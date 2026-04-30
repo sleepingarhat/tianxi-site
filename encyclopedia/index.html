@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDFBF5">
+<title>馬匹百科 · 天喜 TIANXI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<script src="/assets/api.js"></script><style>
+
+.search{padding:12px 20px;border-bottom:1px solid var(--rule)}
+.search input{width:100%;padding:10px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);font-family:var(--font-body);font-size:14px;color:var(--ink)}
+.search input:focus{outline:0;border-color:var(--ink)}
+
+.horse-card{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--rule)}
+.horse-card:last-child{border:0}
+.horse-card__silks{width:40px;height:40px;background:var(--paper-2);border:1px solid var(--rule);border-radius:6px;object-fit:contain;display:block}
+.horse-card__name{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--ink);line-height:1.3}
+.horse-card__name small{display:block;font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--ink-mute);margin-top:2px}
+.horse-card__meta{font-size:11px;color:var(--ink-mute);margin-top:3px}
+.horse-card__stats{display:flex;gap:10px;font-family:var(--font-mono);font-size:10px;margin-top:4px}
+.horse-card__stats span{color:var(--ink-soft)}
+.horse-card__stats b{color:var(--ink);font-weight:700}
+.horse-card__tag{font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--ink-soft);white-space:nowrap;padding-right:8px;margin-right:4px}
+
+</style>
+</head>
+<body>
+<div class="shell">
+
+<header class="brandbar">
+  <a href="/" class="brand">
+    <span class="brand__glyph" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <rect x="1" y="1" width="38" height="38" rx="7" fill="#0B0B0B"/>
+        <text x="20" y="28" font-family="Noto Serif TC, serif" font-size="24" font-weight="900" fill="#FDFBF5" text-anchor="middle">喜</text>
+      </svg>
+    </span>
+    <span class="brand__word">天喜 TIANXI<small>ENTERTAINMENT</small></span>
+  </a>
+  <div></div>
+  <div class="brandbar__actions">
+    <button type="button" class="theme-toggle" data-tx-theme-toggle aria-pressed="false" aria-label="切換至深色模式" title="切換深／淺色">
+      <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+      <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a1 1 0 0 0-1.3-1.3 10 10 0 1 0 13.1 13.1 1 1 0 0 0-1.3-1.3z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="ticker">
+  <strong>HK 04:26 Sun</strong> · R1 T-07:54:00 · <span class="down">#5 ↓ 4.1</span> · <span class="down">#11 ↓ 4.2</span> · <span class="up">#1 ↑ 9.0</span> · 沙田 好地
+</div>
+
+
+<section class="page-head">
+  <h1><small>HORSE ENCYCLOPEDIA</small>馬匹百科</h1>
+  <p>12,000+ 匹在役馬匹資料庫 · Elo 軌跡 · 11 年戰績 · 晨操記錄 · 傷患歷史。</p>
+</section>
+
+<div class="search">
+  <input type="search" placeholder="搜尋馬名 / 馬號 / 騎師 / 練馬師...">
+</div>
+
+<div class="tx-chiprow" style="padding:10px 20px 0">
+  <button class="tx-chip is-active">全部</button>
+  <button class="tx-chip">今日出賽</button>
+  <button class="tx-chip">評分 &gt; 80</button>
+  <button class="tx-chip">心水</button>
+  <button class="tx-chip">最近起動</button>
+  <button class="tx-chip">進口</button>
+  <button class="tx-chip">配速前領</button>
+</div>
+
+<div class="card" id="today-card">
+  <h2>今日出賽馬匹 · <span id="today-count">載入中</span></h2>
+  <div id="today-horses"><div class="tx-empty">載入中...</div></div>
+</div>
+
+<div class="card">
+  <h2>最高 Elo · Top 10 在役</h2>
+  <div id="leaderboard"><div class="tx-empty">Elo 資料整備中...</div></div>
+</div>
+
+<div class="card">
+  <h2>最多勝場 · Top 10 在役</h2>
+  <div id="leaderboard-wins"><div class="tx-empty">載入中...</div></div>
+</div>
+
+
+<footer class="disclaimer">
+  <strong>天喜為分析平台，不提供投注服務。</strong><br>
+  投注請透過合法渠道（HKJC）進行。本頁數據僅供研究分析。<br>
+  Analysis platform · NO betting services · Data for research only
+</footer>
+
+<nav class="botnav">
+  <a href="/dashboard/" class="botnav__item" data-page="dashboard">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+    儀表板
+  </a>
+  <a href="/predictor/" class="botnav__item" data-page="predictor">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+    選馬
+  </a>
+  <a href="/schedule/" class="botnav__item" data-page="schedule">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+    日程
+  </a>
+  <a href="/encyclopedia/" class="botnav__item" data-page="encyclopedia">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
+    百科
+  </a>
+  <a href="/lounge/" class="botnav__item" data-page="lounge">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><path d="M21 12a8 8 0 1 1-3.5-6.6L21 4v5h-5"/></svg>
+    聊天室
+  </a>
+</nav>
+
+</div>
+
+<script>
+(function(){
+  var el = document.querySelector('.botnav__item[data-page="encyclopedia"]');
+  if (el) el.classList.add('is-active');
+})();
+
+function escapeHtml(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+function silksUrlFor(code){
+  if (TX_API && typeof TX_API.silksUrl === 'function' && code) return TX_API.silksUrl(code);
+  if (code) return '/api/silks/' + encodeURIComponent(code) + '.gif';
+  return '';
+}
+
+function silksImg(code, size){
+  var sz = size || 40;
+  var url = silksUrlFor(code);
+  if (!url) return '<div class="horse-card__silks" style="width:'+sz+'px;height:'+sz+'px"></div>';
+  return '<img class="horse-card__silks" style="width:'+sz+'px;height:'+sz+'px" src="'+escapeHtml(url)+'" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">';
+}
+
+function renderNameBlock(nameCh, nameEn){
+  var en = (nameEn && nameEn !== nameCh) ? '<small>' + escapeHtml(nameEn) + '</small>' : '';
+  return '<div class="horse-card__name">' + escapeHtml(nameCh || nameEn || '—') + en + '</div>';
+}
+
+// ---------- Today's horses ----------
+TX_API.smartCurrent().then(function(cur){
+  if (!cur || !cur.date) {
+    document.getElementById('today-count').textContent = '0';
+    document.getElementById('today-horses').innerHTML = '<div class="tx-empty">最近無賽事資料</div>';
+    return;
+  }
+  return TX_API.meeting(cur.date).then(function(m){
+    var seen = {};
+    var entries = [];
+    (m.races || []).forEach(function(r){
+      (r.horses || []).forEach(function(h){
+        if (!h.id || seen[h.id]) return;
+        seen[h.id] = true;
+        entries.push({
+          id:h.id, num:h.horseNumber, draw:h.draw,
+          nameCh:h.nameCh, nameEn:h.name,
+          jockey:h.jockeyCh||h.jockey, trainer:h.trainerCh,
+          raceNo:r.raceNumber, odds:h.winOdds,
+          silksCode: h.silksCode || h.code || h.horseCode
+        });
+      });
+    });
+    document.getElementById('today-count').textContent = entries.length + ' 匹 · ' + m.venueName + ' · ' + cur.date;
+    if (!entries.length) {
+      document.getElementById('today-horses').innerHTML = '<div class="tx-empty">暫無出賽資料</div>';
+      return;
+    }
+    document.getElementById('today-horses').innerHTML = entries.slice(0, 40).map(function(e){
+      return '<div class="horse-card">'
+        + silksImg(e.silksCode, 40)
+        + '<div>'
+        +   renderNameBlock(e.nameCh, e.nameEn)
+        +   '<div class="horse-card__meta">' + (e.jockey ? '騎師 ' + escapeHtml(e.jockey) : '') + (e.trainer ? ' · 練馬師 ' + escapeHtml(e.trainer) : '') + '</div>'
+        +   '<div class="horse-card__stats"><span>檔位 <b>' + (e.draw||'—') + '</b></span><span>賠率 <b>' + (e.odds || '—') + '</b></span></div>'
+        + '</div>'
+        + '<div class="horse-card__tag">R' + e.raceNo + ' · #' + (e.num||'—') + '</div>'
+        + '</div>';
+    }).join('');
+  });
+}).catch(function(e){
+  document.getElementById('today-count').textContent = '無資料';
+  document.getElementById('today-horses').innerHTML = '<div class="tx-err">載入失敗：' + escapeHtml(e.message) + '</div>';
+});
+
+// ---------- Leaderboards ----------
+TX_API.horseLeaderboard('elo', 10).then(function(d){
+  if (!d.horses || !d.horses.length) {
+    document.getElementById('leaderboard').innerHTML = '<div class="tx-empty">Elo 資料整備中 · Phase A2 計算運行中</div>';
+    return;
+  }
+  document.getElementById('leaderboard').innerHTML = d.horses.map(function(h, i){
+    var en = (h.nameEn && h.nameEn !== h.nameCh) ? ' <small style="color:var(--ink-mute);font-size:11px;font-weight:500">'+escapeHtml(h.nameEn)+'</small>' : '';
+    return '<div class="row"><div class="row__num">' + (i+1) + '</div>'
+      + '<div><div class="row__name">' + escapeHtml(h.nameCh || h.nameEn) + en + '</div>'
+      + '<div class="row__sub">' + (h.age ? h.age + ' 歲 · ' : '') + (h.totalStarts || 0) + ' 戰 · ' + (h.totalWins || 0) + ' 勝</div></div>'
+      + '<div class="row__val">' + (h.elo ? Math.round(h.elo) : '——') + '</div></div>';
+  }).join('');
+}).catch(function(){
+  document.getElementById('leaderboard').innerHTML = '<div class="tx-empty">Elo 資料整備中</div>';
+});
+
+TX_API.horseLeaderboard('wins', 10).then(function(d){
+  if (!d.horses || !d.horses.length) {
+    document.getElementById('leaderboard-wins').innerHTML = '<div class="tx-empty">暫無資料</div>';
+    return;
+  }
+  document.getElementById('leaderboard-wins').innerHTML = d.horses.map(function(h, i){
+    var en = (h.nameEn && h.nameEn !== h.nameCh) ? ' <small style="color:var(--ink-mute);font-size:11px;font-weight:500">'+escapeHtml(h.nameEn)+'</small>' : '';
+    return '<div class="row"><div class="row__num">' + (i+1) + '</div>'
+      + '<div><div class="row__name">' + escapeHtml(h.nameCh || h.nameEn) + en + '</div>'
+      + '<div class="row__sub">' + (h.totalStarts || 0) + ' 戰 · 勝率 ' + (h.totalStarts ? Math.round(h.totalWins/h.totalStarts*100) : 0) + '%</div></div>'
+      + '<div class="row__val">' + (h.totalWins || 0) + ' 勝</div></div>';
+  }).join('');
+});
+
+// ---------- Search ----------
+var searchInput = document.querySelector('.search input');
+var searchTimer = null;
+if (searchInput) {
+  searchInput.addEventListener('input', function(){
+    clearTimeout(searchTimer);
+    var q = searchInput.value.trim();
+    searchTimer = setTimeout(function(){
+      if (!q) { return; }
+      TX_API.horseSearch(q).then(function(d){
+        document.querySelector('#today-card h2').textContent = '搜尋結果 · ' + (d.horses||[]).length + ' 匹';
+        document.getElementById('today-horses').innerHTML = (d.horses || []).slice(0, 20).map(function(h){
+          return '<div class="horse-card">'
+            + silksImg(h.silksCode || h.code, 40)
+            + '<div>'
+            +   renderNameBlock(h.nameCh, h.nameEn)
+            +   '<div class="horse-card__meta">' + (h.totalStarts || 0) + ' 戰 · ' + (h.totalWins || 0) + ' 勝 · 評分 ' + (h.currentRating || '——') + '</div>'
+            + '</div>'
+            + '<div class="horse-card__tag">' + escapeHtml(h.code || '—') + '</div>'
+            + '</div>';
+        }).join('') || '<div class="tx-empty">無搜尋結果</div>';
+      }).catch(function(){});
+    }, 300);
+  });
+}
+</script>
+
+</body>
+</html>

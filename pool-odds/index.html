@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDFBF5">
+<title>彩池賠率 · 天喜 TIANXI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css"><style>
+
+.pool-tabs{display:flex;gap:2px;padding:8px 12px;overflow-x:auto;background:var(--paper-2);border-bottom:1px solid var(--rule)}
+.pool-tabs button{padding:8px 12px;font-size:12px;font-weight:600;color:var(--ink-mute);border-radius:6px;white-space:nowrap;flex-shrink:0}
+.pool-tabs button.active{background:var(--ink);color:var(--gold-3)}
+.odds-grid{padding:0 16px}
+.odds-row{display:grid;grid-template-columns:32px 1fr 60px 60px;gap:8px;padding:10px 0;border-bottom:1px solid var(--rule);align-items:center}
+.odds-row .horse{font-family:var(--font-display);font-weight:600;font-size:13px}
+.odds-row .horse small{display:block;font-size:10px;color:var(--ink-mute);font-weight:400;margin-top:2px}
+.odds-cell{font-family:var(--font-mono);font-weight:700;font-size:14px;text-align:right}
+.odds-cell.down{color:var(--odds-down)}
+.odds-cell.up{color:var(--odds-up)}
+.odds-cell small{display:block;font-size:9px;color:var(--ink-mute);font-weight:500;margin-top:1px}
+.horse-num-box{font-family:var(--font-mono);font-weight:700;font-size:14px;color:var(--gold-2);text-align:center;background:var(--paper-3);border-radius:4px;padding:4px 0}
+.legend{display:flex;gap:12px;padding:10px 16px;font-size:10px;color:var(--ink-mute);border-bottom:1px solid var(--rule)}
+.legend .up{color:var(--odds-up)}
+.legend .down{color:var(--odds-down)}
+
+</style>
+</head>
+<body>
+<div class="shell">
+
+<header class="brandbar">
+  <a href="/" class="brand">
+    <span class="brand__glyph" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#00843D"/><stop offset="50%" stop-color="#8B5A2B"/><stop offset="100%" stop-color="#C8102E"/>
+        </linearGradient></defs>
+        <rect x="1" y="1" width="38" height="38" rx="7" fill="url(#g)" stroke="#D4A11E" stroke-width="0.8"/>
+        <text x="20" y="28" font-family="Noto Serif TC, serif" font-size="24" font-weight="900" fill="#F5D77A" text-anchor="middle">喜</text>
+      </svg>
+    </span>
+    <span class="brand__word">天喜 TIANXI<small>ENTERTAINMENT</small></span>
+  </a>
+  <div></div>
+  <div class="brandbar__actions">
+    <button type="button" class="theme-toggle" data-tx-theme-toggle aria-pressed="false" aria-label="切換至深色模式" title="切換深／淺色">
+      <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+      <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a1 1 0 0 0-1.3-1.3 10 10 0 1 0 13.1 13.1 1 1 0 0 0-1.3-1.3z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="ticker">
+  <strong>HK 04:26 Sun</strong> · R1 T-07:54:00 · <span class="down">#5 ↓ 4.1</span> · <span class="down">#11 ↓ 4.2</span> · <span class="up">#1 ↑ 9.0</span> · 沙田 好地
+</div>
+
+
+<section class="page-head">
+  <h1><small>LIVE POOL ODDS</small>彩池賠率</h1>
+  <p>全部彩池實時賠率完整展示。獨贏 · 位置 · 連贏 · 位置Q · 三重彩 · 四重彩 · 四連環 · 六環彩 · 單/三/孖T · 孖/三寶。<br><span class="pill pill--gold">資訊展示 · 非投注介面</span></p>
+</section>
+
+<div class="pool-tabs" role="tablist">
+  <button class="active">獨贏</button>
+  <button>位置</button>
+  <button>連贏</button>
+  <button>位Q</button>
+  <button>三重彩</button>
+  <button>四重彩</button>
+  <button>四連環</button>
+  <button>六環彩</button>
+  <button>單T</button>
+  <button>孖T</button>
+  <button>三T</button>
+  <button>孖寶</button>
+  <button>三寶</button>
+</div>
+
+<div class="legend">
+  <span><span class="down">↓ 綠色</span> 賠率跌 (多人買)</span>
+  <span><span class="up">↑ 紅色</span> 賠率升 (冷)</span>
+  <span>HK convention</span>
+</div>
+
+<div class="card" style="padding:12px 8px">
+  <h2 style="padding:0 8px">R1 獨贏 × 位置 · 沙田 1200m</h2>
+  <div class="odds-grid">
+    <div class="odds-row" style="border-bottom:1px solid var(--rule-2);font-size:10px;color:var(--ink-mute);font-weight:600;padding:6px 0">
+      <div>馬</div><div>馬名 騎師</div><div style="text-align:right">獨贏</div><div style="text-align:right">位置</div>
+    </div>
+    <div class="odds-row"><div class="horse-num-box">5</div><div class="horse">星運少爵<small>莫雷拉 · 方嘉柏</small></div><div class="odds-cell down">4.1<small>-0.3</small></div><div class="odds-cell down">1.7</div></div>
+    <div class="odds-row"><div class="horse-num-box">11</div><div class="horse">賢者威楓<small>布文 · 賀賢</small></div><div class="odds-cell down">4.2<small>-0.2</small></div><div class="odds-cell down">1.7</div></div>
+    <div class="odds-row"><div class="horse-num-box">9</div><div class="horse">利高八斗<small>田泰安 · 姚本輝</small></div><div class="odds-cell down">4.8<small>-0.1</small></div><div class="odds-cell down">1.2</div></div>
+    <div class="odds-row"><div class="horse-num-box">1</div><div class="horse">馬馳登<small>薛凱華 · 黎昭昇</small></div><div class="odds-cell">9.0</div><div class="odds-cell">3.2</div></div>
+    <div class="odds-row"><div class="horse-num-box">13</div><div class="horse">包裝天王<small>潘頓 · 沈集成</small></div><div class="odds-cell up">9.6<small>+0.4</small></div><div class="odds-cell">3.7</div></div>
+    <div class="odds-row"><div class="horse-num-box">10</div><div class="horse">星光大道<small>袁幸堯 · 韋達</small></div><div class="odds-cell up">12<small>+1.0</small></div><div class="odds-cell">4.1</div></div>
+    <div class="odds-row"><div class="horse-num-box">2</div><div class="horse">開心孖寶<small>艾道拿 · 呂健威</small></div><div class="odds-cell">15</div><div class="odds-cell">5.0</div></div>
+    <div class="odds-row"><div class="horse-num-box">3</div><div class="horse">蹺妙<small>布浩榮 · 游達榮</small></div><div class="odds-cell">20</div><div class="odds-cell">6.8</div></div>
+    <div class="odds-row"><div class="horse-num-box">4</div><div class="horse">幸運二十<small>霍宏聲 · 丁冠豪</small></div><div class="odds-cell">29</div><div class="odds-cell">8.2</div></div>
+    <div class="odds-row"><div class="horse-num-box">12</div><div class="horse">雙子美麗<small>鍾易禮 · 告東尼</small></div><div class="odds-cell">41</div><div class="odds-cell">11</div></div>
+    <div class="odds-row"><div class="horse-num-box">7</div><div class="horse">彪形勇將<small>奧爾民 · 蘇偉賢</small></div><div class="odds-cell">47</div><div class="odds-cell">12</div></div>
+    <div class="odds-row"><div class="horse-num-box">8</div><div class="horse">高明豐勝<small>何澤堯 · 葉楚航</small></div><div class="odds-cell">64</div><div class="odds-cell">12</div></div>
+    <div class="odds-row"><div class="horse-num-box">14</div><div class="horse">我最好<small>艾兆禮 · 伍鵬志</small></div><div class="odds-cell">96</div><div class="odds-cell">19</div></div>
+    <div class="odds-row"><div class="horse-num-box">6</div><div class="horse">活力輝煌<small>周俊樂 · 羅富全</small></div><div class="odds-cell">122</div><div class="odds-cell">22</div></div>
+  </div>
+  <div style="padding:8px;font-size:10px;color:var(--ink-faint);text-align:right">Overround: 122.3% · 最後更新 HK 05:26:42</div>
+</div>
+
+
+<footer class="disclaimer">
+  <strong>天喜為分析平台，不提供投注服務。</strong><br>
+  投注請透過合法渠道（HKJC）進行。本頁數據僅供研究分析。<br>
+  Analysis platform · NO betting services · Data for research only
+</footer>
+
+
+<nav class="botnav">
+  <a href="/dashboard/" class="botnav__item" data-page="dashboard">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+    儀表板
+  </a>
+  <a href="/" class="botnav__item" data-page="predictor">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+    選馬
+  </a>
+  <a href="/schedule/" class="botnav__item" data-page="schedule">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+    日程
+  </a>
+  <a href="/encyclopedia/" class="botnav__item" data-page="encyclopedia">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
+    百科
+  </a>
+  <a href="/lounge/" class="botnav__item" data-page="lounge">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><path d="M21 12a8 8 0 1 1-3.5-6.6L21 4v5h-5"/></svg>
+    聊天室
+  </a>
+</nav>
+
+</div>
+
+<script>
+// Mark active nav
+(function(){
+  var slug = "pool-odds";
+  var map = { "combo":"predictor","pool-odds":"predictor","value-heatmap":"predictor","flow":"predictor","watchlist":"predictor","live":"predictor","login":null,"404":null };
+  var target = map[slug] !== undefined ? map[slug] : slug;
+  if (target) {
+    var el = document.querySelector('.botnav__item[data-page="'+target+'"]');
+    if (el) el.classList.add('is-active');
+  }
+})();
+</script>
+
+</body>
+</html>

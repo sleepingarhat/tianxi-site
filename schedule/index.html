@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDFBF5">
+<title>賽馬日程 · 天喜 TIANXI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css"><style>
+/* ==========================================================
+   schedule/ · editorial racing-form layout
+   — 馬經 typography × terminal density, inside 440px shell
+   ========================================================== */
+
+/* ---------- page head upgrade ---------- */
+.sched-head{
+  padding:20px 20px 0;
+  position:relative;
+}
+.sched-head__eyebrow{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--font-body);font-weight:500;
+  font-size:10px;letter-spacing:0.24em;
+  color:var(--ink-mute);text-transform:uppercase;
+  margin-bottom:10px;
+}
+.sched-head__eyebrow::before,
+.sched-head__eyebrow::after{
+  content:"";flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,var(--rule-2),transparent);
+}
+.sched-head__title{
+  display:flex;align-items:baseline;gap:12px;
+  font-family:var(--font-display);
+}
+.sched-head__month{
+  font-weight:900;font-size:34px;line-height:1;
+  color:var(--ink);letter-spacing:-0.01em;
+  font-feature-settings:"tnum" 1;
+}
+.sched-head__year{
+  font-family:var(--font-display);
+  font-weight:500;font-size:20px;color:var(--accent);
+  letter-spacing:0.02em;
+}
+.sched-head__sub{
+  margin-top:6px;font-size:12px;color:var(--ink-soft);
+  line-height:1.5;
+}
+.sched-head__sub .accent{color:var(--accent-strong);font-weight:700;font-family:var(--font-mono)}
+
+/* stats ribbon — 3 tiles */
+.stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;margin:16px 20px 0;
+  background:var(--rule-2);
+  border:1px solid var(--rule-2);
+  border-radius:var(--r-md);
+  overflow:hidden;
+}
+.stat{
+  background:var(--paper);
+  padding:12px 10px;
+  display:flex;flex-direction:column;gap:3px;
+  position:relative;
+}
+.stat__label{
+  font-family:var(--font-body);font-weight:500;
+  font-size:9px;letter-spacing:0.16em;
+  color:var(--ink-mute);text-transform:uppercase;
+}
+.stat__value{
+  font-family:var(--font-display);
+  font-weight:700;font-size:26px;line-height:1;
+  color:var(--ink);letter-spacing:-0.01em;
+  font-variant-numeric:tabular-nums;
+}
+.stat__value .unit{
+  font-family:var(--font-body);
+  font-size:11px;font-weight:500;color:var(--ink-soft);
+  letter-spacing:0.04em;margin-left:2px;
+}
+.stat__foot{
+  font-family:var(--font-mono);font-size:9px;
+  color:var(--ink-mute);letter-spacing:0.06em;
+  margin-top:2px;
+}
+.stat--hot .stat__value{color:var(--accent-strong)}
+.stat--hot::after{
+  content:"";position:absolute;inset:0 0 auto 0;height:2px;
+  background:var(--gold-2);
+}
+
+/* ---------- section rule with ornament ---------- */
+.section-rule{
+  display:flex;align-items:center;gap:12px;
+  margin:24px 20px 12px;
+  font-family:var(--font-body);font-weight:500;
+  font-size:10px;letter-spacing:0.28em;
+  color:var(--ink-mute);text-transform:uppercase;
+}
+.section-rule::before,
+.section-rule::after{
+  content:"";flex:1;height:1px;background:var(--rule-2);
+}
+.section-rule__glyph{
+  width:14px;height:14px;color:var(--gold-2);flex-shrink:0;
+}
+
+/* ---------- calendar redesign ---------- */
+.cal-card{
+  margin:0 16px;padding:14px 14px 10px;
+  background:var(--paper-2);
+  border:1px solid var(--rule);
+  border-radius:var(--r-lg);
+  position:relative;overflow:hidden;
+}
+.cal-card::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(1px 1px at 20% 30%,var(--rule-2) 50%,transparent 51%),
+    radial-gradient(1px 1px at 70% 80%,var(--rule-2) 50%,transparent 51%);
+  background-size:24px 24px;opacity:0.4;
+}
+.cal{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:3px;
+}
+.cal__head{
+  font-family:var(--font-body);font-weight:700;
+  font-size:10px;letter-spacing:0.08em;
+  color:var(--ink-mute);
+  text-align:center;padding:6px 0 10px;
+}
+.cal__head--sun{color:var(--red-2)}
+.cal__head--sat{color:var(--tan)}
+.cal__cell{
+  aspect-ratio:1;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-weight:500;
+  font-size:12px;color:var(--ink-mute);
+  border-radius:var(--r-sm);
+  position:relative;
+  transition:background 160ms ease, color 160ms ease;
+}
+.cal__cell--blank{color:transparent}
+/* race day — gold-tint chip with venue glyph */
+.cal__cell.is-race{
+  background:linear-gradient(155deg,var(--paper-3),var(--paper-2));
+  color:var(--ink);font-weight:700;font-size:13px;
+  box-shadow:inset 0 0 0 1px rgba(184,145,47,0.25);
+  cursor:pointer;
+}
+.cal__cell.is-race::after{
+  content:"";position:absolute;bottom:4px;left:50%;
+  transform:translateX(-50%);
+  width:14px;height:2px;
+  background:var(--gold-2);border-radius:1px;
+}
+.cal__cell.is-race:hover{
+  background:var(--gold-tint);
+  color:var(--brown);
+}
+.cal__cell.is-latest{
+  background:var(--ink);color:var(--gold-3);
+  box-shadow:inset 0 0 0 1px var(--gold-2),
+             0 0 0 2px rgba(212,161,30,0.18);
+}
+.cal__cell.is-latest::after{background:var(--gold-3);width:18px;height:2px}
+.cal__cell.is-today{
+  box-shadow:inset 0 0 0 1px var(--red-2);
+}
+.cal-legend{
+  display:flex;gap:14px;justify-content:center;
+  padding:10px 4px 2px;
+  font-family:var(--font-body);font-size:10px;
+  color:var(--ink-mute);letter-spacing:0.04em;
+  position:relative;z-index:1;
+}
+.cal-legend span{display:inline-flex;align-items:center;gap:5px}
+.cal-legend i{
+  display:inline-block;width:10px;height:10px;border-radius:2px;
+  background:var(--paper-3);box-shadow:inset 0 0 0 1px rgba(184,145,47,0.3);
+}
+.cal-legend i.is-latest{background:var(--ink);box-shadow:inset 0 0 0 1px var(--gold-2)}
+.cal-legend i.is-today{background:transparent;box-shadow:inset 0 0 0 1px var(--red-2)}
+
+/* ---------- meeting hero — featured card ---------- */
+.meet{
+  margin:0 16px;
+  background:var(--paper-2);
+  border:1px solid var(--rule);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  position:relative;
+}
+.meet__header{
+  padding:16px 18px 14px;
+  border-bottom:1px solid var(--rule);
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:14px;align-items:center;
+  background:
+    linear-gradient(180deg,transparent,rgba(212,161,30,0.04)),
+    var(--paper-3);
+  position:relative;
+}
+.meet__header::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;
+  height:1px;background:linear-gradient(90deg,
+    transparent 0%,var(--gold-2) 50%,transparent 100%);
+  opacity:0.6;
+}
+.meet__crest{
+  width:42px;height:42px;flex-shrink:0;
+  display:grid;place-items:center;
+  border-radius:50%;
+  background:var(--ink);color:var(--gold-3);
+  font-family:var(--font-display);font-weight:900;font-size:14px;
+  letter-spacing:0.04em;
+  box-shadow:inset 0 0 0 1px var(--gold-2),
+             0 2px 8px rgba(0,0,0,0.15);
+}
+.meet__info{min-width:0}
+.meet__date{
+  font-family:var(--font-mono);font-weight:500;
+  font-size:12px;color:var(--accent);
+  letter-spacing:0.04em;font-variant-numeric:tabular-nums;
+  text-transform:uppercase;
+}
+.meet__venue{
+  font-family:var(--font-display);font-weight:700;
+  font-size:18px;color:var(--ink);line-height:1.2;
+  margin-top:2px;
+  display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+}
+.meet__venue small{
+  font-family:var(--font-body);font-weight:600;
+  font-size:10px;color:var(--ink-soft);
+  letter-spacing:0.16em;text-transform:uppercase;
+}
+.meet__meta{
+  margin-top:4px;font-size:11px;color:var(--ink-soft);
+  font-family:var(--font-body);
+  display:flex;gap:8px;flex-wrap:wrap;
+}
+.meet__meta span{display:inline-flex;align-items:center;gap:4px}
+.meet__meta svg{width:10px;height:10px;opacity:0.85}
+.meet__count{
+  font-family:var(--font-display);font-weight:900;
+  font-size:30px;line-height:1;color:var(--ink);
+  letter-spacing:-0.02em;
+  font-variant-numeric:tabular-nums;
+  text-align:right;
+}
+.meet__count small{
+  display:block;font-family:var(--font-body);
+  font-size:9px;font-weight:600;color:var(--ink-soft);
+  letter-spacing:0.2em;margin-top:4px;text-transform:uppercase;
+}
+
+/* ---------- race rows (editorial) ---------- */
+.race-list{padding:4px 0 2px}
+.race{
+  display:grid;
+  grid-template-columns:42px 1fr auto;
+  gap:12px;padding:12px 18px;
+  border-bottom:1px dashed var(--rule);
+  align-items:center;
+  position:relative;
+  transition:background 140ms ease;
+}
+.race:last-child{border-bottom:0}
+.race::before{
+  content:"";position:absolute;left:0;top:10px;bottom:10px;
+  width:2px;background:transparent;
+  transition:background 140ms ease,width 140ms ease;
+}
+.race:hover{background:rgba(212,161,30,0.04)}
+.race:hover::before{background:var(--gold-2);width:3px}
+.race__num{
+  font-family:var(--font-display);
+  font-weight:900;font-size:22px;line-height:1;
+  color:var(--accent-strong);letter-spacing:-0.02em;
+  text-align:center;
+  font-variant-numeric:tabular-nums;
+  position:relative;
+}
+.race__num::before{
+  content:"R";
+  font-family:var(--font-body);font-weight:600;
+  font-size:9px;letter-spacing:0.1em;color:var(--ink-soft);
+  display:block;margin-bottom:2px;
+}
+.race__body{min-width:0}
+.race__time{
+  font-family:var(--font-mono);font-weight:700;
+  font-size:15px;color:var(--ink);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:0.02em;
+}
+.race__line{
+  margin-top:3px;
+  font-family:var(--font-body);font-size:12px;
+  color:var(--ink-soft);line-height:1.4;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.race__line strong{
+  color:var(--ink);font-weight:700;
+  margin-right:4px;
+}
+.race__stats{
+  text-align:right;min-width:58px;
+}
+.race__field{
+  font-family:var(--font-display);font-weight:700;
+  font-size:17px;color:var(--ink);line-height:1;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-0.01em;
+}
+.race__field small{
+  font-family:var(--font-body);
+  font-size:9px;font-weight:600;color:var(--ink-soft);
+  margin-left:1px;letter-spacing:0.06em;
+}
+.race__prize{
+  margin-top:5px;
+  font-family:var(--font-mono);font-weight:500;
+  font-size:10px;color:var(--ink-soft);letter-spacing:0.02em;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- past meetings — edition cards ---------- */
+.past{margin:0 16px;display:flex;flex-direction:column;gap:8px}
+.past-item{
+  display:grid;
+  grid-template-columns:52px 1fr 20px;
+  gap:14px;align-items:center;
+  padding:12px 14px;
+  background:var(--paper-2);
+  border:1px solid var(--rule);
+  border-radius:var(--r-md);
+  position:relative;
+  transition:border-color 160ms ease, transform 160ms ease;
+  text-decoration:none;
+}
+.past-item:hover{
+  border-color:var(--gold-2);
+  transform:translateX(2px);
+}
+.past-item__stamp{
+  display:flex;flex-direction:column;align-items:center;
+  padding:6px 0;
+  border-right:1px solid var(--rule);
+}
+.past-item__month{
+  font-family:var(--font-body);font-weight:700;
+  font-size:9px;letter-spacing:0.18em;
+  color:var(--accent);text-transform:uppercase;
+}
+.past-item__day{
+  font-family:var(--font-display);font-weight:900;
+  font-size:24px;line-height:1;color:var(--ink);
+  letter-spacing:-0.02em;
+  margin-top:1px;font-variant-numeric:tabular-nums;
+}
+.past-item__weekday{
+  font-family:var(--font-mono);font-weight:500;
+  font-size:9px;
+  color:var(--ink-soft);margin-top:3px;letter-spacing:0.04em;
+}
+.past-item__body{min-width:0}
+.past-item__venue{
+  font-family:var(--font-display);font-weight:700;
+  font-size:14px;color:var(--ink);line-height:1.2;
+  display:flex;align-items:center;gap:6px;
+}
+.past-item__venue::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--gold-2);flex-shrink:0;
+}
+.past-item__meta{
+  margin-top:3px;font-family:var(--font-body);
+  font-size:11px;color:var(--ink-mute);
+  display:flex;gap:6px;flex-wrap:wrap;
+}
+.past-item__meta span{display:inline-flex;align-items:center}
+.past-item__meta span+span::before{
+  content:"·";margin:0 3px;color:var(--ink-faint);
+}
+.past-item__chev{
+  color:var(--ink-mute);width:16px;height:16px;
+  transition:transform 160ms ease, color 160ms ease;
+}
+.past-item:hover .past-item__chev{color:var(--gold-2);transform:translateX(2px)}
+
+/* ---------- loading / error states ---------- */
+.skeleton{
+  background:linear-gradient(90deg,
+    var(--rule) 0%,var(--rule-2) 50%,var(--rule) 100%);
+  background-size:200% 100%;
+  animation:shimmer 1.4s ease-in-out infinite;
+  border-radius:var(--r-sm);
+}
+@keyframes shimmer{
+  0%{background-position:200% 0}
+  100%{background-position:-200% 0}
+}
+.race.skeleton-row{border-bottom-style:solid}
+.race.skeleton-row .race__num,
+.race.skeleton-row .race__time,
+.race.skeleton-row .race__line,
+.race.skeleton-row .race__field,
+.race.skeleton-row .race__prize{color:transparent;background:var(--rule);border-radius:3px}
+.empty-state{
+  padding:20px 16px;
+  font-family:var(--font-body);font-size:12px;
+  color:var(--ink-mute);text-align:center;
+  line-height:1.6;
+}
+.empty-state--error{color:var(--red-2)}
+.empty-state svg{
+  width:20px;height:20px;margin:0 auto 8px;
+  opacity:0.5;
+}
+
+/* ---------- ornamental hairline ---------- */
+.section-rule__dot{
+  width:3px;height:3px;border-radius:50%;
+  background:var(--gold-2);flex-shrink:0;
+}
+
+/* ---------- subtle page grain ---------- */
+.sched-head,
+.cal-card,
+.meet,
+.past-item{
+  position:relative;
+}
+
+/* ---------- entrance animation ---------- */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.stat,.cal-card,.meet,.past-item{
+  animation:fadeUp 400ms cubic-bezier(0.2,0.7,0.3,1) backwards;
+}
+.stats .stat:nth-child(1){animation-delay:40ms}
+.stats .stat:nth-child(2){animation-delay:80ms}
+.stats .stat:nth-child(3){animation-delay:120ms}
+.cal-card{animation-delay:160ms}
+.meet{animation-delay:220ms}
+
+/* ---------- responsive micro-tweaks ---------- */
+@media (max-width:360px){
+  .sched-head__month{font-size:28px}
+  .stat__value{font-size:22px}
+  .race{grid-template-columns:36px 1fr auto;gap:10px;padding:11px 14px}
+  .race__num{font-size:19px}
+  .meet__venue{font-size:16px}
+  .meet__count{font-size:26px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<header class="brandbar">
+  <a href="/" class="brand">
+    <span class="brand__glyph" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#00843D"/><stop offset="50%" stop-color="#8B5A2B"/><stop offset="100%" stop-color="#C8102E"/>
+        </linearGradient></defs>
+        <rect x="1" y="1" width="38" height="38" rx="7" fill="url(#g)" stroke="#D4A11E" stroke-width="0.8"/>
+        <text x="20" y="28" font-family="Noto Serif TC, serif" font-size="24" font-weight="900" fill="#F5D77A" text-anchor="middle">喜</text>
+      </svg>
+    </span>
+    <span class="brand__word">天喜 TIANXI<small>ENTERTAINMENT</small></span>
+  </a>
+  <div></div>
+  <div class="brandbar__actions">
+    <button type="button" class="theme-toggle" data-tx-theme-toggle aria-pressed="false" aria-label="切換至深色模式" title="切換深／淺色">
+      <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+      <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a1 1 0 0 0-1.3-1.3 10 10 0 1 0 13.1 13.1 1 1 0 0 0-1.3-1.3z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="ticker">
+  <strong>HK 04:26 Sun</strong> · R1 T-07:54:00 · <span class="down">#5 ↓ 4.1</span> · <span class="down">#11 ↓ 4.2</span> · <span class="up">#1 ↑ 9.0</span> · 沙田 好地
+</div>
+
+<!-- ==================== PAGE HEAD ==================== -->
+<section class="sched-head">
+  <div class="sched-head__eyebrow">
+    <span>Race Schedule · 賽馬日程</span>
+  </div>
+  <h1 class="sched-head__title">
+    <span class="sched-head__month" id="head-month">—</span>
+    <span class="sched-head__year" id="head-year">·</span>
+  </h1>
+  <p class="sched-head__sub" id="head-sub">
+    載入中 <span class="accent">…</span>
+  </p>
+</section>
+
+<!-- stats ribbon -->
+<div class="stats" aria-label="本月賽期統計">
+  <div class="stat">
+    <span class="stat__label">本月賽期</span>
+    <span class="stat__value"><span id="stat-month-count">—</span><span class="unit">場</span></span>
+    <span class="stat__foot" id="stat-month-foot">—</span>
+  </div>
+  <div class="stat stat--hot">
+    <span class="stat__label">最近賽期</span>
+    <span class="stat__value"><span id="stat-latest-day">—</span></span>
+    <span class="stat__foot" id="stat-latest-foot">—</span>
+  </div>
+  <div class="stat">
+    <span class="stat__label">近 30 日</span>
+    <span class="stat__value"><span id="stat-30d-races">—</span><span class="unit">場次</span></span>
+    <span class="stat__foot" id="stat-30d-foot">—</span>
+  </div>
+</div>
+
+<!-- ==================== CALENDAR ==================== -->
+<div class="section-rule" role="separator">
+  <svg class="section-rule__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3" y="5" width="18" height="16" rx="2"/>
+    <path d="M8 2v4M16 2v4M3 10h18"/>
+    <circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/>
+  </svg>
+  <span>月曆 · Calendar</span>
+</div>
+
+<div class="cal-card">
+  <div class="cal" id="cal-grid" aria-busy="true">
+    <div class="cal__head cal__head--sun">日</div>
+    <div class="cal__head">一</div>
+    <div class="cal__head">二</div>
+    <div class="cal__head">三</div>
+    <div class="cal__head">四</div>
+    <div class="cal__head">五</div>
+    <div class="cal__head cal__head--sat">六</div>
+  </div>
+  <div class="cal-legend">
+    <span><i></i>賽馬日</span>
+    <span><i class="is-latest"></i>最近賽期</span>
+    <span><i class="is-today"></i>今天</span>
+  </div>
+</div>
+
+<!-- ==================== FEATURED MEETING ==================== -->
+<div class="section-rule" role="separator">
+  <svg class="section-rule__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M3 12h3l3-8 4 16 3-8h5"/>
+  </svg>
+  <span>最近賽期 · Latest Meeting</span>
+</div>
+
+<article class="meet" id="meet-card" aria-busy="true">
+  <header class="meet__header">
+    <div class="meet__crest" id="meet-crest">—</div>
+    <div class="meet__info">
+      <div class="meet__date" id="meet-date">載入中</div>
+      <div class="meet__venue" id="meet-venue">
+        — <small id="meet-venue-en"></small>
+      </div>
+      <div class="meet__meta" id="meet-meta"></div>
+    </div>
+    <div class="meet__count">
+      <span id="meet-count">—</span>
+      <small>races</small>
+    </div>
+  </header>
+  <div class="race-list" id="race-list">
+    <!-- skeleton rows -->
+    <div class="race skeleton-row"><div class="race__num">R—</div><div class="race__body"><div class="race__time">——:——</div><div class="race__line">載入中…</div></div><div class="race__stats"><div class="race__field">—</div><div class="race__prize">—</div></div></div>
+    <div class="race skeleton-row"><div class="race__num">R—</div><div class="race__body"><div class="race__time">——:——</div><div class="race__line">載入中…</div></div><div class="race__stats"><div class="race__field">—</div><div class="race__prize">—</div></div></div>
+    <div class="race skeleton-row"><div class="race__num">R—</div><div class="race__body"><div class="race__time">——:——</div><div class="race__line">載入中…</div></div><div class="race__stats"><div class="race__field">—</div><div class="race__prize">—</div></div></div>
+  </div>
+</article>
+
+<!-- ==================== PAST MEETINGS ==================== -->
+<div class="section-rule" role="separator">
+  <svg class="section-rule__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 8v4l3 2M21 12a9 9 0 1 1-3.5-7.1"/>
+    <path d="M21 3v5h-5"/>
+  </svg>
+  <span>往期賽事 · Past Editions</span>
+</div>
+
+<div class="past" id="past-list">
+  <div class="past-item skeleton" style="height:60px"></div>
+  <div class="past-item skeleton" style="height:60px"></div>
+  <div class="past-item skeleton" style="height:60px"></div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="disclaimer" style="margin-top:28px">
+  <strong>天喜為分析平台，不提供投注服務。</strong><br>
+  投注請透過合法渠道（HKJC）進行。本頁數據僅供研究分析。<br>
+  Analysis platform · NO betting services · Data for research only
+</footer>
+
+
+<nav class="botnav">
+  <a href="/dashboard/" class="botnav__item" data-page="dashboard">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+    儀表板
+  </a>
+  <a href="/" class="botnav__item" data-page="predictor">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+    選馬
+  </a>
+  <a href="/schedule/" class="botnav__item" data-page="schedule">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+    日程
+  </a>
+  <a href="/encyclopedia/" class="botnav__item" data-page="encyclopedia">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
+    百科
+  </a>
+  <a href="/lounge/" class="botnav__item" data-page="lounge">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><path d="M21 12a8 8 0 1 1-3.5-6.6L21 4v5h-5"/></svg>
+    聊天室
+  </a>
+</nav>
+
+</div>
+
+<script>
+(function(){
+  var el = document.querySelector('.botnav__item[data-page="schedule"]');
+  if (el) el.classList.add('is-active');
+})();
+</script>
+
+<script src="/assets/api.js"></script>
+<script>
+/* ============================================================
+   schedule/ render layer
+   Data: /api/meetings + /api/meetings/:date
+   ============================================================ */
+(function(){
+  var MONTH_ZH  = ['一','二','三','四','五','六','七','八','九','十','十一','十二'];
+  var WEEKDAY_ZH = ['日','一','二','三','四','五','六'];
+  var WEEKDAY_EN = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+
+  function $(id){ return document.getElementById(id); }
+  function setText(id, v){ var n=$(id); if(n) n.textContent = v; }
+  function el(tag, cls, text){
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function pad2(n){ return (n<10?'0':'')+n; }
+
+  function daysBetween(iso){
+    var t = new Date(); t.setHours(0,0,0,0);
+    var d = new Date(iso + 'T00:00:00'); d.setHours(0,0,0,0);
+    return Math.round((d - t) / 86400000);
+  }
+
+  function relativeDay(iso){
+    var diff = daysBetween(iso);
+    if (diff === 0) return '今天';
+    if (diff === 1) return '聽日';
+    if (diff === -1) return '噚日';
+    if (diff > 1)  return diff + ' 日後';
+    return Math.abs(diff) + ' 日前';
+  }
+
+  /* ---------- calendar ---------- */
+  function renderCalendar(yearMonth, raceDates, latest){
+    var grid = $('cal-grid');
+    // wipe everything except the 7 weekday headers
+    var heads = grid.querySelectorAll('.cal__head');
+    grid.innerHTML = '';
+    heads.forEach(function(h){ grid.appendChild(h); });
+
+    var parts = yearMonth.split('-');
+    var year  = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10);
+    var first = new Date(year, month - 1, 1);
+    var daysInMonth = new Date(year, month, 0).getDate();
+    var leadBlanks = first.getDay();
+
+    var raceSet = {};
+    raceDates.forEach(function(d){ raceSet[d] = true; });
+    var todayISO = new Date().toISOString().slice(0, 10);
+
+    for (var i = 0; i < leadBlanks; i++){
+      grid.appendChild(el('div', 'cal__cell cal__cell--blank'));
+    }
+
+    for (var d = 1; d <= daysInMonth; d++){
+      var iso = year + '-' + pad2(month) + '-' + pad2(d);
+      var isRace   = !!raceSet[iso];
+      var isLatest = (iso === latest);
+      var isToday  = (iso === todayISO);
+      var cls = 'cal__cell';
+      if (isRace)   cls += ' is-race';
+      if (isLatest) cls += ' is-latest';
+      if (isToday)  cls += ' is-today';
+      var node;
+      if (isRace){
+        node = document.createElement('a');
+        node.href = '/results/';
+        node.title = iso + ' 賽後對賬';
+      } else {
+        node = document.createElement('div');
+      }
+      node.className = cls;
+      node.textContent = String(d);
+      grid.appendChild(node);
+    }
+    grid.removeAttribute('aria-busy');
+  }
+
+  /* ---------- stats ribbon ---------- */
+  function renderStats(all, latest){
+    // month total = count of meetings whose date YYYY-MM matches latest.date's YYYY-MM
+    var ym = latest.date.slice(0,7);
+    var monthCount = all.filter(function(m){ return m.date.slice(0,7) === ym; }).length;
+    setText('stat-month-count', monthCount);
+    setText('stat-month-foot', MONTH_ZH[parseInt(ym.slice(5,7),10)-1] + '月 · ' + ym.slice(0,4));
+
+    // latest day
+    var d = new Date(latest.date + 'T00:00:00');
+    setText('stat-latest-day', pad2(d.getMonth()+1) + '/' + pad2(d.getDate()));
+    setText('stat-latest-foot', WEEKDAY_EN[d.getDay()] + ' · ' + relativeDay(latest.date));
+
+    // last 30 days races
+    var cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 30);
+    var cutoffISO = cutoff.toISOString().slice(0,10);
+    var recent = all.filter(function(m){ return m.date >= cutoffISO; });
+    var totalRaces = recent.reduce(function(s,m){ return s + (m.totalRaces || 0); }, 0);
+    setText('stat-30d-races', totalRaces);
+    setText('stat-30d-foot', recent.length + ' 個賽期');
+  }
+
+  /* ---------- featured meeting ---------- */
+  function venueCrest(venue, name){
+    // ST = 沙田, HV = 跑馬地 — 2-letter monogram in display serif
+    return venue || (name||'').slice(0,2);
+  }
+
+  function renderMeeting(meeting){
+    var venueName = meeting.venueName || meeting.venue || '';
+    var d = new Date(meeting.date + 'T00:00:00');
+
+    $('meet-crest').textContent = venueCrest(meeting.venue, venueName);
+    setText('meet-date', meeting.date + ' · ' + WEEKDAY_ZH[d.getDay()] + ' · ' + relativeDay(meeting.date));
+    $('meet-venue').innerHTML = '';
+    $('meet-venue').appendChild(document.createTextNode(venueName));
+    var sm = el('small', null, (meeting.venue === 'ST' ? 'SHATIN' : meeting.venue === 'HV' ? 'HAPPY VALLEY' : meeting.venue || ''));
+    $('meet-venue').appendChild(sm);
+
+    var meta = $('meet-meta');
+    meta.innerHTML = '';
+    if (meeting.trackCondition){
+      var s1 = el('span');
+      s1.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17c4-3 8-3 12 0 4 3 6 3 6 3"/><path d="M3 12c4-3 8-3 12 0 4 3 6 3 6 3"/></svg>';
+      s1.appendChild(document.createTextNode(meeting.trackCondition));
+      meta.appendChild(s1);
+    }
+    if (meeting.weather){
+      var s2 = el('span');
+      s2.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/></svg>';
+      s2.appendChild(document.createTextNode(meeting.weather));
+      meta.appendChild(s2);
+    }
+    setText('meet-count', meeting.totalRaces || (meeting.races||[]).length || 0);
+
+    // race rows
+    var list = $('race-list');
+    list.innerHTML = '';
+    (meeting.races || []).forEach(function(r){
+      list.appendChild(formatRace(r));
+    });
+    $('meet-card').removeAttribute('aria-busy');
+  }
+
+  // startTime guard: API occasionally returns sectional splits like "(27.76) (52.07)"
+  // instead of a clock time "13:30" due to ingest mapping drift. Strip non-time shapes.
+  function cleanTime(raw){
+    if (!raw) return '——:——';
+    var s = String(raw).trim();
+    // accept only HH:MM or H:MM or HHMM or HH:MM:SS
+    if (/^\d{1,2}:\d{2}(:\d{2})?$/.test(s)) return s;
+    if (/^\d{3,4}$/.test(s)) return s.slice(0,-2) + ':' + s.slice(-2);
+    return '——:——';
+  }
+
+  function formatRace(r){
+    var row = el('div', 'race');
+    row.setAttribute('role','group');
+    row.setAttribute('aria-label', 'R' + r.raceNumber);
+
+    var numBox = el('div', 'race__num', String(r.raceNumber));
+    row.appendChild(numBox);
+
+    var body = el('div', 'race__body');
+    var time = el('div', 'race__time', cleanTime(r.startTime));
+    body.appendChild(time);
+
+    var line = el('div', 'race__line');
+    var klass = r.class ? ('' + r.class) : '';
+    if (klass){
+      var strong = el('strong', null, klass);
+      line.appendChild(strong);
+    }
+    var bits = [];
+    if (r.distance) bits.push(r.distance + 'm');
+    if (r.track)    bits.push(r.track);
+    if (r.going)    bits.push(r.going);
+    if (r.course)   bits.push(r.course);
+    line.appendChild(document.createTextNode(bits.join(' · ')));
+    body.appendChild(line);
+    row.appendChild(body);
+
+    var stats = el('div', 'race__stats');
+    var field = el('div', 'race__field');
+    var fSize = Array.isArray(r.horses) ? r.horses.length : 0;
+    field.appendChild(document.createTextNode(fSize || '—'));
+    field.appendChild(el('small', null, ' 匹'));
+    stats.appendChild(field);
+    var prize = el('div', 'race__prize');
+    if (r.prize){
+      var p = Number(r.prize);
+      prize.textContent = p >= 1000000
+        ? '$' + (p/1000000).toFixed(1) + 'M'
+        : p >= 1000 ? '$' + Math.round(p/1000) + 'K' : '$' + p;
+    } else {
+      prize.textContent = '—';
+    }
+    stats.appendChild(prize);
+    row.appendChild(stats);
+
+    return row;
+  }
+
+  /* ---------- past meetings (edition cards) ---------- */
+  function renderPast(list){
+    var box = $('past-list');
+    box.innerHTML = '';
+    if (!list.length){
+      var empty = el('div', 'empty-state', '冇更早嘅賽事紀錄');
+      box.appendChild(empty);
+      return;
+    }
+    list.forEach(function(m){
+      var a = document.createElement('a');
+      a.href = '/results/';
+      a.className = 'past-item';
+
+      var stamp = el('div', 'past-item__stamp');
+      var d = new Date(m.date + 'T00:00:00');
+      stamp.appendChild(el('div', 'past-item__month', MONTH_ZH[d.getMonth()] + '月'));
+      stamp.appendChild(el('div', 'past-item__day', String(d.getDate())));
+      stamp.appendChild(el('div', 'past-item__weekday', WEEKDAY_EN[d.getDay()]));
+      a.appendChild(stamp);
+
+      var body = el('div', 'past-item__body');
+      body.appendChild(el('div', 'past-item__venue', m.venueName || m.venue));
+      var meta = el('div', 'past-item__meta');
+      meta.appendChild(el('span', null, (m.totalRaces || '?') + ' 場'));
+      if (m.trackCondition) meta.appendChild(el('span', null, m.trackCondition));
+      if (m.weather)        meta.appendChild(el('span', null, m.weather));
+      meta.appendChild(el('span', null, relativeDay(m.date)));
+      body.appendChild(meta);
+      a.appendChild(body);
+
+      var chev = document.createElement('span');
+      chev.className = 'past-item__chev';
+      chev.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+      a.appendChild(chev);
+
+      box.appendChild(a);
+    });
+  }
+
+  /* ---------- page head ---------- */
+  function renderHead(latest){
+    var ym = latest.date.slice(0,7);
+    var m = parseInt(ym.slice(5,7),10);
+    setText('head-month', MONTH_ZH[m-1] + '月');
+    setText('head-year', ym.slice(0,4));
+    var sub = $('head-sub');
+    sub.innerHTML = '';
+    sub.appendChild(document.createTextNode('最新賽期資料更新至 '));
+    var span = el('span', 'accent', latest.date);
+    sub.appendChild(span);
+    sub.appendChild(document.createTextNode('，覆蓋沙田與跑馬地兩大場地。'));
+  }
+
+  function showError(id, msg){
+    var node = $(id);
+    if (!node) return;
+    node.innerHTML = '';
+    var wrap = el('div', 'empty-state empty-state--error', msg);
+    node.appendChild(wrap);
+    node.removeAttribute('aria-busy');
+  }
+
+  /* ---------- bootstrap ---------- */
+  window.TX_API.meetings('?limit=50').then(function(resp){
+    var all = (resp.meetings || []);
+    if (!all.length){
+      showError('cal-grid', '冇賽事數據');
+      showError('race-list', '冇賽事數據');
+      showError('past-list', '冇賽事數據');
+      setText('head-month','—'); setText('head-year','');
+      return;
+    }
+    var latest = all[0];
+    var ym = latest.date.slice(0,7);
+    var monthDates = all
+      .filter(function(m){ return m.date.slice(0,7) === ym; })
+      .map(function(m){ return m.date; });
+
+    renderHead(latest);
+    renderStats(all, latest);
+    renderCalendar(ym, monthDates, latest.date);
+    renderPast(all.slice(1, 6));
+    return window.TX_API.meeting(latest.date).then(renderMeeting);
+  }).catch(function(err){
+    console.error('[schedule] load failed', err);
+    showError('cal-grid', 'API 載入失敗：' + err.message);
+    showError('race-list', 'API 載入失敗');
+    showError('past-list', 'API 載入失敗');
+  });
+})();
+</script>
+
+</body>
+</html>

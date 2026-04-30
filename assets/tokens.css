@@ -1,0 +1,148 @@
+/* ================================================================
+   天喜 TIANXI · Design Tokens (SSOT)
+   2026-04-29 · Phase B · dark mode RESTORED (user directive)
+   Flat-UI retained · brand palette simplified · CONTRAST MANDATE ≥4.5:1 normal / ≥3:1 large
+   ================================================================ */
+:root {
+  /* ink & paper (light-only) */
+  --ink:        #0B0B0B;
+  --ink-soft:   #2A2A28;
+  --ink-mute:   #5F5C52;
+  --ink-faint:  #888888;
+  --paper:      #FDFBF5;
+  --paper-2:    #F5F1E4;
+  --paper-3:    #EDE7D4;
+  --rule:       rgba(11,11,11,0.08);
+  --rule-2:     rgba(11,11,11,0.14);
+
+  /* brandbar / ticker stays dark for brand contrast (not a theme, just a band) */
+  --ticker-bg:  #0B1612;
+  --ticker-fg:  #F0EBDD;
+
+  /* brand — 紅綠啡金, simplified usage
+     Use these as accent/semantic only, not as surface fills. */
+  --green:      #00843D;
+  --green-2:    #3BBF7A;
+  --red:        #C8102E;
+  --red-2:      #E6435A;
+  --brown:      #5C3A1E;
+  --brown-2:    #8B5A2B;
+  --tan:        #D4B78A;
+  --tan-2:      #B9986A;
+  --gold:       #B8912F;
+  --gold-2:     #D4A11E;
+  --gold-3:     #F5D77A;
+  --gold-tint:  #FBF1D2;
+
+  /* semantic accent (contrast-safe for text on paper) */
+  --accent:        #8B5A2B;   /* ~5.8:1 on --paper */
+  --accent-strong: #5C3A1E;   /* ~10:1 on --paper */
+
+  /* HK racing convention (opposite of western stock) */
+  --odds-up:    var(--red);      /* 賠率升 = 冷門 */
+  --odds-down:  var(--green);    /* 賠率跌 = 熱門 */
+
+  /* typography — NO italic display font (constitutional 2026-04-27) */
+  --font-display: "Noto Serif TC", "Source Han Serif TC", "Songti SC", Georgia, serif;
+  --font-body:    "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  /* spacing scale (4px base) */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 20px; --s-6: 24px; --s-7: 32px; --s-8: 40px;
+
+  /* radii */
+  --r-sm: 4px; --r-md: 8px; --r-lg: 12px; --r-xl: 16px;
+
+  /* shadows — kept subtle (no 3D drama) */
+  --sh-xs: 0 1px 0 var(--rule);
+  --sh-sm: 0 1px 2px rgba(11,11,11,0.04), 0 2px 8px -4px rgba(11,11,11,0.06);
+  --sh-md: 0 2px 4px rgba(11,11,11,0.04), 0 10px 24px -8px rgba(11,11,11,0.10);
+}
+
+/* ================================================================
+   Dark theme · :root[data-theme=dark]
+   Activated via <html data-theme="dark">; set by AnimatedThemeToggler
+   Contrast verified:
+     ink (#f2ece1) on paper (#141210)          = 14.1:1   ✓ AAA
+     ink-soft (#c9bfae) on paper               = 10.2:1   ✓ AAA
+     ink-mute (#9a907d) on paper               =  6.0:1   ✓ AA normal
+     green-dark (#18a355) on paper             =  5.1:1   ✓ AA normal
+     red-dark (#ef3d52) on paper               =  4.9:1   ✓ AA normal
+     accent-strong (#d9a547) on paper          =  7.9:1   ✓ AA
+   gold palette kept decorative-only (crest / underline / badge bg).
+   ================================================================ */
+:root[data-theme="dark"] {
+  --ink:        #f2ece1;
+  --ink-soft:   #c9bfae;
+  --ink-mute:   #9a907d;
+  --ink-faint:  #736a5a;
+  --paper:      #141210;
+  --paper-2:    #1d1a16;
+  --paper-3:    #26221c;
+  --rule:       rgba(242,236,225,0.08);
+  --rule-2:     rgba(242,236,225,0.16);
+
+  /* ticker stays the same warm-dark band */
+  --ticker-bg:  #0B1612;
+  --ticker-fg:  #F0EBDD;
+
+  /* brand semantic colors brightened 10% for dark bg readability */
+  --green:      #18a355;
+  --green-2:    #4ad589;
+  --red:        #ef3d52;
+  --red-2:      #ff6a7c;
+  --brown:      #8B5A2B;
+  --brown-2:    #b07843;
+  --tan:        #D4B78A;
+  --tan-2:      #B9986A;
+  --gold:       #d9a547;
+  --gold-2:     #f5c866;
+  --gold-3:     #ffe095;
+  --gold-tint:  rgba(217,165,71,0.12);
+
+  /* semantic accent (contrast-safe on dark paper) */
+  --accent:        #d9a547;   /* ~7.9:1 on dark paper */
+  --accent-strong: #f5c866;   /* ~11.2:1 on dark paper */
+
+  /* HK racing convention preserved */
+  --odds-up:    var(--red);
+  --odds-down:  var(--green);
+
+  /* shadow uses lighter alpha on dark */
+  --sh-xs: 0 1px 0 var(--rule);
+  --sh-sm: 0 1px 2px rgba(0,0,0,0.40), 0 2px 8px -4px rgba(0,0,0,0.50);
+  --sh-md: 0 2px 4px rgba(0,0,0,0.40), 0 10px 24px -8px rgba(0,0,0,0.60);
+}
+
+/* Smooth cross-theme transition (non-jarring swap) */
+html { transition: background-color 220ms ease, color 220ms ease; }
+body { transition: background-color 220ms ease, color 220ms ease; }
+
+/* Respect reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  html, body { transition: none; }
+}
+
+/* ---------- Reset ---------- */
+*,*::before,*::after { box-sizing: border-box; }
+html,body { margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  font-weight: 400;
+  line-height: 1.5;
+  overscroll-behavior-y: contain;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+img, svg { display: block; max-width: 100%; }
+h1,h2,h3,h4,h5,h6,p,ul,ol,dl,dd { margin: 0; padding: 0; }
+ul,ol { list-style: none; }
+
+/* tabular nums for data */
+.num, .tnum, [data-num], .horse-num, .rank-tile,
+[class*="odds"], [class*="elo"], time
+{ font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }

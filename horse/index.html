@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDFBF5">
+<title>馬匹詳情 · 天喜 TIANXI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<script src="/assets/api.js"></script>
+<style>
+.sub-bar{position:sticky;top:60px;z-index:40;background:var(--paper);border-bottom:1px solid var(--rule);padding:10px 16px;display:flex;align-items:center;gap:10px}
+.sub-bar a.back{color:var(--ink);font-size:18px;font-weight:700;text-decoration:none;padding:4px 8px;margin-left:-8px}
+.sub-bar h1{font-family:var(--font-display);font-weight:800;font-size:16px;color:var(--ink)}
+
+.hero-row{display:flex;align-items:center;gap:14px;padding:18px 16px;border-bottom:1px solid var(--rule)}
+.hero-silks{width:56px;height:56px;flex-shrink:0;object-fit:contain;border:1px solid var(--rule-2);border-radius:6px;background:var(--paper-2)}
+.hero-num{font-family:var(--font-mono);font-weight:800;font-size:22px;color:var(--ink);line-height:1}
+.hero-name{font-family:var(--font-display);font-weight:900;font-size:20px;color:var(--ink);line-height:1.15;margin-top:2px}
+.hero-name small{display:block;font-size:11px;color:var(--ink-mute);letter-spacing:.08em;font-weight:500;margin-top:2px}
+
+.kv-table{border-collapse:collapse;width:100%;font-size:13px}
+.kv-table tr{border-bottom:1px solid var(--rule)}
+.kv-table th{text-align:left;padding:10px 16px;color:var(--ink-mute);font-weight:500;width:44%;font-size:12px;background:var(--paper)}
+.kv-table td{padding:10px 16px;color:var(--ink);font-weight:600;font-family:var(--font-body);text-align:right}
+.kv-table td.mono{font-family:var(--font-mono)}
+
+.section-hd{padding:14px 16px 6px;font-size:11px;color:var(--ink-mute);letter-spacing:.14em;font-weight:700;text-transform:uppercase;border-top:1px solid var(--rule-2);background:var(--paper-2)}
+.section-hd:first-of-type{border-top:0}
+
+.explain-card{margin:14px 16px 0;padding:14px;background:var(--paper-2);border:1px solid var(--rule-2);border-radius:10px}
+.explain-card h3{font-family:var(--font-display);font-weight:800;font-size:14px;color:var(--ink);margin-bottom:6px}
+.explain-card p{font-size:12px;color:var(--ink-soft);line-height:1.6}
+.explain-card .score-line{margin-top:8px;font-family:var(--font-mono);font-size:12px;color:var(--ink);display:flex;justify-content:space-between;padding:6px 0;border-top:1px dashed var(--rule-2)}
+.explain-card .score-line:first-of-type{margin-top:10px}
+
+.empty{padding:40px 16px;text-align:center;color:var(--ink-mute);font-size:13px}
+.err{padding:20px;color:var(--red);font-size:12px;text-align:center}
+.disclaimer-strip{margin-top:16px;padding:12px 16px;background:var(--paper-2);border-top:1px solid var(--rule);color:var(--ink-mute);font-size:11px;line-height:1.5}
+.disclaimer-strip strong{color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<header class="brandbar">
+  <a href="/" class="brand">
+    <span class="brand__glyph" aria-hidden="true">
+      <svg viewBox="0 0 40 40">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#00843D"/><stop offset="50%" stop-color="#8B5A2B"/><stop offset="100%" stop-color="#C8102E"/>
+        </linearGradient></defs>
+        <rect x="1" y="1" width="38" height="38" rx="7" fill="url(#g)" stroke="#D4A11E" stroke-width="0.8"/>
+        <text x="20" y="28" font-family="Noto Serif TC, serif" font-size="24" font-weight="900" fill="#F5D77A" text-anchor="middle">喜</text>
+      </svg>
+    </span>
+    <span class="brand__word">天喜 TIANXI<small>ENTERTAINMENT</small></span>
+  </a>
+  <div></div>
+  <div class="brandbar__actions">
+    <button type="button" class="theme-toggle" data-tx-theme-toggle aria-pressed="false" aria-label="切換至深色模式" title="切換深／淺色">
+      <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></g></svg>
+      <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a1 1 0 0 0-1.3-1.3 10 10 0 1 0 13.1 13.1 1 1 0 0 0-1.3-1.3z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="sub-bar">
+  <a href="javascript:history.length>1?history.back():(location.href='/')" class="back" aria-label="返回">‹</a>
+  <h1>馬匹詳情</h1>
+</div>
+
+<div class="hero-row" id="hero-row">
+  <div class="empty" style="padding:0">載入中…</div>
+</div>
+
+<div class="section-hd">本場資料</div>
+<table class="kv-table" id="race-kv"><tbody></tbody></table>
+
+<div class="section-hd">馬匹資料</div>
+<table class="kv-table" id="horse-kv"><tbody></tbody></table>
+
+<div class="section-hd">天喜預測</div>
+<div id="explain-slot">
+  <div class="empty" style="padding:20px 16px">載入預測分析…</div>
+</div>
+
+<div class="disclaimer-strip">
+  <strong>天喜為分析平台，不提供投注服務。</strong>以上預測分數為模型輸出之資訊展示，非投注建議。投注請透過合法渠道（HKJC）進行。
+</div>
+
+<nav class="botnav">
+  <a href="/dashboard/" class="botnav__item" data-page="dashboard">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+    儀表板
+  </a>
+  <a href="/predictor/" class="botnav__item" data-page="predictor">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+    選馬
+  </a>
+  <a href="/schedule/" class="botnav__item" data-page="schedule">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+    日程
+  </a>
+  <a href="/encyclopedia/" class="botnav__item" data-page="encyclopedia">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
+    百科
+  </a>
+  <a href="/lounge/" class="botnav__item" data-page="lounge">
+    <svg class="botnav__icon" viewBox="0 0 24 24"><path d="M21 12a8 8 0 1 1-3.5-6.6L21 4v5h-5"/></svg>
+    聊天室
+  </a>
+</nav>
+
+</div>
+
+<script>
+(function(){
+  function esc(s){ return String(s == null || s === '' ? '—' : s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  }); }
+  function qs(n){
+    var m = location.search.match(new RegExp('[?&]' + n + '=([^&]*)'));
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+
+  function renderKV(tbodyId, rows){
+    var tbody = document.querySelector('#' + tbodyId + ' tbody');
+    tbody.innerHTML = '';
+    rows.forEach(function(r){
+      if (r.value == null || r.value === '') return; // skip empty rows
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<th>' + esc(r.label) + '</th>' +
+        '<td' + (r.mono ? ' class="mono"' : '') + '>' + esc(r.value) + '</td>';
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderHero(h, silksCode){
+    var row = document.getElementById('hero-row');
+    var silksHtml = silksCode
+      ? '<img class="hero-silks" loading="lazy" alt="綵衣" src="' + esc(TX_API.silksUrl(silksCode)) + '">'
+      : '<div class="hero-silks" aria-hidden="true"></div>';
+    row.innerHTML = silksHtml +
+      '<div>' +
+        (h.horseNumber ? '<div class="hero-num">#' + esc(h.horseNumber) + '</div>' : '') +
+        '<div class="hero-name">' + esc(h.nameCh || h.name_ch || h.name || '') +
+          (h.nameEn || h.name_en ? '<small>' + esc(h.nameEn || h.name_en) + '</small>' : '') +
+        '</div>' +
+      '</div>';
+  }
+
+  function renderExplain(ex){
+    var slot = document.getElementById('explain-slot');
+    if (!ex){
+      slot.innerHTML = '<div class="empty" style="padding:20px 16px">未有預測資料</div>';
+      return;
+    }
+    var rows = [];
+    if (ex.horseElo != null)   rows.push({ k: '馬匹 ELO (0.7×)',   v: Number(ex.horseElo).toFixed(0) });
+    if (ex.jockeyElo != null)  rows.push({ k: '騎師 ELO (0.2×)',   v: Number(ex.jockeyElo).toFixed(0) });
+    if (ex.trainerElo != null) rows.push({ k: '練馬師 ELO (0.1×)', v: Number(ex.trainerElo).toFixed(0) });
+    if (ex.eloComposite != null) rows.push({ k: '綜合 ELO',       v: Number(ex.eloComposite).toFixed(1) });
+    if (ex.factorBonus != null)  rows.push({ k: '場次因子調整',    v: (ex.factorBonus >= 0 ? '+' : '') + Number(ex.factorBonus).toFixed(2) });
+    if (ex.finalScore != null)   rows.push({ k: '最終分數',       v: Number(ex.finalScore).toFixed(1) });
+    if (ex.pWin != null)   rows.push({ k: '頭馬機率 (AI)', v: (Number(ex.pWin) * 100).toFixed(1) + '%' });
+    if (ex.pTop3 != null)  rows.push({ k: '前三機率 (AI)', v: (Number(ex.pTop3) * 100).toFixed(1) + '%' });
+    if (ex.rank != null)   rows.push({ k: '預測排名',       v: '#' + ex.rank });
+
+    var scoreHtml = rows.map(function(r){
+      return '<div class="score-line"><span>' + esc(r.k) + '</span><span>' + esc(r.v) + '</span></div>';
+    }).join('');
+
+    var comment = ex.comment || ex.summary || '綜合 ELO 已包含歷史戰績；場次因子考慮今場距離、場地、檔位、近況恢復時間等。';
+
+    slot.innerHTML =
+      '<div class="explain-card">' +
+        '<h3>天喜預測解釋</h3>' +
+        '<p>' + esc(comment) + '</p>' +
+        scoreHtml +
+      '</div>';
+  }
+
+  function buildHorseKV(h){
+    return [
+      { label: '騎師',     value: h.jockey || h.jockey_name },
+      { label: '練馬師',   value: h.trainer || h.trainer_name },
+      { label: '檔位',     value: h.draw, mono: true },
+      { label: '負磅',     value: h.weight || h.carry_weight, mono: true },
+      { label: '馬匹體重', value: h.bodyWeight || h.body_weight, mono: true },
+      { label: '評分',     value: h.rating, mono: true },
+      { label: '年齡 / 性別', value: (h.age != null && h.sex) ? (h.age + ' / ' + h.sex) : (h.ageSex || h.age_sex) },
+      { label: '6 次近績',  value: h.last6 || h.last_6_form || h.form, mono: true },
+      { label: '最佳時間',  value: h.bestTime || h.best_time, mono: true },
+      { label: '配備',     value: h.gear, mono: true },
+      { label: '分齡讓磅',  value: h.ageAllowance || h.age_allowance, mono: true },
+      { label: '王牌',     value: h.trumpCard || h.trump_card },
+      { label: '優先出賽權', value: h.priority || h.priority_entry },
+      { label: '練馬師出賽優先', value: h.trainerPriority || h.trainer_priority },
+    ];
+  }
+
+  function buildRaceKV(r){
+    return [
+      { label: '賽事', value: r.raceName || r.race_name },
+      { label: '場次', value: r.raceNumber || r.race_no, mono: true },
+      { label: '日期', value: TX_API.fmtMeetingDate(r.date), mono: true },
+      { label: '開跑', value: TX_API.cleanTime(r.startTime || r.start_time), mono: true },
+      { label: '場地', value: r.venueName || r.venue },
+      { label: '班次', value: r.className || r.class_name || r.class },
+      { label: '距離', value: (r.distanceM || r.distance_m || r.distance) + (r.distanceM || r.distance_m || r.distance ? '米' : ''), mono: true },
+      { label: '路況', value: r.going },
+      { label: '讓賽', value: r.handicapType || r.handicap_type },
+    ];
+  }
+
+  function boot(){
+    var horseId = qs('id');
+    var raceId = qs('raceId');
+    var no = qs('no');
+
+    if (!horseId && !(raceId && no)){
+      document.getElementById('hero-row').innerHTML = '<div class="err">URL 缺少 id 或 raceId+no 參數</div>';
+      document.getElementById('explain-slot').innerHTML = '';
+      return;
+    }
+
+    // Resolve horse data + race data. Endpoint tolerant: tries the rich detail endpoint
+    // first, then falls back to horses/:id and races/:id entry match.
+    var horsePromise;
+    if (horseId && TX_API.horseDetail){
+      horsePromise = TX_API.horseDetail(horseId).catch(function(){ return TX_API.horse(horseId); });
+    } else if (horseId){
+      horsePromise = TX_API.horse(horseId);
+    } else {
+      horsePromise = TX_API.race(raceId).then(function(r){
+        var ent = (r.entries || []).find(function(e){
+          return String(e.horseNumber || e.horse_no || e.no) === String(no);
+        });
+        if (!ent) throw new Error('找不到該馬號');
+        ent._race = r.race || r;
+        return ent;
+      });
+    }
+
+    horsePromise.then(function(h){
+      var race = h._race || {};
+      // Populate hero
+      renderHero({
+        horseNumber: h.horseNumber || h.horse_no || h.no || no,
+        nameCh: h.nameCh || h.name_ch || h.name,
+        nameEn: h.nameEn || h.name_en,
+      }, h.silksCode || h.silks_code);
+      // Populate KV tables
+      if (race && race.raceNumber) renderKV('race-kv', buildRaceKV(race));
+      else document.querySelector('#race-kv').parentElement.previousElementSibling.style.display = 'none',
+           document.querySelector('#race-kv').style.display = 'none';
+      renderKV('horse-kv', buildHorseKV(h));
+
+      // Explain
+      var eid = horseId || (h.horseId || h.horse_id);
+      var rid = raceId || (race && (race.id || race.raceId));
+      if (eid && rid && TX_API.explain){
+        TX_API.explain(rid, eid)
+          .then(renderExplain)
+          .catch(function(){ renderExplain(null); });
+      } else {
+        renderExplain(null);
+      }
+    }).catch(function(e){
+      document.getElementById('hero-row').innerHTML =
+        '<div class="err">載入失敗：' + esc(e && e.message ? e.message : '網絡錯誤') + '</div>';
+      document.getElementById('explain-slot').innerHTML = '';
+    });
+  }
+
+  boot();
+})();
+</script>
+</body>
+</html>
