@@ -1,107 +1,79 @@
-# 天喜 Frontend · tianxi-site
+# 天喜前端 · tianxi-site
 
-> Cloudflare Pages 靜態前端。Vanilla HTML/CSS/JS。跟 HKJC app 嘅 3-level 層級導航（meeting card → race 排位表 → horse detail），輕量、快、冇 build step。
+Cloudflare Pages 靜態前端，HKJC 3 層賽馬導航佈局。
 
-## Production
+## 技術棧
 
-- **URL**：<https://tianxi-site.pages.dev>
-- **Host**：Cloudflare Pages · project `tianxi-site`
-- **API 源**：<https://tianxi-backend.tianxi-entertainment.workers.dev>
+- **100% Vanilla HTML/CSS/JS** — 無 build step，無框架
+- **部署**：Cloudflare Pages（`wrangler pages deploy .`）
+- **Backend API**：`https://tianxi-backend.tianxi-entertainment.workers.dev`
 
-## 生態系統
+## 系統架構
+
+**生態系統（3 repos）**
 
 | Repo | 角色 |
-|---|---|
-| [tianxi-database](https://github.com/sleepingarhat/tianxi-database) | CSV source + scraper + D1 sync GHA |
-| [tianxi-backend](https://github.com/sleepingarhat/tianxi-backend) | Workers API + ELO engine |
-| **tianxi-site** (本 repo) | CF Pages 靜態前端 |
+|------|------|
+| **tianxi-database**（public） | 數據爬取 · CSV · GHA 調度 |
+| **tianxi-backend**（private） | API + ELO + 預測 |
+| **tianxi-site**（本 repo · public） | CF Pages 前端 |
 
-## 設計系統憲法
-
-- **Dark mode restored** (2026-04-29)：`:root[data-theme="dark"]` block in `assets/tokens.css`，所有 token 有 contrast 註記（≥ 4.5:1 normal text AA）。
-- **Flat UI**：唔做 3D gold plate / bevel shadow。Buttons = pill / filled rectangle。
-- **Brand palette** (簡化)：green / red / brown / gold 保留，但只做 accent · 主體用 `--paper` / `--ink` 灰階。
-- **Layout 參考 HKJC app**：顏色字體自己規矩。
-- **Flat + 格式統一**：tokens.css 單一 source of truth，所有頁用共用 pattern classes。
-
-## 3-Level 導航
-
-### Level 1 · `/index.html` — 下一個賽馬日
-
-- `TX_API.nextMeeting()` → `{date, venue, races: [{raceNumber, startTime, className, ...}]}`
-- 純 meeting card layout（日期 + 場地 chip + 場地狀況 + 場次 list）
-- 無 hero / 無 quick-nav（純 HKJC 風格）
-- Fallback banner 顯示 if 最新可用日期 < today
-
-### Level 2 · `/race/index.html?raceId=...` — 排位表
-
-- 頂 chip row 切換同場 siblings
-- 賽事資料列（日期 / 星期 / 時間 / 場地 / 班次 / 途程 / 跑道 / 讓賽類型）
-- Entries table：馬號 · silks 32×32 · 馬名 + 騎/練 · 獨贏 · 檔位 · 負磅
-
-### Level 3 · `/horse/index.html?id=...` / `?raceId=&no=...` — 馬匹詳情
-
-- Silks 40×40 + 馬號馬名 hero
-- KV 表：騎師 / 練馬師 / 檔位 / 負磅 / 馬體重 / 6 次近績 / 評分 / 年齡性別 / 最佳時間 / 配備 / 分齡讓磅 / 優先出賽權
-- 天喜獨有：ELO 綜合 + 場次適應評分 + 最終預測分
-
-## AnimatedThemeToggler
-
-`assets/theme.js` 用 `document.startViewTransition` API 做圓形 clip-path wipe（from click origin）。Fallback 直接切（`prefers-reduced-motion` or 無 API）。
-
-`localStorage.tx-theme` ∈ `{light, dark, auto}`，默認 auto 跟 `prefers-color-scheme`。
-
-## 頁面清單
+## 3 層導航結構
 
 ```
-/                — Level 1 · 下一個賽馬日
-/race/           — Level 2 · 排位表
-/horse/          — Level 3 · 馬匹詳情
-/dashboard/      — 儀表板（Elo 軌跡 + 組合概率）
-/predictor/      — 選馬（因子 slider DIY）
-/schedule/       — 賽程表
-/encyclopedia/   — 百科
-/lounge/         — 聊天室
-/combo/          — 組合機率
-/pool-odds/      — 各彩池賠率
-/flow/           — 資金流向
-/value-heatmap/  — 值博度熱圖
-/live/           — 即時賠率
-/results/        — 賽後結果
-/watchlist/      — 心水追蹤
-/login/          — 登入
-/404.html        — 404
+/ (index.html)
+  賽馬日列表 → GET /api/meetings/smart/current
+  
+/race/?raceId=race_DATE_VV_N
+  排位表 → GET /api/races/:id/entries
+  
+/horse/?id=HORSE_ID
+  馬匹詳情 + ELO 預測 → GET /api/horses/:id/detail
+                        GET /api/analyze/explain?raceId=&horseId=
 ```
 
-## Local dev
+## 頁面列表
+
+| 頁面 | 路徑 | 狀態 |
+|------|------|------|
+| 賽馬日 | `/` | ✅ 接通 |
+| 排位表 | `/race/` | ✅ 接通 |
+| 馬匹詳情 | `/horse/` | ✅ 接通 |
+| 日程 | `/schedule/` | ✅ 接通 |
+| 選馬工具 | `/predictor/` | ✅ 接通 |
+| 百科全書 | `/encyclopedia/` | ✅ 接通 |
+| 聊天室 | `/lounge/` | ✅ 接通 |
+| 儀表板 | `/dashboard/` | ✅ 接通 |
+| 組合分析 | `/combo/` | ⚠️ stub |
+| 賠率 | `/pool-odds/` | ⚠️ stub |
+| 資金流向 | `/flow/` | ⚠️ stub |
+| 價值熱圖 | `/value-heatmap/` | ⚠️ stub |
+| 即時賽事 | `/live/` | ⚠️ stub（WebSocket 未實現） |
+| 自選馬匹 | `/watchlist/` | ⚠️ stub |
+
+## 設計系統
+
+- **字體**：Noto Serif TC（標題）· Noto Sans TC（正文）· JetBrains Mono（數字/賠率）
+- **主色**：綠 `#00843D` · 紅 `#C8102E` · 棕 `#5C3A1E`（HKJC 配色）
+- **Dark mode**：`:root[data-theme="dark"]`，對比度 ≥ 4.5:1（AA）
+- **佈局**：手機優先，440px 最大寬，桌面呈現「手機框」效果
+
+## 本地開發
 
 ```bash
-# 靜態 server
 python3 -m http.server 8080
-
-# 或 wrangler dev（接 D1 / Workers 模擬）
+# 或
 wrangler pages dev .
 ```
 
-## Deploy
+## 部署
 
 ```bash
-# 需要 CLOUDFLARE_API_TOKEN（要有 Account · Cloudflare Pages · Edit scope）
-# + CLOUDFLARE_ACCOUNT_ID
-wrangler pages deploy . --project-name=tianxi-site --branch=main --commit-dirty=true
+wrangler pages deploy . --project-name=tianxi-site --branch=main
 ```
 
-## 憲法：唔做投注平台
+## 設計規範
 
-天喜 = **分析 / 資訊 SaaS**。展示：
-- ✅ 所有彩池賠率 / 投注分佈 / 組合機率 / ELO 走勢 / 值博度分析
-- ❌ 投注籃 / HKJC 投注碼 / stake 計算器 / 派彩預估 / 下注 CTA
-
-法規視角：香港只有 HKJC 合法經營賽馬投注。資訊展示合規，代理人行為違法。
-
-## Open issues
-
-- [ ] Dark mode visual polish：15 個頁面需要人手 review
-- [ ] Silks proxy：`/api/silks/:code.gif` 首次 hit 會慢 · 要配 CDN cache header
-- [ ] `/live/` WebSocket 連接：未實裝
-- [ ] i18n：目前淨 zh-HK · 未支援英文 / 簡體
+- 本平台**不是**投注平台。展示賠率 / 分布 / 概率符合規定；不得提供投注籃、注額計算或派彩估算。
+- 界面語言：繁體中文（香港）
+- 不使用斜體展示字體
