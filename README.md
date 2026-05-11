@@ -15,7 +15,7 @@ Cloudflare Pages 靜態前端，HKJC 3 層賽馬導航佈局。
 | Repo | 角色 |
 |------|------|
 | **tianxi-database**（public） | 數據爬取 · CSV · GHA 調度 |
-| **tianxi-backend**（private） | API + ELO + 預測 |
+| **tianxi-backend**（private） | API + R5 預測引擎 (ELO + 檔位 + 負磅) |
 | **tianxi-site**（本 repo · public） | CF Pages 前端 |
 
 ## 3 層導航結構
@@ -32,7 +32,30 @@ Cloudflare Pages 靜態前端，HKJC 3 層賽馬導航佈局。
                         GET /api/analyze/explain?raceId=&horseId=
 ```
 
-## 頁面列表
+## 預測引擎可視化 (R5 · 2026-05-10 上線)
+
+  `/encyclopedia/` 內嵌「預測引擎 R5」live card：
+
+  - 公式 mono-font 顯示 (`finalScore = 0.7×馬匹ELO + 0.2×騎師ELO + 0.1×練馬師ELO + 檔位 + 負磅`)
+  - 入分因子 vs telemetry-only 因子分欄
+  - 即時 fetch `/api/analyze/r5-comparison?days=30`，顯示純 ELO vs R5 嘅場數 / Banker hit / Top3 任一 / Δ
+  - 95% CI ±pp + 決議 badge（`✓ KEEP_R5` 綠 / `✗ REVERT` 紅 / `? INCONCLUSIVE` 灰）
+
+  `/horse/` 馬匹詳情卡 score breakdown 顯示「R5 因子 (檔位+負磅)」label，配合新 fallback 註解解釋 R5 公式同 telemetry-only 因子。
+
+  `/predictor/` 標題下加金邊資訊條，提示生產引擎係 R5（與本頁可調權重探索工具區分）。
+
+  ## API helpers (`assets/api.js`)
+
+  ```js
+  TX_API.topPicks(raceId)              // R5 複合預測 (production)
+  TX_API.predictionAccuracy(days)      // 三 variant 命中率 + Brier
+  TX_API.r5Comparison(days)            // R5 vs baseline Δ + KEEP/REVERT 決議
+  TX_API.horseLeaderboard(by, lim)
+  TX_API.horseDetail(id)
+  ```
+
+  ## 頁面列表
 
 | 頁面 | 路徑 | 狀態 |
 |------|------|------|
