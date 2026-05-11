@@ -82,6 +82,56 @@
 </div>
 
 <div class="card">
+  <h2>預測引擎 R5</h2>
+    <div id="r5-card" style="padding:14px;background:var(--paper-2);border:1px solid var(--rule);border-radius:8px;margin-bottom:18px;font-size:12px;line-height:1.6;color:var(--ink-soft)">
+      <div style="font-family:var(--font-mono);font-size:11px;color:var(--ink);background:var(--paper);padding:8px 10px;border-radius:6px;border:1px solid var(--rule-2);margin-bottom:10px">
+        finalScore = 0.7×馬匹ELO + 0.2×騎師ELO + 0.1×練馬師ELO + 檔位偏差 + 負磅變化
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div><strong style="color:var(--ink)">入分因子：</strong>檔位、負磅</div>
+        <div><strong style="color:var(--ink)">Telemetry only：</strong>途程、場地、近戰、晨操、騎練配對、傷患</div>
+      </div>
+      <div id="r5-stats" style="border-top:1px dashed var(--rule);padding-top:10px;font-family:var(--font-mono);font-size:11px">
+        載入過去 30 日表現中…
+      </div>
+    </div>
+    <script>
+      fetch('/api/analyze/r5-comparison?days=30').then(function(r){return r.json()}).then(function(d){
+        var el = document.getElementById('r5-stats');
+        if (!d || !d.r5 || !d.baseline) { el.textContent = '即時表現資料未就緒'; return; }
+        var dec = d.decision === 'KEEP_R5' ? '<span style="color:var(--green);font-weight:700">✓ KEEP_R5</span>'
+                : d.decision === 'REVERT_TO_PURE_ELO' ? '<span style="color:var(--red);font-weight:700">✗ REVERT</span>'
+                : '<span style="color:var(--ink-mute);font-weight:700">? INCONCLUSIVE</span>';
+        el.innerHTML =
+          '<div>過去 ' + d.days + ' 日 walk-forward backtest</div>' +
+          '<div style="margin-top:6px;display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:6px 10px">' +
+          '  <div></div>' +
+          '  <div style="color:var(--ink-mute);font-size:10px">場數</div>' +
+          '  <div style="color:var(--ink-mute);font-size:10px">Banker hit</div>' +
+          '  <div style="color:var(--ink-mute);font-size:10px">Top3 任一</div>' +
+          '  <div>純 ELO</div>' +
+          '  <div>' + d.baseline.races + '</div>' +
+          '  <div>' + d.baseline.bankerHitRate.toFixed(1) + '%</div>' +
+          '  <div>' + d.baseline.top3PickHitRate.toFixed(1) + '%</div>' +
+          '  <div style="color:var(--ink);font-weight:700">R5</div>' +
+          '  <div style="color:var(--ink);font-weight:700">' + d.r5.races + '</div>' +
+          '  <div style="color:var(--ink);font-weight:700">' + d.r5.bankerHitRate.toFixed(1) + '%</div>' +
+          '  <div style="color:var(--ink);font-weight:700">' + d.r5.top3PickHitRate.toFixed(1) + '%</div>' +
+          '  <div style="color:var(--green)">Δ</div>' +
+          '  <div></div>' +
+          '  <div style="color:var(--green)">' + (d.delta.bankerHitPp >= 0 ? '+' : '') + d.delta.bankerHitPp.toFixed(1) + 'pp</div>' +
+          '  <div style="color:var(--green)">' + (d.delta.top3PickHitPp >= 0 ? '+' : '') + d.delta.top3PickHitPp.toFixed(1) + 'pp</div>' +
+          '</div>' +
+          '<div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">' +
+          '  <span style="color:var(--ink-mute)">95% CI ±' + d.ci95Pp.banker.toFixed(1) + 'pp banker</span>' +
+          '  <span>決議：' + dec + '</span>' +
+          '</div>';
+      }).catch(function(){
+        document.getElementById('r5-stats').textContent = '即時表現資料載入失敗';
+      });
+    </script>
+
+    
   <h2>最高 Elo · Top 10 在役</h2>
   <div id="leaderboard"><div class="tx-empty">Elo 資料整備中...</div></div>
 </div>
