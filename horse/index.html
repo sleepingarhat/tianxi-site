@@ -165,7 +165,7 @@
     if (ex.jockeyElo != null)  rows.push({ k: '騎師 ELO (0.2×)',   v: Number(ex.jockeyElo).toFixed(0) });
     if (ex.trainerElo != null) rows.push({ k: '練馬師 ELO (0.1×)', v: Number(ex.trainerElo).toFixed(0) });
     if (ex.eloComposite != null) rows.push({ k: '綜合 ELO',       v: Number(ex.eloComposite).toFixed(1) });
-    if (ex.factorBonus != null)  rows.push({ k: '場次因子調整',    v: (ex.factorBonus >= 0 ? '+' : '') + Number(ex.factorBonus).toFixed(2) });
+    if (ex.factorBonus != null)  rows.push({ k: 'R5 因子 (檔位+負磅)', v: (ex.factorBonus >= 0 ? '+' : '') + Number(ex.factorBonus).toFixed(2) });
     if (ex.finalScore != null)   rows.push({ k: '最終分數',       v: Number(ex.finalScore).toFixed(1) });
     if (ex.pWin != null)   rows.push({ k: '頭馬機率 (AI)', v: (Number(ex.pWin) * 100).toFixed(1) + '%' });
     if (ex.pTop3 != null)  rows.push({ k: '前三機率 (AI)', v: (Number(ex.pTop3) * 100).toFixed(1) + '%' });
@@ -175,7 +175,7 @@
       return '<div class="score-line"><span>' + esc(r.k) + '</span><span>' + esc(r.v) + '</span></div>';
     }).join('');
 
-    var comment = ex.comment || ex.summary || '綜合 ELO 已包含歷史戰績；場次因子考慮今場距離、場地、檔位、近況恢復時間等。';
+    var comment = ex.comment || ex.summary || '預測引擎 R5 (生效中)：綜合 ELO (馬匹 0.7×、騎師 0.2×、練馬師 0.1×) + 檔位偏差 + 負磅變化。其餘 6 個 telemetry 因子（途程、場地、近戰、晨操、騎練配對、傷患）仍計算但唔入分。';
 
     slot.innerHTML =
       '<div class="explain-card">' +
