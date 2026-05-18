@@ -54,6 +54,18 @@
   .cmp-cell.match .cmp-draw{background:rgba(255,255,255,.55);border-color:#D4A93C;color:#5A4210}
   .cmp-cell.match .cmp-draw small{color:#7A5A20}
 
+  /* Non-color cue for matched cells (accessibility) */
+  .cmp-cell.match .cmp-name::before{content:"✓ ";color:#7A5A20;font-weight:900}
+
+  /* Narrow viewport: relax 1:1 + tighten layout */
+  @media (max-width: 360px){
+    .cmp-square{aspect-ratio:auto;min-height:380px}
+    .cmp-cell{padding:8px 8px;gap:6px;grid-template-columns:22px 1fr auto}
+    .cmp-name{font-size:12px}
+    .cmp-rank{font-size:16px}
+    .cmp-draw{padding:2px 5px;font-size:10px}
+  }
+
   .cmp-empty{padding:24px 16px;color:var(--ink-mute);font-size:12px;text-align:center;line-height:1.5}
   .cmp-empty strong{display:block;color:var(--ink-soft);font-size:13px;margin-bottom:4px}
 
@@ -108,10 +120,10 @@
     <div class="cmp-square" id="cmp-square">
       <div class="cmp-col-hdr l">預測<small>PREDICTION · TOP 4</small></div>
       <div class="cmp-col-hdr r">賽果<small>RESULT · 1ST – 4TH</small></div>
-      <div class="cmp-list l" id="cmp-left">
+      <div class="cmp-list l" id="cmp-left" aria-live="polite" aria-label="預測首四名">
         <div class="cmp-empty"><strong>未選擇</strong>請於上方揀選日期同場次</div>
       </div>
-      <div class="cmp-list r" id="cmp-right">
+      <div class="cmp-list r" id="cmp-right" aria-live="polite" aria-label="賽果首四名">
         <div class="cmp-empty"><strong>未選擇</strong>請於上方揀選日期同場次</div>
       </div>
     </div>
@@ -151,11 +163,14 @@
   (function(){
     var VENUE = { HV:'跑馬地', ST:'沙田', S1:'沙田全天候' };
     var BASE = (window.TX_API && TX_API.base) || '';
+    var compareToken = 0; // monotonic, latest-wins guard
+    var racesToken = 0;
     function $(id){ return document.getElementById(id); }
     function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
     }); }
     function rankCls(i){ return i===0?'r1':i===1?'r2':i===2?'r3':''; }
+    function norm(s){ return String(s==null?'':s).trim().toLowerCase(); }
 
     function fetchJSON(p){ return fetch(BASE + p, {credentials:'omit'}).then(function(r){
       if (!r.ok) throw new Error('API ' + r.status); return r.json();
@@ -179,19 +194,32 @@
       '</div>';
     }
 
+    // Match key: prefer trusted horseId; else require BOTH a horse number AND a name
+    // so missing-field items never collide on a synthetic "n:undefined".
+    function key(h){
+      if (!h) return null;
+      if (h.horseId) return 'h:' + h.horseId;
+      if (h.id) return 'h:' + h.id;
+      var no = h.horseNumber != null ? h.horseNumber : h.no;
+      var nm = h.nameCh || h.name;
+      if (no != null && no !== '' && nm) return 'no:' + no + '|nm:' + norm(nm);
+      return null; // not enough info to match safely
+    }
+
     function render(left, right){
-      // build key set (use horseId if available, else horseNumber)
-      function key(h){ return h.horseId || h.id || ('n:' + (h.horseNumber || h.no)); }
-      var L = left || [], R = right || [];
-      var leftKeys = {}; L.forEach(function(h){ leftKeys[key(h)] = true; });
-      var rightKeys = {}; R.forEach(function(h){ rightKeys[key(h)] = true; });
+      var L = (left || []).filter(Boolean);
+      var R = (right || []).filter(Boolean);
+      var leftKeys = {};  L.forEach(function(h){ var k = key(h); if (k) leftKeys[k]  = true; });
+      var rightKeys = {}; R.forEach(function(h){ var k = key(h); if (k) rightKeys[k] = true; });
+
+      function isMatch(h, otherSet){ var k = key(h); return !!(k && otherSet[k]); }
 
       $('cmp-left').innerHTML = L.length
-        ? L.slice(0,4).map(function(h,i){ return renderCell(i+1, h, rightKeys[key(h)]); }).join('')
+        ? L.slice(0,4).map(function(h,i){ return renderCell(i+1, h, isMatch(h, rightKeys)); }).join('')
         : '<div class="cmp-empty"><strong>未有預測</strong>此場暫未產生天喜預測</div>';
 
       $('cmp-right').innerHTML = R.length
-        ? R.slice(0,4).map(function(h,i){ return renderCell(i+1, h, leftKeys[key(h)]); }).join('')
+        ? R.slice(0,4).map(function(h,i){ return renderCell(i+1, h, isMatch(h, leftKeys)); }).join('')
         : '<div class="cmp-empty"><strong>賽果未出</strong>此場暫未完賽或結果未同步</div>';
     }
 
@@ -221,7 +249,9 @@
 
     function loadRaces(date){
       if (!date){ return Promise.resolve(null); }
+      var myToken = ++racesToken;
       return fetchJSON('/api/meetings/' + encodeURIComponent(date)).then(function(m){
+        if (myToken !== racesToken) return null; // stale, ignore
         var races = (m && m.races) || [];
         var sel = $('cmp-race');
         if (!races.length){
@@ -247,23 +277,23 @@
 
     function loadCompare(date, raceId){
       if (!raceId) return;
-      // Predictions
+      var myToken = ++compareToken;
+      $('cmp-left').innerHTML  = '<div class="cmp-empty"><strong>載入中…</strong></div>';
+      $('cmp-right').innerHTML = '<div class="cmp-empty"><strong>載入中…</strong></div>';
       var pPred = fetchJSON('/api/analyze/top-picks?raceId=' + encodeURIComponent(raceId))
         .then(function(d){ return (d && d.picks) ? d.picks.slice(0,4) : []; })
         .catch(function(){ return []; });
-      // Results — from /api/races/:id  horses[finishingPosition]
       var pRes = fetchJSON('/api/races/' + encodeURIComponent(raceId))
         .then(function(r){
           var hs = (r && r.horses) || [];
-          var fin = hs.filter(function(h){ return h.finishingPosition && h.finishingPosition >= 1 && h.finishingPosition <= 4; })
-                      .sort(function(a,b){ return a.finishingPosition - b.finishingPosition; });
-          return fin;
+          return hs.filter(function(h){ return h && h.finishingPosition && h.finishingPosition >= 1 && h.finishingPosition <= 4; })
+                   .sort(function(a,b){ return a.finishingPosition - b.finishingPosition; });
         })
         .catch(function(){ return []; });
-      render(['loading'], ['loading']); // not actually used; we just clear below
-      $('cmp-left').innerHTML = '<div class="cmp-empty"><strong>載入中…</strong></div>';
-      $('cmp-right').innerHTML = '<div class="cmp-empty"><strong>載入中…</strong></div>';
-      Promise.all([pPred, pRes]).then(function(arr){ render(arr[0], arr[1]); });
+      Promise.all([pPred, pRes]).then(function(arr){
+        if (myToken !== compareToken) return; // stale, ignore
+        render(arr[0], arr[1]);
+      });
     }
 
     function bindHandlers(){
