@@ -28,8 +28,6 @@
   | 日程 | `/schedule/` | 月曆 + 月份賽馬日索引 | `meetings` · `meeting` |
   | 我的儀表板 | `/dashboard/` | 個人化 next-meeting overview | `smartCurrent` · `meeting` · `countdown` |
   | 選馬工具 | `/predictor/` | 17-因子權重探索（**唔係**生產公式，純調校用） | `factors` · `analyze` |
-  | 馬匹百科 | `/encyclopedia/` | ELO 排行 + 搜尋 + R5 引擎可視化 card | `horseLeaderboard` · `horseSearch` · `r5Comparison` |
-  | 賽後對賬 | `/results/` | 過往賽馬日預測 vs 結果 | `predictionAccuracy` · `picks-by-date` |
   | 組合分析 | `/combo/` | 多 P / Q / 三重彩組合估算 | `raceEntries` |
   | 彩池賠率 | `/pool-odds/` | 賠率快照 | `raceEntries` |
   | 聊天室 | `/lounge/` | 全局單一聊天室 | `lounge.chat` |
@@ -46,8 +44,6 @@
   - **`/encyclopedia/`** — 「預測引擎 R5」live card：
     - mono-font 公式：`finalScore = 0.7×馬匹ELO + 0.2×騎師ELO + 0.1×練馬師ELO + 檔位 + 負磅`
     - 入分因子 vs telemetry-only 因子分欄
-    - 即時 fetch `/api/analyze/r5-comparison?days=30`：場數 / Banker hit / Top3 任一 / Δ
-    - 95% CI ±pp + 決議 badge（`✓ KEEP_R5` 綠 / `✗ REVERT` 紅 / `? INCONCLUSIVE` 灰）
   - **`/predictor/`** — 標題下金邊 banner 提示：「生產引擎係 R5，本頁可調 17 因子權重做探索」
 
   > Predictor 嘅 17 個因子（檔位、場地、節奏、近績、血統、晨操、騎練、配備、賠率…）係**探索工具**，用 `POST /api/analyze` runtime 計分；生產 `/api/analyze/top-picks` 只用 R5 公式（ELO + 檔位 + 負磅）。
@@ -62,8 +58,6 @@
   TX_API.horseDetail(id)               // 馬匹卡
   TX_API.topPicks(raceId)              // R5 複合預測 ⭐ production
   TX_API.explain(raceId, horseId)      // 因子分解 + 解釋
-  TX_API.r5Comparison(days)            // R5 vs baseline Δ + KEEP/REVERT
-  TX_API.predictionAccuracy(days)      // 三 variant Brier + 命中率
   TX_API.horseLeaderboard(by, lim)
   TX_API.horseSearch(q)
   TX_API.lounge.chat(since, lim)
