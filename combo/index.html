@@ -128,18 +128,5 @@
 
 </div>
 
-<script>
-// Mark active nav
-(function(){
-  var slug = "combo";
-  var map = { "combo":"predictor","pool-odds":"predictor","value-heatmap":"predictor","flow":"predictor","watchlist":"predictor","live":"predictor","login":null,"404":null };
-  var target = map[slug] !== undefined ? map[slug] : slug;
-  if (target) {
-    var el = document.querySelector('.botnav__item[data-page="'+target+'"]');
-    if (el) el.classList.add('is-active');
-  }
-})();
-</script>
-
 </body>
 </html>

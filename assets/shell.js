@@ -53,6 +53,24 @@
       '</button>' +
     '</div>';
 
+  // Alias map: pages that should highlight a different botnav slot
+  // (e.g. /combo/ and /pool-odds/ are sub-tools under "選馬"/predictor).
+  // Source: union of the per-page inline maps removed 2026-05-22.
+  var PAGE_ALIAS = {
+    'combo': 'predictor',
+    'pool-odds': 'predictor',
+    'value-heatmap': 'predictor',
+    'flow': 'predictor',
+    'watchlist': 'predictor',
+    'live': 'predictor',
+    'login': null,
+    '404': null,
+    'home': null,
+    'race': null,
+    'horse': null,
+    'results': null
+  };
+
   // Each entry: [href, page-key, label, svgInner]
   var BOTNAV_ITEMS = [
     ['/dashboard/', 'dashboard', '儀表板',
@@ -79,7 +97,9 @@
   }
 
   function mount() {
-    var activePage = (document.body && document.body.dataset && document.body.dataset.page) || '';
+    var raw = (document.body && document.body.dataset && document.body.dataset.page) || '';
+    // Apply alias map: undefined → use raw key, defined → use alias (may be null = no highlight)
+    var activePage = Object.prototype.hasOwnProperty.call(PAGE_ALIAS, raw) ? (PAGE_ALIAS[raw] || '') : raw;
     var bb = document.querySelector('[data-tx-shell="brandbar"]');
     if (bb && !bb.dataset.txShellMounted) {
       bb.innerHTML = BRANDBAR_HTML;

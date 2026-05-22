@@ -87,10 +87,7 @@
 </div>
 
 <script>
-(function(){
-  var el = document.querySelector('.botnav__item[data-page="encyclopedia"]');
-  if (el) el.classList.add('is-active');
-})();
+
 
 function escapeHtml(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 

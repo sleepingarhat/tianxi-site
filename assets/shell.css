@@ -222,6 +222,11 @@
 .pill--ink   { background: var(--ink); color: var(--paper); border-color: var(--ink); }                   /* user selection / active chip */
 
 /* ---------- Bottom nav ---------- */
+/* CLS guards for shell.js mount points — heights match injected chrome to
+   prevent layout shift during the brief unmounted moment after parse. */
+header.brandbar[data-tx-shell] { min-height: 56px; }
+nav.botnav[data-tx-shell] { min-height: 64px; }
+
 .botnav {
   position: fixed;
   bottom: 0; left: 50%;

@@ -112,11 +112,6 @@
   var gateOk = document.getElementById('gate-ok');
   var gateErr = document.getElementById('gate-err');
 
-  // mark active nav
-  document.querySelectorAll('.botnav__item').forEach(function(a){
-    if (a.getAttribute('data-page') === 'lounge') a.classList.add('is-active');
-  });
-
   function escapeHtml(s){
     return String(s).replace(/[&<>"']/g, function(c){
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
