@@ -118,14 +118,21 @@
   }
 
   function isG1(race){
-    var t = (race.title || race.class || '').toString();
-    return /G1|一級賽|Group\s*1/i.test(t);
+    // \b doesn't fire between letter+digit ("G1" → "G12" gives \b between
+    // "G1" and "2"), so test "G12" must be rejected explicitly. The
+    // class column is canonical "G1" / "G2" / "G3"; titles vary in CJK.
+    var cls = (race.class || '').toString().trim().toUpperCase();
+    if (cls === 'G1') return true;
+    if (/^G[2-9]|^G1[0-9]/.test(cls)) return false;
+    var t = (race.title || '').toString();
+    return /(?:^|[^0-9A-Z])G1(?:$|[^0-9])|一級賽|Group\s*1\b/i.test(t);
   }
 
   function fmtPrize(p){
     if (p == null || p === '') return '';
     var n = Number(p);
-    if (!isFinite(n) || n <= 0) return esc(p);
+    if (!isFinite(n)) return esc(p);
+    if (n === 0) return '$0';
     if (n >= 1e8) return '$' + (n / 1e8).toFixed(2) + '億';
     if (n >= 1e4) return '$' + Math.round(n / 1e4) + '萬';
     return '$' + Math.round(n);
@@ -134,8 +141,9 @@
   function sumPrize(races){
     var total = 0, has = false;
     races.forEach(function(r){
+      if (r.prize == null || r.prize === '') return;
       var n = Number(r.prize);
-      if (isFinite(n) && n > 0){ total += n; has = true; }
+      if (isFinite(n)){ total += n; has = true; }
     });
     return has ? total : null;
   }
@@ -252,6 +260,12 @@
     document.getElementById('ticker').textContent = '賽後對賬 · ' + date + ' 並無資料';
   }
 
+  function hasSettled(m){
+    return !!(m && (m.races || []).some(function(r){
+      return (r.horses || []).some(function(h){ return h.finishingPosition != null; });
+    }));
+  }
+
   function loadByDate(date){
     return TX_API.meeting(date).then(renderMeeting).catch(function(e){
       var msg = e && e.message ? e.message : '網絡錯誤';
@@ -260,21 +274,54 @@
     });
   }
 
+  function todayISO(){
+    var d = new Date();
+    var y = d.getFullYear(), m = String(d.getMonth() + 1).padStart(2, '0'), dd = String(d.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + dd;
+  }
+
+  function pickLatestSettled(list){
+    // Walk past meetings (date <= today) in reverse-chrono order; the first one
+    // whose full /meeting/:date payload has any finishing_position wins. List
+    // entries are race_meetings rows (no horses[] inlined), so we need a probe
+    // per candidate. Cap probes at 6 to avoid hammering the backend on a long
+    // dry spell.
+    var today = todayISO();
+    var past = (list || [])
+      .filter(function(m){ return m && m.date && m.date <= today; })
+      .sort(function(a, b){ return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); })
+      .slice(0, 6);
+    if (!past.length) return Promise.resolve(null);
+
+    var i = 0;
+    function step(){
+      if (i >= past.length) return null;
+      var d = past[i++].date;
+      return TX_API.meeting(d).then(function(m){
+        if (hasSettled(m)) return m;
+        return step();
+      }).catch(function(){ return step(); });
+    }
+    return Promise.resolve(step());
+  }
+
   function boot(){
     var date = qs('date');
     if (date){ loadByDate(date); return; }
 
-    // No ?date= → ask the backend for the most recent meeting we have data for.
-    // smartCurrent returns the meeting that is "currently relevant" (most recent
-    // completed if no upcoming-today). Fall back to nextMeeting + a 1-day step
-    // back if smartCurrent returns nothing.
-    TX_API.smartCurrent()
+    // No ?date= → reconciliation page wants the most recent meeting that
+    // already has settled results, NOT smart/current (which is
+    // upcoming-first). Pull the meetings list, walk past dates back to the
+    // latest one whose horses[] include finishing_position. Fall through to
+    // an empty state if no past meeting in the recent window is settled.
+    TX_API.meetings('?limit=20')
+      .then(function(resp){
+        var list = (resp && (resp.meetings || resp.data)) || resp || [];
+        return pickLatestSettled(Array.isArray(list) ? list : []);
+      })
       .then(function(m){
-        if (m && m.date) return loadByDate(m.date);
-        return TX_API.nextMeeting().then(function(nm){
-          if (nm && nm.date) return loadByDate(nm.date);
-          showEmpty('近期');
-        });
+        if (m) renderMeeting(m);
+        else showEmpty('近期已結束賽事');
       })
       .catch(function(e){
         var msg = e && e.message ? e.message : '網絡錯誤';

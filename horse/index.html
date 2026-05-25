@@ -127,7 +127,7 @@
     if (ex.eloComposite != null) rows.push({ k: '綜合 ELO',       v: Number(ex.eloComposite).toFixed(1) });
     if (ex.factorBonus != null)  rows.push({ k: 'ELO 因子 (檔位+負磅)', v: (ex.factorBonus >= 0 ? '+' : '') + Number(ex.factorBonus).toFixed(2) });
     if (ex.lgbScore != null)     rows.push({ k: 'LightGBM 分數',  v: Number(ex.lgbScore).toFixed(3) });
-    if (ex.finalScore != null)   rows.push({ k: '綜合分數 (α=0.62)', v: Number(ex.finalScore).toFixed(1) });
+    if (ex.finalScore != null)   rows.push({ k: '綜合分數',       v: Number(ex.finalScore).toFixed(1) });
     if (ex.pWin != null)   rows.push({ k: '頭馬機率 (AI)', v: (Number(ex.pWin) * 100).toFixed(1) + '%' });
     if (ex.pTop3 != null)  rows.push({ k: '前三機率 (AI)', v: (Number(ex.pTop3) * 100).toFixed(1) + '%' });
     if (ex.rank != null)   rows.push({ k: '預測排名',       v: '#' + ex.rank });
@@ -137,7 +137,7 @@
       return '<div class="score-line"><span>' + esc(r.k) + '</span><span>' + esc(r.v) + '</span></div>';
     }).join('');
 
-    var defaultComment = '預測引擎 TX-Oracle v3：LightGBM lambdarank（場內排序）與 ELO+因子（馬 0.7×、騎 0.2×、練 0.1× + 檔位/負磅）按機率層融合，α=0.62 偏重 LightGBM；分數來源逐匹標示。';
+    var defaultComment = '預測引擎 TX-Oracle v3：LightGBM lambdarank（場內排序）與 ELO+因子（馬 0.7×、騎 0.2×、練 0.1× + 檔位/負磅）按機率層融合，偏重 LightGBM；混合權重 α 由後台 app_settings.ensemble_alpha 動態管理，分數來源逐匹標示。';
     var comment = ex.comment || ex.summary || defaultComment;
 
     slot.innerHTML =
