@@ -6,12 +6,14 @@
   <script src="/assets/shell.js" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FDFBF5">
-<title>賽後對賬 · 2026-04-26 沙田 · 天喜 TIANXI</title>
+<title>賽後對賬 · 天喜 TIANXI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/tokens.css">
-<link rel="stylesheet" href="/assets/shell.css"><style>
+<link rel="stylesheet" href="/assets/shell.css">
+<script src="/assets/api.js"></script>
+<style>
 .results-day{display:flex;gap:10px;flex-wrap:wrap;padding:12px 20px;align-items:center;border-bottom:1px solid var(--rule)}
 .results-day__date{font-family:var(--font-display);font-size:15px;font-weight:800;color:var(--ink)}
 .results-day__meta{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.08em}
@@ -48,16 +50,8 @@
 .pod__name{font-family:var(--font-display);font-size:11.5px;font-weight:700;margin-top:6px;color:#2E2108;line-height:1.2;min-height:28px;display:flex;align-items:center;justify-content:center;padding:0 2px}
 .pod__slot.p4 .pod__name{color:var(--ink)}
 
-.rec{margin-top:12px;padding:10px 12px;border-radius:8px;background:rgba(233,201,100,.08);border:1px dashed rgba(201,162,39,.35);font-family:var(--font-display);font-size:11px;color:var(--ink-mute);line-height:1.5}
-.rec strong{color:var(--ink)}
-.rec__status{display:inline-block;font-family:var(--font-mono);font-size:10px;font-weight:800;letter-spacing:0.08em;padding:2px 7px;border-radius:4px;margin-right:6px}
-.rec__status.hit{background:linear-gradient(180deg,#3F9357 0%,#00843D 100%);color:#fff}
-.rec__status.miss{background:linear-gradient(180deg,#E6435A 0%,#A81A2F 100%);color:#fff}
-.rec__status.near{background:linear-gradient(180deg,#EBC964 0%,#A07A1F 100%);color:#2E2108}
-
 .rc__time{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);margin-top:8px;display:flex;justify-content:space-between;padding-top:8px;border-top:1px dashed var(--rule)}
 .rc__time span{font-weight:700;color:var(--ink)}
-
 
 .day-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 20px 14px}
 .day-stats__card{padding:10px;border-radius:10px;background:var(--paper);border:1px solid var(--rule);text-align:center;
@@ -66,6 +60,10 @@
 .day-stats__lbl{font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:0.15em;color:var(--ink-mute);margin-bottom:4px}
 .day-stats__val{font-family:var(--font-display);font-size:22px;font-weight:900;color:var(--ink);line-height:1}
 .day-stats__sub{font-family:var(--font-mono);font-size:9px;color:var(--ink-mute);margin-top:4px;letter-spacing:0.08em}
+
+.results-empty{padding:60px 20px;text-align:center;color:var(--ink-mute);font-family:var(--font-display);font-size:13px;line-height:1.7}
+.results-empty strong{color:var(--ink);display:block;margin-bottom:8px;font-size:14px}
+.results-err{padding:40px 20px;text-align:center;color:#A81A2F;font-family:var(--font-mono);font-size:12px}
 </style>
 </head>
 <body data-page="results">
@@ -73,297 +71,23 @@
 
 <header class="brandbar" data-tx-shell="brandbar"></header>
 
-<div class="ticker">
-  <strong>賽後對賬</strong> · 2026-04-26 Sun 沙田 · 好快地 · 草地 A · 共 11 場 · 資料來源 HKJC
-</div>
+<div class="ticker" id="ticker">賽後對賬 · 載入中…</div>
 
 <section class="page-head">
   <h1><small>POST-RACE RECONCILIATION</small>賽後對賬</h1>
-  <p>昨日（2026-04-26）沙田 11 場賽事頭 4 名完整結果。點擊「天喜分析」展開預測對照。<br>
-  <em style="font-family:var(--font-mono);font-size:11px;color:var(--ink-mute)">分析指標 · 非投注建議</em></p>
+  <p>已收回 HKJC 結果之賽事日，按場次顯示頭 4 名馬號、馬名。<br>
+  <em style="font-family:var(--font-mono);font-size:11px;color:var(--ink-mute)">分析指標 · 非投注建議 · 數據來源 HKJC</em></p>
 </section>
 
-<div class="results-day">
-  <div class="results-day__date">2026-04-26 沙田（日）</div>
-  <div class="results-day__meta">好快地 · 草地 A · 11R · G1×3</div>
+<div id="day-slot">
+  <div class="results-empty">載入賽後對賬…</div>
 </div>
-
-<div class="day-stats">
-  <div class="day-stats__card">
-    <div class="day-stats__lbl">場次</div>
-    <div class="day-stats__val">11</div>
-    <div class="day-stats__sub">R1 – R11</div>
-  </div>
-  <div class="day-stats__card">
-    <div class="day-stats__lbl">G1 頭牌</div>
-    <div class="day-stats__val">3</div>
-    <div class="day-stats__sub">R5 · R7 · R9</div>
-  </div>
-  <div class="day-stats__card">
-    <div class="day-stats__lbl">草地</div>
-    <div class="day-stats__val">11</div>
-    <div class="day-stats__sub">A 賽道</div>
-  </div>
-  <div class="day-stats__card">
-    <div class="day-stats__lbl">獎金</div>
-    <div class="day-stats__val">$1.13億</div>
-    <div class="day-stats__sub">HKD 合計</div>
-  </div>
-</div>
-
-<nav class="race-nav" aria-label="場次跳轉">
-  <a class="race-nav__btn" href="#r1">R1</a>
-  <a class="race-nav__btn" href="#r2">R2</a>
-  <a class="race-nav__btn" href="#r3">R3</a>
-  <a class="race-nav__btn" href="#r4">R4</a>
-  <a class="race-nav__btn is-g1" href="#r5">R5 · G1</a>
-  <a class="race-nav__btn" href="#r6">R6</a>
-  <a class="race-nav__btn is-g1" href="#r7">R7 · G1</a>
-  <a class="race-nav__btn" href="#r8">R8</a>
-  <a class="race-nav__btn is-g1" href="#r9">R9 · G1</a>
-  <a class="race-nav__btn" href="#r10">R10</a>
-  <a class="race-nav__btn" href="#r11">R11</a>
-</nav>
-
-<!-- R1 -->
-<article class="rc" id="r1">
-  <div class="rc__hd">
-    <div>
-      <div class="rc__no"><small>R1</small>第一場</div>
-      <div class="rc__title">第四班 1200 米 讓賽</div>
-    </div>
-    <div class="rc__meta">
-      <strong>草地 A · 好快地</strong>
-      14 匹 · $117 萬
-    </div>
-  </div>
-  <div class="pod">
-    <div class="pod__slot p1"><div class="pod__rank">冠軍</div><div class="pod__no">13</div><div class="pod__name">包裝天王</div></div>
-    <div class="pod__slot p2"><div class="pod__rank">亞軍</div><div class="pod__no">9</div><div class="pod__name">利高八斗</div></div>
-    <div class="pod__slot p3"><div class="pod__rank">季軍</div><div class="pod__no">10</div><div class="pod__name">星光大道</div></div>
-    <div class="pod__slot p4"><div class="pod__rank">殿軍</div><div class="pod__no">1</div><div class="pod__name">馬馳登</div></div>
-  </div>
-  <div class="rc__time"><span>頭馬時間 1:08.70</span><span>勝距 ¾ 馬位</span></div>
-</article>
-
-<!-- R2 -->
-<article class="rc" id="r2">
-  <div class="rc__hd">
-    <div>
-      <div class="rc__no"><small>R2</small>第二場</div>
-      <div class="rc__title">第四班 1600 米 讓賽</div>
-    </div>
-    <div class="rc__meta">
-      <strong>草地 A · 好快地</strong>
-      14 匹 · $117 萬
-    </div>
-  </div>
-  <div class="pod">
-    <div class="pod__slot p1"><div class="pod__rank">冠軍</div><div class="pod__no">6</div><div class="pod__name">大回報</div></div>
-    <div class="pod__slot p2"><div class="pod__rank">亞軍</div><div class="pod__no">7</div><div class="pod__name">旌採</div></div>
-    <div class="pod__slot p3"><div class="pod__rank">季軍</div><div class="pod__no">1</div><div class="pod__name">都靈冠星</div></div>
-    <div class="pod__slot p4"><div class="pod__rank">殿軍</div><div class="pod__no">3</div><div class="pod__name">家傳之寶</div></div>
-  </div>
-  <div class="rc__time"><span>頭馬時間 1:33.74</span><span>練馬師 黎昭昇</span></div>
-</article>
-
-<!-- R3 -->
-<article class="rc" id="r3">
-  <div class="rc__hd">
-    <div>
-      <div class="rc__no"><small>R3</small>第三場</div>
-      <div class="rc__title">第四班 1200 米 讓賽</div>
-    </div>
-    <div class="rc__meta">
-      <strong>草地 A · 好快地</strong>
-      14 匹 · $117 萬
-    </div>
-  </div>
-  <div class="pod">
-    <div class="pod__slot p1"><div class="pod__rank">冠軍</div><div class="pod__no">2</div><div class="pod__name">堅先生</div></div>
-    <div class="pod__slot p2"><div class="pod__rank">亞軍</div><div class="pod__no">13</div><div class="pod__name">天天更好</div></div>
-    <div class="pod__slot p3"><div class="pod__rank">季軍</div><div class="pod__no">6</div><div class="pod__name">實力加</div></div>
-    <div class="pod__slot p4"><div class="pod__rank">殿軍</div><div class="pod__no">9</div><div class="pod__name">幸福約定</div></div>
-  </div>
-  <div class="rc__time"><span>頭馬時間 1:08.59</span><span>勝距 3¾ 馬位</span></div>
-</article>
-
-<!-- R4 -->
-<article class="rc" id="r4">
-  <div class="rc__hd">
-    <div>
-      <div class="rc__no"><small>R4</small>第四場</div>
-      <div class="rc__title">第四班 1400 米 讓賽</div>
-    </div>
-    <div class="rc__meta">
-      <strong>草地 A · 好快地</strong>
-      14 匹 · $117 萬
-    </div>
-  </div>
-  <div class="pod">
-    <div class="pod__slot p1"><div class="pod__rank">冠軍</div><div class="pod__no">5</div><div class="pod__name">勁勇皇駒</div></div>
-    <div class="pod__slot p2"><div class="pod__rank">亞軍</div><div class="pod__no">4</div><div class="pod__name">嵐臣</div></div>
-    <div class="pod__slot p3"><div class="pod__rank">季軍</div><div class="pod__no">14</div><div class="pod__name">星光快驅</div></div>
-    <div class="pod__slot p4"><div class="pod__rank">殿軍</div><div class="pod__no">12</div><div class="pod__name">部族高手</div></div>
-  </div>
-  <div class="rc__time"><span>頭馬時間 1:21.27</span><span>前 3 差 0.07s</span></div>
-</article>
-
-<!-- R5 G1 -->
-<article class="rc" id="r5">
-  <div class="rc__hd">
-    <div>
-      <span class="rc__g1">★ G1 · 主席短途獎</span>
-      <div class="rc__no"><small>R5</small>第五場</div>
-      <div class="rc__title">國際一級賽 1200 米 主席短途獎</div>
-    </div>
-    <div class="rc__meta">
-      <strong>草地 A · 好快地</strong>
-      14 匹 · $2,400 萬
-    </div>
-  </div>
-  <div class="pod">
-    <div class="pod__slot p1"><div class="pod__rank">冠軍</div><div class="pod__no">1</div><div class="pod__name">嘉應高昇</div></div>
-    <div class="pod__slot p2"><div class="pod__rank">亞軍</div><div class="pod__no">2</div><div class="pod__name">里見夢境</div></div>
-    <div class="pod__slot p3"><div class="pod__rank">季軍</div><div class="pod__no">5</div><div class="pod__name">精算暴雪</div></div>
-    <div class="pod__slot p4"><div class="pod__rank">殿軍</div><div class="pod__no">4</div><div class="pod__name">舉步生風</div></div>
-  </div>
-  <div class="rc__time"><span>頭馬時間 1:07.10</span><span>騎師 潘頓 · 練 大衛希斯</span></div>
-</article>
-
-<!-- R6 -->
-<article class="rc" id="r6">
-  <div class="rc__hd">
-    <div>
-      <div class="rc__no"><small>R6</small>第六場</div>
-      <div class="rc__title">第三班 1200 米 讓賽</div>
-    </div>
-    <div class="rc__meta">
-      <strong>草地 A · 好快地</strong>
-      14 匹 · $186 萬
-    </div>
-  </div>
-  <div class="pod">
-    <div class="pod__slot p1"><div class="pod__rank">冠軍</div><div class="pod__no">4</div><div class="pod__name">增強</div></div>
-    <div class="pod__slot p2"><div class="pod__rank">亞軍</div><div class="pod__no">13</div><div class="pod__name">傑出雷霆</div></div>
-    <div class="pod__slot p3"><div class="pod__rank">季軍</div><div class="pod__no">14</div><div class="pod__name">幸運糖</div></div>
-    <div class="pod__slot p4"><div class="pod__rank">殿軍</div><div class="pod__no">5</div><div class="pod__name">冷娃</div></div>
-  </div>
-  <div class="rc__time"><span>頭馬時間 1:08.84</span><span>獨贏 3.9</span></div>
-</article>
-
-<!-- R7 G1 -->
-<article class="rc" id="r7">
-  <div class="rc__hd">
-    <div>
-      <span class="rc__g1">★ G1 · 冠軍一哩賽</span>
-      <div class="rc__no"><small>R7</small>第七場</div>
-      <div class="rc__title">國際一級賽 1600 米 冠軍一哩賽</div>
-    </div>
-    <div class="rc__meta">
-      <strong>草地 A · 好快地</strong>
-      14 匹 · $2,400 萬
-    </div>
-  </div>
-  <div class="pod">
-    <div class="pod__slot p1"><div class="pod__rank">冠軍</div><div class="pod__no">5</div><div class="pod__name">祝願</div></div>
-    <div class="pod__slot p2"><div class="pod__rank">亞軍</div><div class="pod__no">9</div><div class="pod__name">百賀飛駒</div></div>
-    <div class="pod__slot p3"><div class="pod__rank">季軍</div><div class="pod__no">3</div><div class="pod__name">港邊小區</div></div>
-    <div class="pod__slot p4"><div class="pod__rank">殿軍</div><div class="pod__no">10</div><div class="pod__name">白鷺金剛</div></div>
-  </div>
-  <div class="rc__time"><span>頭馬時間 1:32.37</span><span>勝距 頸位</span></div>
-</article>
-
-<!-- R8 -->
-<article class="rc" id="r8">
-  <div class="rc__hd">
-    <div>
-      <div class="rc__no"><small>R8</small>第八場</div>
-      <div class="rc__title">第三班 1400 米 讓賽</div>
-    </div>
-    <div class="rc__meta">
-      <strong>草地 A · 好快地</strong>
-      14 匹 · $186 萬
-    </div>
-  </div>
-  <div class="pod">
-    <div class="pod__slot p1"><div class="pod__rank">冠軍</div><div class="pod__no">9</div><div class="pod__name">三軍勇將</div></div>
-    <div class="pod__slot p2"><div class="pod__rank">亞軍</div><div class="pod__no">1</div><div class="pod__name">喜蓮勁感</div></div>
-    <div class="pod__slot p3"><div class="pod__rank">季軍</div><div class="pod__no">4</div><div class="pod__name">一世美麗</div></div>
-    <div class="pod__slot p4"><div class="pod__rank">殿軍</div><div class="pod__no">10</div><div class="pod__name">友瑩仁</div></div>
-  </div>
-  <div class="rc__time"><span>頭馬時間 1:21.03</span><span>首 4 名相差 0.12s</span></div>
-</article>
-
-<!-- R9 G1 -->
-<article class="rc" id="r9">
-  <div class="rc__hd">
-    <div>
-      <span class="rc__g1">★ G1 · 女皇盃</span>
-      <div class="rc__no"><small>R9</small>第九場</div>
-      <div class="rc__title">國際一級賽 2000 米 女皇盃</div>
-    </div>
-    <div class="rc__meta">
-      <strong>草地 A · 好快地</strong>
-      14 匹 · $3,000 萬
-    </div>
-  </div>
-  <div class="pod">
-    <div class="pod__slot p1"><div class="pod__rank">冠軍</div><div class="pod__no">2</div><div class="pod__name">金鎗六十</div></div>
-    <div class="pod__slot p2"><div class="pod__rank">亞軍</div><div class="pod__no">1</div><div class="pod__name">蒙地舞者</div></div>
-    <div class="pod__slot p3"><div class="pod__rank">季軍</div><div class="pod__no">4</div><div class="pod__name">相類才華</div></div>
-    <div class="pod__slot p4"><div class="pod__rank">殿軍</div><div class="pod__no">3</div><div class="pod__name">皇庭魅影</div></div>
-  </div>
-  <div class="rc__time"><span>頭馬時間 2:00.64</span><span>獨贏 1.3 · 騎師 麥道朗</span></div>
-</article>
-
-<!-- R10 -->
-<article class="rc" id="r10">
-  <div class="rc__hd">
-    <div>
-      <div class="rc__no"><small>R10</small>第十場</div>
-      <div class="rc__title">第三班 1600 米 讓賽</div>
-    </div>
-    <div class="rc__meta">
-      <strong>草地 A · 好快地</strong>
-      14 匹 · $205 萬
-    </div>
-  </div>
-  <div class="pod">
-    <div class="pod__slot p1"><div class="pod__rank">冠軍</div><div class="pod__no">8</div><div class="pod__name">火悟空</div></div>
-    <div class="pod__slot p2"><div class="pod__rank">亞軍</div><div class="pod__no">5</div><div class="pod__name">開心勇駒</div></div>
-    <div class="pod__slot p3"><div class="pod__rank">季軍</div><div class="pod__no">3</div><div class="pod__name">安都</div></div>
-    <div class="pod__slot p4"><div class="pod__rank">殿軍</div><div class="pod__no">11</div><div class="pod__name">三寶進財</div></div>
-  </div>
-  <div class="rc__time"><span>頭馬時間 1:34.48</span><span>勝距 1 馬位</span></div>
-</article>
-
-<!-- R11 -->
-<article class="rc" id="r11">
-  <div class="rc__hd">
-    <div>
-      <div class="rc__no"><small>R11</small>第十一場</div>
-      <div class="rc__title">第二班 1400 米 讓賽</div>
-    </div>
-    <div class="rc__meta">
-      <strong>草地 A · 好快地</strong>
-      14 匹 · $310 萬
-    </div>
-  </div>
-  <div class="pod">
-    <div class="pod__slot p1"><div class="pod__rank">冠軍</div><div class="pod__no">5</div><div class="pod__name">時時歡聲</div></div>
-    <div class="pod__slot p2"><div class="pod__rank">亞軍</div><div class="pod__no">9</div><div class="pod__name">韋金主</div></div>
-    <div class="pod__slot p3"><div class="pod__rank">季軍</div><div class="pod__no">12</div><div class="pod__name">千帆駒</div></div>
-    <div class="pod__slot p4"><div class="pod__rank">殿軍</div><div class="pod__no">11</div><div class="pod__name">極上紗瓏</div></div>
-  </div>
-  <div class="rc__time"><span>頭馬時間 1:20.45</span><span>騎師 潘俊彥 · 練 告東尼</span></div>
-</article>
 
 <div class="card" style="margin:14px 20px">
   <h3 style="font-family:var(--font-display);font-size:13px;margin:0 0 8px">資料來源聲明</h3>
   <p style="font-family:var(--font-display);font-size:12px;line-height:1.6;color:var(--ink-mute);margin:0">
-  上述賽果來自 <strong style="color:var(--ink)">HKJC 官方公報</strong>（<a href="https://racing.hkjc.com/zh-hk/local/information/localresults" style="color:var(--ink);text-decoration:underline" target="_blank" rel="noopener">racing.hkjc.com</a>）· 2026-04-26 沙田第一至十一場。頭 4 名馬號、馬名、時間均以 HKJC 公報為準。<br><br>
-  天喜提供本頁純作<strong style="color:var(--ink)">賽後回顧及分析之用</strong>，並無預測或投注建議意味。所有 Elo 分析、值博度指標、組合機率計算均可於 <a href="/combo/" style="color:var(--ink);text-decoration:underline">組合分析</a> · <a href="/pool-odds/" style="color:var(--ink);text-decoration:underline">彩池賠率</a> · <a href="/dashboard/" style="color:var(--ink);text-decoration:underline">儀表板</a> 頁面查閱。
+  上述賽果來自 <strong style="color:var(--ink)">HKJC 官方公報</strong>（<a href="https://racing.hkjc.com/zh-hk/local/information/localresults" style="color:var(--ink);text-decoration:underline" target="_blank" rel="noopener">racing.hkjc.com</a>），頭 4 名馬號、馬名、時間均以 HKJC 公報為準。<br><br>
+  天喜提供本頁純作<strong style="color:var(--ink)">賽後回顧及分析之用</strong>，並無預測或投注建議意味。Elo 分析、值博度指標、組合機率計算可於 <a href="/combo/" style="color:var(--ink);text-decoration:underline">組合分析</a> · <a href="/pool-odds/" style="color:var(--ink);text-decoration:underline">彩池賠率</a> · <a href="/dashboard/" style="color:var(--ink);text-decoration:underline">儀表板</a> 查閱。
   </p>
 </div>
 
@@ -373,9 +97,193 @@
   Analysis platform · NO betting services · Data for research only
 </footer>
 
-
 <nav class="botnav" data-tx-shell="botnav"></nav>
 
 </div>
+
+<script>
+(function(){
+  var VENUE_NAME = { ST: '沙田', HV: '跑馬地' };
+  var RANK_LABEL = ['冠軍','亞軍','季軍','殿軍'];
+
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function qs(name){
+    var m = location.search.match(new RegExp('[?&]' + name + '=([^&]*)'));
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+
+  function isG1(race){
+    var t = (race.title || race.class || '').toString();
+    return /G1|一級賽|Group\s*1/i.test(t);
+  }
+
+  function fmtPrize(p){
+    if (p == null || p === '') return '';
+    var n = Number(p);
+    if (!isFinite(n) || n <= 0) return esc(p);
+    if (n >= 1e8) return '$' + (n / 1e8).toFixed(2) + '億';
+    if (n >= 1e4) return '$' + Math.round(n / 1e4) + '萬';
+    return '$' + Math.round(n);
+  }
+
+  function sumPrize(races){
+    var total = 0, has = false;
+    races.forEach(function(r){
+      var n = Number(r.prize);
+      if (isFinite(n) && n > 0){ total += n; has = true; }
+    });
+    return has ? total : null;
+  }
+
+  function pickTop4(horses){
+    return (horses || [])
+      .filter(function(h){ return h.finishingPosition != null && Number(h.finishingPosition) > 0; })
+      .sort(function(a, b){ return Number(a.finishingPosition) - Number(b.finishingPosition); })
+      .slice(0, 4);
+  }
+
+  function winnerTimeText(top){
+    if (!top || !top.length) return '';
+    var w = top[0];
+    if (w.finishTime) return '頭馬時間 ' + esc(w.finishTime);
+    return '';
+  }
+
+  function metaSubText(top, race){
+    if (top && top.length){
+      var w = top[0];
+      if (w.jockeyCh) return '騎師 ' + esc(w.jockeyCh) + (w.trainerCh ? ' · 練 ' + esc(w.trainerCh) : '');
+      if (w.winOdds) return '獨贏 ' + esc(w.winOdds);
+    }
+    if (race.going) return esc(race.going);
+    return '';
+  }
+
+  function renderRaceCard(race){
+    var top = pickTop4(race.horses);
+    var g1 = isG1(race);
+    var raceNo = race.raceNumber || race.race_number || '';
+    var entryCount = (race.horses || []).length;
+    var goingTxt = [race.track, race.course && (race.course + ' 賽道'), race.going].filter(Boolean).map(esc).join(' · ');
+
+    var pods = '';
+    for (var i = 0; i < 4; i++){
+      var h = top[i];
+      pods += '<div class="pod__slot p' + (i + 1) + '">' +
+        '<div class="pod__rank">' + RANK_LABEL[i] + '</div>' +
+        '<div class="pod__no">' + esc(h && h.horseNumber || '—') + '</div>' +
+        '<div class="pod__name">' + esc(h && (h.nameCh || h.name) || '—') + '</div>' +
+      '</div>';
+    }
+
+    var titleParts = [race.class, race.distance && (race.distance + ' 米')].filter(Boolean);
+    var titleTxt = titleParts.join(' ') + (race.title && !g1 ? ' · ' + race.title : '');
+
+    return '<article class="rc" id="r' + esc(raceNo) + '">' +
+      '<div class="rc__hd"><div>' +
+        (g1 ? '<span class="rc__g1">★ G1 · ' + esc(race.title || '一級賽') + '</span>' : '') +
+        '<div class="rc__no"><small>R' + esc(raceNo) + '</small>第 ' + esc(raceNo) + ' 場</div>' +
+        '<div class="rc__title">' + esc(titleTxt || race.title || '') + '</div>' +
+      '</div><div class="rc__meta">' +
+        '<strong>' + (goingTxt || '—') + '</strong>' +
+        esc(entryCount) + ' 匹' + (race.prize ? ' · ' + fmtPrize(race.prize) : '') +
+      '</div></div>' +
+      '<div class="pod">' + pods + '</div>' +
+      '<div class="rc__time"><span>' + esc(winnerTimeText(top) || '結果待公布') + '</span><span>' + esc(metaSubText(top, race)) + '</span></div>' +
+    '</article>';
+  }
+
+  function renderMeeting(m){
+    var slot = document.getElementById('day-slot');
+    var races = m.races || [];
+    var settled = races.filter(function(r){ return (r.horses || []).some(function(h){ return h.finishingPosition != null; }); });
+    var g1s = races.filter(isG1);
+    var prizeTotal = sumPrize(races);
+    var venueName = m.venueName || VENUE_NAME[m.venue] || m.venue || '';
+    var dateTxt = TX_API.fmtMeetingDate ? (TX_API.fmtMeetingDate(m.date) || m.date) : m.date;
+
+    document.getElementById('ticker').innerHTML =
+      '<strong>賽後對賬</strong> · ' + esc(dateTxt) + ' ' + esc(venueName) +
+      (m.trackCondition ? ' · ' + esc(m.trackCondition) : '') +
+      ' · 共 ' + races.length + ' 場 · 資料來源 HKJC';
+
+    var html =
+      '<div class="results-day">' +
+        '<div class="results-day__date">' + esc(dateTxt) + ' ' + esc(venueName) + '</div>' +
+        '<div class="results-day__meta">' +
+          [m.trackCondition, (g1s.length ? 'G1×' + g1s.length : null), races.length + 'R'].filter(Boolean).map(esc).join(' · ') +
+        '</div>' +
+      '</div>' +
+      '<div class="day-stats">' +
+        '<div class="day-stats__card"><div class="day-stats__lbl">場次</div><div class="day-stats__val">' + races.length + '</div><div class="day-stats__sub">R1 – R' + races.length + '</div></div>' +
+        '<div class="day-stats__card"><div class="day-stats__lbl">已對賬</div><div class="day-stats__val">' + settled.length + '</div><div class="day-stats__sub">含結果</div></div>' +
+        '<div class="day-stats__card"><div class="day-stats__lbl">G1 頭牌</div><div class="day-stats__val">' + g1s.length + '</div><div class="day-stats__sub">' + (g1s.map(function(r){ return 'R' + (r.raceNumber || r.race_number); }).join(' · ') || '—') + '</div></div>' +
+        '<div class="day-stats__card"><div class="day-stats__lbl">獎金</div><div class="day-stats__val">' + (prizeTotal != null ? fmtPrize(prizeTotal) : '—') + '</div><div class="day-stats__sub">HKD 合計</div></div>' +
+      '</div>' +
+      '<nav class="race-nav" aria-label="場次跳轉">' +
+        races.map(function(r){
+          var rn = r.raceNumber || r.race_number;
+          return '<a class="race-nav__btn' + (isG1(r) ? ' is-g1' : '') + '" href="#r' + esc(rn) + '">R' + esc(rn) + (isG1(r) ? ' · G1' : '') + '</a>';
+        }).join('') +
+      '</nav>' +
+      races.map(renderRaceCard).join('');
+
+    if (!settled.length){
+      html += '<div class="results-empty"><strong>當日結果未公布</strong>HKJC 完整賽果公布後此頁自動更新。</div>';
+    }
+
+    slot.innerHTML = html;
+  }
+
+  function showErr(msg){
+    document.getElementById('day-slot').innerHTML =
+      '<div class="results-err">' + esc(msg) + '</div>';
+    document.getElementById('ticker').textContent = '賽後對賬 · 載入失敗';
+  }
+
+  function showEmpty(date){
+    document.getElementById('day-slot').innerHTML =
+      '<div class="results-empty"><strong>' + esc(date) + ' 並無賽事資料</strong>請以 <code>?date=YYYY-MM-DD</code> 指定其他賽事日，或返回 <a href="/schedule/" style="color:var(--ink);text-decoration:underline">賽程表</a> 選擇日期。</div>';
+    document.getElementById('ticker').textContent = '賽後對賬 · ' + date + ' 並無資料';
+  }
+
+  function loadByDate(date){
+    return TX_API.meeting(date).then(renderMeeting).catch(function(e){
+      var msg = e && e.message ? e.message : '網絡錯誤';
+      if (/404|找不到/.test(msg)) showEmpty(date);
+      else showErr(msg);
+    });
+  }
+
+  function boot(){
+    var date = qs('date');
+    if (date){ loadByDate(date); return; }
+
+    // No ?date= → ask the backend for the most recent meeting we have data for.
+    // smartCurrent returns the meeting that is "currently relevant" (most recent
+    // completed if no upcoming-today). Fall back to nextMeeting + a 1-day step
+    // back if smartCurrent returns nothing.
+    TX_API.smartCurrent()
+      .then(function(m){
+        if (m && m.date) return loadByDate(m.date);
+        return TX_API.nextMeeting().then(function(nm){
+          if (nm && nm.date) return loadByDate(nm.date);
+          showEmpty('近期');
+        });
+      })
+      .catch(function(e){
+        var msg = e && e.message ? e.message : '網絡錯誤';
+        showErr(msg);
+      });
+  }
+
+  boot();
+})();
+</script>
 </body>
 </html>
