@@ -68,8 +68,8 @@
     if (!iso) return '';
     var m = iso.match(/^(\d{4})-(\d{2})-(\d{2})/);
     if (!m) return iso;
-    var d = new Date(iso + 'T00:00:00+08:00');
-    var wd = isNaN(d) ? '' : CN_WD[d.getDay()];
+    var d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+    var wd = isNaN(d) ? '' : CN_WD[d.getUTCDay()];
     return m[3] + '/' + m[2] + '/' + m[1] + ' ' + wd;
   }
 
