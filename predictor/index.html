@@ -66,64 +66,6 @@
 .tp-tag--cold{background:var(--gold-tint);color:var(--accent-strong)}
 .tp-tag--hot{background:rgba(200,16,46,0.12);color:var(--red)}
 
-/* ── Collapsible factor tuner ─────────────────────────────── */
-.tuner-fold{border-top:1px solid var(--rule)}
-.tuner-fold>summary{list-style:none;cursor:pointer;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--ink)}
-.tuner-fold>summary::-webkit-details-marker{display:none}
-.tuner-fold>summary small{display:block;font-family:var(--font-body);font-weight:400;font-size:10.5px;color:var(--ink-mute);margin-top:3px;letter-spacing:0.02em}
-.tuner-fold>summary .chev{font-family:var(--font-mono);font-size:12px;color:var(--ink-mute);transition:transform .2s}
-.tuner-fold[open]>summary .chev{transform:rotate(90deg)}
-
-.race-picker{padding:14px 20px;border-bottom:1px solid var(--rule);display:grid;gap:10px}
-.race-picker label{font-size:10px;color:var(--ink-mute);letter-spacing:0.12em;font-weight:700;text-transform:uppercase}
-.race-picker select{width:100%;padding:10px 12px;border:1px solid var(--rule);border-radius:10px;background:var(--paper-2);color:var(--ink);font-family:var(--font-body);font-size:13px;font-weight:500}
-
-.factor-group{padding:14px 20px;border-bottom:1px solid var(--rule)}
-.factor-group h3{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--ink);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.factor-group h3 .bar{width:3px;height:12px;background:var(--gold-2);border-radius:2px}
-.factor-row{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--rule)}
-.factor-row:last-child{border-bottom:0}
-.factor-row__name{font-size:12px;color:var(--ink);font-weight:500}
-.factor-row__name small{display:block;font-size:10px;color:var(--ink-mute);font-weight:400;margin-top:2px}
-.factor-row__weight{font-family:var(--font-mono);font-weight:700;font-size:12px;color:var(--accent-strong);min-width:36px;text-align:right}
-.factor-row__slider{grid-column:1 / -1;padding:4px 0}
-.factor-row__slider input[type=range]{width:100%;appearance:none;-webkit-appearance:none;height:4px;background:var(--paper-3);border-radius:2px;outline:none}
-.factor-row__slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;background:var(--gold-2);border-radius:50%;cursor:pointer;border:2px solid var(--paper)}
-.factor-row__slider input[type=range]::-moz-range-thumb{width:18px;height:18px;background:var(--gold-2);border-radius:50%;cursor:pointer;border:2px solid var(--paper)}
-
-.pred-actions{padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pred-btn{padding:12px 16px;border-radius:10px;font-family:var(--font-display);font-weight:700;font-size:14px;border:1px solid var(--rule);background:var(--paper-2);color:var(--ink);cursor:pointer;text-align:center;display:block;text-decoration:none}
-.pred-btn--primary{background:linear-gradient(135deg,var(--brown),var(--ink));color:var(--gold-3);border-color:var(--brown)}
-.pred-btn--primary:active{transform:scale(0.98)}
-
-.pred-results{padding:16px 20px;border-top:1px solid var(--rule)}
-.pred-results h2{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.pred-results h2 .bar{width:3px;height:14px;background:var(--gold-2);border-radius:2px}
-.pred-results p.sub{font-size:11px;color:var(--ink-mute);margin-bottom:12px;line-height:1.5}
-
-.result-row{display:grid;grid-template-columns:auto 1fr auto;column-gap:10px;row-gap:6px;padding:12px 4px;border-bottom:1px solid var(--rule);align-items:center}
-.result-row:last-child{border-bottom:0}
-.result-row__rank{font-family:var(--font-display);font-weight:900;font-size:20px;color:var(--gold-2);min-width:28px;text-align:center;align-self:start;padding-top:2px}
-.result-row__rank.r1{color:#E8B838}
-.result-row__rank.r2{color:#B8A47A}
-.result-row__rank.r3{color:#8B5A2B}
-.result-row__name{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--ink)}
-.result-row__name small{display:block;font-family:var(--font-body);font-size:10px;color:var(--ink-mute);font-weight:400;margin-top:2px}
-.result-row__stats{text-align:right}
-.result-row__stats .p{font-family:var(--font-mono);font-weight:700;font-size:15px;color:var(--accent-strong)}
-.result-row__stats .delta{display:block;font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);margin-top:2px;letter-spacing:0.04em}
-.result-row__stats .delta.pos{color:var(--green)}
-.result-row__stats .delta.neg{color:var(--red)}
-.result-row__bar{grid-column:2 / -1;height:6px;background:var(--paper-3);border-radius:3px;overflow:hidden;position:relative}
-.result-row__bar::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--pwin,0%);background:linear-gradient(90deg,var(--gold-2),var(--accent-strong));border-radius:3px;transition:width .5s ease-out}
-.result-row.r1 .result-row__bar::after{background:linear-gradient(90deg,#EBC964,#D4A93C,#A07A1F)}
-.result-summary{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 12px;margin:8px 0 14px;background:var(--paper-2);border:1px solid var(--rule);border-radius:8px;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);letter-spacing:0.06em}
-.result-summary strong{font-family:var(--font-display);font-size:13px;color:var(--ink)}
-.result-summary .badge{display:inline-block;padding:2px 8px;background:var(--paper-3);border-radius:999px;font-weight:700;color:var(--ink)}
-
-.empty-state{padding:24px 16px;text-align:center;color:var(--ink-mute);font-size:12px;line-height:1.6}
-.empty-state strong{color:var(--ink-soft);display:block;margin-bottom:4px;font-size:13px}
-
 .disclaimer-note{padding:12px 20px;font-size:10px;color:var(--ink-mute);line-height:1.5;background:var(--paper-2);border-left:3px solid var(--gold-2);margin:12px 20px;border-radius:0 6px 6px 0}
 </style>
 </head>
@@ -174,33 +116,6 @@
   </div>
 </section>
 
-<details class="tuner-fold">
-  <summary>
-    <span>進階 · 自訂因子調校<small>逐項調權重 · 即時重算 Top 5 · 零 token 永遠免費</small></span>
-    <span class="chev">▸</span>
-  </summary>
-
-  <section class="race-picker">
-    <label for="race-select">揀場次</label>
-    <select id="race-select"><option>載入中…</option></select>
-  </section>
-
-  <div id="factors-container">
-    <div class="empty-state"><strong>載入因子列表中…</strong></div>
-  </div>
-
-  <div class="pred-actions">
-    <button class="pred-btn" id="btn-reset">全部重設</button>
-    <button class="pred-btn pred-btn--primary" id="btn-analyze">運算分析</button>
-  </div>
-
-  <section class="pred-results" id="results-section" style="display:none">
-    <h2><span class="bar"></span>AI 分析結果 Top 5</h2>
-    <p class="sub">根據你選定嘅因子權重計算 · P(勝) 用 Plackett-Luce softmax · Δ = 模型 vs 市場暗示機率</p>
-    <div id="results-rows"></div>
-  </section>
-</details>
-
 <p class="disclaimer-note">
   <strong>純分析展示 · 非投注建議。</strong>
   「市場穩陣」融合臨場盤口僅作參考，偏向熱門馬、並非捕捉冷馬之指引；值博 Δ 反映模型與市場隱含機率之差。<br>
@@ -221,7 +136,7 @@
 <script>
 (function(){
   if (!window.TX_API) return;
-  var state = { factors:{}, raceId:null, nextStart:null, report:null };
+  var state = { nextStart:null, report:null };
   function $(id){ return document.getElementById(id); }
   function pad(n){ return (n<10?'0':'')+n; }
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
@@ -316,155 +231,31 @@
     showRace(races[0].raceNumber);
   }
 
-  // ───────────────────────── Factor tuner (advanced, collapsible) ─────────────────────────
-  function renderFactors(groups){
-    var container = $('factors-container');
-    container.innerHTML = groups.map(function(grp){
-      var rows = grp.items.map(function(it){
-        state.factors[it.id] = 50;
-        return '<div class="factor-row"><div class="factor-row__name">'+esc(it.name)+'<small>'+esc(it.description||'')+'</small></div>' +
-          '<div class="factor-row__weight" id="wt-'+esc(it.id)+'">50</div>' +
-          '<div class="factor-row__slider"><input type="range" min="0" max="100" value="50" data-fid="'+esc(it.id)+'"></div></div>';
-      }).join('');
-      return '<div class="factor-group"><h3><span class="bar"></span>'+esc(grp.category)+'</h3>'+rows+'</div>';
-    }).join('');
-    container.addEventListener('input', function(e){
-      var fid = e.target && e.target.getAttribute('data-fid');
-      if (!fid) return;
-      var v = parseInt(e.target.value, 10);
-      state.factors[fid] = v;
-      var el = $('wt-' + fid); if (el) el.textContent = v;
-    });
-  }
-
-  function renderRaces(meeting){
-    var sel = $('race-select');
-    var races = (meeting && meeting.races) || [];
-    if (!races.length){
-      sel.innerHTML = '<option>暫無場次</option>';
-      sel.disabled = true;
-      return;
-    }
-    sel.disabled = false;
-    var now = new Date();
-    var nextIdx = 0;
-    races.forEach(function(r, i){
-      var st = TX_API.cleanTime(r.start_time);
-      if (st){
-        var parts = st.split(':'); var tgt = new Date(now);
-        tgt.setHours(+parts[0], +parts[1], 0, 0);
-        if (tgt > now && !state.nextStart){ nextIdx = i; state.nextStart = st; }
-      }
-    });
-    sel.innerHTML = races.map(function(r){
-      var no = r.race_no || r.no || '?';
-      var st = TX_API.cleanTime(r.start_time) || '——';
-      var dist = r.distance ? r.distance + 'm' : '';
-      return '<option value="'+esc(r.id || r.race_id)+'">R'+esc(no)+' · '+esc(st)+(dist?' · '+esc(dist):'')+'</option>';
-    }).join('');
-    sel.selectedIndex = nextIdx;
-    state.raceId = races[nextIdx].id || races[nextIdx].race_id;
-  }
-
-  function renderResults(picks){
-      var section = $('results-section');
-      var rows = $('results-rows');
-      section.style.display = 'block';
-      if (!picks || !picks.length){
-        rows.innerHTML = '<div class="empty-state"><strong>暫無分析結果</strong>此場 Elo 資料整備中 · 待數據就緒後重試</div>';
-        return;
-      }
-      var top = picks.slice(0,5);
-      var maxP = 0, sumP = 0;
-      top.forEach(function(p){ if (p.pWin != null){ if (p.pWin > maxP) maxP = p.pWin; sumP += p.pWin; } });
-      var summary = '';
-      if (top.length >= 2 && top[0].pWin != null && top[1].pWin != null){
-        var lead = ((top[0].pWin - top[1].pWin) * 100).toFixed(1);
-        var pool = (sumP * 100).toFixed(0);
-        summary = '<div class="result-summary">' +
-          '<span>Top-5 涵蓋 <strong>' + esc(pool) + '%</strong> 機率</span>' +
-          '<span>領先優勢 <span class="badge">+' + esc(lead) + 'pp</span></span>' +
-        '</div>';
-      }
-      rows.innerHTML = summary + top.map(function(p, i){
-        var name = p.nameCh || p.nameEn || p.name || '—';
-        var num = p.horseNumber != null ? p.horseNumber : (p.draw != null ? p.draw : (p.no || '?'));
-        var pct = p.pWin != null ? Math.round(p.pWin*100) : null;
-        var barPct = (p.pWin != null && maxP > 0) ? Math.max(4, Math.round((p.pWin / maxP) * 100)) : 0;
-        var vd = p.valueDelta != null ? (p.valueDelta*100).toFixed(1) : null;
-        var vdCls = vd != null && parseFloat(vd) >= 0 ? 'pos' : 'neg';
-        var vdTxt = vd != null ? ((parseFloat(vd)>=0?'+':'') + vd + 'pp') : '—';
-        var rankCls = i === 0 ? 'r1' : i === 1 ? 'r2' : i === 2 ? 'r3' : '';
-        var sub = '#' + esc(num) + ' · 檔 ' + esc(p.draw != null ? p.draw : '—');
-        var odds = p.winOdds != null ? p.winOdds : p.odds;
-        if (odds != null) sub += ' · 賠率 ' + Number(odds).toFixed(1);
-        return '<div class="result-row '+rankCls+'">' +
-          '<div class="result-row__rank '+rankCls+'">'+(i+1)+'</div>' +
-          '<div class="result-row__name">'+esc(name)+'<small>'+sub+'</small></div>' +
-          '<div class="result-row__stats"><span class="p">'+(pct!=null?pct+'%':'—')+'</span><span class="delta '+vdCls+'">Δ '+esc(vdTxt)+'</span></div>' +
-          '<div class="result-row__bar" style="--pwin:'+barPct+'%"></div>' +
-        '</div>';
-      }).join('');
-    }
-
-  function analyze(){
-    if (!state.raceId){ alert('請先揀場次'); return; }
-    var btn = $('btn-analyze');
-    btn.disabled = true; btn.textContent = '運算中…';
-    var weights = {};
-    Object.keys(state.factors).forEach(function(k){ weights[k] = state.factors[k]/100; });
-    TX_API.analyze({ raceId: state.raceId, factors: weights }).then(function(res){
-      renderResults(res.picks || res.top || []);
-    }).catch(function(err){
-      TX_API.topPicks(state.raceId).then(function(res){
-        renderResults(res.picks || []);
-      }).catch(function(err2){
-        $('results-section').style.display = 'block';
-        $('results-rows').innerHTML = '<div class="empty-state"><strong>暫時無法運算</strong>'+esc(err2.message||'資料服務離線')+'</div>';
-      });
-    }).finally(function(){
-      btn.disabled = false; btn.textContent = '運算分析';
-    });
-  }
-
-  function resetFactors(){
-    Object.keys(state.factors).forEach(function(k){
-      state.factors[k] = 50;
-      var el = $('wt-' + k); if (el) el.textContent = '50';
-    });
-    document.querySelectorAll('input[type=range][data-fid]').forEach(function(inp){ inp.value = 50; });
-  }
-
   // ───────────────────────── bootstrap ─────────────────────────
   TX_API.todayPicks().then(function(rep){
     renderTodayPicks(rep);
-    if (rep && rep.races && rep.races.length){
-      var r0 = rep.races[0];
-      // nextStart for ticker if a start time is exposed
-    }
     tickTicker();
   }).catch(function(){
     $('tp-wait').innerHTML = '<span class="ico">—</span><strong>今日精選載入失敗</strong>請稍後重試';
   });
 
+  // next-race countdown for the ticker
   TX_API.smartCurrent().then(function(cur){
-    if (!cur || !cur.date) { renderRaces(null); return null; }
+    if (!cur || !cur.date) return null;
     return TX_API.meeting(cur.date);
   }).then(function(m){
-    renderRaces(m);
-  }).catch(function(){ renderRaces(null); });
-
-  TX_API.factors().then(function(res){
-    renderFactors(res.factors || []);
-  }).catch(function(){
-    $('factors-container').innerHTML = '<div class="empty-state"><strong>因子列表載入失敗</strong>請稍後重試</div>';
-  });
-
-  $('race-select').addEventListener('change', function(e){
-    state.raceId = e.target.value;
-  });
-  $('btn-analyze').addEventListener('click', analyze);
-  $('btn-reset').addEventListener('click', resetFactors);
+    var races = (m && m.races) || [];
+    var now = new Date();
+    races.forEach(function(r){
+      var st = TX_API.cleanTime(r.startTime || r.start_time);
+      if (st && !state.nextStart){
+        var parts = st.split(':'); var tgt = new Date(now);
+        tgt.setHours(+parts[0], +parts[1], 0, 0);
+        if (tgt > now) state.nextStart = st;
+      }
+    });
+    tickTicker();
+  }).catch(function(){});
 
   tickTicker();
   setInterval(tickTicker, 1000);
