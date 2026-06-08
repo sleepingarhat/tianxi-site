@@ -231,7 +231,7 @@
     return parts;
   }
 
-  function renderPick(r, isTop){
+  function renderPick(r, isTop, anchor){
     var picks = (r.picks||[]).slice().sort(byRank);
     var p1 = picks[0];
     if (!p1) return '';
@@ -243,7 +243,7 @@
 
     var alts = [picks[1], picks[2]].map(altChip).join('');
 
-    return '<div class="pk' + (isTop ? ' pk--top' : '') + '" id="pk-r' + esc(r.raceNumber) + '">' +
+    return '<div class="pk' + (isTop ? ' pk--top' : '') + '" id="pk-' + esc(anchor) + '">' +
       '<div class="pk__hd">' +
         '<div class="pk__race">' + (isTop ? '<span class="pk__crown">本日最強</span>' : '') +
           esc(hp[0]) + '<small>' + esc(hp.slice(1).join(' · ')) + '</small></div>' +
@@ -322,14 +322,14 @@
       if (w > bestW){ bestW = w; bestIdx = i; }
     });
     var nav = races.length > 1
-      ? '<div class="rnav" id="rnav">' + races.map(function(r){ return '<button type="button" class="rnav__b" data-r="' + esc(r.raceNumber) + '">R' + esc(r.raceNumber) + '</button>'; }).join('') + '</div>'
+      ? '<div class="rnav" id="rnav">' + races.map(function(r,i){ return '<button type="button" class="rnav__b" data-r="' + i + '">R' + esc(r.raceNumber != null ? r.raceNumber : (i+1)) + '</button>'; }).join('') + '</div>'
       : '';
-    slot.innerHTML = nav + races.map(function(r,i){ return renderPick(r, i===bestIdx); }).join('');
+    slot.innerHTML = nav + races.map(function(r,i){ return renderPick(r, i===bestIdx, i); }).join('');
     var nv = $('rnav');
     if (nv){
       nv.addEventListener('click', function(e){
         var b = e.target.closest('.rnav__b'); if (!b) return;
-        var el = document.getElementById('pk-r' + b.dataset.r);
+        var el = document.getElementById('pk-' + b.dataset.r);
         if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
         Array.prototype.forEach.call(nv.querySelectorAll('.rnav__b'), function(x){ x.classList.toggle('is-on', x===b); });
       });
