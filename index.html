@@ -72,6 +72,10 @@
 
   .cmp-legend{max-width:560px;margin:12px auto 0;font-size:11px;color:var(--ink-mute);line-height:1.55;text-align:center;padding:0 8px}
   .cmp-legend .swatch{display:inline-block;width:14px;height:10px;background:linear-gradient(180deg,#FFF4C2,#F6E08C);border:1px solid #D4A93C;border-radius:2px;vertical-align:-1px;margin-right:4px}
+
+  .cmp-hit{max-width:560px;margin:11px auto 0;text-align:center;font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);letter-spacing:.04em}
+  .cmp-hit b{font-weight:800;color:var(--ink)}
+  .cmp-hit.good b{color:#00843D}
   </style>
   </head>
   <body data-page="home">
@@ -99,7 +103,7 @@
 
   <div class="cmp-wrap">
     <div class="cmp-square" id="cmp-square">
-      <div class="cmp-col-hdr l">預測<small>PREDICTION · TOP 4</small></div>
+      <div class="cmp-col-hdr l">預測<small>天喜 ELO · TOP 4</small></div>
       <div class="cmp-col-hdr r">賽果<small>RESULT · 1ST – 4TH</small></div>
       <div class="cmp-list l" id="cmp-left" aria-live="polite" aria-label="預測首四名">
         <div class="cmp-empty"><strong>未選擇</strong>請於上方揀選日期同場次</div>
@@ -108,6 +112,7 @@
         <div class="cmp-empty"><strong>未選擇</strong>請於上方揀選日期同場次</div>
       </div>
     </div>
+    <div class="cmp-hit" id="cmp-hit"></div>
     <p class="cmp-legend"><span class="swatch"></span>同時出現於預測與賽果嘅馬匹</p>
   </div>
 
@@ -181,6 +186,18 @@
       $('cmp-right').innerHTML = R.length
         ? R.slice(0,4).map(function(h,i){ return renderCell(i+1, h, isMatch(h, leftKeys)); }).join('')
         : '<div class="cmp-empty"><strong>賽果未出</strong>此場暫未完賽或結果未同步</div>';
+
+      var hitEl = $('cmp-hit');
+      if (hitEl){
+        if (L.length && R.length){
+          var hits = L.slice(0,4).filter(function(h){ return isMatch(h, rightKeys); }).length;
+          hitEl.innerHTML = '預測首 4 命中賽果首 4：<b>' + hits + ' / 4</b>';
+          hitEl.className = 'cmp-hit' + (hits >= 2 ? ' good' : '');
+        } else {
+          hitEl.textContent = '';
+          hitEl.className = 'cmp-hit';
+        }
+      }
     }
 
     function setMeta(text){ $('cmp-meta').innerHTML = text || '—'; }
