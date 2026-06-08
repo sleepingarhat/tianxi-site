@@ -335,7 +335,7 @@
     '</div>';
   }
 
-  function updateCmpSummary(races){
+  function updateCmpSummary(races, allDone){
     var el = document.getElementById('cmp-summary');
     if (!el) return;
     var denom = 0, champ = 0, top3 = 0, lgb = 0, withTp = 0;
@@ -353,7 +353,12 @@
       if (fp === 1) champ++;
       if (fp <= 3) top3++;
     });
-    if (!denom){ el.innerHTML = '<span class="k">模型對賬</span> 此日暫無可比對之模型預測'; return; }
+    if (!denom){
+      el.innerHTML = allDone
+        ? '<span class="k">模型對賬</span> 此日暫無可比對之模型預測'
+        : '<span class="k">模型對賬</span> 計算中…';
+      return;
+    }
     var srcTxt = lgb === withTp ? '集成 LGB' : (lgb === 0 ? 'ELO+因子' : ('LGB ' + lgb + '/' + withTp + ' 場'));
     el.innerHTML =
       '<span class="k">模型對賬</span>' +
@@ -363,6 +368,13 @@
   }
 
   function enrichPredictions(races){
+    var pending = 0;
+    races.forEach(function(race){
+      var settled = (race.horses || []).some(function(h){ return h.finishingPosition != null; });
+      if (settled && race.id) pending++;
+    });
+    if (!pending){ updateCmpSummary(races, true); return; }
+    updateCmpSummary(races, false);
     races.forEach(function(race){
       var anchorId = 'cmp-' + (race.id || ('r' + (race.raceNumber || race.race_number)));
       var el = document.getElementById(anchorId);
@@ -376,9 +388,8 @@
       }).catch(function(){
         var node = document.getElementById(anchorId);
         if (node) node.outerHTML = '<div class="cmp cmp--na">模型預測載入失敗</div>';
-      }).then(function(){ updateCmpSummary(races); });
+      }).then(function(){ pending--; updateCmpSummary(races, pending <= 0); });
     });
-    updateCmpSummary(races);
   }
 
   function showErr(msg){
