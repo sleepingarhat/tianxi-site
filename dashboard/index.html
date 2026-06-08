@@ -35,7 +35,7 @@
 .sec__more{font-family:var(--font-mono);font-size:11px;color:var(--accent);font-weight:700;white-space:nowrap;border-bottom:1px solid var(--rule-2);padding-bottom:1px}
 
 /* ── pick card ── */
-.pk{border:1px solid var(--rule);border-radius:14px;background:var(--paper);padding:12px 13px;margin-bottom:10px;box-shadow:var(--sh-sm)}
+.pk{border:1px solid var(--rule);border-radius:14px;background:var(--paper);padding:12px 13px;margin-bottom:10px;box-shadow:var(--sh-sm);scroll-margin-top:72px}
 .pk--top{border-color:#D9A547;background:linear-gradient(180deg,var(--gold-tint) 0%,var(--paper) 58%)}
 .pk__hd{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:9px;margin-bottom:10px;border-bottom:1px solid var(--rule)}
 .pk__race{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--ink);letter-spacing:.03em}
@@ -59,6 +59,12 @@
 .pk__alt{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap}
 .pk__chip{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--rule);border-radius:999px;padding:3px 9px;letter-spacing:.02em}
 .pk__chip b{color:var(--ink);font-weight:700}
+
+/* ── race quick-nav (tap to scroll to each pick) ── */
+.rnav{display:flex;gap:6px;overflow-x:auto;padding:0 0 11px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.rnav::-webkit-scrollbar{display:none}
+.rnav__b{flex:0 0 auto;font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--rule);border-radius:999px;padding:6px 13px;letter-spacing:.04em;cursor:pointer;transition:background 120ms ease,color 120ms ease,border-color 120ms ease}
+.rnav__b.is-on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 
 /* ── leaderboard rows ── */
 .lb__row{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--rule)}
@@ -105,7 +111,7 @@
   <div class="eng"><div class="eng__lbl">下一賽馬日</div><div class="eng__val" id="eng-day">—</div><div class="eng__sub" id="eng-day-sub">載入中…</div></div>
   <div class="eng"><div class="eng__lbl">編排場次</div><div class="eng__val" id="eng-races">—</div><div class="eng__sub" id="eng-races-sub">—</div></div>
   <div class="eng"><div class="eng__lbl">預測引擎</div><div class="eng__val" id="eng-elo">—</div><div class="eng__sub" id="eng-elo-sub">—</div></div>
-  <div class="eng"><div class="eng__lbl">集成模型 α</div><div class="eng__val" id="eng-alpha">—</div><div class="eng__sub" id="eng-alpha-sub">—</div></div>
+  <div class="eng"><div class="eng__lbl" id="eng-alpha-lbl">集成模型 α</div><div class="eng__val" id="eng-alpha">—</div><div class="eng__sub" id="eng-alpha-sub">—</div></div>
 </div>
 
 <!-- ── 模型精選 ── -->
@@ -237,7 +243,7 @@
 
     var alts = [picks[1], picks[2]].map(altChip).join('');
 
-    return '<div class="pk' + (isTop ? ' pk--top' : '') + '">' +
+    return '<div class="pk' + (isTop ? ' pk--top' : '') + '" id="pk-r' + esc(r.raceNumber) + '">' +
       '<div class="pk__hd">' +
         '<div class="pk__race">' + (isTop ? '<span class="pk__crown">本日最強</span>' : '') +
           esc(hp[0]) + '<small>' + esc(hp.slice(1).join(' · ')) + '</small></div>' +
@@ -285,8 +291,16 @@
     $('eng-elo').innerHTML = 'ELO ' + esc(d.eloEngine||'—');
     $('eng-elo-sub').innerHTML = d.eloReady ? '<b>即時就緒</b> · 馬 0.7 騎 0.2 練 0.1' : '準備中';
 
-    $('eng-alpha').innerHTML = alpha != null ? Number(alpha).toFixed(2) : '—';
-    $('eng-alpha-sub').textContent = lgbV ? 'LGB ' + lgbV : 'LGB 集成 + ELO';
+    var appliedN = races.filter(function(r){ return r.lgbCoverage && r.lgbCoverage.applied; }).length;
+    if (appliedN > 0){
+      $('eng-alpha-lbl').textContent = '集成模型 α';
+      $('eng-alpha').innerHTML = alpha != null ? Number(alpha).toFixed(2) : '—';
+      $('eng-alpha-sub').innerHTML = '<b>LGB ' + esc(lgbV || '集成') + '</b> · 覆蓋 ' + appliedN + '/' + races.length + ' 場';
+    } else {
+      $('eng-alpha-lbl').textContent = '本日模型';
+      $('eng-alpha').innerHTML = 'ELO<small>+因子</small>';
+      $('eng-alpha-sub').textContent = 'LGB 未覆蓋本日 · 集成 α ' + (alpha != null ? Number(alpha).toFixed(2) : '0.88') + ' 待生效';
+    }
 
     var gen = d.generatedAt || d.cachedGeneratedAt;
     if (gen) $('dash-fresh').innerHTML = '模型更新 <b>' + esc(fmtHM(gen)) + '</b> · 共分析 ' + races.length + ' 場 · 資料來源 HKJC';
@@ -307,7 +321,19 @@
       var w = top ? Number(top.pWin)||0 : 0;
       if (w > bestW){ bestW = w; bestIdx = i; }
     });
-    slot.innerHTML = races.map(function(r,i){ return renderPick(r, i===bestIdx); }).join('');
+    var nav = races.length > 1
+      ? '<div class="rnav" id="rnav">' + races.map(function(r){ return '<button type="button" class="rnav__b" data-r="' + esc(r.raceNumber) + '">R' + esc(r.raceNumber) + '</button>'; }).join('') + '</div>'
+      : '';
+    slot.innerHTML = nav + races.map(function(r,i){ return renderPick(r, i===bestIdx); }).join('');
+    var nv = $('rnav');
+    if (nv){
+      nv.addEventListener('click', function(e){
+        var b = e.target.closest('.rnav__b'); if (!b) return;
+        var el = document.getElementById('pk-r' + b.dataset.r);
+        if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+        Array.prototype.forEach.call(nv.querySelectorAll('.rnav__b'), function(x){ x.classList.toggle('is-on', x===b); });
+      });
+    }
   }
 
   TX_API.todayPicks().then(function(d){
