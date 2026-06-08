@@ -17,6 +17,63 @@
 .pred-head h1 small{display:block;font-family:var(--font-body);font-size:10px;color:var(--ink-mute);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;font-weight:600}
 .pred-head p{font-size:12px;color:var(--ink-soft);margin-top:8px;line-height:1.6}
 
+/* ── Today picks · dual-column ─────────────────────────────── */
+.tp{padding:14px 16px 18px}
+.tp-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.tp-meta__date{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--ink)}
+.tp-meta__date small{display:block;font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.08em;margin-top:2px;text-transform:uppercase}
+.tp-meta__venue{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--gold-3);background:linear-gradient(135deg,var(--brown),var(--ink));padding:5px 11px;border-radius:999px;letter-spacing:0.06em;white-space:nowrap}
+.tp-racepick{margin-bottom:12px}
+.tp-racepick label{display:block;font-size:10px;color:var(--ink-mute);letter-spacing:0.12em;font-weight:700;text-transform:uppercase;margin-bottom:6px}
+.tp-racepick select{width:100%;padding:11px 12px;border:1px solid var(--rule-2);border-radius:10px;background:var(--paper-2);color:var(--ink);font-family:var(--font-body);font-size:13px;font-weight:600}
+
+.tp-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tp-col{border:1px solid var(--rule);border-radius:14px;overflow:hidden;background:var(--paper);box-shadow:var(--sh-sm);display:flex;flex-direction:column}
+.tp-col__head{padding:11px 12px 10px;display:flex;flex-direction:column;gap:3px}
+.tp-col__head .ttl{display:flex;align-items:center;gap:6px;font-family:var(--font-display);font-weight:900;font-size:14px;letter-spacing:0.01em}
+.tp-col__head .ttl svg{width:15px;height:15px;flex:0 0 auto}
+.tp-col__head .sub{font-family:var(--font-body);font-size:9.5px;font-weight:600;letter-spacing:0.04em;opacity:0.92;line-height:1.35}
+.tp-col--model .tp-col__head{background:linear-gradient(140deg,var(--brown),var(--ink) 88%);color:var(--gold-3)}
+.tp-col--model .tp-col__head .sub{color:var(--gold-tint)}
+.tp-col--market .tp-col__head{background:var(--paper-3);color:var(--ink);border-bottom:1px solid var(--rule)}
+.tp-col--market .tp-col__head .sub{color:var(--ink-mute)}
+.tp-col__body{flex:1}
+
+.tp-item{display:grid;grid-template-columns:auto 1fr auto;gap:8px;padding:9px 10px;border-top:1px solid var(--rule);align-items:center}
+.tp-item:first-child{border-top:0}
+.tp-item__rank{font-family:var(--font-display);font-weight:900;font-size:17px;min-width:18px;text-align:center;color:var(--ink-mute);line-height:1}
+.tp-item__rank.r1{color:#E8B838}
+.tp-item__rank.r2{color:#B8A47A}
+.tp-item__rank.r3{color:#A9743A}
+.tp-item__name{min-width:0}
+.tp-item__name .n{font-family:var(--font-display);font-weight:700;font-size:12.5px;color:var(--ink);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tp-item__name .m{display:block;font-family:var(--font-mono);font-size:9px;color:var(--ink-mute);font-weight:500;margin-top:2px;letter-spacing:0.02em}
+.tp-item__val{text-align:right;font-family:var(--font-mono);white-space:nowrap}
+.tp-item__val .big{font-weight:700;font-size:13.5px;color:var(--accent-strong)}
+.tp-col--market .tp-item__val .big{color:var(--ink-soft)}
+.tp-item__val .sub{display:block;font-size:9px;color:var(--ink-mute);margin-top:1px}
+.tp-item__val .odds{color:var(--accent)}
+
+.tp-wait{padding:22px 14px;text-align:center;color:var(--ink-mute);font-size:11px;line-height:1.65}
+.tp-wait .ico{font-size:20px;display:block;margin-bottom:6px;opacity:0.5}
+.tp-wait strong{display:block;color:var(--ink-soft);font-size:12px;margin-bottom:4px;font-family:var(--font-display)}
+
+.tp-stamp{font-family:var(--font-mono);font-size:9px;color:var(--ink-faint);text-align:center;padding:7px 8px;border-top:1px dashed var(--rule)}
+
+.tp-legend{margin-top:14px;padding:12px 13px;background:var(--paper-2);border:1px solid var(--rule);border-radius:10px;font-size:10.5px;color:var(--ink-soft);line-height:1.7}
+.tp-legend b{font-family:var(--font-display)}
+.tp-tag{display:inline-block;padding:1px 7px;border-radius:999px;font-size:9.5px;font-weight:700;font-family:var(--font-body);vertical-align:middle}
+.tp-tag--cold{background:var(--gold-tint);color:var(--accent-strong)}
+.tp-tag--hot{background:rgba(200,16,46,0.12);color:var(--red)}
+
+/* ── Collapsible factor tuner ─────────────────────────────── */
+.tuner-fold{border-top:1px solid var(--rule)}
+.tuner-fold>summary{list-style:none;cursor:pointer;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--ink)}
+.tuner-fold>summary::-webkit-details-marker{display:none}
+.tuner-fold>summary small{display:block;font-family:var(--font-body);font-weight:400;font-size:10.5px;color:var(--ink-mute);margin-top:3px;letter-spacing:0.02em}
+.tuner-fold>summary .chev{font-family:var(--font-mono);font-size:12px;color:var(--ink-mute);transition:transform .2s}
+.tuner-fold[open]>summary .chev{transform:rotate(90deg)}
+
 .race-picker{padding:14px 20px;border-bottom:1px solid var(--rule);display:grid;gap:10px}
 .race-picker label{font-size:10px;color:var(--ink-mute);letter-spacing:0.12em;font-weight:700;text-transform:uppercase}
 .race-picker select{width:100%;padding:10px 12px;border:1px solid var(--rule);border-radius:10px;background:var(--paper-2);color:var(--ink);font-family:var(--font-body);font-size:13px;font-weight:500}
@@ -45,24 +102,24 @@
 .pred-results p.sub{font-size:11px;color:var(--ink-mute);margin-bottom:12px;line-height:1.5}
 
 .result-row{display:grid;grid-template-columns:auto 1fr auto;column-gap:10px;row-gap:6px;padding:12px 4px;border-bottom:1px solid var(--rule);align-items:center}
-  .result-row:last-child{border-bottom:0}
-  .result-row__rank{font-family:var(--font-display);font-weight:900;font-size:20px;color:var(--gold-2);min-width:28px;text-align:center;align-self:start;padding-top:2px}
-  .result-row__rank.r1{color:#E8B838}
-  .result-row__rank.r2{color:#B8A47A}
-  .result-row__rank.r3{color:#8B5A2B}
-  .result-row__name{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--ink)}
-  .result-row__name small{display:block;font-family:var(--font-body);font-size:10px;color:var(--ink-mute);font-weight:400;margin-top:2px}
-  .result-row__stats{text-align:right}
-  .result-row__stats .p{font-family:var(--font-mono);font-weight:700;font-size:15px;color:var(--accent-strong)}
-  .result-row__stats .delta{display:block;font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);margin-top:2px;letter-spacing:0.04em}
-  .result-row__stats .delta.pos{color:var(--green)}
-  .result-row__stats .delta.neg{color:var(--red)}
-  .result-row__bar{grid-column:2 / -1;height:6px;background:var(--paper-3);border-radius:3px;overflow:hidden;position:relative}
-  .result-row__bar::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--pwin,0%);background:linear-gradient(90deg,var(--gold-2),var(--accent-strong));border-radius:3px;transition:width .5s ease-out}
-  .result-row.r1 .result-row__bar::after{background:linear-gradient(90deg,#EBC964,#D4A93C,#A07A1F)}
-  .result-summary{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 12px;margin:8px 0 14px;background:var(--paper-2);border:1px solid var(--rule);border-radius:8px;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);letter-spacing:0.06em}
-  .result-summary strong{font-family:var(--font-display);font-size:13px;color:var(--ink)}
-  .result-summary .badge{display:inline-block;padding:2px 8px;background:var(--paper-3);border-radius:999px;font-weight:700;color:var(--ink)}
+.result-row:last-child{border-bottom:0}
+.result-row__rank{font-family:var(--font-display);font-weight:900;font-size:20px;color:var(--gold-2);min-width:28px;text-align:center;align-self:start;padding-top:2px}
+.result-row__rank.r1{color:#E8B838}
+.result-row__rank.r2{color:#B8A47A}
+.result-row__rank.r3{color:#8B5A2B}
+.result-row__name{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--ink)}
+.result-row__name small{display:block;font-family:var(--font-body);font-size:10px;color:var(--ink-mute);font-weight:400;margin-top:2px}
+.result-row__stats{text-align:right}
+.result-row__stats .p{font-family:var(--font-mono);font-weight:700;font-size:15px;color:var(--accent-strong)}
+.result-row__stats .delta{display:block;font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);margin-top:2px;letter-spacing:0.04em}
+.result-row__stats .delta.pos{color:var(--green)}
+.result-row__stats .delta.neg{color:var(--red)}
+.result-row__bar{grid-column:2 / -1;height:6px;background:var(--paper-3);border-radius:3px;overflow:hidden;position:relative}
+.result-row__bar::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--pwin,0%);background:linear-gradient(90deg,var(--gold-2),var(--accent-strong));border-radius:3px;transition:width .5s ease-out}
+.result-row.r1 .result-row__bar::after{background:linear-gradient(90deg,#EBC964,#D4A93C,#A07A1F)}
+.result-summary{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 12px;margin:8px 0 14px;background:var(--paper-2);border:1px solid var(--rule);border-radius:8px;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);letter-spacing:0.06em}
+.result-summary strong{font-family:var(--font-display);font-size:13px;color:var(--ink)}
+.result-summary .badge{display:inline-block;padding:2px 8px;background:var(--paper-3);border-radius:999px;font-weight:700;color:var(--ink)}
 
 .empty-state{padding:24px 16px;text-align:center;color:var(--ink-mute);font-size:12px;line-height:1.6}
 .empty-state strong{color:var(--ink-soft);display:block;margin-bottom:4px;font-size:13px}
@@ -80,33 +137,73 @@
 </div>
 
 <section class="pred-head">
-  <h1><small>PREDICTOR · 選馬神器</small>調校因子 · 自訂分析</h1>
-  <p>揀場次 · 調權重 · 即時重算 Top 5 分析。所有因子純數學運算 · 零 token 永遠免費。</p>
+  <h1><small>PREDICTOR · 選馬神器</small>今日精選 · 雙欄對照</h1>
+  <p>左欄 <b>模型搏冷</b>：賽前一日生成 · 捕捉冷門。右欄 <b>市場穩陣</b>：臨場盤口參考 · 命中率高但偏熱門。兩欄並列 · 各取所需。</p>
 </section>
 
-<section class="race-picker">
-  <label for="race-select">揀場次</label>
-  <select id="race-select"><option>載入中…</option></select>
+<section class="tp" id="tp-section">
+  <div class="tp-wait" id="tp-wait"><span class="ico">⟳</span><strong>載入今日精選中…</strong>整備賽日數據</div>
+  <div id="tp-body" style="display:none">
+    <div class="tp-meta">
+      <div class="tp-meta__date" id="tp-date">——<small id="tp-date-sub"></small></div>
+      <div class="tp-meta__venue" id="tp-venue">——</div>
+    </div>
+    <div class="tp-racepick">
+      <label for="tp-race-select">揀場次</label>
+      <select id="tp-race-select"><option>載入中…</option></select>
+    </div>
+    <div class="tp-cols">
+      <div class="tp-col tp-col--model">
+        <div class="tp-col__head">
+          <span class="ttl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 5.4L20 8.2l-4 4 1 5.8L12 15.4 7 18l1-5.8-4-4 5.6-.8z"/></svg>模型搏冷</span>
+          <span class="sub">天喜 v3 集成 · 捕捉冷門</span>
+        </div>
+        <div class="tp-col__body" id="tp-model"></div>
+      </div>
+      <div class="tp-col tp-col--market">
+        <div class="tp-col__head">
+          <span class="ttl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>市場穩陣</span>
+          <span class="sub">臨場盤口 · 偏熱門 · 高命中</span>
+        </div>
+        <div class="tp-col__body" id="tp-market"></div>
+      </div>
+    </div>
+    <div class="tp-legend">
+      <b>點樣睇？</b> 左欄係天喜模型獨立預測（賽前一日生成，<span class="tp-tag tp-tag--cold">搏冷</span>），分數不受賠率影響。右欄將<b>臨場盤口</b>以對數混合（β0.4）入模型，命中率較高但會<span class="tp-tag tp-tag--hot">偏熱門</span>，<b>並非</b>捕捉冷馬之指引 — 想搏冷請睇左欄。
+    </div>
+  </div>
 </section>
 
-<div id="factors-container">
-  <div class="empty-state"><strong>載入因子列表中…</strong></div>
-</div>
+<details class="tuner-fold">
+  <summary>
+    <span>進階 · 自訂因子調校<small>逐項調權重 · 即時重算 Top 5 · 零 token 永遠免費</small></span>
+    <span class="chev">▸</span>
+  </summary>
 
-<div class="pred-actions">
-  <button class="pred-btn" id="btn-reset">全部重設</button>
-  <button class="pred-btn pred-btn--primary" id="btn-analyze">運算分析</button>
-</div>
+  <section class="race-picker">
+    <label for="race-select">揀場次</label>
+    <select id="race-select"><option>載入中…</option></select>
+  </section>
 
-<section class="pred-results" id="results-section" style="display:none">
-  <h2><span class="bar"></span>AI 分析結果 Top 5</h2>
-  <p class="sub">根據你選定嘅因子權重計算 · P(勝) 用 Plackett-Luce softmax · Δ = 模型 vs 市場暗示機率</p>
-  <div id="results-rows"></div>
-</section>
+  <div id="factors-container">
+    <div class="empty-state"><strong>載入因子列表中…</strong></div>
+  </div>
+
+  <div class="pred-actions">
+    <button class="pred-btn" id="btn-reset">全部重設</button>
+    <button class="pred-btn pred-btn--primary" id="btn-analyze">運算分析</button>
+  </div>
+
+  <section class="pred-results" id="results-section" style="display:none">
+    <h2><span class="bar"></span>AI 分析結果 Top 5</h2>
+    <p class="sub">根據你選定嘅因子權重計算 · P(勝) 用 Plackett-Luce softmax · Δ = 模型 vs 市場暗示機率</p>
+    <div id="results-rows"></div>
+  </section>
+</details>
 
 <p class="disclaimer-note">
   <strong>純分析展示 · 非投注建議。</strong>
-  值博 Δ 為分析指標 · 反映模型與市場隱含機率之差 · 並非落飛指引。<br>
+  「市場穩陣」融合臨場盤口僅作參考，偏向熱門馬、並非捕捉冷馬之指引；值博 Δ 反映模型與市場隱含機率之差。<br>
   投注請透過合法渠道（HKJC）進行。
 </p>
 
@@ -124,7 +221,7 @@
 <script>
 (function(){
   if (!window.TX_API) return;
-  var state = { factors:{}, raceId:null, nextStart:null };
+  var state = { factors:{}, raceId:null, nextStart:null, report:null };
   function $(id){ return document.getElementById(id); }
   function pad(n){ return (n<10?'0':'')+n; }
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
@@ -132,15 +229,94 @@
     var d = new Date(); var wk = ['SUN','MON','TUE','WED','THU','FRI','SAT'][d.getDay()];
     return 'HK ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ' ' + wk;
   }
+  function venueName(v){ return v === 'ST' ? '沙田' : v === 'HV' ? '跑馬地' : (v || '——'); }
 
   function tickTicker(){
     var c = $('ticker-clock'), n = $('ticker-next');
     if (c) c.textContent = hkClock();
     if (n){
-      n.textContent = state.nextStart ? ('下一場 T-' + TX_API.countdown(state.nextStart)) : '揀場次開始分析';
+      n.textContent = state.nextStart ? ('下一場 T-' + TX_API.countdown(state.nextStart)) : '今日精選已就緒';
     }
   }
 
+  // ───────────────────────── Today picks · dual column ─────────────────────────
+  function tpItem(rank, name, meta, big, sub){
+    var rc = rank === 1 ? 'r1' : rank === 2 ? 'r2' : rank === 3 ? 'r3' : '';
+    return '<div class="tp-item">' +
+      '<div class="tp-item__rank '+rc+'">'+rank+'</div>' +
+      '<div class="tp-item__name"><span class="n">'+esc(name)+'</span><span class="m">'+esc(meta)+'</span></div>' +
+      '<div class="tp-item__val">'+big+(sub?'<span class="sub">'+sub+'</span>':'')+'</div>' +
+    '</div>';
+  }
+
+  function renderRaceCols(race){
+    var model = $('tp-model'), market = $('tp-market');
+    if (!race){ model.innerHTML = ''; market.innerHTML = ''; return; }
+    var picks = (race.picks || []).slice();
+
+    // ── Left: model 搏冷 (by rank / pWin) ──
+    var byRank = picks.slice().sort(function(a,b){ return (a.rank||99) - (b.rank||99); }).slice(0,5);
+    model.innerHTML = byRank.length ? byRank.map(function(p,i){
+      var name = p.nameCh || p.nameEn || '—';
+      var meta = '#' + (p.horseNumber!=null?p.horseNumber:'?') + ' · 檔' + (p.draw!=null?p.draw:'—');
+      var pct = p.pWin!=null ? Math.round(p.pWin*100)+'%' : '—';
+      return tpItem(i+1, name, meta, '<span class="big">'+pct+'</span>', 'P勝');
+    }).join('') : '<div class="tp-wait"><strong>此場整備中</strong>待數據就緒</div>';
+
+    // ── Right: market 穩陣 (by marketRank / blendProb + odds) ──
+    if (race.marketReady){
+      var byMkt = picks.filter(function(p){ return p.marketRank!=null; })
+                       .sort(function(a,b){ return a.marketRank - b.marketRank; }).slice(0,5);
+      market.innerHTML = (byMkt.length ? byMkt.map(function(p,i){
+        var name = p.nameCh || p.nameEn || '—';
+        var meta = '#' + (p.horseNumber!=null?p.horseNumber:'?') + ' · 檔' + (p.draw!=null?p.draw:'—');
+        var bp = p.blendProb!=null ? Math.round(p.blendProb*100)+'%' : '—';
+        var od = p.liveWinOdds!=null ? '<span class="odds">賠 '+Number(p.liveWinOdds).toFixed(1)+'</span>' : '盤口待更新';
+        return tpItem(i+1, name, meta, '<span class="big">'+bp+'</span>', od);
+      }).join('') : '<div class="tp-wait"><strong>盤口整備中</strong>稍後再睇</div>') +
+        (race.oddsSnapshotAt ? '<div class="tp-stamp">盤口時間 '+esc(fmtStamp(race.oddsSnapshotAt))+'</div>' : '');
+    } else {
+      market.innerHTML = '<div class="tp-wait"><span class="ico">🕑</span><strong>等臨場盤口</strong>賽日近開賽前自動更新<br>（混合 β0.4 · 偏熱門參考）</div>';
+    }
+  }
+
+  function fmtStamp(iso){
+    if (!iso) return '';
+    var m = String(iso).match(/(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})/);
+    if (!m) return String(iso).slice(0,16);
+    return m[2]+'/'+m[3]+' '+m[4]+':'+m[5];
+  }
+
+  function renderTodayPicks(report){
+    state.report = report;
+    var wait = $('tp-wait'), body = $('tp-body');
+    var races = (report && report.races) || [];
+    if (!report || !report.date || !races.length){
+      wait.innerHTML = '<span class="ico">—</span><strong>暫無即將舉行賽事</strong>賽日前一晚生成 · 請賽前再來';
+      return;
+    }
+    wait.style.display = 'none';
+    body.style.display = 'block';
+    $('tp-date').childNodes[0].nodeValue = TX_API.fmtMeetingDate(report.date);
+    $('tp-date-sub').textContent = (report.scoreSource ? '' : '') + (report.ensembleAlpha!=null ? 'α=' + Number(report.ensembleAlpha).toFixed(2) : '');
+    $('tp-venue').textContent = venueName(report.venue);
+
+    var sel = $('tp-race-select');
+    sel.innerHTML = races.map(function(r){
+      var no = r.raceNumber!=null ? r.raceNumber : '?';
+      var dist = r.distance ? ' · ' + r.distance + 'm' : '';
+      var cls = r.class ? ' · ' + r.class : '';
+      return '<option value="'+esc(no)+'">R'+esc(no)+esc(cls)+esc(dist)+'</option>';
+    }).join('');
+    function showRace(no){
+      var r = races.filter(function(x){ return String(x.raceNumber) === String(no); })[0] || races[0];
+      renderRaceCols(r);
+    }
+    sel.onchange = function(e){ showRace(e.target.value); };
+    showRace(races[0].raceNumber);
+  }
+
+  // ───────────────────────── Factor tuner (advanced, collapsible) ─────────────────────────
   function renderFactors(groups){
     var container = $('factors-container');
     container.innerHTML = groups.map(function(grp){
@@ -235,13 +411,11 @@
     if (!state.raceId){ alert('請先揀場次'); return; }
     var btn = $('btn-analyze');
     btn.disabled = true; btn.textContent = '運算中…';
-    // Weights normalized: 0-100 → 0-1
     var weights = {};
     Object.keys(state.factors).forEach(function(k){ weights[k] = state.factors[k]/100; });
     TX_API.analyze({ raceId: state.raceId, factors: weights }).then(function(res){
       renderResults(res.picks || res.top || []);
     }).catch(function(err){
-      // Fallback: use topPicks if /analyze rejects the shape
       TX_API.topPicks(state.raceId).then(function(res){
         renderResults(res.picks || []);
       }).catch(function(err2){
@@ -261,13 +435,23 @@
     document.querySelectorAll('input[type=range][data-fid]').forEach(function(inp){ inp.value = 50; });
   }
 
-  // bootstrap
+  // ───────────────────────── bootstrap ─────────────────────────
+  TX_API.todayPicks().then(function(rep){
+    renderTodayPicks(rep);
+    if (rep && rep.races && rep.races.length){
+      var r0 = rep.races[0];
+      // nextStart for ticker if a start time is exposed
+    }
+    tickTicker();
+  }).catch(function(){
+    $('tp-wait').innerHTML = '<span class="ico">—</span><strong>今日精選載入失敗</strong>請稍後重試';
+  });
+
   TX_API.smartCurrent().then(function(cur){
     if (!cur || !cur.date) { renderRaces(null); return null; }
     return TX_API.meeting(cur.date);
   }).then(function(m){
     renderRaces(m);
-    tickTicker();
   }).catch(function(){ renderRaces(null); });
 
   TX_API.factors().then(function(res){
