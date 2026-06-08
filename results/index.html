@@ -284,8 +284,14 @@
     var hs = race.horses || [];
     for (var i = 0; i < hs.length; i++){
       var h = hs[i];
-      if (h.horseNumber != null && String(h.horseNumber) === String(pick.horseNumber)) return h.finishingPosition;
-      if (pick.horseId && h.id && pick.horseId === h.id) return h.finishingPosition;
+      var match = (h.horseNumber != null && String(h.horseNumber) === String(pick.horseNumber)) ||
+                  (pick.horseId && h.id && pick.horseId === h.id);
+      if (match){
+        var fp = h.finishingPosition;
+        if (fp == null || fp === '') return null;
+        var n = Number(fp);
+        return isFinite(n) ? n : null;
+      }
     }
     return null;
   }
@@ -378,22 +384,37 @@
     });
   }
 
+  // serialize comparison fetches (concurrency 1) so fast scrolling cannot fire
+  // a burst of expensive top-picks recomputes and trip the Worker CPU limit.
+  var cmpQueue = [], cmpBusy = false;
+  function pumpCmp(){
+    if (cmpBusy) return;
+    var job = cmpQueue.shift();
+    if (!job) return;
+    cmpBusy = true;
+    var done = function(){ cmpBusy = false; pumpCmp(); };
+    job().then(done, done);
+  }
+
   function loadCmp(race, races){
     if (race.__loading || race.__tp) return;
     race.__loading = true;
-    var anchorId = 'cmp-' + race.id;
-    var node = document.getElementById(anchorId);
-    if (node){ node.className = 'cmp cmp--load'; node.innerHTML = '載入模型預測對比…'; }
-    fetchTopWithRetry(race.id, 3).then(function(tp){
-      race.__tp = tp;
-      var n = document.getElementById(anchorId);
-      if (n) n.outerHTML = renderCmp(race, tp);
-    }).catch(function(){
-      race.__loading = false;
-      var n = document.getElementById(anchorId);
-      if (n) n.outerHTML = '<div class="cmp cmp--na" id="' + anchorId + '">' +
-        '<button type="button" class="cmp-retry" data-anchor="' + anchorId + '">模型預測載入失敗 · 點擊重試</button></div>';
-    }).then(function(){ updateCmpSummary(races); });
+    cmpQueue.push(function(){
+      var anchorId = 'cmp-' + race.id;
+      var node = document.getElementById(anchorId);
+      if (node){ node.className = 'cmp cmp--load'; node.innerHTML = '載入模型預測對比…'; }
+      return fetchTopWithRetry(race.id, 3).then(function(tp){
+        race.__tp = tp;
+        var n = document.getElementById(anchorId);
+        if (n) n.outerHTML = renderCmp(race, tp);
+      }).catch(function(){
+        race.__loading = false;
+        var n = document.getElementById(anchorId);
+        if (n) n.outerHTML = '<div class="cmp cmp--na" id="' + anchorId + '">' +
+          '<button type="button" class="cmp-retry" data-anchor="' + anchorId + '">模型預測載入失敗 · 點擊重試</button></div>';
+      }).then(function(){ updateCmpSummary(races); });
+    });
+    pumpCmp();
   }
 
   // top-picks recomputes are expensive and 503 in bursts, so load each race's
@@ -412,7 +433,7 @@
       byId[anchorId] = race;
       pending++;
     });
-    if (slot) slot.__cmpById = byId;
+    if (slot){ slot.__cmpById = byId; slot.__cmpRaces = races; }
     updateCmpSummary(races);
     if (!pending) return;
 
@@ -423,8 +444,9 @@
         var b = t && t.classList && t.classList.contains('cmp-retry') ? t : (t && t.closest ? t.closest('.cmp-retry') : null);
         if (!b) return;
         var map = slot.__cmpById || {};
+        var rs = slot.__cmpRaces || [];
         var race = map[b.getAttribute('data-anchor')];
-        if (race){ race.__loading = false; race.__tp = null; loadCmp(race, races); }
+        if (race){ race.__loading = false; race.__tp = null; loadCmp(race, rs); }
       });
     }
 
