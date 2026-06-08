@@ -6,7 +6,7 @@
   <script src="/assets/shell.js" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FDFBF5">
-<title>賽後對賬 · 天喜 TIANXI</title>
+<title>預測與賽果 · 天喜 TIANXI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -64,6 +64,28 @@
 .results-empty{padding:60px 20px;text-align:center;color:var(--ink-mute);font-family:var(--font-display);font-size:13px;line-height:1.7}
 .results-empty strong{color:var(--ink);display:block;margin-bottom:8px;font-size:14px}
 .results-err{padding:40px 20px;text-align:center;color:#A81A2F;font-family:var(--font-mono);font-size:12px}
+
+.cmp{margin-top:12px;padding-top:12px;border-top:1px dashed var(--rule)}
+.cmp__hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.cmp__ttl{font-family:var(--font-display);font-size:12px;font-weight:800;color:var(--ink);letter-spacing:0.04em}
+.cmp__src{font-family:var(--font-mono);font-size:9px;font-weight:800;letter-spacing:0.1em;color:var(--ink-mute);border:1px solid var(--rule);border-radius:999px;padding:2px 8px;white-space:nowrap}
+.cmp__src.is-lgb{color:#2E2108;border-color:#A07A1F;background:linear-gradient(180deg,#FFF4C2,#EBC964)}
+.cmp__hit{font-family:var(--font-mono);font-size:10px;font-weight:800;letter-spacing:0.04em;padding:2px 8px;border-radius:6px;white-space:nowrap}
+.cmp__hit.win{color:#2E2108;background:linear-gradient(180deg,#FFF4C2,#EBC964);border:1px solid #A07A1F}
+.cmp__hit.top3{color:#1B5E20;background:#E3F2E4;border:1px solid #A5D6A7}
+.cmp__hit.out{color:#A81A2F;background:#FBE6E9;border:1px solid #F0B8C0}
+.cmp__row{display:grid;grid-template-columns:48px 1fr auto auto;gap:8px;align-items:center;padding:6px 0;font-family:var(--font-display);font-size:12px;border-top:1px solid var(--rule)}
+.cmp__row:first-of-type{border-top:none}
+.cmp__rk{font-family:var(--font-mono);font-size:9px;font-weight:800;letter-spacing:0.08em;color:var(--ink-mute)}
+.cmp__h{font-weight:700;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cmp__pw{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute)}
+.cmp__res{font-family:var(--font-mono);font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;white-space:nowrap;color:var(--ink-mute);background:var(--paper-soft,#FAF6EB)}
+.cmp__row.is-win .cmp__res{color:#2E2108;background:linear-gradient(180deg,#FFF4C2,#EBC964)}
+.cmp__row.is-top3 .cmp__res{color:#1B5E20;background:#E3F2E4}
+.cmp--na,.cmp--load{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);margin-top:12px;padding-top:12px;border-top:1px dashed var(--rule)}
+.cmp-summary{margin:0 20px 14px;padding:12px 14px;border:1px solid var(--rule);border-radius:12px;background:var(--paper);font-family:var(--font-mono);font-size:12px;color:var(--ink);display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 6px rgba(58,38,8,.06)}
+.cmp-summary strong{font-family:var(--font-display);font-weight:900;font-size:14px}
+.cmp-summary .k{color:var(--ink-mute);font-size:10px;letter-spacing:0.1em}
 </style>
 </head>
 <body data-page="results">
@@ -71,23 +93,23 @@
 
 <header class="brandbar" data-tx-shell="brandbar"></header>
 
-<div class="ticker" id="ticker">賽後對賬 · 載入中…</div>
+<div class="ticker" id="ticker">預測與賽果 · 載入中…</div>
 
 <section class="page-head">
-  <h1><small>POST-RACE RECONCILIATION</small>賽後對賬</h1>
-  <p>已收回 HKJC 結果之賽事日，按場次顯示頭 4 名馬號、馬名。<br>
+  <h1><small>PREDICTION vs RESULT</small>預測與賽果</h1>
+  <p>已收回 HKJC 結果之賽事日，逐場並列天喜模型預測與實際頭 4 名賽果。<br>
   <em style="font-family:var(--font-mono);font-size:11px;color:var(--ink-mute)">分析指標 · 非投注建議 · 數據來源 HKJC</em></p>
 </section>
 
 <div id="day-slot">
-  <div class="results-empty">載入賽後對賬…</div>
+  <div class="results-empty">載入預測與賽果…</div>
 </div>
 
 <div class="card" style="margin:14px 20px">
   <h3 style="font-family:var(--font-display);font-size:13px;margin:0 0 8px">資料來源聲明</h3>
   <p style="font-family:var(--font-display);font-size:12px;line-height:1.6;color:var(--ink-mute);margin:0">
   上述賽果來自 <strong style="color:var(--ink)">HKJC 官方公報</strong>（<a href="https://racing.hkjc.com/zh-hk/local/information/localresults" style="color:var(--ink);text-decoration:underline" target="_blank" rel="noopener">racing.hkjc.com</a>），頭 4 名馬號、馬名、時間均以 HKJC 公報為準。<br><br>
-  天喜提供本頁純作<strong style="color:var(--ink)">賽後回顧及分析之用</strong>，並無預測或投注建議意味。Elo 分析、值博度指標、組合機率計算可於 <a href="/combo/" style="color:var(--ink);text-decoration:underline">組合分析</a> · <a href="/pool-odds/" style="color:var(--ink);text-decoration:underline">彩池賠率</a> · <a href="/dashboard/" style="color:var(--ink);text-decoration:underline">儀表板</a> 查閱。
+  「模型預測」為天喜以 Elo／集成模型於賽前計算之名次預測，本頁將其與官方賽果並列對賬，純作<strong style="color:var(--ink)">分析研究之用，並非投注建議</strong>。更多分析可於 <a href="/combo/" style="color:var(--ink);text-decoration:underline">組合分析</a> · <a href="/pool-odds/" style="color:var(--ink);text-decoration:underline">彩池賠率</a> · <a href="/dashboard/" style="color:var(--ink);text-decoration:underline">儀表板</a> 查閱。
   </p>
 </div>
 
@@ -203,6 +225,7 @@
       '</div></div>' +
       '<div class="pod">' + pods + '</div>' +
       '<div class="rc__time"><span>' + esc(winnerTimeText(top) || '結果待公布') + '</span><span>' + esc(metaSubText(top, race)) + '</span></div>' +
+      '<div class="cmp cmp--load" id="cmp-' + esc(race.id || ('r' + raceNo)) + '">載入模型預測對比…</div>' +
     '</article>';
   }
 
@@ -216,7 +239,7 @@
     var dateTxt = TX_API.fmtMeetingDate ? (TX_API.fmtMeetingDate(m.date) || m.date) : m.date;
 
     document.getElementById('ticker').innerHTML =
-      '<strong>賽後對賬</strong> · ' + esc(dateTxt) + ' ' + esc(venueName) +
+      '<strong>預測與賽果</strong> · ' + esc(dateTxt) + ' ' + esc(venueName) +
       (m.trackCondition ? ' · ' + esc(m.trackCondition) : '') +
       ' · 共 ' + races.length + ' 場 · 資料來源 HKJC';
 
@@ -229,10 +252,11 @@
       '</div>' +
       '<div class="day-stats">' +
         '<div class="day-stats__card"><div class="day-stats__lbl">場次</div><div class="day-stats__val">' + races.length + '</div><div class="day-stats__sub">R1 – R' + races.length + '</div></div>' +
-        '<div class="day-stats__card"><div class="day-stats__lbl">已對賬</div><div class="day-stats__val">' + settled.length + '</div><div class="day-stats__sub">含結果</div></div>' +
+        '<div class="day-stats__card"><div class="day-stats__lbl">有賽果</div><div class="day-stats__val">' + settled.length + '</div><div class="day-stats__sub">含結果</div></div>' +
         '<div class="day-stats__card"><div class="day-stats__lbl">G1 頭牌</div><div class="day-stats__val">' + g1s.length + '</div><div class="day-stats__sub">' + (g1s.map(function(r){ return 'R' + (r.raceNumber || r.race_number); }).join(' · ') || '—') + '</div></div>' +
         '<div class="day-stats__card"><div class="day-stats__lbl">獎金</div><div class="day-stats__val">' + (prizeTotal != null ? fmtPrize(prizeTotal) : '—') + '</div><div class="day-stats__sub">HKD 合計</div></div>' +
       '</div>' +
+      '<div class="cmp-summary" id="cmp-summary"><span class="k">模型對賬</span> 計算中…</div>' +
       '<nav class="race-nav" aria-label="場次跳轉">' +
         races.map(function(r){
           var rn = r.raceNumber || r.race_number;
@@ -246,18 +270,127 @@
     }
 
     slot.innerHTML = html;
+    enrichPredictions(races);
+  }
+
+  function byRankP(a, b){ return (a.rank || 99) - (b.rank || 99); }
+
+  function predIsLgb(tp){
+    return ((tp && tp.picks) || []).some(function(p){ return p.scoreSource === 'lgb'; });
+  }
+
+  function finishOf(pick, race){
+    var hs = race.horses || [];
+    for (var i = 0; i < hs.length; i++){
+      var h = hs[i];
+      if (h.horseNumber != null && String(h.horseNumber) === String(pick.horseNumber)) return h.finishingPosition;
+      if (pick.horseId && h.id && pick.horseId === h.id) return h.finishingPosition;
+    }
+    return null;
+  }
+
+  function pctTxt(x){
+    var n = Number(x);
+    return isFinite(n) ? Math.round(n * 100) + '%' : '—';
+  }
+
+  function resCls(fp){
+    if (fp === 1) return 'is-win';
+    if (fp != null && fp <= 3) return 'is-top3';
+    return 'is-out';
+  }
+
+  function resTxt(fp){
+    if (fp == null) return '未上名';
+    if (fp === 1) return '冠軍';
+    return '第 ' + fp;
+  }
+
+  function renderCmp(race, tp){
+    var picks = ((tp && tp.picks) || []).slice().sort(byRankP).slice(0, 3);
+    if (!picks.length) return '<div class="cmp cmp--na">此場暫無模型預測</div>';
+    var isLgb = predIsLgb(tp);
+    var p1fp = finishOf(picks[0], race);
+    var hit = p1fp === 1 ? '<span class="cmp__hit win">首選命中冠軍</span>'
+            : (p1fp != null && p1fp <= 3 ? '<span class="cmp__hit top3">首選前三入位</span>'
+            : '<span class="cmp__hit out">首選落空</span>');
+    var rows = picks.map(function(p, i){
+      var fp = finishOf(p, race);
+      return '<div class="cmp__row ' + resCls(fp) + '">' +
+        '<span class="cmp__rk">預測 ' + (i + 1) + '</span>' +
+        '<span class="cmp__h">' + esc(p.horseNumber) + ' ' + esc(p.nameCh || p.nameEn || '') + '</span>' +
+        '<span class="cmp__pw">' + pctTxt(p.pWin) + '</span>' +
+        '<span class="cmp__res">' + esc(resTxt(fp)) + '</span>' +
+      '</div>';
+    }).join('');
+    return '<div class="cmp">' +
+      '<div class="cmp__hd">' +
+        '<span class="cmp__ttl">模型預測 · 賽果對比</span>' +
+        '<span class="cmp__src' + (isLgb ? ' is-lgb' : '') + '">' + (isLgb ? '天喜集成 LGB' : '天喜 ELO+因子') + '</span>' +
+      '</div>' +
+      rows +
+      '<div class="cmp__hd" style="margin-top:8px;margin-bottom:0">' +
+        '<span class="cmp__rk">模型首選 ' + esc(picks[0].horseNumber) + ' ' + esc(picks[0].nameCh || '') + '</span>' + hit +
+      '</div>' +
+    '</div>';
+  }
+
+  function updateCmpSummary(races){
+    var el = document.getElementById('cmp-summary');
+    if (!el) return;
+    var denom = 0, champ = 0, top3 = 0, lgb = 0, withTp = 0;
+    races.forEach(function(race){
+      var tp = race.__tp;
+      var settled = (race.horses || []).some(function(h){ return h.finishingPosition != null; });
+      if (!tp || !settled) return;
+      var picks = ((tp.picks) || []).slice().sort(byRankP);
+      if (!picks.length) return;
+      withTp++;
+      if (predIsLgb(tp)) lgb++;
+      var fp = finishOf(picks[0], race);
+      if (fp == null) return;
+      denom++;
+      if (fp === 1) champ++;
+      if (fp <= 3) top3++;
+    });
+    if (!denom){ el.innerHTML = '<span class="k">模型對賬</span> 此日暫無可比對之模型預測'; return; }
+    var srcTxt = lgb === withTp ? '集成 LGB' : (lgb === 0 ? 'ELO+因子' : ('LGB ' + lgb + '/' + withTp + ' 場'));
+    el.innerHTML =
+      '<span class="k">模型對賬</span>' +
+      '首選命中冠軍 <strong>' + champ + '/' + denom + '</strong>' +
+      '<span class="k">·</span>首選前三入位 <strong>' + top3 + '/' + denom + '</strong>' +
+      '<span class="k">·</span>來源 <strong>' + srcTxt + '</strong>';
+  }
+
+  function enrichPredictions(races){
+    races.forEach(function(race){
+      var anchorId = 'cmp-' + (race.id || ('r' + (race.raceNumber || race.race_number)));
+      var el = document.getElementById(anchorId);
+      var settled = (race.horses || []).some(function(h){ return h.finishingPosition != null; });
+      if (!settled){ if (el) el.outerHTML = ''; return; }
+      if (!race.id){ if (el) el.outerHTML = '<div class="cmp cmp--na">此場暫無模型預測</div>'; return; }
+      TX_API.topPicks(race.id).then(function(tp){
+        race.__tp = tp;
+        var node = document.getElementById(anchorId);
+        if (node) node.outerHTML = renderCmp(race, tp);
+      }).catch(function(){
+        var node = document.getElementById(anchorId);
+        if (node) node.outerHTML = '<div class="cmp cmp--na">模型預測載入失敗</div>';
+      }).then(function(){ updateCmpSummary(races); });
+    });
+    updateCmpSummary(races);
   }
 
   function showErr(msg){
     document.getElementById('day-slot').innerHTML =
       '<div class="results-err">' + esc(msg) + '</div>';
-    document.getElementById('ticker').textContent = '賽後對賬 · 載入失敗';
+    document.getElementById('ticker').textContent = '預測與賽果 · 載入失敗';
   }
 
   function showEmpty(date){
     document.getElementById('day-slot').innerHTML =
       '<div class="results-empty"><strong>' + esc(date) + ' 並無賽事資料</strong>請以 <code>?date=YYYY-MM-DD</code> 指定其他賽事日，或返回 <a href="/schedule/" style="color:var(--ink);text-decoration:underline">賽程表</a> 選擇日期。</div>';
-    document.getElementById('ticker').textContent = '賽後對賬 · ' + date + ' 並無資料';
+    document.getElementById('ticker').textContent = '預測與賽果 · ' + date + ' 並無資料';
   }
 
   function hasSettled(m){
