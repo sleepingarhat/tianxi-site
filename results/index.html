@@ -83,6 +83,7 @@
 .cmp__row.is-win .cmp__res{color:#2E2108;background:linear-gradient(180deg,#FFF4C2,#EBC964)}
 .cmp__row.is-top3 .cmp__res{color:#1B5E20;background:#E3F2E4}
 .cmp--na,.cmp--load{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);margin-top:12px;padding-top:12px;border-top:1px dashed var(--rule)}
+.cmp-retry{font:inherit;color:var(--gold,#b8860b);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline}
 .cmp-summary{margin:0 20px 14px;padding:12px 14px;border:1px solid var(--rule);border-radius:12px;background:var(--paper);font-family:var(--font-mono);font-size:12px;color:var(--ink);display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 6px rgba(58,38,8,.06)}
 .cmp-summary strong{font-family:var(--font-display);font-weight:900;font-size:14px}
 .cmp-summary .k{color:var(--ink-mute);font-size:10px;letter-spacing:0.1em}
@@ -225,7 +226,7 @@
       '</div></div>' +
       '<div class="pod">' + pods + '</div>' +
       '<div class="rc__time"><span>' + esc(winnerTimeText(top) || '結果待公布') + '</span><span>' + esc(metaSubText(top, race)) + '</span></div>' +
-      '<div class="cmp cmp--load" id="cmp-' + esc(race.id || ('r' + raceNo)) + '">載入模型預測對比…</div>' +
+      '<div class="cmp cmp--load" id="cmp-' + esc(race.id || ('r' + raceNo)) + '">捲動載入模型預測對比…</div>' +
     '</article>';
   }
 
@@ -256,7 +257,7 @@
         '<div class="day-stats__card"><div class="day-stats__lbl">G1 頭牌</div><div class="day-stats__val">' + g1s.length + '</div><div class="day-stats__sub">' + (g1s.map(function(r){ return 'R' + (r.raceNumber || r.race_number); }).join(' · ') || '—') + '</div></div>' +
         '<div class="day-stats__card"><div class="day-stats__lbl">獎金</div><div class="day-stats__val">' + (prizeTotal != null ? fmtPrize(prizeTotal) : '—') + '</div><div class="day-stats__sub">HKD 合計</div></div>' +
       '</div>' +
-      '<div class="cmp-summary" id="cmp-summary"><span class="k">模型對賬</span> 計算中…</div>' +
+      '<div class="cmp-summary" id="cmp-summary"><span class="k">模型對賬</span> 捲動各場以載入模型預測對比</div>' +
       '<nav class="race-nav" aria-label="場次跳轉">' +
         races.map(function(r){
           var rn = r.raceNumber || r.race_number;
@@ -335,7 +336,7 @@
     '</div>';
   }
 
-  function updateCmpSummary(races, allDone){
+  function updateCmpSummary(races){
     var el = document.getElementById('cmp-summary');
     if (!el) return;
     var denom = 0, champ = 0, top3 = 0, lgb = 0, withTp = 0;
@@ -353,43 +354,95 @@
       if (fp === 1) champ++;
       if (fp <= 3) top3++;
     });
-    if (!denom){
-      el.innerHTML = allDone
-        ? '<span class="k">模型對賬</span> 此日暫無可比對之模型預測'
-        : '<span class="k">模型對賬</span> 計算中…';
+    if (!withTp){
+      el.innerHTML = '<span class="k">模型對賬</span> 捲動各場以載入模型預測對比';
       return;
     }
     var srcTxt = lgb === withTp ? '集成 LGB' : (lgb === 0 ? 'ELO+因子' : ('LGB ' + lgb + '/' + withTp + ' 場'));
     el.innerHTML =
       '<span class="k">模型對賬</span>' +
-      '首選命中冠軍 <strong>' + champ + '/' + denom + '</strong>' +
+      '已比對 <strong>' + withTp + '</strong> 場' +
+      '<span class="k">·</span>首選命中冠軍 <strong>' + champ + '/' + denom + '</strong>' +
       '<span class="k">·</span>首選前三入位 <strong>' + top3 + '/' + denom + '</strong>' +
       '<span class="k">·</span>來源 <strong>' + srcTxt + '</strong>';
   }
 
-  function enrichPredictions(races){
-    var pending = 0;
-    races.forEach(function(race){
-      var settled = (race.horses || []).some(function(h){ return h.finishingPosition != null; });
-      if (settled && race.id) pending++;
+  // top-picks recomputes per race and can transiently 503 (CF Worker CPU
+  // limit, error 1102) — a short backoff retry recovers.
+  function fetchTopWithRetry(raceId, tries){
+    tries = tries || 3;
+    return TX_API.topPicks(raceId).catch(function(e){
+      if (tries <= 1) throw e;
+      return new Promise(function(res){ setTimeout(res, 700); })
+        .then(function(){ return fetchTopWithRetry(raceId, tries - 1); });
     });
-    if (!pending){ updateCmpSummary(races, true); return; }
-    updateCmpSummary(races, false);
+  }
+
+  function loadCmp(race, races){
+    if (race.__loading || race.__tp) return;
+    race.__loading = true;
+    var anchorId = 'cmp-' + race.id;
+    var node = document.getElementById(anchorId);
+    if (node){ node.className = 'cmp cmp--load'; node.innerHTML = '載入模型預測對比…'; }
+    fetchTopWithRetry(race.id, 3).then(function(tp){
+      race.__tp = tp;
+      var n = document.getElementById(anchorId);
+      if (n) n.outerHTML = renderCmp(race, tp);
+    }).catch(function(){
+      race.__loading = false;
+      var n = document.getElementById(anchorId);
+      if (n) n.outerHTML = '<div class="cmp cmp--na" id="' + anchorId + '">' +
+        '<button type="button" class="cmp-retry" data-anchor="' + anchorId + '">模型預測載入失敗 · 點擊重試</button></div>';
+    }).then(function(){ updateCmpSummary(races); });
+  }
+
+  // top-picks recomputes are expensive and 503 in bursts, so load each race's
+  // comparison lazily as it scrolls into view (spreads requests over time) and
+  // allow a manual retry on the rare hard failure.
+  function enrichPredictions(races){
+    var slot = document.getElementById('day-slot');
+    var byId = {};
+    var pending = 0;
     races.forEach(function(race){
       var anchorId = 'cmp-' + (race.id || ('r' + (race.raceNumber || race.race_number)));
       var el = document.getElementById(anchorId);
       var settled = (race.horses || []).some(function(h){ return h.finishingPosition != null; });
       if (!settled){ if (el) el.outerHTML = ''; return; }
       if (!race.id){ if (el) el.outerHTML = '<div class="cmp cmp--na">此場暫無模型預測</div>'; return; }
-      TX_API.topPicks(race.id).then(function(tp){
-        race.__tp = tp;
-        var node = document.getElementById(anchorId);
-        if (node) node.outerHTML = renderCmp(race, tp);
-      }).catch(function(){
-        var node = document.getElementById(anchorId);
-        if (node) node.outerHTML = '<div class="cmp cmp--na">模型預測載入失敗</div>';
-      }).then(function(){ pending--; updateCmpSummary(races, pending <= 0); });
+      byId[anchorId] = race;
+      pending++;
     });
+    if (slot) slot.__cmpById = byId;
+    updateCmpSummary(races);
+    if (!pending) return;
+
+    if (slot && !slot.__cmpRetryBound){
+      slot.__cmpRetryBound = true;
+      slot.addEventListener('click', function(ev){
+        var t = ev.target;
+        var b = t && t.classList && t.classList.contains('cmp-retry') ? t : (t && t.closest ? t.closest('.cmp-retry') : null);
+        if (!b) return;
+        var map = slot.__cmpById || {};
+        var race = map[b.getAttribute('data-anchor')];
+        if (race){ race.__loading = false; race.__tp = null; loadCmp(race, races); }
+      });
+    }
+
+    if (!('IntersectionObserver' in window)){
+      var list = []; for (var k in byId) list.push(byId[k]);
+      var i = 0;
+      (function nx(){ if (i >= list.length) return; loadCmp(list[i++], races); setTimeout(nx, 1500); })();
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var race = byId[e.target.id];
+        if (race) loadCmp(race, races);
+      });
+    }, { rootMargin: '300px 0px' });
+    for (var key in byId){ var elx = document.getElementById(key); if (elx) io.observe(elx); }
   }
 
   function showErr(msg){
