@@ -145,7 +145,7 @@
   <div class="tp-wait" id="tp-wait"><span class="ico">⟳</span><strong>載入今日精選中…</strong>整備賽日數據</div>
   <div id="tp-body" style="display:none">
     <div class="tp-meta">
-      <div class="tp-meta__date" id="tp-date">——<small id="tp-date-sub"></small></div>
+      <div class="tp-meta__date"><span id="tp-date">——</span><small id="tp-date-sub"></small></div>
       <div class="tp-meta__venue" id="tp-venue">——</div>
     </div>
     <div class="tp-racepick">
@@ -297,7 +297,7 @@
     }
     wait.style.display = 'none';
     body.style.display = 'block';
-    $('tp-date').childNodes[0].nodeValue = TX_API.fmtMeetingDate(report.date);
+    $('tp-date').textContent = TX_API.fmtMeetingDate(report.date);
     $('tp-date-sub').textContent = (report.scoreSource ? '' : '') + (report.ensembleAlpha!=null ? 'α=' + Number(report.ensembleAlpha).toFixed(2) : '');
     $('tp-venue').textContent = venueName(report.venue);
 
