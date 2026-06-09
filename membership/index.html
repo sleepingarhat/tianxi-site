@@ -176,21 +176,28 @@
   // Optional free Telegram channel invite (public). Empty => placeholder text kept.
   var TG_FREE_URL = '';
 
+  function validLink(u){
+    if(typeof u !== 'string') return '';
+    u = u.trim();
+    return /^https:\/\/\S+$/.test(u) ? u : '';
+  }
   function wire(){
     var anyLive = false;
     document.querySelectorAll('.mb-plan').forEach(function(card){
       var key = card.getAttribute('data-plan');
       var btn = card.querySelector('[data-cta]');
       if(!btn) return;
-      var url = WHOP_LINKS[key];
+      var url = validLink(WHOP_LINKS[key]);
       if(url){
         btn.setAttribute('href', url);
         btn.setAttribute('target','_blank');
-        btn.setAttribute('rel','noopener');
+        btn.setAttribute('rel','noopener noreferrer');
+        btn.removeAttribute('aria-disabled');
         btn.classList.remove('is-soon');
         anyLive = true;
       } else {
-        btn.setAttribute('href','javascript:void(0)');
+        btn.removeAttribute('href');
+        btn.setAttribute('aria-disabled','true');
         btn.classList.add('is-soon');
         btn.textContent = '即將開放';
       }
@@ -198,11 +205,12 @@
     var notice = document.getElementById('mb-notice');
     if(notice) notice.style.display = anyLive ? 'none' : '';
 
-    if(TG_FREE_URL){
+    var tg = validLink(TG_FREE_URL);
+    if(tg){
       var f = document.getElementById('mb-tg-free');
-      if(f){ f.innerHTML = '免費頻道：<a href="'+TG_FREE_URL+'" target="_blank" rel="noopener" style="color:var(--gold-3);font-weight:700;text-decoration:underline">按此加入</a>（賽後復盤 · 命中率海報）'; }
+      if(f){ f.innerHTML = '免費頻道：<a href="'+tg+'" target="_blank" rel="noopener noreferrer" style="color:var(--gold-3);font-weight:700;text-decoration:underline">按此加入</a>（賽後復盤 · 命中率海報）'; }
       var n = document.getElementById('mb-notice');
-      if(n && !anyLive){ n.innerHTML = '<b>收費系統設定中</b>，升級入口即將開放。可先 <a href="'+TG_FREE_URL+'" target="_blank" rel="noopener" style="color:var(--brown);font-weight:800;text-decoration:underline">加入免費 Telegram 頻道</a> 收通知。'; }
+      if(n && !anyLive){ n.innerHTML = '<b>收費系統設定中</b>，升級入口即將開放。可先 <a href="'+tg+'" target="_blank" rel="noopener noreferrer" style="color:var(--brown);font-weight:800;text-decoration:underline">加入免費 Telegram 頻道</a> 收通知。'; }
     }
   }
 
