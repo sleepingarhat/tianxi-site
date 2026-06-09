@@ -18,10 +18,6 @@
 .results-day__date{font-family:var(--font-display);font-size:15px;font-weight:800;color:var(--ink)}
 .results-day__meta{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.08em}
 
-.race-nav{display:flex;gap:6px;overflow-x:auto;padding:10px 20px;scrollbar-width:none}
-.race-nav::-webkit-scrollbar{display:none}
-.race-nav__btn{flex:0 0 auto;padding:6px 12px;border:1px solid var(--rule);border-radius:999px;background:var(--paper);color:var(--ink);font-family:var(--font-mono);font-size:11px;font-weight:700;text-decoration:none;letter-spacing:0.05em}
-.race-nav__btn.is-g1{border-color:#D4A93C;background:linear-gradient(180deg,#FFF4C2 0%,#EBC964 50%,#A07A1F 100%);color:#2E2108;box-shadow:inset 0 1px 0 rgba(255,248,210,.8),0 2px 4px rgba(139,111,26,.25);text-shadow:0 1px 0 rgba(255,248,210,.5)}
 
 .rc{margin:14px 20px;padding:14px;border:1px solid var(--rule);border-radius:14px;background:var(--paper);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 1px 0 rgba(58,38,8,.08),0 2px 4px rgba(58,38,8,.06),0 10px 24px rgba(58,38,8,.08),0 22px 48px -18px rgba(90,66,16,.18)}
@@ -262,12 +258,6 @@
         '<div class="day-stats__card"><div class="day-stats__lbl">獎金</div><div class="day-stats__val">' + (prizeTotal != null ? fmtPrize(prizeTotal) : '—') + '</div><div class="day-stats__sub">HKD 合計</div></div>' +
       '</div>' +
       '<div class="cmp-summary" id="cmp-summary"><span class="k">模型對賬</span> 捲動各場以載入模型預測對比</div>' +
-      '<nav class="race-nav" aria-label="場次跳轉">' +
-        races.map(function(r){
-          var rn = r.raceNumber || r.race_number;
-          return '<a class="race-nav__btn' + (isG1(r) ? ' is-g1' : '') + '" href="#r' + esc(rn) + '">R' + esc(rn) + (isG1(r) ? ' · G1' : '') + '</a>';
-        }).join('') +
-      '</nav>' +
       races.map(renderRaceCard).join('');
 
     if (!settled.length){
