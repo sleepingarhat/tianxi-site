@@ -49,6 +49,8 @@
 .pod__slot.p4 .pod__no{color:var(--ink);text-shadow:none}
 .pod__name{font-family:var(--font-display);font-size:11.5px;font-weight:700;margin-top:6px;color:#2E2108;line-height:1.2;min-height:28px;display:flex;align-items:center;justify-content:center;padding:0 2px}
 .pod__slot.p4 .pod__name{color:var(--ink)}
+.pod__odds{font-family:var(--font-mono);font-size:10px;font-weight:700;margin-top:4px;color:rgba(46,33,8,.72)}
+.pod__slot.p4 .pod__odds{color:var(--ink-mute)}
 
 .rc__time{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);margin-top:8px;display:flex;justify-content:space-between;padding-top:8px;border-top:1px dashed var(--rule)}
 .rc__time span{font-weight:700;color:var(--ink)}
@@ -74,11 +76,12 @@
 .cmp__hit.win{color:#2E2108;background:linear-gradient(180deg,#FFF4C2,#EBC964);border:1px solid #A07A1F}
 .cmp__hit.top3{color:#1B5E20;background:#E3F2E4;border:1px solid #A5D6A7}
 .cmp__hit.out{color:#A81A2F;background:#FBE6E9;border:1px solid #F0B8C0}
-.cmp__row{display:grid;grid-template-columns:48px 1fr auto auto;gap:8px;align-items:center;padding:6px 0;font-family:var(--font-display);font-size:12px;border-top:1px solid var(--rule)}
+.cmp__row{display:grid;grid-template-columns:48px 1fr auto auto auto;gap:8px;align-items:center;padding:6px 0;font-family:var(--font-display);font-size:12px;border-top:1px solid var(--rule)}
 .cmp__row:first-of-type{border-top:none}
 .cmp__rk{font-family:var(--font-mono);font-size:9px;font-weight:800;letter-spacing:0.08em;color:var(--ink-mute)}
 .cmp__h{font-weight:700;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cmp__pw{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute)}
+.cmp__odds{font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);white-space:nowrap}
 .cmp__res{font-family:var(--font-mono);font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;white-space:nowrap;color:var(--ink-mute);background:var(--paper-soft,#FAF6EB)}
 .cmp__row.is-win .cmp__res{color:#2E2108;background:linear-gradient(180deg,#FFF4C2,#EBC964)}
 .cmp__row.is-top3 .cmp__res{color:#1B5E20;background:#E3F2E4}
@@ -209,6 +212,7 @@
         '<div class="pod__rank">' + RANK_LABEL[i] + '</div>' +
         '<div class="pod__no">' + esc(h && h.horseNumber || '—') + '</div>' +
         '<div class="pod__name">' + esc(h && (h.nameCh || h.name) || '—') + '</div>' +
+        '<div class="pod__odds">' + (h && h.winOdds != null && h.winOdds !== '' ? '賠 ' + esc(oddsTxt(h.winOdds)) : '—') + '</div>' +
       '</div>';
     }
 
@@ -280,20 +284,35 @@
     return ((tp && tp.picks) || []).some(function(p){ return p.scoreSource === 'lgb'; });
   }
 
-  function finishOf(pick, race){
+  function matchHorse(pick, race){
     var hs = race.horses || [];
     for (var i = 0; i < hs.length; i++){
       var h = hs[i];
-      var match = (h.horseNumber != null && String(h.horseNumber) === String(pick.horseNumber)) ||
-                  (pick.horseId && h.id && pick.horseId === h.id);
-      if (match){
-        var fp = h.finishingPosition;
-        if (fp == null || fp === '') return null;
-        var n = Number(fp);
-        return isFinite(n) ? n : null;
-      }
+      if ((h.horseNumber != null && String(h.horseNumber) === String(pick.horseNumber)) ||
+          (pick.horseId && h.id && pick.horseId === h.id)) return h;
     }
     return null;
+  }
+
+  function finishOf(pick, race){
+    var h = matchHorse(pick, race);
+    if (!h) return null;
+    var fp = h.finishingPosition;
+    if (fp == null || fp === '') return null;
+    var n = Number(fp);
+    return isFinite(n) ? n : null;
+  }
+
+  function oddsOf(pick, race){
+    var h = matchHorse(pick, race);
+    return h ? h.winOdds : null;
+  }
+
+  function oddsTxt(o){
+    if (o == null || o === '') return '—';
+    var n = Number(o);
+    if (isFinite(n)) return n % 1 === 0 ? String(n) : n.toFixed(1);
+    return String(o);
   }
 
   function pctTxt(x){
@@ -327,6 +346,7 @@
         '<span class="cmp__rk">預測 ' + (i + 1) + '</span>' +
         '<span class="cmp__h">' + esc(p.horseNumber) + ' ' + esc(p.nameCh || p.nameEn || '') + '</span>' +
         '<span class="cmp__pw">' + pctTxt(p.pWin) + '</span>' +
+        '<span class="cmp__odds">' + (function(){ var o = oddsOf(p, race); return o != null && o !== '' ? '賠 ' + esc(oddsTxt(o)) : '—'; })() + '</span>' +
         '<span class="cmp__res">' + esc(resTxt(fp)) + '</span>' +
       '</div>';
     }).join('');
