@@ -109,12 +109,13 @@
 
 <h2 class="mb-sec-title">收費方案</h2>
 <div class="mb-plans" id="mb-plans">
-  <div class="mb-plan" data-plan="trial">
-    <div class="mb-plan__name">7 日試用</div>
-    <div class="mb-plan__sub">試足一個賽日，啱玩先續</div>
-    <div class="mb-plan__price"><span class="cur">HK$</span><span class="amt">18</span></div>
-    <div class="mb-plan__note">一次性 · 7 日</div>
-    <a class="mb-plan__btn" data-cta href="#">立即試用</a>
+  <div class="mb-plan feat full" data-plan="month">
+    <div class="mb-plan__tag">最受歡迎</div>
+    <div class="mb-plan__name">月費會員</div>
+    <div class="mb-plan__sub">主力之選，平均約每賽日 HK$25</div>
+    <div class="mb-plan__price"><span class="cur">HK$</span><span class="amt">198</span><span class="per">/月</span></div>
+    <div class="mb-plan__note">每月自動續訂 · 隨時取消</div>
+    <a class="mb-plan__btn" data-cta href="#">月費升級</a>
   </div>
   <div class="mb-plan" data-plan="day">
     <div class="mb-plan__name">單日通行證</div>
@@ -123,19 +124,11 @@
     <div class="mb-plan__note">一次性 · 當個賽日</div>
     <a class="mb-plan__btn" data-cta href="#">買單日</a>
   </div>
-  <div class="mb-plan feat" data-plan="month">
-    <div class="mb-plan__tag">最受歡迎</div>
-    <div class="mb-plan__name">月費會員</div>
-    <div class="mb-plan__sub">主力之選，平均約每賽日 HK$25</div>
-    <div class="mb-plan__price"><span class="cur">HK$</span><span class="amt">198</span><span class="per">/月</span></div>
-    <div class="mb-plan__note">每月自動續訂 · 隨時取消</div>
-    <a class="mb-plan__btn" data-cta href="#">月費升級</a>
-  </div>
   <div class="mb-plan" data-plan="season">
     <div class="mb-plan__name">季票</div>
-    <div class="mb-plan__sub">全季鎖定，最抵長玩</div>
+    <div class="mb-plan__sub">全馬季鎖定，最抵長玩</div>
     <div class="mb-plan__price"><span class="cur">HK$</span><span class="amt">1,680</span></div>
-    <div class="mb-plan__note">約 HK$140/月 · 全季</div>
+    <div class="mb-plan__note">約 HK$140/月 · 全馬季</div>
     <a class="mb-plan__btn" data-cta href="#">買季票</a>
   </div>
 </div>
@@ -143,13 +136,13 @@
 <div class="mb-tg">
   <h3>Telegram VIP 自動入群</h3>
   <p>升級後由 Whop 自動授權你加入 VIP 私頻，賽日提早收到全卡 picks 同盤口提示；會籍到期自動處理，唔使手動管理。</p>
-  <p class="free" id="mb-tg-free">免費頻道（賽後復盤 · 命中率海報）連結即將公布。</p>
+  <p class="free" id="mb-tg-free">免費頻道（每賽日精選 · 賽後復盤 · 命中率）連結即將公布。</p>
 </div>
 
 <h2 class="mb-sec-title">常見問題</h2>
 <div class="mb-faq">
   <details><summary>付款後點樣入 VIP 群？</summary><p>付款成功後，Whop 會用你嘅 Telegram 帳戶自動授權入群，毋須人手審批。如未入到，多數係登入咗錯嘅 Telegram／Whop 帳戶。</p></details>
-  <details><summary>可以隨時取消嗎？</summary><p>月費會員可隨時喺 Whop 取消，當期完結後唔再收費；單日、試用、季票為一次性購買。</p></details>
+  <details><summary>可以隨時取消嗎？</summary><p>月費會員可隨時喺 Whop 取消，當期完結後唔再收費；單日通行證、季票為一次性購買。</p></details>
   <details><summary>付款安全嗎？</summary><p>收款由 Whop 處理，天喜唔會接觸或儲存你嘅信用卡資料。</p></details>
   <details><summary>預測準唔準？</summary><p>所有過往預測同實際賽果、命中率均喺<a href="/results/" style="color:var(--accent);font-weight:700">預測與賽果</a>頁永久公開，請自行查證後再決定。</p></details>
 </div>
@@ -168,7 +161,6 @@
   // Whop hosted-checkout links. Fill each when the Whop plans are created.
   // Empty string => button shows 即將開放 (disabled).
   var WHOP_LINKS = {
-    trial:  '',
     day:    '',
     month:  '',
     season: ''
@@ -208,7 +200,7 @@
     var tg = validLink(TG_FREE_URL);
     if(tg){
       var f = document.getElementById('mb-tg-free');
-      if(f){ f.innerHTML = '免費頻道：<a href="'+tg+'" target="_blank" rel="noopener noreferrer" style="color:var(--gold-3);font-weight:700;text-decoration:underline">按此加入</a>（賽後復盤 · 命中率海報）'; }
+      if(f){ f.innerHTML = '免費頻道：<a href="'+tg+'" target="_blank" rel="noopener noreferrer" style="color:var(--gold-3);font-weight:700;text-decoration:underline">按此加入</a>（每賽日精選 · 賽後復盤 · 命中率）'; }
       var n = document.getElementById('mb-notice');
       if(n && !anyLive){ n.innerHTML = '<b>收費系統設定中</b>，升級入口即將開放。可先 <a href="'+tg+'" target="_blank" rel="noopener noreferrer" style="color:var(--brown);font-weight:800;text-decoration:underline">加入免費 Telegram 頻道</a> 收通知。'; }
     }
