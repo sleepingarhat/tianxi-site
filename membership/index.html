@@ -109,7 +109,7 @@
 
 <h2 class="mb-sec-title">收費方案</h2>
 <div class="mb-plans" id="mb-plans">
-  <div class="mb-plan feat full" data-plan="month">
+  <div class="mb-plan feat" data-plan="month">
     <div class="mb-plan__tag">最受歡迎</div>
     <div class="mb-plan__name">月費會員</div>
     <div class="mb-plan__sub">主力之選，平均約每賽日 HK$25</div>
@@ -124,14 +124,8 @@
     <div class="mb-plan__note">一次性 · 當個賽日</div>
     <a class="mb-plan__btn" data-cta href="#">買單日</a>
   </div>
-  <div class="mb-plan" data-plan="season">
-    <div class="mb-plan__name">季票</div>
-    <div class="mb-plan__sub">全馬季鎖定，最抵長玩</div>
-    <div class="mb-plan__price"><span class="cur">HK$</span><span class="amt">1,680</span></div>
-    <div class="mb-plan__note">約 HK$140/月 · 全馬季</div>
-    <a class="mb-plan__btn" data-cta href="#">買季票</a>
-  </div>
 </div>
+<p style="margin:10px 20px 0;font-size:11px;color:var(--ink-mute);text-align:center;line-height:1.5">季票將於 2026/27 新馬季開鑼（9 月）前推出。</p>
 
 <div class="mb-tg">
   <h3>Telegram VIP 自動入群</h3>
@@ -142,7 +136,7 @@
 <h2 class="mb-sec-title">常見問題</h2>
 <div class="mb-faq">
   <details><summary>付款後點樣入 VIP 群？</summary><p>付款成功後，Whop 會用你嘅 Telegram 帳戶自動授權入群，毋須人手審批。如未入到，多數係登入咗錯嘅 Telegram／Whop 帳戶。</p></details>
-  <details><summary>可以隨時取消嗎？</summary><p>月費會員可隨時喺 Whop 取消，當期完結後唔再收費；單日通行證、季票為一次性購買。</p></details>
+  <details><summary>可以隨時取消嗎？</summary><p>月費會員可隨時喺 Whop 取消，當期完結後唔再收費；單日通行證為一次性購買。</p></details>
   <details><summary>付款安全嗎？</summary><p>收款由 Whop 處理，天喜唔會接觸或儲存你嘅信用卡資料。</p></details>
   <details><summary>預測準唔準？</summary><p>所有過往預測同實際賽果、命中率均喺<a href="/results/" style="color:var(--accent);font-weight:700">預測與賽果</a>頁永久公開，請自行查證後再決定。</p></details>
 </div>
@@ -162,8 +156,7 @@
   // Empty string => button shows 即將開放 (disabled).
   var WHOP_LINKS = {
     day:    '',
-    month:  '',
-    season: ''
+    month:  ''
   };
   // Optional free Telegram channel invite (public). Empty => placeholder text kept.
   var TG_FREE_URL = 'https://t.me/TX_Oracle';
