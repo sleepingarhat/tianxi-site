@@ -37,6 +37,7 @@
     '</a>' +
     '<div></div>' +
     '<div class="brandbar__actions">' +
+      '<a href="/membership/" class="brandbar__upgrade" data-page="membership">升級 Pro</a>' +
       '<button type="button" class="theme-toggle" data-tx-theme-toggle aria-pressed="false" aria-label="切換至深色模式" title="切換深／淺色">' +
         '<svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true">' +
           '<circle cx="12" cy="12" r="4.2"/>' +
