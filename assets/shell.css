@@ -61,6 +61,25 @@
 .brandbar__btn:hover { border-color: var(--gold-2); }
 .brandbar__btn svg { width: 16px; height: 16px; }
 
+/* ---------- Upgrade CTA (brandbar, global) ---------- */
+.brandbar__upgrade {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 12px;
+  letter-spacing: 0.03em;
+  padding: 7px 13px;
+  border-radius: 99px;
+  color: #3a2a08;
+  background: linear-gradient(180deg, var(--gold-3), var(--gold-2));
+  border: 1px solid var(--gold);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.20);
+  white-space: nowrap;
+  transition: transform 120ms, box-shadow 120ms, filter 120ms;
+}
+.brandbar__upgrade:hover { box-shadow: 0 2px 9px rgba(184,145,47,0.45); filter: brightness(1.04); }
+.brandbar__upgrade:active { transform: scale(0.95); }
+.brandbar__upgrade:focus-visible { outline: 2px solid var(--gold-2); outline-offset: 2px; }
+@media (max-width: 360px){ .brandbar__upgrade { padding: 6px 11px; font-size: 11px; } }
+
 /* ---------- Theme toggle (2026-04-29) ---------- */
 .theme-toggle {
   width: 32px; height: 32px;
