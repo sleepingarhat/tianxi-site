@@ -881,6 +881,9 @@ button.gold-3d-plate {
   background: transparent !important;
   font-weight: 700;
 }
+.botnav__icon {
+  stroke: var(--ink-mute) !important;
+}
 .botnav__item.is-active .botnav__icon {
   stroke: var(--ink) !important;
   filter: none !important;
