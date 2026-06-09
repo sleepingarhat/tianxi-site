@@ -65,6 +65,18 @@
 .mb-tg p{font-size:12px;line-height:1.6;color:var(--tan);margin-top:8px}
 .mb-tg .free{margin-top:10px;font-size:11px;color:rgba(240,235,221,0.65);font-family:var(--font-mono);letter-spacing:0.03em}
 
+/* engine tech */
+.mb-tech{margin:0 20px}
+.mb-tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mb-tcard{border:1px solid var(--rule);border-radius:var(--r-lg);background:var(--paper-2);padding:13px 13px 14px}
+.mb-tcard__n{font-family:var(--font-mono);font-size:10px;font-weight:700;color:var(--gold-2);letter-spacing:0.1em}
+.mb-tcard__t{font-family:var(--font-display);font-weight:800;font-size:13.5px;color:var(--ink);margin-top:5px;line-height:1.25}
+.mb-tcard__d{font-size:11.5px;color:var(--ink-soft);line-height:1.55;margin-top:6px}
+.mb-tcard__d b{color:var(--ink);font-weight:700}
+.mb-tech-foot{margin:12px 0 0;padding:12px 14px;border-radius:var(--r-lg);background:var(--gold-tint);border:1px solid rgba(184,145,47,0.3);font-size:12px;line-height:1.6;color:var(--brown);text-align:center}
+.mb-tech-foot b{font-weight:800}
+@media (max-width:360px){.mb-tech-grid{grid-template-columns:1fr}}
+
 /* faq */
 .mb-faq{margin:6px 20px 0}
 .mb-faq details{border-bottom:1px solid var(--rule);padding:12px 2px}
@@ -88,6 +100,19 @@
 </section>
 
 <div class="mb-notice" id="mb-notice"><b>收費系統設定中</b>，升級入口即將開放。想第一時間收到通知，可先加入下方免費 Telegram 頻道。</div>
+
+<h2 class="mb-sec-title">引擎技術實力</h2>
+<div class="mb-tech">
+  <div class="mb-tech-grid">
+    <div class="mb-tcard"><div class="mb-tcard__n">01</div><div class="mb-tcard__t">機器學習集成模型</div><div class="mb-tcard__d">核心為 <b>LightGBM 排序模型</b>（lambdarank），直接以「邊匹馬會贏」為訓練目標，唔係事後憑感覺打分。</div></div>
+    <div class="mb-tcard"><div class="mb-tcard__n">02</div><div class="mb-tcard__t">八千場歷史訓練</div><div class="mb-tcard__d">由 <b>2016 年至今</b>全部香港賽事（沙田・跑馬地），逾 <b>8,000 場</b>、約 98,000 條參賽紀錄持續學習。</div></div>
+    <div class="mb-tcard"><div class="mb-tcard__n">03</div><div class="mb-tcard__t">多維特徵工程</div><div class="mb-tcard__d">融合速度、檔位、配速、班次、騎練配搭同<b>血統</b>等多維訊號，捕捉肉眼難察嘅規律。</div></div>
+    <div class="mb-tcard"><div class="mb-tcard__n">04</div><div class="mb-tcard__t">機率層融合</div><div class="mb-tcard__d">機器學習同 ELO 評分喺<b>機率層標準化後融合</b>，單一模型失準唔會拖累全局，結果更穩。</div></div>
+    <div class="mb-tcard"><div class="mb-tcard__n">05</div><div class="mb-tcard__t">嚴格時序驗證</div><div class="mb-tcard__d">每個新特徵都要喺 <b>walk-forward 時序外樣本</b>通過雙重 A/B，跑唔贏基準即剔除，拒絕過擬合靚數。</div></div>
+    <div class="mb-tcard"><div class="mb-tcard__n">06</div><div class="mb-tcard__t">全自動 + 永久公開</div><div class="mb-tcard__d">每賽日<b>自我校準</b>參數毋須人手；所有預測同實際賽果<b>永久公開對賬</b>，準唔準你自己查證。</div></div>
+  </div>
+  <p class="mb-tech-foot">天喜唔係貼士佬主觀感覺，而係<b>可驗證、可問責</b>嘅數據引擎 —— 呢個就係同坊間「靠估」貼士最大嘅分別。</p>
+</div>
 
 <h2 class="mb-sec-title">免費 vs Pro</h2>
 <div class="mb-cmp">
