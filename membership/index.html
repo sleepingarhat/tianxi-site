@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<script src="/assets/shell.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDFBF5">
+<title>天喜 Pro 會員 · 天喜 TIANXI</title>
+<meta name="description" content="天喜 Pro 會員：賽前全卡預測、模型搏冷 + 市場穩陣雙欄、pWin 信心分、Telegram VIP 私頻。免費對賬永久公開。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<script src="/assets/api.js"></script>
+<style>
+.mb-hero{padding:26px 20px 18px;text-align:center;border-bottom:1px solid var(--rule)}
+.mb-hero .kicker{font-family:var(--font-body);font-size:10px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px}
+.mb-hero h1{font-family:var(--font-display);font-weight:900;font-size:30px;line-height:1.1;color:var(--ink);letter-spacing:-0.01em}
+.mb-hero h1 .pro{background:linear-gradient(180deg,var(--gold-2),var(--brown-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.mb-hero p{font-size:13px;color:var(--ink-soft);line-height:1.6;margin:12px auto 0;max-width:480px}
+
+.mb-notice{margin:16px 20px 0;padding:11px 14px;border-radius:var(--r-lg);background:var(--gold-tint);border:1px solid rgba(184,145,47,0.35);color:var(--brown);font-size:12px;line-height:1.5;text-align:center}
+.mb-notice b{font-weight:700}
+
+.mb-sec-title{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--ink);margin:24px 20px 12px;display:flex;align-items:center;gap:8px}
+.mb-sec-title::before{content:"";display:block;width:3px;height:14px;background:var(--gold-2);border-radius:2px}
+
+/* compare table */
+.mb-cmp{margin:0 20px;border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;background:var(--paper-2)}
+.mb-cmp table{width:100%;border-collapse:collapse;font-size:12.5px}
+.mb-cmp th,.mb-cmp td{padding:11px 10px;border-bottom:1px solid var(--rule);text-align:center;vertical-align:middle}
+.mb-cmp tr:last-child th,.mb-cmp tr:last-child td{border-bottom:0}
+.mb-cmp thead th{font-family:var(--font-display);font-weight:800;font-size:12px;background:var(--paper-3);color:var(--ink)}
+.mb-cmp thead th.pro{color:var(--brown)}
+.mb-cmp tbody th{text-align:left;font-family:var(--font-body);font-weight:600;color:var(--ink-soft);width:48%}
+.mb-cmp td.free{color:var(--ink-mute)}
+.mb-cmp td.pro{color:var(--ink);font-weight:700;background:rgba(184,145,47,0.06)}
+.mb-yes{color:var(--green);font-weight:900}
+.mb-no{color:var(--ink-faint);font-weight:700}
+
+/* pricing cards */
+.mb-plans{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:4px 20px 8px}
+.mb-plan{position:relative;border:1px solid var(--rule);border-radius:var(--r-xl);background:var(--paper-2);padding:16px 14px 14px;display:flex;flex-direction:column;box-shadow:var(--sh-sm)}
+.mb-plan.feat{border-color:var(--gold-2);box-shadow:0 0 0 1px var(--gold-2),0 8px 22px -10px rgba(184,145,47,0.45)}
+.mb-plan.full{grid-column:1 / -1}
+.mb-plan__tag{position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-family:var(--font-body);font-weight:800;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:3px 10px;border-radius:99px;background:linear-gradient(180deg,var(--gold-3),var(--gold-2));color:#3a2a08;border:1px solid var(--gold);white-space:nowrap}
+.mb-plan__name{font-family:var(--font-display);font-weight:800;font-size:15px;color:var(--ink)}
+.mb-plan__sub{font-size:11px;color:var(--ink-mute);margin-top:3px;line-height:1.4;min-height:30px}
+.mb-plan__price{font-family:var(--font-display);font-weight:900;color:var(--ink);margin-top:10px;line-height:1;display:flex;align-items:baseline;gap:3px}
+.mb-plan__price .cur{font-size:14px;font-weight:700;color:var(--ink-soft)}
+.mb-plan__price .amt{font-size:30px;letter-spacing:-0.01em}
+.mb-plan__price .per{font-family:var(--font-body);font-size:11px;font-weight:600;color:var(--ink-mute)}
+.mb-plan__note{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);margin-top:5px;letter-spacing:0.02em;min-height:14px}
+.mb-plan__btn{margin-top:13px;display:block;text-align:center;font-family:var(--font-display);font-weight:800;font-size:13px;padding:11px 12px;border-radius:var(--r-lg);border:1px solid var(--ink);background:var(--ink);color:var(--paper);transition:transform 120ms,opacity 120ms}
+.mb-plan__btn:active{transform:scale(0.97)}
+.mb-plan.feat .mb-plan__btn{background:linear-gradient(180deg,var(--gold-2),var(--brown-2));border-color:var(--brown-2);color:#fff}
+.mb-plan__btn.is-soon{background:var(--paper-3);color:var(--ink-mute);border-color:var(--rule-2);cursor:default;pointer-events:none}
+.mb-plan.feat .mb-plan__btn.is-soon{background:var(--paper-3);color:var(--ink-mute);border-color:var(--rule-2)}
+
+/* telegram vip callout */
+.mb-tg{margin:18px 20px 0;padding:16px;border-radius:var(--r-xl);background:linear-gradient(135deg,#0B1612,#13241d);color:var(--ticker-fg);border:1px solid rgba(240,235,221,0.10)}
+.mb-tg h3{font-family:var(--font-display);font-weight:800;font-size:15px;color:var(--gold-3);display:flex;align-items:center;gap:8px}
+.mb-tg p{font-size:12px;line-height:1.6;color:var(--tan);margin-top:8px}
+.mb-tg .free{margin-top:10px;font-size:11px;color:rgba(240,235,221,0.65);font-family:var(--font-mono);letter-spacing:0.03em}
+
+/* faq */
+.mb-faq{margin:6px 20px 0}
+.mb-faq details{border-bottom:1px solid var(--rule);padding:12px 2px}
+.mb-faq summary{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.mb-faq summary::-webkit-details-marker{display:none}
+.mb-faq summary::after{content:"+";font-family:var(--font-mono);font-weight:700;color:var(--ink-mute);font-size:16px}
+.mb-faq details[open] summary::after{content:"\2212"}
+.mb-faq p{font-size:12px;color:var(--ink-soft);line-height:1.6;margin-top:8px}
+</style>
+</head>
+<body data-page="membership">
+<div class="shell">
+
+<header class="brandbar" data-tx-shell="brandbar"></header>
+
+<section class="mb-hero">
+  <div class="kicker">TIANXI PRO MEMBERSHIP</div>
+  <h1>升級 <span class="pro">天喜 Pro</span></h1>
+  <p>免費對賬永久公開，等你睇實模型成績先決定。Pro 解鎖<b>賽前全卡預測</b>、模型搏冷 + 市場穩陣雙欄、pWin 信心分，同 Telegram VIP 賽日提早通知。</p>
+</section>
+
+<div class="mb-notice" id="mb-notice"><b>收費系統設定中</b>，升級入口即將開放。想第一時間收到通知，可先加入下方免費 Telegram 頻道。</div>
+
+<h2 class="mb-sec-title">免費 vs Pro</h2>
+<div class="mb-cmp">
+  <table>
+    <thead>
+      <tr><th>功能</th><th>免費</th><th class="pro">天喜 Pro</th></tr>
+    </thead>
+    <tbody>
+      <tr><th>過往對賬 + 命中率</th><td class="free"><span class="mb-yes">✓</span></td><td class="pro"><span class="mb-yes">✓</span></td></tr>
+      <tr><th>每賽日免費精選</th><td class="free">1 場</td><td class="pro">全卡</td></tr>
+      <tr><th>賽前預測（開賽前）</th><td class="free"><span class="mb-no">—</span></td><td class="pro">全卡</td></tr>
+      <tr><th>模型搏冷 + 市場穩陣雙欄</th><td class="free"><span class="mb-no">—</span></td><td class="pro"><span class="mb-yes">✓</span></td></tr>
+      <tr><th>pWin 機率 · 信心分</th><td class="free"><span class="mb-no">—</span></td><td class="pro"><span class="mb-yes">✓</span></td></tr>
+      <tr><th>臨場盤口 blend</th><td class="free"><span class="mb-no">—</span></td><td class="pro"><span class="mb-yes">✓</span></td></tr>
+      <tr><th>賽後全卡公開</th><td class="free"><span class="mb-yes">✓</span></td><td class="pro"><span class="mb-yes">✓</span></td></tr>
+      <tr><th>Telegram</th><td class="free">免費頻道</td><td class="pro">VIP 私頻 + 提早通知</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2 class="mb-sec-title">收費方案</h2>
+<div class="mb-plans" id="mb-plans">
+  <div class="mb-plan" data-plan="trial">
+    <div class="mb-plan__name">7 日試用</div>
+    <div class="mb-plan__sub">試足一個賽日，啱玩先續</div>
+    <div class="mb-plan__price"><span class="cur">HK$</span><span class="amt">18</span></div>
+    <div class="mb-plan__note">一次性 · 7 日</div>
+    <a class="mb-plan__btn" data-cta href="#">立即試用</a>
+  </div>
+  <div class="mb-plan" data-plan="day">
+    <div class="mb-plan__name">單日通行證</div>
+    <div class="mb-plan__sub">大賽日首選，當日全卡解鎖</div>
+    <div class="mb-plan__price"><span class="cur">HK$</span><span class="amt">38</span></div>
+    <div class="mb-plan__note">一次性 · 當個賽日</div>
+    <a class="mb-plan__btn" data-cta href="#">買單日</a>
+  </div>
+  <div class="mb-plan feat" data-plan="month">
+    <div class="mb-plan__tag">最受歡迎</div>
+    <div class="mb-plan__name">月費會員</div>
+    <div class="mb-plan__sub">主力之選，平均約每賽日 HK$25</div>
+    <div class="mb-plan__price"><span class="cur">HK$</span><span class="amt">198</span><span class="per">/月</span></div>
+    <div class="mb-plan__note">每月自動續訂 · 隨時取消</div>
+    <a class="mb-plan__btn" data-cta href="#">月費升級</a>
+  </div>
+  <div class="mb-plan" data-plan="season">
+    <div class="mb-plan__name">季票</div>
+    <div class="mb-plan__sub">全季鎖定，最抵長玩</div>
+    <div class="mb-plan__price"><span class="cur">HK$</span><span class="amt">1,680</span></div>
+    <div class="mb-plan__note">約 HK$140/月 · 全季</div>
+    <a class="mb-plan__btn" data-cta href="#">買季票</a>
+  </div>
+</div>
+
+<div class="mb-tg">
+  <h3>Telegram VIP 自動入群</h3>
+  <p>升級後由 Whop 自動授權你加入 VIP 私頻，賽日提早收到全卡 picks 同盤口提示；會籍到期自動處理，唔使手動管理。</p>
+  <p class="free" id="mb-tg-free">免費頻道（賽後復盤 · 命中率海報）連結即將公布。</p>
+</div>
+
+<h2 class="mb-sec-title">常見問題</h2>
+<div class="mb-faq">
+  <details><summary>付款後點樣入 VIP 群？</summary><p>付款成功後，Whop 會用你嘅 Telegram 帳戶自動授權入群，毋須人手審批。如未入到，多數係登入咗錯嘅 Telegram／Whop 帳戶。</p></details>
+  <details><summary>可以隨時取消嗎？</summary><p>月費會員可隨時喺 Whop 取消，當期完結後唔再收費；單日、試用、季票為一次性購買。</p></details>
+  <details><summary>付款安全嗎？</summary><p>收款由 Whop 處理，天喜唔會接觸或儲存你嘅信用卡資料。</p></details>
+  <details><summary>預測準唔準？</summary><p>所有過往預測同實際賽果、命中率均喺<a href="/results/" style="color:var(--accent);font-weight:700">預測與賽果</a>頁永久公開，請自行查證後再決定。</p></details>
+</div>
+
+<footer class="disclaimer" style="margin:22px 20px 26px;padding-top:14px;font-size:11px;color:var(--ink-mute);line-height:1.6;border-top:1px solid var(--rule)">
+  <strong style="color:var(--ink-soft)">天喜為數據分析平台，不提供投注服務，亦非投注建議。</strong>
+  所有預測、賠率、賽果資料純屬分析展示，並不保證準確或回報。投注涉及風險，請量力而為，並只透過合法渠道（香港賽馬會 HKJC）進行。本服務只供 18 歲或以上人士使用。如有需要，請致電平和基金戒賭熱線 1834 633。
+</footer>
+
+<nav class="botnav" data-tx-shell="botnav"></nav>
+
+</div>
+
+<script>
+(function(){
+  // Whop hosted-checkout links. Fill each when the Whop plans are created.
+  // Empty string => button shows 即將開放 (disabled).
+  var WHOP_LINKS = {
+    trial:  '',
+    day:    '',
+    month:  '',
+    season: ''
+  };
+  // Optional free Telegram channel invite (public). Empty => placeholder text kept.
+  var TG_FREE_URL = '';
+
+  function wire(){
+    var anyLive = false;
+    document.querySelectorAll('.mb-plan').forEach(function(card){
+      var key = card.getAttribute('data-plan');
+      var btn = card.querySelector('[data-cta]');
+      if(!btn) return;
+      var url = WHOP_LINKS[key];
+      if(url){
+        btn.setAttribute('href', url);
+        btn.setAttribute('target','_blank');
+        btn.setAttribute('rel','noopener');
+        btn.classList.remove('is-soon');
+        anyLive = true;
+      } else {
+        btn.setAttribute('href','javascript:void(0)');
+        btn.classList.add('is-soon');
+        btn.textContent = '即將開放';
+      }
+    });
+    var notice = document.getElementById('mb-notice');
+    if(notice) notice.style.display = anyLive ? 'none' : '';
+
+    if(TG_FREE_URL){
+      var f = document.getElementById('mb-tg-free');
+      if(f){ f.innerHTML = '免費頻道：<a href="'+TG_FREE_URL+'" target="_blank" rel="noopener" style="color:var(--gold-3);font-weight:700;text-decoration:underline">按此加入</a>（賽後復盤 · 命中率海報）'; }
+      var n = document.getElementById('mb-notice');
+      if(n && !anyLive){ n.innerHTML = '<b>收費系統設定中</b>，升級入口即將開放。可先 <a href="'+TG_FREE_URL+'" target="_blank" rel="noopener" style="color:var(--brown);font-weight:800;text-decoration:underline">加入免費 Telegram 頻道</a> 收通知。'; }
+    }
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', wire, {once:true});
+  else wire();
+})();
+</script>
+</body>
+</html>
