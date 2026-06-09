@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<script src="/assets/shell.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDFBF5">
+<title>公開戰績 · 天喜 TIANXI</title>
+<meta name="description" content="天喜 TX-Oracle 模型命中率全數公開：逐個賽日列出首選命中率、三甲命中率、彩池命中。賽前計算、賽果來自 HKJC、唔揀靚數。睇實成績先決定。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<script src="/assets/api.js"></script>
+<style>
+.tr-win{display:flex;gap:6px;padding:12px 20px 4px;flex-wrap:wrap}
+.tr-win__btn{flex:0 0 auto;padding:7px 14px;border:1px solid var(--rule);border-radius:999px;background:var(--paper);color:var(--ink-soft);font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.05em;cursor:pointer;transition:all 120ms}
+.tr-win__btn.is-on{color:#2E2108;border-color:#A07A1F;background:linear-gradient(180deg,#FFF4C2 0%,#EBC964 50%,#A07A1F 100%);box-shadow:inset 0 1px 0 rgba(255,248,210,.8),0 2px 4px rgba(139,111,26,.25)}
+
+.tr-kpi{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:12px 20px 4px}
+.tr-kpi__card{padding:16px 12px;border-radius:14px;background:var(--paper);border:1px solid var(--rule);text-align:center;position:relative;overflow:hidden;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 1px 0 rgba(58,38,8,.08),0 2px 4px rgba(58,38,8,.06),0 10px 24px rgba(58,38,8,.08)}
+.tr-kpi__card::before{content:'';position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent 0%,rgba(233,201,100,.6) 50%,transparent 100%)}
+.tr-kpi__card.hero{grid-column:1 / -1;background:linear-gradient(180deg,#FFFDF6 0%,#FBF4DE 100%);border-color:#D4A93C}
+.tr-kpi__lbl{font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:0.14em;color:var(--ink-mute);margin-bottom:6px}
+.tr-kpi__val{font-family:var(--font-display);font-size:34px;font-weight:900;color:var(--ink);line-height:1}
+.tr-kpi__card.hero .tr-kpi__val{font-size:46px;background:linear-gradient(180deg,#A07A1F,#5A4210);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tr-kpi__val small{font-size:16px;font-weight:700;color:var(--ink-mute)}
+.tr-kpi__sub{font-family:var(--font-display);font-size:11px;color:var(--ink-mute);margin-top:6px;line-height:1.4}
+
+.tr-pool{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px 20px 4px}
+.tr-pool__card{padding:10px 6px;border-radius:10px;background:var(--paper);border:1px solid var(--rule);text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 6px rgba(58,38,8,.06)}
+.tr-pool__lbl{font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:0.08em;color:var(--ink-mute);margin-bottom:4px}
+.tr-pool__val{font-family:var(--font-display);font-size:18px;font-weight:900;color:var(--ink);line-height:1}
+.tr-pool__sub{font-family:var(--font-mono);font-size:8px;color:var(--ink-mute);margin-top:3px}
+
+.tr-sec{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--ink);margin:22px 20px 10px;display:flex;align-items:center;gap:8px}
+.tr-sec::before{content:"";display:block;width:3px;height:14px;background:var(--gold-2,#C8A14A);border-radius:2px}
+
+.tr-explain{margin:0 20px;padding:13px 15px;border:1px solid var(--rule);border-radius:12px;background:var(--paper);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 6px rgba(58,38,8,.06)}
+.tr-explain dt{font-family:var(--font-display);font-weight:800;font-size:12px;color:var(--ink);margin-top:9px}
+.tr-explain dt:first-child{margin-top:0}
+.tr-explain dd{font-family:var(--font-display);font-size:11.5px;color:var(--ink-mute);line-height:1.55;margin:2px 0 0}
+
+.tr-log{margin:0 20px 4px;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--paper)}
+.tr-log table{width:100%;border-collapse:collapse;font-size:12px}
+.tr-log th,.tr-log td{padding:9px 8px;border-bottom:1px solid var(--rule);text-align:center}
+.tr-log tr:last-child td{border-bottom:0}
+.tr-log thead th{font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:0.06em;color:var(--ink-mute);background:var(--paper-soft,#FAF6EB)}
+.tr-log tbody td{font-family:var(--font-mono);color:var(--ink)}
+.tr-log td.d{font-family:var(--font-display);font-weight:700;text-align:left;color:var(--ink)}
+.tr-log td.d small{display:block;font-family:var(--font-mono);font-size:9px;color:var(--ink-mute);font-weight:400}
+.tr-log td.hit{font-weight:800}
+.tr-log td.hit.g{color:#1B5E20}
+
+.tr-cta{margin:18px 20px 0;padding:18px 16px;border-radius:16px;text-align:center;background:linear-gradient(180deg,#FFFDF6 0%,#FBF4DE 100%);border:1px solid #D4A93C;box-shadow:0 8px 22px -10px rgba(184,145,47,0.45)}
+.tr-cta h3{font-family:var(--font-display);font-weight:900;font-size:17px;color:var(--ink)}
+.tr-cta p{font-family:var(--font-display);font-size:12px;color:var(--ink-soft);line-height:1.6;margin:8px auto 0;max-width:420px}
+.tr-cta__btns{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.tr-cta__btn{font-family:var(--font-display);font-weight:800;font-size:13px;padding:11px 20px;border-radius:12px;text-decoration:none;transition:transform 120ms}
+.tr-cta__btn:active{transform:scale(0.97)}
+.tr-cta__btn.primary{background:linear-gradient(180deg,#EBC964,#A07A1F);color:#2E2108;border:1px solid #A07A1F}
+.tr-cta__btn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--ink)}
+
+.tr-note{margin:14px 20px 0;font-family:var(--font-display);font-size:11px;color:var(--ink-mute);line-height:1.6;text-align:center}
+.tr-empty,.tr-err{padding:50px 20px;text-align:center;font-family:var(--font-display);font-size:13px;color:var(--ink-mute);line-height:1.7}
+.tr-err{color:#A81A2F;font-family:var(--font-mono);font-size:12px}
+.tr-skel{opacity:.5}
+</style>
+</head>
+<body data-page="track-record">
+<div class="shell">
+
+<header class="brandbar" data-tx-shell="brandbar"></header>
+
+<div class="ticker" id="ticker">公開戰績 · 載入中…</div>
+
+<section class="page-head">
+  <h1><small>VERIFIED TRACK RECORD</small>公開戰績</h1>
+  <p>每一個賽日，模型命中率全數公開 —— 唔揀靚數，賽果以 HKJC 官方為準。<br>
+  <em style="font-family:var(--font-mono);font-size:11px;color:var(--ink-mute)">睇實成績先決定 · 分析指標 · 非投注建議</em></p>
+</section>
+
+<div class="tr-win" id="tr-win">
+  <button class="tr-win__btn" data-days="30">近 30 日</button>
+  <button class="tr-win__btn" data-days="60">近 60 日</button>
+  <button class="tr-win__btn is-on" data-days="90">近 90 日</button>
+  <button class="tr-win__btn" data-days="180">近半年</button>
+</div>
+
+<div id="tr-body">
+  <div class="tr-empty">載入命中率…</div>
+</div>
+
+<div class="tr-cta" id="tr-cta" style="display:none">
+  <h3>睇完成績，試一日先</h3>
+  <p>免費對賬永久公開。想要賽前全卡預測、模型搏冷 + 市場穩陣雙欄、pWin 信心分？由 HK$38 試一日開始。</p>
+  <div class="tr-cta__btns">
+    <a href="/membership/" class="tr-cta__btn primary">HK$38 試一日</a>
+    <a href="/membership/" class="tr-cta__btn ghost">睇月費會員</a>
+  </div>
+</div>
+
+<div class="tr-note">
+  所有預測均於<strong style="color:var(--ink)">賽前</strong>由天喜 TX-Oracle 模型計算，賽果來自
+  <a href="https://racing.hkjc.com/zh-hk/local/information/localresults" style="color:var(--ink);text-decoration:underline" target="_blank" rel="noopener">HKJC 官方公報</a>。
+  本頁列出<strong style="color:var(--ink)">每一個</strong>已收回結果之賽事日，不挑選、不修飾。<br>
+  逐場對賬可於 <a href="/results/" style="color:var(--ink);text-decoration:underline">預測與賽果</a> 查閱。
+</div>
+
+<footer class="disclaimer" style="margin-top:24px">
+  本網站所有內容僅供分析研究與娛樂之用，並非投注建議。賽馬有風險，量力而為。
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var V_NAME = { ST:'沙田', HV:'跑馬地' };
+  var WK = ['日','一','二','三','四','五','六'];
+  var bodyEl = document.getElementById('tr-body');
+  var ctaEl  = document.getElementById('tr-cta');
+  var tickEl = document.getElementById('ticker');
+  var winWrap = document.getElementById('tr-win');
+  var curDays = 90;
+
+  function pct(v){ return (v == null) ? '—' : (Math.round(v * 10) / 10); }
+  function fmtDate(iso){
+    if (!iso) return '';
+    var p = iso.split('-');
+    var dt = new Date(Date.UTC(+p[0], +p[1]-1, +p[2]));
+    return (+p[1]) + '月' + (+p[2]) + '日 · 星期' + WK[dt.getUTCDay()];
+  }
+  function rate(n, d){ return d ? Math.round(n / d * 1000) / 10 : null; }
+
+  function render(r){
+    if (!r || r.error) { bodyEl.innerHTML = '<div class="tr-err">暫時無法載入戰績數據，請稍後再試。</div>'; ctaEl.style.display='none'; return; }
+    var races = r.racesEvaluated || 0;
+    var meets = r.meetingsEvaluated || 0;
+    if (!races) {
+      bodyEl.innerHTML = '<div class="tr-empty"><strong style="color:var(--ink);display:block;margin-bottom:8px;font-size:14px">呢個時段未有已收回結果嘅賽事</strong>揀其他時段，或稍後賽果同步後再睇。</div>';
+      ctaEl.style.display='none';
+      return;
+    }
+    tickEl.textContent = '公開戰績 · 近 ' + r.windowDays + ' 日 · ' + meets + ' 個賽日 · ' + races + ' 場';
+
+    var html = '';
+
+    // headline KPI
+    html += '<div class="tr-kpi">';
+    html += '<div class="tr-kpi__card hero"><div class="tr-kpi__lbl">首選命中率 · TOP PICK WINS</div>'
+          + '<div class="tr-kpi__val">' + pct(r.top1HitRate) + '<small>%</small></div>'
+          + '<div class="tr-kpi__sub">模型首選 = 跑第一（' + races + ' 場中 ' + (r.top1Hits||0) + ' 場）</div></div>';
+    html += '<div class="tr-kpi__card"><div class="tr-kpi__lbl">三甲命中率</div>'
+          + '<div class="tr-kpi__val">' + pct(r.top3AnyHitRate) + '<small>%</small></div>'
+          + '<div class="tr-kpi__sub">首三選最少一隻入三甲</div></div>';
+    html += '<div class="tr-kpi__card"><div class="tr-kpi__lbl">平均入三甲</div>'
+          + '<div class="tr-kpi__val">' + (r.top3AvgIntersect==null?'—':r.top3AvgIntersect) + '<small> / 3</small></div>'
+          + '<div class="tr-kpi__sub">每場首三選命中數</div></div>';
+    html += '</div>';
+
+    // pool metrics
+    html += '<div class="tr-sec">彩池命中率</div>';
+    html += '<div class="tr-pool">';
+    html += '<div class="tr-pool__card"><div class="tr-pool__lbl">連贏 Q</div><div class="tr-pool__val">' + pct(r.quinellaHitRate) + '%</div><div class="tr-pool__sub">首二中頭二</div></div>';
+    html += '<div class="tr-pool__card"><div class="tr-pool__lbl">位置Q QP</div><div class="tr-pool__val">' + pct(r.qpHitRate) + '%</div><div class="tr-pool__sub">首二入三甲</div></div>';
+    html += '<div class="tr-pool__card"><div class="tr-pool__lbl">單T 三重彩</div><div class="tr-pool__val">' + pct(r.trioHitRate) + '%</div><div class="tr-pool__sub">首三中三甲</div></div>';
+    html += '<div class="tr-pool__card"><div class="tr-pool__lbl">四連環 F4</div><div class="tr-pool__val">' + pct(r.first4HitRate) + '%</div><div class="tr-pool__sub">首四中頭四</div></div>';
+    html += '</div>';
+
+    // explainer
+    html += '<div class="tr-sec">指標點睇</div>';
+    html += '<dl class="tr-explain">'
+      + '<dt>首選命中率</dt><dd>模型賽前排第一嘅馬，最後真係跑第一嘅比率。最嚴格嘅準繩度指標。</dd>'
+      + '<dt>三甲命中率</dt><dd>模型首三揀，最少有一隻跑入實際三甲（頭三名）嘅比率。</dd>'
+      + '<dt>彩池命中率</dt><dd>用模型首選去夾常見彩池（連贏／位置Q／三重彩／四連環）嘅命中比率，唔計賠率回報，純睇揀中與否。</dd>'
+      + '</dl>';
+
+    // per-meeting log
+    html += '<div class="tr-sec">逐日戰績（' + meets + ' 個賽日）</div>';
+    html += '<div class="tr-log"><table><thead><tr>'
+          + '<th style="text-align:left">賽日</th><th>場數</th><th>首選中</th><th>三甲命中</th>'
+          + '</tr></thead><tbody>';
+    (r.perMeeting || []).forEach(function(m){
+      var re = m.racesEvaluated || 0;
+      var t1 = rate(m.top1Hits||0, re), t3 = rate(m.top3AnyHits||0, re);
+      html += '<tr>'
+        + '<td class="d">' + (V_NAME[m.venue]||m.venue||'') + '<small>' + fmtDate(m.date) + '</small></td>'
+        + '<td>' + re + '</td>'
+        + '<td class="hit' + (t1 ? ' g' : '') + '">' + (m.top1Hits||0) + '/' + re + (t1!=null?' ('+t1+'%)':'') + '</td>'
+        + '<td class="hit' + (t3 ? ' g' : '') + '">' + (m.top3AnyHits||0) + '/' + re + (t3!=null?' ('+t3+'%)':'') + '</td>'
+        + '</tr>';
+    });
+    html += '</tbody></table></div>';
+
+    bodyEl.innerHTML = html;
+    ctaEl.style.display = '';
+  }
+
+  function load(days){
+    curDays = days;
+    Array.prototype.forEach.call(winWrap.querySelectorAll('.tr-win__btn'), function(b){
+      b.classList.toggle('is-on', (+b.dataset.days) === days);
+    });
+    bodyEl.innerHTML = '<div class="tr-empty tr-skel">載入近 ' + days + ' 日命中率…</div>';
+    ctaEl.style.display = 'none';
+    TX_API.hitRateRollup(days).then(render).catch(function(){
+      bodyEl.innerHTML = '<div class="tr-err">暫時無法載入戰績數據，請稍後再試。</div>';
+    });
+  }
+
+  winWrap.addEventListener('click', function(e){
+    var b = e.target.closest('.tr-win__btn');
+    if (b) load(+b.dataset.days);
+  });
+
+  load(90);
+})();
+</script>
+</body>
+</html>
