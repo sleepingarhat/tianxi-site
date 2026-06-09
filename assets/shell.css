@@ -79,6 +79,8 @@
 .brandbar__upgrade:active { transform: scale(0.95); }
 .brandbar__upgrade:focus-visible { outline: 2px solid var(--gold-2); outline-offset: 2px; }
 @media (max-width: 360px){ .brandbar__upgrade { padding: 6px 11px; font-size: 11px; } }
+/* hide the self-link when already on the membership page */
+body[data-page="membership"] .brandbar__upgrade { display: none; }
 
 /* ---------- Theme toggle (2026-04-29) ---------- */
 .theme-toggle {
