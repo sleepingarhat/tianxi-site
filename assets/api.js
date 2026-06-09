@@ -101,6 +101,7 @@
     analyze:  function(body){ return jp('/api/analyze', body); },
     factors:  function(){ return j('/api/analyze/factors'); },
     explain:  function(raceId, horseId){ return j('/api/analyze/explain?raceId=' + encodeURIComponent(raceId) + '&horseId=' + encodeURIComponent(horseId)); },
+    hitRateRollup: function(days){ return j('/api/analyze/hit-rate-rollup?days=' + (days||90)); },
     // lounge — single global chatroom
     lounge: {
       chat: function(since, lim){
