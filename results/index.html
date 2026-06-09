@@ -212,7 +212,7 @@
         '<div class="pod__rank">' + RANK_LABEL[i] + '</div>' +
         '<div class="pod__no">' + esc(h && h.horseNumber || '—') + '</div>' +
         '<div class="pod__name">' + esc(h && (h.nameCh || h.name) || '—') + '</div>' +
-        '<div class="pod__odds">' + (h && h.winOdds != null && h.winOdds !== '' ? '賠 ' + esc(oddsTxt(h.winOdds)) : '—') + '</div>' +
+        '<div class="pod__odds">' + (h ? oddsDisp(h.winOdds) : '—') + '</div>' +
       '</div>';
     }
 
@@ -309,10 +309,17 @@
   }
 
   function oddsTxt(o){
-    if (o == null || o === '') return '—';
-    var n = Number(o);
-    if (isFinite(n)) return n % 1 === 0 ? String(n) : n.toFixed(1);
-    return String(o);
+    if (o == null) return '—';
+    var s = typeof o === 'string' ? o.trim() : o;
+    if (s === '') return '—';
+    var n = Number(s);
+    if (isFinite(n)) return n > 0 ? (n % 1 === 0 ? String(n) : n.toFixed(1)) : '—';
+    return String(s);
+  }
+
+  function oddsDisp(o){
+    var t = oddsTxt(o);
+    return t === '—' ? '—' : '賠 ' + esc(t);
   }
 
   function pctTxt(x){
@@ -346,7 +353,7 @@
         '<span class="cmp__rk">預測 ' + (i + 1) + '</span>' +
         '<span class="cmp__h">' + esc(p.horseNumber) + ' ' + esc(p.nameCh || p.nameEn || '') + '</span>' +
         '<span class="cmp__pw">' + pctTxt(p.pWin) + '</span>' +
-        '<span class="cmp__odds">' + (function(){ var o = oddsOf(p, race); return o != null && o !== '' ? '賠 ' + esc(oddsTxt(o)) : '—'; })() + '</span>' +
+        '<span class="cmp__odds">' + oddsDisp(oddsOf(p, race)) + '</span>' +
         '<span class="cmp__res">' + esc(resTxt(fp)) + '</span>' +
       '</div>';
     }).join('');
