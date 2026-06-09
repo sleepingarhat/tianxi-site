@@ -37,6 +37,7 @@
     '</a>' +
     '<div></div>' +
     '<div class="brandbar__actions">' +
+      '<a href="/track-record/" data-page="track-record" style="font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--ink-soft);text-decoration:none;align-self:center;margin-right:2px;white-space:nowrap">戰績</a>' +
       '<a href="/membership/" class="brandbar__upgrade" data-page="membership">升級 Pro</a>' +
       '<button type="button" class="theme-toggle" data-tx-theme-toggle aria-pressed="false" aria-label="切換至深色模式" title="切換深／淺色">' +
         '<svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true">' +
@@ -69,7 +70,8 @@
     'home': null,
     'race': null,
     'horse': null,
-    'results': null
+    'results': null,
+    'track-record': null
   };
 
   // Each entry: [href, page-key, label, svgInner]
