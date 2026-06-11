@@ -153,6 +153,7 @@ if (chipRow){
   chipRow.addEventListener('click', function(ev){
     var btn = ev.target.closest ? ev.target.closest('.tx-chip') : null;
     if (!btn) return;
+    clearTimeout(searchTimer);
     CUR_FILTER = btn.getAttribute('data-f') || 'all';
     var chips = chipRow.querySelectorAll('.tx-chip');
     for (var i = 0; i < chips.length; i++){ chips[i].classList.toggle('is-active', chips[i] === btn); }
@@ -221,6 +222,8 @@ TX_API.horseLeaderboard('wins', 10).then(function(d){
       + '<div class="row__sub">' + (h.totalStarts || 0) + ' 戰 · 勝率 ' + (h.totalStarts ? Math.round(h.totalWins/h.totalStarts*100) : 0) + '%</div></div>'
       + '<div class="row__val">' + (h.totalWins || 0) + ' 勝</div></div>';
   }).join('');
+}).catch(function(){
+  document.getElementById('leaderboard-wins').innerHTML = '<div class="tx-empty">暫無資料</div>';
 });
 
 // ---------- Search ----------

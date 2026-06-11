@@ -118,7 +118,7 @@ TX_API.hitRateRollup(90).then(function(d){
     ['前三任一',  pct(d.top3AnyHitRate),  '三揀中至少一匹跑入前三'],
     ['位置 Q',    pct(d.qpHitRate),       '頭兩揀跑入前三'],
     ['連贏',      pct(d.quinellaHitRate), '頭兩揀 = 頭兩名'],
-    ['三重彩',    pct(d.trioHitRate),     '前三揀 = 前三名（任序）'],
+    ['單T',      pct(d.trioHitRate),     '揀三匹跑入前三名（任序）'],
     ['頭四覆蓋',  cov(d.top4AvgIntersect),'平均命中實際前四嘅匹數']
   ];
   el.innerHTML = '<div class="eng-grid">' + stats.map(function(s){
