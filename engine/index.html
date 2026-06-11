@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+  <script src="/assets/shell.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDFBF5">
+<title>預測引擎 TX-Oracle v3 · 天喜 TIANXI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<script src="/assets/api.js"></script><style>
+
+.eng-lead{font-size:13px;line-height:1.7;color:var(--ink-soft)}
+.eng-sub{font-size:12px;color:var(--ink-mute);margin:2px 0 14px}
+.eng-sub a{color:var(--brown);font-weight:700;text-decoration:none;white-space:nowrap}
+
+.eng-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.eng-stat{padding:12px;background:var(--paper-2);border:1px solid var(--rule);border-radius:10px}
+.eng-stat__val{font-family:var(--font-mono);font-weight:700;font-size:22px;color:var(--brown);line-height:1.1}
+.eng-stat__lbl{font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--ink);margin-top:5px}
+.eng-stat__sub{font-size:10px;color:var(--ink-mute);margin-top:2px;line-height:1.4}
+.eng-foot{margin-top:12px;font-size:11px;color:var(--ink-mute);line-height:1.6}
+
+.eng-formula{font-family:var(--font-mono);font-size:12px;color:var(--ink);background:var(--paper);padding:10px 12px;border-radius:8px;border:1px solid var(--rule-2);margin:10px 0;line-height:1.7;overflow-x:auto;white-space:nowrap}
+.eng-how{font-size:13px;line-height:1.75;color:var(--ink-soft)}
+.eng-how b{color:var(--ink)}
+.eng-how ul{margin:8px 0 0;padding-left:18px}
+.eng-how li{margin-bottom:6px}
+
+.fac-count{font-size:13px;color:var(--ink-soft);margin-bottom:14px;line-height:1.6}
+.fac-cat{margin-bottom:16px}
+.fac-cat:last-child{margin-bottom:0}
+.fac-cat h3{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--brown);margin:0 0 8px;display:flex;align-items:center;gap:6px}
+.fac-cat h3::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--brown);display:inline-block}
+.fac-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fac-tile{padding:9px 11px;background:var(--paper-2);border:1px solid var(--rule);border-radius:8px}
+.fac-tile__name{font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--ink)}
+.fac-tile__desc{font-size:10px;color:var(--ink-mute);margin-top:3px;line-height:1.45}
+
+.eng-cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+
+@media (max-width:380px){ .fac-grid{grid-template-columns:1fr} }
+
+</style>
+</head>
+<body data-page="engine">
+<div class="shell">
+
+<header class="brandbar" data-tx-shell="brandbar"></header>
+
+<section class="page-head">
+  <h1><small>PREDICTION ENGINE</small>預測引擎 TX-Oracle v3</h1>
+  <p>天喜唔係貼士佬靠估，而係一套可驗證、可問責嘅數據引擎。佢逐場分析數十項因子，用十一年香港賽事訓練，每個賽馬日自動評估同調整。</p>
+</section>
+
+<div class="card">
+  <h2>實戰命中率 · 過去 90 日</h2>
+  <p class="eng-sub">公開、自動更新 · 純分析記錄，非投注回報 · <a href="/track-record/">完整戰績 →</a></p>
+  <div id="eng-perf"><div class="tx-empty">命中率載入中...</div></div>
+</div>
+
+<div class="card">
+  <h2>引擎點運作</h2>
+  <div class="eng-how">
+    <p>TX-Oracle v3 將兩個獨立模型喺<b>機率層</b>融合，再加因子修正：</p>
+    <ul>
+      <li><b>LightGBM（lambdarank）</b>——學習每場馬之間嘅相對排序，捕捉複雜非線性關係（場內排序主力）。</li>
+      <li><b>ELO + 因子模型</b>——馬匹／騎師／練馬師嘅長期實力評分，加檔位、負磅修正。</li>
+    </ul>
+    <div class="eng-formula">finalScore = 1500 + ( α·lgb_z + (1−α)·elo_z + factor·0.5 ) × 100</div>
+    <div class="eng-formula">ELO 組合 = 0.7×馬匹ELO + 0.2×騎師ELO + 0.1×練馬師ELO + 檔位 + 負磅</div>
+    <p>混合權重 <b>α</b> 由後台動態管理，<b>每個賽馬日自動評估</b>模型健康度再決定偏重邊個模型，毋須人手。訓練資料涵蓋 <b>2016 年至今全部香港賽事</b>（8,000+ 場、~98,000 條出賽記錄）。</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>引擎分析嘅因子</h2>
+  <div id="eng-factors"><div class="tx-empty">因子載入中...</div></div>
+</div>
+
+<div class="card">
+  <h2>想睇每場詳細選馬？</h2>
+  <p class="eng-lead" style="margin-bottom:12px">引擎嘅生產預測會逐場列出 Top picks、勝出機率同因子分解。</p>
+  <div class="eng-cta">
+    <a href="/predictor/" class="pill">選馬工具 →</a>
+    <a href="/dashboard/" class="pill">我的儀表板 →</a>
+    <a href="/membership/" class="pill">升級 Pro →</a>
+  </div>
+</div>
+
+
+<footer class="disclaimer">
+  <strong>天喜為分析平台，不提供投注服務。</strong><br>
+  所有命中率為歷史回溯統計，過往表現不代表將來結果。本頁數據僅供研究分析。<br>
+  Analysis platform · NO betting services · Data for research only
+</footer>
+
+<nav class="botnav" data-tx-shell="botnav"></nav>
+
+</div>
+
+<script>
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+// ---------- live performance (hit-rate rollup) ----------
+TX_API.hitRateRollup(90).then(function(d){
+  var el = document.getElementById('eng-perf');
+  if (!d || !d.racesEvaluated) { el.innerHTML = '<div class="tx-empty">命中率資料整備中</div>'; return; }
+  function pct(n){ return (n == null ? '—' : (Math.round(n*10)/10) + '%'); }
+  function cov(n){ return (n == null ? '—' : (Math.round(n*100)/100) + ' / 4'); }
+  var stats = [
+    ['頭馬命中',  pct(d.top1HitRate),     '首選 = 冠軍'],
+    ['前三任一',  pct(d.top3AnyHitRate),  '三揀中至少一匹跑入前三'],
+    ['位置 Q',    pct(d.qpHitRate),       '頭兩揀跑入前三'],
+    ['連贏',      pct(d.quinellaHitRate), '頭兩揀 = 頭兩名'],
+    ['三重彩',    pct(d.trioHitRate),     '前三揀 = 前三名（任序）'],
+    ['頭四覆蓋',  cov(d.top4AvgIntersect),'平均命中實際前四嘅匹數']
+  ];
+  el.innerHTML = '<div class="eng-grid">' + stats.map(function(s){
+    return '<div class="eng-stat"><div class="eng-stat__val">' + s[1] + '</div><div class="eng-stat__lbl">' + esc(s[0]) + '</div><div class="eng-stat__sub">' + esc(s[2]) + '</div></div>';
+  }).join('') + '</div>'
+    + '<div class="eng-foot">統計窗口 ' + esc(d.from) + ' 至 ' + esc(d.to) + ' · ' + d.meetingsEvaluated + ' 場賽事 · ' + d.racesEvaluated + ' 場次評估</div>';
+}).catch(function(){
+  document.getElementById('eng-perf').innerHTML = '<div class="tx-empty">命中率資料載入失敗</div>';
+});
+
+// ---------- all factors the engine analyses ----------
+TX_API.factors().then(function(d){
+  var el = document.getElementById('eng-factors');
+  var cats = (d && d.factors) || [];
+  if (!cats.length) { el.innerHTML = '<div class="tx-empty">因子資料整備中</div>'; return; }
+  var n = cats.reduce(function(a, c){ return a + ((c.items || []).length); }, 0);
+  el.innerHTML = '<div class="fac-count">引擎逐場分析 <b>' + n + '</b> 項因子，橫跨 ' + cats.length + ' 大範疇：</div>'
+    + cats.map(function(c){
+        return '<div class="fac-cat"><h3>' + esc(c.category) + '</h3><div class="fac-grid">'
+          + (c.items || []).map(function(it){
+              return '<div class="fac-tile"><div class="fac-tile__name">' + esc(it.name) + '</div><div class="fac-tile__desc">' + esc(it.description) + '</div></div>';
+            }).join('')
+          + '</div></div>';
+      }).join('');
+}).catch(function(){
+  document.getElementById('eng-factors').innerHTML = '<div class="tx-empty">因子資料載入失敗</div>';
+});
+
+</script>
+
+</body>
+</html>

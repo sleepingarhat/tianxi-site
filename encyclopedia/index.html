@@ -18,13 +18,16 @@
 .search input{width:100%;padding:10px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);font-family:var(--font-body);font-size:14px;color:var(--ink)}
 .search input:focus{outline:0;border-color:var(--ink)}
 
+.ency-note{margin-top:8px;font-size:12px;color:var(--ink-mute);line-height:1.6}
+.ency-note a{color:var(--brown);font-weight:700;text-decoration:none;white-space:nowrap}
+
 .horse-card{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--rule)}
 .horse-card:last-child{border:0}
 .horse-card__silks{width:40px;height:40px;background:var(--paper-2);border:1px solid var(--rule);border-radius:6px;object-fit:contain;display:block}
 .horse-card__name{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--ink);line-height:1.3}
 .horse-card__name small{display:block;font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--ink-mute);margin-top:2px}
 .horse-card__meta{font-size:11px;color:var(--ink-mute);margin-top:3px}
-.horse-card__stats{display:flex;gap:10px;font-family:var(--font-mono);font-size:10px;margin-top:4px}
+.horse-card__stats{display:flex;gap:10px;font-family:var(--font-mono);font-size:10px;margin-top:4px;flex-wrap:wrap}
 .horse-card__stats span{color:var(--ink-soft)}
 .horse-card__stats b{color:var(--ink);font-weight:700}
 .horse-card__tag{font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--ink-soft);white-space:nowrap;padding-right:8px;margin-right:4px}
@@ -36,32 +39,26 @@
 
 <header class="brandbar" data-tx-shell="brandbar"></header>
 
-<div class="ticker">
-  <strong>HK 04:26 Sun</strong> · R1 T-07:54:00 · <span class="down">#5 ↓ 4.1</span> · <span class="down">#11 ↓ 4.2</span> · <span class="up">#1 ↑ 9.0</span> · 沙田 好地
-</div>
-
-
 <section class="page-head">
   <h1><small>HORSE ENCYCLOPEDIA</small>馬匹百科</h1>
   <p>12,000+ 匹在役馬匹資料庫 · Elo 軌跡 · 11 年戰績 · 晨操記錄 · 傷患歷史。</p>
+  <p class="ency-note">本頁係香港馬匹嘅資料庫：搜尋任何一匹馬，或者睇今日出賽馬匹（可按賠率 / 評分篩選），仲有 Elo 同勝場排行榜。想知預測引擎點分析、命中率有幾高？睇 <a href="/engine/">引擎詳解 →</a></p>
 </section>
 
 <div class="search">
   <input type="search" placeholder="搜尋馬名 / 馬號 / 騎師 / 練馬師...">
 </div>
 
-<div class="tx-chiprow" style="padding:10px 20px 0">
-  <button class="tx-chip is-active">全部</button>
-  <button class="tx-chip">今日出賽</button>
-  <button class="tx-chip">評分 &gt; 80</button>
-  <button class="tx-chip">心水</button>
-  <button class="tx-chip">最近起動</button>
-  <button class="tx-chip">進口</button>
-  <button class="tx-chip">配速前領</button>
+<div class="tx-chiprow" id="ency-chips" style="padding:10px 20px 0">
+  <button class="tx-chip is-active" data-f="all">全部</button>
+  <button class="tx-chip" data-f="hot">大熱 ≤5</button>
+  <button class="tx-chip" data-f="mid">中價 5–12</button>
+  <button class="tx-chip" data-f="cold">爆冷 &gt;12</button>
+  <button class="tx-chip" data-f="rate">評分 ≥80</button>
 </div>
 
 <div class="card" id="today-card">
-  <h2>今日出賽馬匹 · <span id="today-count">載入中</span></h2>
+  <h2><span id="today-label">今日出賽馬匹</span> · <span id="today-count">載入中</span></h2>
   <div id="today-horses"><div class="tx-empty">載入中...</div></div>
 </div>
 
@@ -109,7 +106,61 @@ function renderNameBlock(nameCh, nameEn){
   return '<div class="horse-card__name">' + escapeHtml(nameCh || nameEn || '—') + en + '</div>';
 }
 
-// ---------- Today's horses ----------
+// ---------- Today's horses (with client-side filter chips) ----------
+var TODAY_ENTRIES = [];
+var TODAY_META = { total: 0, venue: '', date: '' };
+var CUR_FILTER = 'all';
+
+var FILTERS = {
+  all:  function(){ return true; },
+  hot:  function(e){ var o = parseFloat(e.odds); return isFinite(o) && o > 0 && o <= 5; },
+  mid:  function(e){ var o = parseFloat(e.odds); return isFinite(o) && o > 5 && o <= 12; },
+  cold: function(e){ var o = parseFloat(e.odds); return isFinite(o) && o > 12; },
+  rate: function(e){ var r = parseFloat(e.rating); return isFinite(r) && r >= 80; }
+};
+
+function entryCard(e){
+  var bits = [];
+  if (e.jockey)  bits.push('騎師 ' + escapeHtml(e.jockey));
+  if (e.trainer) bits.push('練馬師 ' + escapeHtml(e.trainer));
+  var rateStat = (e.rating != null && e.rating !== '') ? '<span>評分 <b>' + escapeHtml(e.rating) + '</b></span>' : '';
+  return '<div class="horse-card">'
+    + silksImg(e.silksCode, 40)
+    + '<div>'
+    +   renderNameBlock(e.nameCh, e.nameEn)
+    +   '<div class="horse-card__meta">' + bits.join(' · ') + '</div>'
+    +   '<div class="horse-card__stats"><span>檔位 <b>' + (e.draw || '—') + '</b></span><span>賠率 <b>' + (e.odds || '—') + '</b></span>' + rateStat + '</div>'
+    + '</div>'
+    + '<div class="horse-card__tag">R' + e.raceNo + ' · #' + (e.num || '—') + '</div>'
+    + '</div>';
+}
+
+function renderToday(){
+  var box = document.getElementById('today-horses');
+  var cnt = document.getElementById('today-count');
+  document.getElementById('today-label').textContent = '今日出賽馬匹';
+  var fn = FILTERS[CUR_FILTER] || FILTERS.all;
+  var list = TODAY_ENTRIES.filter(fn);
+  var suffix = TODAY_META.venue ? (' · ' + TODAY_META.venue + ' · ' + TODAY_META.date) : '';
+  cnt.textContent = (list.length === TODAY_META.total ? TODAY_META.total + ' 匹' : list.length + ' / ' + TODAY_META.total + ' 匹') + suffix;
+  if (!TODAY_ENTRIES.length){ box.innerHTML = '<div class="tx-empty">暫無出賽資料</div>'; return; }
+  if (!list.length){ box.innerHTML = '<div class="tx-empty">此分類暫無馬匹（評分喺臨場排位表先齊全）</div>'; return; }
+  box.innerHTML = list.map(entryCard).join('');
+}
+
+var chipRow = document.getElementById('ency-chips');
+if (chipRow){
+  chipRow.addEventListener('click', function(ev){
+    var btn = ev.target.closest ? ev.target.closest('.tx-chip') : null;
+    if (!btn) return;
+    CUR_FILTER = btn.getAttribute('data-f') || 'all';
+    var chips = chipRow.querySelectorAll('.tx-chip');
+    for (var i = 0; i < chips.length; i++){ chips[i].classList.toggle('is-active', chips[i] === btn); }
+    var si = document.querySelector('.search input'); if (si) si.value = '';
+    renderToday();
+  });
+}
+
 TX_API.smartCurrent().then(function(cur){
   if (!cur || !cur.date) {
     document.getElementById('today-count').textContent = '0';
@@ -127,27 +178,14 @@ TX_API.smartCurrent().then(function(cur){
           id:h.id, num:h.horseNumber, draw:h.draw,
           nameCh:h.nameCh, nameEn:h.name,
           jockey:h.jockeyCh||h.jockey, trainer:h.trainerCh,
-          raceNo:r.raceNumber, odds:h.winOdds,
+          raceNo:r.raceNumber, odds:h.winOdds, rating:h.rating,
           silksCode: h.silksCode || h.code || h.horseCode
         });
       });
     });
-    document.getElementById('today-count').textContent = entries.length + ' 匹 · ' + m.venueName + ' · ' + cur.date;
-    if (!entries.length) {
-      document.getElementById('today-horses').innerHTML = '<div class="tx-empty">暫無出賽資料</div>';
-      return;
-    }
-    document.getElementById('today-horses').innerHTML = entries.slice(0, 40).map(function(e){
-      return '<div class="horse-card">'
-        + silksImg(e.silksCode, 40)
-        + '<div>'
-        +   renderNameBlock(e.nameCh, e.nameEn)
-        +   '<div class="horse-card__meta">' + (e.jockey ? '騎師 ' + escapeHtml(e.jockey) : '') + (e.trainer ? ' · 練馬師 ' + escapeHtml(e.trainer) : '') + '</div>'
-        +   '<div class="horse-card__stats"><span>檔位 <b>' + (e.draw||'—') + '</b></span><span>賠率 <b>' + (e.odds || '—') + '</b></span></div>'
-        + '</div>'
-        + '<div class="horse-card__tag">R' + e.raceNo + ' · #' + (e.num||'—') + '</div>'
-        + '</div>';
-    }).join('');
+    TODAY_ENTRIES = entries;
+    TODAY_META = { total: entries.length, venue: m.venueName || '', date: cur.date };
+    renderToday();
   });
 }).catch(function(e){
   document.getElementById('today-count').textContent = '無資料';
@@ -157,7 +195,7 @@ TX_API.smartCurrent().then(function(cur){
 // ---------- Leaderboards ----------
 TX_API.horseLeaderboard('elo', 10).then(function(d){
   if (!d.horses || !d.horses.length) {
-    document.getElementById('leaderboard').innerHTML = '<div class="tx-empty">Elo 資料整備中 · Phase A2 計算運行中</div>';
+    document.getElementById('leaderboard').innerHTML = '<div class="tx-empty">Elo 資料整備中</div>';
     return;
   }
   document.getElementById('leaderboard').innerHTML = d.horses.map(function(h, i){
@@ -193,9 +231,10 @@ if (searchInput) {
     clearTimeout(searchTimer);
     var q = searchInput.value.trim();
     searchTimer = setTimeout(function(){
-      if (!q) { return; }
+      if (!q) { renderToday(); return; }
       TX_API.horseSearch(q).then(function(d){
-        document.querySelector('#today-card h2').textContent = '搜尋結果 · ' + (d.horses||[]).length + ' 匹';
+        document.getElementById('today-label').textContent = '搜尋結果';
+        document.getElementById('today-count').textContent = (d.horses||[]).length + ' 匹';
         document.getElementById('today-horses').innerHTML = (d.horses || []).slice(0, 20).map(function(h){
           return '<div class="horse-card">'
             + silksImg(h.silksCode || h.code, 40)

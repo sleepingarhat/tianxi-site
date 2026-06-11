@@ -59,7 +59,6 @@
   // (e.g. /combo/ and /pool-odds/ are sub-tools under "選馬"/predictor).
   // Source: union of the per-page inline maps removed 2026-05-22.
   var PAGE_ALIAS = {
-    'combo': 'predictor',
     'pool-odds': 'predictor',
     'value-heatmap': 'predictor',
     'flow': 'predictor',
@@ -84,6 +83,8 @@
       '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/>'],
     ['/encyclopedia/', 'encyclopedia', '百科',
       '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14A2.5 2.5 0 0 0 6.5 22H20v-5"/>'],
+    ['/engine/', 'engine', '引擎',
+      '<path d="M3 12h4l3 8 4-16 3 8h4"/>'],
     ['/lounge/', 'lounge', '聊天室',
       '<path d="M21 12a8 8 0 1 1-3.5-6.6L21 4v5h-5"/>']
   ];

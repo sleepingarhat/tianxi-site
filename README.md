@@ -29,9 +29,9 @@ Cloudflare Pages 純靜態前端，HKJC 3 層賽馬導航。**唯一用途係生
 | 日程 | `/schedule/` | 月曆 + 月份賽馬日索引 | `meetings` · `meeting` |
 | 我的儀表板 | `/dashboard/` | 個人化 next-meeting overview | `smartCurrent` · `meeting` |
 | 選馬工具 | `/predictor/` | 因子權重探索（**唔係**生產公式） | `factors` · `analyze` |
-| 組合分析 | `/combo/` | P / Q / 三重彩組合估算 | `raceEntries` |
 | 彩池賠率 | `/pool-odds/` | 賠率快照 | `raceEntries` |
-| 百科 | `/encyclopedia/` | 引擎公式 + 因子說明 | static + `factors` |
+| 百科 | `/encyclopedia/` | 馬匹資料庫 · 搜尋 · Elo/勝場榜 · 今日出賽篩選 | `horseSearch` · `meeting` · `leaderboard` |
+| 引擎 | `/engine/` | 預測引擎 TX-Oracle v3 詳解 · 實戰命中率 · 因子 | `hitRateRollup` · `factors` |
 | 聊天室 | `/lounge/` | 全局單一聊天室 | `lounge.chat` |
 | 登入 | `/login/` | Anon identity | — |
 
@@ -41,7 +41,7 @@ Cloudflare Pages 純靜態前端，HKJC 3 層賽馬導航。**唯一用途係生
 
 - **`/race/`** — Top picks 表，每匹顯示 `finalScore`、`pWin`、score breakdown
 - **`/horse/`** — 個別馬匹卡 + score breakdown（顯示 LightGBM 分 + ELO 因子）
-- **`/encyclopedia/`** — 「TX-Oracle v3」live card：
+- **`/engine/`** — 「TX-Oracle v3」引擎詳解頁：
   - 公式：`finalScore = 1500 + (α·lgb_z + (1−α)·elo_z + factor·0.5) · 100`
   - ELO 組合：`0.7×馬匹ELO + 0.2×騎師ELO + 0.1×練馬師ELO + 檔位 + 負磅`
 - **`/predictor/`** — 探索工具，可調 17 個因子權重做 what-if 分析，唔影響生產
