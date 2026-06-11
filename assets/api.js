@@ -97,6 +97,7 @@
     trainers: function(){ return j('/api/trainers'); },
     // analyze
     topPicks: function(raceId){ return j('/api/analyze/top-picks?raceId=' + encodeURIComponent(raceId)); },
+    hitRate: function(date){ return j('/api/analyze/hit-rate?date=' + encodeURIComponent(date)); },
     todayPicks: function(venue){ return j('/api/analyze/today-picks' + (venue ? '?venue=' + encodeURIComponent(venue) : '')); },
     analyze:  function(body){ return jp('/api/analyze', body); },
     factors:  function(){ return j('/api/analyze/factors'); },

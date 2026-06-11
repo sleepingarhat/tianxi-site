@@ -86,6 +86,26 @@
 .cmp-summary{margin:0 20px 14px;padding:12px 14px;border:1px solid var(--rule);border-radius:12px;background:var(--paper);font-family:var(--font-mono);font-size:12px;color:var(--ink);display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 6px rgba(58,38,8,.06)}
 .cmp-summary strong{font-family:var(--font-display);font-weight:900;font-size:14px}
 .cmp-summary .k{color:var(--ink-mute);font-size:10px;letter-spacing:0.1em}
+.cov-summary{margin:0 20px 14px;padding:12px 14px;border:1px solid var(--rule);border-radius:12px;background:var(--paper);font-family:var(--font-mono);font-size:12px;color:var(--ink);display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 6px rgba(58,38,8,.06)}
+.cov-summary .ct{font-family:var(--font-display);font-weight:900;font-size:13px;letter-spacing:0.04em}
+.cov-summary .k{color:var(--ink-mute);font-size:10px;letter-spacing:0.1em}
+.cov-pill{border:1px solid var(--rule);border-radius:999px;padding:2px 10px;color:var(--ink-mute);background:var(--paper-soft,#FAF6EB)}
+.cov-pill.ok{color:#2E2108;border-color:#A07A1F;background:linear-gradient(180deg,#FFF4C2,#EBC964);font-weight:700}
+.cov-pill.mut{border:none;background:transparent;color:var(--ink-mute);padding-left:0}
+.cov{margin-top:10px;padding-top:10px;border-top:1px dashed var(--rule);font-family:var(--font-mono);font-size:11px}
+.cov__hd{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cov__ttl{font-family:var(--font-display);font-size:12px;font-weight:800;color:var(--ink);letter-spacing:0.04em}
+.cov__badge{font-family:var(--font-mono);font-weight:800;font-size:10px;padding:2px 8px;border-radius:6px;white-space:nowrap;color:var(--ink-mute);background:var(--paper-soft,#FAF6EB);border:1px solid var(--rule)}
+.cov__badge.b4{color:#2E2108;background:linear-gradient(180deg,#FFF4C2,#EBC964);border-color:#A07A1F}
+.cov__badge.b3{color:#1B5E20;background:#E3F2E4;border-color:#A5D6A7}
+.cov-box{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+.cov-boxrow{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;padding:5px 8px;background:var(--paper-soft,#FAF6EB);border:1px solid var(--rule);border-radius:6px}
+.cov-boxnm{font-family:var(--font-display);font-weight:700;color:var(--ink)}
+.cov-boxstk,.cov-boxpay{color:var(--ink-mute);white-space:nowrap}
+.cov-boxnet{font-weight:800;white-space:nowrap}
+.cov-boxnet.pos{color:#1B5E20}
+.cov-boxnet.neg{color:#A81A2F}
+.cov-note{color:var(--ink-mute);margin-top:6px;line-height:1.5}
 </style>
 </head>
 <body data-page="results">
@@ -227,6 +247,7 @@
       '<div class="pod">' + pods + '</div>' +
       '<div class="rc__time"><span>' + esc(winnerTimeText(top) || '結果待公布') + '</span><span>' + esc(metaSubText(top, race)) + '</span></div>' +
       '<div class="cmp cmp--load" id="cmp-' + esc(race.id || ('r' + raceNo)) + '">捲動載入模型預測對比…</div>' +
+      '<div class="cov-slot" id="cov-r' + esc(raceNo) + '"></div>' +
     '</article>';
   }
 
@@ -258,6 +279,7 @@
         '<div class="day-stats__card"><div class="day-stats__lbl">獎金</div><div class="day-stats__val">' + (prizeTotal != null ? fmtPrize(prizeTotal) : '—') + '</div><div class="day-stats__sub">HKD 合計</div></div>' +
       '</div>' +
       '<div class="cmp-summary" id="cmp-summary"><span class="k">模型對賬</span> 捲動各場以載入模型預測對比</div>' +
+      '<div class="cov-summary" id="cov-summary" style="display:none"></div>' +
       races.map(renderRaceCard).join('');
 
     if (!settled.length){
@@ -266,6 +288,7 @@
 
     slot.innerHTML = html;
     enrichPredictions(races);
+    loadCoverage(m.date, races);
   }
 
   function byRankP(a, b){ return (a.rank || 99) - (b.rank || 99); }
@@ -482,6 +505,79 @@
       });
     }, { rootMargin: '300px 0px' });
     for (var key in byId){ var elx = document.getElementById(key); if (elx) io.observe(elx); }
+  }
+
+  function covOf(hr){
+    var m4 = (hr.predictedTop4||[]).map(function(p){ return p.horseNumber; }).filter(function(v){ return v!=null&&v!==''; }).map(String);
+    var a4 = (hr.actualTop4||[]).map(function(a){ return a.horseNumber; }).filter(function(v){ return v!=null&&v!==''; }).map(String);
+    if (!m4.length || !a4.length) return null;
+    var ms = {}; m4.forEach(function(x){ ms[x] = true; });
+    if (Object.keys(ms).length !== 4) return null;
+    var n = 0; a4.forEach(function(x){ if (ms[x]) n++; });
+    return n;
+  }
+
+  function covBadge(cov){
+    if (cov == null) return '';
+    var cls = cov === 4 ? 'b4' : (cov === 3 ? 'b3' : '');
+    var txt = cov === 4 ? '全中 4/4' : ('4 中 ' + cov);
+    return '<span class="cov__badge ' + cls + '">' + txt + '</span>';
+  }
+
+  function renderCovBox(hr){
+    var cov = covOf(hr);
+    if (cov == null) return '';
+    var head = '<div class="cov__hd"><span class="cov__ttl">四揀覆蓋</span>' + covBadge(cov) + '</div>';
+    var bp = hr.boxPayouts || [];
+    if (!bp.length){
+      var note = (cov === 4 || cov === 3) ? '未有官方派彩資料（歷史賽事只顯示覆蓋）' : '四揀未中任何複式組合';
+      return '<div class="cov">' + head + '<div class="cov-note">' + esc(note) + '</div></div>';
+    }
+    var rows = bp.map(function(p){
+      var gain = p.net >= 0 ? ('賺 $' + Number(p.net).toLocaleString()) : ('蝕 $' + Number(-p.net).toLocaleString());
+      var cls = p.net >= 0 ? 'pos' : 'neg';
+      return '<div class="cov-boxrow"><span class="cov-boxnm">' + esc(p.name) + '</span>' +
+        '<span class="cov-boxstk">箱 ' + esc(p.units) + ' 注 $' + esc(p.cost) + '</span>' +
+        '<span class="cov-boxpay">派 $' + Number(p.dividend).toLocaleString() + '</span>' +
+        '<span class="cov-boxnet ' + cls + '">' + gain + '</span></div>';
+    }).join('');
+    return '<div class="cov">' + head + '<div class="cov-box">' + rows + '</div>' +
+      '<div class="cov-note">買中嗰 4 隻打複式，一注 $10 起，本小利大。</div></div>';
+  }
+
+  function renderCovSummary(hrRaces){
+    var el = document.getElementById('cov-summary');
+    if (!el) return;
+    var c4=0,c3=0,c2=0,eligible=0;
+    (hrRaces||[]).forEach(function(hr){ var c=covOf(hr); if(c==null) return; eligible++; if(c===4)c4++; else if(c===3)c3++; else if(c===2)c2++; });
+    if (!eligible){ el.style.display='none'; return; }
+    el.style.display='';
+    el.innerHTML =
+      '<span class="ct">模型四揀覆蓋</span><span class="k">唔分名次</span>' +
+      '<span class="cov-pill ok">全中 4/4 · <strong>' + c4 + '</strong> 場</span>' +
+      '<span class="cov-pill">4 中 3 · ' + c3 + ' 場</span>' +
+      '<span class="cov-pill">4 中 2 · ' + c2 + ' 場</span>' +
+      '<span class="cov-pill mut">合資格 ' + eligible + ' 場</span>';
+  }
+
+  // Coverage + box-bet payouts come from a single /hit-rate fetch per meeting.
+  // Coverage (4中N) is always derivable from predicted/actual top-4 (incl.
+  // historical); box payouts only present for trustworthy-dividend dates.
+  function loadCoverage(date, races){
+    if (!date || !TX_API.hitRate) return;
+    TX_API.hitRate(date).then(function(hr){
+      var hrRaces = (hr && hr.races) || [];
+      renderCovSummary(hrRaces);
+      var byNo = {};
+      hrRaces.forEach(function(r){ byNo[String(r.raceNumber)] = r; });
+      races.forEach(function(race){
+        var no = race.raceNumber || race.race_number;
+        var slot = document.getElementById('cov-r' + no);
+        if (!slot) return;
+        var hrr = byNo[String(no)];
+        slot.innerHTML = hrr ? renderCovBox(hrr) : '';
+      });
+    }).catch(function(){ /* no settled results / 404 — coverage simply absent */ });
   }
 
   function showErr(msg){
