@@ -530,7 +530,7 @@
     var head = '<div class="cov__hd"><span class="cov__ttl">四揀覆蓋</span>' + covBadge(cov) + '</div>';
     var bp = hr.boxPayouts || [];
     if (!bp.length){
-      var note = (cov === 4 || cov === 3) ? '未有官方派彩資料（歷史賽事只顯示覆蓋）' : '四揀未中任何複式組合';
+      var note = (cov === 4) ? '派彩資料暫未提供' : '四揀未中任何複式組合';
       return '<div class="cov">' + head + '<div class="cov-note">' + esc(note) + '</div></div>';
     }
     var rows = bp.map(function(p){
