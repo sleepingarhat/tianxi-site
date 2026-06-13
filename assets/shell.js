@@ -64,6 +64,8 @@
     'flow': 'predictor',
     'watchlist': 'predictor',
     'live': 'predictor',
+    'manual': 'engine',
+    'dev-log': 'engine',
     'login': null,
     '404': null,
     'home': null,
