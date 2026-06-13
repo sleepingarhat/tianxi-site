@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<script src="/assets/shell.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDFBF5">
+<title>天喜引擎說明書 · 天喜 TIANXI</title>
+<meta name="description" content="天喜 TX-Oracle 引擎完整說明書：數據自動化、爬取原理、模型架構、實驗結果、準確性，以及使用教學同答客問。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<script src="/assets/api.js"></script>
+<style>
+.mn-toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 20px 16px}
+.mn-toc a{font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--brown);background:var(--paper-2);border:1px solid var(--rule-2);border-radius:99px;padding:7px 13px;text-decoration:none;transition:border-color 120ms,background 120ms}
+.mn-toc a:hover{border-color:var(--gold-2);background:var(--gold-tint)}
+.card[id]{scroll-margin-top:70px}
+.mn-eyebrow{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;margin-bottom:4px}
+.mn-lead{font-size:13px;line-height:1.75;color:var(--ink-soft)}
+.mn-lead b{color:var(--ink)}
+.mn-p{font-size:13px;line-height:1.75;color:var(--ink-soft);margin-top:10px}
+.mn-p b{color:var(--ink)}
+.mn-dl{margin-top:10px}
+.mn-dl dt{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--ink);margin-top:14px;display:flex;align-items:center;gap:7px}
+.mn-dl dt:first-child{margin-top:0}
+.mn-dl dt::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--brown);display:inline-block;flex-shrink:0}
+.mn-dl dd{font-size:12.5px;line-height:1.7;color:var(--ink-mute);margin:5px 0 0 13px}
+.mn-dl dd b{color:var(--ink-soft)}
+.mn-ul{margin:8px 0 0;padding-left:18px}
+.mn-ul li{font-size:12.5px;line-height:1.7;color:var(--ink-mute);margin-bottom:6px}
+.mn-ul li b{color:var(--ink-soft)}
+.mn-formula{font-family:var(--font-mono);font-size:12px;color:var(--ink);background:var(--paper);padding:10px 12px;border-radius:8px;border:1px solid var(--rule-2);margin:10px 0;line-height:1.7;overflow-x:auto;white-space:nowrap}
+.mn-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.mn-tag{font-family:var(--font-mono);font-weight:600;font-size:10px;letter-spacing:0.04em;padding:3px 8px;border-radius:99px;border:1px solid var(--rule-2);color:var(--ink-mute)}
+.mn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.mn-stat{padding:12px;background:var(--paper-2);border:1px solid var(--rule);border-radius:10px}
+.mn-stat__val{font-family:var(--font-mono);font-weight:700;font-size:22px;color:var(--brown);line-height:1.1}
+.mn-stat__lbl{font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--ink);margin-top:5px}
+.mn-stat__sub{font-size:10px;color:var(--ink-mute);margin-top:2px;line-height:1.4}
+.mn-foot{margin-top:12px;font-size:11px;color:var(--ink-mute);line-height:1.6}
+.mn-note{font-size:11.5px;line-height:1.65;color:var(--ink-mute);background:var(--paper);border:1px dashed var(--rule-2);border-radius:8px;padding:10px 12px;margin-top:12px}
+.mn-note b{color:var(--ink-soft)}
+.mn-flow{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.mn-flow__step{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;background:var(--paper-2);border:1px solid var(--rule);border-radius:8px}
+.mn-flow__n{font-family:var(--font-mono);font-weight:700;font-size:12px;color:#3a2a08;background:linear-gradient(180deg,var(--gold-3),var(--gold-2));border-radius:99px;min-width:20px;height:20px;display:grid;place-items:center;flex-shrink:0;margin-top:1px}
+.mn-flow__t{font-size:12.5px;line-height:1.6;color:var(--ink-soft)}
+.mn-flow__t b{color:var(--ink)}
+.mn-fac__count{font-size:13px;color:var(--ink-soft);margin-bottom:12px;line-height:1.6}
+.mn-fac__count b{color:var(--brown)}
+.mn-fac__cat{margin-bottom:14px}
+.mn-fac__cat:last-child{margin-bottom:0}
+.mn-fac__cat h4{font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--brown);margin:0 0 7px;display:flex;align-items:center;gap:6px}
+.mn-fac__cat h4::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--brown);display:inline-block}
+.mn-fac__grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mn-fac__tile{padding:9px 11px;background:var(--paper-2);border:1px solid var(--rule);border-radius:8px}
+.mn-fac__name{font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--ink)}
+.mn-fac__desc{font-size:10px;color:var(--ink-mute);margin-top:3px;line-height:1.45}
+.mn-qa{border:1px solid var(--rule);border-radius:10px;background:var(--paper-2);margin-bottom:10px;overflow:hidden}
+.mn-qa:last-child{margin-bottom:0}
+.mn-qa summary{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--ink);padding:13px 14px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:9px;line-height:1.5}
+.mn-qa summary::-webkit-details-marker{display:none}
+.mn-qa summary::before{content:"問";font-family:var(--font-display);font-weight:700;font-size:11px;color:#3a2a08;background:linear-gradient(180deg,var(--gold-3),var(--gold-2));border-radius:6px;min-width:22px;height:22px;display:grid;place-items:center;flex-shrink:0}
+.mn-qa summary::after{content:"+";margin-left:auto;font-family:var(--font-mono);font-weight:700;font-size:16px;color:var(--ink-mute);transition:transform 160ms}
+.mn-qa[open] summary::after{transform:rotate(45deg)}
+.mn-qa__body{padding:0 14px 14px 45px;font-size:12.5px;line-height:1.75;color:var(--ink-mute)}
+.mn-qa__body b{color:var(--ink-soft)}
+.mn-cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.tx-empty{font-size:12px;color:var(--ink-mute);padding:8px 0;text-align:center}
+@media (max-width:380px){ .mn-grid,.mn-fac__grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body data-page="manual">
+<div class="shell">
+
+<header class="brandbar" data-tx-shell="brandbar"></header>
+
+<section class="page-head">
+  <h1><small>OWNER'S HANDBOOK</small>天喜引擎說明書</h1>
+  <p>由零開始，用廣東話講清楚天喜成套系統點運作：數據點嚟、點爬、爬得穩唔穩、引擎點計、用咩模型同理論、準唔準，到你逐個功能點用。透明可問責係天喜嘅底線。</p>
+</section>
+
+<nav class="mn-toc" aria-label="章節導覽">
+  <a href="#data">① 數據篇</a>
+  <a href="#tech">② 技術篇</a>
+  <a href="#ux">③ 使用篇</a>
+  <a href="#ama">④ 答客問</a>
+</nav>
+
+<!-- ================= ① 數據篇 ================= -->
+<div class="card" id="data">
+  <h2>① 數據篇 · 數據點嚟、點爬、穩唔穩</h2>
+  <p class="mn-eyebrow">DATA · AUTOMATION &amp; SOURCING</p>
+  <p class="mn-lead">冇好數據就冇好模型。天喜嘅數據由一套<b>全自動爬取系統</b>負責，每個賽馬日自動運行，由賽前排位到賽後賽果一條龍處理，全程毋須人手。</p>
+
+  <h3>自動化運作原理</h3>
+  <p class="mn-p">爬取系統行喺定時排程上（cron）＋事件觸發雙軌：</p>
+  <div class="mn-flow">
+    <div class="mn-flow__step"><span class="mn-flow__n">1</span><span class="mn-flow__t"><b>賽前</b>：排位公佈後，自動抓取每場排位表（馬匹、檔位、騎練、負磅）並寫入資料庫。</span></div>
+    <div class="mn-flow__step"><span class="mn-flow__n">2</span><span class="mn-flow__t"><b>觸發預測</b>：排位一入庫，<b>即時跨系統觸發</b>引擎重新訓練同預測，數據齊到幾個鐘就有覆蓋，唔使等到賽馬日朝早。</span></div>
+    <div class="mn-flow__step"><span class="mn-flow__n">3</span><span class="mn-flow__t"><b>賽後</b>：賽果一出，自動抓取名次、賠率、派彩、賽事評述（走位、受阻等）同血統資料。</span></div>
+    <div class="mn-flow__step"><span class="mn-flow__n">4</span><span class="mn-flow__t"><b>增量更新</b>：只寫入有變動嘅資料（delta），重複寫入會自動合併（idempotent），唔會整污糟資料庫。</span></div>
+  </div>
+
+  <h3>數據來源細節</h3>
+  <p class="mn-p">所有數據來自<b>香港賽馬會（HKJC）公開官方資料</b>，包括：</p>
+  <ul class="mn-ul">
+    <li><b>排位表</b>：出賽馬匹、檔位、騎師、練馬師、負磅、評分。</li>
+    <li><b>賽果同賠率</b>：名次、勝出賠率、各式派彩。</li>
+    <li><b>賽事評述（走位）</b>：每匹馬嘅跑法、受阻、走大疊、出閘等描述。</li>
+    <li><b>馬匹／騎師／練馬師檔案</b>：歷史往績、狀態。</li>
+    <li><b>血統資料</b>：父系（sire）、母父系（damsire）。</li>
+    <li><b>試閘記錄</b>同<b>臨場賠率快照</b>（用嚟做市場參考欄）。</li>
+  </ul>
+
+  <h3>數據涵蓋範圍</h3>
+  <ul class="mn-ul">
+    <li><b>時間</b>：2016 年 9 月至今，全部香港賽事。</li>
+    <li><b>規模</b>：8,000+ 場賽事、約 98,000 條出賽記錄，每個賽馬日自動增長。</li>
+    <li><b>場地</b>：只收<b>香港本地</b>賽事 —— 沙田（ST）同跑馬地（HV）。海外／模擬賽會自動過濾走，唔會污染模型。</li>
+  </ul>
+
+  <h3>數據爬取穩定性</h3>
+  <p class="mn-p">爬蟲最怕亂數據。天喜用<b>多層防護</b>確保入庫嘅都係乾淨、真實嘅資料：</p>
+  <ul class="mn-ul">
+    <li><b>幽靈場次防禦</b>：來源偶爾會吐出假場次（夾雜咗第二日嘅錯誤賽果），系統三層攔截（來源閘 / 顯示閘 / 守衛式清理）將佢擋喺出面。</li>
+    <li><b>海外賽過濾</b>：讀寫兩邊都只認 ST／HV，杜絕海外場次扮香港場。</li>
+    <li><b>自我修復</b>：抓取失敗會自動重試；定時 cron 同事件觸發互為備援，一邊甩底另一邊頂上。</li>
+    <li><b>賠率定時修剪</b>：每日自動清走過期賠率快照，控制資料庫體積。</li>
+  </ul>
+
+  <h3>爬取方法嘅原理同理論</h3>
+  <p class="mn-p">天喜唔係「一次過抄晒」，而係<b>增量式（incremental）</b>抓取：用內容指紋（hash）判斷邊啲資料先有變，只處理變咗嘅部分，慳資源又快。配合<b>定時排程＋事件驅動</b>，做到「數據一有就抓、抓完即用」。所有寫入都係<b>可重現（idempotent）</b>，即係話同一份資料跑幾多次結果都一樣，方便審計同回溯。</p>
+  <div class="mn-note"><b>透明原則：</b>本頁講解嘅係運作<b>原理</b>，唔會公開具體技術細節（程式碼、抓取端點），一嚟保障來源網站，二嚟避免被惡意濫用。但凡影響預測公正性嘅嘢，我哋都會喺<a href="/dev-log/" style="color:var(--brown);font-weight:700">開發者日誌</a>講清楚。</div>
+</div>
+
+<!-- ================= ② 技術篇 ================= -->
+<div class="card" id="tech">
+  <h2>② 技術篇 · 引擎點計、用咩模型</h2>
+  <p class="mn-eyebrow">ENGINE · MODELS &amp; ARCHITECTURE</p>
+  <p class="mn-lead">天喜引擎叫 <b>TX-Oracle v3</b>。佢唔係靠一個模型估，而係將<b>兩個獨立模型喺機率層融合</b>，再加因子修正，務求結果穩定又可解釋。</p>
+
+  <h3>採用嘅模型</h3>
+  <dl class="mn-dl">
+    <dt>LightGBM（lambdarank）</dt>
+    <dd>一種<b>學習排序（learning-to-rank）</b>嘅梯度提升樹模型。佢學嘅唔係「邊匹贏」，而係「同場馬之間嘅相對高低」，所以特別擅長捕捉複雜、非線性嘅關係，係場內排序嘅主力。訓練時用自訂嘅 per-race softmax logloss 評估，避免訓練過早飽和。</dd>
+    <dt>ELO ＋ 因子模型</dt>
+    <dd>類似國際象棋嘅 ELO 評分，量度<b>馬匹、騎師、練馬師</b>嘅長期實力，再加檔位、負磅等即場因子修正。穩陣、可解釋，係 LightGBM 嘅互補。</dd>
+  </dl>
+
+  <h3>運作原理同公式</h3>
+  <p class="mn-p">兩個模型各自輸出機率，喺機率層按權重 <b>α</b> 融合：</p>
+  <div class="mn-formula">finalScore = 1500 + ( α·lgb_z + (1−α)·elo_z + factor·0.5 ) × 100</div>
+  <div class="mn-formula">ELO 組合 = 0.7×馬匹ELO + 0.2×騎師ELO + 0.1×練馬師ELO + 檔位 + 負磅</div>
+  <p class="mn-p">混合權重 <b>α 由後台自動管理</b>：<b>每個賽馬日</b>系統會自我評估模型健康度（覆蓋率、訓練收斂、兩模型相關度等），健康就偏重 LightGBM（α 高），偵測到模型異常就自動退回純 ELO（α＝0）做安全網。全程<b>毋須人手</b>，呢個就係天喜嘅「自我修復混合閘門」。</p>
+
+  <h3>系統架構</h3>
+  <div class="mn-flow">
+    <div class="mn-flow__step"><span class="mn-flow__n">1</span><span class="mn-flow__t"><b>數據層</b>：自動爬取 → 清洗 → 資料庫（見數據篇）。</span></div>
+    <div class="mn-flow__step"><span class="mn-flow__n">2</span><span class="mn-flow__t"><b>特徵工程</b>：喺持續整合（CI）流程計算數十項因子，嚴格用「賽前可得（as-of）」資料，杜絕未來資訊洩漏（leakage）。</span></div>
+    <div class="mn-flow__step"><span class="mn-flow__n">3</span><span class="mn-flow__t"><b>訓練＋預測</b>：每個賽馬日自動用全歷史重新訓練模型，再預測當日每場。</span></div>
+    <div class="mn-flow__step"><span class="mn-flow__n">4</span><span class="mn-flow__t"><b>服務層</b>：預測結果經 API（Cloudflare Workers）送到前端網站，你而家睇緊嘅版就係。</span></div>
+  </div>
+
+  <h3>引擎分析嘅因子</h3>
+  <div id="mn-factors"><div class="tx-empty">因子載入中…</div></div>
+
+  <h3>實驗結果 · 我哋點驗證</h3>
+  <p class="mn-p">天喜對「加新因子」非常克制：每個新念頭都要做<b>嚴謹嘅向前驗證（walk-forward A/B）</b>，喺過千場歷史賽事上對比，唔止跑一次仲要換唔同設定再驗一次，<b>確認有提升先會出街</b>。</p>
+  <ul class="mn-ul">
+    <li><b>血統因子 ✓ 已採用</b>：父系／母父系往績（平滑目標編碼），實測提升頭馬同前三命中。</li>
+    <li><b>市場盤口融合 ✓ 已採用</b>：將市場賠率隱含機率同模型融合，回溯頭馬命中由 20% 升到 32%（即「市場穩陣」欄，見使用篇）。係目前最大嘅提升槓桿。</li>
+    <li><b>多項實驗 ✗ 誠實落選</b>：試閘、場內相對、頭盔／配件變動、分段速度（走位）、賽評受阻、體重變化、傷患停賽 —— 呢啲念頭睇落合理，但向前驗證後對命中率<b>無實質提升</b>，所以全部<b>唔採用</b>。我哋唔會因為個概念吸引就硬塞落模型。</li>
+  </ul>
+  <div class="mn-note"><b>誠實聲明：</b>「重要度高」唔等於「會提升命中」。好多因子模型覺得「重要」，但實測對排序毫無幫助 —— 天喜只信向前驗證嘅實測結果。</div>
+
+  <h3>準確性 · 過去 90 日實戰命中率</h3>
+  <p class="mn-p">公開、自動更新 · 純分析記錄，非投注回報 · <a href="/track-record/" style="color:var(--brown);font-weight:700">完整戰績 →</a></p>
+  <div id="mn-perf"><div class="tx-empty">命中率載入中…</div></div>
+</div>
+
+<!-- ================= ③ 使用篇 ================= -->
+<div class="card" id="ux">
+  <h2>③ 使用篇 · 每個功能點用</h2>
+  <p class="mn-eyebrow">HOW TO USE</p>
+  <p class="mn-lead">天喜分幾大功能，下面逐個講佢嘅作用：</p>
+  <dl class="mn-dl">
+    <dt>儀表板</dt><dd>你嘅主頁，集中睇最近賽事、預測同賽果對賬。</dd>
+    <dt>選馬</dt><dd>核心工具，逐場列出引擎嘅 Top picks、勝出機率同因子分解。詳見下面雙欄教學。</dd>
+    <dt>日程</dt><dd>未來賽馬日同每場時間表。</dd>
+    <dt>百科</dt><dd>馬匹資料庫：搜尋、ELO／勝場榜、當日出賽馬連篩選（大熱／中價／爆冷／評分）。</dd>
+    <dt>引擎</dt><dd>TX-Oracle v3 概覽：live 命中率、公式同因子。想睇深入版就係你而家睇緊呢本說明書。</dd>
+    <dt>聊天室</dt><dd>用戶交流區。</dd>
+    <dt>戰績</dt><dd>公開、自動更新嘅歷史命中率，杜絕「事後孔明」。</dd>
+  </dl>
+
+  <h3>選馬頁雙欄點睇</h3>
+  <p class="mn-p">選馬頁每場有<b>兩欄</b>，故意俾你對照，因為佢哋性格唔同：</p>
+  <dl class="mn-dl">
+    <dt>模型搏冷（左）</dt>
+    <dd>純 LightGBM 模型，<b>完全唔理賠率</b>，淨係睇實力同因子。佢嘅強項係捉<b>冷馬／爆冷</b>，但會搏，唔會次次穩。</dd>
+    <dt>市場穩陣（右）</dt>
+    <dd>喺模型之上<b>額外融合市場盤口</b>（賠率隱含機率，β≈0.4）。佢<b>偏熱門、較穩陣</b>，命中率較高，但本質上唔係捉冷馬。誠實咁講：兩欄各有用途。</dd>
+  </dl>
+  <div class="mn-note"><b>點解有時右欄寫「等臨場盤口」？</b>賠率要近開跑先穩定，所以早幾日預測時市場欄未必齊；到賽馬日臨場就會自動填上。</div>
+  <div class="mn-note" style="margin-top:8px"><b>點解有時係「ELO＋因子」而唔係 LightGBM？</b>LightGBM 覆蓋需要當日數據齊先計到。如果某場暫時未有 LightGBM 覆蓋，系統會自動退回穩陣嘅 ELO 預測 —— 你照樣有 picks 睇，只係嗰一刻未升級到集成版。每場頂部會標明緊用緊邊個模型，絕不扮嘢。</div>
+
+  <div class="mn-cta" style="margin-top:14px">
+    <a href="/predictor/" class="pill">去選馬工具 →</a>
+    <a href="/engine/" class="pill">引擎概覽 →</a>
+    <a href="/dev-log/" class="pill">開發者日誌 →</a>
+  </div>
+</div>
+
+<!-- ================= ④ 答客問 ================= -->
+<div class="card" id="ama">
+  <h2>④ 答客問 AMA</h2>
+  <p class="mn-eyebrow">ASK ME ANYTHING</p>
+  <p class="mn-lead" style="margin-bottom:14px">大家常問嘅問題喺度，<b>之後嘅提問都會陸續加入呢一頁</b>。</p>
+
+  <details class="mn-qa"><summary>天喜係咪「貼士佬」？</summary><div class="mn-qa__body">唔係。天喜係一套<b>可驗證、可問責</b>嘅數據引擎，唔靠估、唔靠內幕。所有預測由公開數據＋公開模型計出嚟，命中率亦公開喺戰績頁，任何人都查得到。</div></details>
+
+  <details class="mn-qa"><summary>點解唔保證一定贏？</summary><div class="mn-qa__body">賽馬本質有運氣成分，世上冇任何模型可以保證。天喜做嘅係<b>長期、穩定咁提升你嘅勝算同效率</b>，並且<b>誠實公開</b>真實命中率。我哋係分析平台，<b>唔提供投注服務</b>，過往表現亦唔代表將來。</div></details>
+
+  <details class="mn-qa"><summary>數據幾時更新？</summary><div class="mn-qa__body">全自動。排位公佈後賽前自動抓並即時觸發預測；賽果一出賽後自動抓名次、賠率同派彩。正常情況下，數據齊到幾個鐘內就有預測覆蓋。</div></details>
+
+  <details class="mn-qa"><summary>點解今日某場暫時無 LightGBM，淨係得 ELO？</summary><div class="mn-qa__body">通常係<b>時序問題</b>，唔係模型壞咗：當日排位數據啱啱先入庫，引擎重新訓練（要喺全歷史上跑）需要少少時間。期間你會見到穩陣嘅 ELO 預測，跑完就自動升級做集成版。</div></details>
+
+  <details class="mn-qa"><summary>「模型搏冷」同「市場穩陣」我應該信邊個？</summary><div class="mn-qa__body">睇你目標。想捉冷馬／爆冷睇<b>左欄（模型搏冷）</b>，佢唔理賠率；想穩陣、命中率高睇<b>右欄（市場穩陣）</b>，佢融合咗市場盤口但偏熱門。兩欄並列就係要你自己權衡。</div></details>
+
+  <details class="mn-qa"><summary>α 係咩嚟？點解會變？</summary><div class="mn-qa__body">α 係兩個模型嘅混合權重。系統每個賽馬日自我評估模型健康度自動調 α —— 健康就偏重 LightGBM，偵測到異常就退回純 ELO 做安全網。全自動，毋須人手。</div></details>
+
+  <details class="mn-qa"><summary>點解有啲「明明合理」嘅因子最後唔用？</summary><div class="mn-qa__body">因為實測唔 work。試閘、走位、賽評受阻、體重變化等念頭都試過，但喺過千場歷史嘅向前驗證後，對命中率無實質提升，所以唔採用。天喜寧願少而精，唔做花架子。</div></details>
+
+  <details class="mn-qa"><summary>邊度睇真實命中率？</summary><div class="mn-qa__body">去<a href="/track-record/" style="color:var(--brown);font-weight:700">戰績頁</a>，嗰度公開、自動更新，係歷史回溯統計，唔係事後砌出嚟嘅靚數。</div></details>
+
+  <details class="mn-qa"><summary>有新功能／重大更新點知？</summary><div class="mn-qa__body">睇<a href="/dev-log/" style="color:var(--brown);font-weight:700">開發者日誌</a>，每次重大更新都會列出日期、時間同細節。</div></details>
+
+  <details class="mn-qa"><summary>我想問問題／提建議？</summary><div class="mn-qa__body">歡迎去<a href="/lounge/" style="color:var(--brown);font-weight:700">聊天室</a>提出。有代表性嘅問題我哋會整理後加入呢一頁嘅答客問。</div></details>
+</div>
+
+<footer class="disclaimer">
+  <strong>天喜為分析平台，不提供投注服務。</strong><br>
+  所有命中率為歷史回溯統計，過往表現不代表將來結果。本頁數據僅供研究分析。<br>
+  Analysis platform · NO betting services · Data for research only
+</footer>
+
+<nav class="botnav" data-tx-shell="botnav"></nav>
+
+</div>
+
+<script>
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+TX_API.hitRateRollup(90).then(function(d){
+  var el = document.getElementById('mn-perf');
+  if (!d || !d.racesEvaluated) { el.innerHTML = '<div class="tx-empty">命中率資料整備中</div>'; return; }
+  function pct(n){ return (n == null ? '—' : (Math.round(n*10)/10) + '%'); }
+  function cov(n){ return (n == null ? '—' : (Math.round(n*100)/100) + ' / 4'); }
+  var stats = [
+    ['頭馬命中',  pct(d.top1HitRate),     '首選 = 冠軍'],
+    ['前三任一',  pct(d.top3AnyHitRate),  '三揀中至少一匹跑入前三'],
+    ['位置 Q',    pct(d.qpHitRate),       '頭兩揀跑入前三'],
+    ['連贏',      pct(d.quinellaHitRate), '頭兩揀 = 頭兩名'],
+    ['單T',      pct(d.trioHitRate),     '揀三匹跑入前三名（任序）'],
+    ['頭四覆蓋',  cov(d.top4AvgIntersect),'平均命中實際前四嘅匹數']
+  ];
+  el.innerHTML = '<div class="mn-grid">' + stats.map(function(s){
+    return '<div class="mn-stat"><div class="mn-stat__val">' + s[1] + '</div><div class="mn-stat__lbl">' + esc(s[0]) + '</div><div class="mn-stat__sub">' + esc(s[2]) + '</div></div>';
+  }).join('') + '</div>'
+    + '<div class="mn-foot">統計窗口 ' + esc(d.from) + ' 至 ' + esc(d.to) + ' · ' + d.meetingsEvaluated + ' 場賽事 · ' + d.racesEvaluated + ' 場次評估</div>';
+}).catch(function(){
+  document.getElementById('mn-perf').innerHTML = '<div class="tx-empty">命中率資料載入失敗</div>';
+});
+
+TX_API.factors().then(function(d){
+  var el = document.getElementById('mn-factors');
+  var cats = (d && d.factors) || [];
+  if (!cats.length) { el.innerHTML = '<div class="tx-empty">因子資料整備中</div>'; return; }
+  var n = cats.reduce(function(a, c){ return a + ((c.items || []).length); }, 0);
+  el.innerHTML = '<div class="mn-fac__count">引擎逐場分析 <b>' + n + '</b> 項因子，橫跨 ' + cats.length + ' 大範疇：</div>'
+    + cats.map(function(c){
+        return '<div class="mn-fac__cat"><h4>' + esc(c.category) + '</h4><div class="mn-fac__grid">'
+          + (c.items || []).map(function(it){
+              return '<div class="mn-fac__tile"><div class="mn-fac__name">' + esc(it.name) + '</div><div class="mn-fac__desc">' + esc(it.description) + '</div></div>';
+            }).join('')
+          + '</div></div>';
+      }).join('');
+}).catch(function(){
+  document.getElementById('mn-factors').innerHTML = '<div class="tx-empty">因子資料載入失敗</div>';
+});
+</script>
+
+</body>
+</html>
