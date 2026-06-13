@@ -403,7 +403,7 @@
       var slot = $('sched-slot');
       var timed = races.filter(function(r){ return TX_API.cleanTime(r.startTime || r.start_time); });
       if (!timed.length){
-        slot.innerHTML = '<p class="sched-empty">此賽馬日臨場前未有開跑時間，racecard 確定後自動更新。</p>';
+        slot.innerHTML = '<p class="sched-empty">此賽馬日臨場前未有開跑時間，開跑時間公佈後自動更新。</p>';
         return null;
       }
       var now = new Date(), nextLocked = false;
