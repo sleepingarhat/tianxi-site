@@ -398,9 +398,11 @@
     var date = cur.date, venue = cur.venueName || VENUE_NAME[cur.venue] || '';
     return TX_API.meeting(date).then(function(m){
       var races = (m && m.races) || [];
-      $('sched-head').innerHTML = (TX_API.fmtMeetingDate ? TX_API.fmtMeetingDate(date) : date) + (venue ? ' · ' + esc(venue) : '') + ' · ' + races.length + ' 場';
+      var count = (m && m.totalRaces) || races.length;
+      $('sched-head').innerHTML = (TX_API.fmtMeetingDate ? TX_API.fmtMeetingDate(date) : date) + (venue ? ' · ' + esc(venue) : '') + ' · ' + count + ' 場';
       var slot = $('sched-slot');
-      if (!races.length){
+      var timed = races.filter(function(r){ return TX_API.cleanTime(r.startTime || r.start_time); });
+      if (!timed.length){
         slot.innerHTML = '<p class="sched-empty">此賽馬日臨場前未有開跑時間，racecard 確定後自動更新。</p>';
         return null;
       }
