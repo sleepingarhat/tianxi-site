@@ -353,7 +353,7 @@
   }
 
   function renderCmp(race, tp){
-    var picks = ((tp && tp.picks) || []).slice().sort(byRankP).slice(0, 3);
+    var picks = ((tp && tp.picks) || []).slice().sort(byRankP).slice(0, 4);
     if (!picks.length) return '<div class="cmp cmp--na">此場暫無模型預測</div>';
     var isLgb = predIsLgb(tp);
     var p1fp = finishOf(picks[0], race);
