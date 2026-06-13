@@ -70,6 +70,15 @@
 .mn-qa__body b{color:var(--ink-soft)}
 .mn-cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 .tx-empty{font-size:12px;color:var(--ink-mute);padding:8px 0;text-align:center}
+.mn-cov{margin:14px 0 4px;padding:14px;border:1px solid var(--gold-2);border-radius:12px;background:var(--gold-tint)}
+.mn-cov__head{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--ink);margin-bottom:6px}
+.mn-cov__live{font-family:var(--font-mono);font-weight:700;font-size:9.5px;letter-spacing:.08em;color:var(--brown);background:var(--paper);border:1px solid var(--gold-2);border-radius:99px;padding:2px 8px;display:inline-flex;align-items:center;gap:5px}
+.mn-cov__live::before{content:"";width:6px;height:6px;border-radius:99px;background:var(--gold);display:inline-block;animation:mncovpulse 1.6s ease-in-out infinite}
+@keyframes mncovpulse{0%,100%{opacity:.3}50%{opacity:1}}
+.mn-cov__sub{font-size:11.5px;color:var(--ink-mute);margin:0 0 10px;line-height:1.5}
+.mn-cov__sub b{color:var(--ink-soft)}
+.mn-cov__foot{font-size:10.5px;color:var(--ink-mute);margin-top:10px;line-height:1.5}
+.mn-cov__foot b{color:var(--ink-soft);font-family:var(--font-mono)}
 @media (max-width:380px){ .mn-grid,.mn-fac__grid{grid-template-columns:1fr} }
 </style>
 </head>
@@ -95,6 +104,8 @@
   <h2>① 數據篇 · 數據點嚟、點爬、穩唔穩</h2>
   <p class="mn-eyebrow">DATA · AUTOMATION &amp; SOURCING</p>
   <p class="mn-lead">冇好數據就冇好模型。天喜嘅數據由一套<b>全自動爬取系統</b>負責，每個賽馬日自動運行，由賽前排位到賽後賽果一條龍處理，全程毋須人手。</p>
+
+  <div id="mn-cov" class="mn-cov"><div class="tx-empty">即時覆蓋率載入中…</div></div>
 
   <h3>自動化運作原理</h3>
   <p class="mn-p">爬取系統行喺定時排程上（cron）＋事件觸發雙軌：</p>
@@ -275,6 +286,27 @@ TX_API.hitRateRollup(90).then(function(d){
 }).catch(function(){
   document.getElementById('mn-perf').innerHTML = '<div class="tx-empty">命中率資料載入失敗</div>';
 });
+
+TX_API.todayPicks().then(function(d){
+  var el = document.getElementById('mn-cov'); if(!el) return;
+  if(!d || !d.races || !d.races.length){ el.style.display='none'; return; }
+  var declared=0, covered=0;
+  d.races.forEach(function(r){ var p=r.picks||[]; declared+=p.length; covered+=p.filter(function(x){ return x.lgbScore!=null || x.pWin!=null; }).length; });
+  if(!declared){ el.style.display='none'; return; }
+  var pct = Math.min(100, Math.round(covered/declared*100));
+  var vn = d.venue==='ST'?'沙田':d.venue==='HV'?'跑馬地':(d.venue||'');
+  function wd(iso){ if(!iso) return ''; var p=iso.split('-'); var dt=new Date(Date.UTC(+p[0],+p[1]-1,+p[2])); return '星期'+'日一二三四五六'.charAt(dt.getUTCDay()); }
+  function hkt(iso){ if(!iso) return ''; var t=new Date(iso); if(isNaN(t.getTime())) return ''; var h=new Date(t.getTime()+8*3600000); function z(n){return (n<10?'0':'')+n;} return z(h.getUTCHours())+':'+z(h.getUTCMinutes()); }
+  var upd = hkt(d.generatedAt || d.cachedGeneratedAt);
+  el.innerHTML =
+    '<div class="mn-cov__head">即時數據覆蓋 <span class="mn-cov__live">LIVE</span></div>'
+    + '<div class="mn-cov__sub">本期賽馬日 <b>' + esc(d.date) + ' ' + wd(d.date) + '</b> · ' + esc(vn) + '</div>'
+    + '<div class="mn-grid">'
+    +   '<div class="mn-stat"><div class="mn-stat__val">' + pct + '%</div><div class="mn-stat__lbl">LGB 模型覆蓋</div><div class="mn-stat__sub">已覆蓋 ' + covered + ' / ' + declared + ' 匹出賽馬</div></div>'
+    +   '<div class="mn-stat"><div class="mn-stat__val">' + d.races.length + ' 場</div><div class="mn-stat__lbl">本期場次</div><div class="mn-stat__sub">共 ' + declared + ' 匹出賽</div></div>'
+    + '</div>'
+    + '<div class="mn-cov__foot">模型版本 <b>' + esc(d.lgbModelVersion || '—') + '</b>' + (upd ? ' · 更新於 ' + upd + ' HKT' : '') + ' · 數據每個賽馬日自動更新</div>';
+}).catch(function(){ var el=document.getElementById('mn-cov'); if(el) el.style.display='none'; });
 
 TX_API.factors().then(function(d){
   var el = document.getElementById('mn-factors');
