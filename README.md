@@ -1,19 +1,19 @@
 # 天喜前端 · tianxi-site
 
-Cloudflare Pages 純靜態前端，HKJC 3 層賽馬導航。**唯一用途係生成買馬報告**——所有頁面都係讀後端 TX-Oracle v3 引擎嘅 production output。
+Cloudflare Pages 純靜態前端，HKJC 3 層賽馬導航。**唯一用途係生成買馬報告**——所有頁面都係讀後端 TX-Oracle v3.2 引擎嘅 production output。
 
 ## 技術棧
 
 - **100% Vanilla HTML/CSS/JS** — 無 build step，無框架
-- **部署**：Cloudflare Pages（auto-deploy on push）
-- **Backend API**：`https://tianxi-backend.tianxi-entertainment.workers.dev`
+- **部署**：Cloudflare Pages，經 tianxi-database `deploy_site.yml` 觸發（每賽日 results 落 D1 後 workflow_run 自動部署 + 可手動 dispatch）
+- **Backend API**（canonical）：`https://tianxi.racing/api/*`（Worker direct：`tianxi-backend.tianxi-entertainment.workers.dev`，debug 用）
 
 ## 生態系統
 
 | Repo | 角色 |
 |------|------|
 | **tianxi-database**（public） | 數據爬取 · CSV · GHA 調度 |
-| **tianxi-backend**（private） | D1 API + TX-Oracle v3 (LightGBM + ELO 概率 blend, α=0.62) |
+| **tianxi-backend**（public） | D1 API + TX-Oracle v3.2 (LightGBM + ELO 概率 blend, α=0.88 auto-gate 自癒) |
 | **tianxi-site**（本 repo · public） | CF Pages 前端（report UI） |
 
 ---
@@ -25,28 +25,29 @@ Cloudflare Pages 純靜態前端，HKJC 3 層賽馬導航。**唯一用途係生
 | 賽馬日入口 | `/` | 今日/下一場次列表 | `meetings` · `meeting` |
 | 排位表 | `/race/?raceId=` | 場次馬匹清單 + Top picks | `raceEntries` · `topPicks` |
 | 馬匹詳情 | `/horse/?id=` | 馬匹 KV + 預測 explainer | `horseDetail` · `explain` |
-| 賽果 | `/results/?date=` | 已結算成績 + 派彩 | `meetings` · `meeting` |
+| 賽果 | `/results/?date=` | 已結算成績 + 派彩 + top-4 模型揀馬 | `meetings` · `meeting` |
 | 日程 | `/schedule/` | 月曆 + 月份賽馬日索引 | `meetings` · `meeting` |
 | 我的儀表板 | `/dashboard/` | 個人化 next-meeting overview | `smartCurrent` · `meeting` |
-| 選馬工具 | `/predictor/` | 因子權重探索（**唔係**生產公式） | `factors` · `analyze` |
+| 選馬工具 | `/predictor/` | 雙欄揀馬：模型搏冷 + 市場穩陣（市場 blend）+ 17 因子 what-if 探索 | `factors` · `analyze` · `topPicks` |
 | 彩池賠率 | `/pool-odds/` | 賠率快照 | `raceEntries` |
 | 百科 | `/encyclopedia/` | 馬匹資料庫 · 搜尋 · Elo/勝場榜 · 今日出賽篩選 | `horseSearch` · `meeting` · `leaderboard` |
-| 引擎 | `/engine/` | 預測引擎 TX-Oracle v3 詳解 · 實戰命中率 · 因子 | `hitRateRollup` · `factors` |
+| 引擎 | `/engine/` | 預測引擎 TX-Oracle v3.2 詳解 · 實戰命中率 · 因子 | `hitRateRollup` · `factors` |
 | 聊天室 | `/lounge/` | 全局單一聊天室 | `lounge.chat` |
 | 登入 | `/login/` | Anon identity | — |
 
 ---
 
-## TX-Oracle v3 喺前端嘅顯示位
+## TX-Oracle v3.2 喺前端嘅顯示位
 
-- **`/race/`** — Top picks 表，每匹顯示 `finalScore`、`pWin`、score breakdown
+- **`/race/`** — Top picks 表，每匹顯示 `finalScore`、`pWin`、score breakdown、**開跑時間**
 - **`/horse/`** — 個別馬匹卡 + score breakdown（顯示 LightGBM 分 + ELO 因子）
-- **`/engine/`** — 「TX-Oracle v3」引擎詳解頁：
-  - 公式：`finalScore = 1500 + (α·lgb_z + (1−α)·elo_z + factor·0.5) · 100`
+- **`/results/`** — 已結算場次 + **top-4 模型揀馬**
+- **`/engine/`** — 「TX-Oracle v3.2」引擎詳解頁：
+  - 公式：`finalScore = 1500 + (α·lgb_z + (1−α)·elo_z + factor·0.5) · 100`（nominal α=0.88，auto-gate 自癒）
   - ELO 組合：`0.7×馬匹ELO + 0.2×騎師ELO + 0.1×練馬師ELO + 檔位 + 負磅`
-- **`/predictor/`** — 探索工具，可調 17 個因子權重做 what-if 分析，唔影響生產
+- **`/predictor/`** — 雙欄揀馬：**模型搏冷**（純模型，捉冷）+ **市場穩陣**（LOG-blend β=0.4 市場 implied prob，偏熱門參考，唔影響生產 finalScore）；另有 17 因子 what-if 探索工具
 
-> Predictor 嘅 17 個因子（檔位、場地、節奏、近績、血統、晨操、騎練、配備、賠率…）係**探索工具**，用 `POST /api/analyze` runtime 計分；生產 `/api/analyze/top-picks` 直接行 TX-Oracle v3。
+> Predictor 嘅 17 個因子（檔位、場地、節奏、近績、血統、晨操、騎練、配備、賠率…）係**探索工具**，用 `POST /api/analyze` runtime 計分；生產 `/api/analyze/top-picks` 直接行 TX-Oracle v3.2。
 
 ---
 
@@ -63,6 +64,6 @@ TX_API.meetings('?limit=20')       // 場次列表
 TX_API.meeting(date)               // 場次詳情
 TX_API.raceEntries(raceId)         // 排位 + 馬匹列表
 TX_API.horseDetail(id)             // 馬匹卡
-TX_API.topPicks(raceId)            // TX-Oracle v3 預測 ⭐ production
+TX_API.topPicks(raceId)            // TX-Oracle v3.2 預測 ⭐ production
 TX_API.explain(raceId, horseId)    // 因子分解 + 解釋
 ```
