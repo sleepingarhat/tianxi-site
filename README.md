@@ -32,7 +32,7 @@ Cloudflare Pages 純靜態前端，HKJC 3 層賽馬導航。**唯一用途係生
 | 彩池賠率 | `/pool-odds/` | 賠率快照 | `raceEntries` |
 | 百科 | `/encyclopedia/` | 馬匹資料庫 · 搜尋 · Elo/勝場榜 · 今日出賽篩選 | `horseSearch` · `meeting` · `leaderboard` |
 | 引擎 | `/engine/` | 預測引擎 TX-Oracle v3.2 詳解 · 實戰命中率 · 因子 | `hitRateRollup` · `factors` |
-| 聊天室 | `/lounge/` | 全局單一聊天室 | `lounge.chat` |
+| 六合彩 | `/marksix/` | 上期攪珠結果 · 號碼冷熱統計 · 聰明組合 | 靜態 JSON（GitHub raw） |
 | 登入 | `/login/` | Anon identity | — |
 
 ---

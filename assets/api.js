@@ -103,16 +103,6 @@
     factors:  function(){ return j('/api/analyze/factors'); },
     explain:  function(raceId, horseId){ return j('/api/analyze/explain?raceId=' + encodeURIComponent(raceId) + '&horseId=' + encodeURIComponent(horseId)); },
     hitRateRollup: function(days){ return j('/api/analyze/hit-rate-rollup?days=' + (days||90)); },
-    // lounge — single global chatroom
-    lounge: {
-      chat: function(since, lim){
-        var qs = [];
-        if (since) qs.push('since=' + encodeURIComponent(since));
-        if (lim)   qs.push('limit=' + lim);
-        return j('/api/lounge/chat' + (qs.length ? '?' + qs.join('&') : ''));
-      },
-      send: function(b){ return jp('/api/lounge/chat', b); },
-    },
     // shared helpers
     cleanTime: cleanTime,
     countdown: countdown,

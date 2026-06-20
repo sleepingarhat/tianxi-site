@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<script src="/assets/shell.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDFBF5">
+<title>六合彩 · 天喜 TIANXI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<style>
+/* ===== Mark Six page ===== */
+.m6-sec{padding:0 16px;margin-top:18px}
+.m6-h2{font-family:var(--font-display);font-weight:900;font-size:16px;color:var(--ink);margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.m6-h2 small{font-family:var(--font-mono);font-weight:500;font-size:10px;color:var(--ink-mute);letter-spacing:.08em}
+.m6-note{font-size:11px;color:var(--ink-mute);line-height:1.6}
+.m6-state{padding:24px 16px;text-align:center;color:var(--ink-mute);font-size:13px}
+.m6-state.err{color:var(--red)}
+
+/* ----- official lottery balls (vector / resolution-independent) ----- */
+.m6-ball{position:relative;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;
+  font-family:var(--font-mono);font-weight:700;color:#fff;line-height:1;flex-shrink:0;
+  text-shadow:0 1px 2px rgba(0,0,0,.4);
+  box-shadow:inset 0 -3px 6px rgba(0,0,0,.30), inset 0 3px 7px rgba(255,255,255,.40), 0 2px 4px rgba(0,0,0,.22)}
+.m6-ball::after{content:"";position:absolute;top:13%;left:17%;width:40%;height:32%;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.92),rgba(255,255,255,0) 72%);pointer-events:none}
+.m6-ball.red{background:radial-gradient(circle at 36% 30%,#ff7064,#e10e2a 56%,#a3081e)}
+.m6-ball.blue{background:radial-gradient(circle at 36% 30%,#5aa6ee,#0a5fbf 56%,#063c7c)}
+.m6-ball.green{background:radial-gradient(circle at 36% 30%,#5fd081,#08923b 56%,#055f29)}
+.m6-ball.special{outline:2.5px solid var(--gold);outline-offset:2px}
+.m6-ball--lg{width:clamp(42px,11.5vw,56px);height:clamp(42px,11.5vw,56px);font-size:clamp(18px,4.8vw,24px)}
+.m6-ball--md{width:36px;height:36px;font-size:15px}
+.m6-ball--sm{width:30px;height:30px;font-size:13px}
+
+/* ----- section 1: latest result ----- */
+.m6-result{padding:16px;margin:0 16px}
+.m6-rhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;margin-bottom:14px}
+.m6-rhead .draw{font-family:var(--font-display);font-weight:900;font-size:22px;color:var(--ink)}
+.m6-rhead .date{font-size:12px;color:var(--ink-mute)}
+.m6-snow{font-size:11px;font-weight:700;color:var(--gold-3);background:var(--ink);padding:2px 9px;border-radius:999px}
+.m6-balls{display:flex;align-items:center;gap:clamp(5px,1.8vw,10px);flex-wrap:wrap;padding:6px 0 4px}
+.m6-plus{font-family:var(--font-display);font-weight:700;font-size:20px;color:var(--ink-mute);margin:0 1px}
+.m6-balls-cap{font-size:10px;color:var(--ink-faint);margin:6px 0 14px}
+.m6-prize{width:100%;border-collapse:collapse;margin-top:4px}
+.m6-prize th,.m6-prize td{padding:7px 8px;font-size:12px;border-bottom:1px solid var(--rule);text-align:right}
+.m6-prize th{font-size:10px;color:var(--ink-mute);font-weight:600;border-bottom:1px solid var(--rule-2)}
+.m6-prize td:first-child,.m6-prize th:first-child{text-align:left;font-weight:700;color:var(--ink)}
+.m6-prize .amt{font-family:var(--font-mono);font-weight:700;color:var(--green-2)}
+.m6-prize .units{font-family:var(--font-mono);color:var(--ink-soft)}
+.m6-prize tr.t1 td{background:var(--gold-tint)}
+.m6-rfoot{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.m6-stat{background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r-md);padding:10px 12px}
+.m6-stat .k{font-size:10px;color:var(--ink-mute);margin-bottom:3px}
+.m6-stat .v{font-family:var(--font-mono);font-weight:700;font-size:15px;color:var(--ink)}
+.m6-stat .v small{font-family:var(--font-body);font-weight:400;font-size:10px;color:var(--ink-mute)}
+
+/* ----- segmented controls ----- */
+.m6-seg{display:flex;gap:2px;background:var(--paper-3);border-radius:var(--r-md);padding:3px;flex-wrap:wrap}
+.m6-seg button{flex:1;min-width:54px;padding:7px 8px;font-size:12px;font-weight:600;color:var(--ink-mute);border-radius:6px;white-space:nowrap;transition:.12s}
+.m6-seg button.active{background:var(--ink);color:var(--gold-3)}
+
+/* ----- section 2: number stats ----- */
+.m6-controls{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.m6-numgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:7px}
+.m6-cell{position:relative;border:1px solid var(--rule);border-radius:var(--r-md);padding:8px 5px 6px;text-align:center;background:var(--paper);overflow:hidden}
+.m6-cell .heat{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
+.m6-cell .m6-ball{margin:0 auto 5px}
+.m6-cell .row{display:flex;justify-content:space-between;font-size:9px;color:var(--ink-mute);padding:1px 3px;line-height:1.5}
+.m6-cell .row b{font-family:var(--font-mono);font-weight:700;color:var(--ink)}
+.m6-cell .row b.due{color:var(--red)}
+.m6-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:10px;color:var(--ink-mute);margin-bottom:10px}
+.m6-legend b{color:var(--ink)}
+
+/* ----- section 3: combos ----- */
+.m6-combo{padding:16px;margin:0 16px}
+.m6-pool{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:6px;margin:8px 0 4px}
+.m6-pick{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:50%;
+  font-family:var(--font-mono);font-weight:700;font-size:14px;border:1.5px solid var(--rule-2);color:var(--ink-soft);
+  background:var(--paper);transition:.1s;user-select:none}
+.m6-pick.on{color:#fff;border-color:transparent}
+.m6-pick.on.red{background:radial-gradient(circle at 36% 30%,#ff7064,#e10e2a 56%,#a3081e)}
+.m6-pick.on.blue{background:radial-gradient(circle at 36% 30%,#5aa6ee,#0a5fbf 56%,#063c7c)}
+.m6-pick.on.green{background:radial-gradient(circle at 36% 30%,#5fd081,#08923b 56%,#055f29)}
+.m6-field{margin:14px 0 0}
+.m6-field>label{display:block;font-size:11px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.m6-poolbtns{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 2px}
+.m6-poolbtns button{font-size:11px;font-weight:600;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px}
+.m6-poolbtns button:active{transform:scale(.96)}
+.m6-gen{width:100%;margin-top:16px;padding:13px;font-family:var(--font-display);font-weight:900;font-size:15px;
+  color:var(--gold-3);background:var(--ink);border-radius:var(--r-md);box-shadow:var(--sh-sm)}
+.m6-gen[disabled]{opacity:.45}
+.m6-cost{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--ink-mute);margin-top:10px}
+.m6-cost b{font-family:var(--font-mono);color:var(--ink);font-size:13px}
+.m6-warn{font-size:11px;color:var(--red);background:var(--red-2);border-radius:var(--r-sm);padding:7px 10px;margin-top:10px;display:none}
+.m6-warn.show{display:block}
+.m6-results{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.m6-summary{font-size:12px;color:var(--ink-soft);padding:8px 0;border-bottom:1px solid var(--rule);line-height:1.6}
+.m6-summary b{font-family:var(--font-mono);color:var(--ink)}
+.m6-ticket{border:1px solid var(--rule);border-radius:var(--r-md);padding:10px;background:var(--paper)}
+.m6-ticket .tballs{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.m6-ticket .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;font-size:10px}
+.m6-ticket .meta .chip{background:var(--paper-2);border:1px solid var(--rule);border-radius:999px;padding:2px 8px;color:var(--ink-mute)}
+.m6-ticket .meta .chip b{color:var(--ink);font-family:var(--font-mono)}
+.m6-ticket .meta .cost{margin-left:auto;font-family:var(--font-mono);font-weight:700;color:var(--green-2)}
+</style>
+</head>
+<body data-page="marksix">
+<div class="shell">
+
+<header class="brandbar" data-tx-shell="brandbar"></header>
+
+<div class="ticker" id="m6-ticker">六合彩 · 載入最新攪珠結果…</div>
+
+<section class="page-head">
+  <h1><small>MARK SIX</small>六合彩</h1>
+  <p>上期攪珠結果 · 號碼冷熱統計 · 聰明組合生成器。<br><span class="pill pill--gold">資訊展示 · 非投注介面</span></p>
+</section>
+
+<!-- ===== Section 1 · latest result ===== -->
+<section class="card m6-result" id="m6-result">
+  <div class="m6-state" id="m6-result-state">載入中…</div>
+</section>
+
+<!-- ===== Section 2 · number stats ===== -->
+<section class="m6-sec">
+  <h2 class="m6-h2">號碼統計 <small>NUMBER FREQUENCY</small></h2>
+  <div class="m6-controls">
+    <div class="m6-seg" id="m6-periods" role="tablist"></div>
+    <div class="m6-seg" id="m6-sort" role="tablist"></div>
+  </div>
+  <div class="m6-legend">
+    <span><b>開</b> 開出次數（所選期內）</span>
+    <span><b>遺</b> 距今未開（全期數據）</span>
+    <span><b>期最</b> 期內最大遺漏</span>
+  </div>
+  <div class="m6-numgrid" id="m6-numgrid"><div class="m6-state">載入中…</div></div>
+</section>
+
+<!-- ===== Section 3 · smart combos ===== -->
+<section class="m6-sec">
+  <h2 class="m6-h2">聰明組合 <small>COMBO GENERATOR</small></h2>
+  <div class="card m6-combo">
+
+    <div class="m6-field">
+      <label>① 揀號碼池（6–49 個）<span id="m6-poolcount" style="color:var(--ink-mute);font-weight:400"></span></label>
+      <div class="m6-poolbtns">
+        <button type="button" data-fill="clear">清除</button>
+        <button type="button" data-fill="all">全 49</button>
+        <button type="button" data-fill="hot">＋熱門 6</button>
+        <button type="button" data-fill="cold">＋遺漏 6</button>
+        <button type="button" data-fill="last">＋上期 6</button>
+      </div>
+      <div class="m6-pool" id="m6-pool"></div>
+    </div>
+
+    <div class="m6-field">
+      <label>② 每組幾多個號碼（k）</label>
+      <div class="m6-seg" id="m6-k"></div>
+    </div>
+
+    <div class="m6-field">
+      <label>③ 生成模式</label>
+      <div class="m6-seg" id="m6-mode"></div>
+      <p class="m6-note" id="m6-modenote" style="margin-top:7px"></p>
+    </div>
+
+    <div class="m6-field" id="m6-tcount-field">
+      <label>④ 智能精選注數</label>
+      <div class="m6-seg" id="m6-tcount"></div>
+    </div>
+
+    <div class="m6-cost">
+      <span id="m6-costinfo">—</span>
+    </div>
+    <div class="m6-warn" id="m6-warn"></div>
+
+    <button type="button" class="m6-gen" id="m6-gen">生成組合</button>
+
+    <div class="m6-results" id="m6-results"></div>
+  </div>
+</section>
+
+<footer class="disclaimer">
+  <strong>天喜為分析平台，不提供投注服務。</strong><br>
+  投注請透過合法渠道（HKJC）進行。六合彩數據僅供研究分析，過往攪珠結果不代表將來。<br>
+  Analysis platform · NO betting services · Data for research only
+</footer>
+
+<nav class="botnav" data-tx-shell="botnav"></nav>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var RAW = 'https://raw.githubusercontent.com/sleepingarhat/hk-mark-six-2002-now/main/data/';
+  var LATEST_URL = RAW + 'latest.json';
+  var HISTORY_URL = RAW + 'mark-six.json';
+
+  // ---- official HKJC colour groups ----
+  var RED = new Set([1,2,7,8,12,13,18,19,23,24,29,30,34,35,40,45,46]);
+  var BLUE = new Set([3,4,9,10,14,15,20,25,26,31,36,37,41,42,47,48]);
+  function grp(n){ return RED.has(n) ? 'red' : BLUE.has(n) ? 'blue' : 'green'; }
+  function ball(n, size, special){
+    return '<span class="m6-ball m6-ball--' + (size||'md') + ' ' + grp(n) + (special?' special':'') + '">' + n + '</span>';
+  }
+  var TIER = {1:'頭獎',2:'二獎',3:'三獎',4:'四獎',5:'五獎',6:'六獎',7:'七獎'};
+  var WD = ['日','一','二','三','四','五','六'];
+  function money(v){ if(v==null||v==='') return '—'; var n=Number(v); return isNaN(n)?String(v):'$'+n.toLocaleString('en-US'); }
+  function num(v){ var n=Number(v); return isNaN(n)?String(v):n.toLocaleString('en-US'); }
+  function cnDate(iso){
+    if(!iso) return '';
+    var m = iso.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if(!m) return iso;
+    var d = new Date(Date.UTC(+m[1], +m[2]-1, +m[3]));   // TZ-safe weekday
+    return +m[1] + '年' + (+m[2]) + '月' + (+m[3]) + '日（' + WD[d.getUTCDay()] + '）';
+  }
+  function choose(n,k){ if(k<0||k>n) return 0; k=Math.min(k,n-k); var r=1; for(var i=0;i<k;i++){ r=r*(n-i)/(i+1); } return Math.round(r); }
+
+  // ---- combination iterator (lazy) ----
+  function eachCombo(arr,k,cb){
+    var n=arr.length; if(k>n||k<1) return;
+    var idx=[]; for(var i=0;i<k;i++) idx.push(i);
+    while(true){
+      if(cb(idx.map(function(i){return arr[i];}))===false) return;
+      var j=k-1; while(j>=0 && idx[j]===j+n-k) j--;
+      if(j<0) return;
+      idx[j]++; for(var t=j+1;t<k;t++) idx[t]=idx[t-1]+1;
+    }
+  }
+  function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+
+  // ================= state =================
+  var HISTORY=[], LATEST=null, UNIT=10, LATEST_YEAR='';
+  var STATS=null, PERIOD='100', SORT='num';
+  var POOL=new Set(), K=7, MODE='smart', TCOUNT=5;
+
+  // ================= section 1 =================
+  function renderResult(){
+    var el=document.getElementById('m6-result');
+    if(!LATEST){ el.innerHTML='<div class="m6-state err">未能載入攪珠結果。</div>'; return; }
+    var d=LATEST;
+    var ballsHTML='';
+    d.numbers.forEach(function(n){ ballsHTML+=ball(n,'lg',false); });
+    ballsHTML+='<span class="m6-plus">+</span>'+ball(d.special,'lg',true);
+
+    var rows='';
+    (d.prizes||[]).forEach(function(p){
+      rows+='<tr class="'+(p.tier===1?'t1':'')+'"><td>'+(TIER[p.tier]||('第'+p.tier))+'</td>'+
+            '<td class="units">'+num(p.winningUnit)+'</td>'+
+            '<td class="amt">'+money(p.dividend)+'</td></tr>';
+    });
+
+    var nd=d.nextDraw;
+    var nextLine = nd && nd.date
+      ? cnDate(nd.date) + (nd.estimatedPrize ? ' · 估計頭獎基金 ' + money(nd.estimatedPrize) : '')
+      : '待 HKJC 公佈';
+
+    el.innerHTML =
+      '<div class="m6-rhead">'+
+        '<span class="draw">第 '+d.draw+' 期</span>'+
+        '<span class="date">'+cnDate(d.date)+'</span>'+
+        (d.snowball?'<span class="m6-snow">'+d.snowball+'</span>':'')+
+      '</div>'+
+      '<div class="m6-balls">'+ballsHTML+'</div>'+
+      '<div class="m6-balls-cap">攪珠結果 · 最後一個為特別號碼（金圈）</div>'+
+      '<table class="m6-prize"><thead><tr><th>獎級</th><th>中獎注數</th><th>每注獎金</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+      '<div class="m6-rfoot">'+
+        '<div class="m6-stat"><div class="k">總投注額</div><div class="v">'+money(d.totalInvestment)+'</div></div>'+
+        '<div class="m6-stat"><div class="k">下期攪珠</div><div class="v" style="font-size:12px;line-height:1.4">'+nextLine+'</div></div>'+
+      '</div>';
+
+    // ticker
+    var tk=document.getElementById('m6-ticker');
+    tk.innerHTML='<strong>第 '+d.draw+' 期</strong> · '+d.numbers.join(' ')+' ＋'+d.special+' · '+cnDate(d.date)+(d.snowball?' · '+d.snowball:'');
+  }
+
+  // ================= section 2 — stats =================
+  function computeStats(periodKey){
+    var n;
+    var win;
+    if(periodKey==='ytd'){ win=HISTORY.filter(function(d){ return d.date.slice(0,4)===LATEST_YEAR; }); }
+    else { n=parseInt(periodKey,10); win=HISTORY.slice(Math.max(0,HISTORY.length-n)); }
+    var count={}, maxOm={}, curOm={};
+    for(var i=1;i<=49;i++){ count[i]=0; maxOm[i]=0; }
+    // count + max omission within window
+    var run={}; for(var j=1;j<=49;j++) run[j]=0;
+    win.forEach(function(d){
+      var has={}; d.numbers.forEach(function(x){ has[x]=1; });
+      for(var v=1;v<=49;v++){
+        if(has[v]){ count[v]++; if(run[v]>maxOm[v]) maxOm[v]=run[v]; run[v]=0; }
+        else { run[v]++; }
+      }
+    });
+    for(var w=1;w<=49;w++){ if(run[w]>maxOm[w]) maxOm[w]=run[w]; }
+    // current omission — GLOBAL (draws since last appearance across all history)
+    for(var t=1;t<=49;t++) curOm[t]=HISTORY.length;
+    for(var z=1;z<=49;z++){
+      for(var k2=HISTORY.length-1, gap=0; k2>=0; k2--, gap++){
+        if(HISTORY[k2].numbers.indexOf(z)!==-1){ curOm[z]=gap; break; }
+      }
+    }
+    return { count:count, maxOm:maxOm, curOm:curOm, windowLen:win.length };
+  }
+  function renderStats(){
+    STATS=computeStats(PERIOD);
+    var s=STATS, grid=document.getElementById('m6-numgrid');
+    var maxCount=0; for(var i=1;i<=49;i++){ if(s.count[i]>maxCount) maxCount=s.count[i]; }
+    var order=[]; for(var n=1;n<=49;n++) order.push(n);
+    if(SORT==='hot') order.sort(function(a,b){ return s.count[b]-s.count[a] || a-b; });
+    else if(SORT==='due') order.sort(function(a,b){ return s.curOm[b]-s.curOm[a] || a-b; });
+    var html='';
+    order.forEach(function(n){
+      var heat = maxCount? (s.count[n]/maxCount) : 0;
+      html+='<div class="m6-cell">'+
+        '<div class="heat" style="opacity:'+(0.15+heat*0.85).toFixed(2)+'"></div>'+
+        ball(n,'sm',false)+
+        '<div class="row"><span>開</span><b>'+s.count[n]+'</b></div>'+
+        '<div class="row"><span>遺</span><b class="'+(s.curOm[n]>=10?'due':'')+'">'+s.curOm[n]+'</b></div>'+
+        '<div class="row"><span>期最</span><b>'+s.maxOm[n]+'</b></div>'+
+      '</div>';
+    });
+    grid.innerHTML=html;
+  }
+  function buildSeg(id, items, getActive, onPick){
+    var box=document.getElementById(id);
+    box.innerHTML=items.map(function(it){
+      return '<button data-v="'+it.v+'"'+(it.v===getActive()?' class="active"':'')+'>'+it.label+'</button>';
+    }).join('');
+    box.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        onPick(b.getAttribute('data-v'));
+        box.querySelectorAll('button').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+      });
+    });
+  }
+
+  // ================= section 3 — combos =================
+  function poolGrp(n){ return grp(n); }
+  function renderPool(){
+    var box=document.getElementById('m6-pool'), html='';
+    for(var n=1;n<=49;n++){
+      var on=POOL.has(n);
+      html+='<div class="m6-pick'+(on?(' on '+poolGrp(n)):'')+'" data-n="'+n+'">'+n+'</div>';
+    }
+    box.innerHTML=html;
+    box.querySelectorAll('.m6-pick').forEach(function(c){
+      c.addEventListener('click',function(){
+        var n=+c.getAttribute('data-n');
+        if(POOL.has(n)) POOL.delete(n); else POOL.add(n);
+        renderPool(); updateCost();
+      });
+    });
+    document.getElementById('m6-poolcount').textContent=' · 已揀 '+POOL.size+' 個';
+  }
+  function topByStat(which, take){
+    if(!STATS) STATS=computeStats(PERIOD);
+    var arr=[]; for(var n=1;n<=49;n++) arr.push(n);
+    if(which==='hot') arr.sort(function(a,b){ return STATS.count[b]-STATS.count[a] || a-b; });
+    else arr.sort(function(a,b){ return STATS.curOm[b]-STATS.curOm[a] || a-b; });
+    return arr.slice(0,take);
+  }
+  function fillPool(kind){
+    if(kind==='clear'){ POOL.clear(); }
+    else if(kind==='all'){ POOL.clear(); for(var n=1;n<=49;n++) POOL.add(n); }
+    else if(kind==='last'){ if(LATEST) LATEST.numbers.forEach(function(x){ POOL.add(x); }); }
+    else if(kind==='hot'){ topByStat('hot',6).forEach(function(x){ POOL.add(x); }); }
+    else if(kind==='cold'){ topByStat('cold',6).forEach(function(x){ POOL.add(x); }); }
+    renderPool(); updateCost();
+  }
+  function scoreSet(s, maxCount, maxOm){
+    var k=s.length, odd=0, low=0, sum=0, om=0, hot=0, i, n;
+    for(i=0;i<k;i++){ n=s[i]; if(n%2) odd++; if(n<=24) low++; sum+=n; om+=STATS.curOm[n]; hot+=STATS.count[n]; }
+    var half=k/2;
+    var bOdd=1-Math.abs(odd-half)/(half||1);
+    var bLow=1-Math.abs(low-half)/(half||1);
+    var bSum=1-Math.min(1,Math.abs(sum-25*k)/(12.5*k));
+    var overdue=maxOm?(om/k)/maxOm:0;
+    var freq=maxCount?(hot/k)/maxCount:0;
+    var signal=0.5*overdue+0.5*freq;
+    var total=0.28*bOdd+0.28*bLow+0.24*bSum+0.20*signal;
+    return { total:total, odd:odd, even:k-odd, low:low, high:k-low, sum:sum };
+  }
+  function intersect(a,b){ var s=new Set(a), c=0; b.forEach(function(x){ if(s.has(x)) c++; }); return c; }
+  function generateSmart(pool, k, T){
+    if(!STATS) STATS=computeStats(PERIOD);
+    var maxCount=0,maxOm=0,i;
+    for(i=1;i<=49;i++){ if(STATS.count[i]>maxCount) maxCount=STATS.count[i]; if(STATS.curOm[i]>maxOm) maxOm=STATS.curOm[i]; }
+    var total=choose(pool.length,k);
+    var BUDGET=8000, cands=[];
+    if(total<=BUDGET){
+      eachCombo(pool,k,function(c){ cands.push(c.slice()); });
+    } else {
+      var rand=mulberry32(0x9E3779B1^(k*131+pool.length)), seen=new Set(), tries=0, max=BUDGET*50;
+      while(cands.length<BUDGET && tries++<max){
+        var p=pool.slice();
+        for(i=0;i<k;i++){ var jj=i+Math.floor(rand()*(p.length-i)); var tmp=p[i]; p[i]=p[jj]; p[jj]=tmp; }
+        var pick=p.slice(0,k).sort(function(a,b){return a-b;});
+        var key=pick.join('-');
+        if(!seen.has(key)){ seen.add(key); cands.push(pick); }
+      }
+    }
+    var scored=cands.map(function(s){ return { s:s, sc:scoreSet(s,maxCount,maxOm), picked:false }; });
+    scored.sort(function(a,b){ return b.sc.total-a.sc.total; });
+    var chosen=[];
+    for(var t=0;t<T;t++){
+      var best=-1, bestVal=-Infinity;
+      for(i=0;i<scored.length;i++){
+        if(scored[i].picked) continue;
+        var ov=0; for(var c2=0;c2<chosen.length;c2++) ov+=intersect(scored[i].s,chosen[c2].s);
+        var val=scored[i].sc.total-0.05*ov;
+        if(val>bestVal){ bestVal=val; best=i; }
+      }
+      if(best<0) break;
+      scored[best].picked=true; chosen.push(scored[best]);
+    }
+    return { tickets:chosen, total:total };
+  }
+  function renderResults(){
+    var box=document.getElementById('m6-results');
+    var warn=document.getElementById('m6-warn');
+    var pool=[].concat([...POOL]).sort(function(a,b){return a-b;});
+    if(pool.length<K){ box.innerHTML='<div class="m6-state err">號碼池要至少 '+K+' 個號碼。</div>'; return; }
+    var linesPer=choose(K,6), costPer=linesPer*UNIT;
+
+    if(MODE==='pure'){
+      var total=choose(pool.length,K), CAP=500, shown=[];
+      eachCombo(pool,K,function(c){ if(shown.length>=CAP) return false; shown.push(c.slice()); });
+      warn.className='m6-warn'+(total>CAP?' show':'');
+      if(total>CAP) warn.textContent='共 '+num(total)+' 組，數量過多只顯示首 '+CAP+' 組。可縮細號碼池，或用「智能精選」。';
+      var head='<div class="m6-summary">純複式 · 號碼池 <b>'+pool.length+'</b> 個 · 每組 <b>'+K+'</b> 字<br>'+
+        '組合總數 <b>'+num(total)+'</b> 組 · 每組複式 <b>'+num(linesPer)+'</b> 注（$'+num(costPer)+'）'+
+        (K>6?'':' · 即單式')+'</div>';
+      var rows=shown.map(function(s){ return ticketHTML(s,null,linesPer,costPer); }).join('');
+      box.innerHTML=head+rows;
+    } else {
+      warn.className='m6-warn';
+      var res=generateSmart(pool,K,TCOUNT);
+      var totalCost=res.tickets.length*costPer, totalLines=res.tickets.length*linesPer;
+      var head2='<div class="m6-summary">智能精選 · 號碼池 <b>'+pool.length+'</b> 個 · 每組 <b>'+K+'</b> 字 · <b>'+res.tickets.length+'</b> 注<br>'+
+        '可選組合 <b>'+num(res.total)+'</b> 組中，按單雙／大細／和值／冷熱平衡揀出<br>'+
+        '合共 <b>'+num(totalLines)+'</b> 複式注 · 預算 <b>$'+num(totalCost)+'</b></div>';
+      var rows2=res.tickets.map(function(t){ return ticketHTML(t.s,t.sc,linesPer,costPer); }).join('');
+      box.innerHTML=head2+rows2;
+    }
+  }
+  function ticketHTML(s, sc, linesPer, costPer){
+    var balls=s.map(function(n){ return ball(n,'md',false); }).join('');
+    var meta='';
+    if(sc){
+      meta='<div class="meta">'+
+        '<span class="chip">單<b>'+sc.odd+'</b>:雙<b>'+sc.even+'</b></span>'+
+        '<span class="chip">大<b>'+sc.high+'</b>:細<b>'+sc.low+'</b></span>'+
+        '<span class="chip">和值<b>'+sc.sum+'</b></span>'+
+        '<span class="cost">'+num(linesPer)+'注 · $'+num(costPer)+'</span>'+
+      '</div>';
+    } else {
+      meta='<div class="meta"><span class="chip">複式 <b>'+linesPer+'</b> 注</span><span class="cost">$'+num(costPer)+'</span></div>';
+    }
+    return '<div class="m6-ticket"><div class="tballs">'+balls+'</div>'+meta+'</div>';
+  }
+  function updateCost(){
+    var pool=POOL.size, linesPer=choose(K,6), costPer=linesPer*UNIT;
+    var info=document.getElementById('m6-costinfo'), gen=document.getElementById('m6-gen');
+    gen.disabled = pool<K;
+    if(MODE==='pure'){
+      var total=pool>=K?choose(pool,K):0;
+      info.innerHTML='每組 '+K+' 字 = 複式 <b>'+num(linesPer)+'</b> 注（$'+num(costPer)+'） · 組合總數 <b>'+num(total)+'</b> 組';
+    } else {
+      info.innerHTML='每注 '+K+' 字 = 複式 <b>'+num(linesPer)+'</b> 注（$'+num(costPer)+'） · 生成 '+TCOUNT+' 注';
+    }
+  }
+  function syncModeUI(){
+    document.getElementById('m6-tcount-field').style.display = MODE==='smart' ? '' : 'none';
+    document.getElementById('m6-modenote').textContent = MODE==='pure'
+      ? '純複式：列出號碼池內所有 k 字組合 C(池,k)，純數學，不加統計。'
+      : '智能精選：用上方統計（冷熱／遺漏／單雙／大細／和值）由號碼池揀出最平衡的組合。';
+    updateCost();
+  }
+
+  // ================= boot =================
+  function setupControls(){
+    buildSeg('m6-periods', [
+      {v:'10',label:'近10期'},{v:'50',label:'近50期'},{v:'100',label:'近100期'},{v:'500',label:'近500期'},{v:'ytd',label:'今年至今'}
+    ], function(){return PERIOD;}, function(v){ PERIOD=v; renderStats(); });
+    buildSeg('m6-sort', [
+      {v:'num',label:'號碼'},{v:'hot',label:'最熱'},{v:'due',label:'最凍'}
+    ], function(){return SORT;}, function(v){ SORT=v; renderStats(); });
+    buildSeg('m6-k', [
+      {v:'6',label:'6'},{v:'7',label:'7'},{v:'8',label:'8'},{v:'9',label:'9'},{v:'10',label:'10'},{v:'11',label:'11'}
+    ], function(){return String(K);}, function(v){ K=+v; syncModeUI(); });
+    buildSeg('m6-mode', [
+      {v:'smart',label:'智能精選'},{v:'pure',label:'純複式'}
+    ], function(){return MODE;}, function(v){ MODE=v; syncModeUI(); });
+    buildSeg('m6-tcount', [
+      {v:'3',label:'3注'},{v:'5',label:'5注'},{v:'10',label:'10注'},{v:'20',label:'20注'}
+    ], function(){return String(TCOUNT);}, function(v){ TCOUNT=+v; updateCost(); });
+
+    document.querySelectorAll('.m6-poolbtns button').forEach(function(b){
+      b.addEventListener('click',function(){ fillPool(b.getAttribute('data-fill')); });
+    });
+    document.getElementById('m6-gen').addEventListener('click', renderResults);
+  }
+
+  function boot(){
+    setupControls();
+    renderPool();
+    syncModeUI();
+    Promise.all([
+      fetch(LATEST_URL).then(function(r){ if(!r.ok) throw 0; return r.json(); }).catch(function(){ return null; }),
+      fetch(HISTORY_URL).then(function(r){ if(!r.ok) throw 0; return r.json(); }).catch(function(){ return null; })
+    ]).then(function(res){
+      LATEST=res[0];
+      HISTORY=(res[1]||[]).slice().sort(function(a,b){ return a.date<b.date?-1:a.date>b.date?1:(a.draw<b.draw?-1:1); });
+      if(LATEST){ UNIT=Number(LATEST.unitBet)||10; }
+      LATEST_YEAR = HISTORY.length ? HISTORY[HISTORY.length-1].date.slice(0,4) : String(new Date().getUTCFullYear());
+      renderResult();
+      if(HISTORY.length){ renderStats(); }
+      else { document.getElementById('m6-numgrid').innerHTML='<div class="m6-state err">未能載入歷史攪珠數據。</div>'; }
+      updateCost();
+    });
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot, {once:true});
+  else boot();
+})();
+</script>
+</body>
+</html>

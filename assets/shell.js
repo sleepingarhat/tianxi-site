@@ -12,7 +12,7 @@
      <script src="/assets/shell.js" defer></script>
 
    Disclaimer is intentionally NOT injected — page content varies
-   (lounge has community rules; predictor/schedule have variants;
+   (marksix adds a past-results note; predictor/schedule have variants;
    index/horse/race omit by design).
    ================================================================ */
 (function () {
@@ -87,8 +87,8 @@
       '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14A2.5 2.5 0 0 0 6.5 22H20v-5"/>'],
     ['/engine/', 'engine', '引擎',
       '<path d="M3 12h4l3 8 4-16 3 8h4"/>'],
-    ['/lounge/', 'lounge', '聊天室',
-      '<path d="M21 12a8 8 0 1 1-3.5-6.6L21 4v5h-5"/>']
+    ['/marksix/', 'marksix', '六合彩',
+      '<circle cx="12" cy="12" r="8.5"/><circle cx="9.2" cy="9.2" r="2.2"/>']
   ];
 
   function renderBotnav(activePage) {
