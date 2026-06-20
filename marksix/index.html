@@ -148,7 +148,7 @@
   </div>
   <div class="m6-legend">
     <span><b>開</b> 開出次數（所選期內）</span>
-    <span><b>距</b> 距今未開（全期數據）</span>
+    <span><b>遺</b> 距今未開（全期數據）</span>
     <span><b>期</b> 期內最大遺漏</span>
   </div>
   <div class="m6-numgrid" id="m6-numgrid"><div class="m6-state">載入中…</div></div>
@@ -334,7 +334,7 @@
         '<div class="heat" style="opacity:'+(0.15+heat*0.85).toFixed(2)+'"></div>'+
         ball(n,'sm',false)+
         '<div class="row"><span>開</span><b>'+s.count[n]+'</b></div>'+
-        '<div class="row"><span>距</span><b class="'+(s.curOm[n]>=10?'due':'')+'">'+s.curOm[n]+'</b></div>'+
+        '<div class="row"><span>遺</span><b class="'+(s.curOm[n]>=10?'due':'')+'">'+s.curOm[n]+'</b></div>'+
         '<div class="row"><span>期</span><b>'+s.maxOm[n]+'</b></div>'+
       '</div>';
     });
@@ -503,7 +503,7 @@
       {v:'10',label:'近10期'},{v:'50',label:'近50期'},{v:'100',label:'近100期'},{v:'500',label:'近500期'},{v:'ytd',label:'今年至今'}
     ], function(){return PERIOD;}, function(v){ PERIOD=v; renderStats(); });
     buildSeg('m6-sort', [
-      {v:'num',label:'號碼'},{v:'hot',label:'最熱'},{v:'due',label:'最凍'}
+      {v:'num',label:'號碼'},{v:'hot',label:'最熱'},{v:'due',label:'最冷'}
     ], function(){return SORT;}, function(v){ SORT=v; renderStats(); });
     buildSeg('m6-k', [
       {v:'6',label:'6'},{v:'7',label:'7'},{v:'8',label:'8'},{v:'9',label:'9'},{v:'10',label:'10'},{v:'11',label:'11'}
