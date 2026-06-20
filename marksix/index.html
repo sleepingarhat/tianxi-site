@@ -21,20 +21,30 @@
 .m6-state{padding:24px 16px;text-align:center;color:var(--ink-mute);font-size:13px}
 .m6-state.err{color:var(--red)}
 
-/* ----- official HKJC-style balls (cog ring + white centre + coloured number) ----- */
+/* ----- official lottery balls (white petal-notches + white centre + black number) ----- */
 .m6-ball{position:relative;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;
-  font-family:var(--font-mono);font-weight:700;line-height:1;flex-shrink:0;isolation:isolate;
-  box-shadow:0 1px 3px rgba(0,0,0,.30)}
-.m6-ball::before{content:"";position:absolute;left:20%;top:20%;width:60%;height:60%;border-radius:50%;
-  background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.07) inset,0 1px 1px rgba(0,0,0,.10);z-index:-1}
-.m6-ball.red{color:#c8102e;background:
-  repeating-conic-gradient(from -3.5deg,rgba(255,255,255,.92) 0 2.4deg,rgba(255,255,255,0) 2.4deg 11.25deg),
+  font-family:var(--font-mono);font-weight:800;color:#0d0d0d;line-height:1;flex-shrink:0;isolation:isolate;
+  box-shadow:0 2px 4px rgba(0,0,0,.28)}
+.m6-ball::before{content:"";position:absolute;left:23%;top:23%;width:54%;height:54%;border-radius:50%;
+  background:radial-gradient(circle at 42% 36%,#fff,#e9ecee 88%);
+  box-shadow:0 0 0 1px rgba(0,0,0,.06) inset,0 1px 2px rgba(0,0,0,.20);z-index:-1}
+.m6-ball.red{background:
+  radial-gradient(circle at 50% 7%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 50% 93%,#fff 0 5.5%,transparent 6.5%),
+  radial-gradient(circle at 7% 50%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 93% 50%,#fff 0 5.5%,transparent 6.5%),
+  radial-gradient(circle at 20% 20%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 20%,#fff 0 5%,transparent 6%),
+  radial-gradient(circle at 20% 80%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 80%,#fff 0 5%,transparent 6%),
   radial-gradient(circle at 38% 30%,#f0566a,#d31329 58%,#9e0a1e)}
-.m6-ball.blue{color:#0a5fbf;background:
-  repeating-conic-gradient(from -3.5deg,rgba(255,255,255,.92) 0 2.4deg,rgba(255,255,255,0) 2.4deg 11.25deg),
+.m6-ball.blue{background:
+  radial-gradient(circle at 50% 7%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 50% 93%,#fff 0 5.5%,transparent 6.5%),
+  radial-gradient(circle at 7% 50%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 93% 50%,#fff 0 5.5%,transparent 6.5%),
+  radial-gradient(circle at 20% 20%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 20%,#fff 0 5%,transparent 6%),
+  radial-gradient(circle at 20% 80%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 80%,#fff 0 5%,transparent 6%),
   radial-gradient(circle at 38% 30%,#4f9be8,#1064c4 58%,#06407f)}
-.m6-ball.green{color:#0a7d33;background:
-  repeating-conic-gradient(from -3.5deg,rgba(255,255,255,.92) 0 2.4deg,rgba(255,255,255,0) 2.4deg 11.25deg),
+.m6-ball.green{background:
+  radial-gradient(circle at 50% 7%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 50% 93%,#fff 0 5.5%,transparent 6.5%),
+  radial-gradient(circle at 7% 50%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 93% 50%,#fff 0 5.5%,transparent 6.5%),
+  radial-gradient(circle at 20% 20%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 20%,#fff 0 5%,transparent 6%),
+  radial-gradient(circle at 20% 80%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 80%,#fff 0 5%,transparent 6%),
   radial-gradient(circle at 38% 30%,#5cc77c,#0c9a3f 58%,#066628)}
 .m6-ball--lg{width:clamp(30px,calc((100vw - 120px)/7),46px);height:clamp(30px,calc((100vw - 120px)/7),46px);font-size:clamp(13px,3.4vw,19px)}
 .m6-ball--md{width:36px;height:36px;font-size:14px}
@@ -139,7 +149,7 @@
   <div class="m6-legend">
     <span><b>開</b> 開出次數（所選期內）</span>
     <span><b>遺</b> 距今未開（全期數據）</span>
-    <span><b>期最</b> 期內最大遺漏</span>
+    <span><b>期</b> 期內最大遺漏</span>
   </div>
   <div class="m6-numgrid" id="m6-numgrid"><div class="m6-state">載入中…</div></div>
 </section>
@@ -325,7 +335,7 @@
         ball(n,'sm',false)+
         '<div class="row"><span>開</span><b>'+s.count[n]+'</b></div>'+
         '<div class="row"><span>遺</span><b class="'+(s.curOm[n]>=10?'due':'')+'">'+s.curOm[n]+'</b></div>'+
-        '<div class="row"><span>期最</span><b>'+s.maxOm[n]+'</b></div>'+
+        '<div class="row"><span>期</span><b>'+s.maxOm[n]+'</b></div>'+
       '</div>';
     });
     grid.innerHTML=html;
