@@ -21,20 +21,24 @@
 .m6-state{padding:24px 16px;text-align:center;color:var(--ink-mute);font-size:13px}
 .m6-state.err{color:var(--red)}
 
-/* ----- official lottery balls (vector / resolution-independent) ----- */
+/* ----- official HKJC-style balls (cog ring + white centre + coloured number) ----- */
 .m6-ball{position:relative;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;
-  font-family:var(--font-mono);font-weight:700;color:#fff;line-height:1;flex-shrink:0;
-  text-shadow:0 1px 2px rgba(0,0,0,.4);
-  box-shadow:inset 0 -3px 6px rgba(0,0,0,.30), inset 0 3px 7px rgba(255,255,255,.40), 0 2px 4px rgba(0,0,0,.22)}
-.m6-ball::after{content:"";position:absolute;top:13%;left:17%;width:40%;height:32%;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,.92),rgba(255,255,255,0) 72%);pointer-events:none}
-.m6-ball.red{background:radial-gradient(circle at 36% 30%,#ff7064,#e10e2a 56%,#a3081e)}
-.m6-ball.blue{background:radial-gradient(circle at 36% 30%,#5aa6ee,#0a5fbf 56%,#063c7c)}
-.m6-ball.green{background:radial-gradient(circle at 36% 30%,#5fd081,#08923b 56%,#055f29)}
-.m6-ball.special{outline:2.5px solid var(--gold);outline-offset:2px}
-.m6-ball--lg{width:clamp(42px,11.5vw,56px);height:clamp(42px,11.5vw,56px);font-size:clamp(18px,4.8vw,24px)}
-.m6-ball--md{width:36px;height:36px;font-size:15px}
-.m6-ball--sm{width:30px;height:30px;font-size:13px}
+  font-family:var(--font-mono);font-weight:700;line-height:1;flex-shrink:0;isolation:isolate;
+  box-shadow:0 1px 3px rgba(0,0,0,.30)}
+.m6-ball::before{content:"";position:absolute;left:20%;top:20%;width:60%;height:60%;border-radius:50%;
+  background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.07) inset,0 1px 1px rgba(0,0,0,.10);z-index:-1}
+.m6-ball.red{color:#c8102e;background:
+  repeating-conic-gradient(from -3.5deg,rgba(255,255,255,.92) 0 2.4deg,rgba(255,255,255,0) 2.4deg 11.25deg),
+  radial-gradient(circle at 38% 30%,#f0566a,#d31329 58%,#9e0a1e)}
+.m6-ball.blue{color:#0a5fbf;background:
+  repeating-conic-gradient(from -3.5deg,rgba(255,255,255,.92) 0 2.4deg,rgba(255,255,255,0) 2.4deg 11.25deg),
+  radial-gradient(circle at 38% 30%,#4f9be8,#1064c4 58%,#06407f)}
+.m6-ball.green{color:#0a7d33;background:
+  repeating-conic-gradient(from -3.5deg,rgba(255,255,255,.92) 0 2.4deg,rgba(255,255,255,0) 2.4deg 11.25deg),
+  radial-gradient(circle at 38% 30%,#5cc77c,#0c9a3f 58%,#066628)}
+.m6-ball--lg{width:clamp(30px,calc((100vw - 120px)/7),46px);height:clamp(30px,calc((100vw - 120px)/7),46px);font-size:clamp(13px,3.4vw,19px)}
+.m6-ball--md{width:36px;height:36px;font-size:14px}
+.m6-ball--sm{width:30px;height:30px;font-size:12px}
 
 /* ----- section 1: latest result ----- */
 .m6-result{padding:16px;margin:0 16px}
@@ -42,8 +46,8 @@
 .m6-rhead .draw{font-family:var(--font-display);font-weight:900;font-size:22px;color:var(--ink)}
 .m6-rhead .date{font-size:12px;color:var(--ink-mute)}
 .m6-snow{font-size:11px;font-weight:700;color:var(--gold-3);background:var(--ink);padding:2px 9px;border-radius:999px}
-.m6-balls{display:flex;align-items:center;gap:clamp(5px,1.8vw,10px);flex-wrap:wrap;padding:6px 0 4px}
-.m6-plus{font-family:var(--font-display);font-weight:700;font-size:20px;color:var(--ink-mute);margin:0 1px}
+.m6-balls{display:flex;align-items:center;justify-content:center;gap:clamp(3px,1.3vw,7px);flex-wrap:nowrap;padding:6px 0 4px}
+.m6-plus{font-family:var(--font-display);font-weight:700;font-size:clamp(15px,4vw,20px);color:var(--ink-mute);margin:0;flex-shrink:0}
 .m6-balls-cap{font-size:10px;color:var(--ink-faint);margin:6px 0 14px}
 .m6-prize{width:100%;border-collapse:collapse;margin-top:4px}
 .m6-prize th,.m6-prize td{padding:7px 8px;font-size:12px;border-bottom:1px solid var(--rule);text-align:right}
@@ -267,7 +271,7 @@
         (d.snowball?'<span class="m6-snow">'+d.snowball+'</span>':'')+
       '</div>'+
       '<div class="m6-balls">'+ballsHTML+'</div>'+
-      '<div class="m6-balls-cap">攪珠結果 · 最後一個為特別號碼（金圈）</div>'+
+      '<div class="m6-balls-cap">攪珠結果 · 最後一個（＋）為特別號碼</div>'+
       '<table class="m6-prize"><thead><tr><th>獎級</th><th>中獎注數</th><th>每注獎金</th></tr></thead><tbody>'+rows+'</tbody></table>'+
       '<div class="m6-rfoot">'+
         '<div class="m6-stat"><div class="k">總投注額</div><div class="v">'+money(d.totalInvestment)+'</div></div>'+
