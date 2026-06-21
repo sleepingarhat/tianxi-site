@@ -80,7 +80,7 @@
 
 <section class="pred-head">
   <h1><small>PREDICTOR · 選馬神器</small>今日精選 · 雙欄對照</h1>
-  <p>左欄 <b>模型搏冷</b>：賽前一日生成 · 捕捉冷門。右欄 <b>市場穩陣</b>：臨場盤口參考 · 命中率高但偏熱門。兩欄並列 · 各取所需。</p>
+  <p>左欄 <b>模型搏冷</b>：賽日 LGB 集成到齊後公佈 · 捕捉冷門。右欄 <b>市場穩陣</b>：臨場盤口參考 · 命中率高但偏熱門。兩欄並列 · 各取所需。</p>
 </section>
 
 <section class="tp" id="tp-section">
@@ -111,7 +111,7 @@
       </div>
     </div>
     <div class="tp-legend">
-      <b>點樣睇？</b> 左欄係天喜模型獨立預測（賽前一日生成，<span class="tp-tag tp-tag--cold">搏冷</span>），分數不受賠率影響。右欄將<b>臨場盤口</b>以對數混合（β0.4）入模型，命中率較高但會<span class="tp-tag tp-tag--hot">偏熱門</span>，<b>並非</b>捕捉冷馬之指引 — 想搏冷請睇左欄。
+      <b>點樣睇？</b> 左欄係天喜模型獨立預測（賽日 LGB 集成到齊先公佈，<span class="tp-tag tp-tag--cold">搏冷</span>），分數不受賠率影響。右欄將<b>臨場盤口</b>以對數混合（β0.4）入模型，命中率較高但會<span class="tp-tag tp-tag--hot">偏熱門</span>，<b>並非</b>捕捉冷馬之指引 — 想搏冷請睇左欄。
     </div>
   </div>
 </section>
@@ -169,14 +169,19 @@
     if (!race){ model.innerHTML = ''; market.innerHTML = ''; return; }
     var picks = (race.picks || []).slice();
 
-    // ── Left: model 搏冷 (by rank / pWin) ──
-    var byRank = picks.slice().sort(function(a,b){ return (a.rank||99) - (b.rank||99); }).slice(0,5);
-    model.innerHTML = byRank.length ? byRank.map(function(p,i){
-      var name = p.nameCh || p.nameEn || '—';
-      var meta = '#' + (p.horseNumber!=null?p.horseNumber:'?') + ' · 檔' + (p.draw!=null?p.draw:'—');
-      var pct = p.pWin!=null ? Math.round(p.pWin*100)+'%' : '—';
-      return tpItem(i+1, name, meta, '<span class="big">'+pct+'</span>', 'P勝');
-    }).join('') : '<div class="tp-wait"><strong>此場整備中</strong>待數據就緒</div>';
+    // ── Left: model 搏冷 — 只在 LGB 集成覆蓋此場後先顯示（未覆蓋唔出初步排位）──
+    var lgbOk = !!(race.lgbCoverage && race.lgbCoverage.applied);
+    if (!lgbOk){
+      model.innerHTML = '<div class="tp-wait"><span class="ico">🕑</span><strong>等 LGB 模型</strong>賽日 LGB 集成到齊先公佈<br>未覆蓋前不顯示初步排位</div>';
+    } else {
+      var byRank = picks.slice().sort(function(a,b){ return (a.rank||99) - (b.rank||99); }).slice(0,5);
+      model.innerHTML = byRank.length ? byRank.map(function(p,i){
+        var name = p.nameCh || p.nameEn || '—';
+        var meta = '#' + (p.horseNumber!=null?p.horseNumber:'?') + ' · 檔' + (p.draw!=null?p.draw:'—');
+        var pct = p.pWin!=null ? Math.round(p.pWin*100)+'%' : '—';
+        return tpItem(i+1, name, meta, '<span class="big">'+pct+'</span>', 'P勝');
+      }).join('') : '<div class="tp-wait"><strong>此場整備中</strong>待數據就緒</div>';
+    }
 
     // ── Right: market 穩陣 (by marketRank / blendProb + odds) ──
     if (race.marketReady){
