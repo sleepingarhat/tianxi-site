@@ -75,7 +75,7 @@
 
 <header class="brandbar" data-tx-shell="brandbar"></header>
 
-<div class="ticker" id="ticker">公開戰績 · 載入中…</div>
+<div class="ticker" id="ticker">公開戰績 · <span data-tx-loader data-size="sm" data-label="載入中…"></span></div>
 
 <section class="page-head">
   <h1><small>VERIFIED TRACK RECORD</small>公開戰績</h1>
@@ -91,7 +91,7 @@
 </div>
 
 <div id="tr-body">
-  <div class="tr-empty">載入命中率…</div>
+  <div class="tx-lemni-host" data-tx-loader data-label="載入命中率…"></div>
 </div>
 
 <div class="tr-cta" id="tr-cta" style="display:none">
@@ -204,7 +204,7 @@
     Array.prototype.forEach.call(winWrap.querySelectorAll('.tr-win__btn'), function(b){
       b.classList.toggle('is-on', (+b.dataset.days) === days);
     });
-    bodyEl.innerHTML = '<div class="tr-empty tr-skel">載入近 ' + days + ' 日命中率…</div>';
+    bodyEl.innerHTML = '<div class="tx-lemni-host" data-tx-loader data-label="載入近 ' + days + ' 日命中率…"></div>';
     ctaEl.style.display = 'none';
     TX_API.hitRateRollup(days).then(render).catch(function(){
       bodyEl.innerHTML = '<div class="tr-err">暫時無法載入戰績數據，請稍後再試。</div>';

@@ -128,3 +128,191 @@
     mount();
   }
 })();
+
+/* ================================================================
+   天喜 TIANXI · Lemniscate Bloom loader (shared, 2026-06-25)
+   ----------------------------------------------------------------
+   Bernoulli-lemniscate particle bloom — the single loading/waiting
+   indicator used across EVERY page. One requestAnimationFrame loop
+   drives all live instances; hosts removed from the DOM are reaped.
+   Markup-driven: any element with [data-tx-loader] is upgraded
+   (initial scan + MutationObserver), so pages emit only a
+   placeholder div — no per-page JS wiring. Also exposes
+   window.TXLoader.{mount,html,scan} for imperative use.
+
+     a = 25.0 + 10.8s
+     x(t) = 50 + a cos t / (1 + sin^2 t)
+     y(t) = 50 + a sin t cos t / (1 + sin^2 t)
+   ================================================================ */
+(function () {
+  'use strict';
+  var SVG_NS = 'http://www.w3.org/2000/svg';
+  var CFG = {
+    particleCount: 62, trailSpan: 0.68, durationMs: 3500,
+    pulseDurationMs: 2800, lemniscateA: 25, lemniscateBoost: 10.8
+  };
+  var reduce = false;
+  try {
+    reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  } catch (e) { reduce = false; }
+
+  function point(progress, detailScale) {
+    var t = progress * Math.PI * 2;
+    var scale = CFG.lemniscateA + detailScale * CFG.lemniscateBoost;
+    var s = Math.sin(t);
+    var denom = 1 + s * s;
+    return {
+      x: 50 + (scale * Math.cos(t)) / denom,
+      y: 50 + (scale * s * Math.cos(t)) / denom
+    };
+  }
+  function norm(p) { return ((p % 1) + 1) % 1; }
+  function esc(v) {
+    return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  var instances = [];
+
+  function build(host) {
+    for (var q = instances.length - 1; q >= 0; q--) {
+      if (instances[q].host === host) instances.splice(q, 1);
+    }
+    var label = host.getAttribute('data-label') || '';
+    var size = host.getAttribute('data-size') || '';
+    host.classList.add('tx-lemni-host');
+    if (size) host.classList.add('tx-lemni-host--' + size);
+    host.setAttribute('data-tx-init', '1');
+    host.setAttribute('role', 'status');
+    host.setAttribute('aria-live', 'polite');
+    host.setAttribute('aria-busy', 'true');
+    if (label) host.setAttribute('aria-label', label);
+
+    var wrap = document.createElement('div');
+    wrap.className = 'tx-lemni' + (size ? ' tx-lemni--' + size : '');
+
+    var fig = document.createElement('div');
+    fig.className = 'tx-lemni__fig';
+    var svg = document.createElementNS(SVG_NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('aria-hidden', 'true');
+    var g = document.createElementNS(SVG_NS, 'g');
+    svg.appendChild(g);
+    fig.appendChild(svg);
+    wrap.appendChild(fig);
+
+    var particles = [];
+    if (reduce) {
+      var path = document.createElementNS(SVG_NS, 'path');
+      var d = '';
+      for (var n = 0; n <= 240; n++) {
+        var sp = point(n / 240, 1);
+        d += (n === 0 ? 'M' : 'L') + ' ' + sp.x.toFixed(2) + ' ' + sp.y.toFixed(2) + ' ';
+      }
+      path.setAttribute('d', d);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', 'currentColor');
+      path.setAttribute('stroke-width', '4.7');
+      path.setAttribute('stroke-linecap', 'round');
+      path.setAttribute('stroke-linejoin', 'round');
+      path.setAttribute('opacity', '0.42');
+      g.appendChild(path);
+    } else {
+      for (var i = 0; i < CFG.particleCount; i++) {
+        var c = document.createElementNS(SVG_NS, 'circle');
+        c.setAttribute('fill', 'currentColor');
+        g.appendChild(c);
+        particles.push(c);
+      }
+    }
+
+    if (label) {
+      var lab = document.createElement('div');
+      lab.className = 'tx-lemni__label';
+      lab.textContent = label;
+      wrap.appendChild(lab);
+    }
+
+    host.innerHTML = '';
+    host.appendChild(wrap);
+    if (!reduce) { instances.push({ g: g, particles: particles }); kick(); }
+  }
+
+  var running = false;
+  function frame(now) {
+    var pulse = (now % CFG.pulseDurationMs) / CFG.pulseDurationMs;
+    var detailScale = 0.52 + ((Math.sin(pulse * Math.PI * 2 + 0.55) + 1) / 2) * 0.48;
+    var progress = (now % CFG.durationMs) / CFG.durationMs;
+    for (var k = instances.length - 1; k >= 0; k--) {
+      var inst = instances[k];
+      if (!inst.g.isConnected) { instances.splice(k, 1); continue; }
+      var ps = inst.particles;
+      for (var i = 0; i < ps.length; i++) {
+        var tailOffset = i / (CFG.particleCount - 1);
+        var pt = point(norm(progress - tailOffset * CFG.trailSpan), detailScale);
+        var fade = Math.pow(1 - tailOffset, 0.56);
+        var node = ps[i];
+        node.setAttribute('cx', pt.x.toFixed(2));
+        node.setAttribute('cy', pt.y.toFixed(2));
+        node.setAttribute('r', (0.9 + fade * 2.7).toFixed(2));
+        node.setAttribute('opacity', (0.04 + fade * 0.96).toFixed(3));
+      }
+    }
+    if (!instances.length) { running = false; return; }
+    requestAnimationFrame(frame);
+  }
+  function kick() {
+    if (running || reduce || !instances.length) return;
+    running = true;
+    requestAnimationFrame(frame);
+  }
+
+  function upgrade(el) {
+    if (!el || el.getAttribute('data-tx-init')) return;
+    build(el);
+  }
+  function scan(root) {
+    var list = (root || document).querySelectorAll('[data-tx-loader]:not([data-tx-init])');
+    for (var i = 0; i < list.length; i++) upgrade(list[i]);
+  }
+  function mount(el, opts) {
+    if (!el) return null;
+    opts = opts || {};
+    el.setAttribute('data-tx-loader', '');
+    if (opts.label != null) el.setAttribute('data-label', opts.label);
+    if (opts.size) el.setAttribute('data-size', opts.size);
+    el.removeAttribute('data-tx-init');
+    build(el);
+    return el;
+  }
+  function html(label, size) {
+    return '<div class="tx-lemni-host' + (size ? ' tx-lemni-host--' + esc(size) : '') +
+      '" data-tx-loader' +
+      (label ? ' data-label="' + esc(label) + '"' : '') +
+      (size ? ' data-size="' + esc(size) + '"' : '') + '></div>';
+  }
+  window.TXLoader = { mount: mount, html: html, scan: scan };
+
+  function init() {
+    scan(document);
+    try {
+      var mo = new MutationObserver(function (muts) {
+        for (var i = 0; i < muts.length; i++) {
+          var an = muts[i].addedNodes;
+          for (var j = 0; j < an.length; j++) {
+            var nd = an[j];
+            if (nd.nodeType !== 1) continue;
+            if (nd.hasAttribute && nd.hasAttribute('data-tx-loader') && !nd.getAttribute('data-tx-init')) upgrade(nd);
+            if (nd.querySelectorAll) scan(nd);
+          }
+        }
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
+    } catch (e) { /* no-op */ }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+})();

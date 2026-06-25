@@ -97,7 +97,7 @@
 <header class="brandbar" data-tx-shell="brandbar"></header>
 
 <div class="ticker" id="ticker">
-  <strong id="ticker-clock">HK --:-- ---</strong> · <span id="ticker-next">載入中…</span>
+  <strong id="ticker-clock">HK --:-- ---</strong> · <span id="ticker-next"><span data-tx-loader data-size="sm" data-label="載入中…"></span></span>
 </div>
 
 <section class="page-head">
@@ -108,7 +108,7 @@
 
 <!-- ── 引擎狀態 ── -->
 <div class="eng-grid" id="eng-grid">
-  <div class="eng"><div class="eng__lbl">下一賽馬日</div><div class="eng__val" id="eng-day">—</div><div class="eng__sub" id="eng-day-sub">載入中…</div></div>
+  <div class="eng"><div class="eng__lbl">下一賽馬日</div><div class="eng__val" id="eng-day">—</div><div class="eng__sub" id="eng-day-sub"><span data-tx-loader data-size="sm" data-label="載入中…"></span></div></div>
   <div class="eng"><div class="eng__lbl">編排場次</div><div class="eng__val" id="eng-races">—</div><div class="eng__sub" id="eng-races-sub">—</div></div>
   <div class="eng"><div class="eng__lbl">預測引擎</div><div class="eng__val" id="eng-elo">—</div><div class="eng__sub" id="eng-elo-sub">—</div></div>
   <div class="eng"><div class="eng__lbl" id="eng-alpha-lbl">集成模型 α</div><div class="eng__val" id="eng-alpha">—</div><div class="eng__sub" id="eng-alpha-sub">—</div></div>
@@ -120,7 +120,7 @@
     <div><span class="sec__eyebrow">Model Picks</span><div class="sec__title">模型精選 · 每場首選</div></div>
     <a href="/predictor/" class="sec__more">全部選馬 →</a>
   </div>
-  <div id="picks-slot"><div class="dash-skel">分析每場馬匹中…</div></div>
+  <div id="picks-slot"><div class="tx-lemni-host" data-tx-loader data-label="分析每場馬匹中…"></div></div>
 </section>
 
 <!-- ── Elo 馬王榜 ── -->
@@ -130,7 +130,7 @@
     <a href="/encyclopedia/" class="sec__more">馬匹百科 →</a>
   </div>
   <div class="card" style="margin:0">
-    <div id="lb-slot"><div class="dash-skel">載入 Elo 排名中…</div></div>
+    <div id="lb-slot"><div class="tx-lemni-host" data-tx-loader data-label="載入 Elo 排名中…"></div></div>
   </div>
 </section>
 
@@ -144,7 +144,7 @@
     </div>
   </div>
   <div class="card" style="margin:0">
-    <div id="stand-slot"><div class="dash-skel">載入排行榜中…</div></div>
+    <div id="stand-slot"><div class="tx-lemni-host" data-tx-loader data-label="載入排行榜中…"></div></div>
   </div>
 </section>
 
@@ -155,8 +155,8 @@
     <a href="/schedule/" class="sec__more">完整日程 →</a>
   </div>
   <div class="card" style="margin:0">
-    <p style="font-size:12px;color:var(--ink-mute);margin:0 0 6px" id="sched-head">載入中…</p>
-    <div id="sched-slot"><div class="dash-skel">載入賽程中…</div></div>
+    <p style="font-size:12px;color:var(--ink-mute);margin:0 0 6px" id="sched-head"><span data-tx-loader data-size="sm" data-label="載入中…"></span></p>
+    <div id="sched-slot"><div class="tx-lemni-host" data-tx-loader data-label="載入賽程中…"></div></div>
   </div>
 </section>
 
@@ -368,7 +368,7 @@
   function renderStandings(kind){
     var slot = $('stand-slot');
     var rows = kind === 'trainer' ? state.trainers : state.jockeys;
-    if (!rows){ slot.innerHTML = '<div class="dash-skel">載入中…</div>'; return; }
+    if (!rows){ slot.innerHTML = '<div class="tx-lemni-host" data-tx-loader data-label="載入中…"></div>'; return; }
     if (!rows.length){ slot.innerHTML = '<div class="dash-skel">暫無資料。</div>'; return; }
     slot.innerHTML = rows.slice(0,8).map(function(x, i){
       var rate = x.winRate != null ? x.winRate + '%' : '';

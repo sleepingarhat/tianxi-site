@@ -1209,3 +1209,28 @@ i, em, .italic,
   display: block;
 }
 
+
+/* ================================================================
+   Lemniscate Bloom loader — shared loading/waiting indicator
+   (markup: <div data-tx-loader data-label data-size="sm|''|lg">)
+   ================================================================ */
+.tx-lemni-host{
+  display:flex; align-items:center; justify-content:center;
+  width:100%; min-height:96px; padding:18px 8px;
+}
+.tx-lemni-host--lg{ min-height:160px; padding:28px 8px; }
+.tx-lemni-host--sm{
+  display:inline-flex; width:auto; min-height:0; padding:0;
+  vertical-align:middle;
+}
+.tx-lemni{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+.tx-lemni--sm{ flex-direction:row; gap:6px; }
+.tx-lemni__fig{ width:64px; height:64px; color:var(--accent); }
+.tx-lemni--lg .tx-lemni__fig{ width:104px; height:104px; }
+.tx-lemni--sm .tx-lemni__fig{ width:1.05em; height:1.05em; }
+.tx-lemni__fig svg{ width:100%; height:100%; overflow:visible; display:block; color:inherit; }
+.tx-lemni__label{
+  font-family:var(--font-body); font-size:13px; line-height:1.35;
+  color:var(--ink-mute); letter-spacing:.02em; text-align:center;
+}
+.tx-lemni--sm .tx-lemni__label{ font-size:inherit; color:inherit; }

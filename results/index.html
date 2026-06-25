@@ -113,7 +113,7 @@
 
 <header class="brandbar" data-tx-shell="brandbar"></header>
 
-<div class="ticker" id="ticker">預測與賽果 · 載入中…</div>
+<div class="ticker" id="ticker">預測與賽果 · <span data-tx-loader data-size="sm" data-label="載入中…"></span></div>
 
 <section class="page-head">
   <h1><small>PREDICTION vs RESULT</small>預測與賽果</h1>
@@ -122,7 +122,7 @@
 </section>
 
 <div id="day-slot">
-  <div class="results-empty">載入預測與賽果…</div>
+  <div class="tx-lemni-host" data-tx-loader data-size="lg" data-label="載入預測與賽果…"></div>
 </div>
 
 <div class="card" style="margin:14px 20px">
@@ -442,7 +442,7 @@
     cmpQueue.push(function(){
       var anchorId = 'cmp-' + race.id;
       var node = document.getElementById(anchorId);
-      if (node){ node.className = 'cmp cmp--load'; node.innerHTML = '載入模型預測對比…'; }
+      if (node){ node.className = 'cmp cmp--load'; node.innerHTML = '<span data-tx-loader data-size="sm" data-label="載入模型預測對比…"></span>'; }
       return fetchTopWithRetry(race.id, 3).then(function(tp){
         race.__tp = tp;
         var n = document.getElementById(anchorId);

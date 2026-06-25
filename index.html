@@ -255,8 +255,8 @@
     function loadCompare(date, raceId){
       if (!raceId) return;
       var myToken = ++compareToken;
-      $('cmp-left').innerHTML  = '<div class="cmp-empty"><strong>載入中…</strong></div>';
-      $('cmp-right').innerHTML = '<div class="cmp-empty"><strong>載入中…</strong></div>';
+      $('cmp-left').innerHTML  = '<div class="tx-lemni-host" data-tx-loader data-label="載入中…"></div>';
+      $('cmp-right').innerHTML = '<div class="tx-lemni-host" data-tx-loader data-label="載入中…"></div>';
       var pPred = fetchJSON('/api/analyze/top-picks?raceId=' + encodeURIComponent(raceId))
         .then(function(d){ return (d && d.picks) ? d.picks.slice(0,4) : []; })
         .catch(function(){ return []; });

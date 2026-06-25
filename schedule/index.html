@@ -488,7 +488,7 @@
     <span class="sched-head__year" id="head-year">·</span>
   </h1>
   <p class="sched-head__sub" id="head-sub">
-    載入中 <span class="accent">…</span>
+    <span data-tx-loader data-size="sm" data-label="載入中…"></span>
   </p>
 </section>
 
@@ -550,7 +550,7 @@
   <header class="meet__header">
     <div class="meet__crest" id="meet-crest">—</div>
     <div class="meet__info">
-      <div class="meet__date" id="meet-date">載入中</div>
+      <div class="meet__date" id="meet-date"><span data-tx-loader data-size="sm" data-label="載入中…"></span></div>
       <div class="meet__venue" id="meet-venue">
         — <small id="meet-venue-en"></small>
       </div>
@@ -562,10 +562,7 @@
     </div>
   </header>
   <div class="race-list" id="race-list">
-    <!-- skeleton rows -->
-    <div class="race skeleton-row"><div class="race__num">R—</div><div class="race__body"><div class="race__time">——:——</div><div class="race__line">載入中…</div></div><div class="race__stats"><div class="race__field">—</div><div class="race__prize">—</div></div></div>
-    <div class="race skeleton-row"><div class="race__num">R—</div><div class="race__body"><div class="race__time">——:——</div><div class="race__line">載入中…</div></div><div class="race__stats"><div class="race__field">—</div><div class="race__prize">—</div></div></div>
-    <div class="race skeleton-row"><div class="race__num">R—</div><div class="race__body"><div class="race__time">——:——</div><div class="race__line">載入中…</div></div><div class="race__stats"><div class="race__field">—</div><div class="race__prize">—</div></div></div>
+    <div class="tx-lemni-host" data-tx-loader data-label="載入賽事中…"></div>
   </div>
 </article>
 
@@ -579,9 +576,7 @@
 </div>
 
 <div class="past" id="past-list">
-  <div class="past-item skeleton" style="height:60px"></div>
-  <div class="past-item skeleton" style="height:60px"></div>
-  <div class="past-item skeleton" style="height:60px"></div>
+  <div class="tx-lemni-host" data-tx-loader data-label="載入往期賽事中…"></div>
 </div>
 
 <!-- ==================== FOOTER ==================== -->
