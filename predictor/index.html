@@ -211,8 +211,13 @@
     state.report = report;
     var wait = $('tp-wait'), body = $('tp-body');
     var races = (report && report.races) || [];
-    if (!report || !report.date || !races.length){
-      wait.innerHTML = '<span class="ico">—</span><strong>暫無即將舉行賽事</strong>賽日 LGB 集成到齊後自動公佈 · 請賽前再來';
+    var coveredCount = races.filter(function(r){ return r.lgbCoverage && r.lgbCoverage.applied; }).length;
+    var anyMarket = races.some(function(r){ return r.marketReady; });
+    // 未到賽日（無 report/date/races）或 未生成全覆蓋報告（零場覆蓋且未有臨場盤口）→ 直接顯示等待數據
+    if (!report || !report.date || !races.length || (coveredCount === 0 && !anyMarket)){
+      wait.style.display = '';
+      body.style.display = 'none';
+      wait.innerHTML = '<span class="ico">🕑</span><strong>引擎正在等待下一個賽日數據</strong>賽日 LGB 集成到齊後自動公佈 · 請賽前再來';
       return;
     }
     wait.style.display = 'none';

@@ -175,7 +175,7 @@
 <script>
 (function(){
   if (!window.TX_API) return;
-  var state = { nextStart:null, jockeys:null, trainers:null };
+  var state = { nextStart:null, jockeys:null, trainers:null, engineLoaded:false };
   function $(id){ return document.getElementById(id); }
   function pad(n){ return (n<10?'0':'')+n; }
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
@@ -274,6 +274,7 @@
   }
 
   function renderEngine(d){
+    state.engineLoaded = true;
     var venue = d.venueName || VENUE_NAME[d.venue] || d.venue || '';
     var dateTxt = TX_API.fmtMeetingDate ? TX_API.fmtMeetingDate(d.date) : d.date;
     var wd = (dateTxt.split(' ')[1]) || '';
@@ -399,6 +400,17 @@
     return TX_API.meeting(date).then(function(m){
       var races = (m && m.races) || [];
       var count = (m && m.totalRaces) || races.length;
+      // 平價接駁：即刻畫出 賽馬日 / 場地 / 場次，唔使等沉重嘅 today-picks 運算先有反應
+      if (!state.engineLoaded){
+        var md = TX_API.fmtMeetingDate ? TX_API.fmtMeetingDate(date) : date;
+        var wd = (String(md).split(' ')[1]) || '';
+        $('eng-day').innerHTML = TX_API.fmtDateShort(date) + '<small>' + esc(venue) + '</small>';
+        $('eng-day-sub').textContent = wd || (date || '');
+        $('eng-races').innerHTML = count + '<small>場</small>';
+        $('eng-races-sub').textContent = venue || '待編排';
+        var df = $('dash-fresh');
+        if (df && /引擎連線中/.test(df.textContent)) df.textContent = '賽日數據已接駁 · 模型運算中…';
+      }
       $('sched-head').innerHTML = (TX_API.fmtMeetingDate ? TX_API.fmtMeetingDate(date) : date) + (venue ? ' · ' + esc(venue) : '') + ' · ' + count + ' 場';
       var slot = $('sched-slot');
       var timed = races.filter(function(r){ return TX_API.cleanTime(r.startTime || r.start_time); });

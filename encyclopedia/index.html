@@ -54,7 +54,7 @@
   <button class="tx-chip" data-f="hot">大熱 ≤5</button>
   <button class="tx-chip" data-f="mid">中價 5–12</button>
   <button class="tx-chip" data-f="cold">爆冷 &gt;12</button>
-  <button class="tx-chip" data-f="rate">評分 ≥80</button>
+  <button class="tx-chip" data-f="rate" style="display:none">評分 ≥80</button>
 </div>
 
 <div class="card" id="today-card">
@@ -148,6 +148,19 @@ function renderToday(){
   box.innerHTML = list.map(entryCard).join('');
 }
 
+// 評分喺臨場排位表先齊全：未有任何評分時隱藏「評分 ≥80」chip，有先顯示
+function updateRateChipVisibility(){
+  var chip = document.querySelector('#ency-chips .tx-chip[data-f="rate"]');
+  if (!chip) return;
+  var hasRated = TODAY_ENTRIES.some(function(e){ var r = parseFloat(e.rating); return isFinite(r) && r > 0; });
+  chip.style.display = hasRated ? '' : 'none';
+  if (!hasRated && CUR_FILTER === 'rate'){
+    CUR_FILTER = 'all';
+    var chips = document.querySelectorAll('#ency-chips .tx-chip');
+    for (var i = 0; i < chips.length; i++){ chips[i].classList.toggle('is-active', chips[i].getAttribute('data-f') === 'all'); }
+  }
+}
+
 var chipRow = document.getElementById('ency-chips');
 if (chipRow){
   chipRow.addEventListener('click', function(ev){
@@ -186,6 +199,7 @@ TX_API.smartCurrent().then(function(cur){
     });
     TODAY_ENTRIES = entries;
     TODAY_META = { total: entries.length, venue: m.venueName || '', date: cur.date };
+    updateRateChipVisibility();
     renderToday();
   });
 }).catch(function(e){
