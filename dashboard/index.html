@@ -338,7 +338,7 @@
   }
 
   TX_API.todayPicks().then(function(d){
-    if (!d || !d.date){ $('picks-slot').innerHTML = '<div class="dash-err">暫無賽馬日數據。</div>'; return; }
+    if (!d || !d.date){ $('picks-slot').innerHTML = '<div class="dash-err">暫無賽馬日數據。</div>'; $('dash-fresh').textContent = '暫無模型報告 · 資料來源 HKJC'; return; }
     state.dayLabel = (TX_API.fmtDateShort(d.date)) + ' ' + (d.venueName||VENUE_NAME[d.venue]||'') + ' 賽馬日';
     renderEngine(d);
     renderPicks(d);

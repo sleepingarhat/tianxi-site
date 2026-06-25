@@ -152,7 +152,7 @@ function renderToday(){
 function updateRateChipVisibility(){
   var chip = document.querySelector('#ency-chips .tx-chip[data-f="rate"]');
   if (!chip) return;
-  var hasRated = TODAY_ENTRIES.some(function(e){ var r = parseFloat(e.rating); return isFinite(r) && r > 0; });
+  var hasRated = TODAY_ENTRIES.some(function(e){ var r = parseFloat(e.rating); return isFinite(r) && r >= 80; });
   chip.style.display = hasRated ? '' : 'none';
   if (!hasRated && CUR_FILTER === 'rate'){
     CUR_FILTER = 'all';
