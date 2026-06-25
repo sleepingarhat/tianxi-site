@@ -175,7 +175,7 @@
 <script>
 (function(){
   if (!window.TX_API) return;
-  var state = { nextStart:null, jockeys:null, trainers:null, engineLoaded:false };
+  var state = { nextStart:null, nextDate:null, jockeys:null, trainers:null, engineLoaded:false };
   function $(id){ return document.getElementById(id); }
   function pad(n){ return (n<10?'0':'')+n; }
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
@@ -196,7 +196,7 @@
     var c = $('ticker-clock'), n = $('ticker-next');
     if (c) c.textContent = hkClock();
     if (n){
-      if (state.nextStart){ n.innerHTML = '下一場 T-' + TX_API.countdown(state.nextStart); }
+      if (state.nextStart){ n.innerHTML = '下一場 T-' + TX_API.countdown(state.nextStart, null, state.nextDate); }
       else if (state.dayLabel){ n.textContent = state.dayLabel; }
       else { n.textContent = '暫無場次 · 數據接駁中'; }
     }
@@ -427,8 +427,11 @@
         var head = [cls, dist].filter(Boolean).join(' · ') || ('賽事 ' + no);
         var cdBadge = '';
         if (!nextLocked && TX_API.cleanTime(r.startTime || r.start_time)){
-          var parts = st.split(':'); var tgt = new Date(now); tgt.setHours(+parts[0], +parts[1], 0, 0);
-          if (tgt > now){ nextLocked = true; state.nextStart = st; cdBadge = ' · T-' + TX_API.countdown(st); }
+          var parts = st.split(':'); var tgt;
+          var mds = String(date).match(/^(\d{4})-(\d{2})-(\d{2})/);
+          if (mds){ tgt = new Date(+mds[1], +mds[2]-1, +mds[3], +parts[0], +parts[1], 0, 0); }
+          else { tgt = new Date(now); tgt.setHours(+parts[0], +parts[1], 0, 0); }
+          if (tgt > now){ nextLocked = true; state.nextStart = st; state.nextDate = date; cdBadge = ' · T-' + TX_API.countdown(st, null, date); }
         }
         return '<div class="row"><div class="row__num">R'+esc(no)+'</div>' +
           '<div><div class="row__name">'+esc(head)+'</div>' +

@@ -136,7 +136,7 @@
 <script>
 (function(){
   if (!window.TX_API) return;
-  var state = { nextStart:null, report:null };
+  var state = { nextStart:null, nextDate:null, report:null };
   function $(id){ return document.getElementById(id); }
   function pad(n){ return (n<10?'0':'')+n; }
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
@@ -150,7 +150,7 @@
     var c = $('ticker-clock'), n = $('ticker-next');
     if (c) c.textContent = hkClock();
     if (n){
-      n.textContent = state.nextStart ? ('下一場 T-' + TX_API.countdown(state.nextStart)) : '今日精選已就緒';
+      n.textContent = state.nextStart ? ('下一場 T-' + TX_API.countdown(state.nextStart, null, state.nextDate)) : '今日精選已就緒';
     }
   }
 
@@ -250,8 +250,10 @@
   });
 
   // next-race countdown for the ticker
+  var mDate = null;
   TX_API.smartCurrent().then(function(cur){
     if (!cur || !cur.date) return null;
+    mDate = cur.date;
     return TX_API.meeting(cur.date);
   }).then(function(m){
     var races = (m && m.races) || [];
@@ -259,9 +261,11 @@
     races.forEach(function(r){
       var st = TX_API.cleanTime(r.startTime || r.start_time);
       if (st && !state.nextStart){
-        var parts = st.split(':'); var tgt = new Date(now);
-        tgt.setHours(+parts[0], +parts[1], 0, 0);
-        if (tgt > now) state.nextStart = st;
+        var parts = st.split(':'); var tgt;
+        var mds = mDate ? String(mDate).match(/^(\d{4})-(\d{2})-(\d{2})/) : null;
+        if (mds){ tgt = new Date(+mds[1], +mds[2]-1, +mds[3], +parts[0], +parts[1], 0, 0); }
+        else { tgt = new Date(now); tgt.setHours(+parts[0], +parts[1], 0, 0); }
+        if (tgt > now){ state.nextStart = st; state.nextDate = mDate; }
       }
     });
     tickTicker();

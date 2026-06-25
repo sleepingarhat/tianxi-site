@@ -34,20 +34,28 @@
     if (/^\d{1,2}:\d{2}(:\d{2})?$/.test(t)) return t.slice(0,5);
     return null;
   }
-  function countdown(startTime, refDate) {
-    // startTime: 'HH:MM' local HK time. refDate: optional Date.
+  function countdown(startTime, refDate, meetingDate) {
+    // startTime: 'HH:MM' HK time. refDate: optional Date (now).
+    // meetingDate: optional 'YYYY-MM-DD' of the race day — REQUIRED to count down
+    // to a future race day; without it the target wrongly defaults to today.
     var ct = cleanTime(startTime);
     if (!ct) return '——:——:——';
     var parts = ct.split(':');
+    var hh = parseInt(parts[0],10), mm = parseInt(parts[1],10);
     var now = refDate || new Date();
-    var tgt = new Date(now);
-    tgt.setHours(parseInt(parts[0],10), parseInt(parts[1],10), 0, 0);
+    var md = meetingDate ? String(meetingDate).match(/^(\d{4})-(\d{2})-(\d{2})/) : null;
+    var tgt;
+    if (md) { tgt = new Date(+md[1], +md[2]-1, +md[3], hh, mm, 0, 0); }
+    else { tgt = new Date(now); tgt.setHours(hh, mm, 0, 0); }
     var diff = Math.floor((tgt - now) / 1000);
     if (diff < 0) return '已開跑';
-    var h = Math.floor(diff/3600);
-    var m = Math.floor((diff%3600)/60);
-    var s = diff%60;
-    return (h<10?'0':'') + h + ':' + (m<10?'0':'') + m + ':' + (s<10?'0':'') + s;
+    var p2 = function(x){ return (x<10?'0':'') + x; };
+    if (diff >= 86400) {
+      var dd = Math.floor(diff/86400);
+      return dd + '日 ' + p2(Math.floor((diff%86400)/3600)) + ':' + p2(Math.floor((diff%3600)/60));
+    }
+    var h = Math.floor(diff/3600), m = Math.floor((diff%3600)/60), s = diff%60;
+    return p2(h) + ':' + p2(m) + ':' + p2(s);
   }
   function fmtDateShort(iso) {
     if (!iso) return '';
