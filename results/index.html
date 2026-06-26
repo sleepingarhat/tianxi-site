@@ -106,6 +106,10 @@
 .cov-boxnet.pos{color:#1B5E20}
 .cov-boxnet.neg{color:#A81A2F}
 .cov-note{color:var(--ink-mute);margin-top:6px;line-height:1.5}
+.rdate-bar{display:flex;align-items:center;gap:10px;padding:14px 20px 0}
+.rdate-lbl{font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--ink-mute);text-transform:uppercase;white-space:nowrap}
+.rdate-sel{flex:1;min-width:0;font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:9px 12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 2px 6px rgba(58,38,8,.05);cursor:pointer}
+.rdate-sel:disabled{opacity:.6;cursor:default}
 </style>
 </head>
 <body data-page="results">
@@ -120,6 +124,11 @@
   <p>已收回 HKJC 結果之賽事日，逐場並列天喜模型預測與實際頭 4 名賽果。<br>
   <em style="font-family:var(--font-mono);font-size:11px;color:var(--ink-mute)">分析指標 · 非投注建議 · 數據來源 HKJC</em></p>
 </section>
+
+<div class="rdate-bar">
+  <label class="rdate-lbl" for="rdate">選擇賽日</label>
+  <select id="rdate" class="rdate-sel" aria-label="選擇賽日"><option>載入賽日…</option></select>
+</div>
 
 <div id="day-slot">
   <div class="tx-lemni-host" data-tx-loader data-size="lg" data-label="載入預測與賽果…"></div>
@@ -637,28 +646,56 @@
     return Promise.resolve(step());
   }
 
+  function buildDatePicker(meetings, currentDate){
+    var sel = document.getElementById('rdate');
+    if (!sel) return;
+    var today = todayISO();
+    var seen = {};
+    var opts = (meetings || []).filter(function(m){
+      if (!m || !m.date || m.date > today || seen[m.date]) return false;
+      seen[m.date] = 1; return true;
+    }).sort(function(a, b){ return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
+    if (!opts.length){ sel.innerHTML = '<option>暫無賽日</option>'; sel.disabled = true; return; }
+    var cur = currentDate || opts[0].date;
+    sel.innerHTML = opts.map(function(m){
+      var label = (TX_API.fmtMeetingDate ? TX_API.fmtMeetingDate(m.date) : m.date) + ' · ' + (VENUE_NAME[m.venue] || m.venue || '');
+      return '<option value="' + esc(m.date) + '"' + (m.date === cur ? ' selected' : '') + '>' + esc(label) + '</option>';
+    }).join('');
+    sel.disabled = false;
+    if (!sel._wired){
+      sel._wired = true;
+      sel.addEventListener('change', function(){
+        var d = sel.value;
+        if (!d) return;
+        try { history.replaceState(null, '', '/results/?date=' + encodeURIComponent(d)); } catch (e) {}
+        document.getElementById('day-slot').innerHTML = '<div class="tx-lemni-host" data-tx-loader data-size="lg" data-label="載入 ' + esc(d) + ' 預測與賽果…"></div>';
+        if (window.scrollTo) window.scrollTo(0, 0);
+        loadByDate(d);
+      });
+    }
+  }
+
   function boot(){
     var date = qs('date');
-    if (date){ loadByDate(date); return; }
-
-    // No ?date= → reconciliation page wants the most recent meeting that
-    // already has settled results, NOT smart/current (which is
-    // upcoming-first). Pull the meetings list, walk past dates back to the
-    // latest one whose horses[] include finishing_position. Fall through to
-    // an empty state if no past meeting in the recent window is settled.
-    TX_API.meetings('?limit=20')
-      .then(function(resp){
-        var list = (resp && (resp.meetings || resp.data)) || resp || [];
-        return pickLatestSettled(Array.isArray(list) ? list : []);
-      })
-      .then(function(m){
-        if (m) renderMeeting(m);
-        else showEmpty('近期已結束賽事');
-      })
-      .catch(function(e){
-        var msg = e && e.message ? e.message : '網絡錯誤';
-        showErr(msg);
+    // Pull the meetings list once: it feeds the date picker AND (when no ?date=)
+    // the latest-settled fallback. Page still works if this request fails.
+    TX_API.meetings('?limit=80').then(function(resp){
+      var list = (resp && (resp.meetings || resp.data)) || resp || [];
+      list = Array.isArray(list) ? list : [];
+      if (date){
+        buildDatePicker(list, date);
+        return loadByDate(date);
+      }
+      // No ?date= → walk past dates back to the latest settled meeting.
+      return pickLatestSettled(list).then(function(m){
+        if (m){ buildDatePicker(list, m.date); renderMeeting(m); }
+        else { buildDatePicker(list, null); showEmpty('近期已結束賽事'); }
       });
+    }).catch(function(e){
+      var msg = e && e.message ? e.message : '網絡錯誤';
+      if (date){ loadByDate(date); return; }
+      showErr(msg);
+    });
   }
 
   boot();
