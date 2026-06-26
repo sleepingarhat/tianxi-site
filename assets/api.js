@@ -111,6 +111,7 @@
     factors:  function(){ return j('/api/analyze/factors'); },
     explain:  function(raceId, horseId){ return j('/api/analyze/explain?raceId=' + encodeURIComponent(raceId) + '&horseId=' + encodeURIComponent(horseId)); },
     hitRateRollup: function(days){ return j('/api/analyze/hit-rate-rollup?days=' + (days||90)); },
+    strategyPnl: function(q){ return j('/api/analyze/strategy-pnl' + (q || '')); },
     // shared helpers
     cleanTime: cleanTime,
     countdown: countdown,
