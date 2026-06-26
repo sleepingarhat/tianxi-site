@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<script src="/assets/shell.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDFBF5">
+<title>天喜策略累計盈虧紀錄 · 天喜 TIANXI</title>
+<meta name="description" content="天喜 TX-Oracle 模型策略累計盈虧透明紀錄：由引擎開始記錄至今，每場以 $10/注 複式箱形（四連環／單T／三重彩／四重彩）投注模型首 4，逐日彙總成本、派彩與累計盈虧。純分析紀錄，非投注建議。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<script src="/assets/api.js"></script>
+<style>
+.sp-note-top{margin:12px 20px 0;padding:11px 13px;border:1px solid #D4A93C;border-radius:12px;background:linear-gradient(180deg,#FFFDF6 0%,#FBF4DE 100%);font-family:var(--font-display);font-size:11.5px;line-height:1.6;color:var(--ink-soft)}
+.sp-note-top b{color:var(--ink);font-weight:800}
+
+.sp-pending{margin:12px 20px 0;padding:10px 13px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);font-family:var(--font-mono);font-size:11px;color:var(--ink-mute);display:flex;align-items:center;gap:8px}
+.sp-pending .dot{width:8px;height:8px;border-radius:50%;background:var(--accent,#C8A14A);animation:sp-pulse 1.1s ease-in-out infinite}
+@keyframes sp-pulse{0%,100%{opacity:.35}50%{opacity:1}}
+
+.sp-kpi{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:14px 20px 4px}
+.sp-kpi__card{padding:16px 12px;border-radius:14px;background:var(--paper);border:1px solid var(--rule);text-align:center;position:relative;overflow:hidden;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 1px 0 rgba(58,38,8,.08),0 2px 4px rgba(58,38,8,.06),0 10px 24px rgba(58,38,8,.08)}
+.sp-kpi__card::before{content:'';position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent 0%,rgba(233,201,100,.6) 50%,transparent 100%)}
+.sp-kpi__card.hero{grid-column:1 / -1;background:linear-gradient(180deg,#FFFDF6 0%,#FBF4DE 100%);border-color:#D4A93C}
+.sp-kpi__lbl{font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:0.13em;color:var(--ink-mute);margin-bottom:6px}
+.sp-kpi__val{font-family:var(--font-display);font-size:30px;font-weight:900;color:var(--ink);line-height:1;word-break:break-all}
+.sp-kpi__card.hero .sp-kpi__val{font-size:40px}
+.sp-kpi__val.pos{color:#1B5E20}
+.sp-kpi__val.neg{color:#A81A2F}
+.sp-kpi__val small{font-size:15px;font-weight:700;color:var(--ink-mute)}
+.sp-kpi__sub{font-family:var(--font-display);font-size:11px;color:var(--ink-mute);margin-top:6px;line-height:1.4}
+
+.sp-sec{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--ink);margin:22px 20px 10px;display:flex;align-items:center;gap:8px}
+.sp-sec::before{content:"";display:block;width:3px;height:14px;background:var(--gold-2,#C8A14A);border-radius:2px}
+
+.sp-chart{margin:0 20px;border:1px solid var(--rule);border-radius:14px;background:var(--paper);padding:14px 12px 10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 6px rgba(58,38,8,.06)}
+.sp-chart svg{display:block;width:100%;height:auto}
+.sp-chart__foot{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:9.5px;color:var(--ink-mute);margin-top:4px;padding:0 2px}
+
+.sp-pool{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:0 20px}
+.sp-pool__card{padding:11px 12px;border-radius:11px;background:var(--paper);border:1px solid var(--rule);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 6px rgba(58,38,8,.05)}
+.sp-pool__nm{font-family:var(--font-display);font-weight:800;font-size:13px;color:var(--ink)}
+.sp-pool__nm small{font-family:var(--font-mono);font-weight:600;font-size:9px;color:var(--ink-mute);margin-left:5px;letter-spacing:.05em}
+.sp-pool__net{font-family:var(--font-display);font-weight:900;font-size:20px;line-height:1;margin-top:7px}
+.sp-pool__net.pos{color:#1B5E20}.sp-pool__net.neg{color:#A81A2F}
+.sp-pool__sub{font-family:var(--font-mono);font-size:9.5px;color:var(--ink-mute);margin-top:5px;letter-spacing:.02em}
+
+.sp-explain{margin:0 20px;padding:13px 15px;border:1px solid var(--rule);border-radius:12px;background:var(--paper);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 6px rgba(58,38,8,.06)}
+.sp-explain dt{font-family:var(--font-display);font-weight:800;font-size:12px;color:var(--ink);margin-top:9px}
+.sp-explain dt:first-child{margin-top:0}
+.sp-explain dd{font-family:var(--font-display);font-size:11.5px;color:var(--ink-mute);line-height:1.55;margin:2px 0 0}
+
+.sp-log{margin:0 20px 4px;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--paper)}
+.sp-log table{width:100%;border-collapse:collapse;font-size:12px}
+.sp-log th,.sp-log td{padding:9px 7px;border-bottom:1px solid var(--rule);text-align:right;white-space:nowrap}
+.sp-log tr:last-child td{border-bottom:0}
+.sp-log thead th{font-family:var(--font-mono);font-size:9.5px;font-weight:700;letter-spacing:0.04em;color:var(--ink-mute);background:var(--paper-soft,#FAF6EB)}
+.sp-log tbody td{font-family:var(--font-mono);color:var(--ink)}
+.sp-log td.d{font-family:var(--font-display);font-weight:700;text-align:left;color:var(--ink)}
+.sp-log td.d small{display:block;font-family:var(--font-mono);font-size:9px;color:var(--ink-mute);font-weight:400}
+.sp-log td.pos{color:#1B5E20;font-weight:700}.sp-log td.neg{color:#A81A2F;font-weight:700}
+
+.sp-note{margin:14px 20px 0;font-family:var(--font-display);font-size:11px;color:var(--ink-mute);line-height:1.6}
+.sp-note strong{color:var(--ink)}
+.sp-empty,.sp-err{padding:50px 20px;text-align:center;font-family:var(--font-display);font-size:13px;color:var(--ink-mute);line-height:1.7}
+.sp-err{color:#A81A2F;font-family:var(--font-mono);font-size:12px}
+</style>
+</head>
+<body data-page="strategy-pnl">
+<div class="shell">
+
+<header class="brandbar" data-tx-shell="brandbar"></header>
+
+<div class="ticker" id="ticker">天喜策略累計盈虧 · <span data-tx-loader data-size="sm" data-label="載入中…"></span></div>
+
+<section class="page-head">
+  <h1><small>STRATEGY P&amp;L · CUMULATIVE</small>天喜策略累計盈虧紀錄</h1>
+  <p>由引擎開始記錄至今，假設每場以 $10/注，將模型首 4 隻馬複式箱形落齊四個彩池，逐日彙總成本、派彩與累計盈虧。<br>
+  <em style="font-family:var(--font-mono);font-size:11px;color:var(--ink-mute)">純分析紀錄 · 非投注建議 · 賽果來源 HKJC</em></p>
+</section>
+
+<div class="sp-note-top">
+  <b>⚠ 此為透明回溯紀錄，並非投注策略。</b>每場每池全數落注屬結構性負期望值（−EV），累計線長線預期向下；天喜唔會挑選或修飾數字，蝕都照列。模型強項在於<b>頭 4 名箱形覆蓋率</b>，而非逐場捉單頭。
+</div>
+
+<div id="sp-pending"></div>
+
+<div id="sp-body">
+  <div class="tx-lemni-host" data-tx-loader data-size="lg" data-label="彙總策略盈虧中…"></div>
+</div>
+
+<div class="sp-note">
+  <strong>計算方法：</strong>每個已收回 HKJC 結果之賽事日，凡模型於賽前定出有效 4 隻馬之場次，即假設同時投注四連環（任序首 4，1 注 $10）、單T（任序首 3，4 注 $40）、三重彩（依序首 3，24 注 $240）、四重彩（依序首 4，24 注 $240），每場成本 $530。派彩沿用該場實際 HKJC 箱形派彩（只記中獎彩池），輸注亦照計成本。起始本金 $0。<br>
+  逐場預測與賽果可於 <a href="/results/" style="color:var(--ink);text-decoration:underline">預測與賽果</a> 查閱；模型命中率見 <a href="/track-record/" style="color:var(--ink);text-decoration:underline">公開戰績</a>。
+</div>
+
+<footer class="disclaimer" style="margin-top:24px">
+  本網站所有內容僅供分析研究與娛樂之用，並非投注建議。賽馬有風險，量力而為。<br>
+  Analysis platform · NO betting services · Data for research only
+</footer>
+
+<nav class="botnav" data-tx-shell="botnav"></nav>
+
+</div>
+
+<script>
+(function(){
+  var V_NAME = { ST:'沙田', HV:'跑馬地' };
+  var WK = ['日','一','二','三','四','五','六'];
+  var POOL_ORDER = ['FF','TRIO','TIERCE','QUARTET'];
+  var POOL_NAME = {
+    FF:      { nm:'四連環', en:'F4 · 任序首4', unit:'$10' },
+    TRIO:    { nm:'單T',    en:'TRIO · 任序首3', unit:'$40' },
+    TIERCE:  { nm:'三重彩', en:'TIERCE · 依序首3', unit:'$240' },
+    QUARTET: { nm:'四重彩', en:'QUARTET · 依序首4', unit:'$240' }
+  };
+
+  var bodyEl = document.getElementById('sp-body');
+  var tickEl = document.getElementById('ticker');
+  var pendEl = document.getElementById('sp-pending');
+  var refreshTimer = null, refreshTries = 0;
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function fmtDate(iso){
+    if (!iso) return '';
+    var p = iso.split('-');
+    var dt = new Date(Date.UTC(+p[0], +p[1]-1, +p[2]));
+    return (+p[1]) + '月' + (+p[2]) + '日 · 星期' + WK[dt.getUTCDay()];
+  }
+  function money(n){
+    var v = Number(n) || 0;
+    var sign = v < 0 ? '-' : '';
+    return sign + '$' + Math.abs(Math.round(v)).toLocaleString('en-US');
+  }
+  function signed(n){
+    var v = Number(n) || 0;
+    return (v > 0 ? '+' : v < 0 ? '-' : '') + '$' + Math.abs(Math.round(v)).toLocaleString('en-US');
+  }
+  function cls(n){ var v = Number(n)||0; return v > 0 ? 'pos' : v < 0 ? 'neg' : ''; }
+
+  /* ---------- cumulative line chart (inline SVG) ---------- */
+  function chartSVG(points){
+    var W = 1000, H = 360, padL = 64, padR = 16, padT = 18, padB = 30;
+    // prepend a $0 origin so the line visibly starts from the engine-start bankroll
+    var ys = [0];
+    points.forEach(function(p){ ys.push(Number(p.cum) || 0); });
+    var n = ys.length;
+    var lo = Math.min.apply(null, ys), hi = Math.max.apply(null, ys);
+    if (lo === hi){ lo -= 10; hi += 10; }
+    var span = hi - lo, padv = span * 0.08;
+    lo -= padv; hi += padv;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    function X(i){ return padL + (n <= 1 ? plotW/2 : (i/(n-1)) * plotW); }
+    function Y(v){ return padT + (1 - (v - lo)/(hi - lo)) * plotH; }
+
+    var line = '', area = '';
+    for (var i = 0; i < n; i++){
+      var px = X(i).toFixed(1), py = Y(ys[i]).toFixed(1);
+      line += (i ? 'L' : 'M') + px + ' ' + py + ' ';
+    }
+    area = 'M' + X(0).toFixed(1) + ' ' + Y(0).toFixed(1) + ' ' +
+           line.replace(/^M/, 'L') +
+           'L' + X(n-1).toFixed(1) + ' ' + Y(0).toFixed(1) + ' Z';
+
+    // y grid lines (4 bands)
+    var grid = '', labels = '';
+    for (var g = 0; g <= 4; g++){
+      var gv = lo + (hi - lo) * (g/4);
+      var gy = Y(gv).toFixed(1);
+      grid += '<line x1="' + padL + '" y1="' + gy + '" x2="' + (W-padR) + '" y2="' + gy + '" stroke="var(--rule)" stroke-width="1"/>';
+      labels += '<text x="' + (padL-8) + '" y="' + (Y(gv)+3).toFixed(1) + '" text-anchor="end" font-family="var(--font-mono)" font-size="13" fill="var(--ink-mute)">' + money(gv) + '</text>';
+    }
+    // zero baseline (emphasised)
+    var zy = Y(0).toFixed(1);
+    var zero = '<line x1="' + padL + '" y1="' + zy + '" x2="' + (W-padR) + '" y2="' + zy + '" stroke="var(--ink-mute)" stroke-width="1.4" stroke-dasharray="5 4"/>';
+
+    var lastV = ys[n-1];
+    var lastX = X(n-1), lastY = Y(lastV);
+    var dotCol = lastV >= 0 ? '#1B5E20' : '#A81A2F';
+    var lastLbl = '<circle cx="' + lastX.toFixed(1) + '" cy="' + lastY.toFixed(1) + '" r="5" fill="' + dotCol + '"/>' +
+      '<text x="' + (lastX - 6).toFixed(1) + '" y="' + (lastY - 10).toFixed(1) + '" text-anchor="end" font-family="var(--font-display)" font-weight="900" font-size="16" fill="' + dotCol + '">' + signed(lastV) + '</text>';
+
+    var stroke = lastV >= 0 ? '#1B5E20' : '#A81A2F';
+    var fill = lastV >= 0 ? 'rgba(27,94,32,0.10)' : 'rgba(168,26,47,0.09)';
+
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet" role="img" aria-label="累計盈虧走勢">' +
+      grid + zero +
+      '<path d="' + area + '" fill="' + fill + '" stroke="none"/>' +
+      '<path d="' + line.trim() + '" fill="none" stroke="' + stroke + '" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>' +
+      labels + lastLbl +
+    '</svg>';
+  }
+
+  function render(r){
+    if (!r || r.error){ bodyEl.innerHTML = '<div class="sp-err">暫時無法載入策略盈虧數據，請稍後再試。</div>'; return; }
+    var points = r.points || [];
+    tickEl.innerHTML = '天喜策略累計盈虧 · ' + esc(r.from || '—') + ' 至今 · ' + (r.daysEvaluated||0) + ' 個賽日 · ' + (r.racesBet||0) + ' 場';
+
+    if (!points.length){
+      bodyEl.innerHTML = '<div class="sp-empty"><strong style="color:var(--ink);display:block;margin-bottom:8px;font-size:14px">暫未有可彙總嘅賽事</strong>賽果與箱形派彩同步後，此頁會自動更新。</div>';
+      return;
+    }
+
+    var cum = Number(r.cumNet) || 0;
+    var html = '';
+
+    // headline KPIs
+    html += '<div class="sp-kpi">';
+    html += '<div class="sp-kpi__card hero"><div class="sp-kpi__lbl">累計盈虧 · CUMULATIVE P&amp;L（本金 $0 起）</div>'
+          + '<div class="sp-kpi__val ' + cls(cum) + '">' + signed(cum) + '</div>'
+          + '<div class="sp-kpi__sub">' + esc(r.from||'') + ' 至 ' + esc(r.to||'') + ' · 投資回報率 '
+          + (r.roiPct==null?'—':(r.roiPct>0?'+':'') + r.roiPct + '%') + '</div></div>';
+    html += '<div class="sp-kpi__card"><div class="sp-kpi__lbl">總投注額</div>'
+          + '<div class="sp-kpi__val">' + money(r.totalCost) + '</div>'
+          + '<div class="sp-kpi__sub">' + (r.racesBet||0) + ' 場 × $' + (r.perRaceCost||530) + '/場</div></div>';
+    html += '<div class="sp-kpi__card"><div class="sp-kpi__lbl">總派彩</div>'
+          + '<div class="sp-kpi__val">' + money(r.totalPayout) + '</div>'
+          + '<div class="sp-kpi__sub">中獎彩池派彩合計</div></div>';
+    html += '<div class="sp-kpi__card"><div class="sp-kpi__lbl">賽日數</div>'
+          + '<div class="sp-kpi__val">' + (r.daysEvaluated||0) + '<small> 日</small></div>'
+          + '<div class="sp-kpi__sub">已彙總賽事日</div></div>';
+    html += '<div class="sp-kpi__card"><div class="sp-kpi__lbl">投注場數</div>'
+          + '<div class="sp-kpi__val">' + (r.racesBet||0) + '<small> 場</small></div>'
+          + '<div class="sp-kpi__sub">模型有有效 4 馬箱</div></div>';
+    html += '</div>';
+
+    // chart
+    html += '<div class="sp-sec">累計盈虧走勢</div>';
+    html += '<div class="sp-chart">' + chartSVG(points)
+          + '<div class="sp-chart__foot"><span>' + esc(points[0].date) + '</span><span>' + esc(points[points.length-1].date) + '</span></div></div>';
+
+    // pool breakdown
+    var pb = r.poolBreakdown || {};
+    html += '<div class="sp-sec">各彩池盈虧細分</div>';
+    html += '<div class="sp-pool">';
+    POOL_ORDER.forEach(function(k){
+      var p = pb[k] || { cost:0, payout:0, net:0, wins:0, bets:0 };
+      var nm = POOL_NAME[k] || { nm:k, en:k, unit:'' };
+      html += '<div class="sp-pool__card">'
+        + '<div class="sp-pool__nm">' + esc(nm.nm) + '<small>' + esc(nm.en) + '</small></div>'
+        + '<div class="sp-pool__net ' + cls(p.net) + '">' + signed(p.net) + '</div>'
+        + '<div class="sp-pool__sub">中 ' + (p.wins||0) + ' / ' + (p.bets||0) + ' 場 · 投 ' + money(p.cost) + ' · 派 ' + money(p.payout) + '</div>'
+        + '</div>';
+    });
+    html += '</div>';
+
+    // explainer
+    html += '<div class="sp-sec">彩池與注項</div>';
+    html += '<dl class="sp-explain">'
+      + '<dt>四連環（F4 · 任序首 4 · $10）</dt><dd>模型首 4 隻任何次序跑入實際頭 4 名即中，每場 1 注。</dd>'
+      + '<dt>單T（TRIO · 任序首 3 · $40）</dt><dd>模型首 4 隻當中任何 3 隻任序跑入三甲即中，複式 4 注。</dd>'
+      + '<dt>三重彩（TIERCE · 依序首 3 · $240）</dt><dd>須準確命中頭 3 名次序，複式箱 24 注，最貴亦最難。</dd>'
+      + '<dt>四重彩（QUARTET · 依序首 4 · $240）</dt><dd>須準確命中頭 4 名次序，複式箱 24 注。</dd>'
+      + '</dl>';
+
+    // per-day log
+    html += '<div class="sp-sec">逐日盈虧（' + (r.daysEvaluated||0) + ' 個賽日）</div>';
+    html += '<div class="sp-log"><table><thead><tr>'
+          + '<th style="text-align:left">賽日</th><th>場</th><th>投注</th><th>派彩</th><th>當日</th><th>累計</th>'
+          + '</tr></thead><tbody>';
+    // newest first
+    points.slice().reverse().forEach(function(p){
+      html += '<tr>'
+        + '<td class="d">' + esc(V_NAME[p.venue]||p.venue||'') + '<small>' + esc(fmtDate(p.date)) + '</small></td>'
+        + '<td>' + (p.racesBet||0) + '</td>'
+        + '<td>' + money(p.cost) + '</td>'
+        + '<td>' + money(p.payout) + '</td>'
+        + '<td class="' + cls(p.net) + '">' + signed(p.net) + '</td>'
+        + '<td class="' + cls(p.cum) + '">' + signed(p.cum) + '</td>'
+        + '</tr>';
+    });
+    html += '</tbody></table></div>';
+
+    bodyEl.innerHTML = html;
+  }
+
+  function renderPending(r){
+    var pend = r && r.pending ? Number(r.pending) : 0;
+    if (!pend){ pendEl.innerHTML = ''; return; }
+    pendEl.innerHTML = '<div class="sp-pending"><span class="dot"></span>正在補算 ' + pend + ' 個賽日嘅箱形派彩，數字會陸續更新…</div>';
+  }
+
+  function scheduleRefresh(r){
+    if (refreshTimer){ clearTimeout(refreshTimer); refreshTimer = null; }
+    var pend = r && r.pending ? Number(r.pending) : 0;
+    // keep polling while the backend self-heals pending days (each load fills one);
+    // cap attempts so we never loop forever on a stuck day.
+    if (pend > 0 && refreshTries < 80){
+      refreshTries++;
+      refreshTimer = setTimeout(load, 30000);
+    }
+  }
+
+  function load(){
+    TX_API.strategyPnl().then(function(r){
+      render(r);
+      renderPending(r);
+      scheduleRefresh(r);
+    }).catch(function(){
+      bodyEl.innerHTML = '<div class="sp-err">暫時無法載入策略盈虧數據，請稍後再試。</div>';
+    });
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>
