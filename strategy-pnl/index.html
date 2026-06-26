@@ -69,6 +69,7 @@
 .sp-note strong{color:var(--ink)}
 .sp-empty,.sp-err{padding:50px 20px;text-align:center;font-family:var(--font-display);font-size:13px;color:var(--ink-mute);line-height:1.7}
 .sp-err{color:#A81A2F;font-family:var(--font-mono);font-size:12px}
+.sp-loadhint{margin:14px auto 0;max-width:460px;text-align:center;font-family:var(--font-display);font-size:11.5px;color:var(--ink-mute);line-height:1.7}
 </style>
 </head>
 <body data-page="strategy-pnl">
@@ -92,6 +93,7 @@
 
 <div id="sp-body">
   <div class="tx-lemni-host" data-tx-loader data-size="lg" data-label="彙總策略盈虧中…"></div>
+  <p class="sp-loadhint">首次載入需向 HKJC 逐日彙總多個賽事日嘅箱形派彩，需時較長（約 10–40 秒）；數字準備好會即時顯示走勢圖與逐日紀錄。</p>
 </div>
 
 <div class="sp-note">
@@ -296,13 +298,34 @@
     }
   }
 
+  var spHasData = false, spErrTries = 0;
+  function spWithTimeout(promise, ms){
+    return new Promise(function(resolve, reject){
+      var t = setTimeout(function(){ reject(new Error('timeout')); }, ms);
+      promise.then(function(v){ clearTimeout(t); resolve(v); }, function(e){ clearTimeout(t); reject(e); });
+    });
+  }
   function load(){
-    TX_API.strategyPnl().then(function(r){
+    spWithTimeout(TX_API.strategyPnl(), 45000).then(function(r){
+      spErrTries = 0;
+      if (r && !r.error && (r.points || []).length) spHasData = true;
       render(r);
       renderPending(r);
       scheduleRefresh(r);
     }).catch(function(){
-      bodyEl.innerHTML = '<div class="sp-err">暫時無法載入策略盈虧數據，請稍後再試。</div>';
+      // already showing a chart → keep it, just keep polling the backend self-heal
+      if (spHasData){ scheduleRefresh({ pending: 1 }); return; }
+      // first load still warming up (cold endpoint / pending backfill) → reassure + auto-retry
+      spErrTries++;
+      if (spErrTries <= 6){
+        bodyEl.innerHTML = '<div class="sp-empty"><div class="tx-lemni-host" data-tx-loader data-size="lg" data-label="仍在彙總中…"></div>'
+          + '<p class="sp-loadhint">首次彙總需向 HKJC 逐日取數，需時較長，正在自動重試（第 ' + spErrTries + ' 次）…</p></div>';
+        if (window.TXLoader) TXLoader.scan(bodyEl);
+        if (refreshTimer){ clearTimeout(refreshTimer); }
+        refreshTimer = setTimeout(load, 8000);
+      } else {
+        bodyEl.innerHTML = '<div class="sp-err">暫時無法載入策略盈虧數據，請稍後重新整理頁面再試。</div>';
+      }
     });
   }
 
