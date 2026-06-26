@@ -89,6 +89,15 @@
 
 .dash-skel{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-mute);padding:14px 2px;letter-spacing:.04em}
 .dash-err{font-family:var(--font-mono);font-size:11.5px;color:var(--red);padding:14px 2px}
+
+/* ── page-head action buttons (策略盈虧 + 預測與賽果) ── */
+.ph-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.ph-head__main{flex:1 1 220px;min-width:0}
+.ph-acts{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start;justify-content:flex-end}
+.ph-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:12px;line-height:1.1;padding:9px 13px;border-radius:11px;border:1px solid var(--ink);color:var(--ink);background:var(--paper);white-space:nowrap;text-align:center;transition:transform 120ms ease,box-shadow 120ms ease}
+.ph-btn:active{transform:scale(.97)}
+.ph-btn--gold{border-color:#A07A1F;color:#2E2108;background:linear-gradient(180deg,#FFF4C2,#EBC964 55%,#A07A1F);box-shadow:inset 0 1px 0 rgba(255,248,210,.7),0 4px 12px -5px rgba(160,122,31,.55)}
+@media(max-width:480px){.ph-acts{width:100%}.ph-btn{flex:1 1 auto}}
 </style>
 </head>
 <body data-page="dashboard">
@@ -100,9 +109,15 @@
   <strong id="ticker-clock">HK --:-- ---</strong> · <span id="ticker-next"><span data-tx-loader data-size="sm" data-label="載入中…"></span></span>
 </div>
 
-<section class="page-head">
-  <h1><small>TIANXI ORACLE · DATA &amp; PREDICTIONS</small>儀表板</h1>
-  <p>引擎即時數據 · 模型精選 · Elo 與騎練排行。純分析記錄，不涉及金錢，不提供投注建議。</p>
+<section class="page-head ph-head">
+  <div class="ph-head__main">
+    <h1><small>TIANXI ORACLE · DATA &amp; PREDICTIONS</small>儀表板</h1>
+    <p>引擎即時數據 · 模型精選 · Elo 與騎練排行。純分析記錄，不涉及金錢，不提供投注建議。</p>
+  </div>
+  <div class="ph-acts">
+    <a href="/strategy-pnl/" class="ph-btn ph-btn--gold">天喜策略累計盈虧紀錄</a>
+    <a href="/results/" class="ph-btn">預測與賽果</a>
+  </div>
 </section>
 <div class="dash-fresh" id="dash-fresh">引擎連線中…</div>
 
