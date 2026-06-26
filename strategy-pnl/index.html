@@ -306,7 +306,7 @@
     });
   }
   function load(){
-    spWithTimeout(TX_API.strategyPnl(), 45000).then(function(r){
+    spWithTimeout(TX_API.strategyPnl(), 60000).then(function(r){
       spErrTries = 0;
       if (r && !r.error && (r.points || []).length) spHasData = true;
       render(r);
