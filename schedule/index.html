@@ -662,8 +662,8 @@
       var node;
       if (isRace){
         node = document.createElement('a');
-        node.href = '/results/';
-        node.title = iso + ' 賽後對賬';
+        if (iso > todayISO){ node.href = '/predictor/'; node.title = iso + ' 即將舉行 · 賽前預測'; }
+        else { node.href = '/results/?date=' + iso; node.title = iso + ' 賽後對賬'; }
       } else {
         node = document.createElement('div');
       }
@@ -808,7 +808,7 @@
     }
     list.forEach(function(m){
       var a = document.createElement('a');
-      a.href = '/results/';
+      a.href = '/results/?date=' + m.date;
       a.className = 'past-item';
 
       var stamp = el('div', 'past-item__stamp');
@@ -872,14 +872,19 @@
     }
     var latest = all[0];
     var ym = latest.date.slice(0,7);
-    var monthDates = all
-      .filter(function(m){ return m.date.slice(0,7) === ym; })
-      .map(function(m){ return m.date; });
+    var todayISO = new Date().toISOString().slice(0,10);
+    var monthMeetings = all.filter(function(m){ return m.date.slice(0,7) === ym; });
+    var monthDates = monthMeetings.map(function(m){ return m.date; });
+    // 下方「往期賽事」列表 = 同一(日曆)月份、已完成且非主打嘅賽期，令日曆圓點
+    // 同列表保持一致（修正「日曆 vs 列表」對唔上嘅問題）。
+    var editions = monthMeetings
+      .filter(function(m){ return m.date !== latest.date && m.date <= todayISO; })
+      .sort(function(a,b){ return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
 
     renderHead(latest);
     renderStats(all, latest);
     renderCalendar(ym, monthDates, latest.date);
-    renderPast(all.slice(1, 6));
+    renderPast(editions.slice(0, 6));
     return window.TX_API.meeting(latest.date).then(renderMeeting);
   }).catch(function(err){
     console.error('[schedule] load failed', err);
