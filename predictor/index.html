@@ -66,6 +66,21 @@
 .tp-tag--cold{background:var(--gold-tint);color:var(--accent-strong)}
 .tp-tag--hot{background:rgba(200,16,46,0.12);color:var(--red)}
 
+.tp-cov{margin-top:10px;padding:11px 12px;background:var(--paper-2);border:1px solid var(--rule);border-radius:12px}
+.tp-cov__hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px;flex-wrap:wrap}
+.tp-cov__ttl{font-family:var(--font-display);font-weight:900;font-size:12px;color:var(--ink)}
+.tp-q{font-family:var(--font-mono);font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.tp-q--hi{background:var(--gold-tint);color:var(--accent-strong)}
+.tp-q--mid{background:var(--paper-3);color:var(--ink-soft)}
+.tp-q--lo{background:rgba(120,120,120,0.13);color:var(--ink-mute)}
+.tp-cov__grid{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:5px 8px;font-family:var(--font-mono);font-size:10.5px;align-items:center}
+.tp-cov__grid .lbl{color:var(--ink-soft);font-weight:600}
+.tp-cov__grid .hd{color:var(--ink-faint);font-size:9px;text-align:right;letter-spacing:0.03em;font-weight:700}
+.tp-cov__grid .v{text-align:right;color:var(--ink-mute);font-weight:600}
+.tp-cov__grid .v b{color:var(--accent-strong);font-weight:800}
+.tp-cov__note{margin-top:9px;font-size:9.5px;color:var(--ink-mute);line-height:1.6}
+.tp-cov__note b{color:var(--ink-soft)}
+
 .disclaimer-note{padding:12px 20px;font-size:10px;color:var(--ink-mute);line-height:1.5;background:var(--paper-2);border-left:3px solid var(--gold-2);margin:12px 20px;border-radius:0 6px 6px 0}
 </style>
 </head>
@@ -110,6 +125,7 @@
         <div class="tp-col__body" id="tp-market"></div>
       </div>
     </div>
+    <div class="tp-cov" id="tp-cov" style="display:none"></div>
     <div class="tp-legend">
       <b>點樣睇？</b> 左欄係天喜模型獨立預測（賽日 LGB 集成到齊先公佈，<span class="tp-tag tp-tag--cold">搏冷</span>），分數不受賠率影響。右欄將<b>臨場盤口</b>以對數混合（β0.4）入模型，命中率較高但會<span class="tp-tag tp-tag--hot">偏熱門</span>，<b>並非</b>捕捉冷馬之指引 — 想搏冷請睇左欄。
     </div>
@@ -155,18 +171,18 @@
   }
 
   // ───────────────────────── Today picks · dual column ─────────────────────────
-  function tpItem(rank, name, meta, big, sub){
+  function tpItem(rank, name, meta, big, sub, badge){
     var rc = rank === 1 ? 'r1' : rank === 2 ? 'r2' : rank === 3 ? 'r3' : '';
     return '<div class="tp-item">' +
       '<div class="tp-item__rank '+rc+'">'+rank+'</div>' +
-      '<div class="tp-item__name"><span class="n">'+esc(name)+'</span><span class="m">'+esc(meta)+'</span></div>' +
+      '<div class="tp-item__name"><span class="n">'+esc(name)+'</span><span class="m">'+esc(meta)+(badge?' '+badge:'')+'</span></div>' +
       '<div class="tp-item__val">'+big+(sub?'<span class="sub">'+sub+'</span>':'')+'</div>' +
     '</div>';
   }
 
   function renderRaceCols(race){
     var model = $('tp-model'), market = $('tp-market');
-    if (!race){ model.innerHTML = ''; market.innerHTML = ''; return; }
+    if (!race){ model.innerHTML = ''; market.innerHTML = ''; var _c=$('tp-cov'); if(_c){_c.style.display='none';_c.innerHTML='';} return; }
     var picks = (race.picks || []).slice();
 
     // ── Left: model 搏冷 — 只在 LGB 集成覆蓋此場後先顯示（未覆蓋唔出初步排位）──
@@ -179,7 +195,12 @@
         var name = p.nameCh || p.nameEn || '—';
         var meta = '#' + (p.horseNumber!=null?p.horseNumber:'?') + ' · 檔' + (p.draw!=null?p.draw:'—');
         var pct = p.pWin!=null ? Math.round(p.pWin*100)+'%' : '—';
-        return tpItem(i+1, name, meta, '<span class="big">'+pct+'</span>', 'P勝');
+        var t3 = p.pTop3!=null ? Math.round(p.pTop3*100) : null;
+        var t4 = p.pTop4!=null ? Math.round(p.pTop4*100) : null;
+        var sub = (t3!=null || t4!=null) ? ('三甲'+(t3!=null?t3:'—')+'% · 前四'+(t4!=null?t4:'—')+'%') : '勝';
+        var badge = (p.value === 'overlay' && p.valueEdge!=null)
+          ? '<span class="tp-tag tp-tag--cold">值博Δ+'+(p.valueEdge*100).toFixed(1)+'pp</span>' : '';
+        return tpItem(i+1, name, meta, '<span class="big">'+pct+'</span>', sub, badge);
       }).join('') : '<div class="tp-wait"><strong>此場整備中</strong>待數據就緒</div>';
     }
 
@@ -198,6 +219,32 @@
     } else {
       market.innerHTML = '<div class="tp-wait"><span class="ico">🕑</span><strong>等臨場盤口</strong>賽日近開賽前自動更新<br>（混合 β0.4 · 偏熱門參考）</div>';
     }
+    renderCoverage(race, lgbOk);
+  }
+
+  // ── Box-coverage estimate panel (per race) — RELATIVE 揀場 signal, not a win rate ──
+  function covCell(v){ return v!=null ? Math.round(v*100)+'%' : '—'; }
+  function renderCoverage(race, lgbOk){
+    var el = $('tp-cov'); if (!el) return;
+    var cov = race && race.expectedBoxCoverage;
+    var rq = race && race.raceQuality;
+    if (!lgbOk || !cov){ el.style.display = 'none'; el.innerHTML = ''; return; }
+    el.style.display = '';
+    var qbadge = '';
+    if (rq){
+      var qcls = rq.tier === '高' ? 'tp-q--hi' : rq.tier === '低' ? 'tp-q--lo' : 'tp-q--mid';
+      qbadge = '<span class="tp-q '+qcls+'">同日相對 #'+esc(rq.rank)+'/'+esc(rq.total)+' · 場質'+esc(rq.tier)+'</span>';
+    }
+    var grid =
+      '<div class="lbl"></div><div class="hd">揀4</div><div class="hd">揀5</div><div class="hd">揀6</div>' +
+      '<div class="lbl">任序首3</div>' +
+        '<div class="v"><b>'+covCell(cov.trio_n4)+'</b></div><div class="v">'+covCell(cov.trio_n5)+'</div><div class="v">'+covCell(cov.trio_n6)+'</div>' +
+      '<div class="lbl">首4 First-4</div>' +
+        '<div class="v"><b>'+covCell(cov.first4_n4)+'</b></div><div class="v">'+covCell(cov.first4_n5)+'</div><div class="v">'+covCell(cov.first4_n6)+'</div>';
+    el.innerHTML =
+      '<div class="tp-cov__hd"><span class="tp-cov__ttl">箱形覆蓋率估算</span>'+qbadge+'</div>' +
+      '<div class="tp-cov__grid">'+grid+'</div>' +
+      '<div class="tp-cov__note">「揀N」= 取模型前 N 名落箱；數值 = 該箱命中（任序首3 / 首4 全入名）之<b>模型分析估算</b>機率。實際命中通常略高，僅供<b>同日相對</b>比較揀場，<b>非</b>實際勝率或投注建議。</div>';
   }
 
   function fmtStamp(iso){
@@ -231,7 +278,9 @@
       var no = r.raceNumber!=null ? r.raceNumber : '?';
       var dist = r.distance ? ' · ' + r.distance + 'm' : '';
       var cls = r.class ? ' · ' + r.class : '';
-      return '<option value="'+esc(no)+'">R'+esc(no)+esc(cls)+esc(dist)+'</option>';
+      var rq = r.raceQuality;
+      var q = rq ? ' · 場質' + rq.tier : '';
+      return '<option value="'+esc(no)+'">R'+esc(no)+esc(cls)+esc(dist)+esc(q)+'</option>';
     }).join('');
     function showRace(no){
       var r = races.filter(function(x){ return String(x.raceNumber) === String(no); })[0] || races[0];
