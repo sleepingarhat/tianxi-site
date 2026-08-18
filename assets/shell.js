@@ -120,6 +120,45 @@
     try {
       document.dispatchEvent(new CustomEvent('tx:shellready', { detail: { activePage: activePage } }));
     } catch (e) { /* no-op */ }
+    mountSeasonBanner(bb);
+  }
+
+  // ── 休季自動化 (2026-08-18): site-wide 休季中 banner ─────────────
+  // Reads GET /api/season (sessionStorage-cached 1h) and, when off_season,
+  // inserts a banner right after the brandbar on every page. Constant
+  // colors (not --ink/--paper) so it reads correctly in BOTH themes.
+  var SEASON_API = 'https://tianxi-backend.tianxi-entertainment.workers.dev/api/season';
+  function insertSeasonBanner(bb, data) {
+    if (!data || data.status !== 'off_season') return;
+    if (document.getElementById('txSeasonBanner')) return;
+    var el = document.createElement('div');
+    el.id = 'txSeasonBanner';
+    el.setAttribute('role', 'status');
+    el.style.cssText = 'background:#bf8a0a;color:#fff;padding:8px 14px;font-size:13px;font-weight:600;text-align:center;line-height:1.5';
+    el.textContent = '\uD83C\uDFD6\uFE0F 休季中 — 賽季已結束，預測引擎自動暫停；新季開鑼後自動恢復' + (data.lastMeeting ? '（上次賽事 ' + data.lastMeeting + '）' : '');
+    var anchor = bb || document.querySelector('[data-tx-shell="brandbar"]');
+    if (anchor && anchor.parentNode) {
+      anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    } else if (document.body) {
+      document.body.insertBefore(el, document.body.firstChild);
+    }
+  }
+  function mountSeasonBanner(bb) {
+    var KEY = 'tx_season_v1';
+    try {
+      var cached = sessionStorage.getItem(KEY);
+      if (cached) {
+        var c = JSON.parse(cached);
+        if (c && c.t && (Date.now() - c.t) < 3600000) {
+          insertSeasonBanner(bb, c.d);
+          return;
+        }
+      }
+    } catch (e) { /* no-op */ }
+    fetch(SEASON_API, { credentials: 'omit' }).then(function (r) { return r.json(); }).then(function (d) {
+      try { sessionStorage.setItem(KEY, JSON.stringify({ t: Date.now(), d: { status: d.status, lastMeeting: d.lastMeeting } })); } catch (e) {}
+      insertSeasonBanner(bb, d);
+    }).catch(function () { /* fail-silent: no banner */ });
   }
 
   if (document.readyState === 'loading') {
