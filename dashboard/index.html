@@ -123,7 +123,7 @@
 
 <!-- ── 引擎狀態 ── -->
 <div class="eng-grid" id="eng-grid">
-  <div class="eng"><div class="eng__lbl">下一賽馬日</div><div class="eng__val" id="eng-day">—</div><div class="eng__sub" id="eng-day-sub"><span data-tx-loader data-size="sm" data-label="載入中…"></span></div></div>
+  <div class="eng"><div class="eng__lbl" id="eng-day-lbl">下一賽馬日</div><div class="eng__val" id="eng-day">—</div><div class="eng__sub" id="eng-day-sub"><span data-tx-loader data-size="sm" data-label="載入中…"></span></div></div>
   <div class="eng"><div class="eng__lbl">編排場次</div><div class="eng__val" id="eng-races">—</div><div class="eng__sub" id="eng-races-sub">—</div></div>
   <div class="eng"><div class="eng__lbl">預測引擎</div><div class="eng__val" id="eng-elo">—</div><div class="eng__sub" id="eng-elo-sub">—</div></div>
   <div class="eng"><div class="eng__lbl" id="eng-alpha-lbl">集成模型 α</div><div class="eng__val" id="eng-alpha">—</div><div class="eng__sub" id="eng-alpha-sub">—</div></div>
@@ -212,6 +212,7 @@
     if (c) c.textContent = hkClock();
     if (n){
       if (state.nextStart){ n.innerHTML = '下一場 T-' + TX_API.countdown(state.nextStart, null, state.nextDate); }
+      else if (state.seasonOff){ n.textContent = '休季中 · 新賽程待公佈'; }
       else if (state.dayLabel){ n.textContent = state.dayLabel; }
       else { n.textContent = '暫無場次 · 數據接駁中'; }
     }
@@ -412,6 +413,30 @@
   TX_API.smartCurrent().then(function(cur){
     if (!cur || !cur.date){ $('sched-head').textContent = '暫無賽馬日'; $('sched-slot').innerHTML = '<p class="sched-empty">暫未有賽程 · <a href="/schedule/">睇賽程表 →</a></p>'; return null; }
     var date = cur.date, venue = cur.venueName || VENUE_NAME[cur.venue] || '';
+    var hkToday = new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
+    var isPast = String(date).slice(0, 10) < hkToday;
+    var seasonOff = false;
+    try {
+      var sc = JSON.parse(sessionStorage.getItem('tx_season_v1') || 'null');
+      seasonOff = !!(sc && sc.d && sc.d.status === 'off_season');
+    } catch (e) { /* no-op */ }
+    function applyOffTexts(){
+      state.seasonOff = true;
+      var lb = $('eng-day-lbl'); if (lb) lb.textContent = '上次賽馬日';
+      var ds = $('eng-day-sub'); if (ds) ds.textContent = '休季中 · 新賽程待公佈';
+      var rs = $('eng-races-sub'); if (rs) rs.textContent = '休季中';
+      var df2 = $('dash-fresh'); if (df2) df2.textContent = '休季中 · 預測引擎自動暫停，新季開鑼後恢復';
+    }
+    if (isPast){
+      var lb0 = $('eng-day-lbl'); if (lb0) lb0.textContent = '上次賽馬日';
+      if (seasonOff) applyOffTexts();
+      else {
+        fetch((TX_API.base || '') + '/api/season', { credentials: 'omit' })
+          .then(function(r){ return r.json(); })
+          .then(function(sd){ if (sd && sd.status === 'off_season') applyOffTexts(); })
+          .catch(function(){ /* fail-silent */ });
+      }
+    }
     return TX_API.meeting(date).then(function(m){
       var races = (m && m.races) || [];
       var count = (m && m.totalRaces) || races.length;
@@ -420,13 +445,13 @@
         var md = TX_API.fmtMeetingDate ? TX_API.fmtMeetingDate(date) : date;
         var wd = (String(md).split(' ')[1]) || '';
         $('eng-day').innerHTML = TX_API.fmtDateShort(date) + '<small>' + esc(venue) + '</small>';
-        $('eng-day-sub').textContent = wd || (date || '');
+        if (!state.seasonOff) $('eng-day-sub').textContent = isPast ? ((wd ? wd + ' · ' : '') + '已舉行') : (wd || (date || ''));
         $('eng-races').innerHTML = count + '<small>場</small>';
-        $('eng-races-sub').textContent = venue || '待編排';
+        if (!state.seasonOff) $('eng-races-sub').textContent = venue || '待編排';
         var df = $('dash-fresh');
-        if (df && /引擎連線中/.test(df.textContent)) df.textContent = '賽日數據已接駁 · 模型運算中…';
+        if (df && /引擎連線中/.test(df.textContent) && !state.seasonOff) df.textContent = isPast ? '對上賽馬日資料 · 引擎待新賽事' : '賽日數據已接駁 · 模型運算中…';
       }
-      $('sched-head').innerHTML = (TX_API.fmtMeetingDate ? TX_API.fmtMeetingDate(date) : date) + (venue ? ' · ' + esc(venue) : '') + ' · ' + count + ' 場';
+      $('sched-head').innerHTML = (TX_API.fmtMeetingDate ? TX_API.fmtMeetingDate(date) : date) + (venue ? ' · ' + esc(venue) : '') + ' · ' + count + ' 場' + (isPast ? '（已舉行）' : '');
       var slot = $('sched-slot');
       var timed = races.filter(function(r){ return TX_API.cleanTime(r.startTime || r.start_time); });
       if (!timed.length){
