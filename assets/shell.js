@@ -110,11 +110,13 @@
     var activePage = Object.prototype.hasOwnProperty.call(PAGE_ALIAS, raw) ? (PAGE_ALIAS[raw] || '') : raw;
     var bb = document.querySelector('[data-tx-shell="brandbar"]');
     if (bb && !bb.dataset.txShellMounted) {
+      bb.classList.add('brandbar');   // defensive: pages that omit the class still get flex layout
       bb.innerHTML = BRANDBAR_HTML;
       bb.dataset.txShellMounted = '1';
     }
     var bn = document.querySelector('[data-tx-shell="botnav"]');
     if (bn && !bn.dataset.txShellMounted) {
+      bn.classList.add('botnav');
       bn.innerHTML = renderBotnav(activePage);
       bn.dataset.txShellMounted = '1';
     }
