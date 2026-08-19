@@ -111,6 +111,8 @@
     trainers: function(){ return j('/api/trainers'); },
     // analyze
     topPicks: function(raceId){ return j('/api/analyze/top-picks?raceId=' + encodeURIComponent(raceId)); },
+    predictionAccuracy: function(days){ return j('/api/analyze/prediction-accuracy?days=' + (days||30)); },
+    r5Comparison: function(days){ return j('/api/analyze/r5-comparison?days=' + (days||30)); },
     hitRate: function(date){ return j('/api/analyze/hit-rate?date=' + encodeURIComponent(date)); },
     todayPicks: function(venue){ return j('/api/analyze/today-picks' + (venue ? '?venue=' + encodeURIComponent(venue) : '')); },
     analyze:  function(body){ return jp('/api/analyze', body); },
@@ -118,6 +120,16 @@
     explain:  function(raceId, horseId){ return j('/api/analyze/explain?raceId=' + encodeURIComponent(raceId) + '&horseId=' + encodeURIComponent(horseId)); },
     hitRateRollup: function(days){ return j('/api/analyze/hit-rate-rollup?days=' + (days||90)); },
     strategyPnl: function(q){ return j('/api/analyze/strategy-pnl' + (q || '')); },
+    // lounge — retained for the legacy global chatroom
+    lounge: {
+      chat: function(since, lim){
+        var qs = [];
+        if (since) qs.push('since=' + encodeURIComponent(since));
+        if (lim)   qs.push('limit=' + lim);
+        return j('/api/lounge/chat' + (qs.length ? '?' + qs.join('&') : ''));
+      },
+      send: function(body){ return jp('/api/lounge/chat', body); },
+    },
     // shared helpers
     cleanTime: cleanTime,
     countdown: countdown,
