@@ -117,6 +117,14 @@
     return value === null || value === undefined || value === '' ? fallback : String(value);
   }
 
+  function present(value){
+    return value !== null && value !== undefined && value !== '';
+  }
+
+  function labelledStat(label, value, suffix){
+    return present(value) ? label + ' ' + value + (suffix || '') : '';
+  }
+
   function link(id, html, className, attrs){
     var extra = attrs || '';
     return id
@@ -129,7 +137,7 @@
     var url = code && TX_API.silksUrl ? TX_API.silksUrl(code) : '';
     return url
       ? '<img class="' + className + '" src="' + esc(url) + '" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">'
-      : '<div class="' + className + ' silks-fallback" aria-hidden="true">—</div>';
+      : '<div class="' + className + ' silks-fallback" aria-hidden="true"></div>';
   }
 
   function empty(title, detail, retry){
@@ -169,16 +177,16 @@
     var english = horse.nameEn && horse.nameEn !== horse.nameCh
       ? '<small>' + esc(horse.nameEn) + '</small>' : '';
     var status = horse.status === 'active' ? '現役'
-      : horse.status === 'retired' ? '已退役' : val(horse.status, '—');
+      : horse.status === 'retired' ? '已退役' : val(horse.status, '');
     var html =
       '<span class="index-horse" role="cell">' +
         silk(horse.code, true) +
         '<span class="index-identity"><strong>' + name + '</strong>' + english + '</span>' +
       '</span>' +
       '<span class="index-status ' + (horse.status === 'retired' ? 'retired' : '') + '" role="cell">' + esc(status) + '</span>' +
-      '<span role="cell">' + esc(val(horse.totalStarts, '—')) + '</span>' +
-      '<span role="cell">' + esc(val(horse.totalWins, '—')) + '</span>' +
-      '<span role="cell">' + esc(horse.elo == null ? '—' : Math.round(horse.elo)) + '</span>';
+      '<span role="cell">' + esc(val(horse.totalStarts, '')) + '</span>' +
+      '<span role="cell">' + esc(val(horse.totalWins, '')) + '</span>' +
+      '<span role="cell">' + esc(horse.elo == null ? '' : Math.round(horse.elo)) + '</span>';
     return link(horse.id, html, 'index-row' + (horse.id ? ' is-link' : ''), ' role="row"');
   }
 
@@ -269,6 +277,14 @@
   }
 
   function entryHtml(item){
+    var raceStats = [
+      labelledStat('檔', item.draw),
+      labelledStat('賠率', item.odds)
+    ].filter(Boolean);
+    var raceTag = [
+      present(item.raceNo) ? 'R' + item.raceNo : '',
+      present(item.num) ? '#' + item.num : ''
+    ].filter(Boolean).join(' · ');
     var inner =
       silk(item.silksCode) +
       '<div><div class="horse-name">' + esc(item.nameCh || item.nameEn || '未有名稱') +
@@ -276,10 +292,11 @@
       '</div><div class="horse-meta">' +
         (item.jockey ? '騎師 ' + esc(item.jockey) : '') +
         (item.trainer ? ' · 練馬師 ' + esc(item.trainer) : '') +
-      '</div><div class="horse-stats"><span>檔 <b>' + esc(val(item.draw, '—')) +
-      '</b></span><span>賠率 <b>' + esc(val(item.odds, '—')) + '</b></span>' +
-      '</div></div><div class="race-tag">R' + esc(val(item.raceNo, '—')) +
-      '<span>#' + esc(val(item.num, '—')) + '</span></div>';
+      '</div>' + (raceStats.length ? '<div class="horse-stats">' + raceStats.map(function(stat){
+        var parts = stat.split(' ');
+        return '<span>' + esc(parts.shift()) + ' <b>' + esc(parts.join(' ')) + '</b></span>';
+      }).join('') + '</div>' : '') + '</div>' +
+      (raceTag ? '<div class="race-tag">' + esc(raceTag) + '</div>' : '');
     return link(item.id, inner, 'horse-card' + (item.id ? ' is-link' : ''));
   }
 
@@ -296,16 +313,19 @@
     var horses = (data && data.horses) || [];
     document.getElementById(id).innerHTML = horses.length ? horses.map(function(horse, index){
       var score = by === 'elo'
-        ? (horse.elo == null ? '—' : Math.round(horse.elo))
-        : val(horse.totalWins, '—') + ' 勝';
-      var sub = val(horse.totalStarts, 0) + ' 戰 · ' + val(horse.totalWins, 0) + ' 勝';
+        ? (horse.elo == null ? '' : Math.round(horse.elo))
+        : (present(horse.totalWins) ? horse.totalWins + ' 勝' : '');
+      var sub = [
+        labelledStat('', horse.totalStarts, ' 戰').trim(),
+        labelledStat('', horse.totalWins, ' 勝').trim()
+      ].filter(Boolean).join(' · ');
       return link(
         horse.id,
         '<span class="leader-rank">' + (index + 1) + '</span>' +
         silk(horse.silksCode || horse.code, true) +
         '<span><span class="leader-name">' + esc(horse.nameCh || horse.nameEn || '未有名稱') +
-        '</span><span class="leader-sub">' + esc(sub) + '</span></span>' +
-        '<span class="leader-val">' + esc(score) + '</span>',
+        '</span>' + (sub ? '<span class="leader-sub">' + esc(sub) + '</span>' : '') + '</span>' +
+        (present(score) ? '<span class="leader-val">' + esc(score) + '</span>' : '<span></span>'),
         'leader-row' + (horse.id ? ' is-link' : '')
       );
     }).join('') : empty('資料整備中', '暫無可用排行榜資料');

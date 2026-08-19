@@ -191,9 +191,14 @@
           var form = unwrap(responses[1]) || {};
           var legacyHorse = detail.horse || detail;
           var legacyFormHorse = form.horse || {};
-          var legacyStarts = Number(legacyHorse.totalStarts) > 0
+          var legacyStarts = has(legacyHorse.totalStarts)
             ? legacyHorse.totalStarts
-            : (Number(legacyFormHorse.totalStarts) > 0 ? legacyFormHorse.totalStarts : null);
+            : (has(legacyFormHorse.totalStarts) ? legacyFormHorse.totalStarts : null);
+          function legacyRecordValue(key) {
+            return has(legacyHorse[key])
+              ? legacyHorse[key]
+              : (has(legacyFormHorse[key]) ? legacyFormHorse[key] : null);
+          }
           var horse = {
             id: legacyHorse.id || legacyHorse.horseId || legacyFormHorse.id || horseId,
             code: legacyHorse.code || legacyFormHorse.code,
@@ -215,9 +220,9 @@
             totalStakes: legacyHorse.totalStakes,
             lastRaceDate: legacyHorse.lastRaceDate,
             record: {
-              wins: legacyStarts != null
-                ? (has(legacyHorse.totalWins) ? legacyHorse.totalWins : legacyFormHorse.totalWins)
-                : null,
+              wins: legacyStarts != null ? legacyRecordValue("totalWins") : null,
+              seconds: legacyStarts != null ? legacyRecordValue("totalSeconds") : null,
+              thirds: legacyStarts != null ? legacyRecordValue("totalThirds") : null,
               totalStarts: legacyStarts
             }
           };
