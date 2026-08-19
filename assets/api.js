@@ -97,6 +97,12 @@
     // horses
     horses:           function(q){ return j('/api/horses' + (q || '')); },
     horse:            function(id){ return j('/api/horses/' + encodeURIComponent(id)); },
+    horseResearch:    function(id, options){
+      options = options || {};
+      var qs = Object.keys(options).filter(function(k){ return options[k] != null && options[k] !== ''; })
+        .map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(options[k]); }).join('&');
+      return j('/api/horses/' + encodeURIComponent(id) + '/research' + (qs ? '?' + qs : ''));
+    },
     horseForm:        function(id, lim){ return j('/api/horses/' + encodeURIComponent(id) + '/form?limit=' + (lim||10)); },
     horseSearch:      function(q){ return j('/api/horses/search/query?q=' + encodeURIComponent(q)); },
     horseLeaderboard: function(by, lim, status){ return j('/api/horses/leaderboard?by=' + encodeURIComponent(by||'elo') + '&limit=' + (lim||10) + '&status=' + encodeURIComponent(status||'all')); },

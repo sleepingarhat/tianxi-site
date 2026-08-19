@@ -1,255 +1,476 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-HK">
 <head>
-<meta charset="utf-8">
-<script src="/assets/theme.js"></script>
+  <meta charset="utf-8">
+  <script src="/assets/theme.js"></script>
   <script src="/assets/shell.js" defer></script>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#FDFBF5">
-<title>馬匹詳情 · 天喜 TIANXI</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css">
-<link rel="stylesheet" href="/assets/shell.css">
-<script src="/assets/api.js"></script>
-<style>
-.sub-bar{position:sticky;top:60px;z-index:40;background:var(--paper);border-bottom:1px solid var(--rule);padding:10px 16px;display:flex;align-items:center;gap:10px}
-.sub-bar a.back{color:var(--ink);font-size:18px;font-weight:700;text-decoration:none;padding:4px 8px;margin-left:-8px}
-.sub-bar h1{font-family:var(--font-display);font-weight:800;font-size:16px;color:var(--ink)}
-
-.hero-row{display:flex;align-items:center;gap:14px;padding:18px 16px;border-bottom:1px solid var(--rule)}
-.hero-silks{width:56px;height:56px;flex-shrink:0;object-fit:contain;border:1px solid var(--rule-2);border-radius:6px;background:var(--paper-2)}
-.hero-num{font-family:var(--font-mono);font-weight:800;font-size:22px;color:var(--ink);line-height:1}
-.hero-name{font-family:var(--font-display);font-weight:900;font-size:20px;color:var(--ink);line-height:1.15;margin-top:2px}
-.hero-name small{display:block;font-size:11px;color:var(--ink-mute);letter-spacing:.08em;font-weight:500;margin-top:2px}
-
-.kv-table{border-collapse:collapse;width:100%;font-size:13px}
-.kv-table tr{border-bottom:1px solid var(--rule)}
-.kv-table th{text-align:left;padding:10px 16px;color:var(--ink-mute);font-weight:500;width:44%;font-size:12px;background:var(--paper)}
-.kv-table td{padding:10px 16px;color:var(--ink);font-weight:600;font-family:var(--font-body);text-align:right}
-.kv-table td.mono{font-family:var(--font-mono)}
-
-.section-hd{padding:14px 16px 6px;font-size:11px;color:var(--ink-mute);letter-spacing:.14em;font-weight:700;text-transform:uppercase;border-top:1px solid var(--rule-2);background:var(--paper-2)}
-.section-hd:first-of-type{border-top:0}
-
-.explain-card{margin:14px 16px 0;padding:14px;background:var(--paper-2);border:1px solid var(--rule-2);border-radius:10px}
-.explain-card h3{font-family:var(--font-display);font-weight:800;font-size:14px;color:var(--ink);margin-bottom:6px}
-.explain-card p{font-size:12px;color:var(--ink-soft);line-height:1.6}
-.explain-card .score-line{margin-top:8px;font-family:var(--font-mono);font-size:12px;color:var(--ink);display:flex;justify-content:space-between;padding:6px 0;border-top:1px dashed var(--rule-2)}
-.explain-card .score-line:first-of-type{margin-top:10px}
-
-.empty{padding:40px 16px;text-align:center;color:var(--ink-mute);font-size:13px}
-.err{padding:20px;color:var(--red);font-size:12px;text-align:center}
-.disclaimer-strip{margin-top:16px;padding:12px 16px;background:var(--paper-2);border-top:1px solid var(--rule);color:var(--ink-mute);font-size:11px;line-height:1.5}
-.disclaimer-strip strong{color:var(--ink-soft)}
-</style>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0B1612">
+  <meta name="description" content="天喜馬匹研究檔案：以可追溯資料整理香港賽馬近績、Elo、表現切片及操練紀錄。">
+  <meta property="og:title" content="馬匹研究檔案 · 天喜 TIANXI">
+  <meta property="og:description" content="香港賽馬研究檔案，展示可追溯的近績、評分、操練及資料覆蓋。">
+  <title>馬匹研究檔案 · 天喜 TIANXI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/tokens.css">
+  <link rel="stylesheet" href="/assets/shell.css">
+  <script src="/assets/api.js"></script>
+  <style>
+    .shell { max-width: 760px; }
+    .horse-wrap { max-width: 760px; margin: auto; padding-bottom: 28px; }
+    .subbar { position: sticky; top: 60px; z-index: 40; display: flex; gap: 10px; align-items: center; padding: 10px 18px; background: color-mix(in srgb,var(--paper) 94%,transparent); border-bottom: 1px solid var(--rule); backdrop-filter: blur(10px); }
+    .back { margin-left: -8px; padding: 2px 8px; font-size: 22px; line-height: 1; border-radius: 6px; }
+    .back:hover, .back:focus-visible { background: var(--paper-2); outline: 0; }
+    .subbar h1 { font: 800 16px var(--font-display); }
+    .hero { display: grid; grid-template-columns: 64px 1fr auto; gap: 14px; padding: 22px 18px 18px; background: linear-gradient(110deg,var(--paper-2),var(--paper)); border-bottom: 1px solid var(--rule); }
+    .hero.no-silks { grid-template-columns: 1fr auto; }
+    .silks { width: 64px; height: 64px; object-fit: contain; border: 1px solid var(--rule-2); border-radius: 8px; }
+    .eyebrow, .label, .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .eyebrow { color: var(--accent); font-size: 10px; letter-spacing: .14em; font-weight: 700; }
+    .hero h2 { margin: 4px 0; font: 900 clamp(23px,6vw,34px)/1.12 var(--font-display); }
+    .hero h2 small { display: block; margin-top: 6px; color: var(--ink-mute); font: 500 11px var(--font-body); letter-spacing: .1em; }
+    .hero-code { color: var(--ink-mute); font-size: 11px; }
+    .status { display: inline-flex; gap: 6px; align-items: center; margin-top: 9px; padding: 3px 8px; border: 1px solid var(--rule-2); border-radius: 99px; color: var(--ink-soft); font: 700 10px var(--font-mono); }
+    .status::before { width: 6px; height: 6px; content: ""; border-radius: 50%; background: var(--green); }
+    .hero-number { color: var(--accent-strong); text-align: right; font: 700 22px var(--font-mono); }
+    .stats { display: grid; grid-template-columns: repeat(4,1fr); border-bottom: 1px solid var(--rule); }
+    .stat { padding: 13px 14px; border-right: 1px solid var(--rule); }
+    .stat:last-child { border: 0; }
+    .stat .label { display: block; color: var(--ink-mute); font-size: 9px; letter-spacing: .08em; }
+    .stat strong { display: block; margin-top: 3px; font: 900 18px var(--font-display); }
+    .section { padding: 18px; border-top: 7px solid var(--paper-2); }
+    .section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+    .section-head h3 { font: 800 16px var(--font-display); }
+    .section-head span { color: var(--ink-mute); font: 9px var(--font-mono); text-align: right; }
+    .grid { display: grid; grid-template-columns: repeat(2,1fr); border: 1px solid var(--rule); border-bottom: 0; }
+    .grid.one-column { grid-template-columns: 1fr; }
+    .grid.one-column .kv { border-right: 0; }
+    .kv { min-width: 0; padding: 10px 12px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .kv:nth-child(even) { border-right: 0; }
+    .kv .label { display: block; margin-bottom: 3px; color: var(--ink-mute); font-size: 9px; }
+    .kv strong { display: block; overflow-wrap: anywhere; font-size: 13px; }
+    .panel, .notice { padding: 14px; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper-2); }
+    .notice { border-left: 3px solid var(--gold-2); font-size: 11px; line-height: 1.65; }
+    .notice strong { color: var(--ink); }
+    .stack, .metrics { display: grid; gap: 8px; }
+    .form-card { overflow: hidden; border: 1px solid var(--rule); border-radius: 8px; }
+    .form-card summary { display: grid; grid-template-columns: 36px 1fr auto; gap: 10px; align-items: center; padding: 12px 13px; cursor: pointer; background: var(--paper-2); }
+    .form-card summary.no-position { grid-template-columns: 1fr auto; }
+    .form-card summary:hover { background: var(--paper-3); }
+    .form-card summary:focus-visible { outline: 2px solid var(--gold-2); outline-offset: -2px; }
+    .form-card summary::-webkit-details-marker { display: none; }
+    .form-pos { color: var(--ink); font: 900 16px var(--font-mono); }
+    .win { color: var(--green); } .place { color: var(--accent); }
+    .form-title { display: block; font-size: 12px; font-weight: 700; }
+    .form-sub { display: block; margin-top: 2px; }
+    .form-sub, .form-side { color: var(--ink-mute); font: 10px var(--font-mono); }
+    .form-detail { display: grid; grid-template-columns: repeat(2,1fr); gap: 7px 16px; padding: 12px 13px; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 11px; line-height: 1.7; }
+    .form-detail b { color: var(--ink); }
+    .footnote, .empty { color: var(--ink-mute); font-size: 10px; line-height: 1.6; }
+    .footnote { padding-top: 12px; }
+    .empty { padding: 12px 0; font-size: 12px; }
+    .elo { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; }
+    .elo-number { color: var(--accent-strong); font: 900 36px var(--font-display); }
+    .elo-meta { color: var(--ink-mute); font-size: 11px; line-height: 1.7; }
+    .spark { display: flex; align-items: end; gap: 3px; height: 42px; margin-top: 12px; border-bottom: 1px solid var(--rule); }
+    .spark i { display: block; flex: 1; min-width: 4px; background: var(--accent); opacity: .7; border-radius: 2px 2px 0 0; }
+    .metric { padding: 11px; border: 1px solid var(--rule); border-radius: 7px; background: var(--paper); }
+    .metric h4 { margin-bottom: 7px; font: 700 12px var(--font-display); }
+    .metric-row { display: flex; justify-content: space-between; gap: 8px; padding: 7px 0; border-top: 1px solid var(--rule); font-size: 11px; }
+    .metric-row span:last-child { text-align: right; font: 700 10px var(--font-mono); }
+    .signal { display: grid; grid-template-columns: 1fr auto; gap: 4px; padding: 10px 0; border-top: 1px solid var(--rule); }
+    .signal:first-child { border-top: 0; }.signal-value { color: var(--accent-strong); font: 800 13px var(--font-mono); }
+    .signal-meta, .signal-explain { grid-column: 1/-1; color: var(--ink-mute); font-size: 10px; line-height: 1.5; }.signal-explain { color: var(--ink-soft); }
+    .loading { padding: 22px 18px; }.skeleton { height: 12px; margin: 9px 0; border-radius: 4px; background: var(--paper-2); animation: pulse 1.2s ease-in-out infinite alternate; }
+    .error { margin: 20px 18px; padding: 16px; border: 1px solid var(--red); color: var(--red); font-size: 12px; }.retry { margin-top: 10px; padding: 7px 11px; border: 1px solid currentColor; border-radius: 5px; font-weight: 700; }
+    @keyframes pulse { to { opacity: .4; } }
+    @media (min-width: 720px) { .horse-wrap { border: 1px solid var(--rule); border-top: 0; } .hero, .section { padding-left: 26px; padding-right: 26px; } .botnav { max-width: 760px; bottom: 0; border-radius: 0; } }
+    @media (max-width: 430px) { .hero { grid-template-columns: 52px 1fr; gap: 11px; padding: 18px 14px; }.hero.no-silks { grid-template-columns: 1fr; }.silks { width: 52px; height: 52px; }.hero-number { grid-column: 2; text-align: left; margin-top: -10px; }.hero.no-silks .hero-number { grid-column: 1; }.stats { grid-template-columns: repeat(2,1fr); }.stat:nth-child(2) { border-right: 0; }.stat:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }.section { padding: 15px 14px; }.grid, .metrics { grid-template-columns: 1fr; }.kv:nth-child(even) { border-right: 1px solid var(--rule); }.form-detail { grid-template-columns: 1fr; } }
+    @media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
+  </style>
 </head>
 <body data-page="horse">
-<div class="shell">
+  <div class="shell">
+    <header class="brandbar" data-tx-shell="brandbar"></header>
+    <main class="horse-wrap">
+      <div class="subbar"><a class="back" href="javascript:history.length>1?history.back():(location.href='/')" aria-label="返回">‹</a><h1>馬匹研究檔案</h1></div>
+      <div id="app"><div class="loading" aria-live="polite"><div class="skeleton" style="width:38%"></div><div class="skeleton" style="width:70%;height:28px"></div><div class="skeleton" style="width:52%"></div></div></div>
+    </main>
+    <nav class="botnav" data-tx-shell="botnav"></nav>
+  </div>
+  <script>
+    (function () {
+      var app = document.getElementById("app");
+      var raceId = query("raceId");
+      var requestedHorseId = query("id");
 
-<header class="brandbar" data-tx-shell="brandbar"></header>
+      function query(name) {
+        var match = location.search.match(new RegExp("[?&]" + name + "=([^&]*)"));
+        return match ? decodeURIComponent(match[1]) : "";
+      }
 
-<div class="sub-bar">
-  <a href="javascript:history.length>1?history.back():(location.href='/')" class="back" aria-label="返回">‹</a>
-  <h1>馬匹詳情</h1>
-</div>
+      function has(value) {
+        if (value === null || value === undefined) return false;
+        var text = String(value).trim();
+        return text !== "" &&
+          !/^[-—–]+$/.test(text) &&
+          !/^(?:n\/a|na|null|undefined)$/i.test(text);
+      }
 
-<div class="hero-row" id="hero-row">
-  <div class="tx-lemni-host" data-tx-loader data-label="載入中…"></div>
-</div>
-
-<div class="section-hd">本場資料</div>
-<table class="kv-table" id="race-kv"><tbody></tbody></table>
-
-<div class="section-hd">馬匹資料</div>
-<table class="kv-table" id="horse-kv"><tbody></tbody></table>
-
-<div class="section-hd">天喜預測</div>
-<div id="explain-slot">
-  <div class="tx-lemni-host" data-tx-loader data-label="載入預測分析…"></div>
-</div>
-
-<div class="disclaimer-strip">
-  <strong>天喜為分析平台，不提供投注服務。</strong>以上預測分數為模型輸出之資訊展示，非投注建議。投注請透過合法渠道（HKJC）進行。
-</div>
-
-<nav class="botnav" data-tx-shell="botnav"></nav>
-
-</div>
-
-<script>
-(function(){
-  function esc(s){ return String(s == null || s === '' ? '—' : s).replace(/[&<>"']/g, function(c){
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-  }); }
-  function qs(n){
-    var m = location.search.match(new RegExp('[?&]' + n + '=([^&]*)'));
-    return m ? decodeURIComponent(m[1]) : null;
-  }
-
-  function renderKV(tbodyId, rows){
-    var tbody = document.querySelector('#' + tbodyId + ' tbody');
-    tbody.innerHTML = '';
-    rows.forEach(function(r){
-      if (r.value == null || r.value === '') return; // skip empty rows
-      var tr = document.createElement('tr');
-      tr.innerHTML = '<th>' + esc(r.label) + '</th>' +
-        '<td' + (r.mono ? ' class="mono"' : '') + '>' + esc(r.value) + '</td>';
-      tbody.appendChild(tr);
-    });
-  }
-
-  function renderHero(h, silksCode){
-    var row = document.getElementById('hero-row');
-    var silksHtml = silksCode
-      ? '<img class="hero-silks" loading="lazy" alt="綵衣" src="' + esc(TX_API.silksUrl(silksCode)) + '">'
-      : '<div class="hero-silks" aria-hidden="true"></div>';
-    row.innerHTML = silksHtml +
-      '<div>' +
-        (h.horseNumber ? '<div class="hero-num">#' + esc(h.horseNumber) + '</div>' : '') +
-        '<div class="hero-name">' + esc(h.nameCh || h.name_ch || h.name || '') +
-          (h.nameEn || h.name_en ? '<small>' + esc(h.nameEn || h.name_en) + '</small>' : '') +
-        '</div>' +
-      '</div>';
-  }
-
-  function renderExplain(ex){
-    var slot = document.getElementById('explain-slot');
-    if (!ex){
-      slot.innerHTML = '<div class="empty" style="padding:20px 16px">未有預測資料</div>';
-      return;
-    }
-    var rows = [];
-    if (ex.horseElo != null)   rows.push({ k: '馬匹 ELO (0.7×)',   v: Number(ex.horseElo).toFixed(0) });
-    if (ex.jockeyElo != null)  rows.push({ k: '騎師 ELO (0.2×)',   v: Number(ex.jockeyElo).toFixed(0) });
-    if (ex.trainerElo != null) rows.push({ k: '練馬師 ELO (0.1×)', v: Number(ex.trainerElo).toFixed(0) });
-    if (ex.eloComposite != null) rows.push({ k: '綜合 ELO',       v: Number(ex.eloComposite).toFixed(1) });
-    if (ex.factorBonus != null)  rows.push({ k: 'ELO 因子 (檔位+負磅)', v: (ex.factorBonus >= 0 ? '+' : '') + Number(ex.factorBonus).toFixed(2) });
-    if (ex.lgbScore != null)     rows.push({ k: 'LightGBM 分數',  v: Number(ex.lgbScore).toFixed(3) });
-    if (ex.finalScore != null)   rows.push({ k: '綜合分數',       v: Number(ex.finalScore).toFixed(1) });
-    if (ex.pWin != null)   rows.push({ k: '頭馬機率 (AI)', v: (Number(ex.pWin) * 100).toFixed(1) + '%' });
-    if (ex.pTop3 != null)  rows.push({ k: '前三機率 (AI)', v: (Number(ex.pTop3) * 100).toFixed(1) + '%' });
-    if (ex.rank != null)   rows.push({ k: '預測排名',       v: '#' + ex.rank });
-    if (ex.scoreSource)    rows.push({ k: '分數來源',       v: String(ex.scoreSource).toUpperCase() + (ex.lgbModelVersion ? ' · ' + ex.lgbModelVersion : '') });
-
-    var scoreHtml = rows.map(function(r){
-      return '<div class="score-line"><span>' + esc(r.k) + '</span><span>' + esc(r.v) + '</span></div>';
-    }).join('');
-
-    var defaultComment = '預測引擎 TX-Oracle v3：LightGBM lambdarank（場內排序）與 ELO+因子（馬 0.7×、騎 0.2×、練 0.1× + 檔位/負磅）按機率層融合，偏重 LightGBM；混合權重 α 由後台 app_settings.ensemble_alpha 動態管理，分數來源逐匹標示。';
-    var comment = ex.comment || ex.summary || defaultComment;
-
-    slot.innerHTML =
-      '<div class="explain-card">' +
-        '<h3>天喜預測解釋</h3>' +
-        '<p>' + esc(comment) + '</p>' +
-        scoreHtml +
-      '</div>';
-  }
-
-  function buildHorseKV(h){
-    return [
-      { label: '騎師',     value: h.jockey || h.jockey_name },
-      { label: '練馬師',   value: h.trainer || h.trainer_name },
-      { label: '檔位',     value: h.draw, mono: true },
-      { label: '負磅',     value: h.weight || h.carry_weight, mono: true },
-      { label: '馬匹體重', value: h.bodyWeight || h.body_weight, mono: true },
-      { label: '評分',     value: h.rating, mono: true },
-      { label: '年齡 / 性別', value: (h.age != null && h.sex) ? (h.age + ' / ' + h.sex) : (h.ageSex || h.age_sex) },
-      { label: '6 次近績',  value: h.last6 || h.last_6_form || h.form, mono: true },
-      { label: '最佳時間',  value: h.bestTime || h.best_time, mono: true },
-      { label: '配備',     value: h.gear, mono: true },
-      { label: '分齡讓磅',  value: h.ageAllowance || h.age_allowance, mono: true },
-      { label: '王牌',     value: h.trumpCard || h.trump_card },
-      { label: '優先出賽權', value: h.priority || h.priority_entry },
-      { label: '練馬師出賽優先', value: h.trainerPriority || h.trainer_priority },
-    ];
-  }
-
-  function buildRaceKV(r){
-    return [
-      { label: '賽事', value: r.raceName || r.race_name },
-      { label: '場次', value: r.raceNumber || r.race_no, mono: true },
-      { label: '日期', value: TX_API.fmtMeetingDate(r.date), mono: true },
-      { label: '開跑', value: TX_API.cleanTime(r.startTime || r.start_time), mono: true },
-      { label: '場地', value: r.venueName || r.venue },
-      { label: '班次', value: r.className || r.class_name || r.class },
-      { label: '距離', value: (r.distanceM || r.distance_m || r.distance) + (r.distanceM || r.distance_m || r.distance ? '米' : ''), mono: true },
-      { label: '路況', value: r.going },
-      { label: '讓賽', value: r.handicapType || r.handicap_type },
-    ];
-  }
-
-  function boot(){
-    var horseId = qs('id');
-    var raceId = qs('raceId');
-    var no = qs('no');
-
-    if (!horseId && !(raceId && no)){
-      document.getElementById('hero-row').innerHTML = '<div class="err">URL 缺少 id 或 raceId+no 參數</div>';
-      document.getElementById('explain-slot').innerHTML = '';
-      return;
-    }
-
-    // Resolve horse data + race data. Endpoint tolerant: tries the rich detail endpoint
-    // first, then falls back to horses/:id and races/:id entry match.
-    var horsePromise;
-    if (horseId && TX_API.horseDetail){
-      horsePromise = TX_API.horseDetail(horseId).catch(function(){ return TX_API.horse(horseId); });
-    } else if (horseId){
-      horsePromise = TX_API.horse(horseId);
-    } else {
-      horsePromise = TX_API.race(raceId).then(function(r){
-        var ent = (r.entries || []).find(function(e){
-          return String(e.horseNumber || e.horse_no || e.no) === String(no);
+      function esc(value) {
+        return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
+          return {"&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"}[char];
         });
-        if (!ent) throw new Error('找不到該馬號');
-        ent._race = r.race || r;
-        return ent;
-      });
-    }
+      }
 
-    horsePromise.then(function(h){
-      var race = h._race || {};
-      // Populate hero
-      renderHero({
-        horseNumber: h.horseNumber || h.horse_no || h.no || no,
-        nameCh: h.nameCh || h.name_ch || h.name,
-        nameEn: h.nameEn || h.name_en,
-      }, h.silksCode || h.silks_code);
-      // Populate KV tables
-      var raceTable = document.getElementById('race-kv');
-      if (race && race.raceNumber) {
-        renderKV('race-kv', buildRaceKV(race));
-      } else if (raceTable) {
-        var raceHeading = raceTable.previousElementSibling;
-        if (raceHeading && raceHeading.classList.contains('section-hd')) {
-          raceHeading.style.display = 'none';
+      function unwrap(response) {
+        return response && response.data && typeof response.data === "object" ? response.data : response;
+      }
+
+      function date(value) {
+        return has(value) && TX_API.fmtMeetingDate ? TX_API.fmtMeetingDate(String(value)) : "";
+      }
+
+      function section(title, body, meta) {
+        return '<section class="section"><div class="section-head"><h3>' + title + '</h3>' +
+          (meta ? "<span>" + esc(meta) + "</span>" : "") + "</div>" + body + "</section>";
+      }
+
+      function keyValues(rows) {
+        return rows.filter(function (row) { return has(row[1]); }).map(function (row) {
+          return '<div class="kv"><span class="label">' + esc(row[0]) + "</span><strong>" + esc(row[1]) + "</strong></div>";
+        }).join("");
+      }
+
+      function keyValueGrid(rows) {
+        var present = rows.filter(function (row) { return has(row[1]); });
+        if (!present.length) return "";
+        return '<div class="grid ' + (present.length === 1 ? "one-column" : "") + '">' + keyValues(present) + "</div>";
+      }
+
+      function money(value) {
+        if (!has(value)) return "";
+        var numeric = Number(String(value).replace(/[$,\s]/g, ""));
+        return Number.isFinite(numeric) ? "HK$" + numeric.toLocaleString("en-HK", { maximumFractionDigits: 0 }) : String(value);
+      }
+
+      function distance(value) {
+        if (!has(value)) return "";
+        var text = String(value).trim();
+        return /^\d+(?:\.\d+)?$/.test(text) ? text + "米" : text;
+      }
+
+      function rate(value) {
+        var numeric = Number(value);
+        return has(value) && Number.isFinite(numeric) ? numeric.toFixed(1) + "%" : "";
+      }
+
+      function listText(value) {
+        if (Array.isArray(value)) return value.filter(has).join("、");
+        return value;
+      }
+
+      function sectionals(value) {
+        if (!Array.isArray(value) || !value.length) return "";
+        return value.map(function (item) {
+          return [
+            has(item.sectionNumber) ? "第" + item.sectionNumber + "段" : "",
+            has(item.sectionTime) ? item.sectionTime + "秒" : "",
+            has(item.positionAtSection) ? "位置 " + item.positionAtSection : ""
+          ].filter(has).join(" · ");
+        }).filter(has).join("；");
+      }
+
+      function legacyEnvelope(horseId) {
+        return Promise.all([
+          TX_API.horseDetail(horseId),
+          TX_API.horseForm(horseId, 12)
+        ]).then(function (responses) {
+          var detail = unwrap(responses[0]) || {};
+          var form = unwrap(responses[1]) || {};
+          var legacyHorse = detail.horse || detail;
+          var legacyFormHorse = form.horse || {};
+          var legacyStarts = Number(legacyHorse.totalStarts) > 0
+            ? legacyHorse.totalStarts
+            : (Number(legacyFormHorse.totalStarts) > 0 ? legacyFormHorse.totalStarts : null);
+          var horse = {
+            id: legacyHorse.id || legacyHorse.horseId || legacyFormHorse.id || horseId,
+            code: legacyHorse.code || legacyFormHorse.code,
+            silksCode: legacyHorse.silksCode || legacyHorse.code || legacyFormHorse.code,
+            nameCh: legacyHorse.nameCh || legacyFormHorse.nameCh,
+            nameEn: legacyHorse.nameEn || legacyFormHorse.nameEn,
+            status: legacyHorse.status,
+            countryOfOrigin: legacyHorse.countryOfOrigin,
+            colour: legacyHorse.colour,
+            sex: legacyHorse.sex,
+            importType: legacyHorse.importType,
+            currentTrainer: legacyHorse.currentTrainer,
+            owner: legacyHorse.owner,
+            sire: legacyHorse.sire || legacyFormHorse.sire,
+            dam: legacyHorse.dam || legacyFormHorse.dam,
+            damSire: legacyHorse.damSire || legacyFormHorse.damSire,
+            currentRating: legacyHorse.currentRating || legacyFormHorse.currentRating,
+            seasonStakes: legacyHorse.seasonStakes,
+            totalStakes: legacyHorse.totalStakes,
+            lastRaceDate: legacyHorse.lastRaceDate,
+            record: {
+              wins: legacyStarts != null
+                ? (has(legacyHorse.totalWins) ? legacyHorse.totalWins : legacyFormHorse.totalWins)
+                : null,
+              totalStarts: legacyStarts
+            }
+          };
+          var legacyElo = has(legacyHorse.elo) ? {
+            latest: {
+              rating: legacyHorse.elo,
+              asOfDate: legacyHorse.lastRaceDate,
+              gamesPlayed: legacyHorse.totalStarts
+            },
+            history: []
+          } : (form.elo || detail.elo || {});
+          return {
+            horse: horse,
+            recentForm: form.recentForm || form.form || [],
+            training: form.training || { trackwork: form.trackwork || [], barrierTrials: form.barrierTrials || [] },
+            elo: legacyElo,
+            performance: form.performance || detail.performance || {},
+            health: form.health || detail.health || {},
+            researchSignals: form.researchSignals || detail.researchSignals || [],
+            meta: form.meta || detail.meta || {}
+          };
+        });
+      }
+
+      function research(horseId) {
+        return TX_API.horseResearch(horseId, {
+          limit: 30,
+          raceId: raceId || undefined,
+          contract: "research-v2"
+        }).catch(function () {
+          return legacyEnvelope(horseId);
+        });
+      }
+
+      function resolveHorseFromRace() {
+        return TX_API.race(raceId).then(function (response) {
+          var race = unwrap(response) || {};
+          var entries = race.entries || race.horses || [];
+          var number = query("no");
+          var entry = entries.find(function (item) {
+            return String(item.horseNumber || item.horse_no || item.no) === String(number);
+          });
+          var horseId = entry && (entry.horseId || entry.horse_id || entry.id);
+          if (!horseId) throw new Error("找不到該馬匹");
+          return research(horseId).then(function (data) {
+            return { data: unwrap(data), race: race, horseId: horseId };
+          });
+        });
+      }
+
+      function raceContext(data, race) {
+        var context = data.raceContext || {};
+        if (!data.raceContext || !raceId) return "";
+        var raceRecord = race && race.race ? race.race : race;
+        var merged = Object.assign({}, raceRecord || {}, context);
+        var values = [
+          ["賽事", merged.name || merged.raceName],
+          ["日期", date(merged.raceDate || merged.date)],
+          ["場地", merged.venue || merged.venueName],
+          ["場次", merged.raceNumber || merged.race_no],
+          ["班次", merged.raceClass || merged.className || merged.class],
+          ["距離", distance(merged.distance)],
+          ["路況", merged.going],
+          ["跑道", merged.track || merged.course],
+          ["騎師", merged.jockey],
+          ["檔位", merged.draw],
+          ["負磅", merged.actualWeight],
+          ["配備", listText(merged.gear)],
+          ["本場評分", merged.rating]
+        ];
+        var body = keyValueGrid(values);
+        return body ? section("本場資料", body, "RACE CONTEXT") : "";
+      }
+
+      function formHistory(rows) {
+        if (!Array.isArray(rows) || !rows.length) return "";
+        var cards = rows.map(function (form, index) {
+          var position = form.positionText || form.position;
+          var positionClass = Number(form.position) === 1 ? "win" : Number(form.position) <= 3 ? "place" : "";
+          var finishTime = has(form.finishTime)
+            ? form.finishTime
+            : (has(form.finishTimeSec) ? form.finishTimeSec + "秒" : "");
+          var details = [
+            ["日期", date(form.date)], ["賽事", [form.venue, has(form.raceNumber) ? "第" + form.raceNumber + "場" : ""].filter(has).join(" · ")],
+            ["班次", form.raceClass], ["距離", distance(form.distance)], ["路況", form.going],
+            ["跑道", form.track || form.course], ["檔位", form.draw], ["馬號", form.horseNumber],
+            ["負磅", form.actualWeight], ["騎師", form.jockey], ["練馬師", form.trainer],
+            ["走位", form.runningPosition], ["勝負距離", form.lbw], ["完成時間", finishTime], ["獨贏賠率", form.winOdds],
+            ["配備", listText(form.gear)], ["賽後評語", form.comment], ["分段", sectionals(form.sectionals)]
+          ].filter(function (item) { return has(item[1]); });
+          return '<details class="form-card" ' + (index === 0 ? "open" : "") + '><summary class="' + (has(position) ? "" : "no-position") + '">' +
+            (has(position) ? '<span class="form-pos ' + positionClass + '">' + esc(position) + "</span>" : "") +
+            '<span><span class="form-title">' + esc([date(form.date), form.venue, has(form.raceNumber) ? "第" + form.raceNumber + "場" : ""].filter(has).join(" · ")) +
+            '</span><span class="form-sub">POST-RACE HISTORY</span></span><span class="form-side">' +
+            esc(has(form.totalRunners) ? form.totalRunners + "匹" : "") + '</span></summary><div class="form-detail">' +
+            details.map(function (item) { return "<div><b>" + esc(item[0]) + "</b> " + esc(item[1]) + "</div>"; }).join("") +
+            "</div></details>";
+        }).join("");
+        return '<div class="stack">' + cards + '</div><p class="footnote">以上為賽後歷史資料；檔位、負磅、騎師、配備、評語及分段不代表目前狀態。</p>';
+      }
+
+      function eloBlock(elo) {
+        var latest = elo && elo.latest || {};
+        var history = elo && Array.isArray(elo.history) ? elo.history : [];
+        if (!has(latest.rating)) return "";
+        var ratings = history.map(function (item) { return Number(item.rating); }).filter(Number.isFinite);
+        var min = Math.min.apply(Math, ratings), max = Math.max.apply(Math, ratings);
+        var graph = history.slice(-24).map(function (item) {
+          var height = max > min ? 18 + ((Number(item.rating) - min) / (max - min)) * 24 : 25;
+          return '<i style="height:' + height + 'px" title="' + esc(date(item.asOfDate)) + '"></i>';
+        }).join("");
+        var meta = [];
+        if (has(latest.asOfDate)) meta.push("截至 " + date(latest.asOfDate));
+        if (has(latest.gamesPlayed)) meta.push("樣本 " + latest.gamesPlayed + " 場");
+        var metaBlock = meta.length || graph
+          ? '<div class="elo-meta">' + meta.map(esc).join("<br>") + (graph ? '<div class="spark">' + graph + "</div>" : "") + "</div>"
+          : "";
+        return '<div class="panel elo"><div><div class="eyebrow">LATEST ELO</div><div class="elo-number">' + esc(Math.round(latest.rating)) +
+          "</div></div>" + metaBlock + "</div>";
+      }
+
+      function performanceBlock(performance) {
+        var labels = { distance: "途程", distanceBucket: "途程分段", track: "跑道", going: "路況", draw: "檔位", jockey: "騎師" };
+        var groups = Object.keys(labels).filter(function (key) { return Array.isArray(performance[key]) && performance[key].length; }).map(function (key) {
+          return '<div class="metric"><h4>' + labels[key] + '</h4>' + performance[key].map(function (item) {
+            return '<div class="metric-row"><span>' + esc(item.label || item.key) + '</span><span>' +
+              esc(has(item.starts) ? item.starts + "場 · 勝 " + rate(item.winRate) + " · 三甲 " + rate(item.top3Rate) : "") + "</span></div>";
+          }).join("") + (performance[key].some(function (item) { return Number(item.starts) < 20; }) ? '<p class="footnote">樣本較少，解讀需審慎。</p>' : "") + "</div>";
+        }).join("");
+        return groups ? '<div class="metrics">' + groups + "</div>" : "";
+      }
+
+      function trainingBlock(training) {
+        var groups = [["trackwork", "晨操"], ["barrierTrials", "試閘"]].map(function (pair) {
+          var rows = Array.isArray(training[pair[0]]) ? training[pair[0]] : [];
+          if (!rows.length) return "";
+          return '<div class="metric"><h4>' + pair[1] + '</h4>' + rows.map(function (item) {
+            return '<div class="metric-row"><span>' + esc(date(item.date)) + '</span><span>' +
+              esc([item.venue, distance(item.distance), item.timeText || item.time, item.position].filter(has).join(" · ")) + "</span></div>";
+          }).join("") + "</div>";
+        }).join("");
+        return groups ? '<div class="metrics">' + groups + "</div>" : "";
+      }
+
+      function methodology(meta) {
+        var sources = Array.isArray(meta.sources) ? meta.sources.filter(has) : [];
+        var notes = []
+          .concat(Array.isArray(meta.notes) ? meta.notes : [])
+          .concat(Array.isArray(meta.coverageNotes) ? meta.coverageNotes : []);
+        if (has(meta.postRaceHistoryBoundary)) notes.push(meta.postRaceHistoryBoundary);
+        notes = notes.filter(has).filter(function (note, index, all) { return all.indexOf(note) === index; });
+        var coverage = meta.coverage;
+        var counts = meta.counts;
+        var parts = [];
+        if (sources.length) parts.push("來源：" + sources.join("、"));
+        if (has(meta.generatedAt)) parts.push("生成：" + meta.generatedAt);
+        if (has(meta.dataAsOf)) parts.push("資料截至：" + meta.dataAsOf);
+        if (coverage && typeof coverage === "object") Object.keys(coverage).forEach(function (key) {
+          if (has(coverage[key])) parts.push(key + "：" + coverage[key]);
+        });
+        if (counts && typeof counts === "object") {
+          var countLabels = {
+            formStarts: "近期賽績",
+            commentsRows: "賽後評語",
+            eloHistoryPoints: "Elo 歷史點",
+            careerPerfStarts: "表現統計場次",
+            trackworkSessions: "晨操紀錄",
+            barrierTrials: "試閘紀錄",
+            injuryRecords: "傷患紀錄",
+            sectionalsRows: "分段紀錄"
+          };
+          Object.keys(countLabels).forEach(function (key) {
+            if (Number(counts[key]) > 0) parts.push(countLabels[key] + "：" + counts[key]);
+          });
         }
-        raceTable.style.display = 'none';
+        notes.forEach(function (note) { parts.push(note); });
+        if (!parts.length) return "";
+        return section("資料方法及覆蓋", '<div class="notice">' + parts.map(esc).join("<br>") +
+          '<br>近績、評語及分段屬賽後資料；缺少傷患或操練紀錄不代表沒有相關事件。</div>', "PROVENANCE");
       }
-      renderKV('horse-kv', buildHorseKV(h));
 
-      // Explain
-      var eid = horseId || (h.horseId || h.horse_id);
-      var rid = raceId || (race && (race.id || race.raceId));
-      if (eid && rid && TX_API.explain){
-        TX_API.explain(rid, eid)
-          .then(renderExplain)
-          .catch(function(){ renderExplain(null); });
-      } else {
-        renderExplain(null);
+      function render(payload, race, explanation) {
+        var data = payload || {}, horse = data.horse || {}, record = horse.record || {};
+        var forms = Array.isArray(data.recentForm) ? data.recentForm : [];
+        var elo = data.elo || {}, training = data.training || {}, health = data.health || {};
+        var signals = Array.isArray(data.researchSignals) ? data.researchSignals : [];
+        var hasSilks = has(horse.silksCode);
+        var hero = '<div class="hero ' + (hasSilks ? "" : "no-silks") + '">' +
+          (hasSilks ? '<img class="silks" alt="' + esc((horse.nameCh || horse.nameEn || "") + "綵衣") + '" src="' + esc(TX_API.silksUrl(horse.silksCode)) + '" onerror="this.hidden=true;this.parentElement.classList.add(\'no-silks\')">' : "") +
+          '<div>' + (has(horse.code) ? '<div class="eyebrow">HORSE DOSSIER · ' + esc(horse.code) + "</div>" : '<div class="eyebrow">HORSE DOSSIER</div>') +
+          '<h2>' + esc(horse.nameCh || horse.nameEn) +
+          (has(horse.nameEn) && has(horse.nameCh) && horse.nameEn !== horse.nameCh ? "<small>" + esc(horse.nameEn) + "</small>" : "") + "</h2>" +
+          (has(horse.status) ? '<span class="status">' + esc(horse.status === "active" ? "現役" : horse.status === "retired" ? "已退役" : horse.status) + "</span>" : "") +
+          '</div>' + (has(horse.code) ? '<div class="hero-number">' + esc(horse.code) + "</div>" : "") + "</div>";
+        var stats = [["頭馬", record.wins], ["亞軍", record.seconds], ["季軍", record.thirds], ["出賽", record.totalStarts]].filter(function (item) { return has(item[1]); });
+        var statBar = stats.length ? '<div class="stats" style="grid-template-columns:repeat(' + stats.length + ',1fr)">' + stats.map(function (item) { return '<div class="stat"><span class="label">' + item[0] + '</span><strong>' + esc(item[1]) + "</strong></div>"; }).join("") + "</div>" : "";
+        var identityBody = keyValueGrid([
+          ["出生地", horse.countryOfOrigin], ["毛色", horse.colour], ["性別", horse.sex], ["進口類別", horse.importType],
+          ["現任練馬師", horse.currentTrainer], ["馬主", horse.owner], ["父系", horse.sire], ["母系", horse.dam],
+          ["外祖父", horse.damSire], ["半兄弟姊妹", listText(horse.halfSiblings)], ["現評", horse.currentRating],
+          ["季內獎金", money(horse.seasonStakes)], ["生涯獎金", money(horse.totalStakes)], ["最後出賽", date(horse.lastRaceDate)]
+        ]);
+        var identity = identityBody ? section("身份及現況", identityBody, "IDENTITY · CURRENT") : "";
+        var signalBody = signals.length ? '<div class="panel">' + signals.map(function (signal) {
+          return '<div class="signal"><span>' + esc(signal.label || signal.key) + '</span><span class="signal-value">' + esc(signal.value) + (has(signal.unit) ? " " + esc(signal.unit) : "") +
+            '</span><span class="signal-meta">' + [date(signal.asOf), has(signal.sampleSize) ? "樣本 " + signal.sampleSize : "", signal.source].filter(has).map(esc).join(" · ") +
+            "</span>" + (has(signal.explanation) ? '<span class="signal-explain">' + esc(signal.explanation) + "</span>" : "") + "</div>";
+        }).join("") + "</div>" : "";
+        var injuryRows = Array.isArray(health.injuries) ? health.injuries.filter(function (item) { return item && Object.keys(item).some(function (key) { return has(item[key]); }); }) : [];
+        var injuryBody = injuryRows.length ? '<div class="notice">' + injuryRows.map(function (item) {
+          var status = item.status === "resolved" ? "已結束" : item.status === "ongoing" ? "跟進中" : item.status;
+          return [date(item.date), item.type, item.description, status, item.resolutionDate && "結束 " + date(item.resolutionDate), has(item.daysOut) ? item.daysOut + "日" : ""].filter(has).map(esc).join(" · ");
+        }).join("<br>") + "</div>" : "";
+        var predictionGrid = raceId && data.raceContext && explanation && Object.keys(explanation).length ? keyValueGrid([
+          ["預測排名", has(explanation.rank) ? "#" + explanation.rank : ""], ["頭馬機率", has(explanation.pWin) ? (Number(explanation.pWin) * 100).toFixed(1) + "%" : ""],
+          ["前三機率", has(explanation.pTop3) ? (Number(explanation.pTop3) * 100).toFixed(1) + "%" : ""],
+          ["前四機率", has(explanation.pTop4) ? (Number(explanation.pTop4) * 100).toFixed(1) + "%" : ""]
+        ]) : "";
+        var prediction = predictionGrid ? section("本場天喜預測", '<div class="panel">' + predictionGrid + "</div>", "MODEL EXPLANATION") : "";
+        var healthCoverage = has(health.coverageNote) ? [health.coverageNote] : [];
+        var metaForDisplay = Object.assign({}, data.meta || {});
+        metaForDisplay.notes = (Array.isArray(metaForDisplay.notes) ? metaForDisplay.notes : []).concat(healthCoverage);
+        var displayName = horse.nameCh || horse.nameEn;
+        if (has(displayName)) {
+          document.title = displayName + " · 馬匹研究檔案 · 天喜 TIANXI";
+        }
+        app.innerHTML = hero + statBar + (raceId ? raceContext(data, race) : "") + identity +
+          (forms.length ? section("近期出賽紀錄", formHistory(forms), "POST-RACE HISTORY") : "") +
+          (eloBlock(elo) ? section("Elo 研究", eloBlock(elo), "RATING HISTORY") : "") +
+          (performanceBlock(data.performance || {}) ? section("表現切片", performanceBlock(data.performance || {}), "AGGREGATES") : "") +
+          (trainingBlock(training) || injuryBody ? section("操練及健康", trainingBlock(training) + injuryBody, "TRAINING · HEALTH") : "") +
+          (signalBody ? section("研究訊號", signalBody, "EVIDENCE REGISTER") : "") + prediction + methodology(metaForDisplay);
       }
-    }).catch(function(e){
-      document.getElementById('hero-row').innerHTML =
-        '<div class="err">載入失敗：' + esc(e && e.message ? e.message : '網絡錯誤') + '</div>';
-      document.getElementById('explain-slot').innerHTML = '';
-    });
-  }
 
-  boot();
-})();
-</script>
+      function load() {
+        if (!requestedHorseId && !raceId) {
+          app.innerHTML = '<div class="error">URL 缺少馬匹 id。</div>';
+          return;
+        }
+        var request = requestedHorseId ? Promise.all([research(requestedHorseId), raceId ? TX_API.race(raceId).catch(function () { return null; }) : Promise.resolve(null)])
+          .then(function (responses) { return { data: unwrap(responses[0]), race: unwrap(responses[1]), horseId: requestedHorseId }; }) : resolveHorseFromRace();
+        request.then(function (result) {
+          var prediction = raceId && result.data && result.data.raceContext
+            ? TX_API.explain(raceId, result.horseId).then(unwrap).catch(function () { return null; })
+            : Promise.resolve(null);
+          return prediction.then(function (explanation) { render(result.data, result.race, explanation); });
+        }).catch(function (error) {
+          app.innerHTML = '<div class="error">暫時未能載入研究檔案。<br><small>' + esc(error.message || "資料服務未有回應") + '</small><br><button class="retry" id="retry">重新載入</button></div>';
+          document.getElementById("retry").onclick = load;
+        });
+      }
+      load();
+    }());
+  </script>
 </body>
 </html>

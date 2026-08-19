@@ -202,7 +202,7 @@
       var raceId = CURRENT_RACE_ID;
       tr.addEventListener('click', function(){
         var params = horseId
-          ? ('id=' + encodeURIComponent(horseId))
+          ? ('id=' + encodeURIComponent(horseId) + '&raceId=' + encodeURIComponent(raceId))
           : ('raceId=' + encodeURIComponent(raceId) + '&no=' + encodeURIComponent(no));
         location.href = '/horse/?' + params;
       });
