@@ -111,7 +111,14 @@
   };
   window.TxTheme = Tx;
 
-  /* ---- wire up any [data-tx-theme-toggle] buttons after DOM ready ---- */
+  /* ---- wire up any [data-tx-theme-toggle] buttons after DOM/shell ready ---- */
+  function reflectToggles(effective) {
+    var buttons = document.querySelectorAll('[data-tx-theme-toggle]');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].setAttribute('aria-pressed', String(effective === 'dark'));
+      buttons[i].setAttribute('aria-label', effective === 'dark' ? '切換至淺色模式' : '切換至深色模式');
+    }
+  }
   function wireToggles() {
     var buttons = document.querySelectorAll('[data-tx-theme-toggle]');
     for (var i = 0; i < buttons.length; i++) {
@@ -121,21 +128,13 @@
         btn.addEventListener('click', function (e) { Tx.toggleAnimated(e); });
       })(buttons[i]);
     }
-    /* reflect state on pressable toggles */
-    document.addEventListener('tx:themechange', function (e) {
-      var eff = e.detail.effective;
-      for (var i = 0; i < buttons.length; i++) {
-        buttons[i].setAttribute('aria-pressed', String(eff === 'dark'));
-        buttons[i].setAttribute('aria-label', eff === 'dark' ? '切換至淺色模式' : '切換至深色模式');
-      }
-    });
-    /* initial pressed state */
-    var eff = resolve(getStored());
-    for (var j = 0; j < buttons.length; j++) {
-      buttons[j].setAttribute('aria-pressed', String(eff === 'dark'));
-      buttons[j].setAttribute('aria-label', eff === 'dark' ? '切換至淺色模式' : '切換至深色模式');
-    }
+    reflectToggles(resolve(getStored()));
   }
+  document.addEventListener('tx:themechange', function (e) {
+    reflectToggles(e && e.detail ? e.detail.effective : resolve(getStored()));
+  });
+  /* shell.js injects its toggle after theme.js has registered DOMContentLoaded. */
+  document.addEventListener('tx:shellready', wireToggles);
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', wireToggles);
   } else {

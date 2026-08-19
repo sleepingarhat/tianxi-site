@@ -75,6 +75,8 @@
     'track-record': null
   };
 
+  // Current production taxonomy: /marksix/ replaces the retired /lounge/
+  // route, while /engine/ remains a first-class research destination.
   // Each entry: [href, page-key, label, svgInner]
   var BOTNAV_ITEMS = [
     ['/dashboard/', 'dashboard', '儀表板',
