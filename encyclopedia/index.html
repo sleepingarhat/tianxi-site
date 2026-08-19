@@ -3,270 +3,443 @@
 <head>
 <meta charset="utf-8">
 <script src="/assets/theme.js"></script>
-  <script src="/assets/shell.js" defer></script>
+<script src="/assets/shell.js" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FDFBF5">
 <title>馬匹百科 · 天喜 TIANXI</title>
+<meta name="description" content="天喜馬匹百科：以 Elo、評分、勝場與出賽次數瀏覽香港賽馬完整馬匹索引。">
+<meta property="og:title" content="馬匹百科 · 天喜 TIANXI">
+<meta property="og:description" content="搜尋與核對香港賽馬馬匹資料，按 Elo、評分、勝場或出賽次數瀏覽。">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/tokens.css">
 <link rel="stylesheet" href="/assets/shell.css">
-<script src="/assets/api.js"></script><style>
-
-.search{padding:12px 20px;border-bottom:1px solid var(--rule)}
-.search input{width:100%;padding:10px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);font-family:var(--font-body);font-size:14px;color:var(--ink)}
-.search input:focus{outline:0;border-color:var(--ink)}
-
-.ency-note{margin-top:8px;font-size:12px;color:var(--ink-mute);line-height:1.6}
-.ency-note a{color:var(--brown);font-weight:700;text-decoration:none;white-space:nowrap}
-
-.horse-card{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--rule)}
-.horse-card:last-child{border:0}
-.horse-card__silks{width:40px;height:40px;background:var(--paper-2);border:1px solid var(--rule);border-radius:6px;object-fit:contain;display:block}
-.horse-card__name{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--ink);line-height:1.3}
-.horse-card__name small{display:block;font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--ink-mute);margin-top:2px}
-.horse-card__meta{font-size:11px;color:var(--ink-mute);margin-top:3px}
-.horse-card__stats{display:flex;gap:10px;font-family:var(--font-mono);font-size:10px;margin-top:4px;flex-wrap:wrap}
-.horse-card__stats span{color:var(--ink-soft)}
-.horse-card__stats b{color:var(--ink);font-weight:700}
-.horse-card__tag{font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--ink-soft);white-space:nowrap;padding-right:8px;margin-right:4px}
-
+<script src="/assets/api.js"></script>
+<style>
+:root{--ency-ink:#18251f;--ency-line:rgba(24,37,31,.12);--ency-wash:#eef1e8;--ency-accent:#a56d1d}
+:root[data-theme="dark"]{--ency-ink:#eee7d9;--ency-line:rgba(238,231,217,.14);--ency-wash:#201f19;--ency-accent:#e2b45d}
+.shell{max-width:1180px}
+@media(min-width:720px){.shell{margin:24px auto;padding-bottom:100px;border-radius:24px;overflow:hidden}.botnav{max-width:1180px;bottom:24px;border-radius:0 0 24px 24px}}
+@media(min-width:720px){:root[data-theme="dark"] body{background:#121814!important}}
+.ency-hero{padding:30px clamp(20px,4vw,48px) 24px;background:linear-gradient(118deg,var(--paper-2),var(--paper) 58%,var(--gold-tint));border-bottom:1px solid var(--ency-line);position:relative;overflow:hidden}
+.ency-hero:after{content:"TX / 01";position:absolute;right:clamp(20px,5vw,60px);bottom:18px;font:700 clamp(42px,8vw,108px)/1 var(--font-mono);letter-spacing:-.1em;color:var(--ency-line);pointer-events:none}
+.hero-kicker{font:700 10px var(--font-mono);letter-spacing:.22em;color:var(--accent);margin-bottom:10px}
+.ency-hero h1{font:900 clamp(30px,5vw,54px)/1.05 var(--font-display);color:var(--ency-ink);letter-spacing:-.04em;position:relative;z-index:1}
+.ency-hero h1 span{display:block;font:500 11px var(--font-body);letter-spacing:.18em;color:var(--ink-mute);margin-top:12px}
+.hero-copy{max-width:650px;color:var(--ink-mute);font-size:13px;line-height:1.8;margin-top:18px;position:relative;z-index:1}
+.hero-copy strong{color:var(--ency-ink);font-weight:700}
+.search-panel{padding:18px clamp(20px,4vw,48px);background:var(--paper);border-bottom:1px solid var(--ency-line)}
+.search-wrap{max-width:820px;position:relative}.search-wrap label{display:block;font:700 10px var(--font-mono);letter-spacing:.16em;color:var(--ink-mute);margin-bottom:8px}
+.search-wrap input{width:100%;height:48px;padding:0 48px 0 16px;border:1px solid var(--rule-2);border-radius:10px;background:var(--paper-2);font:500 14px var(--font-body);color:var(--ink);transition:border-color 160ms,box-shadow 160ms}
+.search-wrap input:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px var(--gold-tint)}
+.search-icon{position:absolute;right:16px;bottom:14px;color:var(--accent);font:700 16px var(--font-mono)}
+.search-status{min-height:18px;margin-top:7px;font-size:11px;color:var(--ink-mute)}
+.search-status.is-error{color:var(--red)}
+.ency-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.85fr);gap:18px;padding:22px clamp(20px,4vw,48px) 28px;background:var(--paper-2)}
+.main-column,.side-column{min-width:0}.side-column{display:grid;align-content:start;gap:18px}
+.panel{background:var(--paper);border:1px solid var(--ency-line);border-radius:14px;box-shadow:var(--sh-xs);overflow:hidden}
+.panel-head{padding:16px 18px 13px;border-bottom:1px solid var(--ency-line);display:flex;justify-content:space-between;align-items:end;gap:12px}
+.panel-head h2{font:800 17px var(--font-display);color:var(--ency-ink)}.panel-head h2 small{display:block;font:700 9px var(--font-mono);letter-spacing:.15em;color:var(--accent);margin-bottom:5px}
+.panel-head .count{font:500 11px var(--font-mono);color:var(--ink-mute);white-space:nowrap}
+.chips{display:flex;gap:7px;flex-wrap:wrap;padding:13px 18px 0}
+.chip{padding:7px 11px;border:1px solid var(--rule-2);border-radius:999px;background:var(--paper);font-size:11px;color:var(--ink-soft);transition:background 140ms,color 140ms,border-color 140ms}
+.chip:hover{border-color:var(--accent)}.chip.is-active{background:var(--ency-ink);border-color:var(--ency-ink);color:var(--paper)}
+.index-controls{padding:14px 18px 10px;border-bottom:1px solid var(--ency-line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.control-group{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.control-label{font:700 9px var(--font-mono);letter-spacing:.12em;color:var(--ink-mute);margin-right:3px}.index-controls .chip{padding:6px 10px}
+.index-table__head,.index-row{display:grid;grid-template-columns:minmax(180px,2fr) 72px 54px 64px 64px 64px 70px;gap:8px;align-items:center}.index-table__head{padding:11px 18px 8px;font:700 9px var(--font-mono);letter-spacing:.08em;color:var(--ink-mute);border-bottom:1px solid var(--ency-line);text-align:right}.index-table__head span:first-child{text-align:left}.index-row{padding:11px 18px;border-bottom:1px solid var(--ency-line);font:500 11px var(--font-mono);color:var(--ink-mute);text-align:right;transition:background 140ms}.index-row:last-child{border-bottom:0}.index-row:hover{background:var(--paper-2)}.index-row.is-link{cursor:pointer}.index-row.is-link:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}.index-horse{display:grid;grid-template-columns:32px minmax(0,1fr);gap:9px;align-items:center;text-align:left;min-width:0}.index-identity{min-width:0}.index-horse strong{display:block;font:800 14px var(--font-display);color:var(--ency-ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.index-horse small{display:block;font:500 10px var(--font-body);color:var(--ink-mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}.index-status{justify-self:end;font:700 9px var(--font-body);padding:3px 6px;border:1px solid var(--rule-2);border-radius:4px;color:var(--green)}.index-status.retired{color:var(--ink-mute)}.index-footer{padding:12px 18px;border-top:1px solid var(--ency-line);display:flex;align-items:center;justify-content:space-between;gap:12px}.load-more{padding:9px 15px;border:1px solid var(--ency-ink);border-radius:7px;background:var(--ency-ink);color:var(--paper);font-size:11px;font-weight:700;transition:opacity 140ms,transform 140ms}.load-more:hover:not(:disabled){transform:translateY(-1px)}.load-more:disabled{opacity:.38;cursor:not-allowed}.index-row,.leader-row,.horse-card{color:inherit;text-decoration:none}
+.list{padding:5px 18px 12px}.horse-card{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:13px;align-items:center;padding:13px 0;border-bottom:1px solid var(--ency-line);transition:transform 160ms,background 160ms}.horse-card:last-child{border-bottom:0}.horse-card.is-link{cursor:pointer}.horse-card.is-link:hover{transform:translateX(3px)}.horse-card.is-link:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:7px}
+.silks{width:44px;height:44px;object-fit:contain;border:1px solid var(--rule-2);border-radius:8px;background:var(--paper-2)}.silks-fallback{display:grid;place-items:center;font:700 11px var(--font-mono);color:var(--ink-mute)}
+.horse-name{font:800 15px/1.25 var(--font-display);color:var(--ency-ink);overflow-wrap:anywhere}.horse-name small{display:block;font:500 10px var(--font-body);letter-spacing:.04em;color:var(--ink-mute);margin-top:3px}.horse-meta{margin-top:5px;font-size:11px;color:var(--ink-mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.horse-stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;font:500 10px var(--font-mono);color:var(--ink-mute)}.horse-stats b{color:var(--ency-ink)}.race-tag{text-align:right;font:600 10px/1.55 var(--font-mono);color:var(--accent);white-space:nowrap}.race-tag span{display:block;color:var(--ink-mute)}
+.skeleton{height:66px;margin:8px 0;border-radius:8px;background:linear-gradient(90deg,var(--paper-2),var(--paper-3),var(--paper-2));background-size:220% 100%;animation:shimmer 1.5s infinite}.state{padding:38px 16px;text-align:center;color:var(--ink-mute);font-size:12px;line-height:1.7}.state strong{display:block;color:var(--ency-ink);font:700 15px var(--font-display);margin-bottom:5px}.retry{margin-top:12px;padding:7px 13px;border:1px solid var(--rule-2);border-radius:7px;font-size:11px}.retry:hover{border-color:var(--accent)}
+.leader-row{display:grid;grid-template-columns:28px 34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px 18px;border-bottom:1px solid var(--ency-line);transition:background 140ms}.leader-row:last-child{border-bottom:0}.leader-row:hover{background:var(--paper-2)}.leader-rank{font:700 13px var(--font-mono);color:var(--accent)}.leader-silk{width:30px;height:30px;border-radius:5px;object-fit:contain;background:var(--paper-2);border:1px solid var(--rule)}.leader-name{font:700 13px var(--font-display);color:var(--ency-ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.leader-sub{font-size:10px;color:var(--ink-mute);margin-top:2px}.leader-val{font:700 15px var(--font-mono);color:var(--ency-ink);white-space:nowrap}.leader-row.is-link{cursor:pointer}.leader-row.is-link:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.method{padding:18px}.method h2{font:800 16px var(--font-display);color:var(--ency-ink);margin-bottom:8px}.method p{font-size:12px;line-height:1.75;color:var(--ink-mute)}.method dl{display:grid;grid-template-columns:1fr auto;gap:9px 14px;margin-top:16px;padding-top:14px;border-top:1px dashed var(--ency-line);font-size:11px}.method dt{color:var(--ink-mute)}.method dd{font:600 11px var(--font-mono);color:var(--ency-ink)}.method a{display:inline-block;margin-top:15px;color:var(--accent);font-size:11px;font-weight:700}
+.disclaimer{margin-top:0}
+@keyframes shimmer{to{background-position:-220% 0}}@media(prefers-reduced-motion:reduce){.skeleton{animation:none}.horse-card,.index-row,.leader-row,.load-more,.chip,.search-wrap input{transition:none}}
+@media(max-width:719px){.ency-grid{grid-template-columns:1fr;padding-top:16px}.side-column{display:contents}.side-column .panel,.method{order:2}.ency-hero:after{opacity:.5}.panel-head{padding-left:15px;padding-right:15px}.list{padding-left:15px;padding-right:15px}.leader-row{padding-left:15px;padding-right:15px}}
+@media(max-width:600px){.index-table__head,.index-row{grid-template-columns:minmax(145px,1.8fr) 55px 42px 52px 52px 54px 58px;gap:5px}.index-table{overflow-x:auto}.index-table__head,.index-row{min-width:470px}.index-table__head{padding-left:15px;padding-right:15px}.index-row{padding-left:15px;padding-right:15px}.index-controls{padding-left:15px;padding-right:15px}.index-footer{padding-left:15px;padding-right:15px}.index-footer .search-status{font-size:10px}}
+@media(min-width:720px){.search-panel{padding-top:22px;padding-bottom:22px}}
 </style>
 </head>
 <body data-page="encyclopedia">
 <div class="shell">
-
 <header class="brandbar" data-tx-shell="brandbar"></header>
-
-<section class="page-head">
-  <h1><small>HORSE ENCYCLOPEDIA</small>馬匹百科</h1>
-  <p>12,000+ 匹在役馬匹資料庫 · Elo 軌跡 · 11 年戰績 · 晨操記錄 · 傷患歷史。</p>
-  <p class="ency-note">本頁係香港馬匹嘅資料庫：搜尋任何一匹馬，或者睇今日出賽馬匹（可按賠率 / 評分篩選），仲有 Elo 同勝場排行榜。想知預測引擎點分析、命中率有幾高？睇 <a href="/engine/">引擎詳解 →</a></p>
+<section class="ency-hero">
+  <div class="hero-kicker">REFERENCE / HONG KONG RACING</div>
+  <h1>馬匹百科<span>THE TIANXI HORSE REGISTER</span></h1>
+  <p class="hero-copy"><strong>證據先於印象。</strong> 以完整馬匹索引為主入口，按狀態、評分、Elo、勝場或出賽次數逐頁核對；今日排位與排行榜只作發現入口。百科只展示 TX_API 已有的資料，不替數字補上想像。</p>
 </section>
-
-<div class="search">
-  <input type="search" placeholder="搜尋馬名 / 馬號 / 騎師 / 練馬師...">
-</div>
-
-<div class="tx-chiprow" id="ency-chips" style="padding:10px 20px 0">
-  <button class="tx-chip is-active" data-f="all">全部</button>
-  <button class="tx-chip" data-f="hot">大熱 ≤5</button>
-  <button class="tx-chip" data-f="mid">中價 5–12</button>
-  <button class="tx-chip" data-f="cold">爆冷 &gt;12</button>
-  <button class="tx-chip" data-f="rate" style="display:none">評分 ≥80</button>
-</div>
-
-<div class="card" id="today-card">
-  <h2><span id="today-label">今日出賽馬匹</span> · <span id="today-count"><span data-tx-loader data-size="sm" data-label="載入中…"></span></span></h2>
-  <div id="today-horses"><div class="tx-lemni-host" data-tx-loader data-label="載入中…"></div></div>
-</div>
-
-<div class="card">
-  <h2>最高 Elo · Top 10 在役</h2>
-  <div id="leaderboard"><div class="tx-lemni-host" data-tx-loader data-label="Elo 資料整備中…"></div></div>
-</div>
-
-<div class="card">
-  <h2>最多勝場 · Top 10 在役</h2>
-  <div id="leaderboard-wins"><div class="tx-lemni-host" data-tx-loader data-label="載入中…"></div></div>
-</div>
-
-
-<footer class="disclaimer">
-  <strong>天喜為分析平台，不提供投注服務。</strong><br>
-  投注請透過合法渠道（HKJC）進行。本頁數據僅供研究分析。<br>
-  Analysis platform · NO betting services · Data for research only
-</footer>
-
+<section class="search-panel">
+  <div class="search-wrap">
+    <label for="horse-search">搜尋馬匹資料庫</label>
+    <input id="horse-search" type="search" autocomplete="off" placeholder="輸入中文名、英文名或馬匹編號…" aria-describedby="search-status">
+    <span class="search-icon" aria-hidden="true">⌕</span>
+    <div id="search-status" class="search-status" aria-live="polite">輸入名稱或編號，結果會取代下方索引</div>
+  </div>
+</section>
+<main class="ency-grid">
+  <div class="main-column">
+    <section class="panel" id="index-panel">
+      <div class="panel-head"><h2><small>HORSE REGISTER</small><span id="index-title">馬匹索引</span></h2><span class="count" id="index-count" aria-live="polite">載入中</span></div>
+      <div class="index-controls" id="index-controls">
+        <div class="control-group"><span class="control-label">資料範圍</span><button class="chip is-active" data-status="active" type="button" aria-pressed="true">現役</button><button class="chip" data-status="all" type="button" aria-pressed="false">全部</button></div>
+        <div class="control-group"><span class="control-label">排序</span><button class="chip is-active" data-sort="elo" type="button" aria-pressed="true">Elo</button><button class="chip" data-sort="rating" type="button" aria-pressed="false">評分</button><button class="chip" data-sort="wins" type="button" aria-pressed="false">勝場</button><button class="chip" data-sort="starts" type="button" aria-pressed="false">出賽</button></div>
+      </div>
+      <div class="index-table" role="table" aria-label="馬匹索引">
+        <div class="index-table__head" role="row"><span>馬匹</span><span>狀態</span><span>年齡</span><span>出賽</span><span>勝場</span><span>評分</span><span>Elo</span></div>
+        <div id="index-list" role="rowgroup"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+      </div>
+      <div class="index-footer"><div id="index-status" class="search-status" aria-live="polite">索引載入中…</div><button id="load-more" class="load-more" type="button" disabled aria-label="載入更多馬匹">載入更多</button></div>
+    </section>
+  </div>
+  <aside class="side-column">
+    <section class="panel"><div class="panel-head"><h2><small>RATING INDEX</small>最高 Elo</h2><span class="count">在役 · 10</span></div><div id="elo-list"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+    <section class="panel"><div class="panel-head"><h2><small>WIN ARCHIVE</small>最多勝場</h2><span class="count">在役 · 10</span></div><div id="wins-list"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+    <section class="panel" id="today-panel"><div class="panel-head"><h2><small>ON THE CARD</small>今日出賽馬匹</h2><span class="count" id="today-count">載入中</span></div><div class="chips" id="ency-chips" role="group" aria-label="篩選今日出賽馬匹"><button class="chip is-active" data-filter="all" type="button">全部</button><button class="chip" data-filter="hot" type="button">大熱 ≤ 5</button><button class="chip" data-filter="mid" type="button">中價 5–12</button><button class="chip" data-filter="cold" type="button">爆冷 &gt; 12</button><button class="chip" data-filter="rate" type="button" hidden>評分 ≥ 80</button></div><div class="list" id="today-list"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+    <section class="panel method"><h2>閱讀這頁的方法</h2><p>索引由完整馬匹資料庫提供；現役與全部是 API 的真實狀態範圍。今日卡片與排行榜是輔助發現，不代表完整歷史。</p><dl><dt>資料來源</dt><dd>TX_API</dd><dt>索引分頁</dt><dd>每頁 50 匹</dd><dt>圖片缺失</dt><dd>保留空位</dd></dl><a href="/engine/">了解天喜引擎 →</a></section>
+  </aside>
+</main>
+<footer class="disclaimer"><strong>天喜為分析平台，不提供投注服務。</strong><br>投注請透過合法渠道（HKJC）進行。本頁數據僅供研究分析。<br>Analysis platform · NO betting services · Data for research only</footer>
 <nav class="botnav" data-tx-shell="botnav"></nav>
-
 </div>
-
 <script>
+(function(){
+  'use strict';
 
-
-function escapeHtml(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
-
-function silksUrlFor(code){
-  if (TX_API && typeof TX_API.silksUrl === 'function' && code) return TX_API.silksUrl(code);
-  if (code) return '/api/silks/' + encodeURIComponent(code) + '.gif';
-  return '';
-}
-
-function silksImg(code, size){
-  var sz = size || 40;
-  var url = silksUrlFor(code);
-  if (!url) return '<div class="horse-card__silks" style="width:'+sz+'px;height:'+sz+'px"></div>';
-  return '<img class="horse-card__silks" style="width:'+sz+'px;height:'+sz+'px" src="'+escapeHtml(url)+'" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">';
-}
-
-function renderNameBlock(nameCh, nameEn){
-  var en = (nameEn && nameEn !== nameCh) ? '<small>' + escapeHtml(nameEn) + '</small>' : '';
-  return '<div class="horse-card__name">' + escapeHtml(nameCh || nameEn || '—') + en + '</div>';
-}
-
-// ---------- Today's horses (with client-side filter chips) ----------
-var TODAY_ENTRIES = [];
-var TODAY_META = { total: 0, venue: '', date: '' };
-var CUR_FILTER = 'all';
-
-var FILTERS = {
-  all:  function(){ return true; },
-  hot:  function(e){ var o = parseFloat(e.odds); return isFinite(o) && o > 0 && o <= 5; },
-  mid:  function(e){ var o = parseFloat(e.odds); return isFinite(o) && o > 5 && o <= 12; },
-  cold: function(e){ var o = parseFloat(e.odds); return isFinite(o) && o > 12; },
-  rate: function(e){ var r = parseFloat(e.rating); return isFinite(r) && r >= 80; }
-};
-
-function entryCard(e){
-  var bits = [];
-  if (e.jockey)  bits.push('騎師 ' + escapeHtml(e.jockey));
-  if (e.trainer) bits.push('練馬師 ' + escapeHtml(e.trainer));
-  var rateStat = (e.rating != null && e.rating !== '') ? '<span>評分 <b>' + escapeHtml(e.rating) + '</b></span>' : '';
-  return '<div class="horse-card">'
-    + silksImg(e.silksCode, 40)
-    + '<div>'
-    +   renderNameBlock(e.nameCh, e.nameEn)
-    +   '<div class="horse-card__meta">' + bits.join(' · ') + '</div>'
-    +   '<div class="horse-card__stats"><span>檔位 <b>' + (e.draw || '—') + '</b></span><span>賠率 <b>' + (e.odds || '—') + '</b></span>' + rateStat + '</div>'
-    + '</div>'
-    + '<div class="horse-card__tag">R' + e.raceNo + ' · #' + (e.num || '—') + '</div>'
-    + '</div>';
-}
-
-function renderToday(){
-  var box = document.getElementById('today-horses');
-  var cnt = document.getElementById('today-count');
-  document.getElementById('today-label').textContent = '今日出賽馬匹';
-  var fn = FILTERS[CUR_FILTER] || FILTERS.all;
-  var list = TODAY_ENTRIES.filter(fn);
-  var suffix = TODAY_META.venue ? (' · ' + TODAY_META.venue + ' · ' + TODAY_META.date) : '';
-  cnt.textContent = (list.length === TODAY_META.total ? TODAY_META.total + ' 匹' : list.length + ' / ' + TODAY_META.total + ' 匹') + suffix;
-  if (!TODAY_ENTRIES.length){ box.innerHTML = '<div class="tx-empty">暫無出賽資料</div>'; return; }
-  if (!list.length){ box.innerHTML = '<div class="tx-empty">此分類暫無馬匹（評分喺臨場排位表先齊全）</div>'; return; }
-  box.innerHTML = list.map(entryCard).join('');
-}
-
-// 評分喺臨場排位表先齊全：未有任何評分時隱藏「評分 ≥80」chip，有先顯示
-function updateRateChipVisibility(){
-  var chip = document.querySelector('#ency-chips .tx-chip[data-f="rate"]');
-  if (!chip) return;
-  var hasRated = TODAY_ENTRIES.some(function(e){ var r = parseFloat(e.rating); return isFinite(r) && r >= 80; });
-  chip.style.display = hasRated ? '' : 'none';
-  if (!hasRated && CUR_FILTER === 'rate'){
-    CUR_FILTER = 'all';
-    var chips = document.querySelectorAll('#ency-chips .tx-chip');
-    for (var i = 0; i < chips.length; i++){ chips[i].classList.toggle('is-active', chips[i].getAttribute('data-f') === 'all'); }
-  }
-}
-
-var chipRow = document.getElementById('ency-chips');
-if (chipRow){
-  chipRow.addEventListener('click', function(ev){
-    var btn = ev.target.closest ? ev.target.closest('.tx-chip') : null;
-    if (!btn) return;
-    clearTimeout(searchTimer);
-    CUR_FILTER = btn.getAttribute('data-f') || 'all';
-    var chips = chipRow.querySelectorAll('.tx-chip');
-    for (var i = 0; i < chips.length; i++){ chips[i].classList.toggle('is-active', chips[i] === btn); }
-    var si = document.querySelector('.search input'); if (si) si.value = '';
-    renderToday();
-  });
-}
-
-TX_API.smartCurrent().then(function(cur){
-  if (!cur || !cur.date) {
-    document.getElementById('today-count').textContent = '0';
-    document.getElementById('today-horses').innerHTML = '<div class="tx-empty">最近無賽事資料</div>';
-    return;
-  }
-  return TX_API.meeting(cur.date).then(function(m){
-    var seen = {};
-    var entries = [];
-    (m.races || []).forEach(function(r){
-      (r.horses || []).forEach(function(h){
-        if (!h.id || seen[h.id]) return;
-        seen[h.id] = true;
-        entries.push({
-          id:h.id, num:h.horseNumber, draw:h.draw,
-          nameCh:h.nameCh, nameEn:h.name,
-          jockey:h.jockeyCh||h.jockey, trainer:h.trainerCh,
-          raceNo:r.raceNumber, odds:h.winOdds, rating:h.rating,
-          silksCode: h.silksCode || h.code || h.horseCode
-        });
-      });
+  function esc(value){
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function(char){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char];
     });
-    TODAY_ENTRIES = entries;
-    TODAY_META = { total: entries.length, venue: m.venueName || '', date: cur.date };
-    updateRateChipVisibility();
+  }
+
+  function val(value, fallback){
+    return value === null || value === undefined || value === '' ? fallback : String(value);
+  }
+
+  function link(id, html, className, attrs){
+    var extra = attrs || '';
+    return id
+      ? '<a class="' + className + '" href="/horse/?id=' + encodeURIComponent(id) + '"' + extra + '>' + html + '</a>'
+      : '<div class="' + className + '"' + extra + '>' + html + '</div>';
+  }
+
+  function silk(code, small){
+    var className = small ? 'leader-silk' : 'silks';
+    var url = code && TX_API.silksUrl ? TX_API.silksUrl(code) : '';
+    return url
+      ? '<img class="' + className + '" src="' + esc(url) + '" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">'
+      : '<div class="' + className + ' silks-fallback" aria-hidden="true">—</div>';
+  }
+
+  function empty(title, detail, retry){
+    return '<div class="state"><strong>' + esc(title) + '</strong>' + esc(detail || '') +
+      (retry ? '<br><button class="retry" type="button" data-retry="' + esc(retry) +
+        '" aria-label="' + esc(title) + '：重新載入">重新載入</button>' : '') + '</div>';
+  }
+
+  var indexState = { sort:'elo', status:'active', offset:0, limit:50, loading:false, seq:0 };
+  var entries = [];
+  var filter = 'all';
+  var meetingSeq = 0;
+  var searchTimer = null;
+  var searchSeq = 0;
+  var filters = {
+    all: function(){ return true; },
+    hot: function(item){ return +item.odds > 0 && +item.odds <= 5; },
+    mid: function(item){ return +item.odds > 5 && +item.odds <= 12; },
+    cold: function(item){ return +item.odds > 12; },
+    rate: function(item){ return +item.rating >= 80; }
+  };
+
+  function setIndexStatus(text, error, countText){
+    var status = document.getElementById('index-status');
+    status.textContent = text;
+    status.className = 'search-status' + (error ? ' is-error' : '');
+    if (countText !== undefined) document.getElementById('index-count').textContent = countText;
+  }
+
+  function setSearchMode(active){
+    document.getElementById('index-controls').hidden = active;
+    document.getElementById('load-more').hidden = active;
+    document.getElementById('index-title').textContent = active ? '搜尋結果' : '馬匹索引';
+  }
+
+  function indexRow(horse){
+    var name = esc(horse.nameCh || horse.nameEn || '未有名稱');
+    var english = horse.nameEn && horse.nameEn !== horse.nameCh
+      ? '<small>' + esc(horse.nameEn) + '</small>' : '';
+    var status = horse.status === 'active' ? '現役'
+      : horse.status === 'retired' ? '已退役' : val(horse.status, '—');
+    var html =
+      '<span class="index-horse" role="cell">' +
+        silk(horse.code, true) +
+        '<span class="index-identity"><strong>' + name + '</strong>' + english + '</span>' +
+      '</span>' +
+      '<span class="index-status ' + (horse.status === 'retired' ? 'retired' : '') + '" role="cell">' + esc(status) + '</span>' +
+      '<span role="cell">' + esc(val(horse.age, '—')) + '</span>' +
+      '<span role="cell">' + esc(val(horse.totalStarts, '—')) + '</span>' +
+      '<span role="cell">' + esc(val(horse.totalWins, '—')) + '</span>' +
+      '<span role="cell">' + esc(val(horse.currentRating, '—')) + '</span>' +
+      '<span role="cell">' + esc(horse.elo == null ? '—' : Math.round(horse.elo)) + '</span>';
+    return link(horse.id, html, 'index-row' + (horse.id ? ' is-link' : ''), ' role="row"');
+  }
+
+  function loadIndex(reset){
+    if (indexState.loading && !reset) return;
+    var requestOffset = reset ? 0 : indexState.offset;
+    if (reset){
+      indexState.offset = 0;
+      document.getElementById('index-list').innerHTML =
+        '<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>';
+      setIndexStatus('索引載入中…', false, '載入中');
+    }
+    indexState.loading = true;
+    var seq = ++indexState.seq;
+    var more = document.getElementById('load-more');
+    more.disabled = true;
+    var query = '?sort=' + encodeURIComponent(indexState.sort) +
+      '&status=' + encodeURIComponent(indexState.status) +
+      '&limit=' + indexState.limit + '&offset=' + requestOffset;
+
+    TX_API.horses(query).then(function(data){
+      if (seq !== indexState.seq) return;
+      var rows = (data && data.horses) || [];
+      var list = document.getElementById('index-list');
+      if (reset) list.innerHTML = '';
+      if (rows.length){
+        list.insertAdjacentHTML('beforeend', rows.map(indexRow).join(''));
+      } else if (reset){
+        list.innerHTML = empty('索引沒有結果', '可改用其他狀態或排序');
+      }
+      indexState.offset = requestOffset + rows.length;
+      var ended = rows.length < indexState.limit;
+      setIndexStatus(
+        rows.length ? '已顯示 ' + indexState.offset + ' 匹' + (ended ? ' · 已到索引末端' : '') : '沒有更多資料',
+        false,
+        indexState.offset + ' 匹'
+      );
+      more.textContent = '載入更多';
+      more.disabled = ended;
+      more.setAttribute('aria-label', ended ? '已載入全部馬匹' : '載入更多馬匹');
+    }).catch(function(error){
+      if (seq !== indexState.seq) return;
+      if (reset){
+        document.getElementById('index-list').innerHTML =
+          empty('馬匹索引未能載入', error.message, 'index');
+        setIndexStatus('索引載入失敗', true, '無資料');
+      } else {
+        setIndexStatus('下一頁未能載入 · 可按右方重試', true, indexState.offset + ' 匹');
+        more.textContent = '重試載入';
+        more.disabled = false;
+        more.setAttribute('aria-label', '重試載入下一頁馬匹');
+      }
+    }).finally(function(){
+      if (seq === indexState.seq) indexState.loading = false;
+    });
+  }
+
+  function runSearch(query, seq){
+    TX_API.horseSearch(query).then(function(data){
+      if (seq !== searchSeq) return;
+      var rows = (data && data.horses) || [];
+      document.getElementById('index-list').innerHTML = rows.length
+        ? rows.map(indexRow).join('')
+        : empty('找不到匹配馬匹', '試試中文名、英文名或馬匹編號');
+      document.getElementById('search-status').textContent =
+        '已更新 · ' + rows.length + ' 項結果' + (rows.length === 20 ? ' · 最多顯示 20 項' : '');
+      setIndexStatus(rows.length ? '搜尋完成' : '沒有搜尋結果', false, rows.length + ' 匹');
+    }).catch(function(error){
+      if (seq !== searchSeq) return;
+      var status = document.getElementById('search-status');
+      status.textContent = '搜尋失敗';
+      status.className = 'search-status is-error';
+      document.getElementById('index-list').innerHTML =
+        empty('搜尋暫時不可用', error.message, 'search');
+      setIndexStatus('搜尋失敗', true, '無資料');
+    });
+  }
+
+  function clearSearch(){
+    clearTimeout(searchTimer);
+    searchSeq += 1;
+    indexState.seq += 1;
+    indexState.loading = false;
+    document.getElementById('horse-search').value = '';
+    document.getElementById('search-status').textContent = '輸入名稱或編號，結果會取代下方索引';
+    document.getElementById('search-status').className = 'search-status';
+    setSearchMode(false);
+  }
+
+  function entryHtml(item){
+    var inner =
+      silk(item.silksCode) +
+      '<div><div class="horse-name">' + esc(item.nameCh || item.nameEn || '未有名稱') +
+        (item.nameEn && item.nameEn !== item.nameCh ? '<small>' + esc(item.nameEn) + '</small>' : '') +
+      '</div><div class="horse-meta">' +
+        (item.jockey ? '騎師 ' + esc(item.jockey) : '') +
+        (item.trainer ? ' · 練馬師 ' + esc(item.trainer) : '') +
+      '</div><div class="horse-stats"><span>檔 <b>' + esc(val(item.draw, '—')) +
+      '</b></span><span>賠率 <b>' + esc(val(item.odds, '—')) + '</b></span>' +
+        (item.rating != null && item.rating !== '' ? '<span>評分 <b>' + esc(item.rating) + '</b></span>' : '') +
+      '</div></div><div class="race-tag">R' + esc(val(item.raceNo, '—')) +
+      '<span>#' + esc(val(item.num, '—')) + '</span></div>';
+    return link(item.id, inner, 'horse-card' + (item.id ? ' is-link' : ''));
+  }
+
+  function renderToday(){
+    var list = entries.filter(filters[filter] || filters.all);
+    document.getElementById('today-count').textContent =
+      list.length + ' 匹' + (list.length !== entries.length ? ' / ' + entries.length : '');
+    document.getElementById('today-list').innerHTML = entries.length
+      ? (list.length ? list.map(entryHtml).join('') : empty('此分類暫無馬匹', '可切換其他篩選條件'))
+      : empty('暫無出賽資料', '最近賽事沒有可展示的排位');
+  }
+
+  function leaderboard(id, data, by){
+    var horses = (data && data.horses) || [];
+    document.getElementById(id).innerHTML = horses.length ? horses.map(function(horse, index){
+      var score = by === 'elo'
+        ? (horse.elo == null ? '—' : Math.round(horse.elo))
+        : val(horse.totalWins, '—') + ' 勝';
+      var sub = (horse.age != null ? horse.age + ' 歲 · ' : '') +
+        val(horse.totalStarts, 0) + ' 戰 · ' + val(horse.totalWins, 0) + ' 勝';
+      return link(
+        horse.id,
+        '<span class="leader-rank">' + (index + 1) + '</span>' +
+        silk(horse.silksCode || horse.code, true) +
+        '<span><span class="leader-name">' + esc(horse.nameCh || horse.nameEn || '未有名稱') +
+        '</span><span class="leader-sub">' + esc(sub) + '</span></span>' +
+        '<span class="leader-val">' + esc(score) + '</span>',
+        'leader-row' + (horse.id ? ' is-link' : '')
+      );
+    }).join('') : empty('資料整備中', '暫無可用排行榜資料');
+  }
+
+  function loadMeeting(){
+    var seq = ++meetingSeq;
+    return TX_API.smartCurrent().then(function(current){
+      if (!current || !current.date) throw new Error('沒有最近賽事');
+      return TX_API.meeting(current.date).then(function(meeting){
+        if (seq !== meetingSeq) return;
+        var seen = {};
+        var nextEntries = [];
+        (meeting.races || []).forEach(function(race){
+          (race.horses || []).forEach(function(horse){
+            var key = horse.id || [race.raceNumber, horse.horseNumber, horse.nameCh || horse.name].join('|');
+            if (seen[key]) return;
+            seen[key] = true;
+            nextEntries.push({
+              id:horse.id, num:horse.horseNumber, draw:horse.draw,
+              nameCh:horse.nameCh, nameEn:horse.name,
+              jockey:horse.jockeyCh || horse.jockey, trainer:horse.trainerCh,
+              raceNo:race.raceNumber, odds:horse.winOdds, rating:horse.rating,
+              silksCode:horse.silksCode || horse.code || horse.horseCode
+            });
+          });
+        });
+        entries = nextEntries;
+        document.querySelector('[data-filter="rate"]').hidden =
+          !entries.some(function(item){ return +item.rating >= 80; });
+        renderToday();
+      });
+    }).catch(function(error){
+      if (seq !== meetingSeq) return;
+      document.getElementById('today-count').textContent = '無資料';
+      document.getElementById('today-list').innerHTML =
+        empty('賽事資料未能載入', error.message, 'meeting');
+    });
+  }
+
+  function loadBoard(by, target){
+    return TX_API.horseLeaderboard(by, 10, 'active').then(function(data){
+      leaderboard(target, data, by);
+    }).catch(function(){
+      document.getElementById(target).innerHTML =
+        empty(by === 'elo' ? 'Elo 資料未能載入' : '勝場資料未能載入', '請稍後再試', by);
+    });
+  }
+
+  document.querySelectorAll('[data-status]').forEach(function(button){
+    button.addEventListener('click', function(){
+      clearSearch();
+      indexState.status = button.dataset.status;
+      document.querySelectorAll('[data-status]').forEach(function(item){
+        item.classList.toggle('is-active', item === button);
+        item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+      });
+      loadIndex(true);
+    });
+  });
+
+  document.querySelectorAll('[data-sort]').forEach(function(button){
+    button.addEventListener('click', function(){
+      clearSearch();
+      indexState.sort = button.dataset.sort;
+      document.querySelectorAll('[data-sort]').forEach(function(item){
+        item.classList.toggle('is-active', item === button);
+        item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+      });
+      loadIndex(true);
+    });
+  });
+
+  document.getElementById('load-more').addEventListener('click', function(){
+    loadIndex(false);
+  });
+
+  document.getElementById('ency-chips').addEventListener('click', function(event){
+    var button = event.target.closest('[data-filter]');
+    if (!button) return;
+    filter = button.dataset.filter;
+    document.querySelectorAll('[data-filter]').forEach(function(item){
+      item.classList.toggle('is-active', item === button);
+      item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+    });
     renderToday();
   });
-}).catch(function(e){
-  document.getElementById('today-count').textContent = '無資料';
-  document.getElementById('today-horses').innerHTML = '<div class="tx-err">載入失敗：' + escapeHtml(e.message) + '</div>';
-});
 
-// ---------- Leaderboards ----------
-TX_API.horseLeaderboard('elo', 10).then(function(d){
-  if (!d.horses || !d.horses.length) {
-    document.getElementById('leaderboard').innerHTML = '<div class="tx-empty">Elo 資料整備中</div>';
-    return;
-  }
-  document.getElementById('leaderboard').innerHTML = d.horses.map(function(h, i){
-    var en = (h.nameEn && h.nameEn !== h.nameCh) ? ' <small style="color:var(--ink-mute);font-size:11px;font-weight:500">'+escapeHtml(h.nameEn)+'</small>' : '';
-    return '<div class="row"><div class="row__num">' + (i+1) + '</div>'
-      + '<div><div class="row__name">' + escapeHtml(h.nameCh || h.nameEn) + en + '</div>'
-      + '<div class="row__sub">' + (h.age ? h.age + ' 歲 · ' : '') + (h.totalStarts || 0) + ' 戰 · ' + (h.totalWins || 0) + ' 勝</div></div>'
-      + '<div class="row__val">' + (h.elo ? Math.round(h.elo) : '——') + '</div></div>';
-  }).join('');
-}).catch(function(){
-  document.getElementById('leaderboard').innerHTML = '<div class="tx-empty">Elo 資料整備中</div>';
-});
-
-TX_API.horseLeaderboard('wins', 10).then(function(d){
-  if (!d.horses || !d.horses.length) {
-    document.getElementById('leaderboard-wins').innerHTML = '<div class="tx-empty">暫無資料</div>';
-    return;
-  }
-  document.getElementById('leaderboard-wins').innerHTML = d.horses.map(function(h, i){
-    var en = (h.nameEn && h.nameEn !== h.nameCh) ? ' <small style="color:var(--ink-mute);font-size:11px;font-weight:500">'+escapeHtml(h.nameEn)+'</small>' : '';
-    return '<div class="row"><div class="row__num">' + (i+1) + '</div>'
-      + '<div><div class="row__name">' + escapeHtml(h.nameCh || h.nameEn) + en + '</div>'
-      + '<div class="row__sub">' + (h.totalStarts || 0) + ' 戰 · 勝率 ' + (h.totalStarts ? Math.round(h.totalWins/h.totalStarts*100) : 0) + '%</div></div>'
-      + '<div class="row__val">' + (h.totalWins || 0) + ' 勝</div></div>';
-  }).join('');
-}).catch(function(){
-  document.getElementById('leaderboard-wins').innerHTML = '<div class="tx-empty">暫無資料</div>';
-});
-
-// ---------- Search ----------
-var searchInput = document.querySelector('.search input');
-var searchTimer = null;
-if (searchInput) {
-  searchInput.addEventListener('input', function(){
+  document.getElementById('horse-search').addEventListener('input', function(){
+    var query = this.value.trim();
+    var seq = ++searchSeq;
+    var status = document.getElementById('search-status');
     clearTimeout(searchTimer);
-    var q = searchInput.value.trim();
-    searchTimer = setTimeout(function(){
-      if (!q) { renderToday(); return; }
-      TX_API.horseSearch(q).then(function(d){
-        document.getElementById('today-label').textContent = '搜尋結果';
-        document.getElementById('today-count').textContent = (d.horses||[]).length + ' 匹';
-        document.getElementById('today-horses').innerHTML = (d.horses || []).slice(0, 20).map(function(h){
-          return '<div class="horse-card">'
-            + silksImg(h.silksCode || h.code, 40)
-            + '<div>'
-            +   renderNameBlock(h.nameCh, h.nameEn)
-            +   '<div class="horse-card__meta">' + (h.totalStarts || 0) + ' 戰 · ' + (h.totalWins || 0) + ' 勝 · 評分 ' + (h.currentRating || '——') + '</div>'
-            + '</div>'
-            + '<div class="horse-card__tag">' + escapeHtml(h.code || '—') + '</div>'
-            + '</div>';
-        }).join('') || '<div class="tx-empty">無搜尋結果</div>';
-      }).catch(function(){});
-    }, 300);
-  });
-}
-</script>
+    indexState.seq += 1;
+    indexState.loading = false;
+    status.className = 'search-status';
 
+    if (!query){
+      status.textContent = '輸入名稱或編號，結果會取代下方索引';
+      setSearchMode(false);
+      loadIndex(true);
+      return;
+    }
+
+    setSearchMode(true);
+    status.textContent = '搜尋中…';
+    document.getElementById('index-list').innerHTML =
+      '<div class="skeleton"></div><div class="skeleton"></div>';
+    setIndexStatus('搜尋中…', false, '載入中');
+    searchTimer = setTimeout(function(){ runSearch(query, seq); }, 320);
+  });
+
+  document.addEventListener('click', function(event){
+    var button = event.target.closest('[data-retry]');
+    if (!button) return;
+    if (button.dataset.retry === 'index') loadIndex(true);
+    if (button.dataset.retry === 'meeting') loadMeeting();
+    if (button.dataset.retry === 'elo') loadBoard('elo', 'elo-list');
+    if (button.dataset.retry === 'wins') loadBoard('wins', 'wins-list');
+    if (button.dataset.retry === 'search'){
+      var input = document.getElementById('horse-search');
+      if (input.value.trim()) input.dispatchEvent(new Event('input'));
+    }
+  });
+
+  loadIndex(true);
+  loadMeeting();
+  loadBoard('elo', 'elo-list');
+  loadBoard('wins', 'wins-list');
+})();
+</script>
 </body>
 </html>
