@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FDFBF5">
 <title>馬匹百科 · 天喜 TIANXI</title>
-<meta name="description" content="天喜馬匹百科：以 Elo、評分、勝場與出賽次數瀏覽香港賽馬完整馬匹索引。">
+<meta name="description" content="天喜馬匹百科：以 Elo、勝場與出賽次數瀏覽香港賽馬完整馬匹索引。">
 <meta property="og:title" content="馬匹百科 · 天喜 TIANXI">
-<meta property="og:description" content="搜尋與核對香港賽馬馬匹資料，按 Elo、評分、勝場或出賽次數瀏覽。">
+<meta property="og:description" content="搜尋與核對香港賽馬馬匹資料，按 Elo、勝場或出賽次數瀏覽。">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,7 @@
 .chip:hover{border-color:var(--accent)}.chip.is-active{background:var(--ency-ink);border-color:var(--ency-ink);color:var(--paper)}
 .index-controls{padding:14px 18px 10px;border-bottom:1px solid var(--ency-line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.control-group{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.control-label{font:700 9px var(--font-mono);letter-spacing:.12em;color:var(--ink-mute);margin-right:3px}.index-controls .chip{padding:6px 10px}
 .index-controls[hidden],.load-more[hidden]{display:none!important}
-.index-table__head,.index-row{display:grid;grid-template-columns:minmax(180px,2fr) 72px 54px 64px 64px 64px 70px;gap:8px;align-items:center}.index-table__head{padding:11px 18px 8px;font:700 9px var(--font-mono);letter-spacing:.08em;color:var(--ink-mute);border-bottom:1px solid var(--ency-line);text-align:right}.index-table__head span:first-child{text-align:left}.index-row{padding:11px 18px;border-bottom:1px solid var(--ency-line);font:500 11px var(--font-mono);color:var(--ink-mute);text-align:right;transition:background 140ms}.index-row:last-child{border-bottom:0}.index-row:hover{background:var(--paper-2)}.index-row.is-link{cursor:pointer}.index-row.is-link:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}.index-horse{display:grid;grid-template-columns:32px minmax(0,1fr);gap:9px;align-items:center;text-align:left;min-width:0}.index-identity{min-width:0}.index-horse strong{display:block;font:800 14px var(--font-display);color:var(--ency-ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.index-horse small{display:block;font:500 10px var(--font-body);color:var(--ink-mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}.index-status{justify-self:end;font:700 9px var(--font-body);padding:3px 6px;border:1px solid var(--rule-2);border-radius:4px;color:var(--green)}.index-status.retired{color:var(--ink-mute)}.index-footer{padding:12px 18px;border-top:1px solid var(--ency-line);display:flex;align-items:center;justify-content:space-between;gap:12px}.load-more{padding:9px 15px;border:1px solid var(--ency-ink);border-radius:7px;background:var(--ency-ink);color:var(--paper);font-size:11px;font-weight:700;transition:opacity 140ms,transform 140ms}.load-more:hover:not(:disabled){transform:translateY(-1px)}.load-more:disabled{opacity:.38;cursor:not-allowed}.index-row,.leader-row,.horse-card{color:inherit;text-decoration:none}
+.index-table__head,.index-row{display:grid;grid-template-columns:minmax(180px,2fr) 72px 64px 64px 70px;gap:8px;align-items:center}.index-table__head{padding:11px 18px 8px;font:700 9px var(--font-mono);letter-spacing:.08em;color:var(--ink-mute);border-bottom:1px solid var(--ency-line);text-align:right}.index-table__head span:first-child{text-align:left}.index-row{padding:11px 18px;border-bottom:1px solid var(--ency-line);font:500 11px var(--font-mono);color:var(--ink-mute);text-align:right;transition:background 140ms}.index-row:last-child{border-bottom:0}.index-row:hover{background:var(--paper-2)}.index-row.is-link{cursor:pointer}.index-row.is-link:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}.index-horse{display:grid;grid-template-columns:32px minmax(0,1fr);gap:9px;align-items:center;text-align:left;min-width:0}.index-identity{min-width:0}.index-horse strong{display:block;font:800 14px var(--font-display);color:var(--ency-ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.index-horse small{display:block;font:500 10px var(--font-body);color:var(--ink-mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}.index-status{justify-self:end;font:700 9px var(--font-body);padding:3px 6px;border:1px solid var(--rule-2);border-radius:4px;color:var(--green)}.index-status.retired{color:var(--ink-mute)}.index-footer{padding:12px 18px;border-top:1px solid var(--ency-line);display:flex;align-items:center;justify-content:space-between;gap:12px}.load-more{padding:9px 15px;border:1px solid var(--ency-ink);border-radius:7px;background:var(--ency-ink);color:var(--paper);font-size:11px;font-weight:700;transition:opacity 140ms,transform 140ms}.load-more:hover:not(:disabled){transform:translateY(-1px)}.load-more:disabled{opacity:.38;cursor:not-allowed}.index-row,.leader-row,.horse-card{color:inherit;text-decoration:none}
 .list{padding:5px 18px 12px}.horse-card{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:13px;align-items:center;padding:13px 0;border-bottom:1px solid var(--ency-line);transition:transform 160ms,background 160ms}.horse-card:last-child{border-bottom:0}.horse-card.is-link{cursor:pointer}.horse-card.is-link:hover{transform:translateX(3px)}.horse-card.is-link:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:7px}
 .silks{width:44px;height:44px;object-fit:contain;border:1px solid var(--rule-2);border-radius:8px;background:var(--paper-2)}.silks-fallback{display:grid;place-items:center;font:700 11px var(--font-mono);color:var(--ink-mute)}
 .horse-name{font:800 15px/1.25 var(--font-display);color:var(--ency-ink);overflow-wrap:anywhere}.horse-name small{display:block;font:500 10px var(--font-body);letter-spacing:.04em;color:var(--ink-mute);margin-top:3px}.horse-meta{margin-top:5px;font-size:11px;color:var(--ink-mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.horse-stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;font:500 10px var(--font-mono);color:var(--ink-mute)}.horse-stats b{color:var(--ency-ink)}.race-tag{text-align:right;font:600 10px/1.55 var(--font-mono);color:var(--accent);white-space:nowrap}.race-tag span{display:block;color:var(--ink-mute)}
@@ -58,7 +58,7 @@
 .disclaimer{margin-top:0}
 @keyframes shimmer{to{background-position:-220% 0}}@media(prefers-reduced-motion:reduce){.skeleton{animation:none}.horse-card,.index-row,.leader-row,.load-more,.chip,.search-wrap input{transition:none}}
 @media(max-width:719px){.ency-grid{grid-template-columns:1fr;padding-top:16px}.side-column{display:contents}.side-column .panel,.method{order:2}.ency-hero:after{opacity:.5}.panel-head{padding-left:15px;padding-right:15px}.list{padding-left:15px;padding-right:15px}.leader-row{padding-left:15px;padding-right:15px}}
-@media(max-width:600px){.index-table__head,.index-row{grid-template-columns:minmax(145px,1.8fr) 55px 42px 52px 52px 54px 58px;gap:5px}.index-table{overflow-x:auto}.index-table__head,.index-row{min-width:470px}.index-table__head{padding-left:15px;padding-right:15px}.index-row{padding-left:15px;padding-right:15px}.index-controls{padding-left:15px;padding-right:15px}.index-footer{padding-left:15px;padding-right:15px}.index-footer .search-status{font-size:10px}}
+@media(max-width:600px){.index-table__head,.index-row{grid-template-columns:minmax(145px,1.8fr) 55px 52px 52px 58px;gap:5px}.index-table{overflow-x:auto}.index-table__head,.index-row{min-width:400px}.index-table__head{padding-left:15px;padding-right:15px}.index-row{padding-left:15px;padding-right:15px}.index-controls{padding-left:15px;padding-right:15px}.index-footer{padding-left:15px;padding-right:15px}.index-footer .search-status{font-size:10px}}
 @media(min-width:720px){.search-panel{padding-top:22px;padding-bottom:22px}}
 </style>
 </head>
@@ -68,7 +68,7 @@
 <section class="ency-hero">
   <div class="hero-kicker">REFERENCE / HONG KONG RACING</div>
   <h1>馬匹百科<span>THE TIANXI HORSE REGISTER</span></h1>
-  <p class="hero-copy"><strong>證據先於印象。</strong> 以完整馬匹索引為主入口，按狀態、評分、Elo、勝場或出賽次數逐頁核對；今日排位與排行榜只作發現入口。百科只展示 TX_API 已有的資料，不替數字補上想像。</p>
+  <p class="hero-copy"><strong>證據先於印象。</strong> 以完整馬匹索引為主入口，按狀態、Elo、勝場或出賽次數逐頁核對；今日排位與排行榜只作發現入口。百科只展示 TX_API 已有的資料，不替數字補上想像。</p>
 </section>
 <section class="search-panel">
   <div class="search-wrap">
@@ -84,19 +84,19 @@
       <div class="panel-head"><h2><small>HORSE REGISTER</small><span id="index-title">馬匹索引</span></h2><span class="count" id="index-count" aria-live="polite">載入中</span></div>
       <div class="index-controls" id="index-controls">
         <div class="control-group"><span class="control-label">資料範圍</span><button class="chip is-active" data-status="active" type="button" aria-pressed="true">現役</button><button class="chip" data-status="all" type="button" aria-pressed="false">全部</button></div>
-        <div class="control-group"><span class="control-label">排序</span><button class="chip is-active" data-sort="elo" type="button" aria-pressed="true">Elo</button><button class="chip" data-sort="rating" type="button" aria-pressed="false">評分</button><button class="chip" data-sort="wins" type="button" aria-pressed="false">勝場</button><button class="chip" data-sort="starts" type="button" aria-pressed="false">出賽</button></div>
+        <div class="control-group"><span class="control-label">排序</span><button class="chip is-active" data-sort="elo" type="button" aria-pressed="true">Elo</button><button class="chip" data-sort="wins" type="button" aria-pressed="false">勝場</button><button class="chip" data-sort="starts" type="button" aria-pressed="false">出賽</button></div>
       </div>
       <div class="index-table" role="table" aria-label="馬匹索引">
-        <div class="index-table__head" role="row"><span>馬匹</span><span>狀態</span><span>年齡</span><span>出賽</span><span>勝場</span><span>評分</span><span>Elo</span></div>
+        <div class="index-table__head" role="row"><span>馬匹</span><span>狀態</span><span>出賽</span><span>勝場</span><span>Elo</span></div>
         <div id="index-list" role="rowgroup"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
       </div>
       <div class="index-footer"><div id="index-status" class="search-status" aria-live="polite">索引載入中…</div><button id="load-more" class="load-more" type="button" disabled aria-label="載入更多馬匹">載入更多</button></div>
     </section>
   </div>
   <aside class="side-column">
-    <section class="panel"><div class="panel-head"><h2><small>RATING INDEX</small>最高 Elo</h2><span class="count">在役 · 10</span></div><div id="elo-list"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+    <section class="panel"><div class="panel-head"><h2><small>ELO INDEX</small>最高 Elo</h2><span class="count">在役 · 10</span></div><div id="elo-list"><div class="skeleton"></div><div class="skeleton"></div></div></section>
     <section class="panel"><div class="panel-head"><h2><small>WIN ARCHIVE</small>最多勝場</h2><span class="count">在役 · 10</span></div><div id="wins-list"><div class="skeleton"></div><div class="skeleton"></div></div></section>
-    <section class="panel" id="today-panel"><div class="panel-head"><h2><small>ON THE CARD</small>今日出賽馬匹</h2><span class="count" id="today-count">載入中</span></div><div class="chips" id="ency-chips" role="group" aria-label="篩選今日出賽馬匹"><button class="chip is-active" data-filter="all" type="button">全部</button><button class="chip" data-filter="hot" type="button">大熱 ≤ 5</button><button class="chip" data-filter="mid" type="button">中價 5–12</button><button class="chip" data-filter="cold" type="button">爆冷 &gt; 12</button><button class="chip" data-filter="rate" type="button" hidden>評分 ≥ 80</button></div><div class="list" id="today-list"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+    <section class="panel" id="today-panel"><div class="panel-head"><h2><small>ON THE CARD</small>今日出賽馬匹</h2><span class="count" id="today-count">載入中</span></div><div class="chips" id="ency-chips" role="group" aria-label="篩選今日出賽馬匹"><button class="chip is-active" data-filter="all" type="button">全部</button><button class="chip" data-filter="hot" type="button">大熱 ≤ 5</button><button class="chip" data-filter="mid" type="button">中價 5–12</button><button class="chip" data-filter="cold" type="button">爆冷 &gt; 12</button></div><div class="list" id="today-list"><div class="skeleton"></div><div class="skeleton"></div></div></section>
     <section class="panel method"><h2>閱讀這頁的方法</h2><p>索引由完整馬匹資料庫提供；現役與全部是 API 的真實狀態範圍。今日卡片與排行榜是輔助發現，不代表完整歷史。</p><dl><dt>資料來源</dt><dd>TX_API</dd><dt>索引分頁</dt><dd>每頁 50 匹</dd><dt>圖片缺失</dt><dd>保留空位</dd></dl><a href="/engine/">了解天喜引擎 →</a></section>
   </aside>
 </main>
@@ -148,8 +148,7 @@
     all: function(){ return true; },
     hot: function(item){ return +item.odds > 0 && +item.odds <= 5; },
     mid: function(item){ return +item.odds > 5 && +item.odds <= 12; },
-    cold: function(item){ return +item.odds > 12; },
-    rate: function(item){ return +item.rating >= 80; }
+    cold: function(item){ return +item.odds > 12; }
   };
 
   function setIndexStatus(text, error, countText){
@@ -177,10 +176,8 @@
         '<span class="index-identity"><strong>' + name + '</strong>' + english + '</span>' +
       '</span>' +
       '<span class="index-status ' + (horse.status === 'retired' ? 'retired' : '') + '" role="cell">' + esc(status) + '</span>' +
-      '<span role="cell">' + esc(val(horse.age, '—')) + '</span>' +
       '<span role="cell">' + esc(val(horse.totalStarts, '—')) + '</span>' +
       '<span role="cell">' + esc(val(horse.totalWins, '—')) + '</span>' +
-      '<span role="cell">' + esc(val(horse.currentRating, '—')) + '</span>' +
       '<span role="cell">' + esc(horse.elo == null ? '—' : Math.round(horse.elo)) + '</span>';
     return link(horse.id, html, 'index-row' + (horse.id ? ' is-link' : ''), ' role="row"');
   }
@@ -281,7 +278,6 @@
         (item.trainer ? ' · 練馬師 ' + esc(item.trainer) : '') +
       '</div><div class="horse-stats"><span>檔 <b>' + esc(val(item.draw, '—')) +
       '</b></span><span>賠率 <b>' + esc(val(item.odds, '—')) + '</b></span>' +
-        (item.rating != null && item.rating !== '' ? '<span>評分 <b>' + esc(item.rating) + '</b></span>' : '') +
       '</div></div><div class="race-tag">R' + esc(val(item.raceNo, '—')) +
       '<span>#' + esc(val(item.num, '—')) + '</span></div>';
     return link(item.id, inner, 'horse-card' + (item.id ? ' is-link' : ''));
@@ -302,8 +298,7 @@
       var score = by === 'elo'
         ? (horse.elo == null ? '—' : Math.round(horse.elo))
         : val(horse.totalWins, '—') + ' 勝';
-      var sub = (horse.age != null ? horse.age + ' 歲 · ' : '') +
-        val(horse.totalStarts, 0) + ' 戰 · ' + val(horse.totalWins, 0) + ' 勝';
+      var sub = val(horse.totalStarts, 0) + ' 戰 · ' + val(horse.totalWins, 0) + ' 勝';
       return link(
         horse.id,
         '<span class="leader-rank">' + (index + 1) + '</span>' +
@@ -333,14 +328,12 @@
               id:horse.id, num:horse.horseNumber, draw:horse.draw,
               nameCh:horse.nameCh, nameEn:horse.name,
               jockey:horse.jockeyCh || horse.jockey, trainer:horse.trainerCh,
-              raceNo:race.raceNumber, odds:horse.winOdds, rating:horse.rating,
+              raceNo:race.raceNumber, odds:horse.winOdds,
               silksCode:horse.silksCode || horse.code || horse.horseCode
             });
           });
         });
         entries = nextEntries;
-        document.querySelector('[data-filter="rate"]').hidden =
-          !entries.some(function(item){ return +item.rating >= 80; });
         renderToday();
       });
     }).catch(function(error){

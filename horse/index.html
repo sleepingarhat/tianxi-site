@@ -219,9 +219,16 @@
         nameEn: h.nameEn || h.name_en,
       }, h.silksCode || h.silks_code);
       // Populate KV tables
-      if (race && race.raceNumber) renderKV('race-kv', buildRaceKV(race));
-      else document.querySelector('#race-kv').parentElement.previousElementSibling.style.display = 'none',
-           document.querySelector('#race-kv').style.display = 'none';
+      var raceTable = document.getElementById('race-kv');
+      if (race && race.raceNumber) {
+        renderKV('race-kv', buildRaceKV(race));
+      } else if (raceTable) {
+        var raceHeading = raceTable.previousElementSibling;
+        if (raceHeading && raceHeading.classList.contains('section-hd')) {
+          raceHeading.style.display = 'none';
+        }
+        raceTable.style.display = 'none';
+      }
       renderKV('horse-kv', buildHorseKV(h));
 
       // Explain
