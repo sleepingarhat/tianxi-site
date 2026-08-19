@@ -375,6 +375,12 @@
         if (sources.length) parts.push("來源：" + sources.join("、"));
         if (has(meta.generatedAt)) parts.push("生成：" + meta.generatedAt);
         if (has(meta.dataAsOf)) parts.push("資料截至：" + meta.dataAsOf);
+        if (meta.profile && typeof meta.profile === "object") {
+          if (has(meta.profile.source)) parts.push("固定檔案來源：" + meta.profile.source);
+          if (has(meta.profile.dataAsOf)) parts.push("固定檔案截至：" + meta.profile.dataAsOf);
+          if (has(meta.profile.checkedAt)) parts.push("最近核對：" + meta.profile.checkedAt);
+          if (has(meta.profile.sourceUrl)) parts.push("公開來源：" + meta.profile.sourceUrl);
+        }
         if (coverage && typeof coverage === "object") Object.keys(coverage).forEach(function (key) {
           if (has(coverage[key])) parts.push(key + "：" + coverage[key]);
         });
