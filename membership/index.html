@@ -23,6 +23,7 @@
 
 .mb-notice{margin:16px 20px 0;padding:11px 14px;border-radius:var(--r-lg);background:var(--gold-tint);border:1px solid rgba(184,145,47,0.35);color:var(--brown);font-size:12px;line-height:1.5;text-align:center}
 .mb-notice b{font-weight:700}
+.mb-account{margin:10px 20px 0;display:flex;justify-content:center}.mb-account a{font-family:var(--font-display);font-size:12px;font-weight:800;color:var(--ink);border-bottom:1px solid var(--gold-2);padding-bottom:2px}
 
 .mb-sec-title{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--ink);margin:24px 20px 12px;display:flex;align-items:center;gap:8px}
 .mb-sec-title::before{content:"";display:block;width:3px;height:14px;background:var(--gold-2);border-radius:2px}
@@ -99,17 +100,18 @@
   <div style="margin-top:14px"><a href="/track-record/" style="font-family:var(--font-display);font-weight:800;font-size:13px;color:var(--brown,#7a4a20);text-decoration:none;border-bottom:2px solid var(--gold-2,#C8A14A);padding-bottom:1px">查看公開戰績 →</a></div>
 </section>
 
-<div class="mb-notice" id="mb-notice"><b>收費系統設定中</b>，升級入口即將開放。想第一時間收到通知，可先加入下方免費 Telegram 頻道。</div>
+<div class="mb-notice" id="mb-notice"><b>付款由 Whop 安全處理</b>。付款後請用同一個 Whop 帳戶登入，系統會即時核實有效會籍；付款完成頁、電郵或會員編號本身不會直接解鎖。</div>
+<div class="mb-account"><a href="https://tianxi.racing/api/membership/login">已購買？登入 Pro 會員中心 →</a></div>
 
 <h2 class="mb-sec-title">引擎技術實力</h2>
 <div class="mb-tech">
   <div class="mb-tech-grid">
-    <div class="mb-tcard"><div class="mb-tcard__n">01</div><div class="mb-tcard__t">機器學習集成模型</div><div class="mb-tcard__d">核心為 <b>LightGBM 排序模型</b>（lambdarank），直接以「邊匹馬會贏」為訓練目標，唔係事後憑感覺打分。</div></div>
-    <div class="mb-tcard"><div class="mb-tcard__n">02</div><div class="mb-tcard__t">八千場歷史訓練</div><div class="mb-tcard__d">由 <b>2016 年至今</b>全部香港賽事（沙田・跑馬地），逾 <b>8,000 場</b>、約 98,000 條參賽紀錄持續學習。</div></div>
-    <div class="mb-tcard"><div class="mb-tcard__n">03</div><div class="mb-tcard__t">多維特徵工程</div><div class="mb-tcard__d">融合速度、檔位、配速、班次、騎練配搭同<b>血統</b>等多維訊號，捕捉肉眼難察嘅規律。</div></div>
-    <div class="mb-tcard"><div class="mb-tcard__n">04</div><div class="mb-tcard__t">機率層融合</div><div class="mb-tcard__d">機器學習同 ELO 評分喺<b>機率層標準化後融合</b>，單一模型失準唔會拖累全局，結果更穩。</div></div>
-    <div class="mb-tcard"><div class="mb-tcard__n">05</div><div class="mb-tcard__t">嚴格時序驗證</div><div class="mb-tcard__d">每個新特徵都要喺 <b>walk-forward 時序外樣本</b>通過雙重 A/B，跑唔贏基準即剔除，拒絕過擬合靚數。</div></div>
-    <div class="mb-tcard"><div class="mb-tcard__n">06</div><div class="mb-tcard__t">全自動 + 永久公開</div><div class="mb-tcard__d">每賽日<b>自我校準</b>參數毋須人手；所有預測同實際賽果<b>永久公開對賬</b>，準唔準你自己查證。</div></div>
+    <div class="mb-tcard"><div class="mb-tcard__n">01</div><div class="mb-tcard__t">數據化預測</div><div class="mb-tcard__d">以香港賽事長期資料建立可重現預測，唔靠賽後改口或主觀貼士。</div></div>
+    <div class="mb-tcard"><div class="mb-tcard__n">02</div><div class="mb-tcard__t">時序外驗證</div><div class="mb-tcard__d">所有改動先用未見過嘅較後賽事驗證，降低只對舊數據有效嘅風險。</div></div>
+    <div class="mb-tcard"><div class="mb-tcard__n">03</div><div class="mb-tcard__t">多來源核對</div><div class="mb-tcard__d">賽事、馬匹及市場資料會經一致性檢查；缺資料時直接隱藏，不以猜測補值。</div></div>
+    <div class="mb-tcard"><div class="mb-tcard__n">04</div><div class="mb-tcard__t">機率化輸出</div><div class="mb-tcard__d">Pro 顯示最終勝出、三甲及前四機率，方便比較同場相對強弱。</div></div>
+    <div class="mb-tcard"><div class="mb-tcard__n">05</div><div class="mb-tcard__t">持續監察</div><div class="mb-tcard__d">新訊號要跨時段維持改善先會採用，單次漂亮結果不足以推出。</div></div>
+    <div class="mb-tcard"><div class="mb-tcard__n">06</div><div class="mb-tcard__t">永久公開對賬</div><div class="mb-tcard__d">過往預測同實際賽果長期公開，準確度由你自行核實。</div></div>
   </div>
   <p class="mb-tech-foot">天喜唔係貼士佬主觀感覺，而係<b>可驗證、可問責</b>嘅數據引擎 —— 呢個就係同坊間「靠估」貼士最大嘅分別。</p>
 </div>
@@ -154,14 +156,14 @@
 <p style="margin:10px 20px 0;font-size:11px;color:var(--ink-mute);text-align:center;line-height:1.5">季票將於 2026/27 新馬季開鑼（9 月）前推出。</p>
 
 <div class="mb-tg">
-  <h3>Telegram VIP 自動入群</h3>
-  <p>升級後由 Whop 自動授權你加入 VIP 私頻，賽日提早收到全卡 picks 同盤口提示；會籍到期自動處理，唔使手動管理。</p>
+  <h3>Telegram VIP 由 Whop 自動管理</h3>
+  <p>兩個方案已連接同一個官方 Whop Telegram app。付款後喺 Whop 開啟 Telegram access；Whop 會按有效會籍管理加入及到期／取消權限，網站唔會公開永久群組連結。</p>
   <p class="free" id="mb-tg-free">免費頻道（每賽日精選 · 賽後復盤 · 命中率）連結即將公布。</p>
 </div>
 
 <h2 class="mb-sec-title">常見問題</h2>
 <div class="mb-faq">
-  <details><summary>付款後點樣入 VIP 群？</summary><p>付款成功後，Whop 會用你嘅 Telegram 帳戶自動授權入群，毋須人手審批。如未入到，多數係登入咗錯嘅 Telegram／Whop 帳戶。</p></details>
+  <details><summary>付款後點樣入 VIP 群？</summary><p>付款後用同一個 Whop 帳戶登入 Pro 會員中心，再按「在 Whop 開啟 Telegram VIP」。群組權限由已連接嘅官方 Whop Telegram app 管理。</p></details>
   <details><summary>可以隨時取消嗎？</summary><p>月費會員可隨時喺 Whop 取消，當期完結後唔再收費；單日通行證為一次性購買。</p></details>
   <details><summary>付款安全嗎？</summary><p>收款由 Whop 處理，天喜唔會接觸或儲存你嘅信用卡資料。</p></details>
   <details><summary>預測準唔準？</summary><p>所有過往預測同實際賽果、命中率均喺<a href="/results/" style="color:var(--accent);font-weight:700">預測與賽果</a>頁永久公開，請自行查證後再決定。</p></details>
@@ -178,11 +180,10 @@
 
 <script>
 (function(){
-  // Whop hosted-checkout links. Fill each when the Whop plans are created.
-  // Empty string => button shows 即將開放 (disabled).
+  // Server-controlled redirects to the two approved legacy Whop products.
   var WHOP_LINKS = {
-    day:    'https://whop.com/tianxi-2d70/38-79/',
-    month:  'https://whop.com/tianxi-2d70/198/'
+    day:    'https://tianxi.racing/api/membership/checkout/day',
+    month:  'https://tianxi.racing/api/membership/checkout/month'
   };
   // Optional free Telegram channel invite (public). Empty => placeholder text kept.
   var TG_FREE_URL = 'https://t.me/TX_Oracle';
@@ -190,7 +191,12 @@
   function validLink(u){
     if(typeof u !== 'string') return '';
     u = u.trim();
-    return /^https:\/\/\S+$/.test(u) ? u : '';
+    try {
+      var parsed = new URL(u);
+      if(parsed.protocol !== 'https:' || parsed.hostname !== 'tianxi.racing') return '';
+      if(!/^\/api\/membership\/checkout\/(?:day|month)$/.test(parsed.pathname)) return '';
+      return parsed.href;
+    } catch(_) { return ''; }
   }
   function wire(){
     var anyLive = false;
@@ -201,8 +207,8 @@
       var url = validLink(WHOP_LINKS[key]);
       if(url){
         btn.setAttribute('href', url);
-        btn.setAttribute('target','_blank');
-        btn.setAttribute('rel','noopener noreferrer');
+        btn.removeAttribute('target');
+        btn.removeAttribute('rel');
         btn.removeAttribute('aria-disabled');
         btn.classList.remove('is-soon');
         anyLive = true;
@@ -216,7 +222,7 @@
     var notice = document.getElementById('mb-notice');
     if(notice) notice.style.display = anyLive ? 'none' : '';
 
-    var tg = validLink(TG_FREE_URL);
+    var tg = /^https:\/\/t\.me\/TX_Oracle$/.test(TG_FREE_URL) ? TG_FREE_URL : '';
     if(tg){
       var f = document.getElementById('mb-tg-free');
       if(f){ f.innerHTML = '免費頻道：<a href="'+tg+'" target="_blank" rel="noopener noreferrer" style="color:var(--gold-3);font-weight:700;text-decoration:underline">按此加入</a>（每賽日精選 · 賽後復盤 · 命中率）'; }
