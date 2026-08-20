@@ -156,6 +156,7 @@
 (function(){
   var VENUE_NAME = { ST: '沙田', HV: '跑馬地' };
   var RANK_LABEL = ['冠軍','亞軍','季軍','殿軍'];
+  var STYLE_MAP = {};
 
   function esc(s){
     return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
@@ -209,7 +210,8 @@
   function winnerTimeText(top){
     if (!top || !top.length) return '';
     var w = top[0];
-    if (w.finishTime) return '頭馬時間 ' + esc(w.finishTime);
+    var ft = TX_API.finishTime(w.finishTimeSec != null ? w.finishTimeSec : w.finishTime);
+    if (ft) return '頭馬時間 ' + esc(ft);
     return '';
   }
 
@@ -231,13 +233,13 @@
     var goingTxt = [race.track, race.course && (race.course + ' 賽道'), race.going].filter(Boolean).map(esc).join(' · ');
 
     var pods = '';
-    for (var i = 0; i < 4; i++){
+    for (var i = 0; i < top.length; i++){
       var h = top[i];
       pods += '<div class="pod__slot p' + (i + 1) + '">' +
         '<div class="pod__rank">' + RANK_LABEL[i] + '</div>' +
-        '<div class="pod__no">' + esc(h && h.horseNumber || '—') + '</div>' +
-        '<div class="pod__name">' + esc(h && (h.nameCh || h.name) || '—') + '</div>' +
-        '<div class="pod__odds">' + (h ? oddsDisp(h.winOdds) : '—') + '</div>' +
+        (h.horseNumber != null ? '<div class="pod__no">' + esc(h.horseNumber) + '</div>' : '') +
+        '<div class="pod__name">' + (function(){ var id=TX_API.canonicalHorseId(h && (h.horseId || h.horse_id || h.id)), label=esc(h && (h.nameCh || h.name) || '') + (STYLE_MAP[id] ? TX_API.runningStyleBadge(STYLE_MAP[id]) : ''), link=TX_API.horseHref(id, race.id); return link ? '<a href="' + link + '">' + label + '</a>' : label; }()) + '</div>' +
+        (h.winOdds != null && h.winOdds !== '' ? '<div class="pod__odds">' + oddsDisp(h.winOdds) + '</div>' : '') +
       '</div>';
     }
 
@@ -250,7 +252,7 @@
         '<div class="rc__no"><small>R' + esc(raceNo) + '</small>第 ' + esc(raceNo) + ' 場</div>' +
         '<div class="rc__title">' + esc(titleTxt || race.title || '') + '</div>' +
       '</div><div class="rc__meta">' +
-        '<strong>' + (goingTxt || '—') + '</strong>' +
+        (goingTxt ? '<strong>' + goingTxt + '</strong>' : '') +
         esc(entryCount) + ' 匹' + (race.prize ? ' · ' + fmtPrize(race.prize) : '') +
       '</div></div>' +
       '<div class="pod">' + pods + '</div>' +
@@ -261,6 +263,15 @@
   }
 
   function renderMeeting(m){
+    if (!m.__stylesReady) {
+      var styleIds = [];
+      (m.races || []).forEach(function(r){ (r.horses || []).forEach(function(h){ styleIds.push(h.horseId || h.horse_id || h.id); }); });
+      m.__stylesReady = true;
+      return TX_API.runningStyles(styleIds, { beforeDate: m.date }).then(function(sd){
+        STYLE_MAP = {}; (sd.styles || []).forEach(function(x){ STYLE_MAP[x.horseId] = x; });
+        renderMeeting(m);
+      });
+    }
     var slot = document.getElementById('day-slot');
     var races = m.races || [];
     var settled = races.filter(function(r){ return (r.horses || []).some(function(h){ return h.finishingPosition != null; }); });
@@ -284,8 +295,8 @@
       '<div class="day-stats">' +
         '<div class="day-stats__card"><div class="day-stats__lbl">場次</div><div class="day-stats__val">' + races.length + '</div><div class="day-stats__sub">R1 – R' + races.length + '</div></div>' +
         '<div class="day-stats__card"><div class="day-stats__lbl">有賽果</div><div class="day-stats__val">' + settled.length + '</div><div class="day-stats__sub">含結果</div></div>' +
-        '<div class="day-stats__card"><div class="day-stats__lbl">G1 頭牌</div><div class="day-stats__val">' + g1s.length + '</div><div class="day-stats__sub">' + (g1s.map(function(r){ return 'R' + (r.raceNumber || r.race_number); }).join(' · ') || '—') + '</div></div>' +
-        '<div class="day-stats__card"><div class="day-stats__lbl">獎金</div><div class="day-stats__val">' + (prizeTotal != null ? fmtPrize(prizeTotal) : '—') + '</div><div class="day-stats__sub">HKD 合計</div></div>' +
+        '<div class="day-stats__card"><div class="day-stats__lbl">G1 頭牌</div><div class="day-stats__val">' + g1s.length + '</div>' + (g1s.length ? '<div class="day-stats__sub">' + g1s.map(function(r){ return 'R' + (r.raceNumber || r.race_number); }).join(' · ') + '</div>' : '') + '</div>' +
+        (prizeTotal != null ? '<div class="day-stats__card"><div class="day-stats__lbl">獎金</div><div class="day-stats__val">' + fmtPrize(prizeTotal) + '</div><div class="day-stats__sub">HKD 合計</div></div>' : '') +
       '</div>' +
       '<div class="cmp-summary" id="cmp-summary"><span class="k">模型對賬</span> 捲動各場以載入模型預測對比</div>' +
       '<div class="cov-summary" id="cov-summary" style="display:none"></div>' +
@@ -331,34 +342,46 @@
   }
 
   function oddsTxt(o){
-    if (o == null) return '—';
+    if (o == null) return '';
     var s = typeof o === 'string' ? o.trim() : o;
-    if (s === '') return '—';
+    if (s === '') return '';
     var n = Number(s);
-    if (isFinite(n)) return n > 0 ? (n % 1 === 0 ? String(n) : n.toFixed(1)) : '—';
+    if (isFinite(n)) return n > 0 ? (n % 1 === 0 ? String(n) : n.toFixed(1)) : '';
     return String(s);
   }
 
   function oddsDisp(o){
     var t = oddsTxt(o);
-    return t === '—' ? '—' : '賠 ' + esc(t);
+    return t ? '賠 ' + esc(t) : '';
   }
 
   function pctTxt(x){
     var n = Number(x);
-    return isFinite(n) ? Math.round(n * 100) + '%' : '—';
+    return isFinite(n) ? Math.round(n * 100) + '%' : '';
   }
 
   function resCls(fp){
     if (fp === 1) return 'is-win';
     if (fp != null && fp <= 3) return 'is-top3';
-    return 'is-out';
+    return fp == null ? '' : 'is-out';
   }
 
   function resTxt(fp){
-    if (fp == null) return '未上名';
+    if (fp == null) return '';
     if (fp === 1) return '冠軍';
     return '第 ' + fp;
+  }
+
+  function cmpHorseHtml(pick, race){
+    if (!pick) return '';
+    var matched = matchHorse(pick, race) || {};
+    var id = TX_API.canonicalHorseId(
+      pick.horseId || pick.horse_id || matched.horseId || matched.horse_id || matched.id
+    );
+    var label = esc(pick.nameCh || pick.nameEn || matched.nameCh || matched.name || '') +
+      (STYLE_MAP[id] ? TX_API.runningStyleBadge(STYLE_MAP[id]) : '');
+    var link = TX_API.horseHref(id, race.id);
+    return link ? '<a href="' + link + '">' + label + '</a>' : label;
   }
 
   function renderCmp(race, tp){
@@ -373,10 +396,10 @@
       var fp = finishOf(p, race);
       return '<div class="cmp__row ' + resCls(fp) + '">' +
         '<span class="cmp__rk">預測 ' + (i + 1) + '</span>' +
-        '<span class="cmp__h">' + esc(p.horseNumber) + ' ' + esc(p.nameCh || p.nameEn || '') + '</span>' +
-        '<span class="cmp__pw">' + pctTxt(p.pWin) + '</span>' +
-        '<span class="cmp__odds">' + oddsDisp(oddsOf(p, race)) + '</span>' +
-        '<span class="cmp__res">' + esc(resTxt(fp)) + '</span>' +
+        '<span class="cmp__h">' + (p.horseNumber != null ? esc(p.horseNumber) + ' ' : '') + cmpHorseHtml(p, race) + '</span>' +
+        (pctTxt(p.pWin) ? '<span class="cmp__pw">' + pctTxt(p.pWin) + '</span>' : '') +
+        (oddsDisp(oddsOf(p, race)) ? '<span class="cmp__odds">' + oddsDisp(oddsOf(p, race)) + '</span>' : '') +
+        (resTxt(fp) ? '<span class="cmp__res">' + esc(resTxt(fp)) + '</span>' : '') +
       '</div>';
     }).join('');
     return '<div class="cmp">' +
@@ -386,7 +409,7 @@
       '</div>' +
       rows +
       '<div class="cmp__hd" style="margin-top:8px;margin-bottom:0">' +
-        '<span class="cmp__rk">模型首選 ' + esc(picks[0].horseNumber) + ' ' + esc(picks[0].nameCh || '') + '</span>' + hit +
+        '<span class="cmp__rk">模型首選 ' + (picks[0].horseNumber != null ? esc(picks[0].horseNumber) + ' ' : '') + cmpHorseHtml(picks[0], race) + '</span>' + hit +
       '</div>' +
     '</div>';
   }

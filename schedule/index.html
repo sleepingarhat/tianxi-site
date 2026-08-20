@@ -484,7 +484,7 @@
     <span>Race Schedule · 賽馬日程</span>
   </div>
   <h1 class="sched-head__title">
-    <span class="sched-head__month" id="head-month">—</span>
+    <span class="sched-head__month" id="head-month"></span>
     <span class="sched-head__year" id="head-year">·</span>
   </h1>
   <p class="sched-head__sub" id="head-sub">
@@ -493,21 +493,21 @@
 </section>
 
 <!-- stats ribbon -->
-<div class="stats" aria-label="本月賽期統計">
+<div class="stats" id="schedule-stats" aria-label="本月賽期統計" hidden>
   <div class="stat">
     <span class="stat__label">本月賽期</span>
-    <span class="stat__value"><span id="stat-month-count">—</span><span class="unit">場</span></span>
-    <span class="stat__foot" id="stat-month-foot">—</span>
+    <span class="stat__value"><span id="stat-month-count"></span><span class="unit">場</span></span>
+    <span class="stat__foot" id="stat-month-foot"></span>
   </div>
   <div class="stat stat--hot">
     <span class="stat__label">最近賽期</span>
-    <span class="stat__value"><span id="stat-latest-day">—</span></span>
-    <span class="stat__foot" id="stat-latest-foot">—</span>
+    <span class="stat__value"><span id="stat-latest-day"></span></span>
+    <span class="stat__foot" id="stat-latest-foot"></span>
   </div>
   <div class="stat">
     <span class="stat__label">近 30 日</span>
-    <span class="stat__value"><span id="stat-30d-races">—</span><span class="unit">場次</span></span>
-    <span class="stat__foot" id="stat-30d-foot">—</span>
+    <span class="stat__value"><span id="stat-30d-races"></span><span class="unit">場次</span></span>
+    <span class="stat__foot" id="stat-30d-foot"></span>
   </div>
 </div>
 
@@ -546,18 +546,16 @@
   <span>最近賽期 · Latest Meeting</span>
 </div>
 
-<article class="meet" id="meet-card" aria-busy="true">
+<article class="meet" id="meet-card" aria-busy="true" hidden>
   <header class="meet__header">
-    <div class="meet__crest" id="meet-crest">—</div>
+    <div class="meet__crest" id="meet-crest"></div>
     <div class="meet__info">
       <div class="meet__date" id="meet-date"><span data-tx-loader data-size="sm" data-label="載入中…"></span></div>
-      <div class="meet__venue" id="meet-venue">
-        — <small id="meet-venue-en"></small>
-      </div>
+      <div class="meet__venue" id="meet-venue"><small id="meet-venue-en"></small></div>
       <div class="meet__meta" id="meet-meta"></div>
     </div>
     <div class="meet__count">
-      <span id="meet-count">—</span>
+      <span id="meet-count"></span>
       <small>races</small>
     </div>
   </header>
@@ -676,6 +674,7 @@
 
   /* ---------- stats ribbon ---------- */
   function renderStats(all, latest){
+    $('schedule-stats').removeAttribute('hidden');
     // month total = count of meetings whose date YYYY-MM matches latest.date's YYYY-MM
     var ym = latest.date.slice(0,7);
     var monthCount = all.filter(function(m){ return m.date.slice(0,7) === ym; }).length;
@@ -703,6 +702,7 @@
   }
 
   function renderMeeting(meeting){
+    $('meet-card').removeAttribute('hidden');
     var venueName = meeting.venueName || meeting.venue || '';
     var d = new Date(meeting.date + 'T00:00:00');
 
@@ -741,12 +741,12 @@
   // startTime guard: API occasionally returns sectional splits like "(27.76) (52.07)"
   // instead of a clock time "13:30" due to ingest mapping drift. Strip non-time shapes.
   function cleanTime(raw){
-    if (!raw) return '——:——';
+    if (!raw) return '';
     var s = String(raw).trim();
     // accept only HH:MM or H:MM or HHMM or HH:MM:SS
     if (/^\d{1,2}:\d{2}(:\d{2})?$/.test(s)) return s;
     if (/^\d{3,4}$/.test(s)) return s.slice(0,-2) + ':' + s.slice(-2);
-    return '——:——';
+    return '';
   }
 
   function formatRace(r){
@@ -758,8 +758,8 @@
     row.appendChild(numBox);
 
     var body = el('div', 'race__body');
-    var time = el('div', 'race__time', cleanTime(r.startTime));
-    body.appendChild(time);
+    var timeText = cleanTime(r.startTime);
+    if (timeText) body.appendChild(el('div', 'race__time', timeText));
 
     var line = el('div', 'race__line');
     var klass = r.class ? ('' + r.class) : '';
@@ -777,22 +777,22 @@
     row.appendChild(body);
 
     var stats = el('div', 'race__stats');
-    var field = el('div', 'race__field');
     var fSize = Array.isArray(r.horses) ? r.horses.length : 0;
-    field.appendChild(document.createTextNode(fSize || '—'));
-    field.appendChild(el('small', null, ' 匹'));
-    stats.appendChild(field);
-    var prize = el('div', 'race__prize');
+    if (fSize){
+      var field = el('div', 'race__field');
+      field.appendChild(document.createTextNode(fSize));
+      field.appendChild(el('small', null, ' 匹'));
+      stats.appendChild(field);
+    }
     if (r.prize){
+      var prize = el('div', 'race__prize');
       var p = Number(r.prize);
       prize.textContent = p >= 1000000
         ? '$' + (p/1000000).toFixed(1) + 'M'
         : p >= 1000 ? '$' + Math.round(p/1000) + 'K' : '$' + p;
-    } else {
-      prize.textContent = '—';
+      stats.appendChild(prize);
     }
-    stats.appendChild(prize);
-    row.appendChild(stats);
+    if (stats.childNodes.length) row.appendChild(stats);
 
     return row;
   }
@@ -821,7 +821,7 @@
       var body = el('div', 'past-item__body');
       body.appendChild(el('div', 'past-item__venue', m.venueName || m.venue));
       var meta = el('div', 'past-item__meta');
-      meta.appendChild(el('span', null, (m.totalRaces || '?') + ' 場'));
+      if (m.totalRaces) meta.appendChild(el('span', null, m.totalRaces + ' 場'));
       if (m.trackCondition) meta.appendChild(el('span', null, m.trackCondition));
       if (m.weather)        meta.appendChild(el('span', null, m.weather));
       meta.appendChild(el('span', null, relativeDay(m.date)));
@@ -867,7 +867,7 @@
       showError('cal-grid', '冇賽事數據');
       showError('race-list', '冇賽事數據');
       showError('past-list', '冇賽事數據');
-      setText('head-month','—'); setText('head-year','');
+      setText('head-month',''); setText('head-year','');
       return;
     }
     var latest = all[0];

@@ -66,14 +66,12 @@
 <div class="card">
   <h2>引擎點運作</h2>
   <div class="eng-how">
-    <p>TX-Oracle v3 將兩個獨立模型喺<b>機率層</b>融合，再加因子修正：</p>
+    <p>TX-Oracle v3 綜合多個獨立分析來源，輸出場內排名與入名機率：</p>
     <ul>
       <li><b>LightGBM（lambdarank）</b>——學習每場馬之間嘅相對排序，捕捉複雜非線性關係（場內排序主力）。</li>
-      <li><b>ELO + 因子模型</b>——馬匹／騎師／練馬師嘅長期實力評分，加檔位、負磅修正。</li>
+      <li><b>長期實力評分模型</b>——用公開賽事歷史建立另一套獨立評估。</li>
     </ul>
-    <div class="eng-formula">finalScore = 1500 + ( α·lgb_z + (1−α)·elo_z + factor·0.5 ) × 100</div>
-    <div class="eng-formula">ELO 組合 = 0.7×馬匹ELO + 0.2×騎師ELO + 0.1×練馬師ELO + 檔位 + 負磅</div>
-    <p>混合權重 <b>α</b> 由後台動態管理，<b>每個賽馬日自動評估</b>模型健康度再決定偏重邊個模型，毋須人手。訓練資料涵蓋 <b>2016 年至今全部香港賽事</b>（8,000+ 場、~98,000 條出賽記錄）。</p>
+    <p>系統每個賽馬日自動評估模型健康度，再決定可用預測。公開頁只展示最終排名、機率與可核對戰績；其餘實作細節只供內部驗證。</p>
   </div>
 </div>
 
@@ -87,13 +85,8 @@
 </div>
 
 <div class="card">
-  <h2>引擎分析嘅因子</h2>
-  <div id="eng-factors"><div class="tx-lemni-host" data-tx-loader data-label="因子載入中…"></div></div>
-</div>
-
-<div class="card">
   <h2>想睇每場詳細選馬？</h2>
-  <p class="eng-lead" style="margin-bottom:12px">引擎嘅生產預測會逐場列出 Top picks、勝出機率同因子分解。</p>
+  <p class="eng-lead" style="margin-bottom:12px">引擎嘅生產預測會逐場列出 Top picks、勝出、三甲同前四機率。</p>
   <div class="eng-cta">
     <a href="/predictor/" class="pill">選馬工具 →</a>
     <a href="/dashboard/" class="pill">我的儀表板 →</a>
@@ -120,8 +113,8 @@ function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ re
 TX_API.hitRateRollup(90).then(function(d){
   var el = document.getElementById('eng-perf');
   if (!d || !d.racesEvaluated) { el.innerHTML = '<div class="tx-empty">命中率資料整備中</div>'; return; }
-  function pct(n){ return (n == null ? '—' : (Math.round(n*10)/10) + '%'); }
-  function cov(n){ return (n == null ? '—' : (Math.round(n*100)/100) + ' / 4'); }
+  function pct(n){ return (n == null ? '' : (Math.round(n*10)/10) + '%'); }
+  function cov(n){ return (n == null ? '' : (Math.round(n*100)/100) + ' / 4'); }
   var stats = [
     ['頭馬命中',  pct(d.top1HitRate),     '首選 = 冠軍'],
     ['前三任一',  pct(d.top3AnyHitRate),  '三揀中至少一匹跑入前三'],
@@ -130,30 +123,12 @@ TX_API.hitRateRollup(90).then(function(d){
     ['單T',      pct(d.trioHitRate),     '揀三匹跑入前三名（任序）'],
     ['頭四覆蓋',  cov(d.top4AvgIntersect),'平均命中實際前四嘅匹數']
   ];
-  el.innerHTML = '<div class="eng-grid">' + stats.map(function(s){
+  el.innerHTML = '<div class="eng-grid">' + stats.filter(function(s){ return s[1]; }).map(function(s){
     return '<div class="eng-stat"><div class="eng-stat__val">' + s[1] + '</div><div class="eng-stat__lbl">' + esc(s[0]) + '</div><div class="eng-stat__sub">' + esc(s[2]) + '</div></div>';
   }).join('') + '</div>'
     + '<div class="eng-foot">統計窗口 ' + esc(d.from) + ' 至 ' + esc(d.to) + ' · ' + d.meetingsEvaluated + ' 場賽事 · ' + d.racesEvaluated + ' 場次評估</div>';
 }).catch(function(){
   document.getElementById('eng-perf').innerHTML = '<div class="tx-empty">命中率資料載入失敗</div>';
-});
-
-// ---------- all factors the engine analyses ----------
-TX_API.factors().then(function(d){
-  var el = document.getElementById('eng-factors');
-  var cats = (d && d.factors) || [];
-  if (!cats.length) { el.innerHTML = '<div class="tx-empty">因子資料整備中</div>'; return; }
-  var n = cats.reduce(function(a, c){ return a + ((c.items || []).length); }, 0);
-  el.innerHTML = '<div class="fac-count">引擎逐場分析 <b>' + n + '</b> 項因子，橫跨 ' + cats.length + ' 大範疇：</div>'
-    + cats.map(function(c){
-        return '<div class="fac-cat"><h3>' + esc(c.category) + '</h3><div class="fac-grid">'
-          + (c.items || []).map(function(it){
-              return '<div class="fac-tile"><div class="fac-tile__name">' + esc(it.name) + '</div><div class="fac-tile__desc">' + esc(it.description) + '</div></div>';
-            }).join('')
-          + '</div></div>';
-      }).join('');
-}).catch(function(){
-  document.getElementById('eng-factors').innerHTML = '<div class="tx-empty">因子資料載入失敗</div>';
 });
 
 </script>

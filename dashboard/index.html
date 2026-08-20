@@ -123,10 +123,10 @@
 
 <!-- ── 引擎狀態 ── -->
 <div class="eng-grid" id="eng-grid">
-  <div class="eng"><div class="eng__lbl" id="eng-day-lbl">下一賽馬日</div><div class="eng__val" id="eng-day">—</div><div class="eng__sub" id="eng-day-sub"><span data-tx-loader data-size="sm" data-label="載入中…"></span></div></div>
-  <div class="eng"><div class="eng__lbl">編排場次</div><div class="eng__val" id="eng-races">—</div><div class="eng__sub" id="eng-races-sub">—</div></div>
-  <div class="eng"><div class="eng__lbl">預測引擎</div><div class="eng__val" id="eng-elo">—</div><div class="eng__sub" id="eng-elo-sub">—</div></div>
-  <div class="eng"><div class="eng__lbl" id="eng-alpha-lbl">集成模型 α</div><div class="eng__val" id="eng-alpha">—</div><div class="eng__sub" id="eng-alpha-sub">—</div></div>
+  <div class="eng"><div class="eng__lbl" id="eng-day-lbl">下一賽馬日</div><div class="eng__val" id="eng-day"></div><div class="eng__sub" id="eng-day-sub"><span data-tx-loader data-size="sm" data-label="載入中…"></span></div></div>
+  <div class="eng"><div class="eng__lbl">編排場次</div><div class="eng__val" id="eng-races"></div><div class="eng__sub" id="eng-races-sub"></div></div>
+  <div class="eng"><div class="eng__lbl">預測引擎</div><div class="eng__val" id="eng-elo"></div><div class="eng__sub" id="eng-elo-sub"></div></div>
+  <div class="eng"><div class="eng__lbl" id="eng-alpha-lbl">集成模型</div><div class="eng__val" id="eng-alpha"></div><div class="eng__sub" id="eng-alpha-sub"></div></div>
 </div>
 
 <!-- ── 模型精選 ── -->
@@ -194,7 +194,7 @@
   function $(id){ return document.getElementById(id); }
   function pad(n){ return (n<10?'0':'')+n; }
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
-  function pct(x){ var n = Number(x); return isFinite(n) ? (n*100).toFixed(1) : '—'; }
+  function pct(x){ var n = Number(x); return x != null && isFinite(n) ? (n*100).toFixed(1) : ''; }
   function hkClock(){
     var d = new Date();
     var wk = ['SUN','MON','TUE','WED','THU','FRI','SAT'][d.getDay()];
@@ -203,7 +203,6 @@
 
   var VENUE_NAME = { ST:'沙田', HV:'跑馬地' };
   var TRACK_NAME = { TURF:'草地', 'ALL WEATHER TRACK':'全天候', AWT:'全天候' };
-  var FK = { recency:'近績', distance:'路程', going:'場地', draw:'檔位', weight:'負磅', condition:'晨操', injury:'傷患', jtCombo:'騎練' };
   var MEDAL = ['①','②','③','④'];
 
   /* ---------- ticker ---------- */
@@ -222,23 +221,22 @@
   function byRank(a,b){ return (a.rank||99) - (b.rank||99); }
 
   function whyText(p){
-    var fb = p.factorBreakdown || {};
-    var arr = Object.keys(fb).map(function(k){ var v = fb[k] || {}; return { k:k, b:Number(v.bonus)||0, note:v.note||'' }; });
-    var pos = arr.filter(function(x){ return x.b > 0.5 && x.note; }).sort(function(a,b){ return b.b - a.b; }).slice(0,2);
-    if (!pos.length){
-      return '綜合 Elo ' + Math.round(p.eloComposite||0) + (p.rating ? ' · 官方評分 ' + p.rating : '');
-    }
-    return pos.map(function(x){ return (FK[x.k]||x.k) + '　' + esc(x.note); }).join('　·　');
+    return '綜合往績評估' + (p.rating ? ' · 官方評分 ' + esc(p.rating) : '');
   }
 
-  function altChip(p){
+  function altChip(p, raceId){
     if (!p) return '';
-    return '<span class="pk__chip">' + (MEDAL[(p.rank||2)-1]||'·') + ' #' + esc(p.horseNumber) + ' ' +
-           esc(p.nameCh||p.nameEn) + ' <b>' + pct(p.pTop3) + '%</b></span>';
+    var href = TX_API.horseHref(p.horseId || p.horse_id, raceId);
+    var nm = esc(p.nameCh||p.nameEn) + (state.styles && state.styles[p.horseId || p.horse_id] ? TX_API.runningStyleBadge(state.styles[p.horseId || p.horse_id]) : '');
+    var probability = pct(p.pTop3);
+    return '<span class="pk__chip">' + (MEDAL[(p.rank||2)-1]||'·') +
+            (p.horseNumber != null ? ' #' + esc(p.horseNumber) : '') + ' ' +
+            (href ? '<a href="' + href + '">' + nm + '</a>' : nm) +
+            (probability ? ' <b>' + probability + '%</b>' : '') + '</span>';
   }
 
   function raceHeadTxt(r){
-    var parts = ['R' + (r.raceNumber||'?')];
+    var parts = [r.raceNumber != null ? 'R' + r.raceNumber : ''];
     if (r.distance) parts.push(r.distance + 'm');
     if (r.class) parts.push('第 ' + r.class + ' 班');
     var t = TRACK_NAME[(r.track||'').toUpperCase()];
@@ -252,12 +250,17 @@
     var p1 = picks[0];
     if (!p1) return '';
     var hp = raceHeadTxt(r);
-    var src = /lgb/i.test(r.scoreSource||'') ? 'LGB 集成' : 'ELO 因子';
-    var meta = [esc(p1.jockeyCh||'—') + ' / ' + esc(p1.trainerCh||'—')];
+    var src = /lgb/i.test(r.scoreSource||'') ? 'LGB 集成' : '天喜模型';
+    var raceId = r.raceId || r.id || r.lgbLookupRaceId;
+    var href = TX_API.horseHref(p1.horseId || p1.horse_id, raceId);
+    var name = esc(p1.nameCh||p1.nameEn) + (state.styles && state.styles[p1.horseId || p1.horse_id] ? TX_API.runningStyleBadge(state.styles[p1.horseId || p1.horse_id]) : '');
+    var meta = [];
+    var team = [p1.jockeyCh, p1.trainerCh].filter(Boolean).join(' / ');
+    if (team) meta.push(esc(team));
     if (p1.draw) meta.push('檔 ' + p1.draw);
     if (p1.rating) meta.push('評分 ' + p1.rating);
 
-    var alts = [picks[1], picks[2]].map(altChip).join('');
+    var alts = [picks[1], picks[2]].map(function(p){ return altChip(p, raceId); }).join('');
 
     return '<div class="pk' + (isTop ? ' pk--top' : '') + '" id="pk-' + esc(anchor) + '">' +
       '<div class="pk__hd">' +
@@ -266,16 +269,15 @@
         '<div class="pk__src">' + esc(src) + '</div>' +
       '</div>' +
       '<div class="pk__main">' +
-        '<div class="pk__no">' + esc(p1.horseNumber) + '</div>' +
+        (p1.horseNumber != null ? '<div class="pk__no">' + esc(p1.horseNumber) + '</div>' : '') +
         '<div class="pk__body">' +
-          '<div class="pk__name">' + esc(p1.nameCh||p1.nameEn) + '</div>' +
-          '<div class="pk__meta">' + meta.join(' · ') + '</div>' +
+           '<div class="pk__name">' + (href ? '<a href="' + href + '">' + name + '</a>' : name) + '</div>' +
+          (meta.length ? '<div class="pk__meta">' + meta.join(' · ') + '</div>' : '') +
         '</div>' +
-        '<div class="pk__prob">' +
-          '<div class="pk__prob-v">' + pct(p1.pTop3) + '<small>%</small></div>' +
-          '<div class="pk__prob-l">入三甲機率</div>' +
-          '<div class="pk__prob-2">勝率 <b>' + pct(p1.pWin) + '%</b></div>' +
-        '</div>' +
+        ((pct(p1.pTop3) || pct(p1.pWin)) ? '<div class="pk__prob">' +
+          (pct(p1.pTop3) ? '<div class="pk__prob-v">' + pct(p1.pTop3) + '<small>%</small></div><div class="pk__prob-l">入三甲機率</div>' : '') +
+          (pct(p1.pWin) ? '<div class="pk__prob-2">勝率 <b>' + pct(p1.pWin) + '%</b></div>' : '') +
+        '</div>' : '') +
       '</div>' +
       '<div class="pk__why"><b>睇好</b>' + whyText(p1) + '</div>' +
       (alts ? '<div class="pk__alt">' + alts + '</div>' : '') +
@@ -295,8 +297,6 @@
     var dateTxt = TX_API.fmtMeetingDate ? TX_API.fmtMeetingDate(d.date) : d.date;
     var wd = (dateTxt.split(' ')[1]) || '';
     var races = d.races || [];
-    var alpha = races.length && races[0].ensembleAlpha != null ? races[0].ensembleAlpha : null;
-    var lgbV = d.lgbModelVersion || '';
 
     $('eng-day').innerHTML = TX_API.fmtDateShort(d.date) + '<small>' + esc(venue) + '</small>';
     $('eng-day-sub').textContent = wd ? wd + (d.mode==='historical' ? ' · 歷史' : ' · 即將舉行') : (d.date||'');
@@ -305,18 +305,18 @@
     var trk = TRACK_NAME[(races[0]&&races[0].track||'').toUpperCase()] || '';
     $('eng-races-sub').textContent = [venue, trk].filter(Boolean).join(' · ') || '待編排';
 
-    $('eng-elo').innerHTML = 'ELO ' + esc(d.eloEngine||'—');
-    $('eng-elo-sub').innerHTML = d.eloReady ? '<b>即時就緒</b> · 馬 0.7 騎 0.2 練 0.1' : '準備中';
+    $('eng-elo').textContent = 'ELO';
+    $('eng-elo-sub').innerHTML = d.eloReady ? '<b>即時就緒</b>' : '準備中';
 
     var appliedN = races.filter(function(r){ return r.lgbCoverage && r.lgbCoverage.applied; }).length;
     if (appliedN > 0){
-      $('eng-alpha-lbl').textContent = '集成模型 α';
-      $('eng-alpha').innerHTML = alpha != null ? Number(alpha).toFixed(2) : '—';
-      $('eng-alpha-sub').innerHTML = '<b>LGB ' + esc(lgbV || '集成') + '</b> · 覆蓋 ' + appliedN + '/' + races.length + ' 場';
+      $('eng-alpha-lbl').textContent = '集成模型';
+      $('eng-alpha').textContent = '已覆蓋';
+      $('eng-alpha-sub').innerHTML = '<b>LGB 集成</b> · 覆蓋 ' + appliedN + '/' + races.length + ' 場';
     } else {
       $('eng-alpha-lbl').textContent = '本日模型';
       $('eng-alpha').innerHTML = 'ELO<small>+因子</small>';
-      $('eng-alpha-sub').textContent = 'LGB 未覆蓋本日 · 集成 α ' + (alpha != null ? Number(alpha).toFixed(2) : '0.88') + ' 待生效';
+      $('eng-alpha-sub').textContent = 'LGB 未覆蓋本日';
     }
 
     var gen = d.generatedAt || d.cachedGeneratedAt;
@@ -356,8 +356,13 @@
   TX_API.todayPicks().then(function(d){
     if (!d || !d.date){ $('picks-slot').innerHTML = '<div class="dash-err">暫無賽馬日數據。</div>'; $('dash-fresh').textContent = '暫無模型報告 · 資料來源 HKJC'; return; }
     state.dayLabel = (TX_API.fmtDateShort(d.date)) + ' ' + (d.venueName||VENUE_NAME[d.venue]||'') + ' 賽馬日';
-    renderEngine(d);
-    renderPicks(d);
+     renderEngine(d);
+     var ids = [];
+     (d.races || []).forEach(function(r){ (r.picks || []).forEach(function(p){ ids.push(p.horseId || p.horse_id); }); });
+     TX_API.runningStyles(ids, { raceId: (d.races && d.races[0] && (d.races[0].id || d.races[0].raceId || d.races[0].lgbLookupRaceId)) }).then(function(sd){
+       state.styles = {}; (sd.styles || []).forEach(function(x){ state.styles[x.horseId] = x; });
+       renderPicks(d);
+     });
     tickTicker();
   }).catch(function(){
     $('picks-slot').innerHTML = '<div class="dash-err">模型數據暫時無法載入。</div>';
@@ -369,16 +374,23 @@
     var rows = (d && d.horses) || [];
     var slot = $('lb-slot');
     if (!rows.length){ slot.innerHTML = '<div class="dash-skel">暫無排名資料。</div>'; return; }
-    slot.innerHTML = rows.map(function(h, i){
-      var active = h.status === 'active';
-      var rec = (h.totalWins!=null && h.totalStarts!=null) ? (h.totalWins + ' 場頭馬 / ' + h.totalStarts + ' 出賽') : '';
-      return '<div class="lb__row">' +
-        '<div class="lb__rk' + (i<3?' top':'') + '">' + (i+1) + '</div>' +
-        '<div class="lb__nm">' + esc(h.nameCh||h.nameEn) +
-          '<span class="lb__tag ' + (active?'lb__tag--active':'lb__tag--retired') + '">' + (active?'現役':'已退役') + '</span></div>' +
-        '<div class="lb__stat"><span class="lb__big">' + Math.round(h.elo||0) + '</span>' + esc(rec) + '</div>' +
-      '</div>';
-    }).join('');
+    return TX_API.runningStyles(rows.map(function(h){ return h.id || h.horseId || h.horse_id; })).then(function(sd){
+      var boardStyles = {};
+      (sd.styles || []).forEach(function(item){ boardStyles[item.horseId] = item; });
+      slot.innerHTML = rows.map(function(h, i){
+        var active = h.status === 'active';
+        var rec = (h.totalWins!=null && h.totalStarts!=null) ? (h.totalWins + ' 場頭馬 / ' + h.totalStarts + ' 出賽') : '';
+        var horseId = TX_API.canonicalHorseId(h.id || h.horseId || h.horse_id);
+        var href = TX_API.horseHref(horseId);
+        var style = boardStyles[horseId];
+        return '<div class="lb__row">' +
+          '<div class="lb__rk' + (i<3?' top':'') + '">' + (i+1) + '</div>' +
+          '<div class="lb__nm">' + (href ? '<a href="' + href + '">' : '') + esc(h.nameCh||h.nameEn) + (style ? TX_API.runningStyleBadge(style) : '') + (href ? '</a>' : '') +
+            '<span class="lb__tag ' + (active?'lb__tag--active':'lb__tag--retired') + '">' + (active?'現役':'已退役') + '</span></div>' +
+          '<div class="lb__stat"><span class="lb__big">' + Math.round(h.elo||0) + '</span>' + esc(rec) + '</div>' +
+        '</div>';
+      }).join('');
+    });
   }).catch(function(){ $('lb-slot').innerHTML = '<div class="dash-err">排名載入失敗。</div>'; });
 
   /* ---------- jockeys / trainers ---------- */
@@ -390,9 +402,12 @@
     slot.innerHTML = rows.slice(0,8).map(function(x, i){
       var rate = x.winRate != null ? x.winRate + '%' : '';
       var base = kind === 'trainer' ? (x.totalRunners + ' 次出賽') : (x.totalRides + ' 次上陣');
-      return '<div class="lb__row">' +
+       var horseId = TX_API.canonicalHorseId(x.horseId || x.horse_id || x.id);
+       var href = TX_API.horseHref(horseId);
+       var style = state.styles && state.styles[horseId];
+       return '<div class="lb__row">' +
         '<div class="lb__rk' + (i<3?' top':'') + '">' + (i+1) + '</div>' +
-        '<div class="lb__nm">' + esc(x.nameCh||x.nameEn) + '</div>' +
+        '<div class="lb__nm">' + (href ? '<a href="' + href + '">' + esc(x.nameCh||x.nameEn) + (style ? TX_API.runningStyleBadge(style) : '') + '</a>' : esc(x.nameCh||x.nameEn)) + '</div>' +
         '<div class="lb__stat"><span class="lb__big">' + esc(x.wins) + ' 勝</span>' + esc(base) + ' · 勝率 ' + esc(rate) + '</div>' +
       '</div>';
     }).join('');
@@ -460,11 +475,11 @@
       }
       var now = new Date(), nextLocked = false;
       slot.innerHTML = races.slice(0,8).map(function(r){
-        var no = r.raceNumber || r.race_no || r.no || '?';
-        var st = TX_API.cleanTime(r.startTime || r.start_time) || '——';
+        var no = r.raceNumber || r.race_no || r.no || '';
+        var st = TX_API.cleanTime(r.startTime || r.start_time);
         var dist = r.distance ? r.distance + 'm' : '';
         var cls = r.class || r.race_class || r.class_name || '';
-        var head = [cls, dist].filter(Boolean).join(' · ') || ('賽事 ' + no);
+        var head = [cls, dist].filter(Boolean).join(' · ') || '賽事';
         var cdBadge = '';
         if (!nextLocked && TX_API.cleanTime(r.startTime || r.start_time)){
           var parts = st.split(':'); var tgt;
@@ -473,7 +488,7 @@
           else { tgt = new Date(now); tgt.setHours(+parts[0], +parts[1], 0, 0); }
           if (tgt > now){ nextLocked = true; state.nextStart = st; state.nextDate = date; cdBadge = ' · T-' + TX_API.countdown(st, null, date); }
         }
-        return '<div class="row"><div class="row__num">R'+esc(no)+'</div>' +
+        return '<div class="row">' + (no !== '' ? '<div class="row__num">R'+esc(no)+'</div>' : '') +
           '<div><div class="row__name">'+esc(head)+'</div>' +
           '<div class="row__sub">'+esc(st)+' 開跑'+cdBadge+'</div></div>' +
           '<div><a href="/predictor/" class="pill">睇分析</a></div></div>';

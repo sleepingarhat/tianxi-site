@@ -99,7 +99,7 @@
     </div>
   </section>
 
-  <div class="cmp-meta" id="cmp-meta">—</div>
+  <div class="cmp-meta" id="cmp-meta"></div>
 
   <div class="cmp-wrap">
     <div class="cmp-square" id="cmp-square">
@@ -130,6 +130,7 @@
     var BASE = (window.TX_API && TX_API.base) || '';
     var compareToken = 0; // monotonic, latest-wins guard
     var racesToken = 0;
+     var STYLE_MAP = {};
     function $(id){ return document.getElementById(id); }
     function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
@@ -142,20 +143,21 @@
     }); }
 
     function renderEmpty(elId, text){
-      $(elId).innerHTML = '<div class="cmp-empty"><strong>' + esc(text||'無資料') + '</strong>—</div>';
+      $(elId).innerHTML = '<div class="cmp-empty"><strong>' + esc(text||'無資料') + '</strong></div>';
     }
 
     function renderCell(rank, horse, isMatch){
-      var no = horse.horseNumber || horse.no || '?';
-      var nm = horse.nameCh || horse.name || '—';
-      var dr = (horse.draw != null && horse.draw !== '') ? horse.draw : '—';
+      var no = horse.horseNumber != null ? horse.horseNumber : horse.no;
+      var nm = horse.nameCh || horse.name || '';
+      var dr = (horse.draw != null && horse.draw !== '') ? horse.draw : null;
+      var href = TX_API.horseHref(horse.horseId || horse.horse_id || horse.id, $('cmp-race').value);
       return '<div class="cmp-cell' + (isMatch?' match':'') + '">' +
         '<div class="cmp-rank ' + rankCls(rank-1) + '">' + rank + '</div>' +
         '<div class="cmp-no-name">' +
-          '<div class="cmp-no">#' + esc(no) + '</div>' +
-          '<div class="cmp-name">' + esc(nm) + '</div>' +
+          (no != null && no !== '' ? '<div class="cmp-no">#' + esc(no) + '</div>' : '') +
+          '<div class="cmp-name">' + (href ? '<a href="' + href + '">' + esc(nm) + (STYLE_MAP[TX_API.canonicalHorseId(horse.horseId || horse.horse_id || horse.id)] ? TX_API.runningStyleBadge(STYLE_MAP[TX_API.canonicalHorseId(horse.horseId || horse.horse_id || horse.id)]) : '') + '</a>' : esc(nm)) + '</div>' +
         '</div>' +
-        '<div class="cmp-draw"><small>檔</small>' + esc(dr) + '</div>' +
+        (dr != null ? '<div class="cmp-draw"><small>檔</small>' + esc(dr) + '</div>' : '') +
       '</div>';
     }
 
@@ -200,7 +202,7 @@
       }
     }
 
-    function setMeta(text){ $('cmp-meta').innerHTML = text || '—'; }
+    function setMeta(text){ $('cmp-meta').innerHTML = text || ''; }
 
     // Load meetings list
     function loadMeetings(){
@@ -240,9 +242,9 @@
         sel.disabled = false;
         sel.innerHTML = races.map(function(r){
           var no = r.raceNumber || r.race_no || r.no;
-          var t = TX_API.cleanTime(r.startTime || r.start_time) || '——';
+          var t = TX_API.cleanTime(r.startTime || r.start_time);
           var d = r.distance || r.distance_m || '';
-          return '<option value="' + esc(r.id || r.race_id) + '">R' + esc(no) + ' · ' + esc(t) + (d ? ' · ' + esc(d) + 'm' : '') + '</option>';
+          return '<option value="' + esc(r.id || r.race_id) + '">R' + esc(no) + (t ? ' · ' + esc(t) : '') + (d ? ' · ' + esc(d) + 'm' : '') + '</option>';
         }).join('');
         sel.selectedIndex = 0;
         var venue = VENUE[m.venue] || m.venue || '';
@@ -267,7 +269,11 @@
                    .sort(function(a,b){ return a.finishingPosition - b.finishingPosition; });
         })
         .catch(function(){ return []; });
-      Promise.all([pPred, pRes]).then(function(arr){
+       var pStyles = Promise.all([pPred, pRes]).then(function(parts){
+         var ids = [].concat(parts[0] || [], parts[1] || []).map(function(h){ return h.horseId || h.horse_id || h.id; });
+         return TX_API.runningStyles(ids, { raceId: raceId }).then(function(sd){ STYLE_MAP = {}; (sd.styles || []).forEach(function(x){ STYLE_MAP[x.horseId] = x; }); return parts; });
+       });
+       pStyles.then(function(arr){
         if (myToken !== compareToken) return; // stale, ignore
         render(arr[0], arr[1]);
       });

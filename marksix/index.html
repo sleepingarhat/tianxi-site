@@ -188,7 +188,7 @@
     </div>
 
     <div class="m6-cost">
-      <span id="m6-costinfo">—</span>
+      <span id="m6-costinfo"></span>
     </div>
     <div class="m6-warn" id="m6-warn"></div>
 
@@ -224,7 +224,7 @@
   }
   var TIER = {1:'頭獎',2:'二獎',3:'三獎',4:'四獎',5:'五獎',6:'六獎',7:'七獎'};
   var WD = ['日','一','二','三','四','五','六'];
-  function money(v){ if(v==null||v==='') return '—'; var n=Number(v); return isNaN(n)?String(v):'$'+n.toLocaleString('en-US'); }
+  function money(v){ if(v==null||v==='') return ''; var n=Number(v); return isNaN(n)?String(v):'$'+n.toLocaleString('en-US'); }
   function num(v){ var n=Number(v); return isNaN(n)?String(v):n.toLocaleString('en-US'); }
   function cnDate(iso){
     if(!iso) return '';
@@ -262,11 +262,14 @@
     d.numbers.forEach(function(n){ ballsHTML+=ball(n,'lg',false); });
     ballsHTML+='<span class="m6-plus">+</span>'+ball(d.special,'lg',true);
 
+    var prizes=d.prizes||[];
+    var showUnits=prizes.some(function(p){ return p.winningUnit!=null && p.winningUnit!==''; });
+    var showDividend=prizes.some(function(p){ return p.dividend!=null && p.dividend!==''; });
     var rows='';
-    (d.prizes||[]).forEach(function(p){
+    prizes.forEach(function(p){
       rows+='<tr class="'+(p.tier===1?'t1':'')+'"><td>'+(TIER[p.tier]||('第'+p.tier))+'</td>'+
-            '<td class="units">'+num(p.winningUnit)+'</td>'+
-            '<td class="amt">'+money(p.dividend)+'</td></tr>';
+            (showUnits?'<td class="units">'+num(p.winningUnit)+'</td>':'')+
+            (showDividend?'<td class="amt">'+money(p.dividend)+'</td>':'')+'</tr>';
     });
 
     var nd=d.nextDraw;
@@ -282,9 +285,9 @@
       '</div>'+
       '<div class="m6-balls">'+ballsHTML+'</div>'+
       '<div class="m6-balls-cap">攪珠結果 · 最後一個（＋）為特別號碼</div>'+
-      '<table class="m6-prize"><thead><tr><th>獎級</th><th>中獎注數</th><th>每注獎金</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+      (rows?'<table class="m6-prize"><thead><tr><th>獎級</th>'+(showUnits?'<th>中獎注數</th>':'')+(showDividend?'<th>每注獎金</th>':'')+'</tr></thead><tbody>'+rows+'</tbody></table>':'')+
       '<div class="m6-rfoot">'+
-        '<div class="m6-stat"><div class="k">總投注額</div><div class="v">'+money(d.totalInvestment)+'</div></div>'+
+        (d.totalInvestment!=null&&d.totalInvestment!==''?'<div class="m6-stat"><div class="k">總投注額</div><div class="v">'+money(d.totalInvestment)+'</div></div>':'')+
         '<div class="m6-stat"><div class="k">下期攪珠</div><div class="v" style="font-size:12px;line-height:1.4">'+nextLine+'</div></div>'+
       '</div>';
 

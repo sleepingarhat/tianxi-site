@@ -39,7 +39,7 @@
     // meetingDate: optional 'YYYY-MM-DD' of the race day — REQUIRED to count down
     // to a future race day; without it the target wrongly defaults to today.
     var ct = cleanTime(startTime);
-    if (!ct) return '——:——:——';
+    if (!ct) return '';
     var parts = ct.split(':');
     var hh = parseInt(parts[0],10), mm = parseInt(parts[1],10);
     var now = refDate || new Date();
@@ -81,6 +81,74 @@
     return m[3] + '/' + m[2] + '/' + m[1] + ' ' + wd;
   }
 
+  // Task 19 shared research helpers. IDs are deliberately strict: a name,
+  // number, or database integer is not enough to construct a public dossier URL.
+  function canonicalHorseId(value){
+    var id = value == null ? '' : String(value).trim();
+    return /^horse_[A-Za-z0-9][A-Za-z0-9_-]*$/.test(id) ? id : '';
+  }
+  function canonicalRaceId(value){
+    var id = value == null ? '' : String(value).trim();
+    var match = id.match(/^race_(\d{4})-(\d{2})-(\d{2})_(?:ST|HV)_\d+$/);
+    if (!match) return '';
+    var y = Number(match[1]), m = Number(match[2]), d = Number(match[3]);
+    var date = new Date(Date.UTC(y, m - 1, d));
+    return date.getUTCFullYear() === y && date.getUTCMonth() === m - 1 && date.getUTCDate() === d ? id : '';
+  }
+  function horseHref(horseId, raceId){
+    var id = canonicalHorseId(horseId);
+    if (!id) return '';
+    var href = '/horse/?id=' + encodeURIComponent(id);
+    var rid = canonicalRaceId(raceId);
+    if (rid) href += '&raceId=' + encodeURIComponent(rid);
+    return href;
+  }
+  function runningStyleBadge(entry){
+    if (!entry || !entry.label || !/^(放|前|中|後)$/.test(String(entry.label))) return '';
+    var count = Number(entry.sampleCount);
+    var sample = isFinite(count) && count > 0 ? '，樣本 ' + count + ' 場' : '';
+    return '<span class="tx-running-style tx-running-style--' + String(entry.code || '').replace(/[^a-z-]/g,'') +
+      '" role="img" aria-label="跑法 ' + String(entry.label) + sample + '">' + String(entry.label) + '</span>';
+  }
+  var styleCache = {};
+  function runningStyles(horseIds, context){
+    context = context || {};
+    var ids = (horseIds || []).map(canonicalHorseId).filter(Boolean).filter(function(id, i, a){ return a.indexOf(id) === i; }).sort();
+    if (!ids.length) return Promise.resolve({ cutoffDate:'', styles:[] });
+    var qs = 'horseIds=' + encodeURIComponent(ids.join(','));
+    var raceId = canonicalRaceId(context.raceId);
+    if (raceId) qs += '&raceId=' + encodeURIComponent(raceId);
+    else if (/^\d{4}-\d{2}-\d{2}$/.test(String(context.beforeDate || ''))) {
+      qs += '&beforeDate=' + encodeURIComponent(context.beforeDate);
+    }
+    var key = qs;
+    if (!styleCache[key]) styleCache[key] = j('/api/horses/running-styles?' + qs).catch(function(error){
+      if (window.console && console.warn) console.warn('[TX_API] running-styles unavailable', error);
+      return { cutoffDate:'', styles:[] };
+    });
+    return styleCache[key];
+  }
+  function finishTime(value){
+    if (value == null || value === '') return '';
+    if (typeof value === 'number' && isFinite(value)) return value.toFixed(2);
+    var text = String(value).trim();
+    if (!text || /^(?:null|undefined|n\/a|na)$/i.test(text)) return '';
+    if (/^\d+(?:\.\d+)?$/.test(text)) return Number(text).toFixed(2);
+    var hk = text.match(/^(\d+)[.:](\d{2})[.:](\d{2})$/);
+    if (hk) {
+      var mins = Number(hk[1]), secs = Number(hk[2]), hundredths = Number(hk[3]);
+      return isFinite(mins) && secs < 60 && hundredths < 100 ? (mins * 60 + secs + hundredths / 100).toFixed(2) : '';
+    }
+    var minute = text.match(/^(\d+):(\d{2})(?:\.(\d+))?$/);
+    if (minute) {
+      var wholeMins = Number(minute[1]), wholeSecs = Number(minute[2]);
+      var fraction = minute[3] ? Number('0.' + minute[3]) : 0;
+      return isFinite(wholeMins) && wholeSecs < 60
+        ? (wholeMins * 60 + wholeSecs + fraction).toFixed(2) : '';
+    }
+    return '';
+  }
+
   window.TX_API = {
     base: BASE,
     // meetings + races
@@ -116,7 +184,6 @@
     hitRate: function(date){ return j('/api/analyze/hit-rate?date=' + encodeURIComponent(date)); },
     todayPicks: function(venue){ return j('/api/analyze/today-picks' + (venue ? '?venue=' + encodeURIComponent(venue) : '')); },
     analyze:  function(body){ return jp('/api/analyze', body); },
-    factors:  function(){ return j('/api/analyze/factors'); },
     explain:  function(raceId, horseId){ return j('/api/analyze/explain?raceId=' + encodeURIComponent(raceId) + '&horseId=' + encodeURIComponent(horseId)); },
     hitRateRollup: function(days){ return j('/api/analyze/hit-rate-rollup?days=' + (days||90)); },
     strategyPnl: function(q){ return j('/api/analyze/strategy-pnl' + (q || '')); },
@@ -134,5 +201,11 @@
     cleanTime: cleanTime,
     countdown: countdown,
     fmtDateShort: fmtDateShort,
+    canonicalHorseId: canonicalHorseId,
+    canonicalRaceId: canonicalRaceId,
+    horseHref: horseHref,
+    runningStyleBadge: runningStyleBadge,
+    runningStyles: runningStyles,
+    finishTime: finishTime,
   };
 })();

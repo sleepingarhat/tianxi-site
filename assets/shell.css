@@ -242,6 +242,26 @@ body[data-page="membership"] .brandbar__upgrade { display: none; }
 .pill--gold  { background: var(--gold-tint); color: var(--brown); border-color: rgba(184,145,47,0.35); }  /* reserved for disclaimer / brand accent only */
 .pill--ink   { background: var(--ink); color: var(--paper); border-color: var(--ink); }                   /* user selection / active chip */
 
+/* Compact running-style marker: text remains meaningful without colour. */
+.tx-running-style {
+  display: inline-grid;
+  place-items: center;
+  min-width: 19px;
+  height: 18px;
+  margin-left: 5px;
+  padding: 0 4px;
+  border: 1px solid var(--rule-2);
+  border-radius: 4px;
+  background: var(--paper-2);
+  color: var(--ink-soft);
+  font: 700 10px/1 var(--font-mono);
+  vertical-align: 1px;
+}
+.tx-running-style--leader { color: var(--green); border-color: rgba(0,132,61,.28); }
+.tx-running-style--prominent { color: var(--accent-strong); border-color: rgba(184,145,47,.4); }
+.tx-running-style--midfield { color: var(--ink-soft); }
+.tx-running-style--held-up { color: var(--red); border-color: rgba(200,16,46,.28); }
+
 /* ---------- Bottom nav ---------- */
 /* CLS guards for shell.js mount points — heights match injected chrome to
    prevent layout shift during the brief unmounted moment after parse. */

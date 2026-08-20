@@ -39,20 +39,6 @@
 .dl-note{font-size:11.5px;line-height:1.65;color:var(--ink-mute);background:var(--paper);border:1px dashed var(--rule-2);border-radius:8px;padding:10px 12px;margin:18px 20px 0}
 .dl-note b{color:var(--ink-soft)}
 .dl-cta{display:flex;flex-wrap:wrap;gap:8px;margin:0 20px 8px}
-.cf-meta{font-size:12px;color:var(--ink-mute);margin:0 20px 14px;line-height:1.6}
-.cf-meta b{color:var(--ink-soft)}
-.cf-list{margin:0 20px}
-.cf-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding:9px 0;border-bottom:1px solid var(--rule-2)}
-.cf-row.is-hidden{display:none}
-.cf-when{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-mute);white-space:nowrap;min-width:104px}
-.cf-area{font-family:var(--font-mono);font-weight:600;font-size:9px;letter-spacing:.03em;padding:1px 6px;border-radius:99px;border:1px solid var(--rule-2);white-space:nowrap}
-.cf-area.a-backend{color:var(--brown-2);border-color:color-mix(in srgb,var(--brown-2) 45%,transparent)}
-.cf-area.a-data{color:var(--green);border-color:color-mix(in srgb,var(--green) 40%,transparent)}
-.cf-area.a-web{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
-.cf-type{font-family:var(--font-mono);font-size:9px;color:var(--ink-mute);white-space:nowrap}
-.cf-title{font-size:12px;line-height:1.55;color:var(--ink-soft);flex:1;min-width:170px}
-.cf-scope{color:var(--ink-mute);font-weight:600}
-.cf-sha{font-family:var(--font-mono);font-size:9.5px;color:var(--ink-mute);opacity:.65}
 </style>
 </head>
 <body data-page="dev-log">
@@ -92,19 +78,19 @@
   <article class="dl-item" data-cat="tech web">
     <div class="dl-when">2026-06-08 · HKT</div>
     <div class="dl-head"><span class="dl-title">選馬頁雙欄上線：模型搏冷 ＋ 市場穩陣</span><span class="dl-tag t-tech">技術</span><span class="dl-tag t-web">前端</span></div>
-    <p class="dl-desc">選馬頁新增<b>「市場穩陣」</b>欄，喺原模型之上額外融合市場盤口（賠率隱含機率，β≈0.4），回溯頭馬命中由 20% 升到 32%，偏熱門較穩陣。左欄<b>「模型搏冷」</b>維持原狀、繼續捉冷馬。兩欄並列，各取所需，誠實標明性格差異。</p>
+    <p class="dl-desc">選馬頁新增<b>「市場穩陣」</b>欄，加入臨場盤口參考，偏熱門較穩陣。左欄<b>「模型搏冷」</b>維持獨立模型排序。兩欄並列，各取所需，誠實標明性格差異。</p>
   </article>
 
   <article class="dl-item" data-cat="tech">
     <div class="dl-when">2026-06-04 → 06-07 · HKT</div>
-    <div class="dl-head"><span class="dl-title">血統因子上線 · 多項特徵實驗誠實落選</span><span class="dl-tag t-tech">技術</span></div>
-    <p class="dl-desc"><b>血統因子（父系／母父系往績）</b>經向前驗證實測有提升，正式採用。同期試過試閘、走位分段速度、賽評受阻、體重變化、傷患停賽等多項念頭，但嚴謹 A/B 後對命中率<b>無實質提升</b>，全部誠實落選 —— 重要度高唔等於有用。</p>
+    <div class="dl-head"><span class="dl-title">研究檔案資料範圍擴充</span><span class="dl-tag t-tech">技術</span></div>
+    <p class="dl-desc">馬匹研究檔案加入更完整背景資料；公開頁繼續只展示已核對的資料與正式結果。</p>
   </article>
 
   <article class="dl-item" data-cat="tech sys">
     <div class="dl-when">2026-05-31 · HKT</div>
-    <div class="dl-head"><span class="dl-title">α 自我修復混合閘門上線</span><span class="dl-tag t-tech">技術</span><span class="dl-tag t-sys">系統</span></div>
-    <p class="dl-desc">引擎每個賽馬日<b>自動評估模型健康度</b>再決定混合權重 α：健康偏重 LightGBM，異常自動退回純 ELO 安全網，全程毋須人手。賽果頁亦改為動態自動更新，並修正星期標籤顯示。</p>
+    <div class="dl-head"><span class="dl-title">自動模型健康守門上線</span><span class="dl-tag t-tech">技術</span><span class="dl-tag t-sys">系統</span></div>
+    <p class="dl-desc">引擎每個賽馬日自動評估模型健康度；偵測到異常會使用安全預測路徑，全程毋須人手。賽果頁亦改為動態自動更新，並修正星期標籤顯示。</p>
   </article>
 
   <article class="dl-item" data-cat="tech">
@@ -121,22 +107,6 @@
 
 </div>
 
-
-<section class="page-head" style="margin-top:10px">
-  <h1><small>FULL COMMIT FEED · AUTO</small>完整提交記錄</h1>
-  <p>由三個程式庫（後端·模型／數據·爬蟲／前端）嘅提交記錄<b>自動生成</b>，每次部署更新。呢度收錄<b>完整技術改動</b>（連日常修正），同上面嘅重大更新互補；想深入原理就睇說明書。</p>
-</section>
-
-<p class="cf-meta" id="cf-meta"><span data-tx-loader data-size="sm" data-label="提交記錄載入緊…"></span></p>
-
-<div class="dl-filter" id="cf-filter">
-  <button data-f="all" class="is-on">全部</button>
-  <button data-f="backend">後端·模型</button>
-  <button data-f="data">數據·爬蟲</button>
-  <button data-f="web">前端</button>
-</div>
-
-<div class="cf-list" id="cf-list"></div>
 
 <div class="dl-note"><b>關於記錄方式：</b>呢一頁只記<b>重大更新</b>（影響數據、模型或你嘅使用體驗嘅改動），日常小修不一一列出。更深入嘅原理講解，請睇<a href="/manual/" style="color:var(--brown);font-weight:700">天喜引擎說明書</a>。</div>
 
@@ -174,46 +144,5 @@
 </script>
 
 
-<script>
-(function(){
-  var meta=document.getElementById("cf-meta");
-  var list=document.getElementById("cf-list");
-  var filter=document.getElementById("cf-filter");
-  var cur="all";
-  var data=[];
-  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
-  function render(){
-    if(!data.length){list.innerHTML="";return;}
-    var html="";
-    for(var i=0;i<data.length;i++){
-      var e=data[i];
-      var hide=(cur!=="all" && e.areaKey!==cur);
-      var scope=e.scope?('<span class="cf-scope">'+esc(e.scope)+' · </span>'):"";
-      html+='<div class="cf-row'+(hide?" is-hidden":"")+'">'+
-        '<span class="cf-when">'+esc(e.date)+" · "+esc(e.time)+'</span>'+
-        '<span class="cf-area a-'+esc(e.areaKey)+'">'+esc(e.area)+'</span>'+
-        '<span class="cf-type">'+esc(e.typeLabel)+'</span>'+
-        '<span class="cf-title">'+scope+esc(e.title)+'</span>'+
-        '<span class="cf-sha">'+esc(e.sha)+'</span>'+
-      '</div>';
-    }
-    list.innerHTML=html;
-  }
-  filter.addEventListener("click",function(ev){
-    var btn=ev.target.closest("button"); if(!btn)return;
-    cur=btn.getAttribute("data-f");
-    var bs=filter.querySelectorAll("button");
-    for(var i=0;i<bs.length;i++){bs[i].classList.toggle("is-on",bs[i]===btn);}
-    render();
-  });
-  fetch("./data.json?t="+Date.now()).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
-    data=(d&&d.entries)||[];
-    meta.innerHTML="共 <b>"+esc(String(d.count||data.length))+"</b> 條技術改動 · 自動更新於 "+esc(d.generatedHKT||"");
-    render();
-  }).catch(function(){
-    meta.textContent="提交記錄暫時無法載入，請稍後再試。";
-  });
-})();
-</script>
 </body>
 </html>

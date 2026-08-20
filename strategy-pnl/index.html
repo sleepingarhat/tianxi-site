@@ -201,7 +201,7 @@
   function render(r){
     if (!r || r.error){ bodyEl.innerHTML = '<div class="sp-err">暫時無法載入策略盈虧數據，請稍後再試。</div>'; return; }
     var points = r.points || [];
-    tickEl.innerHTML = '天喜策略累計盈虧 · ' + esc(r.from || '—') + ' 至今 · ' + (r.daysEvaluated||0) + ' 個賽日 · ' + (r.racesBet||0) + ' 場';
+    tickEl.innerHTML = '天喜策略累計盈虧' + (r.from ? ' · ' + esc(r.from) + ' 至今' : '') + ' · ' + (r.daysEvaluated||0) + ' 個賽日 · ' + (r.racesBet||0) + ' 場';
 
     if (!points.length){
       bodyEl.innerHTML = '<div class="sp-empty"><strong style="color:var(--ink);display:block;margin-bottom:8px;font-size:14px">暫未有可彙總嘅賽事</strong>賽果與箱形派彩同步後，此頁會自動更新。</div>';
@@ -215,8 +215,7 @@
     html += '<div class="sp-kpi">';
     html += '<div class="sp-kpi__card hero"><div class="sp-kpi__lbl">累計盈虧 · CUMULATIVE P&amp;L（本金 $0 起）</div>'
           + '<div class="sp-kpi__val ' + cls(cum) + '">' + signed(cum) + '</div>'
-          + '<div class="sp-kpi__sub">' + esc(r.from||'') + ' 至 ' + esc(r.to||'') + ' · 投資回報率 '
-          + (r.roiPct==null?'—':(r.roiPct>0?'+':'') + r.roiPct + '%') + '</div></div>';
+          + '<div class="sp-kpi__sub">' + [r.from && r.to ? esc(r.from) + ' 至 ' + esc(r.to) : '', r.roiPct == null ? '' : '投資回報率 ' + (r.roiPct>0?'+':'') + r.roiPct + '%'].filter(Boolean).join(' · ') + '</div></div>';
     html += '<div class="sp-kpi__card"><div class="sp-kpi__lbl">總投注額</div>'
           + '<div class="sp-kpi__val">' + money(r.totalCost) + '</div>'
           + '<div class="sp-kpi__sub">' + (r.racesBet||0) + ' 場 × $' + (r.perRaceCost||530) + '/場</div></div>';

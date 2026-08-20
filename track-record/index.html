@@ -126,7 +126,7 @@
   var winWrap = document.getElementById('tr-win');
   var curDays = 90;
 
-  function pct(v){ return (v == null) ? '—' : (Math.round(v * 10) / 10); }
+  function pct(v){ return (v == null) ? '' : (Math.round(v * 10) / 10); }
   function fmtDate(iso){
     if (!iso) return '';
     var p = iso.split('-');
@@ -150,24 +150,29 @@
 
     // headline KPI
     html += '<div class="tr-kpi">';
-    html += '<div class="tr-kpi__card hero"><div class="tr-kpi__lbl">首選命中率 · TOP PICK WINS</div>'
+    if (r.top1HitRate != null) html += '<div class="tr-kpi__card hero"><div class="tr-kpi__lbl">首選命中率 · TOP PICK WINS</div>'
           + '<div class="tr-kpi__val">' + pct(r.top1HitRate) + '<small>%</small></div>'
           + '<div class="tr-kpi__sub">模型首選 = 跑第一（' + races + ' 場中 ' + (r.top1Hits||0) + ' 場）</div></div>';
-    html += '<div class="tr-kpi__card"><div class="tr-kpi__lbl">三甲命中率</div>'
+    if (r.top3AnyHitRate != null) html += '<div class="tr-kpi__card"><div class="tr-kpi__lbl">三甲命中率</div>'
           + '<div class="tr-kpi__val">' + pct(r.top3AnyHitRate) + '<small>%</small></div>'
           + '<div class="tr-kpi__sub">首三選最少一隻入三甲</div></div>';
-    html += '<div class="tr-kpi__card"><div class="tr-kpi__lbl">平均入三甲</div>'
-          + '<div class="tr-kpi__val">' + (r.top3AvgIntersect==null?'—':r.top3AvgIntersect) + '<small> / 3</small></div>'
+    if (r.top3AvgIntersect != null) html += '<div class="tr-kpi__card"><div class="tr-kpi__lbl">平均入三甲</div>'
+          + '<div class="tr-kpi__val">' + r.top3AvgIntersect + '<small> / 3</small></div>'
           + '<div class="tr-kpi__sub">每場首三選命中數</div></div>';
     html += '</div>';
 
     // pool metrics
     html += '<div class="tr-sec">彩池命中率</div>';
     html += '<div class="tr-pool">';
-    html += '<div class="tr-pool__card"><div class="tr-pool__lbl">連贏 Q</div><div class="tr-pool__val">' + pct(r.quinellaHitRate) + '%</div><div class="tr-pool__sub">首二中頭二</div></div>';
-    html += '<div class="tr-pool__card"><div class="tr-pool__lbl">位置Q QP</div><div class="tr-pool__val">' + pct(r.qpHitRate) + '%</div><div class="tr-pool__sub">首二入三甲</div></div>';
-    html += '<div class="tr-pool__card"><div class="tr-pool__lbl">單T 三重彩</div><div class="tr-pool__val">' + pct(r.trioHitRate) + '%</div><div class="tr-pool__sub">首三中三甲</div></div>';
-    html += '<div class="tr-pool__card"><div class="tr-pool__lbl">四連環 F4</div><div class="tr-pool__val">' + pct(r.first4HitRate) + '%</div><div class="tr-pool__sub">首四中頭四</div></div>';
+    [
+      ['連贏 Q', r.quinellaHitRate, '首二中頭二'],
+      ['位置Q QP', r.qpHitRate, '首二入三甲'],
+      ['單T 三重彩', r.trioHitRate, '首三中三甲'],
+      ['四連環 F4', r.first4HitRate, '首四中頭四']
+    ].forEach(function(s){
+      if (s[1] == null) return;
+      html += '<div class="tr-pool__card"><div class="tr-pool__lbl">' + s[0] + '</div><div class="tr-pool__val">' + pct(s[1]) + '%</div><div class="tr-pool__sub">' + s[2] + '</div></div>';
+    });
     html += '</div>';
 
     // explainer

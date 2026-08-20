@@ -182,6 +182,12 @@
         }).filter(has).join("；");
       }
 
+      function styleSummary(horseId) {
+        return TX_API.runningStyles([horseId], raceId ? { raceId: raceId } : {}).then(function (response) {
+          return response && response.styles && response.styles[0] || null;
+        });
+      }
+
       function legacyEnvelope(horseId) {
         return Promise.all([
           TX_API.horseDetail(horseId),
@@ -302,9 +308,7 @@
         var cards = rows.map(function (form, index) {
           var position = form.positionText || form.position;
           var positionClass = Number(form.position) === 1 ? "win" : Number(form.position) <= 3 ? "place" : "";
-          var finishTime = has(form.finishTime)
-            ? form.finishTime
-            : (has(form.finishTimeSec) ? form.finishTimeSec + "秒" : "");
+          var finishTime = TX_API.finishTime(form.finishTimeSec != null ? form.finishTimeSec : form.finishTime);
           var details = [
             ["日期", date(form.date)], ["賽事", [form.venue, has(form.raceNumber) ? "第" + form.raceNumber + "場" : ""].filter(has).join(" · ")],
             ["班次", form.raceClass], ["距離", distance(form.distance)], ["路況", form.going],
@@ -410,7 +414,7 @@
           '<br>近績、評語及分段屬賽後資料；缺少傷患或操練紀錄不代表沒有相關事件。</div>', "PROVENANCE");
       }
 
-      function render(payload, race, explanation) {
+       function render(payload, race, explanation, styleEntry) {
         var data = payload || {}, horse = data.horse || {}, record = horse.record || {};
         var forms = Array.isArray(data.recentForm) ? data.recentForm : [];
         var elo = data.elo || {}, training = data.training || {}, health = data.health || {};
@@ -419,7 +423,7 @@
         var hero = '<div class="hero ' + (hasSilks ? "" : "no-silks") + '">' +
           (hasSilks ? '<img class="silks" alt="' + esc((horse.nameCh || horse.nameEn || "") + "綵衣") + '" src="' + esc(TX_API.silksUrl(horse.silksCode)) + '" onerror="this.hidden=true;this.parentElement.classList.add(\'no-silks\')">' : "") +
           '<div>' + (has(horse.code) ? '<div class="eyebrow">HORSE DOSSIER · ' + esc(horse.code) + "</div>" : '<div class="eyebrow">HORSE DOSSIER</div>') +
-          '<h2>' + esc(horse.nameCh || horse.nameEn) +
+          '<h2>' + esc(horse.nameCh || horse.nameEn) + (styleEntry ? TX_API.runningStyleBadge(styleEntry) : '') +
           (has(horse.nameEn) && has(horse.nameCh) && horse.nameEn !== horse.nameCh ? "<small>" + esc(horse.nameEn) + "</small>" : "") + "</h2>" +
           (has(horse.status) ? '<span class="status">' + esc(horse.status === "active" ? "現役" : horse.status === "retired" ? "已退役" : horse.status) + "</span>" : "") +
           '</div>' + (has(horse.code) ? '<div class="hero-number">' + esc(horse.code) + "</div>" : "") + "</div>";
@@ -468,13 +472,31 @@
           app.innerHTML = '<div class="error">URL 缺少馬匹 id。</div>';
           return;
         }
-        var request = requestedHorseId ? Promise.all([research(requestedHorseId), raceId ? TX_API.race(raceId).catch(function () { return null; }) : Promise.resolve(null)])
-          .then(function (responses) { return { data: unwrap(responses[0]), race: unwrap(responses[1]), horseId: requestedHorseId }; }) : resolveHorseFromRace();
+        var request = requestedHorseId ? Promise.all([
+          research(requestedHorseId),
+          raceId ? TX_API.race(raceId).catch(function () { return null; }) : Promise.resolve(null),
+          raceId ? TX_API.explain(raceId, requestedHorseId).then(unwrap).catch(function () { return null; }) : Promise.resolve(null),
+          styleSummary(requestedHorseId)
+        ]).then(function (responses) {
+          return {
+            data: unwrap(responses[0]),
+            race: unwrap(responses[1]),
+            horseId: requestedHorseId,
+            prediction: responses[2],
+            styleEntry: responses[3]
+          };
+        }) : resolveHorseFromRace();
         request.then(function (result) {
+          if (requestedHorseId) {
+            render(result.data, result.race, result.prediction, result.styleEntry);
+            return;
+          }
           var prediction = raceId && result.data && result.data.raceContext
             ? TX_API.explain(raceId, result.horseId).then(unwrap).catch(function () { return null; })
             : Promise.resolve(null);
-          return prediction.then(function (explanation) { render(result.data, result.race, explanation); });
+           return Promise.all([prediction, styleSummary(result.horseId)]).then(function (parts) {
+             render(result.data, result.race, parts[0], parts[1]);
+           });
         }).catch(function (error) {
           app.innerHTML = '<div class="error">暫時未能載入研究檔案。<br><small>' + esc(error.message || "資料服務未有回應") + '</small><br><button class="retry" id="retry">重新載入</button></div>';
           document.getElementById("retry").onclick = load;

@@ -42,6 +42,7 @@
 .silks-img{width:32px;height:32px;object-fit:contain;border:1px solid var(--rule);border-radius:4px;background:var(--paper-2)}
 .col-name{min-width:0}
 .col-name .n-ch{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:14px;line-height:1.2}
+ .col-name .n-ch a{color:inherit;text-decoration:none}
 .col-name .n-jt{margin-top:2px;font-size:11px;color:var(--ink-mute);line-height:1.3}
 .col-name .n-jt b{color:var(--ink-soft);font-weight:500}
 .col-odds{width:62px;text-align:right;font-family:var(--font-mono);font-weight:700;font-size:14px;color:var(--ink);padding-right:10px!important}
@@ -110,14 +111,11 @@
   }
 
   function buildRaceId(){
-    var rid = qs('raceId');
+    var rid = TX_API.canonicalRaceId(qs('raceId'));
     if (rid) return rid;
-    var date = qs('date'), r = qs('r');
-    if (date && r) {
-      // Guess HV or ST using date day-of-week as hint (HV = Wed, ST = Sat/Sun)
-      // Fall back to HV unless caller provides venue explicitly.
-      var venue = qs('venue') || 'HV';
-      return 'race_' + date + '_' + venue + '_R' + r;
+    var date = qs('date'), r = qs('r'), venue = qs('venue');
+    if (date && /^\d+$/.test(String(r || '')) && /^(ST|HV)$/.test(String(venue || ''))) {
+      return TX_API.canonicalRaceId('race_' + date + '_' + venue + '_' + r);
     }
     return null;
   }
@@ -164,6 +162,7 @@
     document.getElementById('meta-line').innerHTML = parts.join('<span class="sep">·</span>');
   }
 
+  var STYLE_MAP = {};
   function renderEntries(entries){
     var body = document.getElementById('entries-body');
     body.innerHTML = '';
@@ -179,17 +178,17 @@
       var nameCh = e.nameCh || e.name_ch || e.name || '';
       var jockey = e.jockey || e.jockey_name || '';
       var trainer = e.trainer || e.trainer_name || '';
-      var odds = e.winOdds || e.win_odds || '—';
-      var draw = e.draw || '—';
-      var weight = e.weight || e.carry_weight || '—';
-      var horseId = e.horseId || e.horse_id || '';
+      var odds = e.winOdds != null ? e.winOdds : (e.win_odds != null ? e.win_odds : '');
+      var draw = e.draw != null ? e.draw : '';
+      var weight = e.weight != null ? e.weight : (e.carry_weight != null ? e.carry_weight : '');
+      var horseId = TX_API.canonicalHorseId(e.horseId || e.horse_id || e.id);
       var silksCode = e.silksCode || e.silks_code || '';
       var silks = silksCode ? '<img class="silks-img" loading="lazy" alt="綵衣" src="' + esc(TX_API.silksUrl(silksCode)) + '">' : '';
       tr.innerHTML =
         '<td class="col-silks">' + silks + '</td>' +
         '<td class="col-no">' + esc(no) + '</td>' +
         '<td class="col-name">' +
-          '<div class="n-ch">' + esc(nameCh) + '</div>' +
+           '<div class="n-ch">' + (TX_API.horseHref(horseId, CURRENT_RACE_ID) ? '<a href="' + TX_API.horseHref(horseId, CURRENT_RACE_ID) + '">' + esc(nameCh) + (STYLE_MAP[horseId] ? TX_API.runningStyleBadge(STYLE_MAP[horseId]) : '') + '</a>' : esc(nameCh)) + '</div>' +
           '<div class="n-jt">' +
             (jockey ? '<b>騎</b> ' + esc(jockey) : '') +
             (trainer ? ' <b>練</b> ' + esc(trainer) : '') +
@@ -199,13 +198,13 @@
         '<td class="col-draw">' + esc(draw) + '</td>' +
         '<td class="col-weight">' + esc(weight) + '</td>' +
         '<td class="col-chev">›</td>';
-      var raceId = CURRENT_RACE_ID;
-      tr.addEventListener('click', function(){
-        var params = horseId
-          ? ('id=' + encodeURIComponent(horseId) + '&raceId=' + encodeURIComponent(raceId))
-          : ('raceId=' + encodeURIComponent(raceId) + '&no=' + encodeURIComponent(no));
-        location.href = '/horse/?' + params;
-      });
+      if (horseId) {
+        tr.addEventListener('click', function(){
+          location.href = TX_API.horseHref(horseId, CURRENT_RACE_ID);
+        });
+      } else {
+        tr.removeAttribute('tabindex');
+      }
       body.appendChild(tr);
     });
   }
@@ -215,7 +214,7 @@
   function boot(){
     if (!CURRENT_RACE_ID){
       document.getElementById('meta-line').textContent = '缺少 raceId 參數';
-      document.getElementById('entries-body').innerHTML = '<tr><td colspan="7" class="err">URL 缺少 raceId（或 date+r）參數</td></tr>';
+      document.getElementById('entries-body').innerHTML = '<tr><td colspan="7" class="err">URL 缺少標準 raceId（或 date+r+venue）參數</td></tr>';
       return;
     }
 
@@ -232,7 +231,10 @@
 
       renderChipRow(siblings, CURRENT_RACE_ID);
       renderMeta(race, meeting);
-      renderEntries(entries);
+      var ids = entries.map(function(e){ return e.horseId || e.horse_id || e.id; });
+      TX_API.runningStyles(ids, { raceId: CURRENT_RACE_ID }).then(function(sd){
+        STYLE_MAP = {}; (sd.styles || []).forEach(function(x){ STYLE_MAP[x.horseId] = x; }); renderEntries(entries);
+      });
     }).catch(function(e){
       document.getElementById('meta-line').textContent = '載入失敗';
       document.getElementById('entries-body').innerHTML =

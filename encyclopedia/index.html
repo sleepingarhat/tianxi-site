@@ -54,11 +54,12 @@
 .horse-name{font:800 15px/1.25 var(--font-display);color:var(--ency-ink);overflow-wrap:anywhere}.horse-name small{display:block;font:500 10px var(--font-body);letter-spacing:.04em;color:var(--ink-mute);margin-top:3px}.horse-meta{margin-top:5px;font-size:11px;color:var(--ink-mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.horse-stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;font:500 10px var(--font-mono);color:var(--ink-mute)}.horse-stats b{color:var(--ency-ink)}.race-tag{text-align:right;font:600 10px/1.55 var(--font-mono);color:var(--accent);white-space:nowrap}.race-tag span{display:block;color:var(--ink-mute)}
 .skeleton{height:66px;margin:8px 0;border-radius:8px;background:linear-gradient(90deg,var(--paper-2),var(--paper-3),var(--paper-2));background-size:220% 100%;animation:shimmer 1.5s infinite}.state{padding:38px 16px;text-align:center;color:var(--ink-mute);font-size:12px;line-height:1.7}.state strong{display:block;color:var(--ency-ink);font:700 15px var(--font-display);margin-bottom:5px}.retry{margin-top:12px;padding:7px 13px;border:1px solid var(--rule-2);border-radius:7px;font-size:11px}.retry:hover{border-color:var(--accent)}
 .leader-row{display:grid;grid-template-columns:28px 34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px 18px;border-bottom:1px solid var(--ency-line);transition:background 140ms}.leader-row:last-child{border-bottom:0}.leader-row:hover{background:var(--paper-2)}.leader-rank{font:700 13px var(--font-mono);color:var(--accent)}.leader-silk{width:30px;height:30px;border-radius:5px;object-fit:contain;background:var(--paper-2);border:1px solid var(--rule)}.leader-name{font:700 13px var(--font-display);color:var(--ency-ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.leader-sub{font-size:10px;color:var(--ink-mute);margin-top:2px}.leader-val{font:700 15px var(--font-mono);color:var(--ency-ink);white-space:nowrap}.leader-row.is-link{cursor:pointer}.leader-row.is-link:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.race-selector{display:flex;gap:7px;overflow-x:auto;padding:13px 18px 11px;border-bottom:1px solid var(--ency-line);scrollbar-width:thin}.race-selector::-webkit-scrollbar{height:4px}.race-selector::-webkit-scrollbar-thumb{background:var(--rule-2);border-radius:999px}.race-choice{flex:0 0 auto;min-width:48px;padding:7px 10px;border:1px solid var(--rule-2);border-radius:7px;background:var(--paper-2);color:var(--ink-soft);font:700 11px var(--font-mono);line-height:1.25;text-align:center;white-space:nowrap;transition:background 140ms,border-color 140ms,color 140ms}.race-choice:hover{border-color:var(--accent)}.race-choice.is-active{background:var(--ency-ink);border-color:var(--ency-ink);color:var(--paper)}.race-choice small{display:block;margin-top:2px;font:500 9px var(--font-mono);opacity:.72}.today-table-wrap{overflow-x:auto;overscroll-behavior-x:contain}.today-table{width:100%;min-width:474px;border-collapse:collapse;font-size:11px}.today-table th{padding:8px 6px;background:var(--paper-2);border-bottom:1px solid var(--ency-line);font:700 9px var(--font-mono);letter-spacing:.07em;color:var(--ink-mute);text-align:left;white-space:nowrap}.today-table td{padding:9px 6px;border-bottom:1px solid var(--ency-line);vertical-align:middle}.today-table tr:last-child td{border-bottom:0}.today-table tbody tr{transition:background 140ms}.today-table tbody tr:hover{background:var(--paper-2)}.today-silks{display:block;width:27px;height:27px;object-fit:contain;border:1px solid var(--rule-2);border-radius:4px;background:var(--paper-2)}.today-no{width:28px;text-align:center;font:700 12px var(--font-mono);color:var(--ency-ink)}.today-name{min-width:132px}.today-name a{color:var(--ency-ink);font:800 13px/1.25 var(--font-display);text-decoration:none}.today-name a:hover{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}.today-name__text{font:800 13px/1.25 var(--font-display);color:var(--ency-ink)}.today-jt{margin-top:3px;color:var(--ink-mute);font-size:10px;line-height:1.35}.today-jt b{font-weight:700;color:var(--ink-soft)}.today-odds,.today-draw,.today-weight{font:600 11px var(--font-mono);text-align:center;color:var(--ink-soft);white-space:nowrap}.today-odds{text-align:right;color:var(--ency-ink)}.today-table .is-fav{color:var(--red);font-weight:700}.today-empty{padding:22px 18px 26px}
 .method{padding:18px}.method h2{font:800 16px var(--font-display);color:var(--ency-ink);margin-bottom:8px}.method p{font-size:12px;line-height:1.75;color:var(--ink-mute)}.method dl{display:grid;grid-template-columns:1fr auto;gap:9px 14px;margin-top:16px;padding-top:14px;border-top:1px dashed var(--ency-line);font-size:11px}.method dt{color:var(--ink-mute)}.method dd{font:600 11px var(--font-mono);color:var(--ency-ink)}.method a{display:inline-block;margin-top:15px;color:var(--accent);font-size:11px;font-weight:700}
 .disclaimer{margin-top:0}
 @keyframes shimmer{to{background-position:-220% 0}}@media(prefers-reduced-motion:reduce){.skeleton{animation:none}.horse-card,.index-row,.leader-row,.load-more,.chip,.search-wrap input{transition:none}}
 @media(max-width:719px){.ency-grid{grid-template-columns:1fr;padding-top:16px}.side-column{display:contents}.side-column .panel,.method{order:2}.ency-hero:after{opacity:.5}.panel-head{padding-left:15px;padding-right:15px}.list{padding-left:15px;padding-right:15px}.leader-row{padding-left:15px;padding-right:15px}}
-@media(max-width:600px){.index-table__head,.index-row{grid-template-columns:minmax(145px,1.8fr) 55px 52px 52px 58px;gap:5px}.index-table{overflow-x:auto}.index-table__head,.index-row{min-width:400px}.index-table__head{padding-left:15px;padding-right:15px}.index-row{padding-left:15px;padding-right:15px}.index-controls{padding-left:15px;padding-right:15px}.index-footer{padding-left:15px;padding-right:15px}.index-footer .search-status{font-size:10px}}
+@media(max-width:600px){.index-table__head,.index-row{grid-template-columns:minmax(145px,1.8fr) 55px 52px 52px 58px;gap:5px}.index-table{overflow-x:auto}.index-table__head,.index-row{min-width:400px}.index-table__head{padding-left:15px;padding-right:15px}.index-row{padding-left:15px;padding-right:15px}.index-controls{padding-left:15px;padding-right:15px}.index-footer{padding-left:15px;padding-right:15px}.index-footer .search-status{font-size:10px}.race-selector{padding-left:15px;padding-right:15px}.today-table{min-width:442px}.today-table th,.today-table td{padding-left:5px;padding-right:5px}.today-name{min-width:118px}}
 @media(min-width:720px){.search-panel{padding-top:22px;padding-bottom:22px}}
 </style>
 </head>
@@ -96,7 +97,7 @@
   <aside class="side-column">
     <section class="panel"><div class="panel-head"><h2><small>ELO INDEX</small>最高 Elo</h2><span class="count">在役 · 10</span></div><div id="elo-list"><div class="skeleton"></div><div class="skeleton"></div></div></section>
     <section class="panel"><div class="panel-head"><h2><small>WIN ARCHIVE</small>最多勝場</h2><span class="count">在役 · 10</span></div><div id="wins-list"><div class="skeleton"></div><div class="skeleton"></div></div></section>
-    <section class="panel" id="today-panel"><div class="panel-head"><h2><small>ON THE CARD</small>今日出賽馬匹</h2><span class="count" id="today-count">載入中</span></div><div class="chips" id="ency-chips" role="group" aria-label="篩選今日出賽馬匹"><button class="chip is-active" data-filter="all" type="button">全部</button><button class="chip" data-filter="hot" type="button">大熱 ≤ 5</button><button class="chip" data-filter="mid" type="button">中價 5–12</button><button class="chip" data-filter="cold" type="button">爆冷 &gt; 12</button></div><div class="list" id="today-list"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+    <section class="panel" id="today-panel"><div class="panel-head"><h2><small>ON THE CARD</small><span id="today-title">出賽馬匹</span></h2><span class="count" id="today-count" aria-live="polite">載入中</span></div><div class="race-selector" id="today-races" role="group" aria-label="選擇場次"></div><div id="today-list"><div class="list"><div class="skeleton"></div><div class="skeleton"></div></div></div></section>
     <section class="panel method"><h2>閱讀這頁的方法</h2><p>索引由完整馬匹資料庫提供；現役與全部是 API 的真實狀態範圍。今日卡片與排行榜是輔助發現，不代表完整歷史。</p><dl><dt>資料來源</dt><dd>TX_API</dd><dt>索引分頁</dt><dd>每頁 50 匹</dd><dt>圖片缺失</dt><dd>保留空位</dd></dl><a href="/engine/">了解天喜引擎 →</a></section>
   </aside>
 </main>
@@ -127,7 +128,8 @@
 
   function link(id, html, className, attrs){
     var extra = attrs || '';
-    return id
+     id = TX_API.canonicalHorseId ? TX_API.canonicalHorseId(id) : id;
+     return id
       ? '<a class="' + className + '" href="/horse/?id=' + encodeURIComponent(id) + '"' + extra + '>' + html + '</a>'
       : '<div class="' + className + '"' + extra + '>' + html + '</div>';
   }
@@ -147,17 +149,20 @@
   }
 
   var indexState = { sort:'elo', status:'active', offset:0, limit:50, loading:false, seq:0 };
-  var entries = [];
-  var filter = 'all';
+  var STYLE_MAP = {};
+  var meetingState = { data:null, selectedRaceId:null };
   var meetingSeq = 0;
   var searchTimer = null;
   var searchSeq = 0;
-  var filters = {
-    all: function(){ return true; },
-    hot: function(item){ return +item.odds > 0 && +item.odds <= 5; },
-    mid: function(item){ return +item.odds > 5 && +item.odds <= 12; },
-    cold: function(item){ return +item.odds > 12; }
-  };
+
+  function hydrateStyles(items, context){
+    var ids = (items || []).map(function(item){
+      return item && (item.id || item.horseId || item.horse_id);
+    });
+    return TX_API.runningStyles(ids, context || {}).then(function(data){
+      (data.styles || []).forEach(function(style){ STYLE_MAP[style.horseId] = style; });
+    });
+  }
 
   function setIndexStatus(text, error, countText){
     var status = document.getElementById('index-status');
@@ -173,7 +178,9 @@
   }
 
   function indexRow(horse){
-    var name = esc(horse.nameCh || horse.nameEn || '未有名稱');
+    var displayName = horse.nameCh || horse.nameEn || '';
+    if (!displayName) return '';
+    var name = esc(displayName);
     var english = horse.nameEn && horse.nameEn !== horse.nameCh
       ? '<small>' + esc(horse.nameEn) + '</small>' : '';
     var status = horse.status === 'active' ? '現役'
@@ -181,7 +188,7 @@
     var html =
       '<span class="index-horse" role="cell">' +
         silk(horse.code, true) +
-        '<span class="index-identity"><strong>' + name + '</strong>' + english + '</span>' +
+         '<span class="index-identity"><strong>' + name + (STYLE_MAP[TX_API.canonicalHorseId(horse.id)] ? TX_API.runningStyleBadge(STYLE_MAP[TX_API.canonicalHorseId(horse.id)]) : '') + '</strong>' + english + '</span>' +
       '</span>' +
       '<span class="index-status ' + (horse.status === 'retired' ? 'retired' : '') + '" role="cell">' + esc(status) + '</span>' +
       '<span role="cell">' + esc(val(horse.totalStarts, '')) + '</span>' +
@@ -212,21 +219,25 @@
       var rows = (data && data.horses) || [];
       var list = document.getElementById('index-list');
       if (reset) list.innerHTML = '';
-      if (rows.length){
-        list.insertAdjacentHTML('beforeend', rows.map(indexRow).join(''));
-      } else if (reset){
-        list.innerHTML = empty('索引沒有結果', '可改用其他狀態或排序');
-      }
-      indexState.offset = requestOffset + rows.length;
-      var ended = rows.length < indexState.limit;
-      setIndexStatus(
-        rows.length ? '已顯示 ' + indexState.offset + ' 匹' + (ended ? ' · 已到索引末端' : '') : '沒有更多資料',
-        false,
-        indexState.offset + ' 匹'
-      );
-      more.textContent = '載入更多';
-      more.disabled = ended;
-      more.setAttribute('aria-label', ended ? '已載入全部馬匹' : '載入更多馬匹');
+      var styleReady = rows.length ? hydrateStyles(rows) : Promise.resolve();
+      return styleReady.then(function(){
+        if (seq !== indexState.seq) return;
+        if (rows.length){
+          list.insertAdjacentHTML('beforeend', rows.map(indexRow).join(''));
+        } else if (reset){
+          list.innerHTML = empty('索引沒有結果', '可改用其他狀態或排序');
+        }
+        indexState.offset = requestOffset + rows.length;
+        var ended = rows.length < indexState.limit;
+        setIndexStatus(
+          rows.length ? '已顯示 ' + indexState.offset + ' 匹' + (ended ? ' · 已到索引末端' : '') : '沒有更多資料',
+          false,
+          indexState.offset + ' 匹'
+        );
+        more.textContent = '載入更多';
+        more.disabled = ended;
+        more.setAttribute('aria-label', ended ? '已載入全部馬匹' : '載入更多馬匹');
+      });
     }).catch(function(error){
       if (seq !== indexState.seq) return;
       if (reset){
@@ -248,9 +259,12 @@
     TX_API.horseSearch(query).then(function(data){
       if (seq !== searchSeq) return;
       var rows = (data && data.horses) || [];
-      document.getElementById('index-list').innerHTML = rows.length
-        ? rows.map(indexRow).join('')
-        : empty('找不到匹配馬匹', '試試中文名、英文名或馬匹編號');
+      hydrateStyles(rows).then(function(){
+        if (seq !== searchSeq) return;
+        document.getElementById('index-list').innerHTML = rows.length
+          ? rows.map(indexRow).join('')
+          : empty('找不到匹配馬匹', '試試中文名、英文名或馬匹編號');
+      });
       document.getElementById('search-status').textContent =
         '已更新 · ' + rows.length + ' 項結果' + (rows.length === 20 ? ' · 最多顯示 20 項' : '');
       setIndexStatus(rows.length ? '搜尋完成' : '沒有搜尋結果', false, rows.length + ' 匹');
@@ -276,41 +290,151 @@
     setSearchMode(false);
   }
 
-  function entryHtml(item){
-    var raceStats = [
-      labelledStat('檔', item.draw),
-      labelledStat('賠率', item.odds)
-    ].filter(Boolean);
-    var raceTag = [
-      present(item.raceNo) ? 'R' + item.raceNo : '',
-      present(item.num) ? '#' + item.num : ''
-    ].filter(Boolean).join(' · ');
-    var inner =
-      silk(item.silksCode) +
-      '<div><div class="horse-name">' + esc(item.nameCh || item.nameEn || '未有名稱') +
-        (item.nameEn && item.nameEn !== item.nameCh ? '<small>' + esc(item.nameEn) + '</small>' : '') +
-      '</div><div class="horse-meta">' +
-        (item.jockey ? '騎師 ' + esc(item.jockey) : '') +
-        (item.trainer ? ' · 練馬師 ' + esc(item.trainer) : '') +
-      '</div>' + (raceStats.length ? '<div class="horse-stats">' + raceStats.map(function(stat){
-        var parts = stat.split(' ');
-        return '<span>' + esc(parts.shift()) + ' <b>' + esc(parts.join(' ')) + '</b></span>';
-      }).join('') + '</div>' : '') + '</div>' +
-      (raceTag ? '<div class="race-tag">' + esc(raceTag) + '</div>' : '');
-    return link(item.id, inner, 'horse-card' + (item.id ? ' is-link' : ''));
+  function raceIdOf(race){ return race && (race.id || race.raceId || race.race_id); }
+
+  function dateForCard(date){
+    var match = String(date || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+    return match ? match[3] + '-' + match[2] + '-' + match[1] : '';
+  }
+
+  function textValue(value){
+    return value === null || value === undefined ? '' : String(value).trim();
+  }
+
+  function oddsValue(value){
+    var n = Number(value);
+    return isFinite(n) && n > 0 ? n : null;
+  }
+
+  function oddsText(value){
+    var n = oddsValue(value);
+    return n == null ? '' : (n % 1 === 0 ? String(n) : n.toFixed(1));
+  }
+
+  function trustedWeight(value){
+    var n = Number(value);
+    return isFinite(n) && n >= 80 && n <= 160 ? n : null;
+  }
+
+  function entrySilk(item){
+    var code = item.silksCode || item.silks_code || item.code || item.horseCode;
+    var url = code && TX_API.silksUrl ? TX_API.silksUrl(code) : '';
+    return url ? '<img class="today-silks" loading="lazy" alt="" src="' + esc(url) +
+      '" onerror="this.remove()">' : '';
+  }
+
+  function todayRows(race){
+    return (race && race.horses || []).map(function(horse){
+      return {
+        id: TX_API.canonicalHorseId(horse.id || horse.horseId || horse.horse_id),
+        no: textValue(horse.horseNumber || horse.horse_number || horse.no),
+        nameCh: textValue(horse.nameCh || horse.name_ch),
+        nameEn: textValue(horse.nameEn || horse.name_en || horse.name),
+        jockey: textValue(horse.jockeyCh || horse.jockey || horse.jockey_name),
+        trainer: textValue(horse.trainerCh || horse.trainer || horse.trainer_name),
+        draw: textValue(horse.draw),
+        weight: trustedWeight(horse.weight || horse.carry_weight || horse.actualWeight),
+        odds: oddsValue(horse.winOdds || horse.win_odds),
+        silksCode: horse.silksCode || horse.silks_code || horse.code || horse.horseCode
+      };
+    }).filter(function(row){ return row.nameCh || row.nameEn || row.no; });
+  }
+
+  function hasColumn(rows, key){
+    return rows.some(function(row){ return present(row[key]); });
+  }
+
+  function renderRaceChoices(races, activeRaceId){
+    var slot = document.getElementById('today-races');
+    slot.innerHTML = races.map(function(race){
+      var id = raceIdOf(race);
+      var active = id === activeRaceId;
+      var start = TX_API.cleanTime && TX_API.cleanTime(race.startTime || race.start_time);
+      return '<button class="race-choice' + (active ? ' is-active' : '') +
+        '" type="button" data-race-id="' + esc(id) + '" aria-pressed="' + (active ? 'true' : 'false') +
+        '" aria-label="第 ' + esc(race.raceNumber || race.race_number) + ' 場' + (start ? '，' + esc(start) : '') + '">' +
+        'R' + esc(race.raceNumber || race.race_number) + (start ? '<small>' + esc(start) + '</small>' : '') +
+      '</button>';
+    }).join('');
+  }
+
+  function renderRacecard(race){
+    var slot = document.getElementById('today-list');
+    var rows = todayRows(race);
+    if (!rows.length){
+      slot.innerHTML = '<div class="today-empty">' + empty('尚未公布排位', '此場暫未有可核對的排位資料') + '</div>';
+      return;
+    }
+    var showSilks = rows.some(function(row){ return row.silksCode; });
+    var showOdds = hasColumn(rows, 'odds');
+    var showDraw = hasColumn(rows, 'draw');
+    var showWeight = hasColumn(rows, 'weight');
+    var raceId = raceIdOf(race);
+    var favourite = null;
+    rows.forEach(function(row, index){
+      if (row.odds != null && (favourite == null || row.odds < rows[favourite].odds)) favourite = index;
+    });
+    var columns = (showSilks ? '<th scope="col">綵</th>' : '') +
+      '<th scope="col">號</th><th scope="col">馬匹／騎練</th>' +
+      (showOdds ? '<th scope="col">獨贏</th>' : '') +
+      (showDraw ? '<th scope="col">檔</th>' : '') +
+      (showWeight ? '<th scope="col">負磅</th>' : '');
+    var body = rows.map(function(row, index){
+      var horseName = row.nameCh || row.nameEn;
+      var href = TX_API.horseHref(row.id, raceId);
+      var nameHtml = esc(horseName) + (STYLE_MAP[row.id] ? TX_API.runningStyleBadge(STYLE_MAP[row.id]) : '');
+      var jockeyTrainer = [
+        row.jockey ? '<b>騎</b> ' + esc(row.jockey) : '',
+        row.trainer ? '<b>練</b> ' + esc(row.trainer) : ''
+      ].filter(Boolean).join(' · ');
+      return '<tr>' +
+        (showSilks ? '<td>' + entrySilk(row) + '</td>' : '') +
+        '<td class="today-no">' + esc(row.no) + '</td>' +
+        '<td class="today-name">' +
+          (href ? '<a href="' + href + '">' + nameHtml + '</a>' :
+            '<span class="today-name__text">' + nameHtml + '</span>') +
+          (jockeyTrainer ? '<div class="today-jt">' + jockeyTrainer + '</div>' : '') +
+        '</td>' +
+        (showOdds ? '<td class="today-odds' + (index === favourite ? ' is-fav' : '') + '">' + esc(oddsText(row.odds)) + '</td>' : '') +
+        (showDraw ? '<td class="today-draw">' + esc(row.draw) + '</td>' : '') +
+        (showWeight ? '<td class="today-weight">' + esc(row.weight == null ? '' : Math.round(row.weight)) + '</td>' : '') +
+      '</tr>';
+    }).join('');
+    slot.innerHTML = '<div class="today-table-wrap"><table class="today-table" aria-label="第 ' +
+      esc(race.raceNumber || race.race_number) + ' 場排位表"><thead><tr>' + columns +
+      '</tr></thead><tbody>' + body + '</tbody></table></div>';
   }
 
   function renderToday(){
-    var list = entries.filter(filters[filter] || filters.all);
+    var meeting = meetingState.data;
+    if (!meeting) return;
+    var races = (meeting.races || []).slice().sort(function(a, b){
+      return Number(a.raceNumber || a.race_number || 0) - Number(b.raceNumber || b.race_number || 0);
+    });
+    var selected = races.filter(function(race){ return raceIdOf(race) === meetingState.selectedRaceId; })[0] || races[0];
+    if (!selected){
+      document.getElementById('today-races').innerHTML = '';
+      document.getElementById('today-count').textContent = '無場次';
+      document.getElementById('today-list').innerHTML = '<div class="today-empty">' +
+        empty('暫無出賽資料', '最近賽事沒有可展示的排位') + '</div>';
+      return;
+    }
+    meetingState.selectedRaceId = raceIdOf(selected);
+    var day = dateForCard(meeting.date);
+    document.getElementById('today-title').textContent = day ? day + ' 出賽馬匹' : '出賽馬匹';
     document.getElementById('today-count').textContent =
-      list.length + ' 匹' + (list.length !== entries.length ? ' / ' + entries.length : '');
-    document.getElementById('today-list').innerHTML = entries.length
-      ? (list.length ? list.map(entryHtml).join('') : empty('此分類暫無馬匹', '可切換其他篩選條件'))
-      : empty('暫無出賽資料', '最近賽事沒有可展示的排位');
+      '第 ' + (selected.raceNumber || selected.race_number) + ' 場 · ' + todayRows(selected).length + ' 匹';
+    renderRaceChoices(races, meetingState.selectedRaceId);
+    var selectedId = meetingState.selectedRaceId;
+    hydrateStyles(todayRows(selected), { raceId: selectedId }).then(function(){
+      if (meetingState.selectedRaceId === selectedId) renderRacecard(selected);
+    });
   }
 
   function leaderboard(id, data, by){
-    var horses = (data && data.horses) || [];
+    var horses = ((data && data.horses) || []).filter(function(horse){
+      return horse.nameCh || horse.nameEn;
+    });
     document.getElementById(id).innerHTML = horses.length ? horses.map(function(horse, index){
       var score = by === 'elo'
         ? (horse.elo == null ? '' : Math.round(horse.elo))
@@ -319,54 +443,53 @@
         labelledStat('', horse.totalStarts, ' 戰').trim(),
         labelledStat('', horse.totalWins, ' 勝').trim()
       ].filter(Boolean).join(' · ');
+      var horseId = TX_API.canonicalHorseId(horse.id || horse.horseId || horse.horse_id);
+      var badge = STYLE_MAP[horseId] ? TX_API.runningStyleBadge(STYLE_MAP[horseId]) : '';
       return link(
-        horse.id,
+        horseId,
         '<span class="leader-rank">' + (index + 1) + '</span>' +
         silk(horse.silksCode || horse.code, true) +
-        '<span><span class="leader-name">' + esc(horse.nameCh || horse.nameEn || '未有名稱') +
-        '</span>' + (sub ? '<span class="leader-sub">' + esc(sub) + '</span>' : '') + '</span>' +
+        '<span><span class="leader-name">' + esc(horse.nameCh || horse.nameEn) +
+        badge + '</span>' + (sub ? '<span class="leader-sub">' + esc(sub) + '</span>' : '') + '</span>' +
         (present(score) ? '<span class="leader-val">' + esc(score) + '</span>' : '<span></span>'),
-        'leader-row' + (horse.id ? ' is-link' : '')
+        'leader-row' + (horseId ? ' is-link' : '')
       );
     }).join('') : empty('資料整備中', '暫無可用排行榜資料');
   }
 
   function loadMeeting(){
     var seq = ++meetingSeq;
+    meetingState.data = null;
+    meetingState.selectedRaceId = null;
+    document.getElementById('today-races').innerHTML = '';
+    document.getElementById('today-count').textContent = '載入中';
+    document.getElementById('today-list').innerHTML = '<div class="list"><div class="skeleton"></div><div class="skeleton"></div></div>';
     return TX_API.smartCurrent().then(function(current){
       if (!current || !current.date) throw new Error('沒有最近賽事');
       return TX_API.meeting(current.date).then(function(meeting){
         if (seq !== meetingSeq) return;
-        var seen = {};
-        var nextEntries = [];
-        (meeting.races || []).forEach(function(race){
-          (race.horses || []).forEach(function(horse){
-            var key = horse.id || [race.raceNumber, horse.horseNumber, horse.nameCh || horse.name].join('|');
-            if (seen[key]) return;
-            seen[key] = true;
-            nextEntries.push({
-              id:horse.id, num:horse.horseNumber, draw:horse.draw,
-              nameCh:horse.nameCh, nameEn:horse.name,
-              jockey:horse.jockeyCh || horse.jockey, trainer:horse.trainerCh,
-              raceNo:race.raceNumber, odds:horse.winOdds,
-              silksCode:horse.silksCode || horse.code || horse.horseCode
-            });
-          });
-        });
-        entries = nextEntries;
+        meetingState.data = meeting;
+        var firstWithEntries = (meeting.races || []).filter(function(race){
+          return (race.horses || []).length > 0;
+        })[0];
+        meetingState.selectedRaceId = raceIdOf(firstWithEntries || (meeting.races || [])[0]);
         renderToday();
       });
     }).catch(function(error){
       if (seq !== meetingSeq) return;
+      document.getElementById('today-races').innerHTML = '';
+      document.getElementById('today-title').textContent = '出賽馬匹';
       document.getElementById('today-count').textContent = '無資料';
-      document.getElementById('today-list').innerHTML =
-        empty('賽事資料未能載入', error.message, 'meeting');
+      document.getElementById('today-list').innerHTML = '<div class="today-empty">' +
+        empty('賽事資料未能載入', error.message, 'meeting') + '</div>';
     });
   }
 
   function loadBoard(by, target){
     return TX_API.horseLeaderboard(by, 10, 'active').then(function(data){
-      leaderboard(target, data, by);
+      return hydrateStyles((data && data.horses) || []).then(function(){
+        leaderboard(target, data, by);
+      });
     }).catch(function(){
       document.getElementById(target).innerHTML =
         empty(by === 'elo' ? 'Elo 資料未能載入' : '勝場資料未能載入', '請稍後再試', by);
@@ -401,14 +524,10 @@
     loadIndex(false);
   });
 
-  document.getElementById('ency-chips').addEventListener('click', function(event){
-    var button = event.target.closest('[data-filter]');
+  document.getElementById('today-races').addEventListener('click', function(event){
+    var button = event.target.closest('[data-race-id]');
     if (!button) return;
-    filter = button.dataset.filter;
-    document.querySelectorAll('[data-filter]').forEach(function(item){
-      item.classList.toggle('is-active', item === button);
-      item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
-    });
+    meetingState.selectedRaceId = button.dataset.raceId;
     renderToday();
   });
 
