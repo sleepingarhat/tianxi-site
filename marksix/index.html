@@ -89,37 +89,46 @@
 .m6-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:10px;color:var(--ink-mute);margin-bottom:10px}
 .m6-legend b{color:var(--ink)}
 
-/* ----- section 3: combos ----- */
-.m6-combo{padding:16px;margin:0 16px}
-.m6-pool{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:6px;margin:8px 0 4px}
-.m6-pick{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:50%;
-  font-family:var(--font-mono);font-weight:700;font-size:14px;border:1.5px solid var(--rule-2);color:var(--ink-soft);
-  background:var(--paper);transition:.1s;user-select:none}
-.m6-pick.on{color:#fff;border-color:transparent}
-.m6-pick.on.red{background:radial-gradient(circle at 36% 30%,#ff7064,#e10e2a 56%,#a3081e)}
-.m6-pick.on.blue{background:radial-gradient(circle at 36% 30%,#5aa6ee,#0a5fbf 56%,#063c7c)}
-.m6-pick.on.green{background:radial-gradient(circle at 36% 30%,#5fd081,#08923b 56%,#055f29)}
-.m6-field{margin:14px 0 0}
-.m6-field>label{display:block;font-size:11px;font-weight:700;color:var(--ink);margin-bottom:6px}
-.m6-poolbtns{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 2px}
-.m6-poolbtns button{font-size:11px;font-weight:600;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px}
-.m6-poolbtns button:active{transform:scale(.96)}
-.m6-gen{width:100%;margin-top:16px;padding:13px;font-family:var(--font-display);font-weight:900;font-size:15px;
-  color:var(--gold-3);background:var(--ink);border-radius:var(--r-md);box-shadow:var(--sh-sm)}
-.m6-gen[disabled]{opacity:.45}
-.m6-cost{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--ink-mute);margin-top:10px}
-.m6-cost b{font-family:var(--font-mono);color:var(--ink);font-size:13px}
-.m6-warn{font-size:11px;color:var(--red);background:var(--red-2);border-radius:var(--r-sm);padding:7px 10px;margin-top:10px;display:none}
-.m6-warn.show{display:block}
-.m6-results{margin-top:14px;display:flex;flex-direction:column;gap:8px}
-.m6-summary{font-size:12px;color:var(--ink-soft);padding:8px 0;border-bottom:1px solid var(--rule);line-height:1.6}
-.m6-summary b{font-family:var(--font-mono);color:var(--ink)}
-.m6-ticket{border:1px solid var(--rule);border-radius:var(--r-md);padding:10px;background:var(--paper)}
-.m6-ticket .tballs{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
-.m6-ticket .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;font-size:10px}
-.m6-ticket .meta .chip{background:var(--paper-2);border:1px solid var(--rule);border-radius:999px;padding:2px 8px;color:var(--ink-mute)}
-.m6-ticket .meta .chip b{color:var(--ink);font-family:var(--font-mono)}
-.m6-ticket .meta .cost{margin-left:auto;font-family:var(--font-mono);font-weight:700;color:var(--green-2)}
+ /* ----- section 3: four-system research ledger ----- */
+.m6-ledger{padding:16px;margin:0 16px;border-top:3px solid var(--gold)}
+.m6-ledger-intro{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:16px}
+.m6-ledger-intro p{margin:0;font-size:12px;line-height:1.7;color:var(--ink-soft);max-width:620px}
+.m6-ledger-meta{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);text-align:right;white-space:nowrap}
+.m6-origin{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;color:var(--ink);background:var(--gold-tint);border:1px solid var(--gold);padding:4px 8px;border-radius:4px}
+.m6-origin.retro{color:var(--red);background:var(--red-2);border-color:rgba(160,30,40,.25)}
+.m6-rule{padding:11px 12px;margin:12px 0 16px;border-left:3px solid var(--gold);background:var(--paper-2);font-size:11px;line-height:1.7;color:var(--ink-soft)}
+.m6-systemgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.m6-system{border:1px solid var(--rule);border-radius:var(--r-md);background:var(--paper);padding:12px;min-width:0;transition:transform .18s ease,box-shadow .18s ease}
+.m6-system:hover{transform:translateY(-2px);box-shadow:var(--sh-sm)}
+.m6-system h3{font-family:var(--font-display);font-size:14px;margin:0 0 9px;color:var(--ink)}
+.m6-system .m6-balls{justify-content:flex-start;gap:5px;flex-wrap:wrap;padding:2px 0 11px}
+.m6-system .m6-ball{width:29px;height:29px;font-size:11px}
+.m6-system .m6-ball::before{left:23%;top:23%;width:54%;height:54%}
+.m6-system-foot{border-top:1px solid var(--rule);padding-top:9px;display:grid;gap:5px;font-size:10px;color:var(--ink-mute)}
+.m6-hit{display:flex;justify-content:space-between;gap:8px}
+.m6-hit b{font-family:var(--font-mono);color:var(--ink)}
+.m6-hit b.yes{color:var(--green-2)}
+.m6-hit b.no{color:var(--ink-mute)}
+.m6-result-strip{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:10px 0;margin-bottom:10px}
+.m6-result-strip .label{font-size:11px;color:var(--ink-mute);margin-right:3px}
+.m6-result-strip .m6-ball{width:26px;height:26px;font-size:10px}
+.m6-history{display:grid;gap:12px}
+.m6-history-row{border:1px solid var(--rule);border-radius:var(--r-md);padding:13px;background:var(--paper)}
+.m6-history-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:9px}
+.m6-history-head strong{font-family:var(--font-display);font-size:15px;color:var(--ink)}
+.m6-history-head time{font-size:11px;color:var(--ink-mute)}
+.m6-history-row .m6-systemgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.m6-history-row .m6-system{padding:10px}
+.m6-history-row .m6-system .m6-ball{width:25px;height:25px;font-size:10px}
+.m6-more{display:block;margin:14px auto 0;padding:9px 16px;border:1px solid var(--gold);border-radius:999px;color:var(--ink);background:var(--gold-tint);font-size:11px;font-weight:800;transition:transform .16s ease,box-shadow .16s ease}
+.m6-more:hover{transform:translateY(-1px);box-shadow:var(--sh-sm)}
+.m6-empty{padding:24px 12px;text-align:center;background:var(--paper-2);border:1px dashed var(--rule-2);border-radius:var(--r-md);font-size:12px;color:var(--ink-mute);line-height:1.7}
+.m6-fetcherr{color:var(--red);background:var(--red-2);border:1px solid rgba(160,30,40,.2)}
+@media(max-width:760px){
+  .m6-ledger-intro{display:block}.m6-ledger-meta{text-align:left;margin-top:8px}
+  .m6-systemgrid,.m6-history-row .m6-systemgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:390px){.m6-systemgrid,.m6-history-row .m6-systemgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body data-page="marksix">
@@ -131,7 +140,7 @@
 
 <section class="page-head">
   <h1><small>MARK SIX</small>六合彩</h1>
-  <p>上期攪珠結果 · 號碼冷熱統計 · 聰明組合生成器。<br><span class="pill pill--gold">資訊展示 · 非投注介面</span></p>
+  <p>官方結果 · 號碼統計 · 四術獨立研究紀錄。<br><span class="pill pill--gold">資訊展示 · 非投注介面</span></p>
 </section>
 
 <!-- ===== Section 1 · latest result ===== -->
@@ -154,47 +163,11 @@
   <div class="m6-numgrid" id="m6-numgrid"><div class="tx-lemni-host" data-tx-loader data-label="載入中…"></div></div>
 </section>
 
-<!-- ===== Section 3 · smart combos ===== -->
+<!-- ===== Section 3 · four-system ledger ===== -->
 <section class="m6-sec">
-  <h2 class="m6-h2">聰明組合 <small>COMBO GENERATOR</small></h2>
-  <div class="card m6-combo">
-
-    <div class="m6-field">
-      <label>① 揀號碼池（6–49 個）<span id="m6-poolcount" style="color:var(--ink-mute);font-weight:400"></span></label>
-      <div class="m6-poolbtns">
-        <button type="button" data-fill="clear">清除</button>
-        <button type="button" data-fill="all">全 49</button>
-        <button type="button" data-fill="hot">＋熱門 6</button>
-        <button type="button" data-fill="cold">＋遺漏 6</button>
-        <button type="button" data-fill="last">＋上期 6</button>
-      </div>
-      <div class="m6-pool" id="m6-pool"></div>
-    </div>
-
-    <div class="m6-field">
-      <label>② 每組幾多個號碼（k）</label>
-      <div class="m6-seg" id="m6-k"></div>
-    </div>
-
-    <div class="m6-field">
-      <label>③ 生成模式</label>
-      <div class="m6-seg" id="m6-mode"></div>
-      <p class="m6-note" id="m6-modenote" style="margin-top:7px"></p>
-    </div>
-
-    <div class="m6-field" id="m6-tcount-field">
-      <label>④ 智能精選注數</label>
-      <div class="m6-seg" id="m6-tcount"></div>
-    </div>
-
-    <div class="m6-cost">
-      <span id="m6-costinfo"></span>
-    </div>
-    <div class="m6-warn" id="m6-warn"></div>
-
-    <button type="button" class="m6-gen" id="m6-gen">生成組合</button>
-
-    <div class="m6-results" id="m6-results"></div>
+  <h2 class="m6-h2">四術七碼研究簿 <small>FOUR-SYSTEM LEDGER</small></h2>
+  <div class="card m6-ledger" id="m6-ledger">
+    <div class="m6-state"><div class="tx-lemni-host" data-tx-loader data-label="載入研究紀錄…"></div></div>
   </div>
 </section>
 
@@ -233,25 +206,10 @@
     var d = new Date(Date.UTC(+m[1], +m[2]-1, +m[3]));   // TZ-safe weekday
     return +m[1] + '年' + (+m[2]) + '月' + (+m[3]) + '日（' + WD[d.getUTCDay()] + '）';
   }
-  function choose(n,k){ if(k<0||k>n) return 0; k=Math.min(k,n-k); var r=1; for(var i=0;i<k;i++){ r=r*(n-i)/(i+1); } return Math.round(r); }
-
-  // ---- combination iterator (lazy) ----
-  function eachCombo(arr,k,cb){
-    var n=arr.length; if(k>n||k<1) return;
-    var idx=[]; for(var i=0;i<k;i++) idx.push(i);
-    while(true){
-      if(cb(idx.map(function(i){return arr[i];}))===false) return;
-      var j=k-1; while(j>=0 && idx[j]===j+n-k) j--;
-      if(j<0) return;
-      idx[j]++; for(var t=j+1;t<k;t++) idx[t]=idx[t-1]+1;
-    }
-  }
-  function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
-
   // ================= state =================
   var HISTORY=[], LATEST=null, UNIT=10, LATEST_YEAR='';
-  var STATS=null, PERIOD='100', SORT='num';
-  var POOL=new Set(), K=7, MODE='smart', TCOUNT=5;
+  var STATS=null, PERIOD='100', SORT='num', LEDGER=null;
+  var LEDGER_HISTORY_LIMIT=10;
 
   // ================= section 1 =================
   function renderResult(){
@@ -357,147 +315,62 @@
     });
   }
 
-  // ================= section 3 — combos =================
-  function poolGrp(n){ return grp(n); }
-  function renderPool(){
-    var box=document.getElementById('m6-pool'), html='';
-    for(var n=1;n<=49;n++){
-      var on=POOL.has(n);
-      html+='<div class="m6-pick'+(on?(' on '+poolGrp(n)):'')+'" data-n="'+n+'">'+n+'</div>';
-    }
-    box.innerHTML=html;
-    box.querySelectorAll('.m6-pick').forEach(function(c){
-      c.addEventListener('click',function(){
-        var n=+c.getAttribute('data-n');
-        if(POOL.has(n)) POOL.delete(n); else POOL.add(n);
-        renderPool(); updateCost();
-      });
+  // ================= section 3 — read-only research ledger =================
+  function originTag(row){
+    var retro=row.origin==='retrospective_reconstruction';
+    return '<span class="m6-origin'+(retro?' retro':'')+'">'+(row.originLabel||'')+'</span>';
+  }
+  function resultStrip(result){
+    if(!result) return '';
+    return '<div class="m6-result-strip"><span class="label">實際結果</span>'+
+      result.mainNumbers.map(function(n){return ball(n,'sm',false);}).join('')+
+      '<span class="m6-plus">＋</span>'+ball(result.specialNumber,'sm',true)+'</div>';
+  }
+  function systemCard(sys, settled){
+    if(!sys) return '';
+    var mainHits=settled && Array.isArray(sys.mainHits)?sys.mainHits:[];
+    return '<article class="m6-system"><h3>'+ (sys.name||'') +'</h3>'+
+      '<div class="m6-balls">'+(sys.numbers||[]).map(function(n){
+        return ball(n,'sm',settled && mainHits.indexOf(n)!==-1);
+      }).join('')+'</div>'+
+      (settled?'<div class="m6-system-foot">'+
+        '<div class="m6-hit"><span>主號命中</span><b class="'+(sys.mainHitCount?'yes':'no')+'">'+
+        (sys.mainHitCount||0)+' / 6'+(mainHits.length?'（'+mainHits.join('、')+'）':'')+'</b></div>'+
+        '<div class="m6-hit"><span>特別號命中</span><b class="'+(sys.specialHit?'yes':'no')+'">'+(sys.specialHit?'是':'否')+'</b></div>'+
+      '</div>':'')+'</article>';
+  }
+  function rowHTML(row, heading){
+    if(!row) return '<div class="m6-empty">目前沒有可展示的紀錄。</div>';
+    var settled=row.status==='settled' && row.result;
+    var keys=['qimen','bazi','liuyao','taiyi'];
+    return '<div class="m6-history-row">'+
+      '<div class="m6-history-head"><strong>'+heading+' · '+(row.drawId||'')+'</strong>'+
+      '<time>'+cnDate(row.date)+'</time>'+originTag(row)+'</div>'+
+      (settled?resultStrip(row.result):'<p class="m6-note">尚未有官方結果；以下只展示凍結紀錄，不作事後比較。</p>')+
+      '<div class="m6-systemgrid">'+keys.map(function(k){return systemCard(row.systems&&row.systems[k],settled);}).join('')+'</div></div>';
+  }
+  function renderLedger(){
+    var el=document.getElementById('m6-ledger');
+    if(!LEDGER){el.innerHTML='<div class="m6-empty m6-fetcherr">研究紀錄未能載入。頁面不會自行補算或產生號碼，請稍後重試。</div>';return;}
+    var rule=LEDGER.rule||{}, current=LEDGER.current, latest=LEDGER.latestSettled;
+    var history=LEDGER.history||[], visibleHistory=history.slice(0,LEDGER_HISTORY_LIMIT);
+    var html='<div class="m6-ledger-intro"><p>四術各自保存七個號碼，按固定規則獨立記錄。這是研究簿，不是投注組合；不合併、不投票、不排名。</p>'+
+      '<div class="m6-ledger-meta">更新 '+(LEDGER.updatedAtUtc||'')+'<br>時區 '+(LEDGER.timezone||'')+' · 截止 '+(LEDGER.cutoffHkt||'')+'</div></div>'+
+      '<div class="m6-rule"><b>規則</b> '+(rule.summary||'')+'<br><b>缺段</b> '+(rule.missingBandFallback||'')+
+      '<br><b>獨立性</b> '+(rule.independence||'')+'</div>'+
+      '<h3 class="m6-h2">目前凍結紀錄 <small>BEFORE THE DRAW</small></h3>'+
+      (current?rowHTML(current,'待開'):'<div class="m6-empty">目前沒有凍結中的四術紀錄。</div>')+
+      '<h3 class="m6-h2" style="margin-top:22px">最近一次已結算 <small>SETTLED CHECK</small></h3>'+
+      (latest?rowHTML(latest,'已結算'):'<div class="m6-empty">目前沒有已結算紀錄，暫不作命中比較。</div>')+
+      '<h3 class="m6-h2" style="margin-top:22px">已結算歷史 <small>HISTORY</small></h3>'+
+      (history.length?'<div class="m6-history">'+visibleHistory.map(function(r){return rowHTML(r,'歷史');}).join('')+'</div>'+
+      (visibleHistory.length<history.length?'<button class="m6-more" id="m6-history-more">顯示更多（尚餘 '+(history.length-visibleHistory.length)+' 期）</button>':''):'<div class="m6-empty">目前沒有歷史紀錄。</div>');
+    el.innerHTML=html;
+    var more=document.getElementById('m6-history-more');
+    if(more) more.addEventListener('click',function(){
+      LEDGER_HISTORY_LIMIT+=10;
+      renderLedger();
     });
-    document.getElementById('m6-poolcount').textContent=' · 已揀 '+POOL.size+' 個';
-  }
-  function topByStat(which, take){
-    if(!STATS) STATS=computeStats(PERIOD);
-    var arr=[]; for(var n=1;n<=49;n++) arr.push(n);
-    if(which==='hot') arr.sort(function(a,b){ return STATS.count[b]-STATS.count[a] || a-b; });
-    else arr.sort(function(a,b){ return STATS.curOm[b]-STATS.curOm[a] || a-b; });
-    return arr.slice(0,take);
-  }
-  function fillPool(kind){
-    if(kind==='clear'){ POOL.clear(); }
-    else if(kind==='all'){ POOL.clear(); for(var n=1;n<=49;n++) POOL.add(n); }
-    else if(kind==='last'){ if(LATEST) LATEST.numbers.forEach(function(x){ POOL.add(x); }); }
-    else if(kind==='hot'){ topByStat('hot',6).forEach(function(x){ POOL.add(x); }); }
-    else if(kind==='cold'){ topByStat('cold',6).forEach(function(x){ POOL.add(x); }); }
-    renderPool(); updateCost();
-  }
-  function scoreSet(s, maxCount, maxOm){
-    var k=s.length, odd=0, low=0, sum=0, om=0, hot=0, i, n;
-    for(i=0;i<k;i++){ n=s[i]; if(n%2) odd++; if(n<=24) low++; sum+=n; om+=STATS.curOm[n]; hot+=STATS.count[n]; }
-    var half=k/2;
-    var bOdd=1-Math.abs(odd-half)/(half||1);
-    var bLow=1-Math.abs(low-half)/(half||1);
-    var bSum=1-Math.min(1,Math.abs(sum-25*k)/(12.5*k));
-    var overdue=maxOm?(om/k)/maxOm:0;
-    var freq=maxCount?(hot/k)/maxCount:0;
-    var signal=0.5*overdue+0.5*freq;
-    var total=0.28*bOdd+0.28*bLow+0.24*bSum+0.20*signal;
-    return { total:total, odd:odd, even:k-odd, low:low, high:k-low, sum:sum };
-  }
-  function intersect(a,b){ var s=new Set(a), c=0; b.forEach(function(x){ if(s.has(x)) c++; }); return c; }
-  function generateSmart(pool, k, T){
-    if(!STATS) STATS=computeStats(PERIOD);
-    var maxCount=0,maxOm=0,i;
-    for(i=1;i<=49;i++){ if(STATS.count[i]>maxCount) maxCount=STATS.count[i]; if(STATS.curOm[i]>maxOm) maxOm=STATS.curOm[i]; }
-    var total=choose(pool.length,k);
-    var BUDGET=8000, cands=[];
-    if(total<=BUDGET){
-      eachCombo(pool,k,function(c){ cands.push(c.slice()); });
-    } else {
-      var rand=mulberry32(0x9E3779B1^(k*131+pool.length)), seen=new Set(), tries=0, max=BUDGET*50;
-      while(cands.length<BUDGET && tries++<max){
-        var p=pool.slice();
-        for(i=0;i<k;i++){ var jj=i+Math.floor(rand()*(p.length-i)); var tmp=p[i]; p[i]=p[jj]; p[jj]=tmp; }
-        var pick=p.slice(0,k).sort(function(a,b){return a-b;});
-        var key=pick.join('-');
-        if(!seen.has(key)){ seen.add(key); cands.push(pick); }
-      }
-    }
-    var scored=cands.map(function(s){ return { s:s, sc:scoreSet(s,maxCount,maxOm), picked:false }; });
-    scored.sort(function(a,b){ return b.sc.total-a.sc.total; });
-    var chosen=[];
-    for(var t=0;t<T;t++){
-      var best=-1, bestVal=-Infinity;
-      for(i=0;i<scored.length;i++){
-        if(scored[i].picked) continue;
-        var ov=0; for(var c2=0;c2<chosen.length;c2++) ov+=intersect(scored[i].s,chosen[c2].s);
-        var val=scored[i].sc.total-0.05*ov;
-        if(val>bestVal){ bestVal=val; best=i; }
-      }
-      if(best<0) break;
-      scored[best].picked=true; chosen.push(scored[best]);
-    }
-    return { tickets:chosen, total:total };
-  }
-  function renderResults(){
-    var box=document.getElementById('m6-results');
-    var warn=document.getElementById('m6-warn');
-    var pool=[].concat([...POOL]).sort(function(a,b){return a-b;});
-    if(pool.length<K){ box.innerHTML='<div class="m6-state err">號碼池要至少 '+K+' 個號碼。</div>'; return; }
-    var linesPer=choose(K,6), costPer=linesPer*UNIT;
-
-    if(MODE==='pure'){
-      var total=choose(pool.length,K), CAP=500, shown=[];
-      eachCombo(pool,K,function(c){ if(shown.length>=CAP) return false; shown.push(c.slice()); });
-      warn.className='m6-warn'+(total>CAP?' show':'');
-      if(total>CAP) warn.textContent='共 '+num(total)+' 組，數量過多只顯示首 '+CAP+' 組。可縮細號碼池，或用「智能精選」。';
-      var head='<div class="m6-summary">純複式 · 號碼池 <b>'+pool.length+'</b> 個 · 每組 <b>'+K+'</b> 字<br>'+
-        '組合總數 <b>'+num(total)+'</b> 組 · 每組複式 <b>'+num(linesPer)+'</b> 注（$'+num(costPer)+'）'+
-        (K>6?'':' · 即單式')+'</div>';
-      var rows=shown.map(function(s){ return ticketHTML(s,null,linesPer,costPer); }).join('');
-      box.innerHTML=head+rows;
-    } else {
-      warn.className='m6-warn';
-      var res=generateSmart(pool,K,TCOUNT);
-      var totalCost=res.tickets.length*costPer, totalLines=res.tickets.length*linesPer;
-      var head2='<div class="m6-summary">智能精選 · 號碼池 <b>'+pool.length+'</b> 個 · 每組 <b>'+K+'</b> 字 · <b>'+res.tickets.length+'</b> 注<br>'+
-        '可選組合 <b>'+num(res.total)+'</b> 組中，按單雙／大細／和值／冷熱平衡揀出<br>'+
-        '合共 <b>'+num(totalLines)+'</b> 複式注 · 預算 <b>$'+num(totalCost)+'</b></div>';
-      var rows2=res.tickets.map(function(t){ return ticketHTML(t.s,t.sc,linesPer,costPer); }).join('');
-      box.innerHTML=head2+rows2;
-    }
-  }
-  function ticketHTML(s, sc, linesPer, costPer){
-    var balls=s.map(function(n){ return ball(n,'md',false); }).join('');
-    var meta='';
-    if(sc){
-      meta='<div class="meta">'+
-        '<span class="chip">單<b>'+sc.odd+'</b>:雙<b>'+sc.even+'</b></span>'+
-        '<span class="chip">大<b>'+sc.high+'</b>:細<b>'+sc.low+'</b></span>'+
-        '<span class="chip">和值<b>'+sc.sum+'</b></span>'+
-        '<span class="cost">'+num(linesPer)+'注 · $'+num(costPer)+'</span>'+
-      '</div>';
-    } else {
-      meta='<div class="meta"><span class="chip">複式 <b>'+linesPer+'</b> 注</span><span class="cost">$'+num(costPer)+'</span></div>';
-    }
-    return '<div class="m6-ticket"><div class="tballs">'+balls+'</div>'+meta+'</div>';
-  }
-  function updateCost(){
-    var pool=POOL.size, linesPer=choose(K,6), costPer=linesPer*UNIT;
-    var info=document.getElementById('m6-costinfo'), gen=document.getElementById('m6-gen');
-    gen.disabled = pool<K;
-    if(MODE==='pure'){
-      var total=pool>=K?choose(pool,K):0;
-      info.innerHTML='每組 '+K+' 字 = 複式 <b>'+num(linesPer)+'</b> 注（$'+num(costPer)+'） · 組合總數 <b>'+num(total)+'</b> 組';
-    } else {
-      info.innerHTML='每注 '+K+' 字 = 複式 <b>'+num(linesPer)+'</b> 注（$'+num(costPer)+'） · 生成 '+TCOUNT+' 注';
-    }
-  }
-  function syncModeUI(){
-    document.getElementById('m6-tcount-field').style.display = MODE==='smart' ? '' : 'none';
-    document.getElementById('m6-modenote').textContent = MODE==='pure'
-      ? '純複式：列出號碼池內所有 k 字組合 C(池,k)，純數學，不加統計。'
-      : '智能精選：用上方統計（冷熱／遺漏／單雙／大細／和值）由號碼池揀出最平衡的組合。';
-    updateCost();
   }
 
   // ================= boot =================
@@ -508,38 +381,24 @@
     buildSeg('m6-sort', [
       {v:'num',label:'號碼'},{v:'hot',label:'最熱'},{v:'due',label:'最冷'}
     ], function(){return SORT;}, function(v){ SORT=v; renderStats(); });
-    buildSeg('m6-k', [
-      {v:'6',label:'6'},{v:'7',label:'7'},{v:'8',label:'8'},{v:'9',label:'9'},{v:'10',label:'10'},{v:'11',label:'11'}
-    ], function(){return String(K);}, function(v){ K=+v; syncModeUI(); });
-    buildSeg('m6-mode', [
-      {v:'smart',label:'智能精選'},{v:'pure',label:'純複式'}
-    ], function(){return MODE;}, function(v){ MODE=v; syncModeUI(); });
-    buildSeg('m6-tcount', [
-      {v:'3',label:'3注'},{v:'5',label:'5注'},{v:'10',label:'10注'},{v:'20',label:'20注'}
-    ], function(){return String(TCOUNT);}, function(v){ TCOUNT=+v; updateCost(); });
-
-    document.querySelectorAll('.m6-poolbtns button').forEach(function(b){
-      b.addEventListener('click',function(){ fillPool(b.getAttribute('data-fill')); });
-    });
-    document.getElementById('m6-gen').addEventListener('click', renderResults);
   }
 
   function boot(){
     setupControls();
-    renderPool();
-    syncModeUI();
     Promise.all([
       fetch(LATEST_URL).then(function(r){ if(!r.ok) throw 0; return r.json(); }).catch(function(){ return null; }),
-      fetch(HISTORY_URL).then(function(r){ if(!r.ok) throw 0; return r.json(); }).catch(function(){ return null; })
+      fetch(HISTORY_URL).then(function(r){ if(!r.ok) throw 0; return r.json(); }).catch(function(){ return null; }),
+      fetch('../data/marksix-four-systems-7.json').then(function(r){ if(!r.ok) throw 0; return r.json(); }).catch(function(){ return null; })
     ]).then(function(res){
       LATEST=res[0];
       HISTORY=(res[1]||[]).slice().sort(function(a,b){ return a.date<b.date?-1:a.date>b.date?1:(a.draw<b.draw?-1:1); });
+      LEDGER=res[2];
       if(LATEST){ UNIT=Number(LATEST.unitBet)||10; }
       LATEST_YEAR = HISTORY.length ? HISTORY[HISTORY.length-1].date.slice(0,4) : String(new Date().getUTCFullYear());
       renderResult();
       if(HISTORY.length){ renderStats(); }
       else { document.getElementById('m6-numgrid').innerHTML='<div class="m6-state err">未能載入歷史攪珠數據。</div>'; }
-      updateCost();
+      renderLedger();
     });
   }
 
