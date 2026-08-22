@@ -1,18 +1,29 @@
 {
-  "schemaVersion": 1,
-  "study": "marksix-four-systems-independent-seven",
+  "schemaVersion": 2,
+  "study": "marksix-four-systems-independent-versioned",
   "updatedAtUtc": "2026-08-22T06:02:42.148885Z",
   "timezone": "Asia/Hong_Kong",
   "cutoffHkt": "21:30:00",
   "rule": {
-    "version": "four-systems-seven-v1",
-    "summary": "每術依固定21碼生成次序，1–9、10–19、20–29、30–39、40–49各取最先出現一碼，再以已鎖定seed從餘下候選隨機取兩碼。",
-    "missingBandFallback": "缺段時依原21碼生成次序補足。",
+    "version": "four-systems-fifteen-v2",
+    "summary": "每術沿用原始候選生成次序建立完整49碼序列，再以該術該期已鎖定seed在1–9、10–19、20–29、30–39、40–49各隨機取3碼。",
+    "sampling": "五段各自由主seed派生段seed；每段抽樣互相獨立、可重現，合共15個不重複號碼。",
+    "methodScope": "內容只描述排盤、欄位次序與數字映射，不作吉凶判斷、預測聲稱、投注含意或術間高下比較。",
     "independence": "四術各自選碼，不混合、不投票、不互補、不排名。"
+  },
+  "legacyRule": {
+    "version": "four-systems-seven-v1",
+    "summary": "既有7碼封存按原規則保留並逐筆驗證，不作改寫。"
   },
   "labels": {
     "prospective_frozen": "抽獎前凍結",
-    "retrospective_reconstruction": "回溯重建，非當時預測"
+    "retrospective_reconstruction": "歷史研究記錄"
+  },
+  "systemMethods": {
+    "qimen": "以21:30 HKT時家奇門（拆補法、轉盤）排局，按九宮的門、星、神、天地盤干等固定欄位生成次序，再投影至1–49。",
+    "bazi": "以21:30 HKT節氣四柱（立春換年、十二節換月、sect=2）排盤，按干支、五行、納音、藏干與十神的固定欄位生成次序投影至1–49。",
+    "liuyao": "以21:30 HKT日期字串作SHA-256固定虛擬三錢起卦，按京房納甲、八宮、世應、六親及六神的固定欄位生成次序投影至1–49；此為現代可重現替代，不宣稱古法唯一權威。",
+    "taiyi": "以21:30 HKT時計太乙的固定軟件慣例排局，按局數、遁法、太乙、文昌、始擊、主客算與將參等固定欄位生成次序投影至1–49；這是指定軟件慣例，不作唯一古典傳承主張。"
   },
   "current": {
     "date": "2026-08-22",
@@ -21,6 +32,8 @@
     "recordedAtUtc": "2026-08-22T06:02:42.148885Z",
     "origin": "prospective_frozen",
     "originLabel": "抽獎前凍結",
+    "ruleVersion": "four-systems-seven-v1",
+    "numberCount": 7,
     "status": "frozen",
     "systems": {
       "qimen": {
@@ -34,6 +47,8 @@
           39,
           47
         ],
+        "numberCount": 7,
+        "ruleVersion": "four-systems-seven-v1",
         "seed": "dddf7b9569d322b34e3848a23eb7fd80b9f3089e63f36d78a4fa482da31e8a47",
         "bandSelections": {
           "1-9": 7,
@@ -59,6 +74,8 @@
           43,
           45
         ],
+        "numberCount": 7,
+        "ruleVersion": "four-systems-seven-v1",
         "seed": "ca5c169bad7a6d30abedc650f6480e29be8d5043518dd28d8fe4ab92a8878057",
         "bandSelections": {
           "1-9": 6,
@@ -84,6 +101,8 @@
           32,
           42
         ],
+        "numberCount": 7,
+        "ruleVersion": "four-systems-seven-v1",
         "seed": "dd67e4b3b90b83cb0b35b0f397aaba00589a143a7fd2a6a60694aa6b7e04ab7c",
         "bandSelections": {
           "1-9": 5,
@@ -109,6 +128,8 @@
           32,
           43
         ],
+        "numberCount": 7,
+        "ruleVersion": "four-systems-seven-v1",
         "seed": "c53fe21a168ae8fd1c7fe260989a3619ca8947dee221ddc0d839f67ee0eaaabe",
         "bandSelections": {
           "1-9": 4,
@@ -131,7 +152,7 @@
     "castHkt": "2026-08-20T21:30:00+08:00",
     "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
     "origin": "retrospective_reconstruction",
-    "originLabel": "回溯重建，非當時預測",
+    "originLabel": "歷史研究記錄",
     "status": "settled",
     "systems": {
       "qimen": {
@@ -160,7 +181,9 @@
         ],
         "mainHits": [],
         "mainHitCount": 0,
-        "specialHit": false
+        "specialHit": false,
+        "numberCount": 7,
+        "ruleVersion": "four-systems-seven-v1"
       },
       "bazi": {
         "name": "四柱八字",
@@ -191,7 +214,9 @@
           24
         ],
         "mainHitCount": 2,
-        "specialHit": false
+        "specialHit": false,
+        "numberCount": 7,
+        "ruleVersion": "four-systems-seven-v1"
       },
       "liuyao": {
         "name": "六爻納甲／文王卦",
@@ -221,7 +246,9 @@
           46
         ],
         "mainHitCount": 1,
-        "specialHit": false
+        "specialHit": false,
+        "numberCount": 7,
+        "ruleVersion": "four-systems-seven-v1"
       },
       "taiyi": {
         "name": "太乙神數",
@@ -249,7 +276,9 @@
         ],
         "mainHits": [],
         "mainHitCount": 0,
-        "specialHit": false
+        "specialHit": false,
+        "numberCount": 7,
+        "ruleVersion": "four-systems-seven-v1"
       }
     },
     "result": {
@@ -266,7 +295,9 @@
         "provider": "HKJC",
         "operationName": "marksixResult"
       }
-    }
+    },
+    "ruleVersion": "four-systems-seven-v1",
+    "numberCount": 7
   },
   "history": [
     {
@@ -275,7 +306,7 @@
       "castHkt": "2026-08-20T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -304,7 +335,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -335,7 +368,9 @@
             24
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -365,7 +400,9 @@
             46
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -393,7 +430,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -410,7 +449,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-08-18",
@@ -418,7 +459,7 @@
       "castHkt": "2026-08-18T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -450,7 +491,9 @@
             39
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -478,7 +521,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -506,7 +551,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -536,7 +583,9 @@
             7
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -553,7 +602,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-08-15",
@@ -561,7 +612,7 @@
       "castHkt": "2026-08-15T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -590,7 +641,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -618,7 +671,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -646,7 +701,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -674,7 +731,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -691,7 +750,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-08-13",
@@ -699,7 +760,7 @@
       "castHkt": "2026-08-13T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -728,7 +789,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -756,7 +819,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -786,7 +851,9 @@
             27
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -816,7 +883,9 @@
             21
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -833,7 +902,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-08-11",
@@ -841,7 +912,7 @@
       "castHkt": "2026-08-11T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -873,7 +944,9 @@
             43
           ],
           "mainHitCount": 2,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -903,7 +976,9 @@
             43
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -931,7 +1006,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -962,7 +1039,9 @@
             28
           ],
           "mainHitCount": 2,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -979,7 +1058,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-08-08",
@@ -987,7 +1068,7 @@
       "castHkt": "2026-08-08T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -1016,7 +1097,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -1044,7 +1127,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -1076,7 +1161,9 @@
             49
           ],
           "mainHitCount": 3,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -1108,7 +1195,9 @@
             49
           ],
           "mainHitCount": 3,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -1125,7 +1214,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-08-06",
@@ -1133,7 +1224,7 @@
       "castHkt": "2026-08-06T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -1164,7 +1255,9 @@
             42
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -1194,7 +1287,9 @@
             24
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -1222,7 +1317,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -1253,7 +1350,9 @@
             42
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -1270,7 +1369,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-08-04",
@@ -1278,7 +1379,7 @@
       "castHkt": "2026-08-04T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -1309,7 +1410,9 @@
             33
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -1339,7 +1442,9 @@
             4
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -1369,7 +1474,9 @@
             33
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -1399,7 +1506,9 @@
             4
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -1416,7 +1525,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-08-01",
@@ -1424,7 +1535,7 @@
       "castHkt": "2026-08-01T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -1455,7 +1566,9 @@
             1
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -1483,7 +1596,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -1511,7 +1626,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -1539,7 +1656,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -1556,7 +1675,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-07-30",
@@ -1564,7 +1685,7 @@
       "castHkt": "2026-07-30T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -1595,7 +1716,9 @@
             23
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -1625,7 +1748,9 @@
             35
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -1656,7 +1781,9 @@
             17
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -1686,7 +1813,9 @@
             35
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -1703,7 +1832,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-07-28",
@@ -1711,7 +1842,7 @@
       "castHkt": "2026-07-28T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -1740,7 +1871,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -1768,7 +1901,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -1798,7 +1933,9 @@
             21
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -1828,7 +1965,9 @@
             7
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -1845,7 +1984,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-07-25",
@@ -1853,7 +1994,7 @@
       "castHkt": "2026-07-25T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -1884,7 +2025,9 @@
             7
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -1914,7 +2057,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -1944,7 +2089,9 @@
             5
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -1977,7 +2124,9 @@
             42
           ],
           "mainHitCount": 4,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -1994,7 +2143,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-07-23",
@@ -2002,7 +2153,7 @@
       "castHkt": "2026-07-23T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -2033,7 +2184,9 @@
             46
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -2063,7 +2216,9 @@
             32
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -2096,7 +2251,9 @@
             46
           ],
           "mainHitCount": 4,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -2128,7 +2285,9 @@
             46
           ],
           "mainHitCount": 3,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -2145,7 +2304,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-07-21",
@@ -2153,7 +2314,7 @@
       "castHkt": "2026-07-21T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -2184,7 +2345,9 @@
             45
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -2212,7 +2375,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -2242,7 +2407,9 @@
             45
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -2272,7 +2439,9 @@
             1
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -2289,7 +2458,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-07-16",
@@ -2297,7 +2468,7 @@
       "castHkt": "2026-07-16T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -2326,7 +2497,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -2354,7 +2527,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -2382,7 +2557,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -2410,7 +2587,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -2427,7 +2606,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-07-14",
@@ -2435,7 +2616,7 @@
       "castHkt": "2026-07-14T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -2466,7 +2647,9 @@
             19
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -2496,7 +2679,9 @@
             10
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -2524,7 +2709,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -2552,7 +2739,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -2569,7 +2758,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-07-11",
@@ -2577,7 +2768,7 @@
       "castHkt": "2026-07-11T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -2608,7 +2799,9 @@
             2
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -2636,7 +2829,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -2666,7 +2861,9 @@
             46
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -2694,7 +2891,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -2711,7 +2910,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-07-09",
@@ -2719,7 +2920,7 @@
       "castHkt": "2026-07-09T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -2748,7 +2949,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -2778,7 +2981,9 @@
             18
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -2808,7 +3013,9 @@
             18
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -2838,7 +3045,9 @@
             18
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -2855,7 +3064,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-07-07",
@@ -2863,7 +3074,7 @@
       "castHkt": "2026-07-07T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -2894,7 +3105,9 @@
             5
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -2924,7 +3137,9 @@
             43
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -2952,7 +3167,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -2980,7 +3197,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -2997,7 +3216,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-07-05",
@@ -3005,7 +3226,7 @@
       "castHkt": "2026-07-05T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -3034,7 +3255,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -3065,7 +3288,9 @@
             38
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -3093,7 +3318,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -3124,7 +3351,9 @@
             20
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -3141,7 +3370,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-07-02",
@@ -3149,7 +3380,7 @@
       "castHkt": "2026-07-02T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -3178,7 +3409,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -3208,7 +3441,9 @@
             31
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -3239,7 +3474,9 @@
             34
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -3267,7 +3504,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -3284,7 +3523,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-06-30",
@@ -3292,7 +3533,7 @@
       "castHkt": "2026-06-30T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -3323,7 +3564,9 @@
             18
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -3353,7 +3596,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -3383,7 +3628,9 @@
             17
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -3411,7 +3658,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -3428,7 +3677,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-06-28",
@@ -3436,7 +3687,7 @@
       "castHkt": "2026-06-28T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -3467,7 +3718,9 @@
             26
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -3497,7 +3750,9 @@
             37
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -3527,7 +3782,9 @@
             40
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -3557,7 +3814,9 @@
             7
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -3574,7 +3833,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-06-25",
@@ -3582,7 +3843,7 @@
       "castHkt": "2026-06-25T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -3614,7 +3875,9 @@
             20
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -3645,7 +3908,9 @@
             19
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -3675,7 +3940,9 @@
             30
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -3706,7 +3973,9 @@
             20
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -3723,7 +3992,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-06-23",
@@ -3731,7 +4002,7 @@
       "castHkt": "2026-06-23T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -3763,7 +4034,9 @@
             41
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -3791,7 +4064,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -3821,7 +4096,9 @@
             39
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -3849,7 +4126,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -3866,7 +4145,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-06-20",
@@ -3874,7 +4155,7 @@
       "castHkt": "2026-06-20T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -3906,7 +4187,9 @@
             16
           ],
           "mainHitCount": 2,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -3934,7 +4217,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -3962,7 +4247,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -3992,7 +4279,9 @@
             41
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -4009,7 +4298,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-06-18",
@@ -4017,7 +4308,7 @@
       "castHkt": "2026-06-18T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -4048,7 +4339,9 @@
             6
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -4078,7 +4371,9 @@
             34
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -4108,7 +4403,9 @@
             47
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -4139,7 +4436,9 @@
             47
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -4156,7 +4455,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-06-14",
@@ -4164,7 +4465,7 @@
       "castHkt": "2026-06-14T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -4196,7 +4497,9 @@
             32
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -4226,7 +4529,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -4256,7 +4561,9 @@
             32
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -4284,7 +4591,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -4301,7 +4610,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-06-11",
@@ -4309,7 +4620,7 @@
       "castHkt": "2026-06-11T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -4340,7 +4651,9 @@
             28
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -4370,7 +4683,9 @@
             29
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -4398,7 +4713,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -4428,7 +4745,9 @@
             28
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -4445,7 +4764,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-06-09",
@@ -4453,7 +4774,7 @@
       "castHkt": "2026-06-09T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -4484,7 +4805,9 @@
             33
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -4512,7 +4835,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -4543,7 +4868,9 @@
             33
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -4573,7 +4900,9 @@
             33
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -4590,7 +4919,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-06-06",
@@ -4598,7 +4929,7 @@
       "castHkt": "2026-06-06T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -4629,7 +4960,9 @@
             19
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -4659,7 +4992,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -4687,7 +5022,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -4718,7 +5055,9 @@
             36
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -4735,7 +5074,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-06-04",
@@ -4743,7 +5084,7 @@
       "castHkt": "2026-06-04T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -4774,7 +5115,9 @@
             4
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -4805,7 +5148,9 @@
             43
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -4835,7 +5180,9 @@
             43
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -4863,7 +5210,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -4880,7 +5229,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-06-02",
@@ -4888,7 +5239,7 @@
       "castHkt": "2026-06-02T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -4919,7 +5270,9 @@
             37
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -4947,7 +5300,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -4975,7 +5330,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -5003,7 +5360,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -5020,7 +5379,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-30",
@@ -5028,7 +5389,7 @@
       "castHkt": "2026-05-30T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -5059,7 +5420,9 @@
             21
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -5089,7 +5452,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -5119,7 +5484,9 @@
             39
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -5149,7 +5516,9 @@
             41
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -5166,7 +5535,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-28",
@@ -5174,7 +5545,7 @@
       "castHkt": "2026-05-28T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -5206,7 +5577,9 @@
             25
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -5237,7 +5610,9 @@
             43
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -5265,7 +5640,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -5295,7 +5672,9 @@
             40
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -5312,7 +5691,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-26",
@@ -5320,7 +5701,7 @@
       "castHkt": "2026-05-26T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -5351,7 +5732,9 @@
             32
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -5379,7 +5762,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -5407,7 +5792,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -5435,7 +5822,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -5452,7 +5841,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-23",
@@ -5460,7 +5851,7 @@
       "castHkt": "2026-05-23T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -5491,7 +5882,9 @@
             42
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -5519,7 +5912,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -5550,7 +5945,9 @@
             49
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -5581,7 +5978,9 @@
             42
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -5598,7 +5997,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-21",
@@ -5606,7 +6007,7 @@
       "castHkt": "2026-05-21T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -5638,7 +6039,9 @@
             31
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -5666,7 +6069,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -5696,7 +6101,9 @@
             5
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -5726,7 +6133,9 @@
             13
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -5743,7 +6152,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-19",
@@ -5751,7 +6162,7 @@
       "castHkt": "2026-05-19T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -5783,7 +6194,9 @@
             20
           ],
           "mainHitCount": 2,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -5813,7 +6226,9 @@
             1
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -5843,7 +6258,9 @@
             27
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -5871,7 +6288,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -5888,7 +6307,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-16",
@@ -5896,7 +6317,7 @@
       "castHkt": "2026-05-16T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -5928,7 +6349,9 @@
             36
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -5959,7 +6382,9 @@
             43
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -5989,7 +6414,9 @@
             28
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -6017,7 +6444,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -6034,7 +6463,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-14",
@@ -6042,7 +6473,7 @@
       "castHkt": "2026-05-14T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -6073,7 +6504,9 @@
             27
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -6103,7 +6536,9 @@
             30
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -6133,7 +6568,9 @@
             27
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -6161,7 +6598,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -6178,7 +6617,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-12",
@@ -6186,7 +6627,7 @@
       "castHkt": "2026-05-12T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -6215,7 +6656,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -6243,7 +6686,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -6271,7 +6716,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -6301,7 +6748,9 @@
             16
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -6318,7 +6767,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-10",
@@ -6326,7 +6777,7 @@
       "castHkt": "2026-05-10T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -6357,7 +6808,9 @@
             26
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -6385,7 +6838,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -6413,7 +6868,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -6441,7 +6898,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -6458,7 +6917,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-07",
@@ -6466,7 +6927,7 @@
       "castHkt": "2026-05-07T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -6497,7 +6958,9 @@
             20
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -6527,7 +6990,9 @@
             28
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -6557,7 +7022,9 @@
             23
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -6585,7 +7052,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -6602,7 +7071,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-05",
@@ -6610,7 +7081,7 @@
       "castHkt": "2026-05-05T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -6641,7 +7112,9 @@
             10
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -6669,7 +7142,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -6697,7 +7172,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -6728,7 +7205,9 @@
             10
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -6745,7 +7224,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-05-02",
@@ -6753,7 +7234,7 @@
       "castHkt": "2026-05-02T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -6784,7 +7265,9 @@
             28
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -6812,7 +7295,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -6842,7 +7327,9 @@
             2
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -6870,7 +7357,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -6887,7 +7376,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-04-25",
@@ -6895,7 +7386,7 @@
       "castHkt": "2026-04-25T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -6924,7 +7415,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -6952,7 +7445,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -6980,7 +7475,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -7010,7 +7507,9 @@
             36
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -7027,7 +7526,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-04-23",
@@ -7035,7 +7536,7 @@
       "castHkt": "2026-04-23T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -7066,7 +7567,9 @@
             37
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -7096,7 +7599,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -7124,7 +7629,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -7152,7 +7659,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -7169,7 +7678,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-04-21",
@@ -7177,7 +7688,7 @@
       "castHkt": "2026-04-21T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -7206,7 +7717,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -7236,7 +7749,9 @@
             4
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -7266,7 +7781,9 @@
             10
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -7294,7 +7811,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -7311,7 +7830,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-04-18",
@@ -7319,7 +7840,7 @@
       "castHkt": "2026-04-18T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -7350,7 +7871,9 @@
             39
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -7378,7 +7901,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -7408,7 +7933,9 @@
             39
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -7438,7 +7965,9 @@
             17
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -7455,7 +7984,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-04-16",
@@ -7463,7 +7994,7 @@
       "castHkt": "2026-04-16T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -7494,7 +8025,9 @@
             46
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -7524,7 +8057,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -7552,7 +8087,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -7582,7 +8119,9 @@
             44
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -7599,7 +8138,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-04-14",
@@ -7607,7 +8148,7 @@
       "castHkt": "2026-04-14T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -7641,7 +8182,9 @@
             46
           ],
           "mainHitCount": 4,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -7669,7 +8212,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -7699,7 +8244,9 @@
             46
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -7730,7 +8277,9 @@
             33
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -7747,7 +8296,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-04-11",
@@ -7755,7 +8306,7 @@
       "castHkt": "2026-04-11T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -7786,7 +8337,9 @@
             40
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -7816,7 +8369,9 @@
             11
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -7846,7 +8401,9 @@
             17
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -7876,7 +8433,9 @@
             42
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -7893,7 +8452,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-04-09",
@@ -7901,7 +8462,7 @@
       "castHkt": "2026-04-09T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -7933,7 +8494,9 @@
             45
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -7964,7 +8527,9 @@
             43
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -7992,7 +8557,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -8022,7 +8589,9 @@
             13
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -8039,7 +8608,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-04-07",
@@ -8047,7 +8618,7 @@
       "castHkt": "2026-04-07T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -8076,7 +8647,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -8106,7 +8679,9 @@
             34
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -8136,7 +8711,9 @@
             34
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -8164,7 +8741,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -8181,7 +8760,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-04-04",
@@ -8189,7 +8770,7 @@
       "castHkt": "2026-04-04T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -8221,7 +8802,9 @@
             32
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -8249,7 +8832,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -8277,7 +8862,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -8305,7 +8892,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -8322,7 +8911,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-03-31",
@@ -8330,7 +8921,7 @@
       "castHkt": "2026-03-31T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -8359,7 +8950,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -8387,7 +8980,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -8415,7 +9010,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -8445,7 +9042,9 @@
             9
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -8462,7 +9061,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-03-28",
@@ -8470,7 +9071,7 @@
       "castHkt": "2026-03-28T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -8499,7 +9100,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -8527,7 +9130,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -8557,7 +9162,9 @@
             42
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -8585,7 +9192,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -8602,7 +9211,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-03-26",
@@ -8610,7 +9221,7 @@
       "castHkt": "2026-03-26T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -8641,7 +9252,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -8671,7 +9284,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -8701,7 +9316,9 @@
             28
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -8729,7 +9346,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -8746,7 +9365,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-03-24",
@@ -8754,7 +9375,7 @@
       "castHkt": "2026-03-24T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -8785,7 +9406,9 @@
             49
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -8813,7 +9436,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -8841,7 +9466,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -8869,7 +9496,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -8886,7 +9515,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-03-21",
@@ -8894,7 +9525,7 @@
       "castHkt": "2026-03-21T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -8925,7 +9556,9 @@
             9
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -8953,7 +9586,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -8983,7 +9618,9 @@
             9
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -9013,7 +9650,9 @@
             5
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -9030,7 +9669,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-03-19",
@@ -9038,7 +9679,7 @@
       "castHkt": "2026-03-19T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -9069,7 +9710,9 @@
             2
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -9100,7 +9743,9 @@
             33
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -9130,7 +9775,9 @@
             8
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -9160,7 +9807,9 @@
             2
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -9177,7 +9826,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-03-17",
@@ -9185,7 +9836,7 @@
       "castHkt": "2026-03-17T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -9214,7 +9865,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -9242,7 +9895,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -9272,7 +9927,9 @@
             18
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -9300,7 +9957,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -9317,7 +9976,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-03-12",
@@ -9325,7 +9986,7 @@
       "castHkt": "2026-03-12T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -9356,7 +10017,9 @@
             26
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -9384,7 +10047,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -9412,7 +10077,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -9440,7 +10107,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -9457,7 +10126,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-03-10",
@@ -9465,7 +10136,7 @@
       "castHkt": "2026-03-10T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -9496,7 +10167,9 @@
             35
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -9526,7 +10199,9 @@
             37
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -9554,7 +10229,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -9582,7 +10259,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -9599,7 +10278,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-03-07",
@@ -9607,7 +10288,7 @@
       "castHkt": "2026-03-07T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -9638,7 +10319,9 @@
             18
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -9668,7 +10351,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -9698,7 +10383,9 @@
             18
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -9726,7 +10413,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -9743,7 +10432,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-03-05",
@@ -9751,7 +10442,7 @@
       "castHkt": "2026-03-05T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -9782,7 +10473,9 @@
             46
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -9812,7 +10505,9 @@
             24
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -9842,7 +10537,9 @@
             31
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -9870,7 +10567,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -9887,7 +10586,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-03-03",
@@ -9895,7 +10596,7 @@
       "castHkt": "2026-03-03T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -9924,7 +10625,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -9954,7 +10657,9 @@
             32
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -9984,7 +10689,9 @@
             20
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -10014,7 +10721,9 @@
             20
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -10031,7 +10740,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-02-28",
@@ -10039,7 +10750,7 @@
       "castHkt": "2026-02-28T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -10068,7 +10779,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -10099,7 +10812,9 @@
             37
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -10127,7 +10842,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -10155,7 +10872,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -10172,7 +10891,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-02-26",
@@ -10180,7 +10901,7 @@
       "castHkt": "2026-02-26T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -10211,7 +10932,9 @@
             19
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -10241,7 +10964,9 @@
             6
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -10269,7 +10994,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -10299,7 +11026,9 @@
             13
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -10316,7 +11045,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-02-24",
@@ -10324,7 +11055,7 @@
       "castHkt": "2026-02-24T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -10353,7 +11084,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -10383,7 +11116,9 @@
             4
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -10411,7 +11146,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -10442,7 +11179,9 @@
             13
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -10459,7 +11198,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-02-21",
@@ -10467,7 +11208,7 @@
       "castHkt": "2026-02-21T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -10496,7 +11237,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -10524,7 +11267,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -10552,7 +11297,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -10580,7 +11327,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -10597,7 +11346,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-02-15",
@@ -10605,7 +11356,7 @@
       "castHkt": "2026-02-15T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -10636,7 +11387,9 @@
             46
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -10664,7 +11417,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -10692,7 +11447,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -10720,7 +11477,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -10737,7 +11496,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-02-12",
@@ -10745,7 +11506,7 @@
       "castHkt": "2026-02-12T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -10776,7 +11537,9 @@
             37
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -10807,7 +11570,9 @@
             46
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -10835,7 +11600,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -10863,7 +11630,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -10880,7 +11649,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-02-10",
@@ -10888,7 +11659,7 @@
       "castHkt": "2026-02-10T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -10917,7 +11688,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -10945,7 +11718,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -10973,7 +11748,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -11001,7 +11778,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -11018,7 +11797,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-02-07",
@@ -11026,7 +11807,7 @@
       "castHkt": "2026-02-07T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -11058,7 +11839,9 @@
             32
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -11088,7 +11871,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -11118,7 +11903,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -11148,7 +11935,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -11165,7 +11954,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-02-05",
@@ -11173,7 +11964,7 @@
       "castHkt": "2026-02-05T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -11205,7 +11996,9 @@
             24
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -11236,7 +12029,9 @@
             36
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -11266,7 +12061,9 @@
             24
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -11297,7 +12094,9 @@
             35
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -11314,7 +12113,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-02-03",
@@ -11322,7 +12123,7 @@
       "castHkt": "2026-02-03T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -11353,7 +12154,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -11383,7 +12186,9 @@
             42
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -11413,7 +12218,9 @@
             27
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -11443,7 +12250,9 @@
             23
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -11460,7 +12269,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-31",
@@ -11468,7 +12279,7 @@
       "castHkt": "2026-01-31T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -11499,7 +12310,9 @@
             36
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -11532,7 +12345,9 @@
             36
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -11562,7 +12377,9 @@
             32
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -11592,7 +12409,9 @@
             36
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -11609,7 +12428,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-29",
@@ -11617,7 +12438,7 @@
       "castHkt": "2026-01-29T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -11648,7 +12469,9 @@
             6
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -11676,7 +12499,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -11707,7 +12532,9 @@
             35
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -11737,7 +12564,9 @@
             14
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -11754,7 +12583,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-27",
@@ -11762,7 +12593,7 @@
       "castHkt": "2026-01-27T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -11793,7 +12624,9 @@
             38
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -11821,7 +12654,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -11849,7 +12684,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -11877,7 +12714,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -11894,7 +12733,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-24",
@@ -11902,7 +12743,7 @@
       "castHkt": "2026-01-24T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -11933,7 +12774,9 @@
             16
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -11961,7 +12804,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -11989,7 +12834,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -12019,7 +12866,9 @@
             16
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -12036,7 +12885,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-22",
@@ -12044,7 +12895,7 @@
       "castHkt": "2026-01-22T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -12075,7 +12926,9 @@
             9
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -12107,7 +12960,9 @@
             24
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -12137,7 +12992,9 @@
             4
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -12167,7 +13024,9 @@
             15
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -12184,7 +13043,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-20",
@@ -12192,7 +13053,7 @@
       "castHkt": "2026-01-20T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -12224,7 +13085,9 @@
             9
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -12254,7 +13117,9 @@
             1
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -12282,7 +13147,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -12312,7 +13179,9 @@
             6
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -12329,7 +13198,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-17",
@@ -12337,7 +13208,7 @@
       "castHkt": "2026-01-17T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -12368,7 +13239,9 @@
             5
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -12398,7 +13271,9 @@
             42
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -12429,7 +13304,9 @@
             42
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -12460,7 +13337,9 @@
             42
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -12477,7 +13356,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-15",
@@ -12485,7 +13366,7 @@
       "castHkt": "2026-01-15T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -12514,7 +13395,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -12544,7 +13427,9 @@
             44
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -12574,7 +13459,9 @@
             6
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -12602,7 +13489,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -12619,7 +13508,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-13",
@@ -12627,7 +13518,7 @@
       "castHkt": "2026-01-13T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -12656,7 +13547,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -12686,7 +13579,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -12714,7 +13609,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -12742,7 +13639,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -12759,7 +13658,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-10",
@@ -12767,7 +13668,7 @@
       "castHkt": "2026-01-10T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -12796,7 +13697,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -12824,7 +13727,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -12852,7 +13757,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -12880,7 +13787,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -12897,7 +13806,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-08",
@@ -12905,7 +13816,7 @@
       "castHkt": "2026-01-08T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -12936,7 +13847,9 @@
             21
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -12966,7 +13879,9 @@
             15
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -12994,7 +13909,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -13024,7 +13941,9 @@
             40
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -13041,7 +13960,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-06",
@@ -13049,7 +13970,7 @@
       "castHkt": "2026-01-06T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -13080,7 +14001,9 @@
             36
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -13110,7 +14033,9 @@
             36
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -13140,7 +14065,9 @@
             12
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -13170,7 +14097,9 @@
             2
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -13187,7 +14116,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2026-01-03",
@@ -13195,7 +14126,7 @@
       "castHkt": "2026-01-03T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -13227,7 +14158,9 @@
             13
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -13255,7 +14188,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -13285,7 +14220,9 @@
             13
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -13316,7 +14253,9 @@
             13
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -13333,7 +14272,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2025-12-28",
@@ -13341,7 +14282,7 @@
       "castHkt": "2025-12-28T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -13372,7 +14313,9 @@
             19
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -13403,7 +14346,9 @@
             30
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -13433,7 +14378,9 @@
             25
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -13463,7 +14410,9 @@
             30
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -13480,7 +14429,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2025-12-25",
@@ -13488,7 +14439,7 @@
       "castHkt": "2025-12-25T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -13519,7 +14470,9 @@
             2
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -13549,7 +14502,9 @@
             30
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -13577,7 +14532,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -13609,7 +14566,9 @@
             43
           ],
           "mainHitCount": 3,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -13626,7 +14585,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2025-12-21",
@@ -13634,7 +14595,7 @@
       "castHkt": "2025-12-21T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -13666,7 +14627,9 @@
             47
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -13694,7 +14657,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -13725,7 +14690,9 @@
             47
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -13753,7 +14720,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -13770,7 +14739,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2025-12-18",
@@ -13778,7 +14749,7 @@
       "castHkt": "2025-12-18T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -13811,7 +14782,9 @@
             33
           ],
           "mainHitCount": 3,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -13841,7 +14814,9 @@
             34
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -13869,7 +14844,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -13900,7 +14877,9 @@
             23
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -13917,7 +14896,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2025-12-16",
@@ -13925,7 +14906,7 @@
       "castHkt": "2025-12-16T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -13956,7 +14937,9 @@
             35
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -13986,7 +14969,9 @@
             28
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -14016,7 +15001,9 @@
             28
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -14044,7 +15031,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -14061,7 +15050,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2025-12-13",
@@ -14069,7 +15060,7 @@
       "castHkt": "2025-12-13T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -14100,7 +15091,9 @@
             19
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -14128,7 +15121,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -14159,7 +15154,9 @@
             49
           ],
           "mainHitCount": 2,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -14187,7 +15184,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -14204,7 +15203,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2025-12-11",
@@ -14212,7 +15213,7 @@
       "castHkt": "2025-12-11T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -14243,7 +15244,9 @@
             5
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -14274,7 +15277,9 @@
             42
           ],
           "mainHitCount": 2,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -14302,7 +15307,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -14330,7 +15337,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -14347,7 +15356,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2025-12-06",
@@ -14355,7 +15366,7 @@
       "castHkt": "2025-12-06T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -14384,7 +15395,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -14414,7 +15427,9 @@
             28
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -14444,7 +15459,9 @@
             26
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -14472,7 +15489,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -14489,7 +15508,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     },
     {
       "date": "2025-12-02",
@@ -14497,7 +15518,7 @@
       "castHkt": "2025-12-02T21:30:00+08:00",
       "recordedAtUtc": "2026-08-22T06:02:23.750602Z",
       "origin": "retrospective_reconstruction",
-      "originLabel": "回溯重建，非當時預測",
+      "originLabel": "歷史研究記錄",
       "status": "settled",
       "systems": {
         "qimen": {
@@ -14526,7 +15547,9 @@
           ],
           "mainHits": [],
           "mainHitCount": 0,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "bazi": {
           "name": "四柱八字",
@@ -14556,7 +15579,9 @@
             6
           ],
           "mainHitCount": 1,
-          "specialHit": true
+          "specialHit": true,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "liuyao": {
           "name": "六爻納甲／文王卦",
@@ -14586,7 +15611,9 @@
             29
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         },
         "taiyi": {
           "name": "太乙神數",
@@ -14616,7 +15643,9 @@
             34
           ],
           "mainHitCount": 1,
-          "specialHit": false
+          "specialHit": false,
+          "numberCount": 7,
+          "ruleVersion": "four-systems-seven-v1"
         }
       },
       "result": {
@@ -14633,7 +15662,9 @@
           "provider": "HKJC",
           "operationName": "marksixResult"
         }
-      }
+      },
+      "ruleVersion": "four-systems-seven-v1",
+      "numberCount": 7
     }
   ]
 }
