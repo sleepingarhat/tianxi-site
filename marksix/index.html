@@ -96,14 +96,20 @@
 .m6-ledger-meta{font-family:var(--font-mono);font-size:10px;color:var(--ink-mute);text-align:right;white-space:nowrap}
 .m6-origin{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;color:var(--ink);background:var(--gold-tint);border:1px solid var(--gold);padding:4px 8px;border-radius:4px}
 .m6-origin.retro{color:var(--red);background:var(--red-2);border-color:rgba(160,30,40,.25)}
+.m6-rulever{display:inline-block;font:700 9px/1 var(--font-mono);letter-spacing:.03em;color:var(--ink-soft);background:var(--paper-2);border:1px solid var(--rule-2);padding:5px 7px;border-radius:4px}
 .m6-rule{padding:11px 12px;margin:12px 0 16px;border-left:3px solid var(--gold);background:var(--paper-2);font-size:11px;line-height:1.7;color:var(--ink-soft)}
-.m6-systemgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.m6-systemgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .m6-system{border:1px solid var(--rule);border-radius:var(--r-md);background:var(--paper);padding:12px;min-width:0;transition:transform .18s ease,box-shadow .18s ease}
 .m6-system:hover{transform:translateY(-2px);box-shadow:var(--sh-sm)}
 .m6-system h3{font-family:var(--font-display);font-size:14px;margin:0 0 9px;color:var(--ink)}
 .m6-system .m6-balls{justify-content:flex-start;gap:5px;flex-wrap:wrap;padding:2px 0 11px}
 .m6-system .m6-ball{width:29px;height:29px;font-size:11px}
 .m6-system .m6-ball::before{left:23%;top:23%;width:54%;height:54%}
+.m6-method{margin:0 0 10px;padding:8px 9px;border-left:2px solid var(--gold);background:var(--gold-tint);font-size:9px;line-height:1.65;color:var(--ink-soft)}
+.m6-bandgroups{display:grid;gap:7px;margin:1px 0 11px}
+.m6-band{display:grid;grid-template-columns:38px 1fr;gap:5px;align-items:center}
+.m6-band-label{font:700 8px/1.2 var(--font-mono);color:var(--ink-mute)}
+.m6-band .m6-balls{padding:0}
 .m6-system-foot{border-top:1px solid var(--rule);padding-top:9px;display:grid;gap:5px;font-size:10px;color:var(--ink-mute)}
 .m6-hit{display:flex;justify-content:space-between;gap:8px}
 .m6-hit b{font-family:var(--font-mono);color:var(--ink)}
@@ -117,9 +123,10 @@
 .m6-history-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:9px}
 .m6-history-head strong{font-family:var(--font-display);font-size:15px;color:var(--ink)}
 .m6-history-head time{font-size:11px;color:var(--ink-mute)}
-.m6-history-row .m6-systemgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.m6-history .m6-history-row .m6-systemgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
 .m6-history-row .m6-system{padding:10px}
 .m6-history-row .m6-system .m6-ball{width:25px;height:25px;font-size:10px}
+.m6-history .m6-method{display:none}
 .m6-more{display:block;margin:14px auto 0;padding:9px 16px;border:1px solid var(--gold);border-radius:999px;color:var(--ink);background:var(--gold-tint);font-size:11px;font-weight:800;transition:transform .16s ease,box-shadow .16s ease}
 .m6-more:hover{transform:translateY(-1px);box-shadow:var(--sh-sm)}
 .m6-empty{padding:24px 12px;text-align:center;background:var(--paper-2);border:1px dashed var(--rule-2);border-radius:var(--r-md);font-size:12px;color:var(--ink-mute);line-height:1.7}
@@ -165,7 +172,7 @@
 
 <!-- ===== Section 3 · four-system ledger ===== -->
 <section class="m6-sec">
-  <h2 class="m6-h2">四術七碼研究簿 <small>FOUR-SYSTEM LEDGER</small></h2>
+  <h2 class="m6-h2">四術15碼研究簿 <small>FOUR-SYSTEM LEDGER</small></h2>
   <div class="card m6-ledger" id="m6-ledger">
     <div class="m6-state"><div class="tx-lemni-host" data-tx-loader data-label="載入研究紀錄…"></div></div>
   </div>
@@ -320,19 +327,40 @@
     var retro=row.origin==='retrospective_reconstruction';
     return '<span class="m6-origin'+(retro?' retro':'')+'">'+(row.originLabel||'')+'</span>';
   }
+  function ruleTag(row){
+    var count=Number(row&&row.numberCount)||0;
+    if(!count) return '';
+    var current=row.ruleVersion==='four-systems-fifteen-v2';
+    return '<span class="m6-rulever">'+count+'碼 · '+(current?'現行規則':'舊版保留')+'</span>';
+  }
   function resultStrip(result){
     if(!result) return '';
     return '<div class="m6-result-strip"><span class="label">實際結果</span>'+
       result.mainNumbers.map(function(n){return ball(n,'sm',false);}).join('')+
       '<span class="m6-plus">＋</span>'+ball(result.specialNumber,'sm',true)+'</div>';
   }
-  function systemCard(sys, settled){
+  var BAND_ORDER=['1-9','10-19','20-29','30-39','40-49'];
+  function systemBalls(sys, settled, mainHits){
+    var bands=sys&&sys.bandSelections;
+    var grouped=sys&&sys.ruleVersion==='four-systems-fifteen-v2'&&bands&&BAND_ORDER.every(function(k){return Array.isArray(bands[k]);});
+    if(!grouped){
+      return '<div class="m6-balls">'+(sys.numbers||[]).map(function(n){
+        return ball(n,'sm',settled && mainHits.indexOf(n)!==-1);
+      }).join('')+'</div>';
+    }
+    return '<div class="m6-bandgroups">'+BAND_ORDER.map(function(k){
+      var values=bands[k].slice().sort(function(a,b){return a-b;});
+      return '<div class="m6-band"><span class="m6-band-label">'+k+'</span><div class="m6-balls">'+
+        values.map(function(n){return ball(n,'sm',settled && mainHits.indexOf(n)!==-1);}).join('')+
+        '</div></div>';
+    }).join('')+'</div>';
+  }
+  function systemCard(sys, settled, method){
     if(!sys) return '';
     var mainHits=settled && Array.isArray(sys.mainHits)?sys.mainHits:[];
     return '<article class="m6-system"><h3>'+ (sys.name||'') +'</h3>'+
-      '<div class="m6-balls">'+(sys.numbers||[]).map(function(n){
-        return ball(n,'sm',settled && mainHits.indexOf(n)!==-1);
-      }).join('')+'</div>'+
+      (method?'<p class="m6-method">'+method+'</p>':'')+
+      systemBalls(sys,settled,mainHits)+
       (settled?'<div class="m6-system-foot">'+
         '<div class="m6-hit"><span>主號命中</span><b class="'+(sys.mainHitCount?'yes':'no')+'">'+
         (sys.mainHitCount||0)+' / 6'+(mainHits.length?'（'+mainHits.join('、')+'）':'')+'</b></div>'+
@@ -343,21 +371,25 @@
     if(!row) return '<div class="m6-empty">目前沒有可展示的紀錄。</div>';
     var settled=row.status==='settled' && row.result;
     var keys=['qimen','bazi','liuyao','taiyi'];
+    var methods=(LEDGER&&LEDGER.systemMethods)||{};
     return '<div class="m6-history-row">'+
       '<div class="m6-history-head"><strong>'+heading+' · '+(row.drawId||'')+'</strong>'+
-      '<time>'+cnDate(row.date)+'</time>'+originTag(row)+'</div>'+
+      '<time>'+cnDate(row.date)+'</time>'+originTag(row)+ruleTag(row)+'</div>'+
       (settled?resultStrip(row.result):'<p class="m6-note">尚未有官方結果；以下只展示凍結紀錄，不作事後比較。</p>')+
-      '<div class="m6-systemgrid">'+keys.map(function(k){return systemCard(row.systems&&row.systems[k],settled);}).join('')+'</div></div>';
+      '<div class="m6-systemgrid">'+keys.map(function(k){return systemCard(row.systems&&row.systems[k],settled,methods[k]);}).join('')+'</div></div>';
   }
   function renderLedger(){
     var el=document.getElementById('m6-ledger');
     if(!LEDGER){el.innerHTML='<div class="m6-empty m6-fetcherr">研究紀錄未能載入。頁面不會自行補算或產生號碼，請稍後重試。</div>';return;}
     var rule=LEDGER.rule||{}, current=LEDGER.current, latest=LEDGER.latestSettled;
     var history=LEDGER.history||[], visibleHistory=history.slice(0,LEDGER_HISTORY_LIMIT);
-    var html='<div class="m6-ledger-intro"><p>四術各自保存七個號碼，按固定規則獨立記錄。這是研究簿，不是投注組合；不合併、不投票、不排名。</p>'+
+    var html='<div class="m6-ledger-intro"><p>現行規則每術保存15碼，五個號碼段各自隨機抽3碼；已封存的舊7碼按原版本保留。這是研究簿，不是投注組合；不合併、不投票、不排名。</p>'+
       '<div class="m6-ledger-meta">更新 '+(LEDGER.updatedAtUtc||'')+'<br>時區 '+(LEDGER.timezone||'')+' · 截止 '+(LEDGER.cutoffHkt||'')+'</div></div>'+
-      '<div class="m6-rule"><b>規則</b> '+(rule.summary||'')+'<br><b>缺段</b> '+(rule.missingBandFallback||'')+
-      '<br><b>獨立性</b> '+(rule.independence||'')+'</div>'+
+      '<div class="m6-rule">'+
+      (rule.summary?'<b>規則</b> '+rule.summary:'')+
+      (rule.sampling?'<br><b>抽樣</b> '+rule.sampling:'')+
+      (rule.methodScope?'<br><b>範圍</b> '+rule.methodScope:'')+
+      (rule.independence?'<br><b>獨立性</b> '+rule.independence:'')+'</div>'+
       '<h3 class="m6-h2">目前凍結紀錄 <small>BEFORE THE DRAW</small></h3>'+
       (current?rowHTML(current,'待開'):'<div class="m6-empty">目前沒有凍結中的四術紀錄。</div>')+
       '<h3 class="m6-h2" style="margin-top:22px">最近一次已結算 <small>SETTLED CHECK</small></h3>'+
