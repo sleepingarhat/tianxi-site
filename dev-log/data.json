@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-26 04:25 HKT",
+  "generatedHKT": "2026-08-26 04:27 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-26",
+      "time": "04:27",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(dev-log): 還原完整日誌頁（精選條目 + 自動 feed）",
+      "scope": "site",
+      "sha": "e42f954"
+    },
     {
       "date": "2026-08-26",
       "time": "04:25",
@@ -31,6 +41,16 @@
       "title": "feat(dev-log): 補寫 6 月中至今重大更新 + 接回自動 commit feed",
       "scope": "site",
       "sha": "13567e3"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "04:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "6e7b981"
     },
     {
       "date": "2026-08-26",
@@ -301,26 +321,6 @@
       "title": "feat(marksix): 新 UI 邏輯 — 下一期／三鍵／回測／閃爍命中",
       "scope": "site",
       "sha": "0984c7e"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "17:06",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): 八字及奇門遁甲系統 UI 五項改動",
-      "scope": "site",
-      "sha": "988a9e7"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "14:49",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore: 移除 placeholder site-app.js",
-      "scope": "site",
-      "sha": "0d3613a"
     },
     {
       "date": "2026-08-24",
