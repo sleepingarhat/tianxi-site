@@ -22,6 +22,9 @@
   var LATEST=null,HISTORY=[],byDate={},LATEST_YEAR='',PERIOD='100',SORT='num';
   var E=window.TXMarkSixEngine;
   var NEXT=null;
+  var DESC_SOLO='【攪珠日期八字四柱】\n以下一期攪珠日 21:30 HKT 起四柱；\n權重比例：時柱4／日柱3／月柱2／年柱1.5＋日主河圖1；\n五段（1–9…40–49）各取最高 3 碼，共 15 碼。\n\n【攪珠日期奇門遁甲盤】\n拆補定局（符頭地支定元＋節氣口訣定局，不置閏）；\n取數：時乾落宮字尾＋範洪五行數＋宮先後天；同樣五段各 3 碼。\n\n兩術獨立取號，不合併。';
+  var DESC_BAZI='以個人出生四柱 × 下一期攪珠日四柱。\n攪珠盤權重：時柱4／日柱3／月柱2／年柱1.5＋日主1；\n個人盤權重：日柱3／時柱2.5／月柱2／年柱1.5＋日主1。\n兩盤分數相加後，按五段目標各取 3 碼，輸出 15 碼。\n需先填寫「輸入個人出生資料」。';
+  var DESC_QIMEN='個人奇門盤：以出生時辰起時家奇門終身盤；\n攪珠奇門盤：以下一期攪珠日 21:30 起盤。\n定局：拆補\n取數：時乾落宮＋範洪數＋宮先後天。\n融合：攪珠盤 ×1 ＋ 個人盤 ×0.75，再五段各取 3 碼。\n需先填寫「輸入個人出生資料」。';
 
   if(E&&document.getElementById('ruleVer')) document.getElementById('ruleVer').textContent=E.ruleVersion;
 
@@ -148,17 +151,16 @@
     showPanel('solo');
     var bz=E.pureBazi(NEXT.y,NEXT.m,NEXT.d), qm=E.pureQimen(NEXT.y,NEXT.m,NEXT.d);
     document.getElementById('soloOut').innerHTML=
+      '<div class="m6-meta">'+DESC_SOLO+'</div>'+
       '<div class="m6-block">'+
         '<div class="m6-block-title">純八字 · 15 碼</div>'+
         pillarsHTML(bz.pillars,'攪珠日八字')+
         ballsHTML(bz.numbers)+
-        '<p class="m6-note">'+bz.method.anchor+' · '+bz.method.weights+' · '+bz.method.pick+'</p>'+
       '</div>'+
       '<div class="m6-block">'+
         '<div class="m6-block-title">純奇門 · 15 碼</div>'+
         panHTML(qm.pan,'攪珠日奇門')+
         ballsHTML(qm.numbers)+
-        '<p class="m6-note">'+qm.method.dingju+' · '+qm.method.extract+'</p>'+
       '</div>';
     setStatus('八字與奇門獨測 · 下一期 '+NEXT.draw+'（'+NEXT.date+'）');
   }
@@ -170,11 +172,11 @@
     showPanel('bazi');
     var r=E.personalBazi(per.y,per.m,per.d,per.h,NEXT.y,NEXT.m,NEXT.d);
     document.getElementById('baziOut').innerHTML=
+      '<div class="m6-meta">'+DESC_BAZI+'</div>'+
       pillarsHTML(r.personal_pillars,'個人八字')+
       pillarsHTML(r.draw_pillars,'攪珠日八字')+
       '<div class="m6-block-title" style="margin-top:12px">八字合盤 · 15 碼</div>'+
-      ballsHTML(r.numbers)+
-      '<p class="m6-note">個人盤權重 + 攪珠日盤權重融合後五段各取 3 碼</p>';
+      ballsHTML(r.numbers);
     setStatus('八字合盤 · 下一期 '+NEXT.draw);
   }
 
@@ -185,11 +187,11 @@
     showPanel('qimen');
     var r=E.personalQimen(per.y,per.m,per.d,per.h,NEXT.y,NEXT.m,NEXT.d);
     document.getElementById('qimenOut').innerHTML=
+      '<div class="m6-meta">'+DESC_QIMEN+'</div>'+
       panHTML(r.personal,'個人奇門終身參考盤（出生時起）')+
       panHTML(r.draw,'攪珠日奇門盤')+
       '<div class="m6-block-title" style="margin-top:12px">奇門合盤 · 15 碼</div>'+
-      ballsHTML(r.numbers)+
-      '<p class="m6-note">攪珠盤分數 ×1 + 個人盤分數 ×0.75 融合後五段各取 3 碼</p>';
+      ballsHTML(r.numbers);
     setStatus('奇門合盤 · 下一期 '+NEXT.draw);
   }
 
@@ -281,41 +283,6 @@
     step();
   }
 
-  var INFO={
-    solo:{
-      title:'八字與奇門獨測',
-      body:'【純八字】以下一期攪珠日 21:30 HKT 起四柱；權重時4／日3／月2／年1.5＋日主河圖1；五段（1–9…40–49）各取最高 3 碼，共 15 碼。\n\n【純奇門】拆補定局（符頭地支定元＋節氣口訣定局，不置閏）；取數＝時乾落宮字尾＋範洪五行數＋宮先後天；同樣五段各 3 碼。\n\n兩術獨立，不合併。'
-    },
-    bazi:{
-      title:'八字合盤',
-      body:'個人出生四柱 × 下一期攪珠日四柱。\n攪珠盤權重：時4 日3 月2 年1.5＋日主1；個人盤權重：日3 時2.5 月2 年1.5＋日主1。\n兩盤分數相加後，按五段目標各取 3 碼，輸出 15 碼。\n需先填寫「輸入個人出生資料」。'
-    },
-    qimen:{
-      title:'奇門合盤',
-      body:'個人奇門＝以出生時辰起時家奇門終身參考盤；攪珠奇門＝下一期攪珠日 21:30 起盤。\n定局：拆補（blog/407 口訣）。\n取數：時乾落宮＋範洪數＋宮先後天。\n融合：攪珠盤 ×1 ＋ 個人盤 ×0.75，再五段各取 3 碼。\n需先填寫「輸入個人出生資料」。'
-    }
-  };
-  function bindInfo(){
-    document.querySelectorAll('[data-info]').forEach(function(btn){
-      btn.addEventListener('click',function(e){
-        e.stopPropagation();
-        var key=btn.getAttribute('data-info');
-        var pop=document.getElementById('infoPop');
-        var meta=INFO[key];if(!meta)return;
-        var rect=btn.getBoundingClientRect();
-        document.getElementById('infoPopTitle').textContent=meta.title;
-        document.getElementById('infoPopBody').textContent=meta.body;
-        pop.classList.remove('hidden');
-        var top=window.scrollY+rect.bottom+8;
-        var left=Math.min(window.scrollX+rect.left, window.scrollX+window.innerWidth-300);
-        pop.style.top=top+'px';
-        pop.style.left=Math.max(12,left)+'px';
-      });
-    });
-    document.getElementById('infoPopClose').onclick=function(){document.getElementById('infoPop').classList.add('hidden');};
-    document.addEventListener('click',function(){var p=document.getElementById('infoPop');if(p)p.classList.add('hidden');});
-  }
-
   function bindModes(){
     document.getElementById('btnSolo').onclick=function(){try{runSolo();}catch(e){setStatus(e.message,true);console.error(e);}};
     document.getElementById('btnBazi').onclick=function(){try{runBaziCombo();}catch(e){setStatus(e.message,true);console.error(e);}};
@@ -334,7 +301,6 @@
   function boot(){
     setupControls();
     bindModes();
-    bindInfo();
     Promise.all([
       fetch(LATEST_URL).then(function(r){if(!r.ok)throw 0;return r.json();}).catch(function(){return null;}),
       fetch(HISTORY_URL).then(function(r){if(!r.ok)throw 0;return r.json();}).catch(function(){return null;})
