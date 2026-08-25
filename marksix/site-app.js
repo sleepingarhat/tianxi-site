@@ -206,16 +206,13 @@
     var slice=HISTORY.slice(-100);
     var tbody=document.querySelector('#btTable tbody');
     tbody.innerHTML='';
-    var sum=0,sumB=0,sumQ=0,eq5=0,maxS=0,n=slice.length;
-    var modeLabel=kind==='solo'?'八字與奇門獨測':(kind==='bazi'?'八字合盤':'奇門合盤');
-    document.getElementById('btModeLabel').textContent=modeLabel+' · 近 '+n+' 期';
+    var sum=0,eq5=0,maxS=0,n=slice.length;
+    var labels={pure_bazi:'八字獨測',pure_qimen:'奇門獨測',bazi:'八字合盤',qimen:'奇門合盤'};
+    var modeLabel=labels[kind]||kind;
+    document.getElementById('btModeLabel').textContent='最近100期'+modeLabel+'回測數據 · n='+n;
 
     var thead=document.querySelector('#btTable thead tr');
-    if(kind==='solo'){
-      thead.innerHTML='<th>日期</th><th>期數</th><th>八字預測</th><th>奇門預測</th><th>官方結果</th><th>八字命中</th><th>奇門命中</th>';
-    }else{
-      thead.innerHTML='<th>日期</th><th>期數</th><th>預測15碼</th><th>官方結果</th><th>命中號碼</th><th>得分</th>';
-    }
+    thead.innerHTML='<th>日期</th><th>期數</th><th>預測15碼</th><th>官方結果</th><th>命中號碼</th><th>得分</th>';
 
     var i=0;
     function step(){
@@ -225,58 +222,36 @@
         var sp=row.special!=null?row.special:row.numbers[6];
         var official=nums.join(' ')+' +'+sp;
         var tr=document.createElement('tr');
-
-        if(kind==='solo'){
-          var bz=E.pureBazi(p.y,p.m,p.d), qm=E.pureQimen(p.y,p.m,p.d);
-          var sb=E.scorePred(bz.numbers,nums,sp), sq=E.scorePred(qm.numbers,nums,sp);
-          sumB+=sb.score;sumQ+=sq.score;
-          if(sb.score>=5)eq5++;if(sq.score>=5)eq5++;
-          if(sb.score>maxS)maxS=sb.score;if(sq.score>maxS)maxS=sq.score;
-          tr.innerHTML=
-            '<td>'+row.date+'</td><td>'+(row.draw||'')+'</td>'+
-            '<td><div class="m6-nums-mini">'+bz.numbers.map(function(x){return ballHit(x,sb.hit_zheng,sp);}).join('')+'</div></td>'+
-            '<td><div class="m6-nums-mini">'+qm.numbers.map(function(x){return ballHit(x,sq.hit_zheng,sp);}).join('')+'</div></td>'+
-            '<td>'+official+'</td>'+
-            '<td class="m6-score'+(sb.score>=5?' hi':'')+'">'+sb.score+(sb.hit_special?'★':'')+'</td>'+
-            '<td class="m6-score'+(sq.score>=5?' hi':'')+'">'+sq.score+(sq.hit_special?'★':'')+'</td>';
+        var pred,sc;
+        if(kind==='pure_bazi'){
+          pred=E.pureBazi(p.y,p.m,p.d);
+        }else if(kind==='pure_qimen'){
+          pred=E.pureQimen(p.y,p.m,p.d);
+        }else if(kind==='bazi'){
+          pred=E.personalBazi(per.y,per.m,per.d,per.h,p.y,p.m,p.d);
         }else{
-          var pred,sc;
-          if(kind==='bazi'){
-            pred=E.personalBazi(per.y,per.m,per.d,per.h,p.y,p.m,p.d);
-          }else{
-            pred=E.personalQimen(per.y,per.m,per.d,per.h,p.y,p.m,p.d);
-          }
-          sc=E.scorePred(pred.numbers,nums,sp);
-          sum+=sc.score;if(sc.score>=5)eq5++;if(sc.score>maxS)maxS=sc.score;
-          var hitStr=(sc.hit_zheng||[]).join(' ')+(sc.hit_special?' +特'+sp:'');
-          tr.innerHTML=
-            '<td>'+row.date+'</td><td>'+(row.draw||'')+'</td>'+
-            '<td><div class="m6-nums-mini">'+pred.numbers.map(function(x){return ballHit(x,sc.hit_zheng,sp);}).join('')+'</div></td>'+
-            '<td>'+official+'</td>'+
-            '<td>'+(hitStr||'—')+'</td>'+
-            '<td class="m6-score'+(sc.score>=5?' hi':'')+'">'+sc.score+(sc.hit_special?'★':'')+'</td>';
+          pred=E.personalQimen(per.y,per.m,per.d,per.h,p.y,p.m,p.d);
         }
+        sc=E.scorePred(pred.numbers,nums,sp);
+        sum+=sc.score;if(sc.score>=5)eq5++;if(sc.score>maxS)maxS=sc.score;
+        var hitStr=(sc.hit_zheng||[]).join(' ')+(sc.hit_special?' +特'+sp:'');
+        tr.innerHTML=
+          '<td>'+row.date+'</td><td>'+(row.draw||'')+'</td>'+
+          '<td><div class="m6-nums-mini">'+pred.numbers.map(function(x){return ballHit(x,sc.hit_zheng,sp);}).join('')+'</div></td>'+
+          '<td>'+official+'</td>'+
+          '<td>'+(hitStr||'—')+'</td>'+
+          '<td class="m6-score'+(sc.score>=5?' hi':'')+'">'+sc.score+(sc.hit_special?'★':'')+'</td>';
         tbody.appendChild(tr);
       }
       if(i<slice.length){
         setStatus('回測 '+i+'/'+slice.length+'…');
         setTimeout(step,0);
       }else{
-        var stats='';
-        if(kind==='solo'){
-          stats='<div class="m6-statgrid">'+
-            '<div class="m6-statbox"><div class="k">純八字平均</div><div class="v">'+(sumB/n).toFixed(3)+'</div></div>'+
-            '<div class="m6-statbox"><div class="k">純奇門平均</div><div class="v">'+(sumQ/n).toFixed(3)+'</div></div>'+
-            '<div class="m6-statbox"><div class="k">單術 ≥5 字次數</div><div class="v">'+eq5+'</div></div>'+
-            '<div class="m6-statbox"><div class="k">最高單期</div><div class="v">'+maxS+'</div></div></div>';
-        }else{
-          stats='<div class="m6-statgrid">'+
-            '<div class="m6-statbox"><div class="k">整體平均命中</div><div class="v">'+(sum/n).toFixed(3)+'</div></div>'+
-            '<div class="m6-statbox"><div class="k">≥5 字期數</div><div class="v">'+eq5+'</div></div>'+
-            '<div class="m6-statbox"><div class="k">最高單期</div><div class="v">'+maxS+'</div></div>'+
-            '<div class="m6-statbox"><div class="k">回測期數</div><div class="v">'+n+'</div></div></div>';
-        }
-        document.getElementById('btStats').innerHTML=stats;
+        document.getElementById('btStats').innerHTML='<div class="m6-statgrid">'+
+          '<div class="m6-statbox"><div class="k">整體平均命中</div><div class="v">'+(sum/n).toFixed(3)+'</div></div>'+
+          '<div class="m6-statbox"><div class="k">≥5 字期數</div><div class="v">'+eq5+'</div></div>'+
+          '<div class="m6-statbox"><div class="k">最高單期</div><div class="v">'+maxS+'</div></div>'+
+          '<div class="m6-statbox"><div class="k">回測期數</div><div class="v">'+n+'</div></div></div>';
         setStatus('回測完成 · '+modeLabel+' · n='+n);
       }
     }
@@ -287,10 +262,12 @@
     document.getElementById('btnSolo').onclick=function(){try{runSolo();}catch(e){setStatus(e.message,true);console.error(e);}};
     document.getElementById('btnBazi').onclick=function(){try{runBaziCombo();}catch(e){setStatus(e.message,true);console.error(e);}};
     document.getElementById('btnQimen').onclick=function(){try{runQimenCombo();}catch(e){setStatus(e.message,true);console.error(e);}};
-    document.getElementById('btnBT').onclick=function(){
-      var kind=document.getElementById('btKind').value||'solo';
-      try{runBacktest(kind);}catch(e){setStatus(e.message,true);console.error(e);}
-    };
+    document.querySelectorAll('.m6-bt-btn').forEach(function(b){
+      b.onclick=function(){
+        var kind=b.getAttribute('data-bt');
+        try{runBacktest(kind);}catch(e){setStatus(e.message,true);console.error(e);}
+      };
+    });
   }
 
   function setupControls(){
