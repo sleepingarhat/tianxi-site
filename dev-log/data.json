@@ -1,9 +1,29 @@
 {
-  "generatedHKT": "2026-08-26 04:20 HKT",
-  "count": 24,
+  "generatedHKT": "2026-08-26 04:25 HKT",
+  "count": 100,
   "entries": [
     {
-      "date": "2026-08-25",
+      "date": "2026-08-26",
+      "time": "04:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "ci(dev-log): 每日自動刷新 commit feed data.json",
+      "scope": "site",
+      "sha": "04d06e4"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "04:24",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(dev-log): 初始 data.json 自動提交流",
+      "scope": "site",
+      "sha": "e516417"
+    },
+    {
+      "date": "2026-08-26",
       "time": "04:06",
       "areaKey": "web",
       "area": "前端",
@@ -13,17 +33,17 @@
       "sha": "c9f5521"
     },
     {
-      "date": "2026-08-25",
+      "date": "2026-08-26",
       "time": "03:46",
       "areaKey": "data",
       "area": "數據·爬蟲",
       "typeLabel": "維護",
-      "title": "chore(ci): 攪珠後 22:30 / 23:00 / 23:30 HKT 抓取",
+      "title": "chore(ci): 攪珠後 22:30 / 23:00 / 23:30 HKT 抓取（UTC 14:30/15:00/15:30）",
       "scope": "marksix",
       "sha": "8f07d65"
     },
     {
-      "date": "2026-08-25",
+      "date": "2026-08-26",
       "time": "03:44",
       "areaKey": "web",
       "area": "前端",
@@ -38,7 +58,7 @@
       "areaKey": "data",
       "area": "數據·爬蟲",
       "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-08-25)",
+      "title": "data: update Mark Six results (2026-08-25T15:12Z)",
       "scope": "marksix",
       "sha": "8011435"
     },
@@ -54,13 +74,73 @@
     },
     {
       "date": "2026-08-25",
+      "time": "20:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 緊急還原 index + 八字盤對稱／地支十神／出生框",
+      "scope": "site",
+      "sha": "59f6da4"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "20:23",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 八字盤對稱＋地支十神；出生框內 placeholder",
+      "scope": "site",
+      "sha": "56cef55"
+    },
+    {
+      "date": "2026-08-25",
       "time": "20:13",
       "areaKey": "web",
       "area": "前端",
       "typeLabel": "修正",
-      "title": "fix(marksix): 還原經典色波與結果區排版",
+      "title": "fix(marksix): 還原經典色波與結果區排版（只保留指定改動）",
       "scope": "site",
       "sha": "9ca21e9"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "20:06",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 移除回測底部規則說明",
+      "scope": "site",
+      "sha": "248a167"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "20:05",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 回測表合併期次、取消+、獎級換行",
+      "scope": "site",
+      "sha": "25a7c04"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "20:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore index + 回測表專業排版",
+      "scope": "site",
+      "sha": "aae3406"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "20:00",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 回測表專業排版 — 合併期次、防直排、取消+",
+      "scope": "site",
+      "sha": "91f67d3"
     },
     {
       "date": "2026-08-25",
@@ -74,6 +154,16 @@
     },
     {
       "date": "2026-08-25",
+      "time": "18:43",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 回測表最新一期置頂",
+      "scope": "site",
+      "sha": "e298365"
+    },
+    {
+      "date": "2026-08-25",
       "time": "18:41",
       "areaKey": "web",
       "area": "前端",
@@ -81,6 +171,116 @@
       "title": "feat(marksix): 四柱圖表 UI（五行色／十神／藏干）",
       "scope": "site",
       "sha": "0dc738c"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "18:38",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore engine.js with enrichPillars / tenGod",
+      "scope": "site",
+      "sha": "a871569"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "18:36",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): 四柱排盤顯示五行色、十神、藏干",
+      "scope": "site",
+      "sha": "431dce8"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "18:34",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "樣式",
+      "title": "style(marksix): 標題中文上、英文下",
+      "scope": "site",
+      "sha": "1b581af"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "18:32",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 派彩表頭改為「每注派彩」",
+      "scope": "site",
+      "sha": "aec4b4e"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "18:30",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 四獨立回測按鈕（八字／奇門獨測＋合盤）",
+      "scope": "site",
+      "sha": "ae48341"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "18:28",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 出生輸入不溢出；回測改四鍵",
+      "scope": "site",
+      "sha": "c82f88f"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "18:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 說明內嵌結果區，更新三術文案",
+      "scope": "site",
+      "sha": "381a2ee"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "18:23",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 移除？按鈕，說明改為結果內文",
+      "scope": "site",
+      "sha": "b48f79b"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "18:11",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 獎級顯示改為頭獎／二獎／三獎…",
+      "scope": "site",
+      "sha": "2b192cb"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "17:09",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): 本地載入 chaibu-v3 引擎",
+      "scope": "site",
+      "sha": "80f3ae3"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "17:08",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): 新 UI 邏輯 — 下一期／三鍵／回測／閃爍命中",
+      "scope": "site",
+      "sha": "0984c7e"
     },
     {
       "date": "2026-08-25",
@@ -94,23 +294,63 @@
     },
     {
       "date": "2026-08-25",
-      "time": "14:47",
+      "time": "14:49",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): 八字／奇門 chaibu-v3 正式接入",
+      "typeLabel": "維護",
+      "title": "chore: 移除 placeholder site-app.js",
       "scope": "site",
-      "sha": "9004f7d"
+      "sha": "0d3613a"
     },
     {
       "date": "2026-08-25",
-      "time": "14:46",
+      "time": "14:48",
       "areaKey": "web",
       "area": "前端",
       "typeLabel": "功能",
-      "title": "feat(marksix): 加入 chaibu-v3 引擎",
+      "title": "feat(marksix): 換入八字／奇門研究（引擎由 tianxi-marksix 載入）",
       "scope": "site",
-      "sha": "3de7262"
+      "sha": "b851075"
+    },
+    {
+      "date": "2026-08-25",
+      "time": "14:48",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore: 移除 placeholder engine（改由 jsDelivr 載入）",
+      "scope": "site",
+      "sha": "211dc66"
+    },
+    {
+      "date": "2026-08-24",
+      "time": "05:11",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-08-23T21:11Z · [data][skip ci] fixture-calendar 2026-08-23T21:11Z via GHA",
+      "scope": "database",
+      "sha": "ab9a484"
+    },
+    {
+      "date": "2026-08-23",
+      "time": "01:34",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "文檔",
+      "title": "docs: clean README — remove historical cleanup records (v11 strip / qimen / meihua / TimesFM)",
+      "scope": "database",
+      "sha": "54cd889"
+    },
+    {
+      "date": "2026-08-23",
+      "time": "01:34",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "文檔",
+      "title": "docs: clean README — remove historical cleanup records (v11 / qimen / meihua / TimesFM)",
+      "scope": "backend",
+      "sha": "92bea73"
     },
     {
       "date": "2026-08-22",
@@ -118,29 +358,69 @@
       "areaKey": "data",
       "area": "數據·爬蟲",
       "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-08-22)",
+      "title": "data: update Mark Six results (2026-08-22T14:45Z)",
       "scope": "marksix",
       "sha": "50b14d8"
     },
     {
-      "date": "2026-08-22",
-      "time": "14:55",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat: publish versioned four-system 15-number ledger",
-      "scope": "site",
-      "sha": "856ef78"
+      "date": "2026-08-21",
+      "time": "00:07",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Add required OIDC nonce to Whop login",
+      "scope": "backend",
+      "sha": "e27e600"
+    },
+    {
+      "date": "2026-08-21",
+      "time": "00:02",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "Preserve Cloudflare-managed Worker secrets",
+      "scope": "database",
+      "sha": "4bfb6bc"
+    },
+    {
+      "date": "2026-08-21",
+      "time": "00:02",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Preserve Cloudflare-managed membership secret",
+      "scope": "backend",
+      "sha": "f488c0b"
+    },
+    {
+      "date": "2026-08-20",
+      "time": "23:26",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "修正",
+      "title": "Fix central backend deploy authentication",
+      "scope": "database",
+      "sha": "53e948a"
+    },
+    {
+      "date": "2026-08-20",
+      "time": "23:22",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Configure persistent membership session secret",
+      "scope": "backend",
+      "sha": "def415a"
     },
     {
       "date": "2026-08-20",
       "time": "23:20",
-      "areaKey": "web",
-      "area": "前端",
+      "areaKey": "backend",
+      "area": "後端·模型",
       "typeLabel": "提交",
-      "title": "Connect membership page to secure Whop Pro access",
-      "scope": "site",
-      "sha": "cf16b1e"
+      "title": "Add secure Whop Pro membership access",
+      "scope": "backend",
+      "sha": "48bdf7b"
     },
     {
       "date": "2026-08-20",
@@ -148,99 +428,579 @@
       "areaKey": "data",
       "area": "數據·爬蟲",
       "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-08-20)",
+      "title": "data: update Mark Six results (2026-08-20T15:02Z)",
       "scope": "marksix",
       "sha": "62ab8f6"
     },
     {
       "date": "2026-08-20",
-      "time": "18:31",
-      "areaKey": "web",
-      "area": "前端",
+      "time": "21:23",
+      "areaKey": "backend",
+      "area": "後端·模型",
       "typeLabel": "提交",
-      "title": "全站加入跑法徽章與可信馬匹連結",
-      "scope": "site",
-      "sha": "a6fb513"
+      "title": "Centralize admin authentication policies",
+      "scope": "backend",
+      "sha": "1e221c9"
+    },
+    {
+      "date": "2026-08-20",
+      "time": "20:25",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Reject admin credentials in query strings",
+      "scope": "backend",
+      "sha": "b521ead"
+    },
+    {
+      "date": "2026-08-20",
+      "time": "20:14",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Add admin auth regression coverage",
+      "scope": "backend",
+      "sha": "6f2b38f"
+    },
+    {
+      "date": "2026-08-20",
+      "time": "20:02",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Restore clean TypeScript checks for admin and analyze routes",
+      "scope": "backend",
+      "sha": "a1aa78a"
+    },
+    {
+      "date": "2026-08-20",
+      "time": "18:31",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "收緊公開分析邊界並加入跑法分類",
+      "scope": "backend",
+      "sha": "3e264a9"
     },
     {
       "date": "2026-08-19",
-      "time": "17:34",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat: publish comprehensive horse research dossiers",
-      "scope": "site",
-      "sha": "c5cd1d9"
+      "time": "20:47",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "統一馬匹生涯賽績快照：公開端點改用核實數值，未知回傳空值",
+      "scope": "backend",
+      "sha": "592a4ab"
     },
     {
       "date": "2026-08-19",
-      "time": "14:45",
-      "areaKey": "web",
-      "area": "前端",
+      "time": "19:00",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "修正",
+      "title": "fix: exclude migration state from horse-id child tables",
+      "scope": "database",
+      "sha": "368223a"
+    },
+    {
+      "date": "2026-08-19",
+      "time": "19:00",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "test: cover remote horse-id table discovery",
+      "scope": "backend",
+      "sha": "caa95f5"
+    },
+    {
+      "date": "2026-08-19",
+      "time": "18:58",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "修正",
+      "title": "fix: use D1-compatible horse-id table discovery",
+      "scope": "database",
+      "sha": "4805df9"
+    },
+    {
+      "date": "2026-08-19",
+      "time": "18:55",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "修正",
+      "title": "fix: use repository token for public backend checkout",
+      "scope": "database",
+      "sha": "b5bd8e2"
+    },
+    {
+      "date": "2026-08-19",
+      "time": "18:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: backfill verified horse profile details",
+      "scope": "database",
+      "sha": "77032ed"
+    },
+    {
+      "date": "2026-08-19",
+      "time": "18:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "8ee539d"
+    },
+    {
+      "date": "2026-08-19",
+      "time": "18:51",
+      "areaKey": "backend",
+      "area": "後端·模型",
       "typeLabel": "功能",
-      "title": "feat: rebuild horse encyclopedia database",
-      "scope": "site",
-      "sha": "0da3dc3"
+      "title": "feat: publish verified complete horse profiles",
+      "scope": "backend",
+      "sha": "893d22e"
+    },
+    {
+      "date": "2026-08-19",
+      "time": "17:32",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix: use public horse research source labels",
+      "scope": "backend",
+      "sha": "ce4240d"
+    },
+    {
+      "date": "2026-08-19",
+      "time": "17:30",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix: use coherent career record and carrying weight",
+      "scope": "backend",
+      "sha": "0899fad"
+    },
+    {
+      "date": "2026-08-19",
+      "time": "17:21",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix: normalize duplicate horse form records",
+      "scope": "backend",
+      "sha": "2d455ed"
+    },
+    {
+      "date": "2026-08-19",
+      "time": "17:16",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat: add comprehensive horse research dossier API",
+      "scope": "backend",
+      "sha": "d00188c"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "23:00",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-08-18T15:00Z)",
+      "scope": "marksix",
+      "sha": "b5b5d00"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "22:19",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: 加 index.json manifest 俾前端速勢頁讀",
+      "scope": "database",
+      "sha": "cd43e61"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "22:19",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: 每次寫檔後自動重建 index.json manifest",
+      "scope": "database",
+      "sha": "32d711d"
     },
     {
       "date": "2026-08-18",
       "time": "18:18",
-      "areaKey": "web",
-      "area": "前端",
+      "areaKey": "backend",
+      "area": "後端·模型",
       "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause",
-      "scope": "site",
-      "sha": "fd51973"
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners)",
+      "scope": "backend",
+      "sha": "d1d32ee"
     },
     {
-      "date": "2026-06-30",
-      "time": "14:27",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(predictor): pTop3/pTop4、箱形覆蓋率、值博Δ",
-      "scope": "site",
-      "sha": "d554c8c"
+      "date": "2026-08-18",
+      "time": "18:18",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners)",
+      "scope": "backend",
+      "sha": "0a5083e"
     },
     {
-      "date": "2026-06-25",
-      "time": "18:22",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(loader): Lemniscate Bloom particle loader",
-      "scope": "site",
-      "sha": "a5c66de"
-    },
-    {
-      "date": "2026-06-20",
-      "time": "19:38",
+      "date": "2026-08-18",
+      "time": "18:17",
       "areaKey": "data",
       "area": "數據·爬蟲",
-      "typeLabel": "功能",
-      "title": "feat(data): emit data/latest.json with full 7-tier prize breakdown",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "77bba7c"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "92e806c"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "6d9d107"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "0e9fe3e"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "97f6104"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "8ff51d5"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "b37b7b1"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "74f9c0c"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "eba5fd5"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "a1a1524"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "200a3dc"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "a629a3f"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "aeb1f19"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
+      "scope": "database",
+      "sha": "568c497"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners)",
+      "scope": "backend",
+      "sha": "3222ff3"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners)",
+      "scope": "backend",
+      "sha": "8ad9fcc"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "18:17",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners)",
+      "scope": "backend",
+      "sha": "671fc08"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "12:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "57e4da0"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "11:37",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] critical critical=20 warn=7 · 2026-08-18T03:37Z",
+      "scope": "database",
+      "sha": "795da02"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "11:01",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-08-18T03:01Z",
+      "scope": "database",
+      "sha": "cb0d767"
+    },
+    {
+      "date": "2026-08-18",
+      "time": "07:27",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-08-17T23:27Z · pool-a 2026-08-17T23:27Z via GHA matrix",
+      "scope": "database",
+      "sha": "f3af32d"
+    },
+    {
+      "date": "2026-08-17",
+      "time": "20:40",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-08-17T12:40Z · [data][skip ci] entries 2026-08-17T12:40Z via GHA",
+      "scope": "database",
+      "sha": "f1d0087"
+    },
+    {
+      "date": "2026-08-15",
+      "time": "22:45",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-08-15T14:45Z)",
       "scope": "marksix",
-      "sha": "b9261b7"
+      "sha": "bf4ed93"
     },
     {
-      "date": "2026-06-13",
-      "time": "21:42",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(devlog): add auto commit-feed section",
-      "scope": "site",
-      "sha": "abb9980"
+      "date": "2026-08-13",
+      "time": "23:29",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-08-13T15:29Z)",
+      "scope": "marksix",
+      "sha": "88f33cf"
     },
     {
-      "date": "2026-06-13",
-      "time": "17:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(dev-log): 開發者日誌 changelog page",
-      "scope": "site",
-      "sha": "99af18f"
+      "date": "2026-08-11",
+      "time": "23:27",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-08-11T15:27Z)",
+      "scope": "marksix",
+      "sha": "8a9e9f5"
+    },
+    {
+      "date": "2026-08-08",
+      "time": "22:56",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-08-08T14:56Z)",
+      "scope": "marksix",
+      "sha": "7a09aef"
+    },
+    {
+      "date": "2026-08-07",
+      "time": "23:22",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-08-07T15:22Z)",
+      "scope": "marksix",
+      "sha": "8dd933e"
+    },
+    {
+      "date": "2026-08-05",
+      "time": "00:25",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-08-04T16:25Z)",
+      "scope": "marksix",
+      "sha": "841ae05"
+    },
+    {
+      "date": "2026-08-01",
+      "time": "23:34",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-08-01T15:34Z)",
+      "scope": "marksix",
+      "sha": "68fe5b3"
+    },
+    {
+      "date": "2026-07-31",
+      "time": "00:04",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-07-30T16:04Z)",
+      "scope": "marksix",
+      "sha": "b99908b"
+    },
+    {
+      "date": "2026-07-29",
+      "time": "00:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-07-28T16:17Z)",
+      "scope": "marksix",
+      "sha": "c8c4fca"
+    },
+    {
+      "date": "2026-07-25",
+      "time": "23:36",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-07-25T15:36Z)",
+      "scope": "marksix",
+      "sha": "10b2cfb"
+    },
+    {
+      "date": "2026-07-24",
+      "time": "00:06",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-07-23T16:06Z)",
+      "scope": "marksix",
+      "sha": "a14e775"
+    },
+    {
+      "date": "2026-07-21",
+      "time": "23:59",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-07-21T15:59Z)",
+      "scope": "marksix",
+      "sha": "96c0b4e"
+    },
+    {
+      "date": "2026-07-16",
+      "time": "23:54",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-07-16T15:54Z)",
+      "scope": "marksix",
+      "sha": "e06e0f7"
     }
   ]
 }
