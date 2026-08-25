@@ -14,6 +14,26 @@
     },
     {
       "date": "2026-08-26",
+      "time": "04:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "40f60b2"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "04:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(dev-log): 補寫 6 月中至今重大更新 + 接回自動 commit feed",
+      "scope": "site",
+      "sha": "13567e3"
+    },
+    {
+      "date": "2026-08-26",
       "time": "04:24",
       "areaKey": "web",
       "area": "前端",
@@ -301,26 +321,6 @@
       "title": "chore: 移除 placeholder site-app.js",
       "scope": "site",
       "sha": "0d3613a"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "14:48",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): 換入八字／奇門研究（引擎由 tianxi-marksix 載入）",
-      "scope": "site",
-      "sha": "b851075"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "14:48",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore: 移除 placeholder engine（改由 jsDelivr 載入）",
-      "scope": "site",
-      "sha": "211dc66"
     },
     {
       "date": "2026-08-24",
