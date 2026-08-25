@@ -72,8 +72,9 @@
     var prizes=d.prizes||[],showUnits=prizes.some(function(p){return p.winningUnit!=null&&p.winningUnit!=='';});
     var showDividend=prizes.some(function(p){return p.dividend!=null&&p.dividend!=='';});
     var prizeRows='';
+    var TIER_CN={1:'頭獎',2:'二獎',3:'三獎',4:'四獎',5:'五獎',6:'六獎',7:'七獎'};
     prizes.forEach(function(p){
-      prizeRows+='<tr'+(p.tier===1?' class="t1"':'')+'><td>頭'+(p.tier)+'獎</td>';
+      prizeRows+='<tr'+(p.tier===1?' class="t1"':'')+'><td>'+(TIER_CN[p.tier]||('第'+p.tier+'獎'))+'</td>';
       if(showUnits)prizeRows+='<td>'+num(p.winningUnit)+'</td>';
       if(showDividend)prizeRows+='<td class="amt">'+money(p.dividend)+'</td>';
       prizeRows+='</tr>';
