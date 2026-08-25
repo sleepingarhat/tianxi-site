@@ -225,7 +225,7 @@
     if(needPersonal&&!per){setStatus('合盤回測需先輸入個人出生資料',true);return;}
 
     setStatus('回測計算中…');
-    var slice=HISTORY.slice(-100);
+    var slice=HISTORY.slice(-100).slice().reverse();
     var tbody=document.querySelector('#btTable tbody');
     tbody.innerHTML='';
     var sum=0,eq5=0,maxS=0,n=slice.length;
