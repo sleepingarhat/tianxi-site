@@ -87,7 +87,7 @@
       (d.snowball?'<span class="m6-snow">'+d.snowball+'</span>':'')+'</div>'+
       '<div class="m6-balls">'+ballsHTML+'</div>'+
       '<div class="m6-balls-cap">正碼六粒 · 特別號碼一粒</div>'+
-      (prizeRows?'<table class="m6-prize"><thead><tr><th>獎級</th>'+(showUnits?'<th>中獎注數</th>':'')+(showDividend?'<th>派彩</th>':'')+'</tr></thead><tbody>'+prizeRows+'</tbody></table>':'')+
+      (prizeRows?'<table class="m6-prize"><thead><tr><th>獎級</th>'+(showUnits?'<th>中獎注數</th>':'')+(showDividend?'<th>每注派彩</th>':'')+'</tr></thead><tbody>'+prizeRows+'</tbody></table>':'')+
       '<div class="m6-rfoot">'+
         '<div class="m6-stat"><div class="k">投注額</div><div class="v">'+money(d.totalInvestment)+'</div></div>'+
         '<div class="m6-stat"><div class="k">頭獎基金</div><div class="v">'+money(d.jackpot||d.firstPrizeDividend)+'</div></div>'+
