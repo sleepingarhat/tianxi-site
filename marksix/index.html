@@ -80,14 +80,8 @@
 .m6-next-draw{font-family:var(--font-display);font-size:20px;font-weight:900}
 .m6-next-pillars{margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
 .m6-mode-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-.m6-mode-btn-wrap{position:relative;display:inline-flex;align-items:stretch}
 .m6-mode-btn{background:var(--paper-2);color:var(--ink);border:1px solid var(--rule);border-radius:999px;padding:10px 14px;font-weight:700;font-size:13px;cursor:pointer}
 .m6-mode-btn.active,.m6-mode-btn:hover{background:var(--ink);color:var(--gold-3);border-color:var(--ink)}
-.m6-info{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--gold);color:var(--ink);font-size:11px;font-weight:900;border:0;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2}
-.m6-info-pop{position:absolute;z-index:50;width:min(320px,calc(100vw - 24px));background:var(--paper);border:1px solid var(--rule);border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.18);padding:14px 16px}
-.m6-info-pop h4{margin:0 0 8px;font-size:14px;font-weight:900}
-.m6-info-pop p{margin:0;font-size:12px;color:var(--ink-mute);white-space:pre-wrap;line-height:1.55}
-.m6-info-pop .x{position:absolute;top:8px;right:10px;border:0;background:transparent;font-size:16px;cursor:pointer;color:var(--ink-mute)}
 .m6-block{margin-bottom:16px}
 .m6-block-title{font-family:var(--font-display);font-weight:900;font-size:14px;margin:0 0 8px;color:var(--ink)}
 .m6-bt-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 12px}
@@ -130,18 +124,9 @@
       <input type="datetime-local" id="personalDT" autocomplete="off">
     </div>
     <div class="m6-mode-row">
-      <div class="m6-mode-btn-wrap">
-        <button type="button" class="m6-mode-btn" id="btnSolo" data-mode="solo">八字與奇門獨測</button>
-        <button type="button" class="m6-info" data-info="solo" title="說明">?</button>
-      </div>
-      <div class="m6-mode-btn-wrap">
-        <button type="button" class="m6-mode-btn" id="btnBazi" data-mode="bazi">八字合盤</button>
-        <button type="button" class="m6-info" data-info="bazi" title="說明">?</button>
-      </div>
-      <div class="m6-mode-btn-wrap">
-        <button type="button" class="m6-mode-btn" id="btnQimen" data-mode="qimen">奇門合盤</button>
-        <button type="button" class="m6-info" data-info="qimen" title="說明">?</button>
-      </div>
+      <button type="button" class="m6-mode-btn" id="btnSolo" data-mode="solo">八字與奇門獨測</button>
+      <button type="button" class="m6-mode-btn" id="btnBazi" data-mode="bazi">八字合盤</button>
+      <button type="button" class="m6-mode-btn" id="btnQimen" data-mode="qimen">奇門合盤</button>
     </div>
     <div class="m6-bt-bar">
       <button type="button" class="m6-btn sec" id="btnBT">最近100期回測數據</button>
@@ -167,11 +152,6 @@
 </section>
 <footer class="disclaimer"><strong>天喜為分析平台，不提供投注服務。</strong><br>投注請透過合法渠道（HKJC）進行。</footer>
 <nav class="botnav" data-tx-shell="botnav"></nav>
-</div>
-<div id="infoPop" class="m6-info-pop hidden">
-  <button type="button" class="x" id="infoPopClose" aria-label="關閉">×</button>
-  <h4 id="infoPopTitle"></h4>
-  <p id="infoPopBody"></p>
 </div>
 <script src="./site-app.js"></script>
 </body>
