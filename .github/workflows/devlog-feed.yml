@@ -1,0 +1,84 @@
+name: Update dev-log commit feed
+
+on:
+  schedule:
+    - cron: '0 16 * * *'   # 00:00 HKT daily
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: devlog-feed
+  cancel-in-progress: true
+
+jobs:
+  feed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build data.json from commits
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node <<'JS'
+          const fs = require('fs');
+          const repos = [
+            { repo: 'sleepingarhat/tianxi-site', areaKey: 'web', area: '前端', scope: 'site' },
+            { repo: 'sleepingarhat/hk-mark-six-2002-now', areaKey: 'data', area: '數據·爬蟲', scope: 'marksix' },
+            { repo: 'sleepingarhat/tianxi-backend', areaKey: 'backend', area: '後端·模型', scope: 'backend' },
+            { repo: 'sleepingarhat/tianxi-database', areaKey: 'data', area: '數據·爬蟲', scope: 'database' },
+          ];
+          const typeMap = [['feat','功能'],['fix','修正'],['style','樣式'],['chore','維護'],['data','數據'],['docs','文檔'],['refactor','重構']];
+          async function commits(repo) {
+            const url = `https://api.github.com/repos/${repo}/commits?per_page=30`;
+            const r = await fetch(url, { headers: { Authorization: `Bearer ${process.env.GH_TOKEN}`, 'User-Agent': 'tianxi-devlog', Accept: 'application/vnd.github+json' } });
+            if (!r.ok) { console.error(repo, r.status); return []; }
+            return r.json();
+          }
+          (async () => {
+            const entries = [];
+            for (const conf of repos) {
+              const list = await commits(conf.repo);
+              for (const c of list) {
+                const title = (c.commit?.message || '').split('\n')[0].trim();
+                if (!title || title.startsWith('Merge')) continue;
+                const iso = c.commit?.author?.date || '';
+                const d = new Date(iso);
+                const hkt = new Date(d.getTime() + 8 * 3600 * 1000);
+                const date = hkt.toISOString().slice(0, 10);
+                const time = hkt.toISOString().slice(11, 16);
+                let typeLabel = '提交';
+                const low = title.toLowerCase();
+                for (const [k, lab] of typeMap) {
+                  if (low.startsWith(k) || low.includes('(' + k + ')')) { typeLabel = lab; break; }
+                }
+                if (low.startsWith('data:')) typeLabel = '數據';
+                entries.push({ date, time, areaKey: conf.areaKey, area: conf.area, typeLabel, title: title.slice(0, 140), scope: conf.scope, sha: (c.sha || '').slice(0, 7) });
+              }
+            }
+            entries.sort((a, b) => (a.date + a.time) < (b.date + b.time) ? 1 : -1);
+            const slim = entries.slice(0, 100);
+            const now = new Date(Date.now() + 8 * 3600 * 1000);
+            const generatedHKT = now.toISOString().slice(0, 16).replace('T', ' ') + ' HKT';
+            fs.mkdirSync('dev-log', { recursive: true });
+            fs.writeFileSync('dev-log/data.json', JSON.stringify({ generatedHKT, count: slim.length, entries: slim }, null, 2));
+            console.log('wrote', slim.length);
+          })();
+          JS
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dev-log/data.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(dev-log): refresh auto commit feed"
+            git push
+          else
+            echo "No feed changes."
+          fi
