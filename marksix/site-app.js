@@ -25,6 +25,7 @@
   var DESC_SOLO='【攪珠日期八字四柱】\n以下一期攪珠日 21:30 HKT 起四柱；\n權重比例：時柱4／日柱3／月柱2／年柱1.5＋日主河圖1；\n五段（1–9…40–49）各取最高 3 碼，共 15 碼。\n\n【攪珠日期奇門遁甲盤】\n拆補定局（符頭地支定元＋節氣口訣定局，不置閏）；\n取數：時乾落宮字尾＋範洪五行數＋宮先後天；同樣五段各 3 碼。\n\n兩術獨立取號，不合併。';
   var DESC_BAZI='以個人出生四柱 × 下一期攪珠日四柱。\n攪珠盤權重：時柱4／日柱3／月柱2／年柱1.5＋日主1；\n個人盤權重：日柱3／時柱2.5／月柱2／年柱1.5＋日主1。\n兩盤分數相加後，按五段目標各取 3 碼，輸出 15 碼。\n需先填寫「輸入個人出生資料」。';
   var DESC_QIMEN='個人奇門盤：以出生時辰起時家奇門終身盤；\n攪珠奇門盤：以下一期攪珠日 21:30 起盤。\n定局：拆補\n取數：時乾落宮＋範洪數＋宮先後天。\n融合：攪珠盤 ×1 ＋ 個人盤 ×0.75，再五段各取 3 碼。\n需先填寫「輸入個人出生資料」。';
+  var WX_CLS_UI={木:'mu',火:'huo',土:'tu',金:'jin',水:'shui'};
 
   if(E&&document.getElementById('ruleVer')) document.getElementById('ruleVer').textContent=E.ruleVersion;
 
@@ -47,22 +48,44 @@
       timeLabel:'21:30 HKT', weekday:WD[d.getDay()]};
   }
 
+  function renderPillarsChart(p,t){
+    if(!p)return'';
+    var det=(E&&E.enrichPillars)?E.enrichPillars(p):null;
+    if(!det||!det.cols){
+      return '<div class="m6-meta"><b>'+t+'</b><br>'+p.year+' · '+p.month+' · '+p.day+' · '+p.hour+' · 日主 '+p.dayMaster+'（'+(p.dayMasterWx||'')+'）</div>';
+    }
+    var cols=det.cols.map(function(c){
+      var cang=c.cang.map(function(x){
+        return '<span class="bz-cang-item wx-'+x.cls+'">'+x.gan+'<i class="bz-shen">'+x.shen+'</i></span>';
+      }).join('');
+      return '<div class="bz-col">'+
+        '<div class="bz-lab">'+c.lab+'</div>'+
+        '<div class="bz-stem wx-'+c.ganCls+'">'+c.gan+'<i class="bz-shen">'+c.ganShen+'</i></div>'+
+        '<div class="bz-zhi wx-'+c.zhiCls+'">'+c.zhi+'</div>'+
+        '<div class="bz-cang">'+cang+'</div>'+
+      '</div>';
+    }).join('');
+    return '<div class="bz-wrap">'+
+      '<div class="bz-title"><b>'+t+'</b> · 日主 <span class="wx-'+(WX_CLS_UI[det.dayMasterWx]||'')+'">'+det.dayMaster+'</span>（'+det.dayMasterWx+'）</div>'+
+      '<div class="bz-chart">'+cols+'</div>'+
+    '</div>';
+  }
+
   function renderNextDraw(){
     var el=document.getElementById('nextDrawBox');
     if(!el||!NEXT){if(el)el.innerHTML='<div class="m6-state">載入下一期資料中…</div>';return;}
-    var pillarsHTML='';
+    var pillarsBlock='';
     if(NEXT.pillars){
-      var p=NEXT.pillars;
-      pillarsHTML='<div class="m6-next-pillars">'+
+      pillarsBlock='<div class="m6-next-pillars">'+
         '<div class="m6-next-k">八字四柱（攪珠 21:30）</div>'+
-        '<div class="m6-next-v">'+p.year+' · '+p.month+' · '+p.day+' · '+p.hour+
-        ' <span class="m6-note">日主 '+p.dayMaster+'（'+(p.dayMasterWx||'')+'）</span></div></div>';
+        renderPillarsChart(NEXT.pillars,'攪珠日')+
+      '</div>';
     }
     el.innerHTML=
       '<div class="m6-next-grid">'+
         '<div><div class="m6-next-k">下一期期數</div><div class="m6-next-v m6-next-draw">'+(NEXT.draw||'—')+'</div></div>'+
         '<div><div class="m6-next-k">攪珠日期時間</div><div class="m6-next-v">'+cnDate(NEXT.date)+' · '+NEXT.timeLabel+'</div></div>'+
-      '</div>'+pillarsHTML;
+      '</div>'+pillarsBlock;
   }
 
   function renderResult(){
@@ -120,7 +143,6 @@
     box.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){onPick(b.getAttribute('data-v'));box.querySelectorAll('button').forEach(function(x){x.classList.remove('active');});b.classList.add('active');});});
   }
   function ballsHTML(nums,hits,sp){return '<div class="m6-nums">'+nums.map(function(n){return ballHit(n,hits,sp);}).join('')+'</div>';}
-  function pillarsHTML(p,t){return '<div class="m6-meta"><b>'+t+'</b><br>'+p.year+' · '+p.month+' · '+p.day+' · '+p.hour+' · 日主 '+p.dayMaster+'（'+(p.dayMasterWx||'')+'）</div>';}
   function panHTML(pan,t){var di=pan.di_pan,cells=[];[4,9,2,3,5,7,8,1,6].forEach(function(p){cells.push(p+':'+(di[p]||'-'));});
     return '<div class="m6-meta"><b>'+t+'</b><br>'+(pan.yang?'陽':'陰')+'遁'+pan.ju+'局 '+pan.yuan+' · 值符宮'+pan.zhi_fu_palace+(pan.shi_gan_palace!=null?' · 時乾宮'+pan.shi_gan_palace:'')+
       '<br><span class="m6-note">地盤 '+cells.join(' · ')+'</span>'+(pan.meta?'<br><span class="m6-note">節氣 '+pan.meta.jie+(pan.meta.fu_tou_gz?' 符頭'+pan.meta.fu_tou_gz:'')+' · '+(pan.meta.method||'')+'</span>':'')+'</div>';}
@@ -154,7 +176,7 @@
       '<div class="m6-meta">'+DESC_SOLO+'</div>'+
       '<div class="m6-block">'+
         '<div class="m6-block-title">純八字 · 15 碼</div>'+
-        pillarsHTML(bz.pillars,'攪珠日八字')+
+        renderPillarsChart(bz.pillars,'攪珠日八字')+
         ballsHTML(bz.numbers)+
       '</div>'+
       '<div class="m6-block">'+
@@ -173,8 +195,8 @@
     var r=E.personalBazi(per.y,per.m,per.d,per.h,NEXT.y,NEXT.m,NEXT.d);
     document.getElementById('baziOut').innerHTML=
       '<div class="m6-meta">'+DESC_BAZI+'</div>'+
-      pillarsHTML(r.personal_pillars,'個人八字')+
-      pillarsHTML(r.draw_pillars,'攪珠日八字')+
+      renderPillarsChart(r.personal_pillars,'個人八字')+
+      renderPillarsChart(r.draw_pillars,'攪珠日八字')+
       '<div class="m6-block-title" style="margin-top:12px">八字合盤 · 15 碼</div>'+
       ballsHTML(r.numbers);
     setStatus('八字合盤 · 下一期 '+NEXT.draw);
