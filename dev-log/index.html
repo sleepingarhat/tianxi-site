@@ -1,1 +1,267 @@
-PLACEHOLDER_WILL_FAIL
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<script src="/assets/shell.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDFBF5">
+<title>開發者日誌 · 天喜 TIANXI</title>
+<meta name="description" content="天喜系統嘅重大更新記錄：日期、時間同更新細節，透明可追溯。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<script src="/assets/api.js"></script>
+<style>
+.dl-intro{font-size:12px;color:var(--ink-mute);margin:0 20px 16px;line-height:1.65}
+.dl-intro b{color:var(--ink-soft)}
+.dl-filter{display:flex;flex-wrap:wrap;gap:7px;margin:0 20px 16px}
+.dl-filter button{font-family:var(--font-display);font-weight:700;font-size:11px;color:var(--ink-mute);background:var(--paper-2);border:1px solid var(--rule-2);border-radius:99px;padding:6px 12px;cursor:pointer;transition:all 120ms}
+.dl-filter button.is-on{color:#3a2a08;background:linear-gradient(180deg,var(--gold-3),var(--gold-2));border-color:var(--gold)}
+.dl-time{position:relative;margin:0 20px}
+.dl-time::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--rule-2)}
+.dl-item{position:relative;padding:0 0 18px 30px}
+.dl-item:last-child{padding-bottom:2px}
+.dl-item::before{content:"";position:absolute;left:2px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:3px solid var(--gold-2);box-sizing:border-box}
+.dl-item.is-hidden{display:none}
+.dl-when{font-family:var(--font-mono);font-weight:600;font-size:11px;color:var(--ink-mute);letter-spacing:0.02em}
+.dl-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:4px 0 6px}
+.dl-title{font-family:var(--font-display);font-weight:700;font-size:14.5px;color:var(--ink);line-height:1.35}
+.dl-tag{font-family:var(--font-mono);font-weight:600;font-size:9.5px;letter-spacing:0.04em;padding:2px 7px;border-radius:99px;border:1px solid var(--rule-2);white-space:nowrap}
+.dl-tag.t-data{color:var(--green);border-color:color-mix(in srgb,var(--green) 40%,transparent)}
+.dl-tag.t-tech{color:var(--brown-2);border-color:color-mix(in srgb,var(--brown-2) 45%,transparent)}
+.dl-tag.t-web{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.dl-tag.t-sys{color:var(--gold);border-color:color-mix(in srgb,var(--gold) 50%,transparent)}
+.dl-desc{font-size:12.5px;line-height:1.7;color:var(--ink-mute)}
+.dl-desc b{color:var(--ink-soft)}
+.dl-note{font-size:11.5px;line-height:1.65;color:var(--ink-mute);background:var(--paper);border:1px dashed var(--rule-2);border-radius:8px;padding:10px 12px;margin:18px 20px 0}
+.dl-note b{color:var(--ink-soft)}
+.dl-cta{display:flex;flex-wrap:wrap;gap:8px;margin:0 20px 8px}
+.cf-meta{font-size:12px;color:var(--ink-mute);margin:0 20px 14px;line-height:1.6}
+.cf-meta b{color:var(--ink-soft)}
+.cf-list{margin:0 20px}
+.cf-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding:9px 0;border-bottom:1px solid var(--rule-2)}
+.cf-row.is-hidden{display:none}
+.cf-when{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-mute);white-space:nowrap;min-width:104px}
+.cf-area{font-family:var(--font-mono);font-weight:600;font-size:9px;letter-spacing:.03em;padding:1px 6px;border-radius:99px;border:1px solid var(--rule-2);white-space:nowrap}
+.cf-area.a-backend{color:var(--brown-2);border-color:color-mix(in srgb,var(--brown-2) 45%,transparent)}
+.cf-area.a-data{color:var(--green);border-color:color-mix(in srgb,var(--green) 40%,transparent)}
+.cf-area.a-web{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.cf-type{font-family:var(--font-mono);font-size:9px;color:var(--ink-mute);white-space:nowrap}
+.cf-title{font-size:12px;line-height:1.55;color:var(--ink-soft);flex:1;min-width:170px}
+.cf-scope{color:var(--ink-mute);font-weight:600}
+.cf-sha{font-family:var(--font-mono);font-size:9.5px;color:var(--ink-mute);opacity:.65}
+</style>
+</head>
+<body data-page="dev-log">
+<div class="shell">
+
+<header class="brandbar" data-tx-shell="brandbar"></header>
+
+<section class="page-head">
+  <h1><small>CHANGELOG · DEV LOG</small>開發者日誌</h1>
+  <p>天喜每次重大更新都記錄喺度：日期、時間同細節，全部公開可追溯。透明就係信任嘅基礎。</p>
+</section>
+
+<p class="dl-intro">時間以<b>香港時間（HKT）</b>為準。早期條目為日期級記錄；新條目會標明時間。標籤：<b>數據</b>／<b>技術</b>／<b>前端</b>／<b>系統</b>。</p>
+
+<div class="dl-filter" id="dl-filter">
+  <button data-f="all" class="is-on">全部</button>
+  <button data-f="data">數據</button>
+  <button data-f="tech">技術</button>
+  <button data-f="web">前端</button>
+  <button data-f="sys">系統</button>
+</div>
+
+<div class="dl-time" id="dl-time">
+
+  <article class="dl-item" data-cat="tech web sys">
+    <div class="dl-when">2026-08-25 · HKT</div>
+    <div class="dl-head"><span class="dl-title">六合彩頁全面換新：八字 × 奇門遁甲系統</span><span class="dl-tag t-tech">技術</span><span class="dl-tag t-web">前端</span><span class="dl-tag t-sys">系統</span></div>
+    <p class="dl-desc">正式以 <b>chaibu-v3 奇門</b>＋簡化八字取數引擎取代舊四術研究簿。支援純八字／純奇門獨測、個人八字合盤、個人奇門終身盤合盤；各輸出 15 碼並可做近 100 期回測。四柱圖表顯示五行色、十神、藏干；回測表含官方色波與命中獎級。攪珠數據改為每晚 <b>22:30／23:00／23:30 HKT</b> 自動抓取。</p>
+  </article>
+
+  <article class="dl-item" data-cat="data web">
+    <div class="dl-when">2026-08-22 · HKT</div>
+    <div class="dl-head"><span class="dl-title">四術 15 碼凍結台帳上線</span><span class="dl-tag t-data">數據</span><span class="dl-tag t-web">前端</span></div>
+    <p class="dl-desc">公開 versioned four-system Mark Six ledger，固定歷史預測記錄，方便對照與回測，避免事後改寫。</p>
+  </article>
+
+  <article class="dl-item" data-cat="web sys">
+    <div class="dl-when">2026-08-20 · HKT</div>
+    <div class="dl-head"><span class="dl-title">跑法徽章 · Whop Pro 會員接入</span><span class="dl-tag t-web">前端</span><span class="dl-tag t-sys">系統</span></div>
+    <p class="dl-desc">全站加入跑法徽章與可信馬匹連結；會員頁接上 <b>Whop Pro</b> 安全驗證，升級與權限走正式通道。</p>
+  </article>
+
+  <article class="dl-item" data-cat="data tech web">
+    <div class="dl-when">2026-08-19 · HKT</div>
+    <div class="dl-head"><span class="dl-title">馬匹百科重建 · 研究檔案全面公開</span><span class="dl-tag t-data">數據</span><span class="dl-tag t-tech">技術</span><span class="dl-tag t-web">前端</span></div>
+    <p class="dl-desc">重建 horse encyclopedia 資料庫，發布 comprehensive research dossiers；移除假零與佔位統計，只顯示已核實賽績與來源／截點。</p>
+  </article>
+
+  <article class="dl-item" data-cat="sys web">
+    <div class="dl-when">2026-08-18 · HKT</div>
+    <div class="dl-head"><span class="dl-title">休季自動暫停 · 儀表板休季文案</span><span class="dl-tag t-sys">系統</span><span class="dl-tag t-web">前端</span></div>
+    <p class="dl-desc">上線 off-season auto-pause（season gate + /api/season + 休季 banner）；儀表板將過去賽馬日改標「上次賽馬日」，避免休季期間誤導成「下一賽馬日」。</p>
+  </article>
+
+  <article class="dl-item" data-cat="tech web">
+    <div class="dl-when">2026-06-30 · HKT</div>
+    <div class="dl-head"><span class="dl-title">選馬頁：三甲／前四概率 · 箱形覆蓋 · 值博Δ</span><span class="dl-tag t-tech">技術</span><span class="dl-tag t-web">前端</span></div>
+    <p class="dl-desc">模型欄新增 Harville <b>pTop3／pTop4</b>；箱形覆蓋率估算（揀 4／5／6）與同日場質高低標記；值博Δ overlay 標示模型較市場偏熱 ≥3pp 的選擇。</p>
+  </article>
+
+  <article class="dl-item" data-cat="web">
+    <div class="dl-when">2026-06-25 · HKT</div>
+    <div class="dl-head"><span class="dl-title">Lemniscate Bloom 全站載入動畫</span><span class="dl-tag t-web">前端</span></div>
+    <p class="dl-desc">共用 rAF 閘控 loader（shell.js + shell.css），多頁遷移至 data-tx-loader；主題感知、空閒停轉、reduced-motion 靜態後備。</p>
+  </article>
+
+  <article class="dl-item" data-cat="web sys">
+    <div class="dl-when">2026-06-13 · HKT</div>
+    <div class="dl-head"><span class="dl-title">開發者日誌上線 · 自動提交流設計</span><span class="dl-tag t-web">前端</span><span class="dl-tag t-sys">系統</span></div>
+    <p class="dl-desc">推出公開 changelog 頁；設計由多倉庫 commits 自動生成技術改動流（data.json），與精選重大更新互補。</p>
+  </article>
+
+  <article class="dl-item" data-cat="data sys">
+    <div class="dl-when">2026-06-12 · 21:00 HKT</div>
+    <div class="dl-head"><span class="dl-title">跨系統自動觸發鏈上線</span><span class="dl-tag t-data">數據</span><span class="dl-tag t-sys">系統</span></div>
+    <p class="dl-desc">排位數據一抓妥（enrich 成功），<b>即時自動觸發</b>引擎重新訓練同預測，毋須等賽馬日朝早嘅定時排程。覆蓋因此提早幾個鐘到位。同時為預測工作流加上 <b>concurrency 防重疊</b>，避免同日多次觸發互相打架。定時 cron 維持做備援。</p>
+  </article>
+
+  <article class="dl-item" data-cat="data">
+    <div class="dl-when">2026-06-11 · HKT</div>
+    <div class="dl-head"><span class="dl-title">賽後派彩即時抓取 · 修正大額派彩</span><span class="dl-tag t-data">數據</span></div>
+    <p class="dl-desc">賽果復盤改為賽後即時抓 HKJC 派彩，並修正大額派彩數字喺資料庫被逗號截斷嘅問題，確保派彩顯示準確。</p>
+  </article>
+
+  <article class="dl-item" data-cat="tech web">
+    <div class="dl-when">2026-06-08 · HKT</div>
+    <div class="dl-head"><span class="dl-title">選馬頁雙欄上線：模型搏冷 ＋ 市場穩陣</span><span class="dl-tag t-tech">技術</span><span class="dl-tag t-web">前端</span></div>
+    <p class="dl-desc">選馬頁新增<b>「市場穩陣」</b>欄，加入臨場盤口參考，偏熱門較穩陣。左欄<b>「模型搏冷」</b>維持獨立模型排序。兩欄並列，各取所需，誠實標明性格差異。</p>
+  </article>
+
+  <article class="dl-item" data-cat="tech">
+    <div class="dl-when">2026-06-04 → 06-07 · HKT</div>
+    <div class="dl-head"><span class="dl-title">研究檔案資料範圍擴充</span><span class="dl-tag t-tech">技術</span></div>
+    <p class="dl-desc">馬匹研究檔案加入更完整背景資料；公開頁繼續只展示已核對的資料與正式結果。</p>
+  </article>
+
+  <article class="dl-item" data-cat="tech sys">
+    <div class="dl-when">2026-05-31 · HKT</div>
+    <div class="dl-head"><span class="dl-title">自動模型健康守門上線</span><span class="dl-tag t-tech">技術</span><span class="dl-tag t-sys">系統</span></div>
+    <p class="dl-desc">引擎每個賽馬日自動評估模型健康度；偵測到異常會使用安全預測路徑，全程毋須人手。賽果頁亦改為動態自動更新，並修正星期標籤顯示。</p>
+  </article>
+
+  <article class="dl-item" data-cat="tech">
+    <div class="dl-when">2026-05-28 · HKT</div>
+    <div class="dl-head"><span class="dl-title">訓練窗擴展至全歷史 · 修正訓練飽和</span><span class="dl-tag t-tech">技術</span></div>
+    <p class="dl-desc">訓練資料由近兩年擴展至 <b>2016 年至今全部香港賽事</b>（8,000+ 場、~98,000 條記錄）。同時修正 lambdarank 訓練過早飽和嘅問題（改用自訂 per-race softmax logloss 評估），驗證集表現明顯改善。</p>
+  </article>
+
+  <article class="dl-item" data-cat="web">
+    <div class="dl-when">2026-05 · HKT</div>
+    <div class="dl-head"><span class="dl-title">公開戰績頁 · 統一導航 · 深淺色主題</span><span class="dl-tag t-web">前端</span></div>
+    <p class="dl-desc">推出<b>公開戰績頁</b>，自動更新歷史命中率，杜絕事後孔明。全站導航統一由單一來源管理；新增深／淺色主題切換，對比度全部符合無障礙標準。</p>
+  </article>
+
+</div>
+
+<section class="page-head" style="margin-top:10px">
+  <h1><small>AUTO COMMIT FEED</small>技術改動流</h1>
+  <p>由程式庫（前端／數據·爬蟲）嘅提交記錄<b>自動生成</b>。呢度收錄<b>完整技術改動</b>（連日常修正），同上面嘅重大更新互補。</p>
+</section>
+
+<p class="cf-meta" id="cf-meta">提交記錄載入緊…</p>
+
+<div class="dl-filter" id="cf-filter">
+  <button data-f="all" class="is-on">全部</button>
+  <button data-f="web">前端</button>
+  <button data-f="data">數據·爬蟲</button>
+  <button data-f="backend">後端·模型</button>
+</div>
+
+<div class="cf-list" id="cf-list"></div>
+
+<div class="dl-note"><b>關於記錄方式：</b>呢一頁只記<b>重大更新</b>（影響數據、模型或你嘅使用體驗嘅改動），日常小修不一一列出。更深入嘅原理講解，請睇<a href="/manual/" style="color:var(--brown);font-weight:700">天喜引擎說明書</a>。</div>
+
+<div class="dl-cta" style="margin-top:18px">
+  <a href="/manual/" class="pill">引擎說明書 →</a>
+  <a href="/engine/" class="pill">引擎概覽 →</a>
+  <a href="/track-record/" class="pill">公開戰績 →</a>
+</div>
+
+<footer class="disclaimer">
+  <strong>天喜為分析平台，不提供投注服務。</strong><br>
+  所有命中率為歷史回溯統計，過往表現不代表將來結果。本頁數據僅供研究分析。<br>
+  Analysis platform · NO betting services · Data for research only
+</footer>
+
+<nav class="botnav" data-tx-shell="botnav"></nav>
+
+</div>
+
+<script>
+(function(){
+  var filter = document.getElementById('dl-filter');
+  var items = Array.prototype.slice.call(document.querySelectorAll('#dl-time .dl-item'));
+  filter.addEventListener('click', function(e){
+    var btn = e.target.closest('button'); if(!btn) return;
+    var f = btn.getAttribute('data-f');
+    Array.prototype.forEach.call(filter.querySelectorAll('button'), function(b){ b.classList.toggle('is-on', b===btn); });
+    items.forEach(function(it){
+      var cats = (it.getAttribute('data-cat')||'').split(/\s+/);
+      var show = (f==='all') || cats.indexOf(f) !== -1;
+      it.classList.toggle('is-hidden', !show);
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var meta=document.getElementById("cf-meta");
+  var list=document.getElementById("cf-list");
+  var filter=document.getElementById("cf-filter");
+  if(!meta||!list||!filter) return;
+  var cur="all";
+  var data=[];
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&","<":"<",">":">","\"":"""}[c];});}
+  function render(){
+    if(!data.length){list.innerHTML="";return;}
+    var html="";
+    for(var i=0;i<data.length;i++){
+      var e=data[i];
+      var hide=(cur!=="all" && e.areaKey!==cur);
+      var scope=e.scope?('<span class="cf-scope">'+esc(e.scope)+' · </span>'):"";
+      html+='<div class="cf-row'+(hide?" is-hidden":"")+'">'+ 
+        '<span class="cf-when">'+esc(e.date)+" · "+esc(e.time)+'</span>'+
+        '<span class="cf-area a-'+esc(e.areaKey)+'">'+esc(e.area)+'</span>'+
+        '<span class="cf-type">'+esc(e.typeLabel)+'</span>'+
+        '<span class="cf-title">'+scope+esc(e.title)+'</span>'+
+        '<span class="cf-sha">'+esc(e.sha)+'</span>'+
+      '</div>';
+    }
+    list.innerHTML=html;
+  }
+  filter.addEventListener("click",function(ev){
+    var btn=ev.target.closest("button"); if(!btn)return;
+    cur=btn.getAttribute("data-f");
+    var bs=filter.querySelectorAll("button");
+    for(var i=0;i<bs.length;i++){bs[i].classList.toggle("is-on",bs[i]===btn);}
+    render();
+  });
+  fetch("./data.json?t="+Date.now()).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
+    data=(d&&d.entries)||[];
+    meta.innerHTML="共 <b>"+esc(String(d.count||data.length))+"</b> 條技術改動 · 自動更新於 "+esc(d.generatedHKT||"");
+    render();
+  }).catch(function(){
+    meta.textContent="提交記錄暫時無法載入，請稍後再試。";
+  });
+})();
+</script>
+
+</body>
+</html>
