@@ -234,24 +234,30 @@
     document.getElementById('btModeLabel').textContent='最近100期'+modeLabel+'回測數據 · n='+n;
 
     var thead=document.querySelector('#btTable thead tr');
-    thead.innerHTML='<th>日期</th><th>期數</th><th>預測15碼</th><th>官方結果</th><th>命中號碼</th><th>命中獎級</th>';
+    thead.innerHTML='<th class="col-meta">期次</th><th>預測15碼</th><th>官方結果</th><th>命中</th><th class="col-prize">獎級</th>';
 
     function prizeLabel(sc){
       var z=(sc.hit_zheng||[]).length, sp=!!sc.hit_special;
-      if(z>=6) return {txt:'頭獎 · 6個字', hi:true};
-      if(z===5 && sp) return {txt:'二獎 · 5.5個字', hi:true};
-      if(z===5) return {txt:'三獎 · 5個字', hi:true};
-      if(z===4 && sp) return {txt:'四獎 · 4.5個字', hi:true};
-      if(z===4) return {txt:'五獎 · 4個字', hi:false};
-      if(z===3 && sp) return {txt:'六獎 · 3.5個字', hi:false};
-      if(z===3) return {txt:'七獎 · 3個字', hi:false};
+      if(z>=6) return {txt:'頭獎<br>6個字', hi:true};
+      if(z===5 && sp) return {txt:'二獎<br>5.5個字', hi:true};
+      if(z===5) return {txt:'三獎<br>5個字', hi:true};
+      if(z===4 && sp) return {txt:'四獎<br>4.5個字', hi:true};
+      if(z===4) return {txt:'五獎<br>4個字', hi:false};
+      if(z===3 && sp) return {txt:'六獎<br>3.5個字', hi:false};
+      if(z===3) return {txt:'七獎<br>3個字', hi:false};
       if(sc.score>0) return {txt:sc.score+'個字', hi:false};
       return {txt:'—', hi:false};
+    }
+    function shortDate(iso){
+      if(!iso)return'';
+      var m=iso.match(/^(\d{4})-(\d{2})-(\d{2})/);
+      if(!m)return iso;
+      return m[2]+'-'+m[3];
     }
     function officialBalls(nums,sp){
       var h='<div class="m6-nums-mini">';
       (nums||[]).forEach(function(n){h+=ball(n,'sm',false);});
-      if(sp!=null) h+='<span style="margin:0 2px;color:var(--ink-mute);font-weight:700">+</span>'+ball(sp,'sm',true);
+      if(sp!=null) h+=ball(sp,'sm',true);
       return h+'</div>';
     }
     function hitBalls(sc,sp){
@@ -281,12 +287,13 @@
         sc=E.scorePred(pred.numbers,nums,sp);
         sum+=sc.score;if(sc.score>=5)eq5++;if(sc.score>maxS)maxS=sc.score;
         var pl=prizeLabel(sc);
+        var meta='<div class="m6-draw-cell"><span class="d">'+shortDate(row.date)+'</span><span class="p">'+(row.draw||'')+'</span></div>';
         tr.innerHTML=
-          '<td>'+row.date+'</td><td>'+(row.draw||'')+'</td>'+
+          '<td class="col-meta">'+meta+'</td>'+
           '<td><div class="m6-nums-mini">'+pred.numbers.map(function(x){return ballHit(x,sc.hit_zheng,sp);}).join('')+'</div></td>'+
           '<td>'+officialBalls(nums,sp)+'</td>'+
           '<td>'+hitBalls(sc,sp)+'</td>'+
-          '<td class="m6-score'+(pl.hi?' hi':'')+'">'+pl.txt+'</td>';
+          '<td class="col-prize m6-score'+(pl.hi?' hi':'')+'">'+pl.txt+'</td>';
         tbody.appendChild(tr);
       }
       if(i<slice.length){
