@@ -83,6 +83,21 @@
       '<div class="m6-block-title">當運流年</div><div style="overflow:auto"><table class="yun-table">'+
       '<thead><tr><th>年</th><th>干支</th><th>十神</th></tr></thead><tbody>'+lns+'</tbody></table></div></div>';
   }
+  function ensureCss(){
+    if(document.getElementById('tx-ge-css')) return;
+    var st=document.createElement('style');
+    st.id='tx-ge-css';
+    st.textContent='.ge-row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:13px}.ge-k{width:1.4em;font-weight:800;color:var(--ink-mute)}.ge-chip{display:inline-flex;align-items:center;justify-content:center;min-width:1.6em;padding:1px 8px;margin-right:4px;border-radius:999px;border:1px solid var(--rule);font-weight:800;font-size:13px;background:var(--paper)}';
+    document.head.appendChild(st);
+  }
+  function loadScript(src, done){
+    var exist=document.querySelector('script[src="'+src+'"]');
+    if(exist){ if(done) done(); return; }
+    var s=document.createElement('script');
+    s.src=src;
+    s.onload=function(){ if(done) done(); };
+    document.head.appendChild(s);
+  }
   function render(){
     var box=document.getElementById('natalOut');
     if(!box){
@@ -112,13 +127,44 @@
       box.innerHTML='<div class="m6-note" style="color:var(--red)">'+(err&&err.message||err)+'</div>';
     }
   }
+  function bindXiyong(){
+    var btn=document.getElementById('btnBazi');
+    if(!btn||btn.getAttribute('data-xiyong-bound')==='1') return;
+    btn.setAttribute('data-xiyong-bound','1');
+    btn.addEventListener('click', function(){
+      var E=global.TXMarkSixEngine, per=readPersonal(), sex=currentSex();
+      if(!E||!E.xiyongPick||!per||!sex) return;
+      var nextBox=document.getElementById('nextDrawBox');
+      var dateEl=document.querySelector('.m6-next-v');
+      var now=new Date();
+      var y=now.getFullYear(), m=now.getMonth()+1, d=now.getDate();
+      if(global.__TX_NEXT && global.__TX_NEXT.y){ y=global.__TX_NEXT.y; m=global.__TX_NEXT.m; d=global.__TX_NEXT.d; }
+      try{
+        var r=E.xiyongPick(per.y,per.m,per.d,per.h,per.min||0,sex,y,m,d);
+        var out=document.getElementById('baziOut');
+        if(!out) return;
+        var nums=(r.numbers||[]).map(function(n){ return '<span class="m6-ball m6-ball--md">'+n+'</span>'; }).join('');
+        var extra=gejuHTML({pattern:r.pattern,yong_shen:r.yong_shen,xi_shen:r.xi_shen,ji_shen:r.ji_shen,chou_shen:r.chou_shen,tiaohou:r.tiaohou,zhong_gua:{},note:r.interact});
+        var head=out.querySelector('.m6-block-title');
+        if(head) head.textContent='喜用合盤 · 15 碼 · '+r.ruleVersion;
+        if(!out.querySelector('.ge-wrap')) out.insertAdjacentHTML('beforeend', extra);
+      }catch(e){ console.warn(e); }
+    });
+  }
   function boot(){
-    if(!(global.TXMarkSixEngine&&global.TXMarkSixEngine.buildYun)){
-      var s=document.createElement('script');
-      s.src='./tianxi-mingpan.js';
-      s.onload=function(){ render(); };
-      document.head.appendChild(s);
+    ensureCss();
+    var E=global.TXMarkSixEngine;
+    function afterEngines(){
+      if(!(E&&E.buildYun)){
+        var s=document.createElement('script');
+        s.src='./tianxi-mingpan.js';
+        s.onload=function(){ render(); bindXiyong(); };
+        document.head.appendChild(s);
+      } else { render(); bindXiyong(); }
     }
+    loadScript('./tianxi-geju.js', function(){
+      loadScript('./tianxi-xiyong-pick.js', afterEngines);
+    });
     document.querySelectorAll('.m6-sex-btn').forEach(function(b){
       if(b.getAttribute('data-natal-bound')==='1') return;
       b.setAttribute('data-natal-bound','1');
@@ -137,7 +183,6 @@
       dt.addEventListener('input',render);
       dt.addEventListener('change',render);
     }
-    render();
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true});
   else boot();
