@@ -7,10 +7,11 @@
   function grp(n){return RED.has(n)?'red':BLUE.has(n)?'blue':'green';}
   function ball(n,size,special){return '<span class="m6-ball m6-ball--'+(size||'md')+' '+grp(n)+(special?' special':'')+'">'+n+'</span>';}
   function ballHit(n,hits,sp){
-    var hit=hits&&hits.indexOf(n)>=0;
+    var inZheng=hits&&hits.indexOf(n)>=0;
     var isSp=sp!=null&&n===sp;
+    var hit=!!(inZheng||isSp);
     var c='m6-ball m6-ball--sm '+grp(n)+(hit?' hit':'')+(isSp?' sp':'');
-    return '<span class="'+c+'"'+(hit?' title="命中"':'')+'>'+n+'</span>';
+    return '<span class="'+c+'"'+(hit?' title="命中"':'')+(isSp?' data-sp="1"':'')+'>'+n+'</span>';
   }
   var WD=['日','一','二','三','四','五','六'];
   function money(v){if(v==null||v==='')return'';var n=Number(v);return isNaN(n)?String(v):'$'+n.toLocaleString('en-US');}
@@ -264,10 +265,14 @@
       if(!m)return iso;
       return m[2]+'-'+m[3];
     }
-    function officialBalls(nums,sp){
+    function officialBalls(nums,sp,sc){
+      var zheng=sc&&sc.hit_zheng||[];
       var h='<div class="m6-nums-mini">';
-      (nums||[]).forEach(function(n){h+=ball(n,'sm',false);});
-      if(sp!=null) h+=ball(sp,'sm',true);
+      (nums||[]).forEach(function(n){h+=ballHit(n,zheng,null);});
+      if(sp!=null){
+        if(sc&&sc.hit_special) h+=ballHit(sp,[sp],sp);
+        else h+=ball(sp,'sm',true);
+      }
       return h+'</div>';
     }
     function hitBalls(sc,sp){
@@ -295,7 +300,7 @@
         tr.innerHTML=
           '<td class="col-meta">'+meta+'</td>'+
           '<td><div class="m6-nums-mini">'+pred.numbers.map(function(x){return ballHit(x,sc.hit_zheng,sp);}).join('')+'</div></td>'+
-          '<td>'+officialBalls(nums,sp)+'</td>'+
+          '<td>'+officialBalls(nums,sp,sc)+'</td>'+
           '<td>'+hitBalls(sc,sp)+'</td>'+
           '<td class="col-prize m6-score'+(pl.hi?' hi':'')+'">'+pl.txt+'</td>';
         tbody.appendChild(tr);
