@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 05:43 HKT",
+  "generatedHKT": "2026-08-27 05:51 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "05:50",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore engine.js with 時家拆補轉盤 qimen board",
+      "scope": "site",
+      "sha": "2d2bf9c"
+    },
     {
       "date": "2026-08-27",
       "time": "05:43",
@@ -11,6 +21,16 @@
       "title": "奇門合盤加時家拆補轉盤九宮（八字輸出不變）",
       "scope": "site",
       "sha": "33faba2"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "05:43",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "ed09c51"
     },
     {
       "date": "2026-08-27",
@@ -281,26 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "150e4bf"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "14:53",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 回測卡片選中態與合盤缺資料時不切面板",
-      "scope": "site",
-      "sha": "75189c2"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "14:52",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "634e69d"
     },
     {
       "date": "2026-08-26",
