@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-26 14:56 HKT",
+  "generatedHKT": "2026-08-26 17:02 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-26",
+      "time": "17:02",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 出生框 placeholder 真正垂直置中（抵銷 .m6-res input margin）",
+      "scope": "site",
+      "sha": "1da0b8c"
+    },
     {
       "date": "2026-08-26",
       "time": "14:56",
@@ -11,6 +21,16 @@
       "title": "fix(marksix): restore site-app.js after accidental overwrite",
       "scope": "site",
       "sha": "67bf0a4"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "14:56",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "dcd3e7d"
     },
     {
       "date": "2026-08-26",
@@ -301,26 +321,6 @@
       "title": "fix(marksix): restore engine.js with enrichPillars / tenGod",
       "scope": "site",
       "sha": "a871569"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "18:36",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): 四柱排盤顯示五行色、十神、藏干",
-      "scope": "site",
-      "sha": "431dce8"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "18:34",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "樣式",
-      "title": "style(marksix): 標題中文上、英文下",
-      "scope": "site",
-      "sha": "1b581af"
     },
     {
       "date": "2026-08-24",
