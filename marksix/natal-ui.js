@@ -36,6 +36,33 @@
       '<div class="bz-chart">'+cols+'</div>'+
     '</div>';
   }
+  function wxChip(wx){
+    var cls = WX_CLS[wx] || '';
+    return '<span class="ge-chip wx-'+cls+'">'+wx+'</span>';
+  }
+  function chips(arr){
+    if(!arr||!arr.length) return '—';
+    return arr.map(wxChip).join('');
+  }
+  function gejuHTML(ge){
+    if(!ge||!ge.pattern) return '';
+    var p=ge.pattern, zg=ge.zhong_gua||{};
+    var notes=(ge.note||[]).length?'<div class="yun-meta">'+ge.note.join(' · ')+'</div>':'';
+    var th=ge.tiaohou&&ge.tiaohou.need?('調候 '+(ge.tiaohou.urgent?'急要 ':'')+ge.tiaohou.need):'';
+    return '<div class="yun-wrap ge-wrap">'+
+      '<div class="m6-block-title">格局喜用</div>'+
+      '<p class="yun-meta"><b>'+p.primary+'</b> · 月令 '+p.yue_ling+' · 表鍵 '+p.table_key+
+      (p.status&&p.status!=='成'?' · '+p.status:'')+
+      (th?' · '+th:'')+
+      '<br>眾寡 自黨 '+zg.party_self+'／他黨 '+zg.party_other+'（比 '+zg.ratio+'）'+
+      (zg.rooted?' · 有根':' · 無根')+'</p>'+
+      '<div class="ge-row"><span class="ge-k">用</span>'+chips(ge.yong_shen)+'</div>'+
+      '<div class="ge-row"><span class="ge-k">喜</span>'+chips(ge.xi_shen)+'</div>'+
+      '<div class="ge-row"><span class="ge-k">忌</span>'+chips(ge.ji_shen)+'</div>'+
+      '<div class="ge-row"><span class="ge-k">仇</span>'+chips(ge.chou_shen)+'</div>'+
+      notes+
+    '</div>';
+  }
   function yunHTML(yun){
     var cur=yun.current_dayun, ln=yun.current_liunian;
     var rows=(yun.rows||[]).map(function(r){
@@ -78,7 +105,8 @@
       var yun=E.buildYun(per.y,per.m,per.d,per.h,per.min,sex,new Date());
       var pers=E.pillarsAt?E.pillarsAt(per.y,per.m,per.d,per.h,per.min):yun.pillars;
       box.classList.remove('hidden');
-      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+yunHTML(yun);
+      var ge=E.analyzeGeju?E.analyzeGeju({year:pers.year,month:pers.month,day:pers.day,hour:pers.hour}):null;
+      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+gejuHTML(ge)+yunHTML(yun);
     }catch(err){
       box.classList.remove('hidden');
       box.innerHTML='<div class="m6-note" style="color:var(--red)">'+(err&&err.message||err)+'</div>';
