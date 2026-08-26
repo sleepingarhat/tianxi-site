@@ -1,4 +1,5 @@
 (function(global){
+  var WX_CLS = {木:'mu',火:'huo',土:'tu',金:'jin',水:'shui'};
   function fmtDT(s){ return String(s||'').replace('T',' '); }
   function readPersonal(){
     var el=document.getElementById('personalDT');
@@ -10,6 +11,30 @@
   function currentSex(){
     var on=document.querySelector('.m6-sex-btn.active');
     return on ? on.getAttribute('data-sex') : '';
+  }
+  function pillarsChart(p, title){
+    var E=global.TXMarkSixEngine;
+    if(!p) return '';
+    var det=(E&&E.enrichPillars)?E.enrichPillars(p):null;
+    if(!det||!det.cols){
+      return '<div class="m6-meta"><b>'+title+'</b><br>'+p.year+' · '+p.month+' · '+p.day+' · '+p.hour+
+        ' · 日主 '+p.dayMaster+'（'+(p.dayMasterWx||'')+'）</div>';
+    }
+    var cols=det.cols.map(function(c){
+      var cang=c.cang.map(function(x){
+        return '<span class="bz-cang-item wx-'+x.cls+'">'+x.gan+'<i class="bz-shen">'+x.shen+'</i></span>';
+      }).join('');
+      return '<div class="bz-col">'+
+        '<div class="bz-lab">'+c.lab+'</div>'+
+        '<div class="bz-stem wx-'+c.ganCls+'"><span class="bz-char">'+c.gan+'</span><i class="bz-shen">'+c.ganShen+'</i></div>'+
+        '<div class="bz-zhi wx-'+c.zhiCls+'"><span class="bz-char">'+c.zhi+'</span><i class="bz-shen">'+(c.zhiShen||'')+'</i></div>'+
+        '<div class="bz-cang">'+cang+'</div>'+
+      '</div>';
+    }).join('');
+    return '<div class="bz-wrap">'+
+      '<div class="bz-title"><b>'+title+'</b> · 日主 <span class="wx-'+(WX_CLS[det.dayMasterWx]||'')+'">'+det.dayMaster+'</span>（'+det.dayMasterWx+'）</div>'+
+      '<div class="bz-chart">'+cols+'</div>'+
+    '</div>';
   }
   function yunHTML(yun){
     var cur=yun.current_dayun, ln=yun.current_liunian;
@@ -53,21 +78,22 @@
       var yun=E.buildYun(per.y,per.m,per.d,per.h,per.min,sex,new Date());
       var pers=E.pillarsAt?E.pillarsAt(per.y,per.m,per.d,per.h,per.min):yun.pillars;
       box.classList.remove('hidden');
-      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+
-        '<div class="bz-title"><b>出生四柱</b> · 日主 '+pers.dayMaster+'（'+pers.dayMasterWx+'）</div>'+
-        '<div class="m6-meta">'+pers.year+' 　'+pers.month+' 　'+pers.day+' 　'+pers.hour+'</div>'+
-        yunHTML(yun);
+      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+yunHTML(yun);
     }catch(err){
       box.classList.remove('hidden');
       box.innerHTML='<div class="m6-note" style="color:var(--red)">'+(err&&err.message||err)+'</div>';
     }
   }
   function boot(){
-    var s=document.createElement('script');
-    s.src='./tianxi-mingpan.js';
-    s.onload=function(){ render(); };
-    document.head.appendChild(s);
+    if(!(global.TXMarkSixEngine&&global.TXMarkSixEngine.buildYun)){
+      var s=document.createElement('script');
+      s.src='./tianxi-mingpan.js';
+      s.onload=function(){ render(); };
+      document.head.appendChild(s);
+    }
     document.querySelectorAll('.m6-sex-btn').forEach(function(b){
+      if(b.getAttribute('data-natal-bound')==='1') return;
+      b.setAttribute('data-natal-bound','1');
       b.addEventListener('click',function(){
         document.querySelectorAll('.m6-sex-btn').forEach(function(x){
           var on=x===b;
@@ -78,7 +104,12 @@
       });
     });
     var dt=document.getElementById('personalDT');
-    if(dt){ dt.addEventListener('input',render); dt.addEventListener('change',render); }
+    if(dt && dt.getAttribute('data-natal-bound')!=='1'){
+      dt.setAttribute('data-natal-bound','1');
+      dt.addEventListener('input',render);
+      dt.addEventListener('change',render);
+    }
+    render();
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true});
   else boot();
