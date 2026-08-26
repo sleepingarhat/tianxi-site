@@ -40,7 +40,7 @@
     }
     var nextDate=ymd(d);
     var nextDraw='';
-    if(lastDraw&&/^\d{2}\/\d{3}$/.test(lastDraw)){
+    if(lastDraw&&/^\\d{2}\\/\\d{3}$/.test(lastDraw)){
       var yy=lastDraw.slice(0,2), nn=parseInt(lastDraw.slice(3),10)+1;
       nextDraw=yy+'/'+String(nn).padStart(3,'0');
     }
@@ -164,8 +164,16 @@
       if(el)el.classList.toggle('hidden',k!==which);
     });
     document.querySelectorAll('.m6-mode-btn').forEach(function(b){
-      b.classList.toggle('active',b.getAttribute('data-mode')===which);
+      var on=b.getAttribute('data-mode')===which;
+      b.classList.toggle('active',on);
+      b.setAttribute('aria-pressed',on?'true':'false');
     });
+    if(which!=='bt'){
+      document.querySelectorAll('.m6-bt-btn').forEach(function(b){
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed','false');
+      });
+    }
   }
 
   function runSolo(){
@@ -219,10 +227,10 @@
 
   function runBacktest(kind){
     if(!E||!HISTORY.length){setStatus('歷史未載入',true);return;}
-    showPanel('bt');
     var needPersonal=(kind==='bazi'||kind==='qimen');
     var per=needPersonal?readPersonal():null;
     if(needPersonal&&!per){setStatus('合盤回測需先輸入個人出生資料',true);return;}
+    showPanel('bt');
 
     setStatus('回測計算中…');
     var slice=HISTORY.slice(-100).slice().reverse();
@@ -232,6 +240,11 @@
     var labels={pure_bazi:'八字獨測',pure_qimen:'奇門獨測',bazi:'八字合盤',qimen:'奇門合盤'};
     var modeLabel=labels[kind]||kind;
     document.getElementById('btModeLabel').textContent='最近100期'+modeLabel+'回測數據 · n='+n;
+    document.querySelectorAll('.m6-bt-btn').forEach(function(b){
+      var on=b.getAttribute('data-bt')===kind;
+      b.classList.toggle('active',on);
+      b.setAttribute('aria-pressed',on?'true':'false');
+    });
 
     var thead=document.querySelector('#btTable thead tr');
     thead.innerHTML='<th class="col-meta">期次</th><th>預測15碼</th><th>官方結果</th><th>命中</th><th class="col-prize">獎級</th>';
