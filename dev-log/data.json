@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-26 18:00 HKT",
+  "generatedHKT": "2026-08-26 19:08 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-26",
+      "time": "19:08",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): 男女命 + 6tail 大運流年表（不改取號）",
+      "scope": "site",
+      "sha": "f51a8cb"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "18:00",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "db171c1"
+    },
     {
       "date": "2026-08-26",
       "time": "17:59",
@@ -301,26 +321,6 @@
       "title": "fix(marksix): 回測表專業排版 — 合併期次、防直排、取消+",
       "scope": "site",
       "sha": "91f67d3"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "19:54",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): 回測表官方色波＋命中獎級對照",
-      "scope": "site",
-      "sha": "bf7d3eb"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "18:43",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 回測表最新一期置頂",
-      "scope": "site",
-      "sha": "e298365"
     },
     {
       "date": "2026-08-24",
