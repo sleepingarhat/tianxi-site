@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-26 04:27 HKT",
+  "generatedHKT": "2026-08-26 14:52 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-26",
+      "time": "14:51",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "樣式",
+      "title": "style(marksix): 測算區改分段控制 + 2x2 回測卡片",
+      "scope": "site",
+      "sha": "3006207"
+    },
     {
       "date": "2026-08-26",
       "time": "04:27",
@@ -11,6 +21,16 @@
       "title": "fix(dev-log): 還原完整日誌頁（精選條目 + 自動 feed）",
       "scope": "site",
       "sha": "e42f954"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "04:27",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "0aad90a"
     },
     {
       "date": "2026-08-26",
@@ -301,26 +321,6 @@
       "title": "fix(marksix): 獎級顯示改為頭獎／二獎／三獎…",
       "scope": "site",
       "sha": "2b192cb"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "17:09",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): 本地載入 chaibu-v3 引擎",
-      "scope": "site",
-      "sha": "80f3ae3"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "17:08",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): 新 UI 邏輯 — 下一期／三鍵／回測／閃爍命中",
-      "scope": "site",
-      "sha": "0984c7e"
     },
     {
       "date": "2026-08-24",
