@@ -1,7 +1,37 @@
 {
-  "generatedHKT": "2026-08-26 21:04 HKT",
+  "generatedHKT": "2026-08-27 00:41 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "00:30",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "marksix: add geju/xiyong display engine (no pick weights)",
+      "scope": "site",
+      "sha": "a98b377"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "00:21",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "marksix natal: restore colored pillars with shi-shen and canggan",
+      "scope": "site",
+      "sha": "9234b55"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "23:13",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "marksix: wire natal chart UI (gender, qiyun, current dayun, liunian)",
+      "scope": "site",
+      "sha": "6c2bd68"
+    },
     {
       "date": "2026-08-26",
       "time": "21:04",
@@ -11,6 +41,16 @@
       "title": "feat(marksix): load tianxi-mingpan and natal panel",
       "scope": "site",
       "sha": "cc88838"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "21:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "963ca84"
     },
     {
       "date": "2026-08-26",
@@ -237,16 +277,6 @@
       "time": "04:25",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "提交",
-      "title": "ci(dev-log): 每日自動刷新 commit feed data.json",
-      "scope": "site",
-      "sha": "04d06e4"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "04:25",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
@@ -274,26 +304,6 @@
     },
     {
       "date": "2026-08-26",
-      "time": "04:24",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(dev-log): 初始 data.json 自動提交流",
-      "scope": "site",
-      "sha": "e516417"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "04:06",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "樣式",
-      "title": "style(marksix): 出生框 placeholder 真正垂直置中並略加高",
-      "scope": "site",
-      "sha": "c9f5521"
-    },
-    {
-      "date": "2026-08-26",
       "time": "03:46",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -301,16 +311,6 @@
       "title": "chore(ci): 攪珠後 22:30 / 23:00 / 23:30 HKT 抓取（UTC 14:30/15:00/15:30）",
       "scope": "marksix",
       "sha": "8f07d65"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "03:44",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "樣式",
-      "title": "style(marksix): 出生資料 placeholder 置中",
-      "scope": "site",
-      "sha": "ab42ac7"
     },
     {
       "date": "2026-08-25",
