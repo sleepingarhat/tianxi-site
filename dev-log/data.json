@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-26 14:54 HKT",
+  "generatedHKT": "2026-08-26 14:56 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-26",
+      "time": "14:56",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore site-app.js after accidental overwrite",
+      "scope": "site",
+      "sha": "67bf0a4"
+    },
     {
       "date": "2026-08-26",
       "time": "14:54",
@@ -21,6 +31,16 @@
       "title": "fix(marksix): restore next-draw number parse",
       "scope": "site",
       "sha": "5614965"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "14:54",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "150e4bf"
     },
     {
       "date": "2026-08-26",
@@ -301,26 +321,6 @@
       "title": "style(marksix): 標題中文上、英文下",
       "scope": "site",
       "sha": "1b581af"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "18:32",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 派彩表頭改為「每注派彩」",
-      "scope": "site",
-      "sha": "aec4b4e"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "18:30",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 四獨立回測按鈕（八字／奇門獨測＋合盤）",
-      "scope": "site",
-      "sha": "ae48341"
     },
     {
       "date": "2026-08-24",
