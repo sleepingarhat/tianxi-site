@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-26 21:01 HKT",
+  "generatedHKT": "2026-08-26 21:04 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-26",
+      "time": "21:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): load tianxi-mingpan and natal panel",
+      "scope": "site",
+      "sha": "cc88838"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "21:01",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "212417d"
+    },
     {
       "date": "2026-08-26",
       "time": "21:00",
@@ -301,26 +321,6 @@
       "title": "data: update Mark Six results (2026-08-25T15:12Z)",
       "scope": "marksix",
       "sha": "8011435"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "20:26",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 還原 site-app + 地支十神與出生框邏輯",
-      "scope": "site",
-      "sha": "e726c9f"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "20:25",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 緊急還原 index + 八字盤對稱／地支十神／出生框",
-      "scope": "site",
-      "sha": "59f6da4"
     },
     {
       "date": "2026-08-24",
