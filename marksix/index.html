@@ -23,7 +23,7 @@
 .m6-state.err{color:var(--red)}
 .m6-ball{position:relative;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;font-family:var(--font-mono);font-weight:800;color:#0d0d0d;line-height:1;flex-shrink:0;isolation:isolate;box-shadow:0 2px 4px rgba(0,0,0,.28)}
 .m6-ball::before{content:"";position:absolute;left:23%;top:23%;width:54%;height:54%;border-radius:50%;background:radial-gradient(circle at 42% 36%,#fff,#e9ecee 88%);box-shadow:0 0 0 1px rgba(0,0,0,.06) inset,0 1px 2px rgba(0,0,0,.20);z-index:-1}
-.m6-ball.red{background:radial-gradient(circle at 50% 7%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 50% 93%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 7% 50%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 93% 50%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 20% 20%,#fff 0 5.5%,transparent 6%),radial-gradient(circle at 80% 20%,#fff 0 5%,transparent 6%),radial-gradient(circle at 20% 80%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 80%,#fff 0 5%,transparent 6%),radial-gradient(circle at 38% 30%,#f0566a,#d31329 58%,#9e0a1e)}
+.m6-ball.red{background:radial-gradient(circle at 50% 7%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 50% 93%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 7% 50%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 93% 50%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 20% 20%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 20%,#fff 0 5%,transparent 6%),radial-gradient(circle at 20% 80%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 80%,#fff 0 5%,transparent 6%),radial-gradient(circle at 38% 30%,#f0566a,#d31329 58%,#9e0a1e)}
 .m6-ball.blue{background:radial-gradient(circle at 50% 7%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 50% 93%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 7% 50%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 93% 50%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 20% 20%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 20%,#fff 0 5%,transparent 6%),radial-gradient(circle at 20% 80%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 80%,#fff 0 5%,transparent 6%),radial-gradient(circle at 38% 30%,#4f9be8,#1064c4 58%,#06407f)}
 .m6-ball.green{background:radial-gradient(circle at 50% 7%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 50% 93%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 7% 50%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 93% 50%,#fff 0 5.5%,transparent 6.5%),radial-gradient(circle at 20% 20%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 20%,#fff 0 5%,transparent 6%),radial-gradient(circle at 20% 80%,#fff 0 5%,transparent 6%),radial-gradient(circle at 80% 80%,#fff 0 5%,transparent 6%),radial-gradient(circle at 38% 30%,#5cc77c,#0c9a3f 58%,#066628)}
 .m6-ball--lg{width:clamp(30px,calc((100vw - 120px)/7),46px);height:clamp(30px,calc((100vw - 120px)/7),46px);font-size:clamp(13px,3.4vw,19px)}
@@ -143,6 +143,16 @@
 .m6-draw-cell .p{font-size:10px;color:var(--ink-mute);font-family:var(--font-mono)}
 .m6-bt-scroll{overflow:auto;max-height:480px;margin-top:12px;-webkit-overflow-scrolling:touch}
 .m6-score{white-space:nowrap;line-height:1.3}
+.m6-sex-seg{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--paper-3);border:1px solid var(--rule);border-radius:14px;padding:4px}
+.m6-sex-btn{min-height:44px;border:0;border-radius:11px;background:transparent;color:var(--ink-mute);font-size:14px;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.m6-sex-btn.active{background:var(--ink);color:var(--gold-3);box-shadow:var(--sh-sm)}
+.yun-wrap{margin:8px 0 14px}
+.yun-meta{font-size:11px;color:var(--ink-mute);line-height:1.55;margin:0 0 8px}
+.yun-table{width:100%;border-collapse:collapse;font-size:12px;margin:0 0 12px}
+.yun-table th,.yun-table td{border-bottom:1px solid var(--rule);padding:6px 5px;text-align:left;white-space:nowrap}
+.yun-table th{font-size:10px;color:var(--ink-mute);font-weight:700;letter-spacing:.04em}
+.yun-table tr.now td{background:var(--gold-tint);font-weight:700}
+.yun-gz{font-family:var(--font-display);font-weight:900}
 </style>
 </head>
 <body data-page="marksix">
@@ -173,6 +183,13 @@
         <div class="m6-field m6-dt" id="personalDTWrap">
           <input type="datetime-local" id="personalDT" autocomplete="off" aria-label="輸入個人出生資料">
           <span class="m6-dt-ph">點擊輸入出生日期與時辰</span>
+        </div>
+      </div>
+      <div class="m6-ops-block">
+        <div class="m6-ops-lab">命造</div>
+        <div class="m6-sex-seg" role="radiogroup" aria-label="男命或女命">
+          <button type="button" class="m6-sex-btn" data-sex="m" aria-pressed="false">男命</button>
+          <button type="button" class="m6-sex-btn" data-sex="f" aria-pressed="false">女命</button>
         </div>
       </div>
       <div class="m6-ops-block">
