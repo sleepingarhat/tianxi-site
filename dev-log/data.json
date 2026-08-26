@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-26 20:58 HKT",
+  "generatedHKT": "2026-08-26 21:01 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-26",
+      "time": "21:00",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore engine.js and accept birth minutes",
+      "scope": "site",
+      "sha": "4d5cdf9"
+    },
     {
       "date": "2026-08-26",
       "time": "20:58",
@@ -11,6 +21,16 @@
       "title": "fix(marksix): pillarsAt 接受分鐘",
       "scope": "site",
       "sha": "0ae1fd5"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "20:58",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "be9b7ba"
     },
     {
       "date": "2026-08-26",
@@ -301,26 +321,6 @@
       "title": "fix(marksix): 緊急還原 index + 八字盤對稱／地支十神／出生框",
       "scope": "site",
       "sha": "59f6da4"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "20:23",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 八字盤對稱＋地支十神；出生框內 placeholder",
-      "scope": "site",
-      "sha": "56cef55"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "20:13",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 還原經典色波與結果區排版（只保留指定改動）",
-      "scope": "site",
-      "sha": "9ca21e9"
     },
     {
       "date": "2026-08-24",
