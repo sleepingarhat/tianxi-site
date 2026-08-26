@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-26 20:57 HKT",
+  "generatedHKT": "2026-08-26 20:58 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-26",
+      "time": "20:58",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): pillarsAt 接受分鐘",
+      "scope": "site",
+      "sha": "0ae1fd5"
+    },
     {
       "date": "2026-08-26",
       "time": "20:57",
@@ -11,6 +21,16 @@
       "title": "feat(marksix): 天喜命盤 顯示性別起運當運流年",
       "scope": "site",
       "sha": "e4febfd"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "20:57",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "d17dbb4"
     },
     {
       "date": "2026-08-26",
@@ -301,26 +321,6 @@
       "title": "fix(marksix): 還原經典色波與結果區排版（只保留指定改動）",
       "scope": "site",
       "sha": "9ca21e9"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "20:06",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 移除回測底部規則說明",
-      "scope": "site",
-      "sha": "248a167"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "20:05",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 回測表合併期次、取消+、獎級換行",
-      "scope": "site",
-      "sha": "25a7c04"
     },
     {
       "date": "2026-08-24",
