@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-27 05:51 HKT",
+  "generatedHKT": "2026-08-27 05:53 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "05:53",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore site-app.js and render qimenBoardHTML",
+      "scope": "site",
+      "sha": "2367384"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "05:51",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "0b6e543"
+    },
     {
       "date": "2026-08-27",
       "time": "05:50",
@@ -271,26 +291,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "dcd3e7d"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "14:54",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "34fce31"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "14:54",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): restore next-draw number parse",
-      "scope": "site",
-      "sha": "5614965"
     },
     {
       "date": "2026-08-26",
