@@ -4,6 +4,26 @@
   "entries": [
     {
       "date": "2026-08-26",
+      "time": "14:54",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "34fce31"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "14:54",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore next-draw number parse",
+      "scope": "site",
+      "sha": "5614965"
+    },
+    {
+      "date": "2026-08-26",
       "time": "14:53",
       "areaKey": "web",
       "area": "前端",
@@ -301,26 +321,6 @@
       "title": "fix(marksix): 四獨立回測按鈕（八字／奇門獨測＋合盤）",
       "scope": "site",
       "sha": "ae48341"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "18:28",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 出生輸入不溢出；回測改四鍵",
-      "scope": "site",
-      "sha": "c82f88f"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "18:25",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 說明內嵌結果區，更新三術文案",
-      "scope": "site",
-      "sha": "381a2ee"
     },
     {
       "date": "2026-08-24",
