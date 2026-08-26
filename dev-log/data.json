@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-26 14:52 HKT",
+  "generatedHKT": "2026-08-26 14:54 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-26",
+      "time": "14:53",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 回測卡片選中態與合盤缺資料時不切面板",
+      "scope": "site",
+      "sha": "75189c2"
+    },
+    {
+      "date": "2026-08-26",
+      "time": "14:52",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "634e69d"
+    },
     {
       "date": "2026-08-26",
       "time": "14:51",
@@ -301,26 +321,6 @@
       "title": "fix(marksix): 說明內嵌結果區，更新三術文案",
       "scope": "site",
       "sha": "381a2ee"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "18:23",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 移除？按鈕，說明改為結果內文",
-      "scope": "site",
-      "sha": "b48f79b"
-    },
-    {
-      "date": "2026-08-25",
-      "time": "18:11",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 獎級顯示改為頭獎／二獎／三獎…",
-      "scope": "site",
-      "sha": "2b192cb"
     },
     {
       "date": "2026-08-24",
