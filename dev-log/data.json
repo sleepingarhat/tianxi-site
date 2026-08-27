@@ -1,7 +1,57 @@
 {
-  "generatedHKT": "2026-08-28 00:52 HKT",
+  "generatedHKT": "2026-08-28 01:10 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-28",
+      "time": "01:10",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): put solo/combo + 100-draw backtest on user page; specs behind help buttons",
+      "scope": "site",
+      "sha": "ab3633d"
+    },
+    {
+      "date": "2026-08-28",
+      "time": "01:03",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(admin): mount token login gate before dashboard routes",
+      "scope": "backend",
+      "sha": "bf4faf8"
+    },
+    {
+      "date": "2026-08-28",
+      "time": "00:57",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(admin): add token form login when GitHub OAuth is unset",
+      "scope": "backend",
+      "sha": "db6edd9"
+    },
+    {
+      "date": "2026-08-28",
+      "time": "00:56",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(admin): issue dashboard session from ADMIN_TOKEN without OAuth",
+      "scope": "backend",
+      "sha": "e4c9658"
+    },
+    {
+      "date": "2026-08-28",
+      "time": "00:52",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "4b68367"
+    },
     {
       "date": "2026-08-28",
       "time": "00:51",
@@ -281,26 +331,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "45d9a76"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:27",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(natal): show layer-1 喜用 after 命局分",
-      "scope": "site",
-      "sha": "5c5b87c"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:27",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "acb5557"
     },
     {
       "date": "2026-08-26",
@@ -971,36 +1001,6 @@
       "title": "data: update Mark Six results (2026-07-25T15:36Z)",
       "scope": "marksix",
       "sha": "10b2cfb"
-    },
-    {
-      "date": "2026-07-24",
-      "time": "00:06",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-07-23T16:06Z)",
-      "scope": "marksix",
-      "sha": "a14e775"
-    },
-    {
-      "date": "2026-07-21",
-      "time": "23:59",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-07-21T15:59Z)",
-      "scope": "marksix",
-      "sha": "96c0b4e"
-    },
-    {
-      "date": "2026-07-16",
-      "time": "23:54",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-07-16T15:54Z)",
-      "scope": "marksix",
-      "sha": "e06e0f7"
     }
   ]
 }
