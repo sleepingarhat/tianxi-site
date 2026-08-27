@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 21:20 HKT",
+  "generatedHKT": "2026-08-27 21:44 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "21:44",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(natal): 大運喜用/五行切換改用全頁委派",
+      "scope": "site",
+      "sha": "6f91784"
+    },
     {
       "date": "2026-08-27",
       "time": "21:20",
@@ -11,6 +21,16 @@
       "title": "feat(pick): replace hash seeds with 河圖+洛書 mapping",
       "scope": "site",
       "sha": "1784c97"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "21:20",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "6058f98"
     },
     {
       "date": "2026-08-27",
@@ -281,26 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "ce52598"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:01",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "a6b8f49"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:00",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore: cache-bust mingju l1b",
-      "scope": "site",
-      "sha": "787c4d5"
     },
     {
       "date": "2026-08-26",
