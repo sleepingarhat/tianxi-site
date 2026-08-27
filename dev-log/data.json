@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 14:36 HKT",
+  "generatedHKT": "2026-08-27 14:40 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "14:40",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(qimen): 天盘干 follow stars (星帶本家干); 天禽 follows 天芮 + mid stem",
+      "scope": "site",
+      "sha": "c37b6e1"
+    },
     {
       "date": "2026-08-27",
       "time": "14:36",
@@ -11,6 +21,16 @@
       "title": "fix(marksix): bust cached engine.js so personalQimen loads on iOS",
       "scope": "site",
       "sha": "a378249"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "14:36",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "9a4eb85"
     },
     {
       "date": "2026-08-27",
@@ -277,30 +297,10 @@
       "time": "20:58",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): pillarsAt 接受分鐘",
-      "scope": "site",
-      "sha": "0ae1fd5"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "20:58",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "be9b7ba"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "20:57",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "d17dbb4"
     },
     {
       "date": "2026-08-26",
