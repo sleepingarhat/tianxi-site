@@ -1,5 +1,5 @@
 {
-  "generatedHKT": "2026-08-27 22:39 HKT",
+  "generatedHKT": "2026-08-27 22:40 HKT",
   "count": 100,
   "entries": [
     {
@@ -11,6 +11,26 @@
       "title": "feat(marksix): split user frontend and internal monitor lab",
       "scope": "site",
       "sha": "a14e777"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "22:39",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "085e89c"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "22:39",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): keep 五行/藏干 refs on monitor only",
+      "scope": "site",
+      "sha": "e42e6ae"
     },
     {
       "date": "2026-08-27",
@@ -281,26 +301,6 @@
       "title": "chore: load canggan tables after wuxing",
       "scope": "site",
       "sha": "a37dd65"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:07",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "e2989b6"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:06",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(natal): load wuxing tables before mingju",
-      "scope": "site",
-      "sha": "cdcb843"
     },
     {
       "date": "2026-08-26",
