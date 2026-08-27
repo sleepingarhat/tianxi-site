@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-27 15:27 HKT",
+  "generatedHKT": "2026-08-27 16:22 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "16:21",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): cache-bust UI restore",
+      "scope": "site",
+      "sha": "22210f1"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "15:27",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "7987642"
+    },
     {
       "date": "2026-08-27",
       "time": "15:26",
@@ -281,26 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "fe56938"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "00:45",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "load geju + xiyong pick; bind 八字合盤 to tianxi-xiyong-pick-v1",
-      "scope": "site",
-      "sha": "d2d1380"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "00:44",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "add tianxi-xiyong-pick-v1 frontend engine",
-      "scope": "site",
-      "sha": "a07d204"
     },
     {
       "date": "2026-08-26",
