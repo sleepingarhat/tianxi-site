@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-27 16:47 HKT",
+  "generatedHKT": "2026-08-27 16:49 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "16:49",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore full colorful UI, stats rows, flashing hit balls",
+      "scope": "site",
+      "sha": "1837ba2"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "16:47",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "4a88769"
+    },
     {
       "date": "2026-08-27",
       "time": "16:46",
@@ -281,26 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "0b6e543"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "05:50",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): restore engine.js with 時家拆補轉盤 qimen board",
-      "scope": "site",
-      "sha": "2d2bf9c"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "05:43",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "ed09c51"
     },
     {
       "date": "2026-08-26",
