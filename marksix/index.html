@@ -13,19 +13,9 @@
 <link rel="stylesheet" href="/assets/tokens.css">
 <link rel="stylesheet" href="/assets/shell.css">
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript/lunar.js"></script>
-<script src="./engine.js?v=fix-pq-20260827"></script>
+<script src="./engine.js?v=fix-ui-20260827"></script>
 <script src="./tianxi-mingpan.js"></script>
-<style>
-.m6-sec{padding:0 16px;margin-top:18px}
-.m6-h2{font-family:var(--font-display);font-weight:900;font-size:16px;color:var(--ink);margin:0 0 10px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;line-height:1.25}
-.m6-h2 small{display:block;font-family:var(--font-mono);font-weight:500;font-size:10px;color:var(--ink-mute);letter-spacing:.08em}
-.m6-note{font-size:11px;color:var(--ink-mute);line-height:1.6}
-.m6-state{padding:24px 16px;text-align:center;color:var(--ink-mute);font-size:13px}
-.m6-state.err{color:var(--red)}
-.m6-ball{position:relative;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;font-family:var(--font-mono);font-weight:800;color:#0d0d0d;line-height:1;flex-shrink:0;isolation:isolate;box-shadow:0 2px 4px rgba(0,0,0,.28)}
-.hidden{display:none!important}
-.qm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
-</style>
+<link rel="stylesheet" href="./marksix.css?v=fix-ui-20260827">
 </head>
 <body data-page="marksix">
 <div class="shell">
@@ -33,43 +23,94 @@
 <div class="ticker" id="m6-ticker">六合彩 · 載入中…</div>
 <section class="page-head">
   <h1><small>MARK SIX</small>六合彩</h1>
+  <p>官方結果 · 號碼統計 · 八字及奇門遁甲系統。<br><span class="pill pill--gold">資訊展示 · 非投注介面</span></p>
 </section>
 <section class="card m6-result" id="m6-result"><div class="m6-state">載入中…</div></section>
 <section class="m6-sec">
+  <h2 class="m6-h2">號碼統計 <small>NUMBER FREQUENCY</small></h2>
+  <div class="m6-controls">
+    <div class="m6-seg" id="m6-periods"></div>
+    <div class="m6-seg" id="m6-sort"></div>
+  </div>
+  <div class="m6-legend"><span><b>開</b> 次數</span> <span><b>遺</b> 遺漏</span> <span><b>期</b> 最大遺漏</span></div>
+  <div class="m6-numgrid" id="m6-numgrid">載入中…</div>
+</section>
+<section class="m6-sec">
+  <h2 class="m6-h2">八字及奇門遁甲系統 <small>BAZI · QIMEN DUNJIA System</small></h2>
   <div class="card m6-res">
-    <div class="m6-next" id="nextDrawBox"></div>
+    <div class="m6-next" id="nextDrawBox"><div class="m6-state">載入下一期…</div></div>
     <div class="m6-ops">
-      <div class="m6-field m6-dt" id="personalDTWrap">
-        <input type="datetime-local" id="personalDT" autocomplete="off">
+      <div class="m6-ops-block">
+        <label class="m6-ops-lab" for="personalDT">個人出生資料</label>
+        <div class="m6-field m6-dt" id="personalDTWrap">
+          <input type="datetime-local" id="personalDT" autocomplete="off" aria-label="輸入個人出生資料">
+          <span class="m6-dt-ph">點擊輸入出生日期與時辰</span>
+        </div>
       </div>
-      <div class="m6-sex-seg">
-        <button type="button" class="m6-sex-btn" data-sex="m">男命</button>
-        <button type="button" class="m6-sex-btn" data-sex="f">女命</button>
+      <div class="m6-ops-block">
+        <div class="m6-ops-lab">命造</div>
+        <div class="m6-sex-seg" role="radiogroup" aria-label="男命或女命">
+          <button type="button" class="m6-sex-btn" data-sex="m" aria-pressed="false">男命</button>
+          <button type="button" class="m6-sex-btn" data-sex="f" aria-pressed="false">女命</button>
+        </div>
       </div>
       <div id="natalOut" class="hidden"></div>
-      <button type="button" class="m6-mode-btn" id="btnSolo" data-mode="solo">獨測</button>
-      <button type="button" class="m6-mode-btn" id="btnBazi" data-mode="bazi">八字合盤</button>
-      <button type="button" class="m6-mode-btn" id="btnQimen" data-mode="qimen">奇門合盤</button>
-      <button type="button" class="m6-bt-btn" data-bt="pure_bazi">八字獨測</button>
-      <button type="button" class="m6-bt-btn" data-bt="pure_qimen">奇門獨測</button>
-      <button type="button" class="m6-bt-btn" data-bt="bazi">八字合盤</button>
-      <button type="button" class="m6-bt-btn" data-bt="qimen">奇門合盤</button>
+      <div class="m6-ops-block">
+        <div class="m6-ops-lab">測算方式</div>
+        <div class="m6-mode-seg" role="tablist" aria-label="測算方式">
+          <button type="button" class="m6-mode-btn" id="btnSolo" data-mode="solo" aria-pressed="false">
+            <span class="m6-mode-t">獨測</span>
+            <span class="m6-mode-s">八字 · 奇門</span>
+          </button>
+          <button type="button" class="m6-mode-btn" id="btnBazi" data-mode="bazi" aria-pressed="false">
+            <span class="m6-mode-t">八字合盤</span>
+            <span class="m6-mode-s">個人 × 攪珠</span>
+          </button>
+          <button type="button" class="m6-mode-btn" id="btnQimen" data-mode="qimen" aria-pressed="false">
+            <span class="m6-mode-t">奇門合盤</span>
+            <span class="m6-mode-s">終身盤 × 當期</span>
+          </button>
+        </div>
+      </div>
+      <div class="m6-ops-block">
+        <div class="m6-ops-lab">回測最近 100 期</div>
+        <div class="m6-bt-grid">
+          <button type="button" class="m6-bt-btn" data-bt="pure_bazi" aria-pressed="false">
+            <span class="m6-bt-t">八字獨測</span>
+            <span class="m6-bt-s">無需出生資料</span>
+          </button>
+          <button type="button" class="m6-bt-btn" data-bt="pure_qimen" aria-pressed="false">
+            <span class="m6-bt-t">奇門獨測</span>
+            <span class="m6-bt-s">無需出生資料</span>
+          </button>
+          <button type="button" class="m6-bt-btn" data-bt="bazi" aria-pressed="false">
+            <span class="m6-bt-t">八字合盤</span>
+            <span class="m6-bt-s">需出生資料</span>
+          </button>
+          <button type="button" class="m6-bt-btn" data-bt="qimen" aria-pressed="false">
+            <span class="m6-bt-t">奇門合盤</span>
+            <span class="m6-bt-s">需出生資料</span>
+          </button>
+        </div>
+      </div>
     </div>
     <p class="m6-note" id="status"></p>
     <div id="panel-solo" class="hidden"><div id="soloOut"></div></div>
     <div id="panel-bazi" class="hidden"><div id="baziOut"></div></div>
     <div id="panel-qimen" class="hidden"><div id="qimenOut"></div></div>
     <div id="panel-bt" class="hidden">
-      <div id="btModeLabel">回測</div>
+      <div class="m6-block-title" id="btModeLabel">回測</div>
       <div id="btStats"></div>
-      <table class="m6-table" id="btTable"><thead><tr><th>期次</th><th>預測15碼</th><th>官方結果</th><th>命中</th><th>獎級</th></tr></thead><tbody></tbody></table>
+      <div class="m6-bt-scroll">
+        <table class="m6-table" id="btTable"><thead><tr><th class="col-meta">期次</th><th>預測15碼</th><th>官方結果</th><th>命中</th><th class="col-prize">獎級</th></tr></thead><tbody></tbody></table>
+      </div>
     </div>
   </div>
 </section>
-<footer class="disclaimer">天喜為分析平台，不提供投注服務。</footer>
+<footer class="disclaimer"><strong>天喜為分析平台，不提供投注服務。</strong><br>投注請透過合法渠道（HKJC）進行。</footer>
 <nav class="botnav" data-tx-shell="botnav"></nav>
 </div>
-<script src="./site-app.js?v=fix-pq-20260827"></script>
+<script src="./site-app.js?v=fix-ui-20260827"></script>
 <script src="./natal-ui.js"></script>
 </body>
 </html>
