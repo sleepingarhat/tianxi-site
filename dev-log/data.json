@@ -1,5 +1,5 @@
 {
-  "generatedHKT": "2026-08-27 18:06 HKT",
+  "generatedHKT": "2026-08-27 18:07 HKT",
   "count": 100,
   "entries": [
     {
@@ -11,6 +11,26 @@
       "title": "feat(mingju): attach 旺衰状态 and show 五行表",
       "scope": "site",
       "sha": "071b727"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "18:06",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "cd33cbb"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "18:06",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(natal): load wuxing tables before mingju",
+      "scope": "site",
+      "sha": "cdcb843"
     },
     {
       "date": "2026-08-27",
@@ -277,30 +297,10 @@
       "time": "14:40",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(qimen): 天盘干 follow stars (星帶本家干); 天禽 follows 天芮 + mid stem",
-      "scope": "site",
-      "sha": "c37b6e1"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "14:40",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "21c3408"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "14:36",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "9a4eb85"
     },
     {
       "date": "2026-08-26",
