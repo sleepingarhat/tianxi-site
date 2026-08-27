@@ -89,10 +89,12 @@
   function boot(){
     ensureCss();
     function ready(){ render(); }
-    loadScript('./tianxi-mingju.js?v=mj-l1b-20260827', function(){
-      if(!(global.TXMarkSixEngine&&global.TXMarkSixEngine.buildYun)){
-        loadScript('./tianxi-mingpan.js', ready);
-      } else ready();
+    loadScript('./tianxi-wuxing.js?v=wx-20260827', function(){
+      loadScript('./tianxi-mingju.js?v=mj-l1c-20260827', function(){
+        if(!(global.TXMarkSixEngine&&global.TXMarkSixEngine.buildYun)){
+          loadScript('./tianxi-mingpan.js', ready);
+        } else ready();
+      });
     });
     document.querySelectorAll('.m6-sex-btn').forEach(function(b){
       if(b.getAttribute('data-natal-bound')==='1') return;
