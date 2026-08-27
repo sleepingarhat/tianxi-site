@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 18:05 HKT",
+  "generatedHKT": "2026-08-27 18:06 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "18:06",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(mingju): attach 旺衰状态 and show 五行表",
+      "scope": "site",
+      "sha": "071b727"
+    },
     {
       "date": "2026-08-27",
       "time": "18:05",
@@ -11,6 +21,16 @@
       "title": "feat(marksix): ingest 五行四季旺衰表 with typo fixes",
       "scope": "site",
       "sha": "e066850"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "18:05",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "ce52598"
     },
     {
       "date": "2026-08-27",
@@ -277,30 +297,10 @@
       "time": "14:36",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): bust cached engine.js so personalQimen loads on iOS",
-      "scope": "site",
-      "sha": "a378249"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "14:36",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "9a4eb85"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "14:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "4434d8f"
     },
     {
       "date": "2026-08-26",
