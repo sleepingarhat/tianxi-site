@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 18:27 HKT",
+  "generatedHKT": "2026-08-27 19:14 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "19:14",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat: frontend full layer-1 喜用 matrix",
+      "scope": "site",
+      "sha": "b927b2f"
+    },
     {
       "date": "2026-08-27",
       "time": "18:27",
@@ -31,6 +41,16 @@
       "title": "feat(natal): show layer-1 喜用 after 命局分",
       "scope": "site",
       "sha": "5c5b87c"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "18:27",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "acb5557"
     },
     {
       "date": "2026-08-27",
@@ -281,26 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "7987642"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "15:26",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): restore full page CSS",
-      "scope": "site",
-      "sha": "971b92f"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "15:25",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "4586111"
     },
     {
       "date": "2026-08-26",
