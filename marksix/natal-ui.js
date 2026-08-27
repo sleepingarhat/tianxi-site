@@ -4,6 +4,13 @@
   var WX_Z = {子:'水',丑:'土',寅:'木',卯:'木',辰:'土',巳:'火',午:'火',未:'土',申:'金',酉:'金',戌:'土',亥:'水'};
   var yunTone = 'xy';
   var toneBound = false;
+  function isMonitor(){
+    var page = (document.body && document.body.getAttribute('data-page')) || '';
+    return page === 'marksix-monitor';
+  }
+  function scriptBase(){
+    return isMonitor() ? '../' : './';
+  }
   function fmtDT(s){ return String(s||'').replace('T',' '); }
   function readPersonal(){
     var el=document.getElementById('personalDT');
@@ -99,6 +106,14 @@
       render();
     }, true);
   }
+  function refPack(mj){
+    var E=global.TXMarkSixEngine;
+    if(!E) return '';
+    var wx=(E.wuxingRefHTML)?E.wuxingRefHTML(mj&&mj.monthZhi, mj&&mj.dayMasterWx):'';
+    var cg=(E.cangHTML)?E.cangHTML():'';
+    if(wx && cg && wx.indexOf('地支藏干')>=0) return wx;
+    return wx + cg;
+  }
   function render(){
     var box=natalBox();
     if(!box) return;
@@ -106,45 +121,53 @@
     var per=readPersonal();
     var sex=currentSex();
     var E=global.TXMarkSixEngine;
-    var matrix=(E&&E.l1XiyongMatrixHTML)?E.l1XiyongMatrixHTML():'';
+    var monitor=isMonitor();
+    var matrix=(monitor && E && E.l1XiyongMatrixHTML)?E.l1XiyongMatrixHTML():'';
     if(!per||!sex){
-      box.classList.remove('hidden');
-      box.innerHTML=matrix || '';
+      if(monitor){
+        box.classList.remove('hidden');
+        box.innerHTML='<div class="m6-note">監控台：輸入出生日期同命造先睇本局；下面係第 1 層規格同參考表。</div>'+matrix+refPack(null);
+      } else {
+        box.classList.add('hidden');
+        box.innerHTML='';
+      }
       return;
     }
     if(!E||!E.pillarsAt){
       box.classList.remove('hidden');
-      box.innerHTML='<div class="m6-note">命盤引擎未載入</div>'+matrix;
+      box.innerHTML='<div class="m6-note">命盤引擎未載入</div>'+(monitor?matrix:'');
       return;
     }
     try{
       var pers=E.pillarsAt(per.y,per.m,per.d,per.h,per.min);
       var mj=(E.scoreMingJu)?E.scoreMingJu(pers,{day:per.d}):null;
-      var mjHtml=(E.mingJuHTML&&mj)?E.mingJuHTML(mj):'';
+      var mjHtml=(E.mingJuHTML&&mj)?E.mingJuHTML(mj,{refs:monitor}):'';
       var spec=(mj&&E.l1XiyongSpec)?E.l1XiyongSpec(mj.dayMasterWx, mj.band):null;
       var xyHtml=(spec&&E.l1XiyongHTML)?E.l1XiyongHTML(spec, mj.dayMaster, mj.dayMasterWx):'';
-      var mx=(E.l1XiyongMatrixHTML)?E.l1XiyongMatrixHTML(mj&&mj.dayMasterWx, mj&&mj.band):matrix;
+      var mx=(monitor && E.l1XiyongMatrixHTML)?E.l1XiyongMatrixHTML(mj&&mj.dayMasterWx, mj&&mj.band):'';
+      var refs=monitor?refPack(mj):'';
       var yunHtml='';
       if(E.buildYun){
         try{ yunHtml=yunHTML(E.buildYun(per.y,per.m,per.d,per.h,per.min,sex,new Date()), spec, yunTone); }catch(e){}
       }
       box.classList.remove('hidden');
-      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+mjHtml+xyHtml+mx+yunHtml;
+      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+mjHtml+xyHtml+mx+refs+yunHtml;
     }catch(err){
       box.classList.remove('hidden');
-      box.innerHTML='<div class="m6-note" style="color:var(--red)">'+(err&&err.message||err)+'</div>'+matrix;
+      box.innerHTML='<div class="m6-note" style="color:var(--red)">'+(err&&err.message||err)+'</div>'+(monitor?matrix:'');
     }
   }
   function boot(){
     ensureCss();
     bindTone();
+    var base=scriptBase();
     function ready(){ render(); }
-    loadScript('./tianxi-wuxing.js?v=wx-l1d-20260827', function(){
-      loadScript('./tianxi-canggan.js?v=cg-l1d-20260827', function(){
-        loadScript('./tianxi-mingju.js?v=mj-l1d-20260827', function(){
-          loadScript('./tianxi-l1-xiyong.js?v=xy-l1c-20260827', function(){
+    loadScript(base+'tianxi-wuxing.js?v=wx-split-20260827', function(){
+      loadScript(base+'tianxi-canggan.js?v=cg-split-20260827', function(){
+        loadScript(base+'tianxi-mingju.js?v=mj-split-20260827', function(){
+          loadScript(base+'tianxi-l1-xiyong.js?v=xy-split-20260827', function(){
             if(!(global.TXMarkSixEngine&&global.TXMarkSixEngine.buildYun)){
-              loadScript('./tianxi-mingpan.js', ready);
+              loadScript(base+'tianxi-mingpan.js', ready);
             } else ready();
           });
         });
