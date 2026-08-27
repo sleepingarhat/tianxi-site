@@ -13,9 +13,9 @@
 <link rel="stylesheet" href="/assets/tokens.css">
 <link rel="stylesheet" href="/assets/shell.css">
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript/lunar.js"></script>
-<script src="./engine.js?v=split-20260827"></script>
+<script src="./engine.js?v=user-bt-20260828"></script>
 <script src="./tianxi-mingpan.js"></script>
-<link rel="stylesheet" href="./marksix.css?v=split-20260827">
+<link rel="stylesheet" href="./marksix.css?v=user-bt-20260828">
 </head>
 <body data-page="marksix">
 <div class="shell">
@@ -54,6 +54,12 @@
           <button type="button" class="m6-sex-btn" data-sex="f" aria-pressed="false">女命</button>
         </div>
       </div>
+      <div class="m6-spec-bar">
+        <button type="button" class="m6-help-btn" id="btnXySpec" aria-expanded="false">第 1 層喜用規格</button>
+        <button type="button" class="m6-help-btn" id="btnMjRef" aria-expanded="false">計分／五行藏干</button>
+      </div>
+      <div id="specXyPack" class="hidden"></div>
+      <div id="specRefPack" class="hidden"></div>
       <div id="natalOut" class="hidden"></div>
       <div class="m6-ops-block">
         <div class="m6-ops-lab">測算方式</div>
@@ -77,13 +83,22 @@
     <div id="panel-solo" class="hidden"><div id="soloOut"></div></div>
     <div id="panel-bazi" class="hidden"><div id="baziOut"></div></div>
     <div id="panel-qimen" class="hidden"><div id="qimenOut"></div></div>
-    <div id="panel-bt" class="hidden"></div>
+    <div id="panel-bt" class="hidden">
+      <div class="m6-block-title" id="btModeLabel">最近100期回測</div>
+      <div id="btStats"></div>
+      <div class="m6-bt-scroll">
+        <table class="m6-table" id="btTable">
+          <thead><tr></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </section>
 <footer class="disclaimer"><strong>天喜為分析平台，不提供投注服務。</strong><br>投注請透過合法渠道（HKJC）進行。</footer>
 <nav class="botnav" data-tx-shell="botnav"></nav>
 </div>
-<script src="./site-app.js?v=split-20260827"></script>
-<script src="./natal-ui.js?v=split-20260827"></script>
+<script src="./site-app.js?v=user-bt-20260828"></script>
+<script src="./natal-ui.js?v=user-bt-20260828"></script>
 </body>
 </html>
