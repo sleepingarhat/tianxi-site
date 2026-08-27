@@ -1,5 +1,5 @@
 {
-  "generatedHKT": "2026-08-27 18:00 HKT",
+  "generatedHKT": "2026-08-27 18:01 HKT",
   "count": 100,
   "entries": [
     {
@@ -11,6 +11,26 @@
       "title": "fix(mingju): 辰戌丑未 layer1 use 本气土, not 余气木",
       "scope": "site",
       "sha": "70df4a1"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "18:00",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "56f9047"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "18:00",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore: cache-bust mingju l1b",
+      "scope": "site",
+      "sha": "787c4d5"
     },
     {
       "date": "2026-08-27",
@@ -277,30 +297,10 @@
       "time": "14:01",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 奇門九宮含中宮布奇儀，甲時旬首寄中對齊參考盤",
-      "scope": "site",
-      "sha": "aaf3e8f"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "14:01",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "b2ec40b"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "13:37",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "f9219de"
     },
     {
       "date": "2026-08-26",
