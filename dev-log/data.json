@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 14:45 HKT",
+  "generatedHKT": "2026-08-27 15:25 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "15:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore full page structure and link marksix.css",
+      "scope": "site",
+      "sha": "1437f61"
+    },
     {
       "date": "2026-08-27",
       "time": "14:45",
@@ -11,6 +21,16 @@
       "title": "fix(marksix): resolve engine at call time; guard personalQimen",
       "scope": "site",
       "sha": "4fbb6bb"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "14:45",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "2d4b133"
     },
     {
       "date": "2026-08-27",
@@ -281,26 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "8fb4466"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "00:30",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "marksix: add geju/xiyong display engine (no pick weights)",
-      "scope": "site",
-      "sha": "a98b377"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "00:21",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "marksix natal: restore colored pillars with shi-shen and canggan",
-      "scope": "site",
-      "sha": "9234b55"
     },
     {
       "date": "2026-08-26",
