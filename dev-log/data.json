@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 14:42 HKT",
+  "generatedHKT": "2026-08-27 14:44 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "14:44",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "restore(marksix): full index.html with cache-bust fix-pq-20260827",
+      "scope": "site",
+      "sha": "d9b1229"
+    },
     {
       "date": "2026-08-27",
       "time": "14:42",
@@ -11,6 +21,16 @@
       "title": "restore(marksix): full engine with 星帶本家干 轉盘",
       "scope": "site",
       "sha": "cf99fe3"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "14:42",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "2cb1c30"
     },
     {
       "date": "2026-08-27",
@@ -277,30 +297,10 @@
       "time": "21:04",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): load tianxi-mingpan and natal panel",
-      "scope": "site",
-      "sha": "cc88838"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "21:04",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "963ca84"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "21:01",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "212417d"
     },
     {
       "date": "2026-08-26",
