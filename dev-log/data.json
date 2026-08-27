@@ -1,5 +1,5 @@
 {
-  "generatedHKT": "2026-08-28 00:51 HKT",
+  "generatedHKT": "2026-08-28 00:52 HKT",
   "count": 100,
   "entries": [
     {
@@ -11,6 +11,26 @@
       "title": "chore(marksix): remove unused /marksix/monitor/ page",
       "scope": "site",
       "sha": "aab0ea2"
+    },
+    {
+      "date": "2026-08-28",
+      "time": "00:51",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "7622fd7"
+    },
+    {
+      "date": "2026-08-28",
+      "time": "00:51",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(marksix): drop monitor-only natal UI branch",
+      "scope": "site",
+      "sha": "a84f810"
     },
     {
       "date": "2026-08-27",
@@ -261,26 +281,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "45d9a76"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:27",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat: layer-1 喜用规格 十日主x四格",
-      "scope": "site",
-      "sha": "d352489"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:27",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "75a4836"
     },
     {
       "date": "2026-08-27",
