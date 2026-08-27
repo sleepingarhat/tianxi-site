@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-27 18:10 HKT",
+  "generatedHKT": "2026-08-27 18:27 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "18:27",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat: layer-1 喜用规格 十日主x四格",
+      "scope": "site",
+      "sha": "d352489"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "18:10",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "40601bf"
+    },
     {
       "date": "2026-08-27",
       "time": "18:09",
@@ -277,30 +297,10 @@
       "time": "14:45",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): resolve engine at call time; guard personalQimen",
-      "scope": "site",
-      "sha": "4fbb6bb"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "14:45",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "2d4b133"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "14:44",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "bcdd9fe"
     },
     {
       "date": "2026-08-26",
