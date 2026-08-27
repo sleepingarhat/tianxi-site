@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-28 01:14 HKT",
+  "generatedHKT": "2026-08-28 04:33 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-28",
+      "time": "04:33",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(admin): route tianxi.racing/admin to Worker dashboard",
+      "scope": "backend",
+      "sha": "7c64d05"
+    },
+    {
+      "date": "2026-08-28",
+      "time": "04:33",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(admin): redirect /admin on Pages to Worker dashboard host",
+      "scope": "site",
+      "sha": "40f0456"
+    },
     {
       "date": "2026-08-28",
       "time": "01:14",
@@ -11,6 +31,16 @@
       "title": "feat(marksix): 100-draw backtest buttons under solo/bazi/qimen",
       "scope": "site",
       "sha": "17d5627"
+    },
+    {
+      "date": "2026-08-28",
+      "time": "01:14",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "442dbe2"
     },
     {
       "date": "2026-08-28",
@@ -301,26 +331,6 @@
       "title": "chore: cache-bust natal scripts after footnote removal",
       "scope": "site",
       "sha": "f17e871"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "19:39",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore: hide layer notes from natal UI",
-      "scope": "site",
-      "sha": "8a96472"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "19:39",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "f83ce64"
     },
     {
       "date": "2026-08-27",
@@ -991,16 +1001,6 @@
       "title": "data: update Mark Six results (2026-07-28T16:17Z)",
       "scope": "marksix",
       "sha": "c8c4fca"
-    },
-    {
-      "date": "2026-07-25",
-      "time": "23:36",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-07-25T15:36Z)",
-      "scope": "marksix",
-      "sha": "10b2cfb"
     }
   ]
 }
