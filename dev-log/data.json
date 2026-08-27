@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-27 22:40 HKT",
+  "generatedHKT": "2026-08-27 22:41 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "22:40",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "0fb8b99"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "22:40",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): natal UI split — matrix/refs only on monitor",
+      "scope": "site",
+      "sha": "bc18049"
+    },
     {
       "date": "2026-08-27",
       "time": "22:39",
@@ -271,26 +291,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "40601bf"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:09",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat: ingest 藏干比例、四旺四生四库、人元司令分野",
-      "scope": "site",
-      "sha": "3bbdf0e"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:09",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "7018224"
     },
     {
       "date": "2026-08-27",
