@@ -1,5 +1,5 @@
 {
-  "generatedHKT": "2026-08-27 19:40 HKT",
+  "generatedHKT": "2026-08-27 19:41 HKT",
   "count": 100,
   "entries": [
     {
@@ -11,6 +11,26 @@
       "title": "chore: drop 藏干 footnote from UI",
       "scope": "site",
       "sha": "b569f7e"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "19:40",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "6e508c2"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "19:40",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore: cache-bust natal scripts after footnote removal",
+      "scope": "site",
+      "sha": "f17e871"
     },
     {
       "date": "2026-08-27",
@@ -281,26 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "30c81bf"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "17:12",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): layer-1 命局生克评分, replace 子平喜用",
-      "scope": "site",
-      "sha": "4ba2847"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "17:12",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "556593b"
     },
     {
       "date": "2026-08-26",
