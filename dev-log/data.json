@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 15:25 HKT",
+  "generatedHKT": "2026-08-27 15:27 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "15:26",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore full page CSS",
+      "scope": "site",
+      "sha": "971b92f"
+    },
     {
       "date": "2026-08-27",
       "time": "15:25",
@@ -11,6 +21,16 @@
       "title": "fix(marksix): restore full page structure and link marksix.css",
       "scope": "site",
       "sha": "1437f61"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "15:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "4586111"
     },
     {
       "date": "2026-08-27",
@@ -277,30 +297,10 @@
       "time": "00:44",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "bfbe6a9"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "00:44",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "提交",
       "title": "add tianxi-xiyong-pick-v1 frontend engine",
       "scope": "site",
       "sha": "a07d204"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "00:41",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "8fb4466"
     },
     {
       "date": "2026-08-26",
