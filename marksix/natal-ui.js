@@ -4,6 +4,7 @@
   var WX_Z = {子:'水',丑:'土',寅:'木',卯:'木',辰:'土',巳:'火',午:'火',未:'土',申:'金',酉:'金',戌:'土',亥:'水'};
   var yunTone = 'xy';
   var toneBound = false;
+  var lastMj = null;
   function fmtDT(s){ return String(s||'').replace('T',' '); }
   function readPersonal(){
     var el=document.getElementById('personalDT');
@@ -65,7 +66,7 @@
   function ensureCss(){
     var st=document.getElementById('tx-mj-css');
     if(!st){ st=document.createElement('style'); st.id='tx-mj-css'; document.head.appendChild(st); }
-    st.textContent='.mj-plus{color:var(--green-2);font-weight:800;font-family:var(--font-mono)}.mj-minus{color:var(--red);font-weight:800;font-family:var(--font-mono)}.mj-score{font-family:var(--font-mono);font-size:18px;margin:0 4px}.mj-how{display:inline-block;margin-left:4px;font-size:10px;color:var(--ink-mute)}.mj-hint{font-size:11px;color:var(--ink-mute)}.xy-table td{font-size:12px;line-height:1.45;vertical-align:top}.xy-good{color:#e11d48!important;font-weight:800}.xy-bad{color:#2563eb!important;font-weight:800}.yun-title{display:flex;align-items:center;flex-wrap:wrap;gap:6px}.yun-tone{display:inline-flex;margin-left:4px;vertical-align:middle;border:1px solid var(--line,#ccc);border-radius:999px;overflow:hidden}.yun-tone button{border:0;background:transparent;color:var(--ink-mute);font:inherit;font-size:12px;padding:4px 12px;cursor:pointer}.yun-tone button.active{background:var(--gold,#c9a227);color:#1a1408;font-weight:700}.yun-gz .wx-mu,.wx-char.wx-mu{color:#2e7d32!important}.yun-gz .wx-huo,.wx-char.wx-huo{color:#c62828!important}.yun-gz .wx-tu,.wx-char.wx-tu{color:#c9a227!important}.yun-gz .wx-jin,.wx-char.wx-jin{color:#b8860b!important}.yun-gz .wx-shui,.wx-char.wx-shui{color:#1565c0!important}';
+    st.textContent='.m6-spec-bar{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 4px}.m6-help-btn{border:1px solid var(--rule,#ccc);background:var(--paper,#fff);color:var(--ink,#111);border-radius:999px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer}.m6-help-btn.active{background:var(--ink,#111);color:var(--gold-3,#e6c35c);border-color:var(--ink,#111)}.m6-bt-foot{display:flex;flex-direction:column;gap:8px;margin:16px 0 4px;padding-top:12px;border-top:1px dashed var(--rule,#ccc)}.m6-bt-foot .m6-btn{width:100%}.m6-bt-run.active{box-shadow:0 0 0 2px var(--gold,#c9a227)}#panel-bt{margin-top:16px;padding-top:14px;border-top:1px solid var(--rule,#ccc)}.mj-plus{color:var(--green-2);font-weight:800;font-family:var(--font-mono)}.mj-minus{color:var(--red);font-weight:800;font-family:var(--font-mono)}.mj-score{font-family:var(--font-mono);font-size:18px;margin:0 4px}.mj-how{display:inline-block;margin-left:4px;font-size:10px;color:var(--ink-mute)}.mj-hint{font-size:11px;color:var(--ink-mute)}.xy-table td{font-size:12px;line-height:1.45;vertical-align:top}.xy-good{color:#e11d48!important;font-weight:800}.xy-bad{color:#2563eb!important;font-weight:800}.yun-title{display:flex;align-items:center;flex-wrap:wrap;gap:6px}.yun-tone{display:inline-flex;margin-left:4px;vertical-align:middle;border:1px solid var(--line,#ccc);border-radius:999px;overflow:hidden}.yun-tone button{border:0;background:transparent;color:var(--ink-mute);font:inherit;font-size:12px;padding:4px 12px;cursor:pointer}.yun-tone button.active{background:var(--gold,#c9a227);color:#1a1408;font-weight:700}.yun-gz .wx-mu,.wx-char.wx-mu{color:#2e7d32!important}.yun-gz .wx-huo,.wx-char.wx-huo{color:#c62828!important}.yun-gz .wx-tu,.wx-char.wx-tu{color:#c9a227!important}.yun-gz .wx-jin,.wx-char.wx-jin{color:#b8860b!important}.yun-gz .wx-shui,.wx-char.wx-shui{color:#1565c0!important}';
   }
   function loadScript(src, done){
     var exist=document.querySelector('script[src="'+src+'"]');
@@ -76,14 +77,7 @@
     document.head.appendChild(s);
   }
   function natalBox(){
-    var box=document.getElementById('natalOut');
-    if(box) return box;
-    var status=document.getElementById('status');
-    if(!status||!status.parentNode) return null;
-    box=document.createElement('div');
-    box.id='natalOut';
-    status.parentNode.insertBefore(box, status.nextSibling);
-    return box;
+    return document.getElementById('natalOut');
   }
   function bindTone(){
     if(toneBound) return;
@@ -99,6 +93,38 @@
       render();
     }, true);
   }
+  function fillSpecPacks(){
+    var E=global.TXMarkSixEngine;
+    var xy=document.getElementById('specXyPack');
+    var ref=document.getElementById('specRefPack');
+    if(xy && E && E.l1XiyongMatrixHTML){
+      var wx=lastMj&&lastMj.dayMasterWx;
+      var band=lastMj&&lastMj.band;
+      xy.innerHTML=E.l1XiyongMatrixHTML(wx, band);
+    }
+    if(ref && E){
+      var score=(lastMj&&E.mingJuHTML)?E.mingJuHTML(lastMj):'<p class="m6-note">輸入出生日期同命造後，先有本局計分明細。</p>';
+      var tables=(E.wuxingRefHTML)?E.wuxingRefHTML(lastMj&&lastMj.monthZhi||'', lastMj&&lastMj.dayMasterWx||''):'';
+      ref.innerHTML=score+tables;
+    }
+  }
+  function bindSpecButtons(){
+    function tog(btnId, packId){
+      var btn=document.getElementById(btnId);
+      var pack=document.getElementById(packId);
+      if(!btn||!pack||btn.getAttribute('data-spec-bound')==='1') return;
+      btn.setAttribute('data-spec-bound','1');
+      btn.addEventListener('click', function(){
+        fillSpecPacks();
+        var on=pack.classList.contains('hidden');
+        pack.classList.toggle('hidden', !on);
+        btn.classList.toggle('active', on);
+        btn.setAttribute('aria-expanded', on?'true':'false');
+      });
+    }
+    tog('btnXySpec','specXyPack');
+    tog('btnMjRef','specRefPack');
+  }
   function render(){
     var box=natalBox();
     if(!box) return;
@@ -106,9 +132,11 @@
     var per=readPersonal();
     var sex=currentSex();
     var E=global.TXMarkSixEngine;
+    lastMj=null;
     if(!per||!sex){
       box.classList.add('hidden');
       box.innerHTML='';
+      fillSpecPacks();
       return;
     }
     if(!E||!E.pillarsAt){
@@ -119,15 +147,19 @@
     try{
       var pers=E.pillarsAt(per.y,per.m,per.d,per.h,per.min);
       var mj=(E.scoreMingJu)?E.scoreMingJu(pers,{day:per.d}):null;
-      var mjHtml=(E.mingJuHTML&&mj)?E.mingJuHTML(mj):'';
+      lastMj=mj;
       var spec=(mj&&E.l1XiyongSpec)?E.l1XiyongSpec(mj.dayMasterWx, mj.band):null;
       var xyHtml=(spec&&E.l1XiyongHTML)?E.l1XiyongHTML(spec, mj.dayMaster, mj.dayMasterWx):'';
       var yunHtml='';
       if(E.buildYun){
         try{ yunHtml=yunHTML(E.buildYun(per.y,per.m,per.d,per.h,per.min,sex,new Date()), spec, yunTone); }catch(e){}
       }
+      var scoreLine=mj
+        ? '<p class="yun-meta">本局得分 <b class="mj-score">'+mj.score+'</b>　<b>'+mj.mingGe+'</b>'+(mj.zhuanGe?' · '+mj.zhuanGe:'')+'<br><span class="mj-hint">明細同五行／藏干表嗚上面「計分／五行藏干」</span></p>'
+        : '';
       box.classList.remove('hidden');
-      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+mjHtml+xyHtml+yunHtml;
+      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+scoreLine+xyHtml+yunHtml;
+      fillSpecPacks();
     }catch(err){
       box.classList.remove('hidden');
       box.innerHTML='<div class="m6-note" style="color:var(--red)">'+(err&&err.message||err)+'</div>';
@@ -136,11 +168,12 @@
   function boot(){
     ensureCss();
     bindTone();
-    function ready(){ render(); }
-    loadScript('./tianxi-wuxing.js?v=wx-split-20260827', function(){
-      loadScript('./tianxi-canggan.js?v=cg-split-20260827', function(){
-        loadScript('./tianxi-mingju.js?v=mj-split-20260827', function(){
-          loadScript('./tianxi-l1-xiyong.js?v=xy-split-20260827', function(){
+    bindSpecButtons();
+    function ready(){ fillSpecPacks(); render(); }
+    loadScript('./tianxi-wuxing.js?v=user-bt-20260828', function(){
+      loadScript('./tianxi-canggan.js?v=user-bt-20260828', function(){
+        loadScript('./tianxi-mingju.js?v=user-bt-20260828', function(){
+          loadScript('./tianxi-l1-xiyong.js?v=user-bt-20260828', function(){
             if(!(global.TXMarkSixEngine&&global.TXMarkSixEngine.buildYun)){
               loadScript('./tianxi-mingpan.js', ready);
             } else ready();
