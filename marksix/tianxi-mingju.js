@@ -14,7 +14,7 @@
     { name: '巳酉丑', wx: '金', zhi: ['巳', '酉', '丑'] }
   ];
   var TOMB = { 辰: 1, 戌: 1, 丑: 1, 未: 1 };
-  var JI_WANG = { 土: '稼穣格', 木: '曲直格', 金: '從革格', 水: '潤下格', 火: '炎上格' };
+  var JI_WANG = { 土: '稼穬格', 木: '曲直格', 金: '從革格', 水: '潤下格', 火: '炎上格' };
   function relToDm(srcWx, dmWx) {
     if (!srcWx || !dmWx) return '';
     if (srcWx === dmWx) return '扶';
@@ -86,8 +86,9 @@
       dmWangShuai: (global.TXMarkSixEngine && global.TXMarkSixEngine.wangShuai) ? global.TXMarkSixEngine.wangShuai(dmWx, zhis[1]) : ''
     };
   }
-  function mingJuHTML(r) {
+  function mingJuHTML(r, opt) {
     if (!r) return '';
+    opt = opt || {};
     var rows = r.items.map(function (it) {
       var sg = it.signed > 0 ? ('+' + it.signed) : String(it.signed);
       var c = it.support ? 'mj-plus' : 'mj-minus';
@@ -95,7 +96,10 @@
     }).join('');
     var geLine = '<b>' + r.mingGe + '</b>' + (r.zhuanGe ? ' · ' + r.zhuanGe : '');
     var note = (r.notes && r.notes.length) ? '<p class="yun-meta">' + r.notes.join(' · ') + '</p>' : '';
-    var ref = (global.TXMarkSixEngine && global.TXMarkSixEngine.wuxingRefHTML) ? global.TXMarkSixEngine.wuxingRefHTML(r.monthZhi, r.dayMasterWx) : '';
+    var ref = '';
+    if (opt.refs && global.TXMarkSixEngine && global.TXMarkSixEngine.wuxingRefHTML) {
+      ref = global.TXMarkSixEngine.wuxingRefHTML(r.monthZhi, r.dayMasterWx);
+    }
     return '<div class="yun-wrap mj-wrap"><div class="m6-block-title">命局分析 · 第 1 層</div><p class="yun-meta">以日干 <span class="wx-' + (WX_CLS[r.dayMasterWx] || '') + '">' + r.dayMaster + r.dayMasterWx + '</span> 為核心 · 生扶為正、克泄耗為負 · 日干永取正分<br>得分（正分之和）<b class="mj-score">' + r.score + '</b>　' + geLine + '<br><span class="mj-hint">較弱 15–50 · 較旺 50–85 · 極弱 <15 · 極旺 >85</span></p><div style="overflow:auto"><table class="yun-table mj-table"><thead><tr><th>位置</th><th>字</th><th>對日干</th><th>分</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + note + '</div>' + ref;
   }
   function install() {
