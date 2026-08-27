@@ -1,5 +1,5 @@
 {
-  "generatedHKT": "2026-08-27 21:44 HKT",
+  "generatedHKT": "2026-08-27 21:45 HKT",
   "count": 100,
   "entries": [
     {
@@ -11,6 +11,26 @@
       "title": "fix(natal): 大運喜用/五行切換改用全頁委派",
       "scope": "site",
       "sha": "6f91784"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "21:44",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "5070993"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "21:44",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat: 喜用/忌仇 signed weight 同幅",
+      "scope": "site",
+      "sha": "99f2c5e"
     },
     {
       "date": "2026-08-27",
@@ -281,26 +301,6 @@
       "title": "feat(natal): load wuxing tables before mingju",
       "scope": "site",
       "sha": "cdcb843"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:05",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): ingest 五行四季旺衰表 with typo fixes",
-      "scope": "site",
-      "sha": "e066850"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:05",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "ce52598"
     },
     {
       "date": "2026-08-26",
