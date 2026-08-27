@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 20:10 HKT",
+  "generatedHKT": "2026-08-27 21:20 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "21:20",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(pick): replace hash seeds with 河圖+洛書 mapping",
+      "scope": "site",
+      "sha": "1784c97"
+    },
     {
       "date": "2026-08-27",
       "time": "20:10",
@@ -11,6 +21,16 @@
       "title": "feat(natal): 大運干支 喜用/五行 二選一著色",
       "scope": "site",
       "sha": "9945c45"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "20:10",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "f0c9436"
     },
     {
       "date": "2026-08-27",
@@ -271,26 +291,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "a6b8f49"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:00",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(mingju): 辰戌丑未 layer1 use 本气土, not 余气木",
-      "scope": "site",
-      "sha": "70df4a1"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:00",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "56f9047"
     },
     {
       "date": "2026-08-27",
