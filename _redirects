@@ -1,0 +1,3 @@
+# Exact /admin is served by Pages; Worker only has /admin/*
+# Send operators to the working Worker dashboard.
+/admin https://tianxi-backend.tianxi-entertainment.workers.dev/admin 302
