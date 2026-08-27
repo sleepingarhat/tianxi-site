@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-27 16:22 HKT",
+  "generatedHKT": "2026-08-27 16:47 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "16:46",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): cache-bust restore full colorful UI",
+      "scope": "site",
+      "sha": "28de6f6"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "16:22",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "6569ea5"
+    },
     {
       "date": "2026-08-27",
       "time": "16:21",
@@ -277,30 +297,10 @@
       "time": "05:43",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "提交",
-      "title": "奇門合盤加時家拆補轉盤九宮（八字輸出不變）",
-      "scope": "site",
-      "sha": "33faba2"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "05:43",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "ed09c51"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "01:03",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "fe56938"
     },
     {
       "date": "2026-08-26",
