@@ -1,5 +1,9 @@
 (function(global){
   var WX_CLS = {木:'mu',火:'huo',土:'tu',金:'jin',水:'shui'};
+  var WX_G = {甲:'木',乙:'木',丙:'火',丁:'火',戊:'土',己:'土',庚:'金',辛:'金',壬:'水',癸:'水'};
+  var WX_Z = {子:'水',丑:'土',寅:'木',卯:'木',辰:'土',巳:'火',午:'火',未:'土',申:'金',酉:'金',戌:'土',亥:'水'};
+  var yunTone = 'xy';
+  var lastSpec = null;
   function fmtDT(s){ return String(s||'').replace('T',' '); }
   function readPersonal(){
     var el=document.getElementById('personalDT');
@@ -11,6 +15,26 @@
   function currentSex(){
     var on=document.querySelector('.m6-sex-btn.active');
     return on ? on.getAttribute('data-sex') : '';
+  }
+  function xyClass(wx, spec){
+    if(!spec||!wx) return '';
+    if((spec.yong||[]).indexOf(wx)>=0 || (spec.xi||[]).indexOf(wx)>=0) return 'xy-good';
+    if((spec.ji||[]).indexOf(wx)>=0 || (spec.chou||[]).indexOf(wx)>=0) return 'xy-bad';
+    return '';
+  }
+  function paintGz(gz, spec, tone){
+    if(!gz) return '';
+    var g=gz.charAt(0), z=gz.charAt(1)||'';
+    if(tone==='wx'){
+      return '<span class="wx-'+(WX_CLS[WX_G[g]]||'')+'">'+g+'</span><span class="wx-'+(WX_CLS[WX_Z[z]]||'')+'">'+z+'</span>';
+    }
+    return '<span class="'+xyClass(WX_G[g],spec)+'">'+g+'</span><span class="'+xyClass(WX_Z[z],spec)+'">'+z+'</span>';
+  }
+  function toneBtns(){
+    return '<span class="yun-tone" role="group">'+
+      '<button type="button" data-yun-tone="xy" class="'+(yunTone==='xy'?'active':'')+'">喜用</button>'+
+      '<button type="button" data-yun-tone="wx" class="'+(yunTone==='wx'?'active':'')+'">五行</button>'+
+      '</span>';
   }
   function pillarsChart(p, title){
     var E=global.TXMarkSixEngine;
@@ -27,22 +51,22 @@
     }).join('');
     return '<div class="bz-wrap"><div class="bz-title"><b>'+title+'</b> · 日主 <span class="wx-'+(WX_CLS[det.dayMasterWx]||'')+'">'+det.dayMaster+'</span>（'+det.dayMasterWx+'）</div><div class="bz-chart">'+cols+'</div></div>';
   }
-  function yunHTML(yun){
+  function yunHTML(yun, spec, tone){
     if(!yun) return '';
     var cur=yun.current_dayun||{}, ln=yun.current_liunian||{};
     var rows=(yun.rows||[]).map(function(r){
-      return '<tr class="'+(r.current?'now':'')+'"><td>'+r.kind+'</td><td class="yun-gz">'+r.ganzhi+'</td><td>'+r.shi_shen+'</td><td>'+r.xu_sui+'</td><td>'+fmtDT(r.start_solar)+'<br>'+fmtDT(r.end_solar)+'</td></tr>';
+      return '<tr class="'+(r.current?'now':'')+'"><td>'+r.kind+'</td><td class="yun-gz">'+paintGz(r.ganzhi,spec,tone)+'</td><td>'+r.shi_shen+'</td><td>'+r.xu_sui+'</td><td>'+fmtDT(r.start_solar)+'<br>'+fmtDT(r.end_solar)+'</td></tr>';
     }).join('');
     var lns=(yun.liunian_in_current||[]).map(function(x){
-      return '<tr class="'+(x.current?'now':'')+'"><td>'+x.year+'</td><td class="yun-gz">'+x.ganzhi+'</td><td>'+x.shi_shen+'</td></tr>';
+      return '<tr class="'+(x.current?'now':'')+'"><td>'+x.year+'</td><td class="yun-gz">'+paintGz(x.ganzhi,spec,tone)+'</td><td>'+x.shi_shen+'</td></tr>';
     }).join('');
-    return '<div class="yun-wrap"><p class="yun-meta">'+yun.sexLabel+' · '+yun.direction+' · 起運節 <b>'+(yun.jie&&yun.jie.name||'')+'</b>（'+fmtDT(yun.jie&&yun.jie.datetime)+'）<br>起運 '+(yun.qiyun_note||'')+' → <b>'+fmtDT(yun.qiyun_solar)+'</b><br>當運 <b>'+(cur.ganzhi||'')+' '+(cur.shi_shen||'')+'</b> · '+(cur.xu_sui||'')+'（'+fmtDT(cur.start_solar)+' ～ '+fmtDT(cur.end_solar)+'）<br>流年 <b>'+(ln.year||'')+' '+(ln.ganzhi||'')+' '+(ln.shi_shen||'')+'</b></p><div class="m6-block-title">大運排盤</div><div style="overflow:auto"><table class="yun-table"><thead><tr><th>限</th><th>干支</th><th>十神</th><th>虛歲</th><th>交運</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="m6-block-title">當運流年</div><div style="overflow:auto"><table class="yun-table"><thead><tr><th>年</th><th>干支</th><th>十神</th></tr></thead><tbody>'+lns+'</tbody></table></div></div>';
+    return '<div class="yun-wrap"><p class="yun-meta">'+yun.sexLabel+' · '+yun.direction+' · 起運節 <b>'+(yun.jie&&yun.jie.name||'')+'</b>（'+fmtDT(yun.jie&&yun.jie.datetime)+'）<br>起運 '+(yun.qiyun_note||'')+' → <b>'+fmtDT(yun.qiyun_solar)+'</b><br>當運 <b>'+paintGz(cur.ganzhi,spec,tone)+' '+(cur.shi_shen||'')+'</b> · '+(cur.xu_sui||'')+'（'+fmtDT(cur.start_solar)+' ～ '+fmtDT(cur.end_solar)+'）<br>流年 <b>'+(ln.year||'')+' '+paintGz(ln.ganzhi,spec,tone)+' '+(ln.shi_shen||'')+'</b></p><div class="m6-block-title">大運排盤 '+toneBtns()+'</div><div style="overflow:auto"><table class="yun-table"><thead><tr><th>限</th><th>干支</th><th>十神</th><th>虛歲</th><th>交運</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="m6-block-title">當運流年</div><div style="overflow:auto"><table class="yun-table"><thead><tr><th>年</th><th>干支</th><th>十神</th></tr></thead><tbody>'+lns+'</tbody></table></div></div>';
   }
   function ensureCss(){
     if(document.getElementById('tx-mj-css')) return;
     var st=document.createElement('style');
     st.id='tx-mj-css';
-    st.textContent='.mj-plus{color:var(--green-2);font-weight:800;font-family:var(--font-mono)}.mj-minus{color:var(--red);font-weight:800;font-family:var(--font-mono)}.mj-score{font-family:var(--font-mono);font-size:18px;margin:0 4px}.mj-how{display:inline-block;margin-left:4px;font-size:10px;color:var(--ink-mute)}.mj-hint{font-size:11px;color:var(--ink-mute)}.xy-table td{font-size:12px;line-height:1.45;vertical-align:top}.xy-table .wx-mu,.xy-table .wx-huo,.xy-table .wx-tu,.xy-table .wx-jin,.xy-table .wx-shui{margin-right:4px}';
+    st.textContent='.mj-plus{color:var(--green-2);font-weight:800;font-family:var(--font-mono)}.mj-minus{color:var(--red);font-weight:800;font-family:var(--font-mono)}.mj-score{font-family:var(--font-mono);font-size:18px;margin:0 4px}.mj-how{display:inline-block;margin-left:4px;font-size:10px;color:var(--ink-mute)}.mj-hint{font-size:11px;color:var(--ink-mute)}.xy-table td{font-size:12px;line-height:1.45;vertical-align:top}.xy-good{color:var(--red);font-weight:800}.xy-bad{color:#3b82f6;font-weight:800}.yun-tone{display:inline-flex;margin-left:8px;vertical-align:middle;border:1px solid var(--line);border-radius:999px;overflow:hidden}.yun-tone button{border:0;background:transparent;color:var(--ink-mute);font:inherit;font-size:12px;padding:3px 10px;cursor:pointer}.yun-tone button.active{background:var(--gold);color:#1a1408;font-weight:700}';
     document.head.appendChild(st);
   }
   function loadScript(src, done){
@@ -61,6 +85,12 @@
     box=document.createElement('div');
     box.id='natalOut';
     status.parentNode.insertBefore(box, status.nextSibling);
+    box.addEventListener('click', function(ev){
+      var btn=ev.target.closest('[data-yun-tone]');
+      if(!btn) return;
+      yunTone=btn.getAttribute('data-yun-tone');
+      render();
+    });
     return box;
   }
   function render(){
@@ -84,14 +114,13 @@
       var pers=E.pillarsAt(per.y,per.m,per.d,per.h,per.min);
       var mj=(E.scoreMingJu)?E.scoreMingJu(pers,{day:per.d}):null;
       var mjHtml=(E.mingJuHTML&&mj)?E.mingJuHTML(mj):'';
-      var xyHtml='';
-      if(mj&&E.l1XiyongSpec&&E.l1XiyongHTML){
-        xyHtml=E.l1XiyongHTML(E.l1XiyongSpec(mj.dayMasterWx, mj.band), mj.dayMaster, mj.dayMasterWx);
-      }
+      var spec=(mj&&E.l1XiyongSpec)?E.l1XiyongSpec(mj.dayMasterWx, mj.band):null;
+      lastSpec=spec;
+      var xyHtml=(spec&&E.l1XiyongHTML)?E.l1XiyongHTML(spec, mj.dayMaster, mj.dayMasterWx):'';
       var mx=(E.l1XiyongMatrixHTML)?E.l1XiyongMatrixHTML(mj&&mj.dayMasterWx, mj&&mj.band):matrix;
       var yunHtml='';
       if(E.buildYun){
-        try{ yunHtml=yunHTML(E.buildYun(per.y,per.m,per.d,per.h,per.min,sex,new Date())); }catch(e){}
+        try{ yunHtml=yunHTML(E.buildYun(per.y,per.m,per.d,per.h,per.min,sex,new Date()), spec, yunTone); }catch(e){}
       }
       box.classList.remove('hidden');
       box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+mjHtml+xyHtml+mx+yunHtml;
