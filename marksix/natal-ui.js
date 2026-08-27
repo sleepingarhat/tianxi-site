@@ -42,7 +42,7 @@
     if(document.getElementById('tx-mj-css')) return;
     var st=document.createElement('style');
     st.id='tx-mj-css';
-    st.textContent='.mj-plus{color:var(--green-2);font-weight:800;font-family:var(--font-mono)}.mj-minus{color:var(--red);font-weight:800;font-family:var(--font-mono)}.mj-score{font-family:var(--font-mono);font-size:18px;margin:0 4px}.mj-how{display:inline-block;margin-left:4px;font-size:10px;color:var(--ink-mute)}.mj-hint{font-size:11px;color:var(--ink-mute)}';
+    st.textContent='.mj-plus{color:var(--green-2);font-weight:800;font-family:var(--font-mono)}.mj-minus{color:var(--red);font-weight:800;font-family:var(--font-mono)}.mj-score{font-family:var(--font-mono);font-size:18px;margin:0 4px}.mj-how{display:inline-block;margin-left:4px;font-size:10px;color:var(--ink-mute)}.mj-hint{font-size:11px;color:var(--ink-mute)}.xy-table td{font-size:12px;line-height:1.45;vertical-align:top}.xy-table .wx-mu,.xy-table .wx-huo,.xy-table .wx-tu,.xy-table .wx-jin,.xy-table .wx-shui{margin-right:4px}';
     document.head.appendChild(st);
   }
   function loadScript(src, done){
@@ -53,22 +53,31 @@
     s.onload=function(){ if(done) done(); };
     document.head.appendChild(s);
   }
-  function render(){
+  function natalBox(){
     var box=document.getElementById('natalOut');
-    if(!box){
-      var status=document.getElementById('status');
-      if(!status||!status.parentNode) return;
-      box=document.createElement('div');
-      box.id='natalOut';
-      status.parentNode.insertBefore(box, status.nextSibling);
-    }
+    if(box) return box;
+    var status=document.getElementById('status');
+    if(!status||!status.parentNode) return null;
+    box=document.createElement('div');
+    box.id='natalOut';
+    status.parentNode.insertBefore(box, status.nextSibling);
+    return box;
+  }
+  function render(){
+    var box=natalBox();
+    if(!box) return;
     var per=readPersonal();
     var sex=currentSex();
     var E=global.TXMarkSixEngine;
-    if(!per||!sex){ box.classList.add('hidden'); box.innerHTML=''; return; }
+    var matrix=(E&&E.l1XiyongMatrixHTML)?E.l1XiyongMatrixHTML():'';
+    if(!per||!sex){
+      box.classList.remove('hidden');
+      box.innerHTML=matrix || '';
+      return;
+    }
     if(!E||!E.pillarsAt){
       box.classList.remove('hidden');
-      box.innerHTML='<div class="m6-note">命盤引擎未載入</div>';
+      box.innerHTML='<div class="m6-note">命盤引擎未載入</div>'+matrix;
       return;
     }
     try{
@@ -79,15 +88,16 @@
       if(mj&&E.l1XiyongSpec&&E.l1XiyongHTML){
         xyHtml=E.l1XiyongHTML(E.l1XiyongSpec(mj.dayMasterWx, mj.band), mj.dayMaster, mj.dayMasterWx);
       }
+      var mx=(E.l1XiyongMatrixHTML)?E.l1XiyongMatrixHTML(mj&&mj.dayMasterWx, mj&&mj.band):matrix;
       var yunHtml='';
       if(E.buildYun){
         try{ yunHtml=yunHTML(E.buildYun(per.y,per.m,per.d,per.h,per.min,sex,new Date())); }catch(e){}
       }
       box.classList.remove('hidden');
-      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+mjHtml+xyHtml+yunHtml;
+      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+mjHtml+xyHtml+mx+yunHtml;
     }catch(err){
       box.classList.remove('hidden');
-      box.innerHTML='<div class="m6-note" style="color:var(--red)">'+(err&&err.message||err)+'</div>';
+      box.innerHTML='<div class="m6-note" style="color:var(--red)">'+(err&&err.message||err)+'</div>'+matrix;
     }
   }
   function boot(){
@@ -96,7 +106,7 @@
     loadScript('./tianxi-wuxing.js?v=wx-20260827', function(){
       loadScript('./tianxi-canggan.js?v=cg-20260827', function(){
         loadScript('./tianxi-mingju.js?v=mj-l1c-20260827', function(){
-          loadScript('./tianxi-l1-xiyong.js?v=xy-l1-20260827', function(){
+          loadScript('./tianxi-l1-xiyong.js?v=xy-l1b-20260827', function(){
             if(!(global.TXMarkSixEngine&&global.TXMarkSixEngine.buildYun)){
               loadScript('./tianxi-mingpan.js', ready);
             } else ready();
