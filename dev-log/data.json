@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 19:39 HKT",
+  "generatedHKT": "2026-08-27 19:40 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "19:40",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore: drop 藏干 footnote from UI",
+      "scope": "site",
+      "sha": "b569f7e"
+    },
     {
       "date": "2026-08-27",
       "time": "19:39",
@@ -11,6 +21,26 @@
       "title": "chore: hide layer notes from natal UI",
       "scope": "site",
       "sha": "8a96472"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "19:39",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "f83ce64"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "19:39",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore: drop correction footnotes from 旺衰 UI",
+      "scope": "site",
+      "sha": "f452767"
     },
     {
       "date": "2026-08-27",
@@ -271,36 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "556593b"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "16:49",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): restore full colorful UI, stats rows, flashing hit balls",
-      "scope": "site",
-      "sha": "1837ba2"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "16:49",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "d058993"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "16:47",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "4a88769"
     },
     {
       "date": "2026-08-26",
