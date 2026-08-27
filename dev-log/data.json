@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 19:14 HKT",
+  "generatedHKT": "2026-08-27 19:15 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "19:15",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(natal): always render 喜用规格表",
+      "scope": "site",
+      "sha": "83abc59"
+    },
     {
       "date": "2026-08-27",
       "time": "19:14",
@@ -11,6 +21,16 @@
       "title": "feat: frontend full layer-1 喜用 matrix",
       "scope": "site",
       "sha": "b927b2f"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "19:14",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "45d9a76"
     },
     {
       "date": "2026-08-27",
@@ -281,26 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "6569ea5"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "16:21",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): cache-bust UI restore",
-      "scope": "site",
-      "sha": "22210f1"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "15:27",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "7987642"
     },
     {
       "date": "2026-08-26",
