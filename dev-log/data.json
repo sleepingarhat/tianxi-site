@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 14:44 HKT",
+  "generatedHKT": "2026-08-27 14:45 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "14:45",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): resolve engine at call time; guard personalQimen",
+      "scope": "site",
+      "sha": "4fbb6bb"
+    },
     {
       "date": "2026-08-27",
       "time": "14:44",
@@ -11,6 +21,16 @@
       "title": "restore(marksix): full index.html with cache-bust fix-pq-20260827",
       "scope": "site",
       "sha": "d9b1229"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "14:44",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "bcdd9fe"
     },
     {
       "date": "2026-08-27",
@@ -281,26 +301,6 @@
       "title": "marksix natal: restore colored pillars with shi-shen and canggan",
       "scope": "site",
       "sha": "9234b55"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "23:13",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "marksix: wire natal chart UI (gender, qiyun, current dayun, liunian)",
-      "scope": "site",
-      "sha": "6c2bd68"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "21:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "963ca84"
     },
     {
       "date": "2026-08-26",
