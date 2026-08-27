@@ -103,9 +103,9 @@
   function boot(){
     ensureCss();
     function ready(){ render(); }
-    loadScript('./tianxi-wuxing.js?v=wx-20260827', function(){
-      loadScript('./tianxi-canggan.js?v=cg-20260827', function(){
-        loadScript('./tianxi-mingju.js?v=mj-l1c-20260827', function(){
+    loadScript('./tianxi-wuxing.js?v=wx-l1d-20260827', function(){
+      loadScript('./tianxi-canggan.js?v=cg-l1d-20260827', function(){
+        loadScript('./tianxi-mingju.js?v=mj-l1d-20260827', function(){
           loadScript('./tianxi-l1-xiyong.js?v=xy-l1b-20260827', function(){
             if(!(global.TXMarkSixEngine&&global.TXMarkSixEngine.buildYun)){
               loadScript('./tianxi-mingpan.js', ready);
