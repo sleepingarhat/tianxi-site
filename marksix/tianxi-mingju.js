@@ -1,4 +1,4 @@
-/* 天喜命局計分 · 第 1 層：日干五行生克評分（自訂，非子平喜用） */
+/* 天喜命局計分 · 第 1 層 */
 (function (global) {
   'use strict';
   var WX_G = { 甲: '木', 乙: '木', 丙: '火', 丁: '火', 戊: '土', 己: '土', 庚: '金', 辛: '金', 壬: '水', 癸: '水' };
@@ -26,12 +26,9 @@
   }
   function isSupport(rel) { return rel === '生' || rel === '扶'; }
   function detectSanhe(zhis) {
-    var set = {};
-    zhis.forEach(function (z) { if (z) set[z] = 1; });
+    var set = {}; zhis.forEach(function (z) { if (z) set[z] = 1; });
     var hits = [];
-    SANHE.forEach(function (h) {
-      if (h.zhi.every(function (z) { return set[z]; })) hits.push(h);
-    });
+    SANHE.forEach(function (h) { if (h.zhi.every(function (z) { return set[z]; })) hits.push(h); });
     return hits;
   }
   function classify(score) {
@@ -53,35 +50,26 @@
     var notes = [];
     var sanhe = detectSanhe(zhis);
     var heMap = {};
-    sanhe.forEach(function (hh) {
-      hh.zhi.forEach(function (z) { heMap[z] = hh.wx; });
-      notes.push('三合' + hh.name + '化' + hh.wx);
-    });
+    sanhe.forEach(function (hh) { hh.zhi.forEach(function (z) { heMap[z] = hh.wx; }); notes.push('三合' + hh.name + '化' + hh.wx); });
     var tombs = zhis.filter(function (z) { return TOMB[z] && !heMap[z]; });
     if (tombs.length) notes.push(tombs.join('、') + '本氣作土計分；雜氣比例待「四季月五行特性」再拆');
     var slots = [
-      { key: 'yearG', lab: '年干', glyph: gans[0], kind: 'gan' },
-      { key: 'monthG', lab: '月干', glyph: gans[1], kind: 'gan' },
-      { key: 'dayG', lab: '日干', glyph: gans[2], kind: 'gan' },
-      { key: 'hourG', lab: '時干', glyph: gans[3], kind: 'gan' },
-      { key: 'yearZ', lab: '年支', glyph: zhis[0], kind: 'zhi' },
-      { key: 'monthZ', lab: '月支', glyph: zhis[1], kind: 'zhi' },
-      { key: 'dayZ', lab: '日支', glyph: zhis[2], kind: 'zhi' },
-      { key: 'hourZ', lab: '時支', glyph: zhis[3], kind: 'zhi' }
+      { key: 'yearG', lab: '年干', glyph: gans[0], kind: 'gan' }, { key: 'monthG', lab: '月干', glyph: gans[1], kind: 'gan' },
+      { key: 'dayG', lab: '日干', glyph: gans[2], kind: 'gan' }, { key: 'hourG', lab: '時干', glyph: gans[3], kind: 'gan' },
+      { key: 'yearZ', lab: '年支', glyph: zhis[0], kind: 'zhi' }, { key: 'monthZ', lab: '月支', glyph: zhis[1], kind: 'zhi' },
+      { key: 'dayZ', lab: '日支', glyph: zhis[2], kind: 'zhi' }, { key: 'hourZ', lab: '時支', glyph: zhis[3], kind: 'zhi' }
     ];
     var items = slots.map(function (s) {
       var wx, how = '';
       if (s.kind === 'gan') wx = WX_G[s.glyph] || '';
       else if (heMap[s.glyph]) { wx = heMap[s.glyph]; how = '三合'; }
-      else {
-        wx = ZWX[s.glyph] || '';
-        if (TOMB[s.glyph]) how = '本氣土';
-      }
+      else { wx = ZWX[s.glyph] || ''; if (TOMB[s.glyph]) how = '本氣土'; }
       var rel = s.key === 'dayG' ? '扶' : relToDm(wx, dmWx);
       var abs = WEIGHT[s.key] || 0;
       var support = s.key === 'dayG' ? true : isSupport(rel);
       var signed = support ? abs : -abs;
-      return { key: s.key, lab: s.lab, glyph: s.glyph, wx: wx, cls: WX_CLS[wx] || '', rel: rel, how: how, abs: abs, signed: signed, support: support };
+      var state = (global.TXMarkSixEngine && global.TXMarkSixEngine.wangShuai) ? global.TXMarkSixEngine.wangShuai(wx, zhis[1]) : '';
+      return { key: s.key, lab: s.lab, glyph: s.glyph, wx: wx, cls: WX_CLS[wx] || '', rel: rel, how: how, abs: abs, signed: signed, support: support, state: state };
     });
     var posSum = 0, negSum = 0;
     items.forEach(function (it) { if (it.support) posSum += it.abs; else negSum += it.abs; });
@@ -90,13 +78,16 @@
     if (score === 15 || score === 50 || score === 85) notes.push('得分恰為' + score + '，需詳析含雜氣之地支');
     var zhuan = cls.band === 'ji-wang' ? (JI_WANG[dmWx] || '') : null;
     return {
-      layer: 1, ruleVersion: 'mingju-l1b-benqi-tu',
+      layer: 1, ruleVersion: 'mingju-l1c-wuxing-ref',
       pillars: { year: y, month: mo, day: d, hour: h },
       dayMaster: dm, dayMasterWx: dmWx, dayOfMonth: dayNum,
       items: items, posSum: posSum, negSum: negSum, score: score,
       mingGe: cls.ge, band: cls.band, zhuanGe: zhuan,
       sanhe: sanhe.map(function (hh) { return hh.name + '→' + hh.wx; }),
-      notes: notes, nextLayers: ['原局生克制化刑沖合害', '流年大運計分']
+      notes: notes, nextLayers: ['原局生克制化刑沖合害', '流年大運計分'],
+      monthZhi: zhis[1],
+      season: (global.TXMarkSixEngine && global.TXMarkSixEngine.seasonOf) ? global.TXMarkSixEngine.seasonOf(zhis[1]) : '',
+      dmWangShuai: (global.TXMarkSixEngine && global.TXMarkSixEngine.wangShuai) ? global.TXMarkSixEngine.wangShuai(dmWx, zhis[1]) : ''
     };
   }
   function mingJuHTML(r) {
@@ -104,17 +95,16 @@
     var rows = r.items.map(function (it) {
       var sg = it.signed > 0 ? ('+' + it.signed) : String(it.signed);
       var c = it.support ? 'mj-plus' : 'mj-minus';
-      return '<tr><td>' + it.lab + '</td><td class="wx-' + it.cls + '">' + it.glyph + '<i class="bz-shen">' + it.wx + '</i></td><td>' + it.rel + (it.how ? '<span class="mj-how">' + it.how + '</span>' : '') + '</td><td class="' + c + '">' + sg + '</td></tr>';
+      return '<tr><td>' + it.lab + '</td><td class="wx-' + it.cls + '">' + it.glyph + '<i class="bz-shen">' + it.wx + (it.state || '') + '</i></td><td>' + it.rel + (it.how ? '<span class="mj-how">' + it.how + '</span>' : '') + '</td><td class="' + c + '">' + sg + '</td></tr>';
     }).join('');
     var geLine = '<b>' + r.mingGe + '</b>' + (r.zhuanGe ? ' · ' + r.zhuanGe : '');
     var note = (r.notes && r.notes.length) ? '<p class="yun-meta">' + r.notes.join(' · ') + '</p>' : '';
-    return '<div class="yun-wrap mj-wrap"><div class="m6-block-title">命局分析 · 第 1 層</div><p class="yun-meta">以日干 <span class="wx-' + (WX_CLS[r.dayMasterWx] || '') + '">' + r.dayMaster + r.dayMasterWx + '</span> 為核心 · 生扶為正、克泄耗為負 · 日干永取正分<br>得分（正分之和）<b class="mj-score">' + r.score + '</b>　' + geLine + '<br><span class="mj-hint">較弱 15–50 · 較旺 50–85 · 極弱 <15 · 極旺 >85</span></p><div style="overflow:auto"><table class="yun-table mj-table"><thead><tr><th>位置</th><th>字</th><th>對日干</th><th>分</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + note + '<p class="yun-meta">下層未計：' + (r.nextLayers || []).join('、') + '</p></div>';
+    var ref = (global.TXMarkSixEngine && global.TXMarkSixEngine.wuxingRefHTML) ? global.TXMarkSixEngine.wuxingRefHTML(r.monthZhi, r.dayMasterWx) : '';
+    return '<div class="yun-wrap mj-wrap"><div class="m6-block-title">命局分析 · 第 1 層</div><p class="yun-meta">以日干 <span class="wx-' + (WX_CLS[r.dayMasterWx] || '') + '">' + r.dayMaster + r.dayMasterWx + '</span> 為核心 · 生扶為正、克泄耗為負 · 日干永取正分<br>得分（正分之和）<b class="mj-score">' + r.score + '</b>　' + geLine + '<br><span class="mj-hint">較弱 15–50 · 較旺 50–85 · 極弱 <15 · 極旺 >85</span></p><div style="overflow:auto"><table class="yun-table mj-table"><thead><tr><th>位置</th><th>字</th><th>對日干</th><th>分</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + note + '<p class="yun-meta">下層未計：' + (r.nextLayers || []).join('、') + '</p></div>' + ref;
   }
   function install() {
     var E = global.TXMarkSixEngine || (global.TXMarkSixEngine = {});
-    E.scoreMingJu = scoreMingJu;
-    E.mingJuHTML = mingJuHTML;
-    E.MINGJU_LAYER = 1;
+    E.scoreMingJu = scoreMingJu; E.mingJuHTML = mingJuHTML; E.MINGJU_LAYER = 1;
   }
   install();
 })(typeof window !== 'undefined' ? window : globalThis);
