@@ -1,14 +1,15 @@
-/* 第 1 層喜用規格
- * 極弱<15 從弱：順克泄耗，忌生扶
- * 較弱 15–50 扶抑身弱：用印、喜比劫，忌官殺食傷，仇財
- * 較旺 50–85 扶抑身旺：用食傷財、喜官殺，忌印，仇比劫
- * 極旺>85 專旺順洩：用食傷、喜印比，忌財，仇官殺
- */
+/* 第 1 層喜用規格 */
 (function (global) {
   'use strict';
   var SHENG = { 木: '火', 火: '土', 土: '金', 金: '水', 水: '木' };
   var KE = { 木: '土', 火: '金', 土: '水', 金: '木', 水: '火' };
-  var BAND_KEY = { 'ji-ruo': 'ji-ruo', ruo: 'ruo', wang: 'wang', 'ji-wang': 'ji-wang', edge: 'edge' };
+  var WX_CLS = { 木: 'mu', 火: 'huo', 土: 'tu', 金: 'jin', 水: 'shui' };
+  var BANDS = [
+    { key: 'ji-ruo', lab: '極弱格', range: '<15', name: '從弱' },
+    { key: 'ruo', lab: '較弱格', range: '15–50', name: '扶抑身弱' },
+    { key: 'wang', lab: '較旺格', range: '50–85', name: '扶抑身旺' },
+    { key: 'ji-wang', lab: '極旺格', range: '>85', name: '專旺順洩' }
+  ];
   var SPEC = {
     'ji-ruo': { name: '從弱', yong: ['食傷', '財', '官殺'], xi: [], ji: ['印', '比劫'], chou: [] },
     ruo: { name: '扶抑身弱', yong: ['印'], xi: ['比劫'], ji: ['官殺', '食傷'], chou: ['財'] },
@@ -17,6 +18,7 @@
     edge: { name: '交界兩可', yong: ['印', '食傷'], xi: ['比劫', '財'], ji: ['官殺'], chou: [] }
   };
   var ZHUAN = { 木: '曲直格', 火: '炎上格', 土: '稼穣格', 金: '從革格', 水: '潤下格' };
+  var DM_LAB = { 木: '甲乙木', 火: '丙丁火', 土: '戊己土', 金: '庚辛金', 水: '壬癸水' };
   function rolesOf(dmWx) {
     var yin = '', guan = '';
     Object.keys(SHENG).forEach(function (k) { if (SHENG[k] === dmWx) yin = k; });
@@ -31,8 +33,14 @@
     });
     return out;
   }
+  function paint(xs) {
+    if (!xs || !xs.length) return '—';
+    return xs.map(function (w) {
+      return '<span class="wx-' + (WX_CLS[w] || '') + '">' + w + '</span>';
+    }).join('');
+  }
   function specFor(dmWx, band) {
-    var key = BAND_KEY[band] || 'ruo';
+    var key = SPEC[band] ? band : 'ruo';
     var pack = SPEC[key];
     var roles = rolesOf(dmWx);
     return {
@@ -47,31 +55,37 @@
       chou: expand(roles, pack.chou)
     };
   }
-  function allMatrix() {
-    var dms = ['木', '火', '土', '金', '水'];
-    var bands = ['ji-ruo', 'ruo', 'wang', 'ji-wang'];
-    var rows = [];
-    dms.forEach(function (wx) {
-      bands.forEach(function (b) {
-        var s = specFor(wx, b);
-        rows.push({ dmWx: wx, band: b, method: s.method, zhuanGe: s.zhuanGe, yong: s.yong, xi: s.xi, ji: s.ji, chou: s.chou });
-      });
-    });
-    return rows;
-  }
   function xiyongHTML(s, dm, dmWx) {
     if (!s) return '';
-    function cell(xs) { return xs.length ? xs.join('、') : '—'; }
-    return '<div class="yun-wrap"><div class="m6-block-title">第 1 層喜用</div>' +
-      '<p class="yun-meta">日主' + (dm || '') + (dmWx || '') + ' · ' + s.method + (s.zhuanGe ? ' · ' + s.zhuanGe : '') +
-      '<br>用神 <b>' + cell(s.yong) + '</b> · 喜神 ' + cell(s.xi) +
-      ' · 忌神 ' + cell(s.ji) + ' · 仇神 ' + cell(s.chou) + '</p></div>';
+    return '<div class="yun-wrap xy-now"><div class="m6-block-title">第 1 層喜用（本局）</div>' +
+      '<p class="yun-meta">日主 <span class="wx-' + (WX_CLS[dmWx] || '') + '">' + (dm || '') + (dmWx || '') + '</span> · ' +
+      s.method + (s.zhuanGe ? ' · ' + s.zhuanGe : '') + '</p>' +
+      '<div style="overflow:auto"><table class="yun-table"><thead><tr><th>用神</th><th>喜神</th><th>忌神</th><th>仇神</th></tr></thead>' +
+      '<tbody><tr><td>' + paint(s.yong) + '</td><td>' + paint(s.xi) + '</td><td>' + paint(s.ji) + '</td><td>' + paint(s.chou) + '</td></tr></tbody></table></div></div>';
+  }
+  function matrixHTML(curWx, curBand) {
+    var rows = ['木', '火', '土', '金', '水'].map(function (wx) {
+      var cells = BANDS.map(function (b) {
+        var s = specFor(wx, b.key);
+        var on = (wx === curWx && b.key === curBand) ? ' class="now"' : '';
+        var extra = s.zhuanGe ? '<div class="mj-hint">' + s.zhuanGe + '</div>' : '';
+        return '<td' + on + '><div>用 ' + paint(s.yong) + '</div><div>喜 ' + paint(s.xi) +
+          '</div><div>忌 ' + paint(s.ji) + '</div><div>仇 ' + paint(s.chou) + '</div>' + extra + '</td>';
+      }).join('');
+      return '<tr><td class="wx-' + (WX_CLS[wx] || '') + '">' + DM_LAB[wx] + '</td>' + cells + '</tr>';
+    }).join('');
+    var head = BANDS.map(function (b) {
+      return '<th>' + b.lab + '<div class="mj-hint">' + b.range + ' · ' + b.name + '</div></th>';
+    }).join('');
+    return '<div class="yun-wrap xy-matrix"><div class="m6-block-title">第 1 層喜用規格</div>' +
+      '<p class="yun-meta">極弱從弱：順克泄耗　較弱：印主比輔　較旺：洩耗為主　極旺：專旺順洩</p>' +
+      '<div style="overflow:auto"><table class="yun-table xy-table"><thead><tr><th>日主</th>' + head + '</tr></thead><tbody>' + rows + '</tbody></table></div></div>';
   }
   function install() {
     var E = global.TXMarkSixEngine || (global.TXMarkSixEngine = {});
     E.l1XiyongSpec = specFor;
-    E.l1XiyongMatrix = allMatrix;
     E.l1XiyongHTML = xiyongHTML;
+    E.l1XiyongMatrixHTML = matrixHTML;
   }
   install();
 })(typeof window !== 'undefined' ? window : globalThis);
