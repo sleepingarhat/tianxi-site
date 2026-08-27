@@ -135,27 +135,37 @@
     el.innerHTML=err?'<span style="color:var(--red)">'+msg+'</span>':msg;
   }
   function showPanel(which){
-    ['solo','bazi','qimen','bt'].forEach(function(k){
+    ['solo','bazi','qimen'].forEach(function(k){
       var el=document.getElementById('panel-'+k);
       if(el)el.classList.toggle('hidden',k!==which);
     });
+    var bt=document.getElementById('panel-bt');
+    if(bt) bt.classList.add('hidden');
     document.querySelectorAll('.m6-mode-btn').forEach(function(b){
       var on=b.getAttribute('data-mode')===which;
       b.classList.toggle('active',on);
       b.setAttribute('aria-pressed',on?'true':'false');
     });
-    if(which!=='bt'){
-      document.querySelectorAll('.m6-bt-btn').forEach(function(b){
-        b.classList.remove('active');
-        b.setAttribute('aria-pressed','false');
-      });
+    document.querySelectorAll('.m6-bt-run').forEach(function(b){
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed','false');
+    });
+  }
+  function btFoot(kind){
+    if(kind==='solo'){
+      return '<div class="m6-bt-foot">'+
+        '<button type="button" class="m6-btn m6-bt-run" data-bt="pure_bazi">八字獨測 · 近100期回測</button>'+
+        '<button type="button" class="m6-btn m6-bt-run" data-bt="pure_qimen">奇門獨測 · 近100期回測</button>'+
+        '</div>';
     }
+    var lab=kind==='bazi'?'八字合盤 · 近100期回測':'奇門合盤 · 近100期回測';
+    return '<div class="m6-bt-foot"><button type="button" class="m6-btn m6-bt-run" data-bt="'+kind+'">'+lab+'</button></div>';
   }
   function runSolo(){
     if(!engineReady('pureBazi')||!engineReady('pureQimen')||!NEXT){setStatus('引擎未載入完整版，請強制重新整理頁面',true);return;}
     var E=engine(); showPanel('solo');
     var bz=E.pureBazi(NEXT.y,NEXT.m,NEXT.d), qm=E.pureQimen(NEXT.y,NEXT.m,NEXT.d);
-    document.getElementById('soloOut').innerHTML='<div class="m6-meta">'+DESC_SOLO+'</div><div class="m6-block"><div class="m6-block-title">純八字 · 15 碼</div>'+renderPillarsChart(bz.pillars,'攪珠日八字')+ballsHTML(bz.numbers)+'</div><div class="m6-block"><div class="m6-block-title">純奇門 · 15 碼</div>'+panHTML(qm.pan,'攪珠日奇門')+ballsHTML(qm.numbers)+'</div>';
+    document.getElementById('soloOut').innerHTML='<div class="m6-meta">'+DESC_SOLO+'</div><div class="m6-block"><div class="m6-block-title">純八字 · 15 碼</div>'+renderPillarsChart(bz.pillars,'攪珠日八字')+ballsHTML(bz.numbers)+'</div><div class="m6-block"><div class="m6-block-title">純奇門 · 15 碼</div>'+panHTML(qm.pan,'攪珠日奇門')+ballsHTML(qm.numbers)+'</div>'+btFoot('solo');
     setStatus('八字與奇門獨測 · 下一期 '+NEXT.draw);
   }
   function runBaziCombo(){
@@ -164,7 +174,7 @@
     if(!per){setStatus('請先輸入個人出生資料（含時辰）',true);return;}
     showPanel('bazi');
     var r=E.personalBazi(per.y,per.m,per.d,per.h,NEXT.y,NEXT.m,NEXT.d);
-    document.getElementById('baziOut').innerHTML='<div class="m6-meta">'+DESC_BAZI+'</div>'+renderPillarsChart(r.personal_pillars,'個人八字')+renderPillarsChart(r.draw_pillars,'攪珠日八字')+'<div class="m6-block-title" style="margin-top:12px">八字合盤 · 15 碼</div>'+ballsHTML(r.numbers);
+    document.getElementById('baziOut').innerHTML='<div class="m6-meta">'+DESC_BAZI+'</div>'+renderPillarsChart(r.personal_pillars,'個人八字')+renderPillarsChart(r.draw_pillars,'攪珠日八字')+'<div class="m6-block-title" style="margin-top:12px">八字合盤 · 15 碼</div>'+ballsHTML(r.numbers)+btFoot('bazi');
     setStatus('八字合盤 · 下一期 '+NEXT.draw);
   }
   function runQimenCombo(){
@@ -173,7 +183,7 @@
     if(!per){setStatus('請先輸入個人出生資料（含時辰）',true);return;}
     showPanel('qimen');
     var r=E.personalQimen(per.y,per.m,per.d,per.h,NEXT.y,NEXT.m,NEXT.d);
-    document.getElementById('qimenOut').innerHTML='<div class="m6-meta">'+DESC_QIMEN+'</div>'+panHTML(r.personal,'個人奇門終身參考盤（出生時起）')+panHTML(r.draw,'攪珠日奇門盤')+'<div class="m6-block-title" style="margin-top:12px">奇門合盤 · 15 碼</div>'+ballsHTML(r.numbers);
+    document.getElementById('qimenOut').innerHTML='<div class="m6-meta">'+DESC_QIMEN+'</div>'+panHTML(r.personal,'個人奇門終身參考盤（出生時起）')+panHTML(r.draw,'攪珠日奇門盤')+'<div class="m6-block-title" style="margin-top:12px">奇門合盤 · 15 碼</div>'+ballsHTML(r.numbers)+btFoot('qimen');
     setStatus('奇門合盤 · 下一期 '+NEXT.draw);
   }
   function runBacktest(kind){
@@ -184,7 +194,9 @@
     var needPersonal=(kind==='bazi'||kind==='qimen');
     var per=needPersonal?readPersonal():null;
     if(needPersonal&&!per){setStatus('合盤回測需先輸入個人出生資料',true);return;}
-    showPanel('bt'); setStatus('回測計算中…');
+    var btPanel=document.getElementById('panel-bt');
+    if(btPanel) btPanel.classList.remove('hidden');
+    setStatus('回測計算中…');
     var slice=HISTORY.slice(-100).slice().reverse();
     var tbody=document.querySelector('#btTable tbody');
     if(!tbody){setStatus('回測表未就緒',true);return;}
@@ -193,7 +205,7 @@
     var labels={pure_bazi:'八字獨測',pure_qimen:'奇門獨測',bazi:'八字合盤',qimen:'奇門合盤'};
     var modeLabel=labels[kind]||kind;
     document.getElementById('btModeLabel').textContent='最近100期'+modeLabel+'回測數據 · n='+n;
-    document.querySelectorAll('.m6-bt-btn').forEach(function(b){
+    document.querySelectorAll('.m6-bt-run').forEach(function(b){
       var on=b.getAttribute('data-bt')===kind;
       b.classList.toggle('active',on);
       b.setAttribute('aria-pressed',on?'true':'false');
@@ -265,9 +277,14 @@
     var a=document.getElementById('btnSolo'); if(a) a.onclick=function(){try{runSolo();}catch(e){setStatus(e.message,true);}};
     var b=document.getElementById('btnBazi'); if(b) b.onclick=function(){try{runBaziCombo();}catch(e){setStatus(e.message,true);}};
     var c=document.getElementById('btnQimen'); if(c) c.onclick=function(){try{runQimenCombo();}catch(e){setStatus(e.message,true);}};
-    document.querySelectorAll('.m6-bt-btn').forEach(function(btn){
-      btn.onclick=function(){ try{runBacktest(btn.getAttribute('data-bt'));}catch(e){setStatus(e.message,true);} };
-    });
+    if(!document.body.getAttribute('data-m6-bt-bound')){
+      document.body.setAttribute('data-m6-bt-bound','1');
+      document.addEventListener('click',function(ev){
+        var btn=ev.target&&ev.target.closest&&ev.target.closest('.m6-bt-run');
+        if(!btn) return;
+        try{runBacktest(btn.getAttribute('data-bt'));}catch(e){setStatus(e.message,true);}
+      });
+    }
   }
   function setupControls(){
     buildSeg('m6-periods',[{v:'10',label:'近10期'},{v:'50',label:'近50期'},{v:'100',label:'近100期'},{v:'500',label:'近500期'},{v:'ytd',label:'今年至今'}],function(){return PERIOD;},function(v){PERIOD=v;renderStats();});
