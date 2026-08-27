@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-27 05:55 HKT",
+  "generatedHKT": "2026-08-27 13:37 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "13:36",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore natal UI and add qimen 9-palace CSS + cache-bust",
+      "scope": "site",
+      "sha": "fdacd02"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "05:55",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "7cd28e1"
+    },
     {
       "date": "2026-08-27",
       "time": "05:54",
@@ -277,30 +297,10 @@
       "time": "17:02",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 出生框 placeholder 真正垂直置中（抵銷 .m6-res input margin）",
-      "scope": "site",
-      "sha": "1da0b8c"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "17:02",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "1133019"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "14:56",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "dcd3e7d"
     },
     {
       "date": "2026-08-26",
