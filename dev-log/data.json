@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-27 22:41 HKT",
+  "generatedHKT": "2026-08-28 00:51 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-28",
+      "time": "00:51",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(marksix): remove unused /marksix/monitor/ page",
+      "scope": "site",
+      "sha": "aab0ea2"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "22:41",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "786189f"
+    },
     {
       "date": "2026-08-27",
       "time": "22:40",
@@ -281,26 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "acb5557"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:10",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "40601bf"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "18:09",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore: load canggan tables after wuxing",
-      "scope": "site",
-      "sha": "a37dd65"
     },
     {
       "date": "2026-08-26",
