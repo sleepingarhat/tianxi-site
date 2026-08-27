@@ -89,7 +89,7 @@
   function boot(){
     ensureCss();
     function ready(){ render(); }
-    loadScript('./tianxi-mingju.js?v=mj-l1-20260827', function(){
+    loadScript('./tianxi-mingju.js?v=mj-l1b-20260827', function(){
       if(!(global.TXMarkSixEngine&&global.TXMarkSixEngine.buildYun)){
         loadScript('./tianxi-mingpan.js', ready);
       } else ready();
