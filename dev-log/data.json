@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 14:01 HKT",
+  "generatedHKT": "2026-08-27 14:04 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "14:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore engine.js with 9-palace qimen arrangement",
+      "scope": "site",
+      "sha": "45860c7"
+    },
     {
       "date": "2026-08-27",
       "time": "14:01",
@@ -11,6 +21,16 @@
       "title": "fix(marksix): 奇門九宮含中宮布奇儀，甲時旬首寄中對齊參考盤",
       "scope": "site",
       "sha": "aaf3e8f"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "14:01",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "b2ec40b"
     },
     {
       "date": "2026-08-27",
@@ -277,30 +297,10 @@
       "time": "19:08",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): 男女命 + 6tail 大運流年表（不改取號）",
-      "scope": "site",
-      "sha": "f51a8cb"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "19:08",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "84ece81"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "18:00",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "db171c1"
     },
     {
       "date": "2026-08-26",
