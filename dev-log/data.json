@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-28 01:11 HKT",
+  "generatedHKT": "2026-08-28 01:14 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-28",
+      "time": "01:14",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): 100-draw backtest buttons under solo/bazi/qimen",
+      "scope": "site",
+      "sha": "17d5627"
+    },
     {
       "date": "2026-08-28",
       "time": "01:11",
@@ -11,6 +21,16 @@
       "title": "feat(marksix): natal help buttons for xiyong matrix and score/refs",
       "scope": "site",
       "sha": "a413280"
+    },
+    {
+      "date": "2026-08-28",
+      "time": "01:11",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "b2fbad5"
     },
     {
       "date": "2026-08-28",
@@ -311,26 +331,6 @@
       "title": "chore: drop correction footnotes from 旺衰 UI",
       "scope": "site",
       "sha": "f452767"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "19:15",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(natal): always render 喜用规格表",
-      "scope": "site",
-      "sha": "83abc59"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "19:15",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "f12a358"
     },
     {
       "date": "2026-08-26",
