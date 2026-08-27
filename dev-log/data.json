@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-28 01:10 HKT",
+  "generatedHKT": "2026-08-28 01:11 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-28",
+      "time": "01:11",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): natal help buttons for xiyong matrix and score/refs",
+      "scope": "site",
+      "sha": "a413280"
+    },
     {
       "date": "2026-08-28",
       "time": "01:10",
@@ -11,6 +21,16 @@
       "title": "feat(marksix): put solo/combo + 100-draw backtest on user page; specs behind help buttons",
       "scope": "site",
       "sha": "ab3633d"
+    },
+    {
+      "date": "2026-08-28",
+      "time": "01:10",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "c06cec7"
     },
     {
       "date": "2026-08-28",
@@ -311,26 +331,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "f12a358"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "19:14",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat: frontend full layer-1 喜用 matrix",
-      "scope": "site",
-      "sha": "b927b2f"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "19:14",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "45d9a76"
     },
     {
       "date": "2026-08-26",
