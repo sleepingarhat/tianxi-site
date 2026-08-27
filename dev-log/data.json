@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-27 13:37 HKT",
+  "generatedHKT": "2026-08-27 14:01 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "14:01",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): 奇門九宮含中宮布奇儀，甲時旬首寄中對齊參考盤",
+      "scope": "site",
+      "sha": "aaf3e8f"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "13:37",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "f9219de"
+    },
     {
       "date": "2026-08-27",
       "time": "13:36",
@@ -281,26 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "db171c1"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "17:59",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): 特別號碼命中同樣閃爌金圈",
-      "scope": "site",
-      "sha": "7ef890c"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "17:02",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "1133019"
     },
     {
       "date": "2026-08-26",
