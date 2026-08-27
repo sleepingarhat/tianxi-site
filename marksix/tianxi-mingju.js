@@ -13,12 +13,7 @@
     { name: '寅午戌', wx: '火', zhi: ['寅', '午', '戌'] },
     { name: '巳酉丑', wx: '金', zhi: ['巳', '酉', '丑'] }
   ];
-  var ZAQ = {
-    辰: { early: '木', mid: '土', late: '火' },
-    未: { early: '火', mid: '土', late: '金' },
-    戌: { early: '金', mid: '土', late: '水' },
-    丑: { early: '水', mid: '土', late: '木' }
-  };
+  var TOMB = { 辰: 1, 戌: 1, 丑: 1, 未: 1 };
   var JI_WANG = { 土: '稼穣格', 木: '曲直格', 金: '從革格', 水: '潤下格', 火: '炎上格' };
   function relToDm(srcWx, dmWx) {
     if (!srcWx || !dmWx) return '';
@@ -30,14 +25,6 @@
     return '';
   }
   function isSupport(rel) { return rel === '生' || rel === '扶'; }
-  function zaqiWx(zhi, dayOfMonth) {
-    var q = ZAQ[zhi];
-    if (!q) return ZWX[zhi] || '';
-    var d = dayOfMonth || 15;
-    if (d <= 10) return q.early;
-    if (d <= 20) return q.mid;
-    return q.late;
-  }
   function detectSanhe(zhis) {
     var set = {};
     zhis.forEach(function (z) { if (z) set[z] = 1; });
@@ -70,6 +57,8 @@
       hh.zhi.forEach(function (z) { heMap[z] = hh.wx; });
       notes.push('三合' + hh.name + '化' + hh.wx);
     });
+    var tombs = zhis.filter(function (z) { return TOMB[z] && !heMap[z]; });
+    if (tombs.length) notes.push(tombs.join('、') + '本氣作土計分；雜氣比例待「四季月五行特性」再拆');
     var slots = [
       { key: 'yearG', lab: '年干', glyph: gans[0], kind: 'gan' },
       { key: 'monthG', lab: '月干', glyph: gans[1], kind: 'gan' },
@@ -84,10 +73,10 @@
       var wx, how = '';
       if (s.kind === 'gan') wx = WX_G[s.glyph] || '';
       else if (heMap[s.glyph]) { wx = heMap[s.glyph]; how = '三合'; }
-      else if (ZAQ[s.glyph]) {
-        wx = zaqiWx(s.glyph, dayNum);
-        how = '雜氣' + (dayNum <= 10 ? '餘氣' : dayNum <= 20 ? '本氣' : '進氣');
-      } else wx = ZWX[s.glyph] || '';
+      else {
+        wx = ZWX[s.glyph] || '';
+        if (TOMB[s.glyph]) how = '本氣土';
+      }
       var rel = s.key === 'dayG' ? '扶' : relToDm(wx, dmWx);
       var abs = WEIGHT[s.key] || 0;
       var support = s.key === 'dayG' ? true : isSupport(rel);
@@ -101,7 +90,7 @@
     if (score === 15 || score === 50 || score === 85) notes.push('得分恰為' + score + '，需詳析含雜氣之地支');
     var zhuan = cls.band === 'ji-wang' ? (JI_WANG[dmWx] || '') : null;
     return {
-      layer: 1, ruleVersion: 'mingju-l1-shengke',
+      layer: 1, ruleVersion: 'mingju-l1b-benqi-tu',
       pillars: { year: y, month: mo, day: d, hour: h },
       dayMaster: dm, dayMasterWx: dmWx, dayOfMonth: dayNum,
       items: items, posSum: posSum, negSum: negSum, score: score,
