@@ -1,4 +1,4 @@
-/* tianxi marksix — bazi + qimen chaibu-v3 · 起局 blog/407 */
+/* tianxi marksix — bazi + qimen chaibu-v3 · hetu-luoshu-v1 */
 (function (global) {
   'use strict';
   var GAN = '甲乙丙丁戊己庚辛壬癸';
@@ -9,7 +9,7 @@
   var WX_TAILS = { 水: [1, 6], 火: [2, 7], 木: [3, 8], 金: [4, 9], 土: [0, 5] };
   var YANG_JU = {
     冬至: [1, 7, 4], 小寒: [2, 8, 5], 大寒: [3, 9, 6], 立春: [8, 5, 2], 雨水: [9, 6, 3],
-    驚蟾: [1, 7, 4], 惊蛰: [1, 7, 4], 春分: [3, 9, 6], 清明: [4, 1, 7], 穀雨: [5, 2, 8], 谷雨: [5, 2, 8],
+    驚蟬: [1, 7, 4], 惊蛰: [1, 7, 4], 春分: [3, 9, 6], 清明: [4, 1, 7], 穀雨: [5, 2, 8], 谷雨: [5, 2, 8],
     立夏: [4, 1, 7], 小滿: [5, 2, 8], 小满: [5, 2, 8], 芒種: [6, 3, 9], 芒种: [6, 3, 9]
   };
   var YIN_JU = {
@@ -18,17 +18,14 @@
   };
   var FU_ZHI_YUAN = { 子: 0, 午: 0, 卯: 0, 酉: 0, 寅: 1, 申: 1, 巳: 1, 亥: 1, 辰: 2, 戌: 2, 丑: 2, 未: 2 };
   var PALACE_XIAN = { 1: 6, 2: 8, 3: 4, 4: 5, 5: 5, 6: 1, 7: 2, 8: 7, 9: 3 };
-  var PALACE_TAILS = {
-    1: [1, 6, 8], 8: [4, 5, 0, 7, 8], 3: [3, 8, 4], 4: [3, 8, 4, 5, 2],
-    9: [2, 7, 9, 3, 1], 2: [5, 0, 2, 8], 7: [4, 9, 2, 7, 6], 6: [4, 9, 6, 7, 1], 5: [5, 0]
-  };
   var FAN_HONG = {
     甲: 9, 己: 9, 子: 9, 午: 9, 乙: 8, 庚: 8, 丑: 8, 未: 8,
     丙: 7, 辛: 7, 寅: 7, 申: 7, 丁: 6, 壬: 6, 卯: 6, 酉: 6,
     戊: 5, 癸: 5, 辰: 5, 戌: 5, 巳: 4, 亥: 4
   };
-  var DRAW_W = { hour: 4, day: 3, month: 2, year: 1.5, day_master_wx: 1 };
-  var PERSONAL_W = { day: 3, hour: 2.5, month: 2, year: 1.5, day_master_wx: 1 };
+  var LUO_SHU_WX = { 1: '水', 2: '土', 3: '木', 4: '木', 5: '土', 6: '金', 7: '金', 8: '土', 9: '火' };
+  var DRAW_W = { hour: 4, day: 3, month: 2, year: 1.5 };
+  var PERSONAL_W = { day: 3, hour: 2.5, month: 2, year: 1.5 };
   var CANG_GAN = {
     子:['癸'], 丑:['己','癸','辛'], 寅:['甲','丙','戊'], 卯:['乙'],
     辰:['戊','乙','癸'], 巳:['丙','戊','庚'], 午:['丁','己'], 未:['己','丁','乙'],
@@ -96,31 +93,28 @@
     var ec = solar.getLunar().getEightChar();
     return { year: ec.getYear(), month: ec.getMonth(), day: ec.getDay(), hour: ec.getTime(), dayMaster: ec.getDay().charAt(0), dayMasterWx: WX_G[ec.getDay().charAt(0)] || '' };
   }
-  function mapGz(gz, weight, scores) {
-    if (!gz || gz.length < 2) return;
-    var gi = GAN.indexOf(gz.charAt(0)) + 1, zi = ZHI.indexOf(gz.charAt(1)) + 1;
-    if (gi < 1 || zi < 1) return;
-    var bases = [gi, zi, gi + zi, Math.abs(gi * zi), (gi * 6 + zi) % 49 + 1], cands = {};
-    bases.forEach(function (base) {
-      var n = ((base - 1) % 49) + 1; cands[n] = 1; cands[((n + 8) % 49) + 1] = 1; cands[((n + 23) % 49) + 1] = 1;
-    });
-    Object.keys(cands).forEach(function (k) { scores[+k] = (scores[+k] || 0) + weight; });
-  }
-  function mapWx(wx, weight, scores) {
+  function luoshuPalace(n) { var p = n % 9; return p === 0 ? 9 : p; }
+  function mapHetuLuoshu(wx, weight, scores) {
+    if (!wx || !weight) return;
     var tails = WX_TAILS[wx] || [];
     for (var n = 1; n <= 49; n++) {
       var t = n % 10;
       if (tails.indexOf(t) >= 0 || (t === 0 && tails.indexOf(0) >= 0)) scores[n] = (scores[n] || 0) + weight;
+      if (LUO_SHU_WX[luoshuPalace(n)] === wx) scores[n] = (scores[n] || 0) + weight;
     }
   }
   function scoreChart(pillars, weights, scores) {
-    ['year', 'month', 'day', 'hour'].forEach(function (k) { if (weights[k]) mapGz(pillars[k], weights[k], scores); });
-    if (weights.day_master_wx) mapWx(pillars.dayMasterWx || WX_G[pillars.day.charAt(0)], weights.day_master_wx, scores);
+    ['year', 'month', 'day', 'hour'].forEach(function (k) {
+      if (!weights[k] || !pillars[k]) return;
+      var gz = pillars[k];
+      mapHetuLuoshu(WX_G[gz.charAt(0)], weights[k], scores);
+      mapHetuLuoshu(ZWX[gz.charAt(1)], weights[k], scores);
+    });
   }
   function pureBazi(y, m, d) {
     var pillars = pillarsAt(y, m, d, 21), scores = {};
     scoreChart(pillars, DRAW_W, scores);
-    return { mode: 'pure_bazi', pillars: pillars, method: { anchor: '攪珠日 21:30 HKT', weights: '時4 日3 月2 年1.5 + 日主河圖1', pick: '五段目標各3' }, numbers: pick15(scores) };
+    return { mode: 'pure_bazi', pillars: pillars, method: { anchor: '攪珠日 21:30 HKT', map: '河圖尾數＋洛書九宮五行', weights: '時4 日3 月2 年1.5', pick: '五段各03' }, numbers: pick15(scores) };
   }
   function personalBazi(py, pm, pd, ph, dy, dm, dd) {
     var personal = pillarsAt(py, pm, pd, ph), draw = pillarsAt(dy, dm, dd, 21), scores = {};
@@ -169,11 +163,7 @@
     var chao = ft.date < jq.jieStart;
     return {
       yang: yang, ju: table[key][yi], yuan: ['上元', '中元', '下元'][yi],
-      meta: {
-        jie: jq.name, ju_key: key, fu_tou_gz: ft.gz,
-        jie_qi: chao ? '超神' : '接氣或正授',
-        method: 'chaibu', rule: 'qimen-chaibu-v3', source: 'qimenpai.com/blog/407'
-      }
+      meta: { jie: jq.name, ju_key: key, fu_tou_gz: ft.gz, jie_qi: chao ? '超神' : '接氣或正授', method: 'chaibu', rule: 'qimen-chaibu-v3', source: 'qimenpai.com/blog/407' }
     };
   }
   function arrangeDi(yang, ju) {
@@ -210,19 +200,6 @@
         if (mid && mid !== stem) stem = stem + mid;
       }
       tian[p] = stem;
-    }
-    return tian;
-  }
-  function arrangeTian(yang, di, hourGan, xunYi) {
-    var gan = hourGan === '甲' ? xunYi : hourGan;
-    if (YI_ORDER.indexOf(gan) < 0) gan = xunYi;
-    var start = findPalace(di, gan);
-    var gi = YI_ORDER.indexOf(gan);
-    if (gi < 0) gi = 0;
-    var tian = {};
-    for (var i = 0; i < 9; i++) {
-      var palace = yang ? ((start - 1 + i) % 9 + 1) : ((start - 1 - i + 9) % 9 + 1);
-      tian[palace] = YI_ORDER[(gi + i) % 9];
     }
     return tian;
   }
@@ -289,8 +266,7 @@
       palaces[n] = {
         id: n, name: GONG_NAME[n],
         di: (di && di[n]) || '', tian: (tian && tian[n]) || '',
-        star: stars[n] || '',
-        door: doors[n] || '', god: gods[n] || ''
+        star: stars[n] || '', door: doors[n] || '', god: gods[n] || ''
       };
     }
     return palaces;
@@ -317,8 +293,7 @@
       zhi_fu_star: STAR_HOME[originRaw] || '天禽',
       zhi_shi_palace: zs, zhi_shi_door: DOOR_HOME[originRaw] || '死門',
       xun_shou: xun.name, xun_shou_yi: yi0, kong_wang: xun.kong,
-      method_pan: '時家 · 拆補 · 轉盤',
-      meta: yj.meta
+      method_pan: '時家 · 拆補 · 轉盤', meta: yj.meta
     };
   }
   function qimenBoardHTML(pan, title) {
@@ -332,43 +307,21 @@
       if (n === zs) cls += ' zs';
       if (n === sg) cls += ' sg';
       if (n === 5) cls += ' mid';
-      return '<div class="'+cls+'">'
-        +'<div class="qm-god">'+(c.god || '')+'</div>'
-        +'<div class="qm-star">'+(c.star || '')+'</div>'
-        +'<div class="qm-door">'+(c.door || '')+'</div>'
-        +'<div class="qm-tian">'+(c.tian || '')+'</div>'
-        +'<div class="qm-di">'+(c.di || '')+'</div>'
-        +'<div class="qm-gong">'+c.name+n+'</div>'
-        +'</div>';
+      return '<div class="'+cls+'">'+'<div class="qm-god">'+(c.god || '')+'</div>'+'<div class="qm-star">'+(c.star || '')+'</div>'+'<div class="qm-door">'+(c.door || '')+'</div>'+'<div class="qm-tian">'+(c.tian || '')+'</div>'+'<div class="qm-di">'+(c.di || '')+'</div>'+'<div class="qm-gong">'+c.name+n+'</div>'+'</div>';
     }).join('');
     return '<style id="qm-css">.qm-wrap{margin:8px 0 14px}.qm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;border:1px solid var(--rule,#ddd);border-radius:12px;padding:6px;background:var(--paper-2,#f6f4ee)}.qm-cell{position:relative;min-height:92px;border:1px solid var(--rule,#ddd);border-radius:8px;background:var(--paper,#fff);padding:5px 4px 16px;display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center}.qm-cell.mid{background:var(--paper-3,#efece3)}.qm-cell.zf{box-shadow:inset 0 0 0 1.5px var(--gold,#c9a227)}.qm-cell.zs{background:color-mix(in srgb,var(--gold,#c9a227) 12%,var(--paper,#fff))}.qm-god{font-size:10px;font-weight:700;min-height:1.2em}.qm-star,.qm-door{font-size:12px;font-weight:800;line-height:1.2}.qm-tian{font-size:18px;font-weight:900;line-height:1.15;margin-top:2px}.qm-di{font-size:12px;font-weight:700;opacity:.7}.qm-gong{position:absolute;right:5px;bottom:3px;font-size:9px;opacity:.45}.qm-legend{display:flex;flex-wrap:wrap;gap:8px;font-size:10px;opacity:.7;margin-top:6px}</style>'+
-      '<div class="qm-wrap">'+
-      '<div class="bz-title"><b>'+title+'</b> · 時家拆補轉盤</div>'+
-      '<p class="yun-meta">'+(pan.yang ? '陽' : '陰')+'遁'+pan.ju+'局 '+pan.yuan+
-      ' · 旬首 '+(pan.xun_shou || '')+' · 空亡 '+(pan.kong_wang || '')+
-      '<br>值符 '+(pan.zhi_fu_star || '')+'→宮'+zf+
-      ' · 值使 '+(pan.zhi_shi_door || '')+'→宮'+zs+
-      ' · 時乾宮'+sg+
+      '<div class="qm-wrap">'+'<div class="bz-title"><b>'+title+'</b> · 時家拆補轉盤</div>'+
+      '<p class="yun-meta">'+(pan.yang ? '陽' : '陰')+'遁'+pan.ju+'局 '+pan.yuan+' · 旬首 '+(pan.xun_shou || '')+' · 空亡 '+(pan.kong_wang || '')+
+      '<br>值符 '+(pan.zhi_fu_star || '')+'→宮'+zf+' · 值使 '+(pan.zhi_shi_door || '')+'→宮'+zs+' · 時乾宮'+sg+
       (pan.pillars ? '<br>'+pan.pillars.year+' '+pan.pillars.month+' '+pan.pillars.day+' '+pan.pillars.hour : '')+
-      (pan.meta ? '<br>節氣 '+pan.meta.jie+(pan.meta.fu_tou_gz ? ' 符頭'+pan.meta.fu_tou_gz : '')+' · 拆補' : '')+
-      '</p>'+
+      (pan.meta ? '<br>節氣 '+pan.meta.jie+(pan.meta.fu_tou_gz ? ' 符頭'+pan.meta.fu_tou_gz : '')+' · 拆補' : '')+'</p>'+
       '<div class="qm-grid">'+cells+'</div>'+
-      '<div class="qm-legend"><span class="zf">值符宮</span><span class="zs">值使宮</span><span class="sg">時乾宮</span>　上神／星／門／天盤／地盤</div>'+
-    '</div>';
+      '<div class="qm-legend"><span class="zf">值符宮</span><span class="zs">值使宮</span><span class="sg">時乾宮</span>　上神／星／門／天盤／地盤</div></div>';
   }
-  function norm49(x) { x = Math.abs(x) || 1; return ((x - 1) % 49) + 1; }
   function digitExpand(digit) {
     var d = digit % 10; if (d === 0) d = 10;
     var out = [];
     for (var k = 0; k < 5; k++) { var n = d + k * 10; if (n >= 1 && n <= 49) out.push(n); }
-    return out;
-  }
-  function tailsToNums(tails) {
-    var out = [];
-    for (var n = 1; n <= 49; n++) {
-      var t = n % 10;
-      if (tails.indexOf(t) >= 0 || (t === 0 && tails.indexOf(0) >= 0)) out.push(n);
-    }
     return out;
   }
   function add(scores, nums, w) {
@@ -376,55 +329,29 @@
   }
   function extractScores(pan, scale) {
     scale = scale || 1;
-    var scores = {}, sgp = pan.shi_gan_palace, di = pan.di_pan;
+    var scores = {}, sgp = pan.shi_gan_palace;
     var hg = pan.pillars.hour.charAt(0), hz = pan.pillars.hour.charAt(1);
     var dg = pan.pillars.day.charAt(0), dz = pan.pillars.day.charAt(1);
-    for (var i = 1; i <= 49; i++) scores[i] = 0;
-    add(scores, tailsToNums(PALACE_TAILS[sgp] || [1, 6]), 4 * scale);
-    add(scores, tailsToNums(PALACE_TAILS[pan.zhi_fu_palace] || []), 2.5 * scale);
+    function addPalace(p, w) {
+      if (!p) return;
+      add(scores, digitExpand(p), w * scale);
+      add(scores, digitExpand(PALACE_XIAN[p] || p), w * 0.8 * scale);
+      mapHetuLuoshu(LUO_SHU_WX[p] || '', w * scale, scores);
+    }
+    addPalace(sgp, 4);
+    addPalace(pan.zhi_fu_palace, 2.5);
+    addPalace(pan.zhi_shi_palace, 2);
     [[hg, 3.5], [hz, 3], [dg, 2.5], [dz, 2]].forEach(function (pair) {
-      var fh = FAN_HONG[pair[0]];
-      if (fh) add(scores, digitExpand(fh), pair[1] * scale);
-    });
-    Object.keys(di).forEach(function (pk) {
-      var palace = +pk; if (palace === 5) return;
-      var gan = di[palace], fh = FAN_HONG[gan];
-      if (!fh) return;
-      var w = 1.2;
-      if (palace === sgp) w = 3;
-      else if (palace === pan.zhi_fu_palace) w = 2.5;
-      else if (SAN_QI[gan]) w = 1.8;
-      add(scores, digitExpand(fh), w * scale);
-      add(scores, [norm49(palace + fh)], 1.5 * scale);
-      add(scores, [norm49((PALACE_XIAN[palace] || 5) + fh)], 1.2 * scale);
-    });
-    var ht = sgp, xt = PALACE_XIAN[sgp] || 5;
-    [ht, xt, ht + xt, pan.ju, pan.ju + ht, pan.zhi_fu_palace, pan.zhi_fu_origin].forEach(function (v) {
-      add(scores, digitExpand(v), 1.5 * scale);
-      add(scores, [norm49(v), norm49(v + 10), norm49(v + 20)], 0.8 * scale);
-    });
-    ['year', 'month'].forEach(function (k) {
-      var gz = pan.pillars[k] || '';
-      if (gz.length >= 2) {
-        [gz.charAt(0), gz.charAt(1)].forEach(function (ch) {
-          var fh = FAN_HONG[ch]; if (fh) add(scores, digitExpand(fh), (k === 'month' ? 1.2 : 1) * scale);
-        });
-      }
+      var ch = pair[0], w = pair[1] * scale;
+      var fh = FAN_HONG[ch];
+      if (fh) add(scores, digitExpand(fh), w);
+      mapHetuLuoshu(WX_G[ch] || ZWX[ch] || '', w * 0.6, scores);
     });
     return scores;
   }
   function pureQimen(y, m, d) {
     var pan = castQimen(y, m, d, 21);
-    return {
-      mode: 'pure_qimen', pan: pan,
-      method: {
-        dingju: '拆補 · blog/407：符頭地支定元 + 當日節氣口訣定局（不置閏）',
-        extract: '時乾落宮字尾 + 範洪五行數 + 宮先後天',
-        refs: 'qimenpai.com/blog/407 · /719 · /28 · /31',
-        pick: '五段×3'
-      },
-      numbers: pick15(extractScores(pan, 1))
-    };
+    return { mode: 'pure_qimen', pan: pan, method: { dingju: '拆補', extract: '時乾／值符／值使宮數＋先天＋範洪＋河圖洛書', pick: '五段×3' }, numbers: pick15(extractScores(pan, 1)) };
   }
   function personalQimen(py, pm, pd, ph, dy, dm, dd) {
     var personal = castQimen(py, pm, pd, ph), draw = castQimen(dy, dm, dd, 21), scores = {};
@@ -443,6 +370,6 @@
     pureBazi: pureBazi, pureQimen: pureQimen, personalBazi: personalBazi, personalQimen: personalQimen,
     pillarsAt: pillarsAt, enrichPillars: enrichPillars, tenGod: tenGod,
     castQimen: castQimen, scorePred: scorePred, qimenBoardHTML: qimenBoardHTML,
-    ruleVersion: 'bazi + qimen-chaibu-v3 + zhuanpan-star-stem'
+    ruleVersion: 'hetu-luoshu-v1 + qimen-chaibu'
   };
 })(typeof window !== 'undefined' ? window : globalThis);
