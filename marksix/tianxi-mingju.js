@@ -46,13 +46,10 @@
     var zhis = [y.charAt(1), mo.charAt(1), d.charAt(1), h.charAt(1)];
     var dm = pillars.dayMaster || gans[2];
     var dmWx = pillars.dayMasterWx || WX_G[dm] || '';
-    var dayNum = opt.day || opt.dayOfMonth || 15;
     var notes = [];
     var sanhe = detectSanhe(zhis);
     var heMap = {};
     sanhe.forEach(function (hh) { hh.zhi.forEach(function (z) { heMap[z] = hh.wx; }); notes.push('三合' + hh.name + '化' + hh.wx); });
-    var tombs = zhis.filter(function (z) { return TOMB[z] && !heMap[z]; });
-    if (tombs.length) notes.push(tombs.join('、') + '本氣作土計分；雜氣比例待「四季月五行特性」再拆');
     var slots = [
       { key: 'yearG', lab: '年干', glyph: gans[0], kind: 'gan' }, { key: 'monthG', lab: '月干', glyph: gans[1], kind: 'gan' },
       { key: 'dayG', lab: '日干', glyph: gans[2], kind: 'gan' }, { key: 'hourG', lab: '時干', glyph: gans[3], kind: 'gan' },
@@ -63,7 +60,7 @@
       var wx, how = '';
       if (s.kind === 'gan') wx = WX_G[s.glyph] || '';
       else if (heMap[s.glyph]) { wx = heMap[s.glyph]; how = '三合'; }
-      else { wx = ZWX[s.glyph] || ''; if (TOMB[s.glyph]) how = '本氣土'; }
+      else { wx = ZWX[s.glyph] || ''; }
       var rel = s.key === 'dayG' ? '扶' : relToDm(wx, dmWx);
       var abs = WEIGHT[s.key] || 0;
       var support = s.key === 'dayG' ? true : isSupport(rel);
@@ -75,16 +72,15 @@
     items.forEach(function (it) { if (it.support) posSum += it.abs; else negSum += it.abs; });
     var score = posSum;
     var cls = classify(score);
-    if (score === 15 || score === 50 || score === 85) notes.push('得分恰為' + score + '，需詳析含雜氣之地支');
     var zhuan = cls.band === 'ji-wang' ? (JI_WANG[dmWx] || '') : null;
     return {
-      layer: 1, ruleVersion: 'mingju-l1c-wuxing-ref',
+      layer: 1, ruleVersion: 'mingju-l1d',
       pillars: { year: y, month: mo, day: d, hour: h },
-      dayMaster: dm, dayMasterWx: dmWx, dayOfMonth: dayNum,
+      dayMaster: dm, dayMasterWx: dmWx,
       items: items, posSum: posSum, negSum: negSum, score: score,
       mingGe: cls.ge, band: cls.band, zhuanGe: zhuan,
       sanhe: sanhe.map(function (hh) { return hh.name + '→' + hh.wx; }),
-      notes: notes, nextLayers: ['原局生克制化刑沖合害', '流年大運計分'],
+      notes: notes,
       monthZhi: zhis[1],
       season: (global.TXMarkSixEngine && global.TXMarkSixEngine.seasonOf) ? global.TXMarkSixEngine.seasonOf(zhis[1]) : '',
       dmWangShuai: (global.TXMarkSixEngine && global.TXMarkSixEngine.wangShuai) ? global.TXMarkSixEngine.wangShuai(dmWx, zhis[1]) : ''
@@ -100,7 +96,7 @@
     var geLine = '<b>' + r.mingGe + '</b>' + (r.zhuanGe ? ' · ' + r.zhuanGe : '');
     var note = (r.notes && r.notes.length) ? '<p class="yun-meta">' + r.notes.join(' · ') + '</p>' : '';
     var ref = (global.TXMarkSixEngine && global.TXMarkSixEngine.wuxingRefHTML) ? global.TXMarkSixEngine.wuxingRefHTML(r.monthZhi, r.dayMasterWx) : '';
-    return '<div class="yun-wrap mj-wrap"><div class="m6-block-title">命局分析 · 第 1 層</div><p class="yun-meta">以日干 <span class="wx-' + (WX_CLS[r.dayMasterWx] || '') + '">' + r.dayMaster + r.dayMasterWx + '</span> 為核心 · 生扶為正、克泄耗為負 · 日干永取正分<br>得分（正分之和）<b class="mj-score">' + r.score + '</b>　' + geLine + '<br><span class="mj-hint">較弱 15–50 · 較旺 50–85 · 極弱 <15 · 極旺 >85</span></p><div style="overflow:auto"><table class="yun-table mj-table"><thead><tr><th>位置</th><th>字</th><th>對日干</th><th>分</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + note + '<p class="yun-meta">下層未計：' + (r.nextLayers || []).join('、') + '</p></div>' + ref;
+    return '<div class="yun-wrap mj-wrap"><div class="m6-block-title">命局分析 · 第 1 層</div><p class="yun-meta">以日干 <span class="wx-' + (WX_CLS[r.dayMasterWx] || '') + '">' + r.dayMaster + r.dayMasterWx + '</span> 為核心 · 生扶為正、克泄耗為負 · 日干永取正分<br>得分（正分之和）<b class="mj-score">' + r.score + '</b>　' + geLine + '<br><span class="mj-hint">較弱 15–50 · 較旺 50–85 · 極弱 <15 · 極旺 >85</span></p><div style="overflow:auto"><table class="yun-table mj-table"><thead><tr><th>位置</th><th>字</th><th>對日干</th><th>分</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + note + '</div>' + ref;
   }
   function install() {
     var E = global.TXMarkSixEngine || (global.TXMarkSixEngine = {});
