@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 17:13 HKT",
+  "generatedHKT": "2026-08-27 18:00 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "18:00",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(mingju): 辰戌丑未 layer1 use 本气土, not 余气木",
+      "scope": "site",
+      "sha": "70df4a1"
+    },
     {
       "date": "2026-08-27",
       "time": "17:13",
@@ -11,6 +21,16 @@
       "title": "feat(marksix): natal UI uses layer-1 命局评分, drop 喜用格局",
       "scope": "site",
       "sha": "9e72aaa"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "17:13",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "30c81bf"
     },
     {
       "date": "2026-08-27",
@@ -281,26 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "f9219de"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "13:36",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): restore natal UI and add qimen 9-palace CSS + cache-bust",
-      "scope": "site",
-      "sha": "fdacd02"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "05:55",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "7cd28e1"
     },
     {
       "date": "2026-08-26",
