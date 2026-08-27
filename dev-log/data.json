@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-27 19:15 HKT",
+  "generatedHKT": "2026-08-27 19:39 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "19:39",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore: hide layer notes from natal UI",
+      "scope": "site",
+      "sha": "8a96472"
+    },
     {
       "date": "2026-08-27",
       "time": "19:15",
@@ -11,6 +21,16 @@
       "title": "feat(natal): always render 喜用规格表",
       "scope": "site",
       "sha": "83abc59"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "19:15",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "f12a358"
     },
     {
       "date": "2026-08-27",
@@ -281,26 +301,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "4a88769"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "16:46",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): cache-bust restore full colorful UI",
-      "scope": "site",
-      "sha": "28de6f6"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "16:22",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "6569ea5"
     },
     {
       "date": "2026-08-26",
