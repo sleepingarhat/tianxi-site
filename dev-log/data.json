@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-27 14:04 HKT",
+  "generatedHKT": "2026-08-27 14:36 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-27",
+      "time": "14:36",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): bust cached engine.js so personalQimen loads on iOS",
+      "scope": "site",
+      "sha": "a378249"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "14:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "4434d8f"
+    },
     {
       "date": "2026-08-27",
       "time": "14:03",
@@ -277,30 +297,10 @@
       "time": "20:57",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): 天喜命盤 顯示性別起運當運流年",
-      "scope": "site",
-      "sha": "e4febfd"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "20:57",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "d17dbb4"
-    },
-    {
-      "date": "2026-08-26",
-      "time": "19:08",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "84ece81"
     },
     {
       "date": "2026-08-26",
