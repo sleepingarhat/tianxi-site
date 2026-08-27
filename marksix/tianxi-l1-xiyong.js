@@ -4,6 +4,7 @@
   var SHENG = { 木: '火', 火: '土', 土: '金', 金: '水', 水: '木' };
   var KE = { 木: '土', 火: '金', 土: '水', 金: '木', 水: '火' };
   var WX_CLS = { 木: 'mu', 火: 'huo', 土: 'tu', 金: 'jin', 水: 'shui' };
+  var ROLE_W = { yong: 1, xi: 1, ji: -1, chou: -1 };
   var BANDS = [
     { key: 'ji-ruo', lab: '極弱格', range: '<15', name: '從弱' },
     { key: 'ruo', lab: '較弱格', range: '15–50', name: '扶抑身弱' },
@@ -44,7 +45,7 @@
     var pack = SPEC[key];
     var roles = rolesOf(dmWx);
     return {
-      ruleVersion: 'mingju-l1-xiyong-v1',
+      ruleVersion: 'mingju-l1-xiyong-v1b',
       band: key,
       method: pack.name,
       zhuanGe: key === 'ji-wang' ? (ZHUAN[dmWx] || '') : '',
@@ -52,7 +53,8 @@
       yong: expand(roles, pack.yong),
       xi: expand(roles, pack.xi),
       ji: expand(roles, pack.ji),
-      chou: expand(roles, pack.chou)
+      chou: expand(roles, pack.chou),
+      weight: ROLE_W
     };
   }
   function xiyongHTML(s, dm, dmWx) {
@@ -78,7 +80,7 @@
       return '<th>' + b.lab + '<div class="mj-hint">' + b.range + ' · ' + b.name + '</div></th>';
     }).join('');
     return '<div class="yun-wrap xy-matrix"><div class="m6-block-title">第 1 層喜用規格</div>' +
-      '<p class="yun-meta">極弱從弱：順克泄耗　較弱：印主比輔　較旺：洩耗為主　極旺：專旺順洩</p>' +
+      '<p class="yun-meta">極弱從弱：只分順（用）／逆（忌），五行分盡故無喜無仇　較弱：印主比輔　較旺：洩耗為主　極旺：專旺順洩</p>' +
       '<div style="overflow:auto"><table class="yun-table xy-table"><thead><tr><th>日主</th>' + head + '</tr></thead><tbody>' + rows + '</tbody></table></div></div>';
   }
   function install() {
@@ -86,6 +88,7 @@
     E.l1XiyongSpec = specFor;
     E.l1XiyongHTML = xiyongHTML;
     E.l1XiyongMatrixHTML = matrixHTML;
+    E.L1_ROLE_W = ROLE_W;
   }
   install();
 })(typeof window !== 'undefined' ? window : globalThis);
