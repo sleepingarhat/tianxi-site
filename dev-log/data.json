@@ -14,6 +14,26 @@
     },
     {
       "date": "2026-08-27",
+      "time": "18:27",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "75a4836"
+    },
+    {
+      "date": "2026-08-27",
+      "time": "18:27",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(natal): show layer-1 喜用 after 命局分",
+      "scope": "site",
+      "sha": "5c5b87c"
+    },
+    {
+      "date": "2026-08-27",
       "time": "18:10",
       "areaKey": "web",
       "area": "前端",
@@ -277,30 +297,10 @@
       "time": "15:25",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): restore full page structure and link marksix.css",
-      "scope": "site",
-      "sha": "1437f61"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "15:25",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "4586111"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "14:45",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "2d4b133"
     },
     {
       "date": "2026-08-26",
