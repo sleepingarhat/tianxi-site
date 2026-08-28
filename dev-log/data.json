@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-28 04:33 HKT",
+  "generatedHKT": "2026-08-28 08:43 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-28",
+      "time": "07:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-08-27T23:51Z)",
+      "scope": "marksix",
+      "sha": "4880b2e"
+    },
     {
       "date": "2026-08-28",
       "time": "04:33",
@@ -21,6 +31,16 @@
       "title": "fix(admin): redirect /admin on Pages to Worker dashboard host",
       "scope": "site",
       "sha": "40f0456"
+    },
+    {
+      "date": "2026-08-28",
+      "time": "04:33",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "500e718"
     },
     {
       "date": "2026-08-28",
@@ -331,16 +351,6 @@
       "title": "chore: cache-bust natal scripts after footnote removal",
       "scope": "site",
       "sha": "f17e871"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "19:39",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore: drop correction footnotes from 旺衰 UI",
-      "scope": "site",
-      "sha": "f452767"
     },
     {
       "date": "2026-08-26",
@@ -991,16 +1001,6 @@
       "title": "data: update Mark Six results (2026-07-30T16:04Z)",
       "scope": "marksix",
       "sha": "b99908b"
-    },
-    {
-      "date": "2026-07-29",
-      "time": "00:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-07-28T16:17Z)",
-      "scope": "marksix",
-      "sha": "c8c4fca"
     }
   ]
 }
