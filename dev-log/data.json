@@ -1,7 +1,37 @@
 {
-  "generatedHKT": "2026-08-30 03:05 HKT",
+  "generatedHKT": "2026-08-30 05:16 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-30",
+      "time": "05:15",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): 淨分定帶喜用 v2（交界無印+食傷）",
+      "scope": "site",
+      "sha": "338f0fc"
+    },
+    {
+      "date": "2026-08-30",
+      "time": "05:15",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): 一字一太極原局計分 v2（隔柱×0.5、淨分-95從弱）",
+      "scope": "site",
+      "sha": "5ed9b67"
+    },
+    {
+      "date": "2026-08-30",
+      "time": "03:05",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "9ed11c1"
+    },
     {
       "date": "2026-08-30",
       "time": "01:46",
@@ -327,40 +357,10 @@
       "time": "20:10",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(natal): 大運干支 喜用/五行 二選一著色",
-      "scope": "site",
-      "sha": "9945c45"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "20:10",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "f0c9436"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "19:41",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "2c4f5f3"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "19:40",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore: cache-bust natal scripts after footnote removal",
-      "scope": "site",
-      "sha": "f17e871"
     },
     {
       "date": "2026-08-26",
