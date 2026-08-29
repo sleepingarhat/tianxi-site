@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-30 05:17 HKT",
+  "generatedHKT": "2026-08-30 05:18 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-30",
+      "time": "05:18",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): 一字一太極原局計分 tianxi-mingju v2",
+      "scope": "site",
+      "sha": "ceb9853"
+    },
     {
       "date": "2026-08-30",
       "time": "05:17",
@@ -11,6 +21,16 @@
       "title": "fix(marksix): restore natal-ui 一字一太極 loader",
       "scope": "site",
       "sha": "0105886"
+    },
+    {
+      "date": "2026-08-30",
+      "time": "05:17",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "1022737"
     },
     {
       "date": "2026-08-30",
@@ -327,16 +347,6 @@
       "time": "21:44",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(natal): 大運喜用/五行切換改用全頁委派",
-      "scope": "site",
-      "sha": "6f91784"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "21:44",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
@@ -351,16 +361,6 @@
       "title": "feat: 喜用/忌仇 signed weight 同幅",
       "scope": "site",
       "sha": "99f2c5e"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "21:20",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "6058f98"
     },
     {
       "date": "2026-08-26",
