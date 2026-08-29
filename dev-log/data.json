@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-30 05:16 HKT",
+  "generatedHKT": "2026-08-30 05:17 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-30",
+      "time": "05:17",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(marksix): restore natal-ui 一字一太極 loader",
+      "scope": "site",
+      "sha": "0105886"
+    },
+    {
+      "date": "2026-08-30",
+      "time": "05:16",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "a39e8d6"
+    },
     {
       "date": "2026-08-30",
       "time": "05:15",
@@ -337,30 +357,10 @@
       "time": "21:20",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(pick): replace hash seeds with 河圖+洛書 mapping",
-      "scope": "site",
-      "sha": "1784c97"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "21:20",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "6058f98"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "20:10",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "f0c9436"
     },
     {
       "date": "2026-08-26",
