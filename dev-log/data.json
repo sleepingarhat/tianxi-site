@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-28 08:43 HKT",
+  "generatedHKT": "2026-08-29 08:20 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-28",
+      "time": "08:43",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "a451d88"
+    },
     {
       "date": "2026-08-28",
       "time": "07:51",
@@ -321,16 +331,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "2c4f5f3"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "19:40",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore: drop 藏干 footnote from UI",
-      "scope": "site",
-      "sha": "b569f7e"
     },
     {
       "date": "2026-08-27",
