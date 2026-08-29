@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-08-30 05:18 HKT",
+  "generatedHKT": "2026-08-30 05:19 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-30",
+      "time": "05:19",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(marksix): cache-bust natal-ui taiji-20260830",
+      "scope": "site",
+      "sha": "52b30cf"
+    },
     {
       "date": "2026-08-30",
       "time": "05:18",
@@ -11,6 +21,16 @@
       "title": "feat(marksix): 一字一太極原局計分 tianxi-mingju v2",
       "scope": "site",
       "sha": "ceb9853"
+    },
+    {
+      "date": "2026-08-30",
+      "time": "05:18",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "39c80ca"
     },
     {
       "date": "2026-08-30",
@@ -341,26 +361,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "ae97087"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "21:44",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "5070993"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "21:44",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat: 喜用/忌仇 signed weight 同幅",
-      "scope": "site",
-      "sha": "99f2c5e"
     },
     {
       "date": "2026-08-26",
