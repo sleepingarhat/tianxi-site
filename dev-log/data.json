@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-29 08:20 HKT",
+  "generatedHKT": "2026-08-30 03:05 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-30",
+      "time": "01:46",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-08-29T17:46Z)",
+      "scope": "marksix",
+      "sha": "3b87b95"
+    },
+    {
+      "date": "2026-08-29",
+      "time": "08:20",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "82e82cd"
+    },
     {
       "date": "2026-08-28",
       "time": "08:43",
@@ -331,16 +351,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "2c4f5f3"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "19:40",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "6e508c2"
     },
     {
       "date": "2026-08-27",
@@ -991,16 +1001,6 @@
       "title": "data: update Mark Six results (2026-08-01T15:34Z)",
       "scope": "marksix",
       "sha": "68fe5b3"
-    },
-    {
-      "date": "2026-07-31",
-      "time": "00:04",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-07-30T16:04Z)",
-      "scope": "marksix",
-      "sha": "b99908b"
     }
   ]
 }
