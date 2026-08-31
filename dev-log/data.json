@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-08-31 02:59 HKT",
+  "generatedHKT": "2026-09-01 05:15 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-08-31",
+      "time": "06:59",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-08-30T22:59Z · [data][skip ci] fixture-calendar 2026-08-30T22:59Z via GHA",
+      "scope": "database",
+      "sha": "a7751fe"
+    },
+    {
+      "date": "2026-08-31",
+      "time": "02:59",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "6ad8d13"
+    },
     {
       "date": "2026-08-30",
       "time": "05:19",
@@ -331,16 +351,6 @@
       "title": "feat(marksix): natal UI split — matrix/refs only on monitor",
       "scope": "site",
       "sha": "bc18049"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "22:39",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): split user frontend and internal monitor lab",
-      "scope": "site",
-      "sha": "a14e777"
     },
     {
       "date": "2026-08-27",
@@ -921,16 +931,6 @@
       "title": "[data][skip ci] 2026-08-17T23:27Z · pool-a 2026-08-17T23:27Z via GHA matrix",
       "scope": "database",
       "sha": "f3af32d"
-    },
-    {
-      "date": "2026-08-17",
-      "time": "20:40",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-08-17T12:40Z · [data][skip ci] entries 2026-08-17T12:40Z via GHA",
-      "scope": "database",
-      "sha": "f1d0087"
     },
     {
       "date": "2026-08-15",
