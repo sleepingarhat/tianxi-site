@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-01 18:36 HKT",
+  "generatedHKT": "2026-09-02 03:08 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-01",
+      "time": "18:36",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "27a3166"
+    },
     {
       "date": "2026-09-01",
       "time": "18:35",
@@ -341,16 +351,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "500e718"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "01:14",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "442dbe2"
     },
     {
       "date": "2026-08-28",
