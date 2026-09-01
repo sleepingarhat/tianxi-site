@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-01 05:15 HKT",
+  "generatedHKT": "2026-09-01 18:20 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-01",
+      "time": "18:20",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(marksix): load mingju ling50 cache",
+      "scope": "site",
+      "sha": "ea0a825"
+    },
+    {
+      "date": "2026-09-01",
+      "time": "05:15",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "0622d44"
+    },
     {
       "date": "2026-08-31",
       "time": "06:59",
@@ -351,26 +371,6 @@
       "title": "feat(marksix): natal UI split — matrix/refs only on monitor",
       "scope": "site",
       "sha": "bc18049"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "22:39",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "085e89c"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "22:39",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): keep 五行/藏干 refs on monitor only",
-      "scope": "site",
-      "sha": "e42e6ae"
     },
     {
       "date": "2026-08-26",
