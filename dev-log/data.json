@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-01 18:20 HKT",
+  "generatedHKT": "2026-09-01 18:22 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-01",
+      "time": "18:22",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(marksix): 月令佔盤 p% 令黨重分配",
+      "scope": "site",
+      "sha": "206fe48"
+    },
     {
       "date": "2026-09-01",
       "time": "18:20",
@@ -11,6 +21,16 @@
       "title": "chore(marksix): load mingju ling50 cache",
       "scope": "site",
       "sha": "ea0a825"
+    },
+    {
+      "date": "2026-09-01",
+      "time": "18:20",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "d34531e"
     },
     {
       "date": "2026-09-01",
@@ -351,26 +371,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "786189f"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "22:40",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "0fb8b99"
-    },
-    {
-      "date": "2026-08-27",
-      "time": "22:40",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): natal UI split — matrix/refs only on monitor",
-      "scope": "site",
-      "sha": "bc18049"
     },
     {
       "date": "2026-08-26",
