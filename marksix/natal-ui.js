@@ -147,11 +147,19 @@
       var mx=(monitor && E.l1XiyongMatrixHTML)?E.l1XiyongMatrixHTML(mj&&mj.dayMasterWx, mj&&mj.band):'';
       var refs=monitor?refPack(mj):'';
       var yunHtml='';
+      var yunScore='';
       if(E.buildYun){
-        try{ yunHtml=yunHTML(E.buildYun(per.y,per.m,per.d,per.h,per.min,sex,new Date()), spec, yunTone); }catch(e){}
+        try{
+          var yunPack=E.buildYun(per.y,per.m,per.d,per.h,per.min,sex,new Date());
+          yunHtml=yunHTML(yunPack, spec, yunTone);
+          if(E.scoreYun && spec){
+            var ys=E.scoreYun(mj, spec, yunPack);
+            yunScore=(E.yunScoreHTML && ys)?E.yunScoreHTML(ys):'';
+          }
+        }catch(e){}
       }
       box.classList.remove('hidden');
-      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+mjHtml+xyHtml+mx+refs+yunHtml;
+      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+mjHtml+xyHtml+yunScore+mx+refs+yunHtml;
     }catch(err){
       box.classList.remove('hidden');
       box.innerHTML='<div class="m6-note" style="color:var(--red)">'+(err&&err.message||err)+'</div>'+(monitor?matrix:'');
@@ -165,10 +173,14 @@
     loadScript(base+'tianxi-wuxing.js?v=wx-split-20260827', function(){
       loadScript(base+'tianxi-canggan.js?v=cg-split-20260827', function(){
         loadScript(base+'tianxi-mingju.js?v=mj-ling50-20260901', function(){
+          loadScript(base+'tianxi-ling50.js?v=ling50-20260901', function(){
           loadScript(base+'tianxi-l1-xiyong.js?v=xy-taiji-20260830', function(){
+          loadScript(base+'tianxi-yun.js?v=yun-20260901', function(){
             if(!(global.TXMarkSixEngine&&global.TXMarkSixEngine.buildYun)){
               loadScript(base+'tianxi-mingpan.js', ready);
             } else ready();
+          });
+          });
           });
         });
       });
