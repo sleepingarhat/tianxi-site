@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-01 18:34 HKT",
+  "generatedHKT": "2026-09-01 18:36 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-01",
+      "time": "18:35",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(engine): show health gates, architecture copy and research column on /engine/",
+      "scope": "site",
+      "sha": "7616559"
+    },
     {
       "date": "2026-09-01",
       "time": "18:34",
@@ -11,6 +21,16 @@
       "title": "feat(engine): public health checklist, architecture text, papers column, monitor page",
       "scope": "site",
       "sha": "7ca989f"
+    },
+    {
+      "date": "2026-09-01",
+      "time": "18:34",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "ba22835"
     },
     {
       "date": "2026-09-01",
@@ -327,30 +347,10 @@
       "time": "01:14",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): 100-draw backtest buttons under solo/bazi/qimen",
-      "scope": "site",
-      "sha": "17d5627"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "01:14",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "442dbe2"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "01:11",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "b2fbad5"
     },
     {
       "date": "2026-08-28",
