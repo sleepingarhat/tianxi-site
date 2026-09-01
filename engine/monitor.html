@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<script src="/assets/shell.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>引擎監控清單 · 天喜</title>
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<style>
+.m-row{display:grid;grid-template-columns:72px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule-2)}
+.m-st{font-family:var(--font-mono);font-weight:700;font-size:11px}
+.PASS{color:var(--green)} .WATCH{color:var(--brown)} .FAIL{color:#8b1e1e}
+.m-name{font-weight:700;font-size:13px}
+.m-det{font-size:12px;color:var(--ink-mute);line-height:1.6;margin-top:3px}
+pre{font-family:var(--font-mono);font-size:11px;white-space:pre-wrap;background:var(--paper);padding:10px;border-radius:8px;border:1px solid var(--rule-2)}
+</style>
+</head>
+<body data-page="engine">
+<div class="shell">
+<header class="brandbar" data-tx-shell="brandbar"></header>
+<section class="page-head">
+  <h1><small>ENGINE MONITOR</small>引擎監控清單</h1>
+  <p>同後端倉庫 reports/ENGINE_HEALTH.md、用戶端 /engine/ 共用一份 JSON。休季期間無當日 live 曲線屬預期。</p>
+</section>
+<div class="card">
+  <h2>守門狀態</h2>
+  <div id="box">載入中…</div>
+</div>
+<div class="card">
+  <h2>原始健康檔</h2>
+  <pre id="raw"></pre>
+</div>
+<footer class="disclaimer">分析平台 · 不提供投注服務</footer>
+<nav class="botnav" data-tx-shell="botnav"></nav>
+</div>
+<script>
+fetch('/engine/health.json?t='+Date.now()).then(function(r){return r.json()}).then(function(d){
+  document.getElementById('raw').textContent = JSON.stringify(d,null,2);
+  var h = '<p>總評 <b>'+d.overall+'</b> · PASS '+d.counts.pass+' · WATCH '+d.counts.watch+' · FAIL '+d.counts.fail+' · '+d.generatedHKT+'</p>';
+  h += (d.checks||[]).map(function(c){
+    return '<div class="m-row"><div class="m-st '+c.status+'">'+c.status+'</div><div><div class="m-name">'+c.label+'</div><div class="m-det">'+c.detail+'</div></div></div>';
+  }).join('');
+  document.getElementById('box').innerHTML = h;
+}).catch(function(){ document.getElementById('box').textContent = '載入失敗'; });
+</script>
+</body>
+</html>
