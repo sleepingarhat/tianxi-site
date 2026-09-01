@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-01 18:30 HKT",
+  "generatedHKT": "2026-09-01 18:34 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-01",
+      "time": "18:34",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(engine): public health checklist, architecture text, papers column, monitor page",
+      "scope": "site",
+      "sha": "7ca989f"
+    },
+    {
+      "date": "2026-09-01",
+      "time": "18:33",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "文檔",
+      "title": "docs(engine): publish TX-Oracle health checklist + architecture papers (no weight change)",
+      "scope": "backend",
+      "sha": "5b92a38"
+    },
     {
       "date": "2026-09-01",
       "time": "18:30",
@@ -11,6 +31,16 @@
       "title": "marksix: natal-ui loads ling50 + yun layer; cache-bust index",
       "scope": "site",
       "sha": "1f34ccf"
+    },
+    {
+      "date": "2026-09-01",
+      "time": "18:30",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "353b216"
     },
     {
       "date": "2026-09-01",
@@ -317,30 +347,10 @@
       "time": "01:11",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): natal help buttons for xiyong matrix and score/refs",
-      "scope": "site",
-      "sha": "a413280"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "01:11",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "b2fbad5"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "01:10",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "c06cec7"
     },
     {
       "date": "2026-08-28",
@@ -991,16 +1001,6 @@
       "title": "data: update Mark Six results (2026-08-04T16:25Z)",
       "scope": "marksix",
       "sha": "841ae05"
-    },
-    {
-      "date": "2026-08-01",
-      "time": "23:34",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-08-01T15:34Z)",
-      "scope": "marksix",
-      "sha": "68fe5b3"
     }
   ]
 }
