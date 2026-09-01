@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-01 18:29 HKT",
+  "generatedHKT": "2026-09-01 18:30 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-01",
+      "time": "18:30",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "marksix: natal-ui loads ling50 + yun layer; cache-bust index",
+      "scope": "site",
+      "sha": "1f34ccf"
+    },
     {
       "date": "2026-09-01",
       "time": "18:29",
@@ -11,6 +21,16 @@
       "title": "marksix: unlock yun layer (role + yinhua + banhe); load ling50.js",
       "scope": "site",
       "sha": "9de5970"
+    },
+    {
+      "date": "2026-09-01",
+      "time": "18:29",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "72d6ad6"
     },
     {
       "date": "2026-09-01",
@@ -317,16 +337,6 @@
       "time": "01:10",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): put solo/combo + 100-draw backtest on user page; specs behind help buttons",
-      "scope": "site",
-      "sha": "ab3633d"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "01:10",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
@@ -361,16 +371,6 @@
       "title": "feat(admin): issue dashboard session from ADMIN_TOKEN without OAuth",
       "scope": "backend",
       "sha": "e4c9658"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "00:52",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "4b68367"
     },
     {
       "date": "2026-08-26",
