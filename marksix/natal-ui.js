@@ -164,7 +164,7 @@
     function ready(){ render(); }
     loadScript(base+'tianxi-wuxing.js?v=wx-split-20260827', function(){
       loadScript(base+'tianxi-canggan.js?v=cg-split-20260827', function(){
-        loadScript(base+'tianxi-mingju.js?v=mj-taiji-20260830', function(){
+        loadScript(base+'tianxi-mingju.js?v=mj-ling50-20260901', function(){
           loadScript(base+'tianxi-l1-xiyong.js?v=xy-taiji-20260830', function(){
             if(!(global.TXMarkSixEngine&&global.TXMarkSixEngine.buildYun)){
               loadScript(base+'tianxi-mingpan.js', ready);
