@@ -1,7 +1,47 @@
 {
-  "generatedHKT": "2026-09-02 22:25 HKT",
+  "generatedHKT": "2026-09-03 03:09 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-03",
+      "time": "02:43",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "文檔",
+      "title": "docs(papers): add verified sources and adopt/reject notes",
+      "scope": "backend",
+      "sha": "c03dbce"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "02:25",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(ops): restore season, last card, hit-rate and strategy P&L on public board",
+      "scope": "backend",
+      "sha": "069d099"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "01:57",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(ops): mount /ops only; leave /admin auth tests unchanged so deploy can ship",
+      "scope": "backend",
+      "sha": "3dbd06c"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "22:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "badfc8c"
+    },
     {
       "date": "2026-09-02",
       "time": "22:24",
@@ -424,16 +464,6 @@
     },
     {
       "date": "2026-09-01",
-      "time": "18:36",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "27a3166"
-    },
-    {
-      "date": "2026-09-01",
       "time": "18:33",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -761,36 +791,6 @@
       "title": "[manifest][skip ci] regenerate data/index.json",
       "scope": "database",
       "sha": "8ee539d"
-    },
-    {
-      "date": "2026-08-19",
-      "time": "18:51",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat: publish verified complete horse profiles",
-      "scope": "backend",
-      "sha": "893d22e"
-    },
-    {
-      "date": "2026-08-19",
-      "time": "17:32",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix: use public horse research source labels",
-      "scope": "backend",
-      "sha": "ce4240d"
-    },
-    {
-      "date": "2026-08-19",
-      "time": "17:30",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix: use coherent career record and carrying weight",
-      "scope": "backend",
-      "sha": "0899fad"
     },
     {
       "date": "2026-08-18",
