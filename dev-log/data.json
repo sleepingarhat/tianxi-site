@@ -1,7 +1,47 @@
 {
-  "generatedHKT": "2026-09-02 03:08 HKT",
+  "generatedHKT": "2026-09-02 18:15 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-02",
+      "time": "18:15",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "marksix: 早子夜子同柱 + 流運分 v2（半合加分、巳午比和非半會）",
+      "scope": "site",
+      "sha": "9ed9dfd"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "16:46",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "768b8a7"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "12:24",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-02T04:24Z · pool-a 2026-09-02T04:24Z via GHA matrix",
+      "scope": "database",
+      "sha": "dbee740"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "03:08",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "89f0797"
+    },
     {
       "date": "2026-09-01",
       "time": "18:36",
@@ -331,26 +371,6 @@
       "title": "fix(admin): route tianxi.racing/admin to Worker dashboard",
       "scope": "backend",
       "sha": "7c64d05"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "04:33",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(admin): redirect /admin on Pages to Worker dashboard host",
-      "scope": "site",
-      "sha": "40f0456"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "04:33",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "500e718"
     },
     {
       "date": "2026-08-28",
@@ -921,26 +941,6 @@
       "title": "[audit][skip ci] critical critical=20 warn=7 · 2026-08-18T03:37Z",
       "scope": "database",
       "sha": "795da02"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "11:01",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-08-18T03:01Z",
-      "scope": "database",
-      "sha": "cb0d767"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "07:27",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-08-17T23:27Z · pool-a 2026-08-17T23:27Z via GHA matrix",
-      "scope": "database",
-      "sha": "f3af32d"
     },
     {
       "date": "2026-08-15",
