@@ -8,9 +8,7 @@
     var page = (document.body && document.body.getAttribute('data-page')) || '';
     return page === 'marksix-monitor';
   }
-  function scriptBase(){
-    return isMonitor() ? '../' : './';
-  }
+  function scriptBase(){ return isMonitor() ? '../' : './'; }
   function fmtDT(s){ return String(s||'').replace('T',' '); }
   function readPersonal(){
     var el=document.getElementById('personalDT');
@@ -40,8 +38,7 @@
   function toneBtns(){
     return '<span class="yun-tone" role="group">'+
       '<button type="button" data-yun-tone="xy" class="'+(yunTone==='xy'?'active':'')+'">喜用</button>'+
-      '<button type="button" data-yun-tone="wx" class="'+(yunTone==='wx'?'active':'')+'">五行</button>'+
-      '</span>';
+      '<button type="button" data-yun-tone="wx" class="'+(yunTone==='wx'?'active':'')+'">五行</button></span>';
   }
   function pillarsChart(p, title){
     var E=global.TXMarkSixEngine;
@@ -127,10 +124,7 @@
       if(monitor){
         box.classList.remove('hidden');
         box.innerHTML='<div class="m6-note">監控台：輸入出生日期同命造先睇本局；下面係第 1 層規格同參考表。</div>'+matrix+refPack(null);
-      } else {
-        box.classList.add('hidden');
-        box.innerHTML='';
-      }
+      } else { box.classList.add('hidden'); box.innerHTML=''; }
       return;
     }
     if(!E||!E.pillarsAt){
@@ -159,7 +153,8 @@
         }catch(e){}
       }
       box.classList.remove('hidden');
-      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+pillarsChart(pers,'出生四柱')+mjHtml+xyHtml+yunScore+mx+refs+yunHtml;
+      var ziNote=pers.clockNote?'<p class="yun-meta">'+pers.clockNote+'</p>':'';
+      box.innerHTML='<div class="m6-block-title">個人命盤</div>'+ziNote+pillarsChart(pers,'出生四柱')+mjHtml+xyHtml+yunScore+mx+refs+yunHtml;
     }catch(err){
       box.classList.remove('hidden');
       box.innerHTML='<div class="m6-note" style="color:var(--red)">'+(err&&err.message||err)+'</div>'+(monitor?matrix:'');
@@ -170,20 +165,22 @@
     bindTone();
     var base=scriptBase();
     function ready(){ render(); }
+    loadScript(base+'tianxi-zishi.js?v=zi-20260902', function(){
     loadScript(base+'tianxi-wuxing.js?v=wx-split-20260827', function(){
       loadScript(base+'tianxi-canggan.js?v=cg-split-20260827', function(){
         loadScript(base+'tianxi-mingju.js?v=mj-ling50-20260901', function(){
           loadScript(base+'tianxi-ling50.js?v=ling50-20260901', function(){
           loadScript(base+'tianxi-l1-xiyong.js?v=xy-taiji-20260830', function(){
-          loadScript(base+'tianxi-yun.js?v=yun-20260901', function(){
+          loadScript(base+'tianxi-yun.js?v=liuyun-20260902', function(){
             if(!(global.TXMarkSixEngine&&global.TXMarkSixEngine.buildYun)){
-              loadScript(base+'tianxi-mingpan.js', ready);
+              loadScript(base+'tianxi-mingpan.js?v=zi-20260902', ready);
             } else ready();
           });
           });
           });
         });
       });
+    });
     });
     document.querySelectorAll('.m6-sex-btn').forEach(function(b){
       if(b.getAttribute('data-natal-bound')==='1') return;
