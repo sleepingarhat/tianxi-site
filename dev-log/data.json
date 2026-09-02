@@ -1,7 +1,47 @@
 {
-  "generatedHKT": "2026-09-03 03:09 HKT",
+  "generatedHKT": "2026-09-03 05:25 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-03",
+      "time": "05:25",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(admin): unauthenticated /admin redirects to login page instead of JSON 401",
+      "scope": "backend",
+      "sha": "0a27883"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "05:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(admin): bookmark /admin goes to login page, not /ops",
+      "scope": "site",
+      "sha": "97565c5"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "05:23",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(admin): login accepts pasted URL token; unauth /admin goes to login page",
+      "scope": "backend",
+      "sha": "56147e8"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "03:09",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "63497fb"
+    },
     {
       "date": "2026-09-03",
       "time": "02:43",
@@ -417,16 +457,6 @@
       "time": "18:15",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "提交",
-      "title": "marksix: 早子夜子同柱 + 流運分 v2（半合加分、巳午比和非半會）",
-      "scope": "site",
-      "sha": "9ed9dfd"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "18:15",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
@@ -451,16 +481,6 @@
       "title": "[data][skip ci] 2026-09-02T04:24Z · pool-a 2026-09-02T04:24Z via GHA matrix",
       "scope": "database",
       "sha": "dbee740"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "03:08",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "89f0797"
     },
     {
       "date": "2026-09-01",
@@ -724,16 +744,6 @@
     },
     {
       "date": "2026-08-19",
-      "time": "20:47",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "統一馬匹生涯賽績快照：公開端點改用核實數值，未知回傳空值",
-      "scope": "backend",
-      "sha": "592a4ab"
-    },
-    {
-      "date": "2026-08-19",
       "time": "19:00",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -741,16 +751,6 @@
       "title": "fix: exclude migration state from horse-id child tables",
       "scope": "database",
       "sha": "368223a"
-    },
-    {
-      "date": "2026-08-19",
-      "time": "19:00",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "test: cover remote horse-id table discovery",
-      "scope": "backend",
-      "sha": "caa95f5"
     },
     {
       "date": "2026-08-19",
