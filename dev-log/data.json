@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-02 21:20 HKT",
+  "generatedHKT": "2026-09-02 21:25 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-02",
+      "time": "21:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(engine): cite paper sources under research cards",
+      "scope": "site",
+      "sha": "f9eb38c"
+    },
     {
       "date": "2026-09-02",
       "time": "21:20",
@@ -11,6 +21,26 @@
       "title": "chore(engine): auto-sync health.json from season + daily sanity stamp",
       "scope": "site",
       "sha": "5f08d66"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "21:20",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "8b7536b"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "21:20",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-02T21:20",
+      "scope": "site",
+      "sha": "a55920c"
     },
     {
       "date": "2026-09-02",
@@ -367,40 +397,10 @@
       "time": "18:30",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "提交",
-      "title": "marksix: natal-ui loads ling50 + yun layer; cache-bust index",
-      "scope": "site",
-      "sha": "1f34ccf"
-    },
-    {
-      "date": "2026-09-01",
-      "time": "18:30",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "353b216"
-    },
-    {
-      "date": "2026-09-01",
-      "time": "18:29",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "marksix: unlock yun layer (role + yinhua + banhe); load ling50.js",
-      "scope": "site",
-      "sha": "9de5970"
-    },
-    {
-      "date": "2026-09-01",
-      "time": "18:29",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "72d6ad6"
     },
     {
       "date": "2026-08-31",
