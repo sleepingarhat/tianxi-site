@@ -36,6 +36,9 @@
 .hx-det{font-size:11.5px;line-height:1.55;color:var(--ink-mute);margin-top:2px}
 .paper-card{padding:11px 12px;background:var(--paper-2);border:1px solid var(--rule);border-radius:8px;margin-bottom:8px}
 .paper-card p{font-size:12px;line-height:1.7;color:var(--ink-mute);margin:4px 0 0}
+.paper-src{font-size:11px;line-height:1.65;margin-top:8px;color:var(--ink-mute)}
+.paper-src a{color:var(--brown);font-weight:700;text-decoration:none}
+.paper-src a:hover{text-decoration:underline}
 @media (max-width:380px){.eng-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -48,7 +51,7 @@
 </section>
 <div class="card">
   <h2>引擎健康 · 逐項守門</h2>
-  <p class="eng-sub">同數據庫 sanity 同一種清單：PASS／WATCH／FAIL · <a href="/engine/health.json">JSON</a> · <a href="https://github.com/sleepingarhat/tianxi-backend/blob/main/reports/ENGINE_HEALTH.md">後端倉庫報告</a> · <a href="/engine/monitor.html">監控清單</a></p>
+  <p class="eng-sub">同數據庫 sanity 同一種清單：PASS／WATCH／FAIL · <a href="/engine/health.json">JSON</a> · <a href="https://github.com/sleepingarhat/tianxi-backend/blob/main/reports/ENGINE_HEALTH.json">後端倉庫報告</a> · <a href="/engine/monitor.html">監控清單</a></p>
   <div id="eng-health">載入中…</div>
 </div>
 <div class="card">
@@ -64,19 +67,66 @@
       <li><b>LightGBM LambdaRank</b>——同場當一條名單學相對排序，唔係預測完賽秒數。</li>
       <li><b>Elo v12</b>——馬 70%、騎 20%、練 10%，加檔位同負磅修正，獨立後備。</li>
       <li><b>概率混合</b>——按健康閘 α 加權。閘唔過只出 Elo。</li>
-      <li><b>臨場盤</b>——只出現喺選馬頁右欄，永不進入 LGB。</li>
+      <li><b>臨場盤</b>——只出現喻選馬頁右欄，永不進入 LGB。</li>
     </ul>
     <div class="eng-formula">p = α · softmax(LGB / τ_lgb) + (1−α) · softmax(Elo / τ_elo)<br>閘 FAIL ⇒ α = 0（純 Elo）</div>
   </div>
 </div>
 <div class="card" id="research">
   <h2>論文同論證</h2>
-  <p class="eng-lead" style="margin-bottom:12px">核實之後寫明採納同拒絕。</p>
-  <div class="paper-card"><b>2025 · Learning-to-Rank（韓國馬事會）</b><p>採納 listwise LambdaRank。拒絕：只因 CatBoost 論文 NDCG 高就換產線。</p></div>
-  <div class="paper-card"><b>2024–25 · 集成與自動投注</b><p>採納：戰績對準頭四框同估中終賠。拒絕：117 特徵 + TabNet 一次堆疊。</p></div>
-  <div class="paper-card"><b>2026 · 場地與環境</b><p>採納分場來看。拒絕：無 as-of 溫濕就上氣候模型。</p></div>
-  <div class="paper-card"><b>2025 · 特徵四梯隊</b><p>已用近況、分段、負磅、間隔、血統。傷患／操練要覆蓋先入。</p></div>
-  <div class="paper-card"><b>高雜訊樹模型調參</b><p>Replica：train／valid NDCG 差 0.42；收緊後兩季同向升。生產 live 仍 min_leaf=20、無 bagging — 列 WATCH，未改權重。</p></div>
+  <p class="eng-lead" style="margin-bottom:12px">核實之後寫明採納同拒絕。下面係來源，可點開對讀。</p>
+
+  <div class="paper-card">
+    <b>2025 · Learning-to-Rank（韓國馬事會數據）</b>
+    <p>採納 listwise LambdaRank。拒絕：只因 CatBoost 論文 NDCG 高就換產線。論文本身都註明 LightGBM／XGBoost 在實戰投注場景命中反而穩。</p>
+    <p class="paper-src">來源：
+      <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003266151" target="_blank" rel="noopener">So, Woo &amp; Lee (2025) JKSCI ART003266151</a>
+      · <a href="https://journal.kci.go.kr/jksci/archive/articleView?artiId=ART003266151" target="_blank" rel="noopener">期刊頁</a><br>
+      法：<a href="https://papers.nips.cc/paper/2971-learning-to-rank-with-nonsmooth-cost-functions" target="_blank" rel="noopener">Burges, Ragno &amp; Le (2006) LambdaRank, NIPS</a>
+      · <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/MSR-TR-2010-82.pdf" target="_blank" rel="noopener">Burges (2010) RankNet → LambdaMART</a>
+    </p>
+  </div>
+
+  <div class="paper-card">
+    <b>2024 · 首爾騎师 LTR 對照</b>
+    <p>採納 pair-wise／listwise 好過用秒數做迴歸。拒絕：無 as-of 擇練／症診覆蓋就寫入產線。</p>
+    <p class="paper-src">來源：
+      <a href="https://doi.org/10.5351/KJAS.2024.37.2.239" target="_blank" rel="noopener">Chung, Shin, Hwang &amp; Park (2024) KJAS 37(2)</a>
+      · <a href="https://koreascience.kr/article/JAKO202414143309228.page" target="_blank" rel="noopener">KoreaScience</a>
+    </p>
+  </div>
+
+  <div class="paper-card">
+    <b>2024–25 · 集成與自動投注</b>
+    <p>採納：戰績對準頭四框同估中終賠。拒絕：117 特徵 + TabNet 一次堆疊。</p>
+    <p class="paper-src">來源：
+      <a href="https://www.researchgate.net/publication/385301910_Optimizing_Horse_Racing_Predictions_through_Ensemble_Learning_and_Automated_Betting_Systems" target="_blank" rel="noopener">Ensemble + automated betting (2024) RG 10.13140/RG.2.2.23233.16484</a>
+    </p>
+  </div>
+
+  <div class="paper-card">
+    <b>2026 · 場地與環境</b>
+    <p>採納分場來看。拒絕：無 as-of 溫濕就上氣候模型。</p>
+    <p class="paper-src">來源：天喜 replica 分場 walk-forward（沙田草／跑馬地／AWT）· 未公開季前實驗。氣候特徵要求賽前已知、唔食賽後 going。</p>
+  </div>
+
+  <div class="paper-card">
+    <b>2025 · 特徵四梯隊</b>
+    <p>已用近況、分段、負磅、間隔、血統。傷患／操練要覆蓋先入。韓國 LTR 論文重要度亦指近況、平均名次、負磅、歲齡。</p>
+    <p class="paper-src">來源：
+      <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003266151" target="_blank" rel="noopener">So et al. (2025) feature importance</a>
+      · <a href="https://doi.org/10.5351/KJAS.2024.37.2.239" target="_blank" rel="noopener">Chung et al. (2024) SHAP：近況、訓練次數、症診</a>
+    </p>
+  </div>
+
+  <div class="paper-card">
+    <b>高雜訊樹模型調參</b>
+    <p>Replica：train／valid NDCG 差 0.42；收緊後兩季同向升。生產 live 仍 min_leaf=20、無 bagging — 列 WATCH，未改權重。</p>
+    <p class="paper-src">來源：
+      <a href="https://lightgbm.readthedocs.io/en/latest/Parameters-Tuning.html" target="_blank" rel="noopener">LightGBM Parameters Tuning · Deal with Over-fitting</a>
+      · <a href="https://github.com/microsoft/LightGBM/blob/master/examples/lambdarank/train.conf" target="_blank" rel="noopener">官方 LambdaRank 範例 train.conf</a>
+    </p>
+  </div>
 </div>
 <div class="card">
   <h2>更多</h2>
