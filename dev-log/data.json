@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-02 18:17 HKT",
+  "generatedHKT": "2026-09-02 18:18 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-02",
+      "time": "18:18",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "marksix: natal-ui load zishi + liuyun-v2",
+      "scope": "site",
+      "sha": "90588e5"
+    },
     {
       "date": "2026-09-02",
       "time": "18:17",
@@ -11,6 +21,16 @@
       "title": "feat(engine): shared health strip script + updated passing JSON",
       "scope": "site",
       "sha": "7c425df"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "18:17",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "13a00f6"
     },
     {
       "date": "2026-09-02",
@@ -341,26 +361,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "1022737"
-    },
-    {
-      "date": "2026-08-30",
-      "time": "05:16",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "a39e8d6"
-    },
-    {
-      "date": "2026-08-30",
-      "time": "05:15",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): 一字一太極原局計分 v2（隔柱×0.5、淨分-95從弱）",
-      "scope": "site",
-      "sha": "5ed9b67"
     },
     {
       "date": "2026-08-30",
