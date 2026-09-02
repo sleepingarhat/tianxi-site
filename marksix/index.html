@@ -15,6 +15,7 @@
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript/lunar.js"></script>
 <script src="./engine.js?v=zi-20260902"></script>
 <script src="./tianxi-mingpan.js?v=zi-20260902"></script>
+<script src="./tianxi-zishi.js?v=zi-v3-20260902"></script>
 <link rel="stylesheet" href="./marksix.css?v=user-bt-20260828">
 </head>
 <body data-page="marksix">
@@ -41,10 +42,10 @@
     <div class="m6-next" id="nextDrawBox"><div class="m6-state">載入下一期…</div></div>
     <div class="m6-ops">
       <div class="m6-ops-block">
-        <label class="m6-ops-lab" for="personalDT">個人出生資料</label>
+        <label class="m6-ops-lab" for="personalDT">個人出生資料（24小時制）</label>
         <div class="m6-field m6-dt" id="personalDTWrap">
-          <input type="datetime-local" id="personalDT" autocomplete="off" aria-label="輸入個人出生資料">
-          <span class="m6-dt-ph">點擊輸入出生日期與時辰</span>
+          <input type="datetime-local" id="personalDT" autocomplete="off" aria-label="輸入出生時刻（24小時制）" step="60">
+          <span class="m6-dt-ph">24小時制 · 子時23:00–00:59 · 日柱00:00換</span>
         </div>
       </div>
       <div class="m6-ops-block">
@@ -99,6 +100,6 @@
 <nav class="botnav" data-tx-shell="botnav"></nav>
 </div>
 <script src="./site-app.js?v=user-bt-20260828"></script>
-<script src="./natal-ui.js?v=zi-v2-20260902"></script>
+<script src="./natal-ui.js?v=zi-v3-20260902"></script>
 </body>
 </html>
