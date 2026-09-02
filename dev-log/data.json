@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-02 18:16 HKT",
+  "generatedHKT": "2026-09-02 18:17 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-02",
+      "time": "18:17",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(engine): shared health strip script + updated passing JSON",
+      "scope": "site",
+      "sha": "7c425df"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "18:16",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "文檔",
+      "title": "docs: put engine passing list at top of README",
+      "scope": "backend",
+      "sha": "618825d"
+    },
     {
       "date": "2026-09-02",
       "time": "18:16",
@@ -11,6 +31,16 @@
       "title": "marksix: tianxi-zishi wrap 早子 + natal-ui load liuyun-v2",
       "scope": "site",
       "sha": "3f817d9"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "18:16",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "8a6ca5d"
     },
     {
       "date": "2026-09-02",
@@ -328,29 +358,9 @@
       "areaKey": "web",
       "area": "前端",
       "typeLabel": "功能",
-      "title": "feat(marksix): 淨分定帶喜用 v2（交界無印+食傷）",
-      "scope": "site",
-      "sha": "338f0fc"
-    },
-    {
-      "date": "2026-08-30",
-      "time": "05:15",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
       "title": "feat(marksix): 一字一太極原局計分 v2（隔柱×0.5、淨分-95從弱）",
       "scope": "site",
       "sha": "5ed9b67"
-    },
-    {
-      "date": "2026-08-30",
-      "time": "03:05",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "9ed11c1"
     },
     {
       "date": "2026-08-30",
@@ -991,16 +1001,6 @@
       "title": "data: update Mark Six results (2026-08-08T14:56Z)",
       "scope": "marksix",
       "sha": "7a09aef"
-    },
-    {
-      "date": "2026-08-07",
-      "time": "23:22",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-08-07T15:22Z)",
-      "scope": "marksix",
-      "sha": "8dd933e"
     }
   ]
 }
