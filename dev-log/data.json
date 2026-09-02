@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-02 20:55 HKT",
+  "generatedHKT": "2026-09-02 21:20 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-02",
+      "time": "21:20",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): auto-sync health.json from season + daily sanity stamp",
+      "scope": "site",
+      "sha": "5f08d66"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "21:19",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "維護",
+      "title": "chore(sanity): write ENGINE_HEALTH.json with generatedHKT + season + live",
+      "scope": "backend",
+      "sha": "9a6370a"
+    },
     {
       "date": "2026-09-02",
       "time": "20:55",
@@ -11,6 +31,16 @@
       "title": "zishi v4: noon-based day pillar + buildYun uses locked hour stem; natal-ui cache-bust",
       "scope": "site",
       "sha": "65c56c0"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "20:55",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "331fb35"
     },
     {
       "date": "2026-09-02",
@@ -371,26 +401,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "72d6ad6"
-    },
-    {
-      "date": "2026-09-01",
-      "time": "18:23",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(marksix): cache-bust natal-ui ling50",
-      "scope": "site",
-      "sha": "306327e"
-    },
-    {
-      "date": "2026-09-01",
-      "time": "18:23",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "2760532"
     },
     {
       "date": "2026-08-31",
@@ -951,16 +961,6 @@
       "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
       "scope": "database",
       "sha": "568c497"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners)",
-      "scope": "backend",
-      "sha": "671fc08"
     },
     {
       "date": "2026-08-18",
