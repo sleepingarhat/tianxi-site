@@ -1,3 +1,4 @@
-# Worker serves the real monitor. Pages must not swallow /admin.
-/admin https://tianxi-backend.tianxi-entertainment.workers.dev/admin/login 302
-/admin/ https://tianxi-backend.tianxi-entertainment.workers.dev/admin/login 302
+/admin https://tianxi-backend.tianxi-entertainment.workers.dev/ops 302
+/admin/ https://tianxi-backend.tianxi-entertainment.workers.dev/ops 302
+/ops https://tianxi-backend.tianxi-entertainment.workers.dev/ops 302
+/ops/ https://tianxi-backend.tianxi-entertainment.workers.dev/ops 302
