@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-02 18:18 HKT",
+  "generatedHKT": "2026-09-02 20:05 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-02",
+      "time": "20:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "marksix: 早子日柱用新日（子夜換日）zi-v2",
+      "scope": "site",
+      "sha": "503aaef"
+    },
     {
       "date": "2026-09-02",
       "time": "18:18",
@@ -11,6 +21,16 @@
       "title": "marksix: natal-ui load zishi + liuyun-v2",
       "scope": "site",
       "sha": "90588e5"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "18:18",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "e034976"
     },
     {
       "date": "2026-09-02",
@@ -341,26 +361,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "39c80ca"
-    },
-    {
-      "date": "2026-08-30",
-      "time": "05:17",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(marksix): restore natal-ui 一字一太極 loader",
-      "scope": "site",
-      "sha": "0105886"
-    },
-    {
-      "date": "2026-08-30",
-      "time": "05:17",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "1022737"
     },
     {
       "date": "2026-08-30",
