@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-02 21:25 HKT",
+  "generatedHKT": "2026-09-02 21:58 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-02",
+      "time": "21:58",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(admin): send operators to Worker login form, no token in URL",
+      "scope": "site",
+      "sha": "9da8be0"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "21:28",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(meetings): drop correlated subquery that 500s list at limit=80",
+      "scope": "backend",
+      "sha": "81c14d3"
+    },
     {
       "date": "2026-09-02",
       "time": "21:25",
@@ -11,6 +31,16 @@
       "title": "feat(engine): cite paper sources under research cards",
       "scope": "site",
       "sha": "f9eb38c"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "21:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "2f3923e"
     },
     {
       "date": "2026-09-02",
@@ -367,16 +397,6 @@
       "time": "18:34",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(engine): public health checklist, architecture text, papers column, monitor page",
-      "scope": "site",
-      "sha": "7ca989f"
-    },
-    {
-      "date": "2026-09-01",
-      "time": "18:34",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
@@ -391,16 +411,6 @@
       "title": "docs(engine): publish TX-Oracle health checklist + architecture papers (no weight change)",
       "scope": "backend",
       "sha": "5b92a38"
-    },
-    {
-      "date": "2026-09-01",
-      "time": "18:30",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "353b216"
     },
     {
       "date": "2026-08-31",
@@ -801,16 +811,6 @@
       "title": "speedpro: 每次寫檔後自動重建 index.json manifest",
       "scope": "database",
       "sha": "32d711d"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:18",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners)",
-      "scope": "backend",
-      "sha": "d1d32ee"
     },
     {
       "date": "2026-08-18",
