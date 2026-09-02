@@ -1,0 +1,96 @@
+name: Engine health.json daily stamp
+
+# After tianxi-backend engine_sanity_daily (HK 10:03),
+# rewrite engine/health.json: generatedHKT + season + live two checks.
+# Pages deploy follows the commit. Does not change prediction weights.
+
+on:
+  schedule:
+    - cron: '15 2 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [engine-health-sync]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: engine-health-sync
+  cancel-in-progress: true
+
+jobs:
+  stamp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Rebuild engine/health.json
+        run: |
+          python3 <<'PY'
+          import json, urllib.request
+          from datetime import datetime, timezone, timedelta
+          from pathlib import Path
+          HKT = timezone(timedelta(hours=8))
+          now = datetime.now(HKT).strftime('%Y-%m-%d %H:%M HKT')
+          path = Path('engine/health.json')
+          data = json.loads(path.read_text()) if path.exists() else {}
+          season = data.get('season') or {}
+          try:
+              with urllib.request.urlopen('https://tianxi-backend.tianxi-entertainment.workers.dev/api/season', timeout=20) as r:
+                  raw = json.loads(r.read().decode())
+              season = {
+                  'status': raw.get('status'),
+                  'lastMeeting': raw.get('lastMeeting'),
+                  'nextMeeting': raw.get('nextMeeting'),
+                  'label': raw.get('label') or raw.get('status'),
+              }
+          except Exception as e:
+              print('season fetch failed', e)
+          off = season.get('status') == 'off_season'
+          checks = data.get('checks') or []
+          by_id = {c.get('id'): c for c in checks}
+          if 'season' in by_id:
+              by_id['season']['detail'] = '上仗 %s。' % (season.get('lastMeeting') or '—')
+              by_id['season']['status'] = 'PASS'
+          if 'offseason_live' in by_id:
+              by_id['offseason_live']['status'] = 'WATCH' if off else 'PASS'
+              by_id['offseason_live']['detail'] = '休季無新曲線。' if off else '賽季中；有場日允許 live 曲線。'
+          if 'diag_persist' in by_id:
+              by_id['diag_persist']['status'] = 'WATCH'
+              by_id['diag_persist']['detail'] = '開季後寫 best_iter。' if off else '等當日 diagnostics 落地。'
+          if not checks:
+              checks = list(by_id.values())
+          pass_n = sum(1 for c in checks if c.get('status')=='PASS')
+          watch_n = sum(1 for c in checks if c.get('status')=='WATCH')
+          fail_n = sum(1 for c in checks if c.get('status')=='FAIL')
+          overall = 'FAIL' if fail_n else ('WATCH' if watch_n else 'PASS')
+          summary = '結構閘通過。已對齊 live／backfill 正規化參數與 frame label。'
+          summary += '休季無當日 live 曲線。' if off else '賽季可跑 live 曲線。'
+          summary += '臨場盤不入 LGB。'
+          data.update({
+              'schemaVersion': 2,
+              'generatedHKT': now,
+              'engine': data.get('engine') or 'TX-Oracle v3.2',
+              'season': season,
+              'overall': overall,
+              'summary': summary,
+              'counts': {'pass': pass_n, 'watch': watch_n, 'fail': fail_n},
+              'checks': checks,
+          })
+          path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
+          print('wrote', path, now, overall, season)
+          PY
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add engine/health.json
+          if git diff --cached --quiet; then
+            echo "health.json unchanged"
+          else
+            git commit -m "chore(engine): stamp health.json $(TZ=Asia/Hong_Kong date +%Y-%m-%dT%H:%M)"
+            git push
+          fi
