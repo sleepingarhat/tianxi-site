@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-02 20:54 HKT",
+  "generatedHKT": "2026-09-02 20:55 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-02",
+      "time": "20:55",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "zishi v4: noon-based day pillar + buildYun uses locked hour stem; natal-ui cache-bust",
+      "scope": "site",
+      "sha": "65c56c0"
+    },
     {
       "date": "2026-09-02",
       "time": "20:54",
@@ -11,6 +21,16 @@
       "title": "lock 24h zishi: 23:00-00:59=zi, day changes at 00:00, late-zi hour stem from next-day wushudun",
       "scope": "site",
       "sha": "6e797f8"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "20:54",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "225812f"
     },
     {
       "date": "2026-09-02",
@@ -371,26 +391,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "2760532"
-    },
-    {
-      "date": "2026-09-01",
-      "time": "18:22",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(marksix): 月令佔盤 p% 令黨重分配",
-      "scope": "site",
-      "sha": "206fe48"
-    },
-    {
-      "date": "2026-09-01",
-      "time": "18:22",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "2c89721"
     },
     {
       "date": "2026-08-31",
