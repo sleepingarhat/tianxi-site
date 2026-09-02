@@ -47,11 +47,19 @@
     var sexN = parseSex(sex);
     if (!sexN) throw new Error('請選男命或女命');
     if (!global.Solar) throw new Error('需要 lunar-javascript');
-    min = min || 0;
-    h = h || 0;
-    var solar = global.Solar.fromYmdHms(y, m, d, h, min, 0);
+    min = (min == null || min === '') ? 0 : +min;
+    h = (h == null || h === '') ? 12 : +h;
+    if (isNaN(h)) h = 12;
+    if (isNaN(min)) min = 0;
+    var clk = (global.TXMarkSixEngine && global.TXMarkSixEngine.resolveBaZiClock)
+      ? global.TXMarkSixEngine.resolveBaZiClock(y, m, d, h, min)
+      : { y: y, m: m, d: d, hour: h, minute: min };
+    var solar = global.Solar.fromYmdHms(clk.y, clk.m, clk.d, clk.hour, clk.minute, 0);
     var lunar = solar.getLunar();
     var ec = lunar.getEightChar();
+    if (ec && typeof ec.setSect === 'function') {
+      try { ec.setSect(1); } catch (e) {}
+    }
     var yun = ec.getYun(sexN === 'male' ? 1 : 0, 2);
     var forward = yun.isForward();
     var JIE_TRAD = { 惊蛰: '驚蟄', 谷雨: '穀雨', 小满: '小滿', 芒种: '芒種', 处暑: '處暑' };
@@ -66,6 +74,19 @@
       dayMaster: ec.getDay().charAt(0),
       dayMasterWx: WX_G[ec.getDay().charAt(0)] || ''
     };
+    if (global.TXMarkSixEngine && typeof global.TXMarkSixEngine.pillarsAt === 'function') {
+      try {
+        var zp = global.TXMarkSixEngine.pillarsAt(clk.y, clk.m, clk.d, clk.hour, clk.minute);
+        if (zp && zp.hour) {
+          pillars.year = zp.year || pillars.year;
+          pillars.month = zp.month || pillars.month;
+          pillars.day = zp.day || pillars.day;
+          pillars.hour = zp.hour;
+          pillars.dayMaster = zp.dayMaster || pillars.day.charAt(0);
+          pillars.dayMasterWx = zp.dayMasterWx || WX_G[pillars.dayMaster] || '';
+        }
+      } catch (eZ) {}
+    }
     var dm = pillars.dayMaster;
     var note = yun.getStartYear() + '年' + yun.getStartMonth() + '個月' +
       yun.getStartDay() + '日' + yun.getStartHour() + '時後起運';
