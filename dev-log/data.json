@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-02 20:45 HKT",
+  "generatedHKT": "2026-09-02 20:54 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-02",
+      "time": "20:54",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "lock 24h zishi: 23:00-00:59=zi, day changes at 00:00, late-zi hour stem from next-day wushudun",
+      "scope": "site",
+      "sha": "6e797f8"
+    },
     {
       "date": "2026-09-02",
       "time": "20:45",
@@ -21,6 +31,16 @@
       "title": "marksix: load tianxi-zishi v3 in index (24h 子時)",
       "scope": "site",
       "sha": "0188e82"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "20:45",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "a48ec59"
     },
     {
       "date": "2026-09-02",
@@ -371,26 +391,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "2c89721"
-    },
-    {
-      "date": "2026-09-01",
-      "time": "18:20",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(marksix): load mingju ling50 cache",
-      "scope": "site",
-      "sha": "ea0a825"
-    },
-    {
-      "date": "2026-09-01",
-      "time": "18:20",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "d34531e"
     },
     {
       "date": "2026-08-31",
