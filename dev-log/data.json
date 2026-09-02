@@ -4,6 +4,26 @@
   "entries": [
     {
       "date": "2026-09-02",
+      "time": "20:45",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "d512472"
+    },
+    {
+      "date": "2026-09-02",
+      "time": "20:45",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "marksix: load tianxi-zishi v3 in index (24h 子時)",
+      "scope": "site",
+      "sha": "0188e82"
+    },
+    {
+      "date": "2026-09-02",
       "time": "20:44",
       "areaKey": "web",
       "area": "前端",
@@ -373,16 +393,6 @@
       "sha": "d34531e"
     },
     {
-      "date": "2026-09-01",
-      "time": "05:15",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "0622d44"
-    },
-    {
       "date": "2026-08-31",
       "time": "06:59",
       "areaKey": "data",
@@ -391,16 +401,6 @@
       "title": "[data][skip ci] 2026-08-30T22:59Z · [data][skip ci] fixture-calendar 2026-08-30T22:59Z via GHA",
       "scope": "database",
       "sha": "a7751fe"
-    },
-    {
-      "date": "2026-08-31",
-      "time": "02:59",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "6ad8d13"
     },
     {
       "date": "2026-08-30",
