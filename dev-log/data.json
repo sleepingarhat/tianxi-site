@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-03 18:20 HKT",
+  "generatedHKT": "2026-09-03 19:07 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-03",
+      "time": "19:06",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: race cards product voice — no pool tutorials, gold hits",
+      "scope": "site",
+      "sha": "6b57ca8"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "18:20",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "210a1f2"
+    },
     {
       "date": "2026-09-03",
       "time": "18:19",
@@ -461,26 +481,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "2f3923e"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "21:20",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): auto-sync health.json from season + daily sanity stamp",
-      "scope": "site",
-      "sha": "5f08d66"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "21:20",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "8b7536b"
     },
     {
       "date": "2026-09-02",
