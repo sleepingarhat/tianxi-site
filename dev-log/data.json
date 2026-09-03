@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-03 15:35 HKT",
+  "generatedHKT": "2026-09-03 15:46 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-03",
+      "time": "15:46",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "copy: professional HKJC terms for hit-rate and LambdaRank",
+      "scope": "site",
+      "sha": "9e6fc89"
+    },
     {
       "date": "2026-09-03",
       "time": "15:35",
@@ -11,6 +21,16 @@
       "title": "docs: product README — ecosystem includes marksix",
       "scope": "site",
       "sha": "7a323f5"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "15:35",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "e4cff6f"
     },
     {
       "date": "2026-09-03",
@@ -501,26 +521,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "e034976"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "18:17",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(engine): shared health strip script + updated passing JSON",
-      "scope": "site",
-      "sha": "7c425df"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "18:17",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "13a00f6"
     },
     {
       "date": "2026-09-02",
