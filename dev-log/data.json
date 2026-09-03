@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-03 20:11 HKT",
+  "generatedHKT": "2026-09-03 20:13 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-03",
+      "time": "20:13",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "marksix: replace iOS AM/PM datetime with 24h date+hour+min picker",
+      "scope": "site",
+      "sha": "2330d19"
+    },
     {
       "date": "2026-09-03",
       "time": "20:11",
@@ -11,6 +21,16 @@
       "title": "marksix: 24h clock UI without AM/PM picker, restore birth-data label",
       "scope": "site",
       "sha": "dd5438c"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "20:11",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "c23a44c"
     },
     {
       "date": "2026-09-03",
@@ -317,16 +337,6 @@
       "time": "15:35",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "文檔",
-      "title": "docs: product README — ecosystem includes marksix",
-      "scope": "site",
-      "sha": "7a323f5"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "15:35",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
@@ -351,16 +361,6 @@
       "title": "docs: product README — ecosystem + Elo snapshot note, no CI lecture",
       "scope": "backend",
       "sha": "643b591"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "15:12",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-03T15:12",
-      "scope": "site",
-      "sha": "4054808"
     },
     {
       "date": "2026-09-03",
