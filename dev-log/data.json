@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-03 19:23 HKT",
+  "generatedHKT": "2026-09-03 20:09 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-03",
+      "time": "20:09",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "Add DESIGN.md brand system for site, posters, and admin surfaces.",
+      "scope": "site",
+      "sha": "9a37922"
+    },
     {
       "date": "2026-09-03",
       "time": "19:23",
@@ -21,6 +31,16 @@
       "title": "fix: cards page copy; demo QP table payout",
       "scope": "site",
       "sha": "3c733e9"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "19:23",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "9cdc6de"
     },
     {
       "date": "2026-09-03",
@@ -414,16 +434,6 @@
     },
     {
       "date": "2026-09-03",
-      "time": "03:09",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "63497fb"
-    },
-    {
-      "date": "2026-09-03",
       "time": "02:43",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -451,16 +461,6 @@
       "title": "fix(ops): mount /ops only; leave /admin auth tests unchanged so deploy can ship",
       "scope": "backend",
       "sha": "3dbd06c"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "22:25",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "badfc8c"
     },
     {
       "date": "2026-09-02",
