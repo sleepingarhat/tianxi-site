@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<script src="/assets/shell.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>逐場預測卡 · 天喜 TIANXI</title>
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<link rel="stylesheet" href="/assets/race-card.css">
+<script src="/assets/api.js"></script>
+<script src="/assets/race-card.js"></script>
+<style>
+.cards-toolbar{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 12px}
+.cards-toolbar select{font:inherit;padding:8px 10px;border:1px solid var(--rule-2);border-radius:8px;background:var(--paper-2);min-height:44px}
+.cards-list{padding:0 20px 24px;display:flex;flex-direction:column;gap:12px}
+.cards-lead{font-size:13px;line-height:1.7;color:var(--ink-soft);padding:0 20px 12px;text-wrap:pretty}
+</style>
+</head>
+<body data-page="cards">
+<div class="shell">
+<header class="brandbar" data-tx-shell="brandbar"></header>
+<section class="page-head">
+  <h1><small>RACE CARDS</small>逐場預測卡 · 對賬卡</h1>
+</section>
+<p class="cards-lead">賽前一場一張預測卡；賽後同一場一張對賬卡。彩池名跟香港賽馬會：單T（Trio，毋須順序）同三重彩（Tierce，必須順序）分開。Telegram 頻道 <a href="https://t.me/TX_Oracle">@TX_Oracle</a> 用同一套資料發佈。</p>
+<div class="cards-toolbar">
+  <select id="mode"><option value="pre">賽前預測卡</option><option value="post">賽後對賬卡</option></select>
+  <select id="date"></select>
+</div>
+<div class="cards-list" id="list"><div data-tx-loader data-label="載入賽事…"></div></div>
+<footer class="disclaimer"><strong>天喜為分析平台，不提供投注服務。</strong></footer>
+<nav class="botnav" data-tx-shell="botnav"></nav>
+</div>
+<script>
+(function(){
+  var V={'ST':'沙田','HV':'跑馬地'};
+  function $(id){return document.getElementById(id);}
+  function labelDate(iso){ if(!iso) return ''; var p=iso.split('-'); return Number(p[1])+'月'+Number(p[2])+'日'; }
+  function fillDates(meetings){
+    var sel=$('date');
+    sel.innerHTML=(meetings||[]).slice(0,24).map(function(m){ return '<option value="'+m.date+'">'+m.date+' · '+(V[m.venue]||m.venue||'')+'</option>'; }).join('');
+  }
+  function render(){
+    var mode=$('mode').value, date=$('date').value, list=$('list');
+    if(!date){list.textContent='未有賽日';return;}
+    list.innerHTML='<div data-tx-loader data-label="載入場次…"></div>';
+    var path = mode==='pre' ? '/api/analyze/today-picks' : '/api/analyze/hit-rate?date='+encodeURIComponent(date);
+    fetch('https://tianxi.racing'+path).then(function(r){return r.json();}).then(function(d){
+      var venue=V[d.venue]||d.venue||'';
+      var races=d.races||[];
+      if(!races.length){list.textContent='呢日未有場次或未評核。';return;}
+      list.innerHTML=races.map(function(r){
+        return mode==='pre' ? TXRaceCard.renderPre(r,{dateLabel:labelDate(d.date||date),venue:venue}) : TXRaceCard.renderPost(r,{dateLabel:labelDate(d.date||date),venue:venue});
+      }).join('');
+    }).catch(function(){list.textContent='載入失敗';});
+  }
+  $('mode').addEventListener('change',render);
+  $('date').addEventListener('change',render);
+  fetch('https://tianxi.racing/api/meetings').then(function(r){return r.json();}).then(function(d){
+    fillDates(d.meetings||[]);
+    if($('date').value) render();
+  }).catch(function(){$('list').textContent='賽日清單載入失敗';});
+})();
+</script>
+</body>
+</html>
