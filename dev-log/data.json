@@ -1,7 +1,57 @@
 {
-  "generatedHKT": "2026-09-04 03:02 HKT",
+  "generatedHKT": "2026-09-04 04:08 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "04:08",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "Settled results comparisons must use hit-rate predictedTop4.",
+      "scope": "site",
+      "sha": "a88eb2b"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "04:06",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Restore index.ts and attach freeze overlay on analyze sub-app.",
+      "scope": "backend",
+      "sha": "bad5653"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "04:05",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "Fix freeze overlay so settled top-picks use prediction_log.",
+      "scope": "backend",
+      "sha": "a0c1ad7"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "03:26",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(ops): close missing paren so deploy can parse ops.ts",
+      "scope": "backend",
+      "sha": "f13f20e"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "03:02",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "8b33fc9"
+    },
     {
       "date": "2026-09-04",
       "time": "02:53",
@@ -564,26 +614,6 @@
     },
     {
       "date": "2026-09-03",
-      "time": "17:01",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "5f3d4ec"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "17:00",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: restore engine page; Trio=單T, Tierce=三重彩 per HKJC",
-      "scope": "site",
-      "sha": "58e25ec"
-    },
-    {
-      "date": "2026-09-03",
       "time": "15:34",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -791,36 +821,6 @@
       "title": "docs: use Actions badges for engine passing like tianxi-database",
       "scope": "backend",
       "sha": "aa2049d"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "20:05",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "ci: add engine sanity workflow like database capy_sanity_daily",
-      "scope": "backend",
-      "sha": "bd8b840"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "18:16",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "文檔",
-      "title": "docs: put engine passing list at top of README",
-      "scope": "backend",
-      "sha": "618825d"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "18:15",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "文檔",
-      "title": "docs(engine): root ENGINE_STATUS passing list + public health module",
-      "scope": "backend",
-      "sha": "2e06d2c"
     },
     {
       "date": "2026-09-02",
