@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <script src="/assets/theme.js"></script>
 <script src="/assets/shell.js" defer></script>
+<script src="/assets/engine-mode.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>引擎監控清單 · 天喜</title>
 <link rel="stylesheet" href="/assets/tokens.css">
@@ -25,6 +26,11 @@ pre{font-family:var(--font-mono);font-size:11px;white-space:pre-wrap;background:
   <p>同後端倉庫 reports/ENGINE_HEALTH.md、用戶端 /engine/ 共用一份 JSON。休季期間無當日 live 曲線屬預期。</p>
 </section>
 <div class="card">
+  <h2>運作模式 · 初版／最終版</h2>
+  <p>公開四擇必須標明此輪係 <span class="tx-ed is-draft">初版</span> 定 <span class="tx-ed is-final">最終版</span>。已完場對賬只用最終版。</p>
+  <div id="mon-rules"></div>
+</div>
+<div class="card">
   <h2>守門狀態</h2>
   <div id="box">載入中…</div>
 </div>
@@ -36,6 +42,7 @@ pre{font-family:var(--font-mono);font-size:11px;white-space:pre-wrap;background:
 <nav class="botnav" data-tx-shell="botnav"></nav>
 </div>
 <script>
+if (window.TX_ENGINE_MODE) document.getElementById('mon-rules').innerHTML = TX_ENGINE_MODE.rulesListHtml();
 fetch('/engine/health.json?t='+Date.now()).then(function(r){return r.json()}).then(function(d){
   document.getElementById('raw').textContent = JSON.stringify(d,null,2);
   var h = '<p>總評 <b>'+d.overall+'</b> · PASS '+d.counts.pass+' · WATCH '+d.counts.watch+' · FAIL '+d.counts.fail+' · '+d.generatedHKT+'</p>';
