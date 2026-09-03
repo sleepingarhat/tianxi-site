@@ -4,6 +4,26 @@
   "entries": [
     {
       "date": "2026-09-03",
+      "time": "19:23",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "dfef210"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "19:23",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: cards page copy; demo QP table payout",
+      "scope": "site",
+      "sha": "3c733e9"
+    },
+    {
+      "date": "2026-09-03",
       "time": "19:22",
       "areaKey": "web",
       "area": "前端",
@@ -454,16 +474,6 @@
     },
     {
       "date": "2026-09-02",
-      "time": "22:24",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(admin): bookmark goes to public ops coverage board",
-      "scope": "site",
-      "sha": "c31486d"
-    },
-    {
-      "date": "2026-09-02",
       "time": "22:23",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -481,16 +491,6 @@
       "title": "fix(admin): send unauthenticated /admin to password login, not GitHub-only page",
       "scope": "backend",
       "sha": "3190ba9"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "21:58",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "c8638da"
     },
     {
       "date": "2026-09-02",
