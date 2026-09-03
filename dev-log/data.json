@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-04 04:10 HKT",
+  "generatedHKT": "2026-09-04 05:16 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "05:16",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(engine-mode): 公開頁說明運作規則並標明初版／最終版",
+      "scope": "site",
+      "sha": "7e67f21"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "04:10",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "b993745"
+    },
     {
       "date": "2026-09-04",
       "time": "04:09",
@@ -591,26 +611,6 @@
       "title": "ci: post per-race cards after day digest on @TX_Oracle",
       "scope": "database",
       "sha": "bba3632"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "18:01",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat: race-card.js renderer for pre/post cards",
-      "scope": "site",
-      "sha": "8e7dfdb"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "18:01",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "c46ec08"
     },
     {
       "date": "2026-09-03",
