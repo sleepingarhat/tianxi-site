@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-03 16:58 HKT",
+  "generatedHKT": "2026-09-03 17:01 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-03",
+      "time": "17:00",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: restore engine page; Trio=單T, Tierce=三重彩 per HKJC",
+      "scope": "site",
+      "sha": "58e25ec"
+    },
     {
       "date": "2026-09-03",
       "time": "16:58",
@@ -11,6 +21,16 @@
       "title": "fix: Trio is 單T not 三重彩; follow HKJC official pool names",
       "scope": "site",
       "sha": "2fdde6f"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "16:58",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "e8d1e17"
     },
     {
       "date": "2026-09-03",
@@ -501,26 +521,6 @@
       "title": "ci: add engine sanity workflow like database capy_sanity_daily",
       "scope": "backend",
       "sha": "bd8b840"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "20:05",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "marksix: bump natal-ui cache to load zi-v2",
-      "scope": "site",
-      "sha": "fa6bd60"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "20:05",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "90727a5"
     },
     {
       "date": "2026-09-02",
