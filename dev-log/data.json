@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-04 04:08 HKT",
+  "generatedHKT": "2026-09-04 04:10 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "04:09",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "Settled TX_API.topPicks reads hit-rate predictedTop4.",
+      "scope": "site",
+      "sha": "95e9854"
+    },
     {
       "date": "2026-09-04",
       "time": "04:08",
@@ -11,6 +21,16 @@
       "title": "Settled results comparisons must use hit-rate predictedTop4.",
       "scope": "site",
       "sha": "a88eb2b"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "04:08",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "8f1463d"
     },
     {
       "date": "2026-09-04",
@@ -577,16 +597,6 @@
       "time": "18:01",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "2a98d97"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "18:01",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "功能",
       "title": "feat: race-card.js renderer for pre/post cards",
       "scope": "site",
@@ -601,16 +611,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "c46ec08"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "18:00",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat: per-race pre/post cards page (HKJC pool names)",
-      "scope": "site",
-      "sha": "5175c9f"
     },
     {
       "date": "2026-09-03",
