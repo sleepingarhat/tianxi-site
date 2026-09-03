@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-03 15:48 HKT",
+  "generatedHKT": "2026-09-03 16:58 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-03",
+      "time": "16:58",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: Trio is 單T not 三重彩; follow HKJC official pool names",
+      "scope": "site",
+      "sha": "2fdde6f"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "15:48",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "c41ec33"
+    },
     {
       "date": "2026-09-03",
       "time": "15:47",
@@ -487,16 +507,6 @@
       "time": "20:05",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "7b2ba60"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "20:05",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "提交",
       "title": "marksix: bump natal-ui cache to load zi-v2",
       "scope": "site",
@@ -511,16 +521,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "90727a5"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "20:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "marksix: 早子日柱用新日（子夜換日）zi-v2",
-      "scope": "site",
-      "sha": "503aaef"
     },
     {
       "date": "2026-09-02",
