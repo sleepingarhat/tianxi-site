@@ -1,5 +1,5 @@
 {
-  "generatedHKT": "2026-09-03 20:13 HKT",
+  "generatedHKT": "2026-09-03 20:14 HKT",
   "count": 100,
   "entries": [
     {
@@ -11,6 +11,26 @@
       "title": "marksix: replace iOS AM/PM datetime with 24h date+hour+min picker",
       "scope": "site",
       "sha": "2330d19"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "20:13",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "01a8d00"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "20:13",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "clock24: emit change on hidden personalDT so natal chart refreshes",
+      "scope": "site",
+      "sha": "ccb78ba"
     },
     {
       "date": "2026-09-03",
@@ -317,30 +337,10 @@
       "time": "15:46",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "提交",
-      "title": "copy: professional HKJC terms for hit-rate and LambdaRank",
-      "scope": "site",
-      "sha": "9e6fc89"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "15:46",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "c5d054a"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "15:35",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "e4cff6f"
     },
     {
       "date": "2026-09-03",
