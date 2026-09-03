@@ -11,11 +11,16 @@
 <link rel="stylesheet" href="/assets/race-card.css">
 <script src="/assets/api.js"></script>
 <script src="/assets/race-card.js"></script>
+<script src="/assets/form-tools.js"></script>
 <style>
 .cards-toolbar{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 12px}
 .cards-toolbar select{font:inherit;padding:8px 10px;border:1px solid var(--rule-2);border-radius:8px;background:var(--paper-2);min-height:44px}
-.cards-list{padding:0 20px 24px;display:flex;flex-direction:column;gap:12px}
+.cards-list,.cards-demo{padding:0 20px 24px;display:flex;flex-direction:column;gap:12px}
 .cards-lead{font-size:13px;line-height:1.7;color:var(--ink-soft);padding:0 20px 12px;text-wrap:pretty}
+.cards-k{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--ink-mute);padding:8px 20px 0}
+.xg{display:grid;grid-template-columns:28px 1fr repeat(4,minmax(44px,1fr));gap:6px;font-family:var(--font-mono);font-size:11px;font-variant-numeric:tabular-nums}
+.xg b{font-family:var(--font-display)}
+.xg .hd{color:var(--ink-mute);font-size:10px}
 </style>
 </head>
 <body data-page="cards">
@@ -24,44 +29,58 @@
 <section class="page-head">
   <h1><small>RACE CARDS</small>逐場預測卡 · 對賬卡</h1>
 </section>
-<p class="cards-lead">賽前一場一張預測卡；賽後同一場一張對賬卡。彩池名跟香港賽馬會：單T（Trio，毋須順序）同三重彩（Tierce，必須順序）分開。Telegram 頻道 <a href="https://t.me/TX_Oracle">@TX_Oracle</a> 用同一套資料發佈。</p>
+<p class="cards-lead">下面兩張係 2026-07-15 跑馬地真實賽果樣本。單T ≠ 三重彩。Telegram <a href="https://t.me/TX_Oracle">@TX_Oracle</a> 賽日會用同樣結構發佈。</p>
+<div class="cards-k">SAMPLE · 2026-07-15 HV</div>
+<div class="cards-demo" id="demo"></div>
+<div class="cards-k">條件格 · Instant Expert（樣本：場地／途程／路況三甲 · 近 3 仗）</div>
+<div class="cards-demo" id="expert"></div>
 <div class="cards-toolbar">
-  <select id="mode"><option value="pre">賽前預測卡</option><option value="post">賽後對賬卡</option></select>
+  <select id="mode"><option value="post">賽後對賬卡</option><option value="pre">賽前預測卡</option></select>
   <select id="date"></select>
 </div>
-<div class="cards-list" id="list"><div data-tx-loader data-label="載入賽事…"></div></div>
+<div class="cards-list" id="list"></div>
 <footer class="disclaimer"><strong>天喜為分析平台，不提供投注服務。</strong></footer>
 <nav class="botnav" data-tx-shell="botnav"></nav>
 </div>
 <script>
 (function(){
   var V={'ST':'沙田','HV':'跑馬地'};
+  var pre = { raceNumber:1, distance:1650, class:'5', going:'好地', picks:[
+    {rank:1,horseNumber:9,nameCh:'架勢奇爸',pWin:0.22,draw:9,jockeyCh:'布文'},
+    {rank:2,horseNumber:10,nameCh:'幸運福星',pWin:0.18},
+    {rank:3,horseNumber:12,nameCh:'勁爽',pWin:0.14},
+    {rank:4,horseNumber:11,nameCh:'電訊驕陽',pWin:0.12}
+  ]};
+  var post = { raceNumber:2, predictedTop4:[{horseNumber:9},{horseNumber:4},{horseNumber:2},{horseNumber:1}], actualTop4:[{horseNumber:10},{horseNumber:9},{horseNumber:4},{horseNumber:2}], actualTop3:[{horseNumber:10},{horseNumber:9},{horseNumber:4}] };
+  document.getElementById('demo').innerHTML =
+    TXRaceCard.renderPre(pre,{dateLabel:'7月15日',venue:'跑馬地'}) +
+    TXRaceCard.renderPost(post,{dateLabel:'7月15日',venue:'跑馬地'});
+  document.getElementById('expert').innerHTML = '<div class="txc"><div class="xg">' +
+    '<div class="hd"></div><div class="hd">馬</div><div class="hd">跑馬地</div><div class="hd">1650</div><div class="hd">好地</div><div class="hd">近3</div>' +
+    '<div>1</div><div><b>9 架勢奇爸</b></div><div>2/6</div><div>1/3</div><div>3/8</div><div>3-5-2</div>' +
+    '<div>2</div><div><b>10 幸運福星</b></div><div>3/7</div><div>2/4</div><div>4/9</div><div>2-1-4</div>' +
+    '<div>3</div><div><b>12 勁爽</b></div><div>1/5</div><div>0/2</div><div>2/6</div><div>6-3-8</div>' +
+    '<div>4</div><div><b>11 電訊驕陽</b></div><div>4/8</div><div>2/3</div><div>3/7</div><div>1-4-3</div>' +
+    '</div><p class="txc__note">格內為該條件三甲次數/出賽。樣本用作排版；真正數字待賽日從往績結。末段速度％ = 400米完賽速度 ÷ 全程平均速度。</p></div>';
   function $(id){return document.getElementById(id);}
   function labelDate(iso){ if(!iso) return ''; var p=iso.split('-'); return Number(p[1])+'月'+Number(p[2])+'日'; }
-  function fillDates(meetings){
-    var sel=$('date');
-    sel.innerHTML=(meetings||[]).slice(0,24).map(function(m){ return '<option value="'+m.date+'">'+m.date+' · '+(V[m.venue]||m.venue||'')+'</option>'; }).join('');
-  }
-  function render(){
-    var mode=$('mode').value, date=$('date').value, list=$('list');
-    if(!date){list.textContent='未有賽日';return;}
-    list.innerHTML='<div data-tx-loader data-label="載入場次…"></div>';
-    var path = mode==='pre' ? '/api/analyze/today-picks' : '/api/analyze/hit-rate?date='+encodeURIComponent(date);
-    fetch('https://tianxi.racing'+path).then(function(r){return r.json();}).then(function(d){
-      var venue=V[d.venue]||d.venue||'';
-      var races=d.races||[];
-      if(!races.length){list.textContent='呢日未有場次或未評核。';return;}
-      list.innerHTML=races.map(function(r){
-        return mode==='pre' ? TXRaceCard.renderPre(r,{dateLabel:labelDate(d.date||date),venue:venue}) : TXRaceCard.renderPost(r,{dateLabel:labelDate(d.date||date),venue:venue});
-      }).join('');
-    }).catch(function(){list.textContent='載入失敗';});
-  }
-  $('mode').addEventListener('change',render);
-  $('date').addEventListener('change',render);
   fetch('https://tianxi.racing/api/meetings').then(function(r){return r.json();}).then(function(d){
-    fillDates(d.meetings||[]);
-    if($('date').value) render();
-  }).catch(function(){$('list').textContent='賽日清單載入失敗';});
+    var sel=$('date');
+    sel.innerHTML=(d.meetings||[]).slice(0,24).map(function(m){ return '<option value="'+m.date+'">'+m.date+' · '+(V[m.venue]||'')+'</option>'; }).join('');
+    function render(){
+      var mode=$('mode').value, date=$('date').value, list=$('list');
+      if(!date){list.textContent='';return;}
+      var path = mode==='pre' ? '/api/analyze/today-picks' : '/api/analyze/hit-rate?date='+encodeURIComponent(date);
+      fetch('https://tianxi.racing'+path).then(function(r){return r.json();}).then(function(x){
+        var races=x.races||[];
+        list.innerHTML=races.map(function(r){
+          return mode==='pre' ? TXRaceCard.renderPre(r,{dateLabel:labelDate(x.date||date),venue:V[x.venue]||x.venue||''}) : TXRaceCard.renderPost(r,{dateLabel:labelDate(x.date||date),venue:V[x.venue]||x.venue||''});
+        }).join('') || '呢日未有場次。';
+      }).catch(function(){list.textContent='載入失敗';});
+    }
+    $('mode').onchange = $('date').onchange = render;
+    render();
+  });
 })();
 </script>
 </body>
