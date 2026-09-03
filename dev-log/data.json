@@ -1,7 +1,107 @@
 {
-  "generatedHKT": "2026-09-03 05:25 HKT",
+  "generatedHKT": "2026-09-03 15:35 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-03",
+      "time": "15:35",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "文檔",
+      "title": "docs: product README — ecosystem includes marksix",
+      "scope": "site",
+      "sha": "7a323f5"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "15:34",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "ci: fill D1 Elo snapshot hole 2024-02 to 2025-02 from continuous compute",
+      "scope": "backend",
+      "sha": "0bef5ee"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "15:34",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "文檔",
+      "title": "docs: product README — ecosystem + Elo snapshot note, no CI lecture",
+      "scope": "backend",
+      "sha": "643b591"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "15:12",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-03T15:12",
+      "scope": "site",
+      "sha": "4054808"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "14:52",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "ci: diagnose Elo snapshot gap 2024-01 to 2025-02 (SELECT only)",
+      "scope": "backend",
+      "sha": "ad2ac79"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "14:07",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "ci: export historical v12 Elo snapshots before 2025-02 (read-only)",
+      "scope": "backend",
+      "sha": "169c9e7"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "13:53",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "ci: read-only monthly export of v12 Elo + declared_weight (no writes)",
+      "scope": "backend",
+      "sha": "63d1e49"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "13:34",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "ci: add read-only D1 dump job for v12 Elo snapshot (no writes)",
+      "scope": "backend",
+      "sha": "189271e"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "05:27",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(admin-gate): do not read ADMIN_TOKEN outside shared auth module",
+      "scope": "backend",
+      "sha": "445c6fe"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "05:26",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "revert: keep GET /admin on adminRoutes so auth regression deploy can ship",
+      "scope": "backend",
+      "sha": "35c0d4c"
+    },
     {
       "date": "2026-09-03",
       "time": "05:25",
@@ -21,6 +121,16 @@
       "title": "fix(admin): bookmark /admin goes to login page, not /ops",
       "scope": "site",
       "sha": "97565c5"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "05:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "4d0480c"
     },
     {
       "date": "2026-09-03",
@@ -424,26 +534,6 @@
     },
     {
       "date": "2026-09-02",
-      "time": "18:16",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "marksix: tianxi-zishi wrap 早子 + natal-ui load liuyun-v2",
-      "scope": "site",
-      "sha": "3f817d9"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "18:16",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "8a6ca5d"
-    },
-    {
-      "date": "2026-09-02",
       "time": "18:15",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -451,16 +541,6 @@
       "title": "docs(engine): root ENGINE_STATUS passing list + public health module",
       "scope": "backend",
       "sha": "2e06d2c"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "18:15",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "324029f"
     },
     {
       "date": "2026-09-02",
@@ -643,16 +723,6 @@
       "sha": "4bfb6bc"
     },
     {
-      "date": "2026-08-21",
-      "time": "00:02",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Preserve Cloudflare-managed membership secret",
-      "scope": "backend",
-      "sha": "f488c0b"
-    },
-    {
       "date": "2026-08-20",
       "time": "23:26",
       "areaKey": "data",
@@ -664,26 +734,6 @@
     },
     {
       "date": "2026-08-20",
-      "time": "23:22",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Configure persistent membership session secret",
-      "scope": "backend",
-      "sha": "def415a"
-    },
-    {
-      "date": "2026-08-20",
-      "time": "23:20",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Add secure Whop Pro membership access",
-      "scope": "backend",
-      "sha": "48bdf7b"
-    },
-    {
-      "date": "2026-08-20",
       "time": "23:02",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -691,56 +741,6 @@
       "title": "data: update Mark Six results (2026-08-20T15:02Z)",
       "scope": "marksix",
       "sha": "62ab8f6"
-    },
-    {
-      "date": "2026-08-20",
-      "time": "21:23",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Centralize admin authentication policies",
-      "scope": "backend",
-      "sha": "1e221c9"
-    },
-    {
-      "date": "2026-08-20",
-      "time": "20:25",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Reject admin credentials in query strings",
-      "scope": "backend",
-      "sha": "b521ead"
-    },
-    {
-      "date": "2026-08-20",
-      "time": "20:14",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Add admin auth regression coverage",
-      "scope": "backend",
-      "sha": "6f2b38f"
-    },
-    {
-      "date": "2026-08-20",
-      "time": "20:02",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Restore clean TypeScript checks for admin and analyze routes",
-      "scope": "backend",
-      "sha": "a1aa78a"
-    },
-    {
-      "date": "2026-08-20",
-      "time": "18:31",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "收緊公開分析邊界並加入跑法分類",
-      "scope": "backend",
-      "sha": "3e264a9"
     },
     {
       "date": "2026-08-19",
