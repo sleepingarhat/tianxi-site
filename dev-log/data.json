@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-03 17:01 HKT",
+  "generatedHKT": "2026-09-03 18:01 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-03",
+      "time": "18:00",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat: per-race pre/post cards page (HKJC pool names)",
+      "scope": "site",
+      "sha": "5175c9f"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "17:01",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "5f3d4ec"
+    },
     {
       "date": "2026-09-03",
       "time": "17:00",
@@ -447,16 +467,6 @@
       "time": "20:45",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "d512472"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "20:45",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "提交",
       "title": "marksix: load tianxi-zishi v3 in index (24h 子時)",
       "scope": "site",
@@ -471,16 +481,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "a48ec59"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "20:44",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "marksix: 24h 子時；夜子時干按次日五鼠遁（戊午日甲子時）",
-      "scope": "site",
-      "sha": "80efc3e"
     },
     {
       "date": "2026-09-02",
