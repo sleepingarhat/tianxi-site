@@ -76,7 +76,10 @@
     function render(){
       var mode=$('mode').value, date=$('date').value, list=$('list');
       if(!date){list.textContent='';return;}
-      var path = mode==='pre' ? '/api/analyze/today-picks' : '/api/analyze/hit-rate?date='+encodeURIComponent(date);
+      var today = new Date().toISOString().slice(0,10);
+      var settled = date && date < today;
+      var path = (!settled && mode==='pre') ? '/api/analyze/today-picks' : '/api/analyze/hit-rate?date='+encodeURIComponent(date);
+      if (settled) mode = 'post';
       fetch('https://tianxi.racing'+path).then(function(r){return r.json();}).then(function(x){
         var races=x.races||[];
         list.innerHTML=races.map(function(r){
