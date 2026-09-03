@@ -94,7 +94,7 @@
     return href;
   }
   function runningStyleBadge(entry){
-    if (!entry || !entry.label || !/^(放|前|中|後)$/.test(String(entry.label))) return '';
+    if (!entry || !entry.label || !/^(?:放|前|中|後)$/.test(String(entry.label))) return '';
     var count = Number(entry.sampleCount);
     var sample = isFinite(count) && count > 0 ? '，樣本 ' + count + ' 場' : '';
     return '<span class="tx-running-style tx-running-style--' + String(entry.code || '').replace(/[^a-z-]/g,'') +
@@ -164,7 +164,41 @@
     horseLeaderboard: function(by, lim, status){ return j('/api/horses/leaderboard?by=' + encodeURIComponent(by||'elo') + '&limit=' + (lim||10) + '&status=' + encodeURIComponent(status||'all')); },
     jockeys:  function(){ return j('/api/jockeys'); },
     trainers: function(){ return j('/api/trainers'); },
-    topPicks: function(raceId){ return j('/api/analyze/top-picks?raceId=' + encodeURIComponent(raceId)); },
+    topPicks: function(raceId){
+      var id = String(raceId || '');
+      var m = id.match(/^race_(\d{4}-\d{2}-\d{2})_(?:ST|HV)_(\d+)$/);
+      if (!m) return j('/api/analyze/top-picks?raceId=' + encodeURIComponent(raceId));
+      var date = m[1], rn = Number(m[2]);
+      var today = new Date().toISOString().slice(0, 10);
+      if (date >= today) return j('/api/analyze/top-picks?raceId=' + encodeURIComponent(raceId));
+      return j('/api/analyze/hit-rate?date=' + encodeURIComponent(date)).then(function(hr){
+        var races = (hr && hr.races) || [];
+        var race = null;
+        for (var i = 0; i < races.length; i++) {
+          if (Number(races[i].raceNumber) === rn) { race = races[i]; break; }
+        }
+        var top = race && race.predictedTop4;
+        if (!top || !top.length) return j('/api/analyze/top-picks?raceId=' + encodeURIComponent(raceId));
+        return {
+          raceId: id,
+          date: date,
+          raceNumber: rn,
+          frozen: true,
+          freezeSource: 'prediction_log',
+          picks: top.map(function(p, i){
+            return {
+              horseNumber: p.horseNumber,
+              nameCh: p.nameCh,
+              horseId: p.horseId,
+              rank: p.rank || (i + 1),
+              pWin: p.pWin,
+              scoreSource: 'lgb',
+              frozen: true
+            };
+          })
+        };
+      });
+    },
     predictionAccuracy: function(days){ return j('/api/analyze/prediction-accuracy?days=' + (days||30)); },
     r5Comparison: function(days){ return j('/api/analyze/r5-comparison?days=' + (days||30)); },
     hitRate: function(date){ return j('/api/analyze/hit-rate?date=' + encodeURIComponent(date)); },
