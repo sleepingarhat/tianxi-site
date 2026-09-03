@@ -1,7 +1,267 @@
 {
-  "generatedHKT": "2026-09-03 20:14 HKT",
+  "generatedHKT": "2026-09-04 02:52 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "02:52",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "Add TX_API.predictionLock helper for freeze audit.",
+      "scope": "site",
+      "sha": "b4c74d8"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "02:51",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "Fix prediction-lock import and overlay settled rankings at the HTTP boundary.",
+      "scope": "backend",
+      "sha": "db91f7d"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "02:50",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Add freezeExplainPayload for settled-race explain overlay.",
+      "scope": "backend",
+      "sha": "4b56f9d"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "02:50",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Pass frozen flags through public prediction projectors.",
+      "scope": "backend",
+      "sha": "1fc557b"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "02:49",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Enforce published-prediction freeze at HTTP boundary and audit route.",
+      "scope": "backend",
+      "sha": "09ad60f"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "02:40",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Close published-prediction freeze leaks at the HTTP boundary.",
+      "scope": "backend",
+      "sha": "ed9fbb0"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "02:36",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Cron: audit latest settled meeting prediction-lock vs hit-rate.",
+      "scope": "backend",
+      "sha": "af5ca8a"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "02:34",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Lock published top-4 to prediction_log after results settle.",
+      "scope": "backend",
+      "sha": "aa22453"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "01:45",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "fallback blank certificate if locked templates missing",
+      "scope": "database",
+      "sha": "3f06253"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "01:42",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "pre-race cards at 09:00 HKT on race days",
+      "scope": "database",
+      "sha": "71c7acb"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "01:32",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "post-race Telegram: full-day card only, no per-race PDFs",
+      "scope": "database",
+      "sha": "94cc621"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "01:31",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "pre-race cards at 12:00 HKT on race days",
+      "scope": "database",
+      "sha": "e951ec3"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "00:53",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "restore locked-template overlay renderer",
+      "scope": "database",
+      "sha": "866d7e6"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "00:53",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "test sender reads official dividends + horse meta",
+      "scope": "database",
+      "sha": "f5caab6"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "00:52",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "poster: overlay locked templates + official D1 dividends",
+      "scope": "database",
+      "sha": "77bea9a"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "00:32",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "add TG test sender for three locked cards",
+      "scope": "database",
+      "sha": "d3b5eec"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "00:32",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "workflow: send 3 locked test cards to @TX_Oracle",
+      "scope": "database",
+      "sha": "092b6c5"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "00:30",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "功能",
+      "title": "feat(tg): prerace --date uses hit-rate predicted top4 for historical tests",
+      "scope": "database",
+      "sha": "0783435"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "00:30",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "功能",
+      "title": "feat(tg): prerace workflow accepts date for historical poster test",
+      "scope": "database",
+      "sha": "2faae8f"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "00:22",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "lock poster templates to approved 7-15 layout; font-only variable slots",
+      "scope": "database",
+      "sha": "d497562"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "23:32",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "修正",
+      "title": "fix(tg): horse weight unit 磅 not 磨",
+      "scope": "database",
+      "sha": "0d91bb6"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "23:31",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "修正",
+      "title": "fix(tg): restore certificate-style tx_poster.py (replace placeholder)",
+      "scope": "database",
+      "sha": "27d4beb"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "23:30",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "功能",
+      "title": "feat(tg): certificate-style posters for @TX_Oracle prerace/postrace/day PDFs",
+      "scope": "database",
+      "sha": "9da2ec1"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "21:21",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "Publish race posters as Telegram PDFs.",
+      "scope": "database",
+      "sha": "ac1f45e"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "21:20",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "Wire Telegram posters: PDF sendDocument + full-day card.",
+      "scope": "database",
+      "sha": "ba71edf"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "20:14",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "97c6ffb"
+    },
     {
       "date": "2026-09-03",
       "time": "20:13",
@@ -324,26 +584,6 @@
     },
     {
       "date": "2026-09-03",
-      "time": "15:47",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: restore engine page with professional terminology",
-      "scope": "site",
-      "sha": "694d447"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "15:46",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "c5d054a"
-    },
-    {
-      "date": "2026-09-03",
       "time": "15:34",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -603,16 +843,6 @@
       "sha": "dbee740"
     },
     {
-      "date": "2026-09-01",
-      "time": "18:33",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "文檔",
-      "title": "docs(engine): publish TX-Oracle health checklist + architecture papers (no weight change)",
-      "scope": "backend",
-      "sha": "5b92a38"
-    },
-    {
       "date": "2026-08-31",
       "time": "06:59",
       "areaKey": "data",
@@ -641,46 +871,6 @@
       "title": "data: update Mark Six results (2026-08-27T23:51Z)",
       "scope": "marksix",
       "sha": "4880b2e"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "04:33",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(admin): route tianxi.racing/admin to Worker dashboard",
-      "scope": "backend",
-      "sha": "7c64d05"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "01:03",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(admin): mount token login gate before dashboard routes",
-      "scope": "backend",
-      "sha": "bf4faf8"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "00:57",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(admin): add token form login when GitHub OAuth is unset",
-      "scope": "backend",
-      "sha": "db6edd9"
-    },
-    {
-      "date": "2026-08-28",
-      "time": "00:56",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(admin): issue dashboard session from ADMIN_TOKEN without OAuth",
-      "scope": "backend",
-      "sha": "e4c9658"
     },
     {
       "date": "2026-08-26",
@@ -723,16 +913,6 @@
       "sha": "54cd889"
     },
     {
-      "date": "2026-08-23",
-      "time": "01:34",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "文檔",
-      "title": "docs: clean README — remove historical cleanup records (v11 / qimen / meihua / TimesFM)",
-      "scope": "backend",
-      "sha": "92bea73"
-    },
-    {
       "date": "2026-08-22",
       "time": "22:45",
       "areaKey": "data",
@@ -741,16 +921,6 @@
       "title": "data: update Mark Six results (2026-08-22T14:45Z)",
       "scope": "marksix",
       "sha": "50b14d8"
-    },
-    {
-      "date": "2026-08-21",
-      "time": "00:07",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Add required OIDC nonce to Whop login",
-      "scope": "backend",
-      "sha": "e27e600"
     },
     {
       "date": "2026-08-21",
@@ -793,46 +963,6 @@
       "sha": "368223a"
     },
     {
-      "date": "2026-08-19",
-      "time": "18:58",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "修正",
-      "title": "fix: use D1-compatible horse-id table discovery",
-      "scope": "database",
-      "sha": "4805df9"
-    },
-    {
-      "date": "2026-08-19",
-      "time": "18:55",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "修正",
-      "title": "fix: use repository token for public backend checkout",
-      "scope": "database",
-      "sha": "b5bd8e2"
-    },
-    {
-      "date": "2026-08-19",
-      "time": "18:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: backfill verified horse profile details",
-      "scope": "database",
-      "sha": "77032ed"
-    },
-    {
-      "date": "2026-08-19",
-      "time": "18:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "8ee539d"
-    },
-    {
       "date": "2026-08-18",
       "time": "23:00",
       "areaKey": "data",
@@ -841,136 +971,6 @@
       "title": "data: update Mark Six results (2026-08-18T15:00Z)",
       "scope": "marksix",
       "sha": "b5b5d00"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "22:19",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: 加 index.json manifest 俾前端速勢頁讀",
-      "scope": "database",
-      "sha": "cd43e61"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "22:19",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: 每次寫檔後自動重建 index.json manifest",
-      "scope": "database",
-      "sha": "32d711d"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
-      "sha": "0e9fe3e"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
-      "sha": "97f6104"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
-      "sha": "8ff51d5"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
-      "sha": "b37b7b1"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
-      "sha": "74f9c0c"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
-      "sha": "eba5fd5"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
-      "sha": "a1a1524"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
-      "sha": "200a3dc"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
-      "sha": "a629a3f"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
-      "sha": "aeb1f19"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
-      "sha": "568c497"
     },
     {
       "date": "2026-08-15",
