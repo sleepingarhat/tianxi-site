@@ -22,6 +22,7 @@
     }
     hidden.value = dateEl.value + 'T' + hourEl.value + ':' + minEl.value;
     if (wrap) wrap.classList.add('has-val');
+    try { hidden.dispatchEvent(new Event('change', { bubbles: true })); } catch (e) {}
   }
   function injectCss() {
     if (document.getElementById('tx-clock24-css')) return;
