@@ -5,7 +5,7 @@
 <script src="/assets/theme.js"></script>
 <script src="/assets/shell.js" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>逐場預測卡 · 天喜 TIANXI</title>
+<title>逐場預測 · 天喜 TIANXI</title>
 <link rel="stylesheet" href="/assets/tokens.css">
 <link rel="stylesheet" href="/assets/shell.css">
 <link rel="stylesheet" href="/assets/race-card.css">
@@ -27,15 +27,15 @@
 <div class="shell">
 <header class="brandbar" data-tx-shell="brandbar"></header>
 <section class="page-head">
-  <h1><small>RACE CARDS</small>逐場預測卡 · 對賬卡</h1>
+  <h1><small>RACE CARDS</small>逐場預測與賽果</h1>
 </section>
-<p class="cards-lead">下面兩張係 2026-07-15 跑馬地真實賽果樣本。單T ≠ 三重彩。Telegram <a href="https://t.me/TX_Oracle">@TX_Oracle</a> 賽日會用同樣結構發佈。</p>
+<p class="cards-lead">2026-07-15 跑馬地樣本。Telegram <a href="https://t.me/TX_Oracle">@TX_Oracle</a> 賽日同結構發佈。</p>
 <div class="cards-k">SAMPLE · 2026-07-15 HV</div>
 <div class="cards-demo" id="demo"></div>
-<div class="cards-k">條件格 · Instant Expert（樣本：場地／途程／路況三甲 · 近 3 仗）</div>
+<div class="cards-k">條件格 · 場地／途程／路況三甲 · 近 3 仗</div>
 <div class="cards-demo" id="expert"></div>
 <div class="cards-toolbar">
-  <select id="mode"><option value="post">賽後對賬卡</option><option value="pre">賽前預測卡</option></select>
+  <select id="mode"><option value="post">預測與賽果比對</option><option value="pre">賽前預測</option></select>
   <select id="date"></select>
 </div>
 <div class="cards-list" id="list"></div>
@@ -46,12 +46,18 @@
 (function(){
   var V={'ST':'沙田','HV':'跑馬地'};
   var pre = { raceNumber:1, distance:1650, class:'5', going:'好地', picks:[
-    {rank:1,horseNumber:9,nameCh:'架勢奇爸',pWin:0.22,draw:9,jockeyCh:'布文'},
-    {rank:2,horseNumber:10,nameCh:'幸運福星',pWin:0.18},
-    {rank:3,horseNumber:12,nameCh:'勁爽',pWin:0.14},
-    {rank:4,horseNumber:11,nameCh:'電訊驕陽',pWin:0.12}
+    {rank:1,horseNumber:9,nameCh:'架勢奇爸',draw:9,jockeyCh:'布文',trainerCh:'告東尼',actualWeight:126,style:'前'},
+    {rank:2,horseNumber:10,nameCh:'幸運福星',draw:10,jockeyCh:'霍宏聲',trainerCh:'呂健威',actualWeight:125,style:'中'},
+    {rank:3,horseNumber:12,nameCh:'勁爽',draw:12,actualWeight:123,style:'前'},
+    {rank:4,horseNumber:11,nameCh:'電訊驕陽',draw:11,actualWeight:122,style:'中'}
   ]};
-  var post = { raceNumber:2, predictedTop4:[{horseNumber:9},{horseNumber:4},{horseNumber:2},{horseNumber:1}], actualTop4:[{horseNumber:10},{horseNumber:9},{horseNumber:4},{horseNumber:2}], actualTop3:[{horseNumber:10},{horseNumber:9},{horseNumber:4}] };
+  var post = {
+    raceNumber:2,
+    predictedTop4:[{horseNumber:9},{horseNumber:4},{horseNumber:2},{horseNumber:1}],
+    actualTop4:[{horseNumber:10},{horseNumber:9},{horseNumber:4},{horseNumber:2}],
+    actualTop3:[{horseNumber:10},{horseNumber:9},{horseNumber:4}],
+    dividends:{QP:186}
+  };
   document.getElementById('demo').innerHTML =
     TXRaceCard.renderPre(pre,{dateLabel:'7月15日',venue:'跑馬地'}) +
     TXRaceCard.renderPost(post,{dateLabel:'7月15日',venue:'跑馬地'});
@@ -61,7 +67,7 @@
     '<div>2</div><div><b>10 幸運福星</b></div><div>3/7</div><div>2/4</div><div>4/9</div><div>2-1-4</div>' +
     '<div>3</div><div><b>12 勁爽</b></div><div>1/5</div><div>0/2</div><div>2/6</div><div>6-3-8</div>' +
     '<div>4</div><div><b>11 電訊驕陽</b></div><div>4/8</div><div>2/3</div><div>3/7</div><div>1-4-3</div>' +
-    '</div><p class="txc__note">格內為該條件三甲次數/出賽。樣本用作排版；真正數字待賽日從往績結。末段速度％ = 400米完賽速度 ÷ 全程平均速度。</p></div>';
+    '</div></div>';
   function $(id){return document.getElementById(id);}
   function labelDate(iso){ if(!iso) return ''; var p=iso.split('-'); return Number(p[1])+'月'+Number(p[2])+'日'; }
   fetch('https://tianxi.racing/api/meetings').then(function(r){return r.json();}).then(function(d){
