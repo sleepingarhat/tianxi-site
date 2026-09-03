@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-03 20:09 HKT",
+  "generatedHKT": "2026-09-03 20:11 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-03",
+      "time": "20:11",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "marksix: 24h clock UI without AM/PM picker, restore birth-data label",
+      "scope": "site",
+      "sha": "dd5438c"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "20:09",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "Add TX poster renderer (DESIGN.md) and Telegram sendDocument helper.",
+      "scope": "database",
+      "sha": "5f425bd"
+    },
     {
       "date": "2026-09-03",
       "time": "20:09",
@@ -11,6 +31,16 @@
       "title": "Add DESIGN.md brand system for site, posters, and admin surfaces.",
       "scope": "site",
       "sha": "9a37922"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "20:09",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "a6e8aba"
     },
     {
       "date": "2026-09-03",
@@ -401,26 +431,6 @@
       "title": "fix(admin): unauthenticated /admin redirects to login page instead of JSON 401",
       "scope": "backend",
       "sha": "0a27883"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "05:25",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(admin): bookmark /admin goes to login page, not /ops",
-      "scope": "site",
-      "sha": "97565c5"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "05:25",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "4d0480c"
     },
     {
       "date": "2026-09-03",
@@ -851,16 +861,6 @@
       "title": "speedpro: 每次寫檔後自動重建 index.json manifest",
       "scope": "database",
       "sha": "32d711d"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
-      "sha": "6d9d107"
     },
     {
       "date": "2026-08-18",
