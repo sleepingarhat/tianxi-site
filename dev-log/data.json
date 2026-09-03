@@ -1,7 +1,37 @@
 {
-  "generatedHKT": "2026-09-03 18:01 HKT",
+  "generatedHKT": "2026-09-03 18:19 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-03",
+      "time": "18:19",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat: form-tools FSP + Instant Expert helper",
+      "scope": "site",
+      "sha": "d1f93d8"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "18:02",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "功能",
+      "title": "feat: per-race Telegram cards for @TX_Oracle",
+      "scope": "database",
+      "sha": "a6c717a"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "18:02",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "ci: post per-race cards after day digest on @TX_Oracle",
+      "scope": "database",
+      "sha": "bba3632"
+    },
     {
       "date": "2026-09-03",
       "time": "18:01",
@@ -21,6 +51,16 @@
       "title": "feat: race-card.js renderer for pre/post cards",
       "scope": "site",
       "sha": "8e7dfdb"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "18:01",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "c46ec08"
     },
     {
       "date": "2026-09-03",
@@ -464,26 +504,6 @@
     },
     {
       "date": "2026-09-02",
-      "time": "20:54",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "lock 24h zishi: 23:00-00:59=zi, day changes at 00:00, late-zi hour stem from next-day wushudun",
-      "scope": "site",
-      "sha": "6e797f8"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "20:54",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "225812f"
-    },
-    {
-      "date": "2026-09-02",
       "time": "20:18",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -830,16 +850,6 @@
       "typeLabel": "提交",
       "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
       "scope": "database",
-      "sha": "77bba7c"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "18:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
-      "scope": "database",
       "sha": "92e806c"
     },
     {
@@ -961,16 +971,6 @@
       "title": "休季自動化: off-season auto-pause (season gate + /api/season + 休季中 banners) [skip ci]",
       "scope": "database",
       "sha": "568c497"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "12:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "57e4da0"
     },
     {
       "date": "2026-08-15",
