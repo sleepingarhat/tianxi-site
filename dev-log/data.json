@@ -1,5 +1,5 @@
 {
-  "generatedHKT": "2026-09-03 18:19 HKT",
+  "generatedHKT": "2026-09-03 18:20 HKT",
   "count": 100,
   "entries": [
     {
@@ -11,6 +11,26 @@
       "title": "feat: form-tools FSP + Instant Expert helper",
       "scope": "site",
       "sha": "d1f93d8"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "18:19",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "6531f13"
+    },
+    {
+      "date": "2026-09-03",
+      "time": "18:19",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat: cards page always shows 15 Jul sample pre/post cards",
+      "scope": "site",
+      "sha": "302b141"
     },
     {
       "date": "2026-09-03",
@@ -481,26 +501,6 @@
       "title": "chore(sanity): write ENGINE_HEALTH.json with generatedHKT + season + live",
       "scope": "backend",
       "sha": "9a6370a"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "20:55",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "zishi v4: noon-based day pillar + buildYun uses locked hour stem; natal-ui cache-bust",
-      "scope": "site",
-      "sha": "65c56c0"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "20:55",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "331fb35"
     },
     {
       "date": "2026-09-02",
