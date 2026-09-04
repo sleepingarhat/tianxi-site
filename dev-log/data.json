@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-04 11:46 HKT",
+  "generatedHKT": "2026-09-04 11:59 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "11:59",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(engine-mode): remaining public pages — results/predictor/dashboard/track-record + health.json edition labels",
+      "scope": "site",
+      "sha": "9cba777"
+    },
     {
       "date": "2026-09-04",
       "time": "11:46",
@@ -11,6 +21,16 @@
       "title": "feat(track-record): hit-rate copy states final-edition freeze only",
       "scope": "site",
       "sha": "b6713b7"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "11:46",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "29242b3"
     },
     {
       "date": "2026-09-04",
@@ -591,26 +611,6 @@
       "title": "fix: Telegram race cards match product voice",
       "scope": "database",
       "sha": "75ca9ed"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "19:07",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: restore CJK in race-card.js",
-      "scope": "site",
-      "sha": "312a5f0"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "19:07",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "d3c556b"
     },
     {
       "date": "2026-09-03",
