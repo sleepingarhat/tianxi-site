@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-04 12:27 HKT",
+  "generatedHKT": "2026-09-04 12:30 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "12:30",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: dashboard TRACK_NAME quote (restore JS parse)",
+      "scope": "site",
+      "sha": "7346228"
+    },
     {
       "date": "2026-09-04",
       "time": "12:27",
@@ -11,6 +21,16 @@
       "title": "fix: restore full dashboard page with 初版/最終版 edition badge",
       "scope": "site",
       "sha": "7fdf252"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "12:27",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "f6f8b47"
     },
     {
       "date": "2026-09-04",
@@ -331,26 +351,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "fc84811"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "02:52",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "Add TX_API.predictionLock helper for freeze audit.",
-      "scope": "site",
-      "sha": "b4c74d8"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "02:52",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "8a4fc9f"
     },
     {
       "date": "2026-09-04",
