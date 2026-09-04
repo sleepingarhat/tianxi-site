@@ -1,7 +1,37 @@
 {
-  "generatedHKT": "2026-09-04 11:43 HKT",
+  "generatedHKT": "2026-09-04 11:46 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "11:46",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(track-record): hit-rate copy states final-edition freeze only",
+      "scope": "site",
+      "sha": "b6713b7"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "11:44",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(ops): explain engine rules and draft vs final edition",
+      "scope": "backend",
+      "sha": "95f2fab"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "11:43",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "409f1e4"
+    },
     {
       "date": "2026-09-04",
       "time": "11:42",
@@ -567,16 +597,6 @@
       "time": "19:07",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "f57f992"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "19:07",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "修正",
       "title": "fix: restore CJK in race-card.js",
       "scope": "site",
@@ -591,16 +611,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "d3c556b"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "19:06",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: race cards product voice — no pool tutorials, gold hits",
-      "scope": "site",
-      "sha": "6b57ca8"
     },
     {
       "date": "2026-09-03",
@@ -811,16 +821,6 @@
       "title": "[data][skip ci] 2026-09-02T12:18Z · [data][skip ci] fixture-calendar 2026-09-02T12:18Z via GHA",
       "scope": "database",
       "sha": "a1b55b3"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "20:13",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "文檔",
-      "title": "docs: product README — drop CI lecture and failing badge row",
-      "scope": "backend",
-      "sha": "8f489d7"
     },
     {
       "date": "2026-09-02",
