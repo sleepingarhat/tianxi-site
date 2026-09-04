@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-04 05:16 HKT",
+  "generatedHKT": "2026-09-04 11:40 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "11:40",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(engine-mode): engine + cards + health.json show draft/final edition",
+      "scope": "site",
+      "sha": "34ae7a5"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "05:18",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(ops): document engine mode and draft/final on health console",
+      "scope": "backend",
+      "sha": "6876c71"
+    },
     {
       "date": "2026-09-04",
       "time": "05:16",
@@ -11,6 +31,16 @@
       "title": "feat(engine-mode): 公開頁說明運作規則並標明初版／最終版",
       "scope": "site",
       "sha": "7e67f21"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "05:16",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "2eba1bf"
     },
     {
       "date": "2026-09-04",
@@ -568,26 +598,6 @@
       "areaKey": "web",
       "area": "前端",
       "typeLabel": "功能",
-      "title": "feat: form-tools FSP + Instant Expert helper",
-      "scope": "site",
-      "sha": "d1f93d8"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "18:19",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "6531f13"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "18:19",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
       "title": "feat: cards page always shows 15 Jul sample pre/post cards",
       "scope": "site",
       "sha": "302b141"
@@ -811,16 +821,6 @@
       "title": "docs: product README — drop CI lecture and failing badge row",
       "scope": "backend",
       "sha": "8f489d7"
-    },
-    {
-      "date": "2026-09-02",
-      "time": "20:06",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "文檔",
-      "title": "docs: use Actions badges for engine passing like tianxi-database",
-      "scope": "backend",
-      "sha": "aa2049d"
     },
     {
       "date": "2026-09-02",
