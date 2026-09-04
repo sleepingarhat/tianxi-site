@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-04 12:30 HKT",
+  "generatedHKT": "2026-09-04 12:35 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "12:35",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: restore full results page with 最終版 freeze badges",
+      "scope": "site",
+      "sha": "5a9019b"
+    },
     {
       "date": "2026-09-04",
       "time": "12:30",
@@ -11,6 +21,16 @@
       "title": "fix: dashboard TRACK_NAME quote (restore JS parse)",
       "scope": "site",
       "sha": "7346228"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "12:30",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "8701b1b"
     },
     {
       "date": "2026-09-04",
@@ -331,26 +351,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "8b33fc9"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "02:53",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "Use hit-rate predictedTop4 for settled race cards.",
-      "scope": "site",
-      "sha": "18e3aa1"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "02:53",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "fc84811"
     },
     {
       "date": "2026-09-04",
