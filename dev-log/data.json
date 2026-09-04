@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-04 11:40 HKT",
+  "generatedHKT": "2026-09-04 11:43 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "11:42",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(ui): engine and cards pages explain draft vs final edition",
+      "scope": "site",
+      "sha": "49d8a4e"
+    },
     {
       "date": "2026-09-04",
       "time": "11:40",
@@ -11,6 +21,16 @@
       "title": "feat(engine-mode): engine + cards + health.json show draft/final edition",
       "scope": "site",
       "sha": "34ae7a5"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "11:40",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "1fee23b"
     },
     {
       "date": "2026-09-04",
@@ -581,26 +601,6 @@
       "title": "fix: race cards product voice — no pool tutorials, gold hits",
       "scope": "site",
       "sha": "6b57ca8"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "18:20",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "210a1f2"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "18:19",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat: cards page always shows 15 Jul sample pre/post cards",
-      "scope": "site",
-      "sha": "302b141"
     },
     {
       "date": "2026-09-03",
