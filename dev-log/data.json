@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-04 12:47 HKT",
+  "generatedHKT": "2026-09-04 12:56 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "12:56",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(engine): stack 初版 / 最終版 legend so mobile does not wrap mid-sentence",
+      "scope": "site",
+      "sha": "93d0c6d"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "12:47",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "67fc8fe"
+    },
     {
       "date": "2026-09-04",
       "time": "12:46",
@@ -291,26 +311,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "409f1e4"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "11:42",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(ui): engine and cards pages explain draft vs final edition",
-      "scope": "site",
-      "sha": "49d8a4e"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "11:40",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "1fee23b"
     },
     {
       "date": "2026-09-04",
