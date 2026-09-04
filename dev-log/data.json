@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-04 12:06 HKT",
+  "generatedHKT": "2026-09-04 12:24 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "12:24",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: restore full predictor page with 初版/最終版 edition badges",
+      "scope": "site",
+      "sha": "1c14ca3"
+    },
     {
       "date": "2026-09-04",
       "time": "12:06",
@@ -11,6 +21,16 @@
       "title": "fix: restore predictor page + 初版/最終版 badge",
       "scope": "site",
       "sha": "eac269c"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "12:06",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "f3af488"
     },
     {
       "date": "2026-09-04",
@@ -561,26 +581,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "97c6ffb"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "20:13",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "marksix: replace iOS AM/PM datetime with 24h date+hour+min picker",
-      "scope": "site",
-      "sha": "2330d19"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "20:13",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "01a8d00"
     },
     {
       "date": "2026-09-03",
