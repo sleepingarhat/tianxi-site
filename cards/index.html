@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/assets/shell.css">
 <link rel="stylesheet" href="/assets/race-card.css">
 <script src="/assets/api.js"></script>
+<script src="/assets/engine-mode.js"></script>
 <script src="/assets/race-card.js"></script>
 <script src="/assets/form-tools.js"></script>
 <style>
@@ -18,6 +19,9 @@
 .cards-list,.cards-demo{padding:0 20px 24px;display:flex;flex-direction:column;gap:12px}
 .cards-lead{font-size:13px;line-height:1.7;color:var(--ink-soft);padding:0 20px 12px;text-wrap:pretty}
 .cards-k{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--ink-mute);padding:8px 20px 0}
+.tx-ed{display:inline-block;font-family:var(--font-mono);font-weight:800;font-size:10px;letter-spacing:.08em;padding:2px 8px;border-radius:99px;border:1px solid var(--rule);margin-left:6px;vertical-align:middle}
+.tx-ed.is-final{color:#2E2108;border-color:#A07A1F;background:linear-gradient(180deg,#FFF4C2,#EBC964)}
+.tx-ed.is-draft{color:var(--ink-mute)}
 .xg{display:grid;grid-template-columns:28px 1fr repeat(4,minmax(44px,1fr));gap:6px;font-family:var(--font-mono);font-size:11px;font-variant-numeric:tabular-nums}
 .xg b{font-family:var(--font-display)}
 .xg .hd{color:var(--ink-mute);font-size:10px}
@@ -29,7 +33,7 @@
 <section class="page-head">
   <h1><small>RACE CARDS</small>逐場預測與賽果</h1>
 </section>
-<p class="cards-lead">2026-07-15 跑馬地樣本。Telegram <a href="https://t.me/TX_Oracle">@TX_Oracle</a> 賽日同結構發佈。</p>
+<p class="cards-lead">每輪預測標明 <span class="tx-ed is-draft">初版</span>（未鎖，可刷新）或 <span class="tx-ed is-final">最終版</span>（已鎖，對賬用呢套）。規格：第一場開跑前 1.5 小時鎖、T−1h 出卡；而家已完場日顯示最終版。Telegram <a href="https://t.me/TX_Oracle">@TX_Oracle</a>。</p>
 <div class="cards-k">SAMPLE · 2026-07-15 HV</div>
 <div class="cards-demo" id="demo"></div>
 <div class="cards-k">條件格 · 場地／途程／路況三甲 · 近 3 仗</div>
@@ -82,7 +86,9 @@
       if (settled) mode = 'post';
       fetch('https://tianxi.racing'+path).then(function(r){return r.json();}).then(function(x){
         var races=x.races||[];
-        list.innerHTML=races.map(function(r){
+        var ed = window.TX_ENGINE_MODE ? TX_ENGINE_MODE.edition({ settled: settled || mode==='post', frozen: !!(x && x.frozen) }) : null;
+        var head = ed ? '<div class="cards-k">此輪預測 '+TX_ENGINE_MODE.badgeHtml(ed)+' · '+ed.note+'</div>' : '';
+        list.innerHTML=head+races.map(function(r){
           return mode==='pre' ? TXRaceCard.renderPre(r,{dateLabel:labelDate(x.date||date),venue:V[x.venue]||x.venue||''}) : TXRaceCard.renderPost(r,{dateLabel:labelDate(x.date||date),venue:V[x.venue]||x.venue||''});
         }).join('') || '呢日未有場次。';
       }).catch(function(){list.textContent='載入失敗';});

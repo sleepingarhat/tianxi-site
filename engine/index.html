@@ -9,7 +9,13 @@
 <link rel="stylesheet" href="/assets/tokens.css">
 <link rel="stylesheet" href="/assets/shell.css">
 <script src="/assets/api.js"></script>
+<script src="/assets/engine-mode.js"></script>
 <style>
+.tx-ed{display:inline-block;font-family:var(--font-mono);font-weight:800;font-size:10px;letter-spacing:.08em;padding:2px 8px;border-radius:99px;border:1px solid var(--rule);vertical-align:middle}
+.tx-ed.is-final{color:#2E2108;border-color:#A07A1F;background:linear-gradient(180deg,#FFF4C2,#EBC964)}
+.tx-ed.is-draft{color:var(--ink-mute)}
+.tx-ed-rules{margin:8px 0 0;padding-left:18px;font-size:13px;line-height:1.7;color:var(--ink-soft)}
+.tx-ed-rules li{margin-bottom:6px}
 .eng-lead{font-size:13px;line-height:1.7;color:var(--ink-soft)}
 .eng-sub{font-size:12px;color:var(--ink-mute);margin:2px 0 14px}
 .eng-sub a{color:var(--brown);font-weight:700;text-decoration:none}
@@ -51,6 +57,12 @@
   <p>可驗證的賽事前預測：同一場出賽名單內排序，賽後用官方名次對賬。</p>
 </section>
 <div class="card">
+  <h2>運作模式 · 初版／最終版</h2>
+  <p class="eng-sub">每輪公開預測必須標明係未鎖初版定已鎖最終版。命中率只對最終版。</p>
+  <p><span class="tx-ed is-draft">初版</span> 未鎖，刷新可改四擇　　<span class="tx-ed is-final">最終版</span> 已鎖，對賬同卡同一套</p>
+  <div id="eng-rules"></div>
+</div>
+<div class="card">
   <h2>引擎健康 · 逐項守門</h2>
   <p class="eng-sub">同數據庫 sanity 同一種清單：PASS／WATCH／FAIL · <a href="/engine/health.json">JSON</a> · <a href="https://github.com/sleepingarhat/tianxi-backend/blob/main/reports/ENGINE_HEALTH.json">後端倉庫報告</a> · <a href="/engine/monitor.html">監控清單</a></p>
   <div id="eng-health">載入中…</div>
@@ -67,7 +79,7 @@
     <p>TX-Oracle v3.2 係兩層集成，唔係神經網路：</p>
     <ul>
       <li><b>LightGBM LambdaRank</b>——把同一場出賽馬列為一條排序名單，學習場內相對名次；不是預測完賽時間（秒數）。</li>
-      <li><b>Elo v12</b>——馬匹／騎師／練馬師權重 70／20／10，再加檔位與負磅修正；作為獨立後備模型。</li>
+      <li><b>Elo v12</b>——馬匹／騎師／練馬師權重 70／20／10，再加檔位與負磨修正；作為獨立後備模型。</li>
       <li><b>機率混合</b>——按健康閘的 α 加權兩層輸出。閘未過關時只採用 Elo。</li>
       <li><b>臨場獨贏賠率</b>——只顯示於選馬頁右欄作對照，不進入 LambdaRank。</li>
     </ul>
@@ -93,6 +105,7 @@
 </div>
 <script>
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+if (window.TX_ENGINE_MODE) document.getElementById('eng-rules').innerHTML = TX_ENGINE_MODE.rulesListHtml();
 fetch('/engine/health.json?t='+Date.now()).then(function(r){return r.json()}).then(function(d){
   var el=document.getElementById('eng-health');
   var ov=String(d.overall||'WATCH');
