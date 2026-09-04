@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-04 12:42 HKT",
+  "generatedHKT": "2026-09-04 12:43 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "12:43",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(results): restore 四揀 wording and G1 title regex",
+      "scope": "site",
+      "sha": "3191c66"
+    },
     {
       "date": "2026-09-04",
       "time": "12:42",
@@ -11,6 +21,16 @@
       "title": "fix(results): persist 最終版 badge after cmp load; harden esc() against entity-decode",
       "scope": "site",
       "sha": "d93ac8d"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "12:42",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "8dacab7"
     },
     {
       "date": "2026-09-04",
@@ -301,26 +321,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "b993745"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "04:09",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "Settled TX_API.topPicks reads hit-rate predictedTop4.",
-      "scope": "site",
-      "sha": "95e9854"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "04:08",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "8f1463d"
     },
     {
       "date": "2026-09-04",
