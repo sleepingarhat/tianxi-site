@@ -4,6 +4,26 @@
   "entries": [
     {
       "date": "2026-09-04",
+      "time": "12:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "baaa655"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "12:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: restore track-record/index.html (revert placeholder)",
+      "scope": "site",
+      "sha": "dae2a70"
+    },
+    {
+      "date": "2026-09-04",
       "time": "12:02",
       "areaKey": "web",
       "area": "前端",
@@ -581,26 +601,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "a6e8aba"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "19:23",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: cards page copy; demo QP table payout",
-      "scope": "site",
-      "sha": "3c733e9"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "19:23",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "9cdc6de"
     },
     {
       "date": "2026-09-03",
