@@ -14,6 +14,9 @@
 .tx-ed{display:inline-block;font-family:var(--font-mono);font-weight:800;font-size:10px;letter-spacing:.08em;padding:2px 8px;border-radius:99px;border:1px solid var(--rule);vertical-align:middle}
 .tx-ed.is-final{color:#2E2108;border-color:#A07A1F;background:linear-gradient(180deg,#FFF4C2,#EBC964)}
 .tx-ed.is-draft{color:var(--ink-mute)}
+.tx-ed-legend{display:flex;flex-direction:column;gap:8px;margin:4px 0 10px}
+.tx-ed-legend__row{display:flex;align-items:flex-start;gap:8px;font-size:13px;line-height:1.55;color:var(--ink-soft)}
+.tx-ed-legend__row .tx-ed{flex:0 0 auto;margin-top:1px}
 .tx-ed-rules{margin:8px 0 0;padding-left:18px;font-size:13px;line-height:1.7;color:var(--ink-soft)}
 .tx-ed-rules li{margin-bottom:6px}
 .eng-lead{font-size:13px;line-height:1.7;color:var(--ink-soft)}
@@ -59,7 +62,10 @@
 <div class="card">
   <h2>運作模式 · 初版／最終版</h2>
   <p class="eng-sub">每輪公開預測必須標明係未鎖初版定已鎖最終版。命中率只對最終版。</p>
-  <p><span class="tx-ed is-draft">初版</span> 未鎖，刷新可改四擇　　<span class="tx-ed is-final">最終版</span> 已鎖，對賬同卡同一套</p>
+  <div class="tx-ed-legend">
+    <div class="tx-ed-legend__row"><span class="tx-ed is-draft">初版</span><span>未鎖 · 刷新可改四揀</span></div>
+    <div class="tx-ed-legend__row"><span class="tx-ed is-final">最終版</span><span>已鎖 · 對賬同卡同一套</span></div>
+  </div>
   <div id="eng-rules"></div>
 </div>
 <div class="card">
@@ -79,7 +85,7 @@
     <p>TX-Oracle v3.2 係兩層集成，唔係神經網路：</p>
     <ul>
       <li><b>LightGBM LambdaRank</b>——把同一場出賽馬列為一條排序名單，學習場內相對名次；不是預測完賽時間（秒數）。</li>
-      <li><b>Elo v12</b>——馬匹／騎師／練馬師權重 70／20／10，再加檔位與負磨修正；作為獨立後備模型。</li>
+      <li><b>Elo v12</b>——馬匹／騎師／練馬師權重 70／20／10，再加檔位與負磅修正；作為獨立後備模型。</li>
       <li><b>機率混合</b>——按健康閘的 α 加權兩層輸出。閘未過關時只採用 Elo。</li>
       <li><b>臨場獨贏賠率</b>——只顯示於選馬頁右欄作對照，不進入 LambdaRank。</li>
     </ul>
