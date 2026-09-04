@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-04 12:56 HKT",
+  "generatedHKT": "2026-09-05 02:45 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-05",
+      "time": "00:56",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-04T16:56Z · [data][skip ci] race-day 2026-09-04T16:56Z via GHA",
+      "scope": "database",
+      "sha": "77807c4"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "15:15",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-04T15:15",
+      "scope": "site",
+      "sha": "e9ce9be"
+    },
     {
       "date": "2026-09-04",
       "time": "12:56",
@@ -11,6 +31,16 @@
       "title": "fix(engine): stack 初版 / 最終版 legend so mobile does not wrap mid-sentence",
       "scope": "site",
       "sha": "93d0c6d"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "12:56",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "75875c2"
     },
     {
       "date": "2026-09-04",
@@ -277,16 +307,6 @@
       "time": "11:46",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(track-record): hit-rate copy states final-edition freeze only",
-      "scope": "site",
-      "sha": "b6713b7"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "11:46",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
@@ -301,16 +321,6 @@
       "title": "feat(ops): explain engine rules and draft vs final edition",
       "scope": "backend",
       "sha": "95f2fab"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "11:43",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "409f1e4"
     },
     {
       "date": "2026-09-04",
@@ -951,16 +961,6 @@
       "title": "data: update Mark Six results (2026-08-20T15:02Z)",
       "scope": "marksix",
       "sha": "62ab8f6"
-    },
-    {
-      "date": "2026-08-19",
-      "time": "19:00",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "修正",
-      "title": "fix: exclude migration state from horse-id child tables",
-      "scope": "database",
-      "sha": "368223a"
     },
     {
       "date": "2026-08-18",
