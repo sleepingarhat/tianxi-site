@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-04 12:24 HKT",
+  "generatedHKT": "2026-09-04 12:27 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "12:27",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: restore full dashboard page with 初版/最終版 edition badge",
+      "scope": "site",
+      "sha": "7fdf252"
+    },
     {
       "date": "2026-09-04",
       "time": "12:24",
@@ -11,6 +21,16 @@
       "title": "fix: restore full predictor page with 初版/最終版 edition badges",
       "scope": "site",
       "sha": "1c14ca3"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "12:24",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "9ea32d4"
     },
     {
       "date": "2026-09-04",
@@ -571,26 +591,6 @@
       "title": "Wire Telegram posters: PDF sendDocument + full-day card.",
       "scope": "database",
       "sha": "ba71edf"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "20:14",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "97c6ffb"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "20:13",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "clock24: emit change on hidden personalDT so natal chart refreshes",
-      "scope": "site",
-      "sha": "ccb78ba"
     },
     {
       "date": "2026-09-03",
