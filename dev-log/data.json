@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-04 12:35 HKT",
+  "generatedHKT": "2026-09-04 12:42 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "12:42",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(results): persist 最終版 badge after cmp load; harden esc() against entity-decode",
+      "scope": "site",
+      "sha": "d93ac8d"
+    },
     {
       "date": "2026-09-04",
       "time": "12:35",
@@ -11,6 +21,16 @@
       "title": "fix: restore full results page with 最終版 freeze badges",
       "scope": "site",
       "sha": "5a9019b"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "12:35",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "49b28d1"
     },
     {
       "date": "2026-09-04",
@@ -297,16 +317,6 @@
       "time": "04:08",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "提交",
-      "title": "Settled results comparisons must use hit-rate predictedTop4.",
-      "scope": "site",
-      "sha": "a88eb2b"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "04:08",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
@@ -341,16 +351,6 @@
       "title": "fix(ops): close missing paren so deploy can parse ops.ts",
       "scope": "backend",
       "sha": "f13f20e"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "03:02",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "8b33fc9"
     },
     {
       "date": "2026-09-04",
