@@ -114,7 +114,7 @@
 <div class="ticker" id="ticker">預測與賽果 · <span data-tx-loader data-size="sm" data-label="載入中…"></span></div>
 <section class="page-head">
   <h1><small>PREDICTION vs RESULT</small>預測與賽果</h1>
-  <p>已收回 HKJC 結果之賽事日，逐場並列天喜模型預測與實際頭 4 名賽果。本頁只讀 <span class="tx-ed is-final">最終版</span> 凍結四揀，唔用 live 重算。<br>
+  <p>已收回 HKJC 結果之賽事日，逐場並列天喜模型預測與實際頭 4 名賽果。本頁只讀 <span class="tx-ed is-final">最終版</span> 凍結四擁，唔用 live 重算。<br>
   <em style="font-family:var(--font-mono);font-size:11px;color:var(--ink-mute)">分析指標 · 非投注建議 · 數據來源 HKJC · <a href="/engine/" style="color:var(--brown)">引擎規則</a></em></p>
 </section>
 <div class="rdate-bar">
@@ -145,7 +145,7 @@
   var STYLE_MAP = {};
   function esc(s){
     return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
-      return {'&':'&','<':'<','>':'>','"':'"',"'":'&#39;'}[c];
+      return {'&':'&'+'amp;','<':'&'+'lt;','>':'&'+'gt;','"':'&'+'quot;',"'":'&#39;'}[c];
     });
   }
   function qs(name){
@@ -157,7 +157,7 @@
     if (cls === 'G1') return true;
     if (/^G[2-9]|^G1[0-9]/.test(cls)) return false;
     var t = (race.title || '').toString();
-    return /(?:^|[^0-9A-Z])G1(?:$|[^0-9])|一級賽|Group\s*1\b/i.test(t);
+    return /(?:^|[^0-9A-Z])G1(?:$|[^0-9])|一級賽|Group\\s*1\\b/i.test(t);
   }
   function fmtPrize(p){
     if (p == null || p === '') return '';
@@ -266,7 +266,7 @@
         '<div class="day-stats__card"><div class="day-stats__lbl">G1 頭牌</div><div class="day-stats__val">' + g1s.length + '</div>' + (g1s.length ? '<div class="day-stats__sub">' + g1s.map(function(r){ return 'R' + (r.raceNumber || r.race_number); }).join(' · ') + '</div>' : '') + '</div>' +
         (prizeTotal != null ? '<div class="day-stats__card"><div class="day-stats__lbl">獎金</div><div class="day-stats__val">' + fmtPrize(prizeTotal) + '</div><div class="day-stats__sub">HKD 合計</div></div>' : '') +
       '</div>' +
-      '<div class="cmp-summary" id="cmp-summary"><span class="k">模型對賬</span> ' + (window.TX_ENGINE_MODE ? TX_ENGINE_MODE.badgeHtml(TX_ENGINE_MODE.edition({settled:true})) + ' 最終版凍結四揀 · ' : '') + '捲動各場以載入模型預測對比</div>' +
+      '<div class="cmp-summary" id="cmp-summary"><span class="k">模型對賬</span> ' + (window.TX_ENGINE_MODE ? TX_ENGINE_MODE.badgeHtml(TX_ENGINE_MODE.edition({settled:true})) + ' 最終版凍結四擁 · ' : '') + '捲動各場以載入模型預測對比</div>' +
       '<div class="cov-summary" id="cov-summary" style="display:none"></div>' +
       races.map(renderRaceCard).join('');
     if (!settled.length){
@@ -385,13 +385,14 @@
       if (fp === 1) champ++;
       if (fp <= 3) top3++;
     });
+    var badge = window.TX_ENGINE_MODE ? TX_ENGINE_MODE.badgeHtml(TX_ENGINE_MODE.edition({settled:true})) + ' ' : '';
     if (!withTp){
-      el.innerHTML = '<span class="k">模型對賬</span> 捲動各場以載入模型預測對比';
+      el.innerHTML = '<span class="k">模型對賬</span> ' + badge + '最終版凍結四擁 · 捲動各場以載入模型預測對比';
       return;
     }
     var srcTxt = lgb === withTp ? '集成 LGB' : (lgb === 0 ? 'ELO+因子' : ('LGB ' + lgb + '/' + withTp + ' 場'));
     el.innerHTML =
-      '<span class="k">模型對賬</span>' +
+      '<span class="k">模型對賬</span>' + badge +
       '已比對 <strong>' + withTp + '</strong> 場' +
       '<span class="k">·</span>首選命中冠軍 <strong>' + champ + '/' + denom + '</strong>' +
       '<span class="k">·</span>首選前三入位 <strong>' + top3 + '/' + denom + '</strong>' +
@@ -496,10 +497,10 @@
   function renderCovBox(hr){
     var cov = covOf(hr);
     if (cov == null) return '';
-    var head = '<div class="cov__hd"><span class="cov__ttl">四揀覆蓋</span>' + covBadge(cov) + '</div>';
+    var head = '<div class="cov__hd"><span class="cov__ttl">四擁覆蓋</span>' + covBadge(cov) + '</div>';
     var bp = hr.boxPayouts || [];
     if (!bp.length){
-      var note = (cov === 4) ? '派彩資料暫未提供' : '四揀未中任何複式組合';
+      var note = (cov === 4) ? '派彩資料暫未提供' : '四擁未中任何複式組合';
       return '<div class="cov">' + head + '<div class="cov-note">' + esc(note) + '</div></div>';
     }
     var rows = bp.map(function(p){
@@ -521,7 +522,7 @@
     if (!eligible){ el.style.display='none'; return; }
     el.style.display='';
     el.innerHTML =
-      '<span class="ct">模型四揀覆蓋</span><span class="k">唔分名次</span>' +
+      '<span class="ct">模型四擁覆蓋</span><span class="k">唔分名次</span>' +
       '<span class="cov-pill ok">全中 4/4 · <strong>' + c4 + '</strong> 場</span>' +
       '<span class="cov-pill">4 中 3 · ' + c3 + ' 場</span>' +
       '<span class="cov-pill">4 中 2 · ' + c2 + ' 場</span>' +
