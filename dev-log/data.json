@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-04 12:44 HKT",
+  "generatedHKT": "2026-09-04 12:47 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "12:46",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(results): restore full results page (revert stub)",
+      "scope": "site",
+      "sha": "0bcf860"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "12:44",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "d9d68f8"
+    },
     {
       "date": "2026-09-04",
       "time": "12:43",
@@ -287,16 +307,6 @@
       "time": "11:40",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(engine-mode): engine + cards + health.json show draft/final edition",
-      "scope": "site",
-      "sha": "34ae7a5"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "11:40",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
@@ -311,16 +321,6 @@
       "title": "feat(ops): document engine mode and draft/final on health console",
       "scope": "backend",
       "sha": "6876c71"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "05:16",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "2eba1bf"
     },
     {
       "date": "2026-09-04",
