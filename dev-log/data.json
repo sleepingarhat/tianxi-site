@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-04 11:59 HKT",
+  "generatedHKT": "2026-09-04 12:03 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-04",
+      "time": "12:02",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(engine-mode): stamp 初版/最終版 on remaining public pages (track-record, predictor, dashboard, results)",
+      "scope": "site",
+      "sha": "fb7b000"
+    },
     {
       "date": "2026-09-04",
       "time": "11:59",
@@ -11,6 +21,16 @@
       "title": "feat(engine-mode): remaining public pages — results/predictor/dashboard/track-record + health.json edition labels",
       "scope": "site",
       "sha": "9cba777"
+    },
+    {
+      "date": "2026-09-04",
+      "time": "11:59",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "73c23ee"
     },
     {
       "date": "2026-09-04",
@@ -567,16 +587,6 @@
       "time": "19:23",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "dfef210"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "19:23",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "修正",
       "title": "fix: cards page copy; demo QP table payout",
       "scope": "site",
@@ -591,16 +601,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "9cdc6de"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "19:22",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: restore original card layout; chips + hit table only",
-      "scope": "site",
-      "sha": "b17ca62"
     },
     {
       "date": "2026-09-03",
