@@ -1,7 +1,87 @@
 {
-  "generatedHKT": "2026-09-06 01:51 HKT",
+  "generatedHKT": "2026-09-07 01:57 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-07",
+      "time": "01:40",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-06T17:40Z · [data][skip ci] race-day 2026-09-06T17:40Z via GHA",
+      "scope": "database",
+      "sha": "15caaa3"
+    },
+    {
+      "date": "2026-09-06",
+      "time": "16:39",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "bc69f89"
+    },
+    {
+      "date": "2026-09-06",
+      "time": "15:27",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] warn critical=0 warn=19 · 2026-09-06T07:27Z",
+      "scope": "database",
+      "sha": "f5f410e"
+    },
+    {
+      "date": "2026-09-06",
+      "time": "15:09",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-06T15:09",
+      "scope": "site",
+      "sha": "cb7af7b"
+    },
+    {
+      "date": "2026-09-06",
+      "time": "15:03",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-06T07:03Z",
+      "scope": "database",
+      "sha": "5071f4f"
+    },
+    {
+      "date": "2026-09-06",
+      "time": "08:52",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-06T00:52Z · pool-a 2026-09-06T00:52Z via GHA matrix",
+      "scope": "database",
+      "sha": "c523d28"
+    },
+    {
+      "date": "2026-09-06",
+      "time": "03:40",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-05T19:40Z · [data][skip ci] pool-b 2026-09-05T19:40Z via GHA",
+      "scope": "database",
+      "sha": "e5142e9"
+    },
+    {
+      "date": "2026-09-06",
+      "time": "01:51",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "1e98345"
+    },
     {
       "date": "2026-09-06",
       "time": "01:28",
@@ -554,26 +634,6 @@
     },
     {
       "date": "2026-09-04",
-      "time": "12:02",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(engine-mode): stamp 初版/最終版 on remaining public pages (track-record, predictor, dashboard, results)",
-      "scope": "site",
-      "sha": "fb7b000"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "11:59",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "73c23ee"
-    },
-    {
-      "date": "2026-09-04",
       "time": "11:44",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -768,69 +828,9 @@
       "areaKey": "data",
       "area": "數據·爬蟲",
       "typeLabel": "提交",
-      "title": "add TG test sender for three locked cards",
-      "scope": "database",
-      "sha": "d3b5eec"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "00:32",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
       "title": "workflow: send 3 locked test cards to @TX_Oracle",
       "scope": "database",
       "sha": "092b6c5"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "00:30",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "功能",
-      "title": "feat(tg): prerace --date uses hit-rate predicted top4 for historical tests",
-      "scope": "database",
-      "sha": "0783435"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "00:30",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "功能",
-      "title": "feat(tg): prerace workflow accepts date for historical poster test",
-      "scope": "database",
-      "sha": "2faae8f"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "00:22",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "lock poster templates to approved 7-15 layout; font-only variable slots",
-      "scope": "database",
-      "sha": "d497562"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "23:32",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "修正",
-      "title": "fix(tg): horse weight unit 磅 not 磨",
-      "scope": "database",
-      "sha": "0d91bb6"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "23:31",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "修正",
-      "title": "fix(tg): restore certificate-style tx_poster.py (replace placeholder)",
-      "scope": "database",
-      "sha": "27d4beb"
     },
     {
       "date": "2026-09-03",
