@@ -1,7 +1,97 @@
 {
-  "generatedHKT": "2026-09-07 01:57 HKT",
+  "generatedHKT": "2026-09-08 03:32 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-08",
+      "time": "01:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-07T17:17Z · [data][skip ci] entries 2026-09-07T17:17Z via GHA",
+      "scope": "database",
+      "sha": "6db45b3"
+    },
+    {
+      "date": "2026-09-07",
+      "time": "17:20",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "dd7c410"
+    },
+    {
+      "date": "2026-09-07",
+      "time": "15:44",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] warn critical=0 warn=7 · 2026-09-07T07:44Z",
+      "scope": "database",
+      "sha": "7c342d6"
+    },
+    {
+      "date": "2026-09-07",
+      "time": "15:21",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-07T15:21",
+      "scope": "site",
+      "sha": "f6197d0"
+    },
+    {
+      "date": "2026-09-07",
+      "time": "15:14",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-07T07:14Z",
+      "scope": "database",
+      "sha": "5a9f893"
+    },
+    {
+      "date": "2026-09-07",
+      "time": "13:42",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: update speed-guide data (2026-09-07T05:42Z)",
+      "scope": "database",
+      "sha": "6ac8fc2"
+    },
+    {
+      "date": "2026-09-07",
+      "time": "08:47",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-07T00:47Z · pool-a 2026-09-07T00:47Z via GHA matrix",
+      "scope": "database",
+      "sha": "39717af"
+    },
+    {
+      "date": "2026-09-07",
+      "time": "06:32",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-06T22:32Z · [data][skip ci] fixture-calendar 2026-09-06T22:32Z via GHA",
+      "scope": "database",
+      "sha": "314d44a"
+    },
+    {
+      "date": "2026-09-07",
+      "time": "01:57",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "d3fd3e1"
+    },
     {
       "date": "2026-09-07",
       "time": "01:40",
@@ -610,26 +700,6 @@
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
-      "sha": "baaa655"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:03",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: restore track-record/index.html (revert placeholder)",
-      "scope": "site",
-      "sha": "dae2a70"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:03",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
       "sha": "a50f35a"
     },
     {
@@ -761,76 +831,6 @@
       "title": "fallback blank certificate if locked templates missing",
       "scope": "database",
       "sha": "3f06253"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "01:42",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "pre-race cards at 09:00 HKT on race days",
-      "scope": "database",
-      "sha": "71c7acb"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "01:32",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "post-race Telegram: full-day card only, no per-race PDFs",
-      "scope": "database",
-      "sha": "94cc621"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "01:31",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "pre-race cards at 12:00 HKT on race days",
-      "scope": "database",
-      "sha": "e951ec3"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "00:53",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "restore locked-template overlay renderer",
-      "scope": "database",
-      "sha": "866d7e6"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "00:53",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "test sender reads official dividends + horse meta",
-      "scope": "database",
-      "sha": "f5caab6"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "00:52",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "poster: overlay locked templates + official D1 dividends",
-      "scope": "database",
-      "sha": "77bea9a"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "00:32",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "workflow: send 3 locked test cards to @TX_Oracle",
-      "scope": "database",
-      "sha": "092b6c5"
     },
     {
       "date": "2026-09-03",
