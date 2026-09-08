@@ -1,7 +1,237 @@
 {
-  "generatedHKT": "2026-09-08 03:32 HKT",
+  "generatedHKT": "2026-09-09 03:12 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-09",
+      "time": "02:52",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-08T18:52Z · [data][skip ci] race-day 2026-09-08T18:52Z via GHA",
+      "scope": "database",
+      "sha": "d8aeea1"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "02:48",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "auth manifest: draw-tune (admin only)",
+      "scope": "backend",
+      "sha": "f3f353b"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "02:47",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "檔位效應 v2：場地×賽道×路程分層 + 場數期望 + 收縮；新增 /api/analyze/draw-tune A/B",
+      "scope": "backend",
+      "sha": "a97e6a4"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "01:59",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-09-08T17:59Z)",
+      "scope": "marksix",
+      "sha": "d6318c8"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "00:01",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-08T16:01Z · [data][skip ci] entries 2026-09-08T16:01Z via GHA",
+      "scope": "database",
+      "sha": "a55447f"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "21:44",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix: scope from/to + raw sums to elo-tune handler only",
+      "scope": "backend",
+      "sha": "3fdf777"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "21:34",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "elo-tune: from/to date range + raw sums for chunked 365d scan",
+      "scope": "backend",
+      "sha": "651987c"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "20:13",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "維護",
+      "title": "chore: register elo-tune route policy",
+      "scope": "backend",
+      "sha": "85270f3"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "20:13",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(admin): ELO weight scan link",
+      "scope": "backend",
+      "sha": "2e2c55b"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "20:11",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(engine): db-tunable ELO axis weights + /api/analyze/elo-tune grid search",
+      "scope": "backend",
+      "sha": "0cae9f1"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "19:51",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(hit-rate): invalidate legacy caches missing per-race scoreSource",
+      "scope": "backend",
+      "sha": "be3428b"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "19:50",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(public): expose frozen scoreSource/alpha in hit-rate projection",
+      "scope": "backend",
+      "sha": "6fabb5c"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "19:47",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(hit-rate): surface frozen ensemble alpha per race",
+      "scope": "backend",
+      "sha": "aad6d0b"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "16:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "50cd2f2"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "15:37",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] warn critical=0 warn=6 · 2026-09-08T07:37Z",
+      "scope": "database",
+      "sha": "0b02bb2"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "15:16",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-08T15:16",
+      "scope": "site",
+      "sha": "50961bb"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "15:09",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-08T07:09Z",
+      "scope": "database",
+      "sha": "b881f8a"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "13:49",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(lgb): Stage 14 layoff/comeback features (candidate, A/B pending)",
+      "scope": "backend",
+      "sha": "81c4f0d"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "13:49",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(lgb): Stage 14 layoff/comeback features (candidate, A/B pending)",
+      "scope": "backend",
+      "sha": "0a7e7cf"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "13:37",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: update speed-guide data (2026-09-08T05:37Z)",
+      "scope": "database",
+      "sha": "673dd9c"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "09:37",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-08T01:37Z · pool-a 2026-09-08T01:37Z via GHA matrix",
+      "scope": "database",
+      "sha": "9217195"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "04:52",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-07T20:52Z · [data][skip ci] pool-b 2026-09-07T20:52Z via GHA",
+      "scope": "database",
+      "sha": "9a04f05"
+    },
+    {
+      "date": "2026-09-08",
+      "time": "03:32",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "19557fc"
+    },
     {
       "date": "2026-09-08",
       "time": "01:17",
@@ -338,16 +568,6 @@
       "areaKey": "data",
       "area": "數據·爬蟲",
       "typeLabel": "提交",
-      "title": "[fixtures] drop 7 phantom 2026-08 race days (HKJC off-season fallback served September calendar)",
-      "scope": "database",
-      "sha": "610809a"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "17:43",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
       "title": "[fixtures] drop phantom 2026-08 rows",
       "scope": "database",
       "sha": "c80fd1b"
@@ -364,16 +584,6 @@
     },
     {
       "date": "2026-09-05",
-      "time": "16:21",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "252f7de"
-    },
-    {
-      "date": "2026-09-05",
       "time": "15:52",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -381,16 +591,6 @@
       "title": "fix(lgb): send admin token as Bearer header (worker no longer accepts ?token=)",
       "scope": "backend",
       "sha": "965bcdb"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "15:15",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] critical critical=35 warn=6 · 2026-09-05T07:15Z",
-      "scope": "database",
-      "sha": "9c08175"
     },
     {
       "date": "2026-09-05",
@@ -404,16 +604,6 @@
     },
     {
       "date": "2026-09-05",
-      "time": "14:52",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-05T06:52Z",
-      "scope": "database",
-      "sha": "9168d96"
-    },
-    {
-      "date": "2026-09-05",
       "time": "13:29",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -424,26 +614,6 @@
     },
     {
       "date": "2026-09-05",
-      "time": "13:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: update speed-guide data (2026-09-05T05:17Z)",
-      "scope": "database",
-      "sha": "9af6b90"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "12:59",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-05T04:59Z · [data][skip ci] entries 2026-09-05T04:59Z via GHA",
-      "scope": "database",
-      "sha": "6ef379f"
-    },
-    {
-      "date": "2026-09-05",
       "time": "02:45",
       "areaKey": "web",
       "area": "前端",
@@ -451,16 +621,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "cb6084e"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "00:56",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-04T16:56Z · [data][skip ci] race-day 2026-09-04T16:56Z via GHA",
-      "scope": "database",
-      "sha": "77807c4"
     },
     {
       "date": "2026-09-04",
@@ -677,30 +837,10 @@
       "time": "12:05",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: restore full track-record page with final-edition note",
-      "scope": "site",
-      "sha": "9891279"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:05",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "ad75e13"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:03",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "a50f35a"
     },
     {
       "date": "2026-09-04",
@@ -783,136 +923,6 @@
       "sha": "1fc557b"
     },
     {
-      "date": "2026-09-04",
-      "time": "02:49",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Enforce published-prediction freeze at HTTP boundary and audit route.",
-      "scope": "backend",
-      "sha": "09ad60f"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "02:40",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Close published-prediction freeze leaks at the HTTP boundary.",
-      "scope": "backend",
-      "sha": "ed9fbb0"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "02:36",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Cron: audit latest settled meeting prediction-lock vs hit-rate.",
-      "scope": "backend",
-      "sha": "af5ca8a"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "02:34",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Lock published top-4 to prediction_log after results settle.",
-      "scope": "backend",
-      "sha": "aa22453"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "01:45",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "fallback blank certificate if locked templates missing",
-      "scope": "database",
-      "sha": "3f06253"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "15:34",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "ci: fill D1 Elo snapshot hole 2024-02 to 2025-02 from continuous compute",
-      "scope": "backend",
-      "sha": "0bef5ee"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "15:34",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "文檔",
-      "title": "docs: product README — ecosystem + Elo snapshot note, no CI lecture",
-      "scope": "backend",
-      "sha": "643b591"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "14:52",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "ci: diagnose Elo snapshot gap 2024-01 to 2025-02 (SELECT only)",
-      "scope": "backend",
-      "sha": "ad2ac79"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "14:07",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "ci: export historical v12 Elo snapshots before 2025-02 (read-only)",
-      "scope": "backend",
-      "sha": "169c9e7"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "13:53",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "ci: read-only monthly export of v12 Elo + declared_weight (no writes)",
-      "scope": "backend",
-      "sha": "63d1e49"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "13:34",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "ci: add read-only D1 dump job for v12 Elo snapshot (no writes)",
-      "scope": "backend",
-      "sha": "189271e"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "05:27",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(admin-gate): do not read ADMIN_TOKEN outside shared auth module",
-      "scope": "backend",
-      "sha": "445c6fe"
-    },
-    {
-      "date": "2026-09-03",
-      "time": "05:26",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "revert: keep GET /admin on adminRoutes so auth regression deploy can ship",
-      "scope": "backend",
-      "sha": "35c0d4c"
-    },
-    {
       "date": "2026-08-30",
       "time": "01:46",
       "areaKey": "data",
@@ -991,16 +1001,6 @@
       "title": "data: update Mark Six results (2026-08-15T14:45Z)",
       "scope": "marksix",
       "sha": "bf4ed93"
-    },
-    {
-      "date": "2026-08-13",
-      "time": "23:29",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-08-13T15:29Z)",
-      "scope": "marksix",
-      "sha": "88f33cf"
     }
   ]
 }
