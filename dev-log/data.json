@@ -1,7 +1,147 @@
 {
-  "generatedHKT": "2026-09-09 03:12 HKT",
+  "generatedHKT": "2026-09-10 03:00 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-09",
+      "time": "23:50",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "維護",
+      "title": "chore(weather): sync 2026-09-09 track weather snapshots (200 rows)",
+      "scope": "database",
+      "sha": "8cca6bd"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "23:50",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "8999460"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "17:48",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "c0fda24"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "17:47",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "維護",
+      "title": "chore(weather): sync 2026-09-09 track weather snapshots (56 rows)",
+      "scope": "database",
+      "sha": "248fced"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "16:57",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "e5fc2b9"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "15:43",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] warn critical=0 warn=21 · 2026-09-09T07:43Z",
+      "scope": "database",
+      "sha": "5cc055c"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "15:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-09T15:25",
+      "scope": "site",
+      "sha": "274c6da"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "15:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-09T07:17Z",
+      "scope": "database",
+      "sha": "821ec80"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "13:43",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: update speed-guide data (2026-09-09T05:43Z)",
+      "scope": "database",
+      "sha": "51d6713"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "12:26",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(lgb): 休季後驗證集擴窗；無驗證集時不再自動把 ensemble_alpha 寫成 0",
+      "scope": "backend",
+      "sha": "d917ed0"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "09:33",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-09T01:33Z · pool-a 2026-09-09T01:33Z via GHA matrix",
+      "scope": "database",
+      "sha": "273063d"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "04:24",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-08T20:24Z · [data][skip ci] pool-b 2026-09-08T20:24Z via GHA",
+      "scope": "database",
+      "sha": "adaa813"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "04:23",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "draw-tune: 檔位因子權重倍數 scales 回測參數（不改生產）",
+      "scope": "backend",
+      "sha": "ee4bbc2"
+    },
+    {
+      "date": "2026-09-09",
+      "time": "03:12",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "7267be6"
+    },
     {
       "date": "2026-09-09",
       "time": "02:52",
@@ -384,16 +524,6 @@
     },
     {
       "date": "2026-09-06",
-      "time": "03:40",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-05T19:40Z · [data][skip ci] pool-b 2026-09-05T19:40Z via GHA",
-      "scope": "database",
-      "sha": "e5142e9"
-    },
-    {
-      "date": "2026-09-06",
       "time": "01:51",
       "areaKey": "web",
       "area": "前端",
@@ -404,16 +534,6 @@
     },
     {
       "date": "2026-09-06",
-      "time": "01:28",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-05T17:28Z · [data][skip ci] race-day 2026-09-05T17:27Z via GHA",
-      "scope": "database",
-      "sha": "af808bd"
-    },
-    {
-      "date": "2026-09-06",
       "time": "00:53",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -421,26 +541,6 @@
       "title": "data: update Mark Six results (2026-09-05T16:53Z)",
       "scope": "marksix",
       "sha": "18cdee4"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "22:19",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "晨操採集：加入新鮮度判定，修正已抓過嘅馬永不重抓導致資料落後 52 日",
-      "scope": "database",
-      "sha": "f24a3d1"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "21:13",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "功能",
-      "title": "feat(scraper): output structured 場地/距離/時間/合操/分段 columns",
-      "scope": "database",
-      "sha": "b2caaef"
     },
     {
       "date": "2026-09-05",
@@ -504,36 +604,6 @@
     },
     {
       "date": "2026-09-05",
-      "time": "17:49",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "b1e2268"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "17:48",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] warn critical=0 warn=6 · 2026-09-05T09:48Z",
-      "scope": "database",
-      "sha": "e26ea02"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "17:48",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "修正",
-      "title": "fix(manifest): regenerate instead of rebase on push race (generated file never merges)",
-      "scope": "database",
-      "sha": "bf261d2"
-    },
-    {
-      "date": "2026-09-05",
       "time": "17:47",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -545,42 +615,12 @@
     {
       "date": "2026-09-05",
       "time": "17:44",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "ef88f18"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "17:44",
       "areaKey": "backend",
       "area": "後端·模型",
       "typeLabel": "提交",
       "title": "[admin] season-aware freshness grading for coverage + alerts (off-season no longer red)",
       "scope": "backend",
       "sha": "6def9fe"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "17:43",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[fixtures] drop phantom 2026-08 rows",
-      "scope": "database",
-      "sha": "c80fd1b"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "17:43",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[fixtures] verify rendered calendar month before accepting days (off-season fallback guard)",
-      "scope": "database",
-      "sha": "b1abf31"
     },
     {
       "date": "2026-09-05",
@@ -817,30 +857,10 @@
       "time": "12:06",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: restore predictor page + 初版/最終版 badge",
-      "scope": "site",
-      "sha": "eac269c"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:06",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "f3af488"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:05",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "ad75e13"
     },
     {
       "date": "2026-09-04",
@@ -901,26 +921,6 @@
       "title": "Fix prediction-lock import and overlay settled rankings at the HTTP boundary.",
       "scope": "backend",
       "sha": "db91f7d"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "02:50",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Add freezeExplainPayload for settled-race explain overlay.",
-      "scope": "backend",
-      "sha": "4b56f9d"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "02:50",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Pass frozen flags through public prediction projectors.",
-      "scope": "backend",
-      "sha": "1fc557b"
     },
     {
       "date": "2026-08-30",
