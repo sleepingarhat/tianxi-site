@@ -1,7 +1,197 @@
 {
-  "generatedHKT": "2026-09-11 02:52 HKT",
+  "generatedHKT": "2026-09-12 02:55 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-11",
+      "time": "21:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "功能",
+      "title": "feat(pedigree): add HorsePedigree_Scraper + D1 sync (HorsePedigree_Scraper.py)",
+      "scope": "database",
+      "sha": "cc2ea79"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "21:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "功能",
+      "title": "feat(pedigree): add HorsePedigree_Scraper + D1 sync (scripts/pedigree_to_d1_sql.py)",
+      "scope": "database",
+      "sha": "303d556"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "21:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "功能",
+      "title": "feat(pedigree): add HorsePedigree_Scraper + D1 sync (.github/workflows/capy_pedigree.yml)",
+      "scope": "database",
+      "sha": "bd7f842"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "21:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "功能",
+      "title": "feat(pedigree): add HorsePedigree_Scraper + D1 sync (RunAll_Scrapers.py)",
+      "scope": "database",
+      "sha": "a124f78"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "21:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "功能",
+      "title": "feat(pedigree): add HorsePedigree_Scraper + D1 sync (data/pedigree/horse_pedigree.csv)",
+      "scope": "database",
+      "sha": "c8d65db"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "21:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "623a759"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "20:05",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Stage 15: non-odds class-fit / J-T rolling quality / draw x distance features (dormant, A/B did not beat baseline)",
+      "scope": "backend",
+      "sha": "44ae304"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "20:05",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Stage 15: non-odds class-fit / J-T rolling quality / draw x distance features (dormant, A/B did not beat baseline)",
+      "scope": "backend",
+      "sha": "afd040d"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "18:03",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(calibration): segmented per-odds-band Platt curves (probabilities only, ranking untouched)",
+      "scope": "backend",
+      "sha": "5f7e5eb"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "18:03",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(calibration): segmented per-odds-band Platt curves (probabilities only, ranking untouched)",
+      "scope": "backend",
+      "sha": "4d1c91f"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "16:54",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "978db27"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "15:38",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] critical critical=1 warn=7 · 2026-09-11T07:38Z",
+      "scope": "database",
+      "sha": "e14094f"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "15:19",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-11T15:19",
+      "scope": "site",
+      "sha": "fa47a7f"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "15:12",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-11T07:12Z",
+      "scope": "database",
+      "sha": "3ffc277"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "13:38",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: update speed-guide data (2026-09-11T05:38Z)",
+      "scope": "database",
+      "sha": "1464d21"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "12:37",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(analyze): 殘差診斷 /api/analyze/residuals（班次／路程／地質／賠率／馬場分組偏差）",
+      "scope": "backend",
+      "sha": "01ab69e"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "09:24",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-11T01:24Z · pool-a 2026-09-11T01:24Z via GHA matrix",
+      "scope": "database",
+      "sha": "b228376"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "04:10",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-10T20:10Z · [data][skip ci] pool-b 2026-09-10T20:10Z via GHA",
+      "scope": "database",
+      "sha": "078ed45"
+    },
+    {
+      "date": "2026-09-11",
+      "time": "02:52",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "8828083"
+    },
     {
       "date": "2026-09-11",
       "time": "01:46",
@@ -323,16 +513,6 @@
       "sha": "d6318c8"
     },
     {
-      "date": "2026-09-09",
-      "time": "00:01",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-08T16:01Z · [data][skip ci] entries 2026-09-08T16:01Z via GHA",
-      "scope": "database",
-      "sha": "a55447f"
-    },
-    {
       "date": "2026-09-08",
       "time": "21:44",
       "areaKey": "backend",
@@ -414,26 +594,6 @@
     },
     {
       "date": "2026-09-08",
-      "time": "16:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "50cd2f2"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "15:37",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] warn critical=0 warn=6 · 2026-09-08T07:37Z",
-      "scope": "database",
-      "sha": "0b02bb2"
-    },
-    {
-      "date": "2026-09-08",
       "time": "15:16",
       "areaKey": "web",
       "area": "前端",
@@ -441,16 +601,6 @@
       "title": "chore(engine): stamp health.json 2026-09-08T15:16",
       "scope": "site",
       "sha": "50961bb"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "15:09",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-08T07:09Z",
-      "scope": "database",
-      "sha": "b881f8a"
     },
     {
       "date": "2026-09-08",
@@ -474,36 +624,6 @@
     },
     {
       "date": "2026-09-08",
-      "time": "13:37",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: update speed-guide data (2026-09-08T05:37Z)",
-      "scope": "database",
-      "sha": "673dd9c"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "09:37",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-08T01:37Z · pool-a 2026-09-08T01:37Z via GHA matrix",
-      "scope": "database",
-      "sha": "9217195"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "04:52",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-07T20:52Z · [data][skip ci] pool-b 2026-09-07T20:52Z via GHA",
-      "scope": "database",
-      "sha": "9a04f05"
-    },
-    {
-      "date": "2026-09-08",
       "time": "03:32",
       "areaKey": "web",
       "area": "前端",
@@ -511,36 +631,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "19557fc"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "01:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-07T17:17Z · [data][skip ci] entries 2026-09-07T17:17Z via GHA",
-      "scope": "database",
-      "sha": "6db45b3"
-    },
-    {
-      "date": "2026-09-07",
-      "time": "17:20",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "dd7c410"
-    },
-    {
-      "date": "2026-09-07",
-      "time": "15:44",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] warn critical=0 warn=7 · 2026-09-07T07:44Z",
-      "scope": "database",
-      "sha": "7c342d6"
     },
     {
       "date": "2026-09-07",
@@ -551,26 +641,6 @@
       "title": "chore(engine): stamp health.json 2026-09-07T15:21",
       "scope": "site",
       "sha": "f6197d0"
-    },
-    {
-      "date": "2026-09-07",
-      "time": "15:14",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-07T07:14Z",
-      "scope": "database",
-      "sha": "5a9f893"
-    },
-    {
-      "date": "2026-09-07",
-      "time": "13:42",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: update speed-guide data (2026-09-07T05:42Z)",
-      "scope": "database",
-      "sha": "6ac8fc2"
     },
     {
       "date": "2026-09-07",
@@ -684,26 +754,6 @@
     },
     {
       "date": "2026-09-05",
-      "time": "17:44",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "[admin] season-aware freshness grading for coverage + alerts (off-season no longer red)",
-      "scope": "backend",
-      "sha": "6def9fe"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "15:52",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(lgb): send admin token as Bearer header (worker no longer accepts ?token=)",
-      "scope": "backend",
-      "sha": "965bcdb"
-    },
-    {
-      "date": "2026-09-05",
       "time": "14:57",
       "areaKey": "web",
       "area": "前端",
@@ -711,16 +761,6 @@
       "title": "chore(engine): stamp health.json 2026-09-05T14:57",
       "scope": "site",
       "sha": "cf5c429"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "13:29",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(odds): target the local HK meeting and pass date/venueCode to HKJC odds queries",
-      "scope": "backend",
-      "sha": "9be5dc2"
     },
     {
       "date": "2026-09-05",
@@ -887,50 +927,10 @@
       "time": "12:27",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: restore full dashboard page with 初版/最終版 edition badge",
-      "scope": "site",
-      "sha": "7fdf252"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:27",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "f6f8b47"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:24",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "9ea32d4"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "11:44",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(ops): explain engine rules and draft vs final edition",
-      "scope": "backend",
-      "sha": "95f2fab"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "05:18",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(ops): document engine mode and draft/final on health console",
-      "scope": "backend",
-      "sha": "6876c71"
     },
     {
       "date": "2026-08-30",
