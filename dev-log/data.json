@@ -1,7 +1,137 @@
 {
-  "generatedHKT": "2026-09-12 02:55 HKT",
+  "generatedHKT": "2026-09-13 02:01 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-13",
+      "time": "01:47",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-12T17:47Z · [data][skip ci] race-day 2026-09-12T17:47Z via GHA",
+      "scope": "database",
+      "sha": "12c2b67"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "01:19",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-09-12T17:19Z)",
+      "scope": "marksix",
+      "sha": "2fa7977"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "00:24",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-12T16:24Z · [data][skip ci] pedigree 2026-09-12T16:24Z via GHA",
+      "scope": "database",
+      "sha": "62d2450"
+    },
+    {
+      "date": "2026-09-12",
+      "time": "23:01",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-12T15:01Z · [data][skip ci] entries 2026-09-12T15:01Z via GHA",
+      "scope": "database",
+      "sha": "3f4c636"
+    },
+    {
+      "date": "2026-09-12",
+      "time": "16:38",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "b25b993"
+    },
+    {
+      "date": "2026-09-12",
+      "time": "15:30",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] critical critical=1 warn=7 · 2026-09-12T07:30Z",
+      "scope": "database",
+      "sha": "74609ca"
+    },
+    {
+      "date": "2026-09-12",
+      "time": "15:11",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-12T15:11",
+      "scope": "site",
+      "sha": "0f7654f"
+    },
+    {
+      "date": "2026-09-12",
+      "time": "15:04",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-12T07:04Z",
+      "scope": "database",
+      "sha": "167e5bf"
+    },
+    {
+      "date": "2026-09-12",
+      "time": "13:25",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: update speed-guide data (2026-09-12T05:25Z)",
+      "scope": "database",
+      "sha": "6f4534d"
+    },
+    {
+      "date": "2026-09-12",
+      "time": "08:52",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-12T00:52Z · pool-a 2026-09-12T00:52Z via GHA matrix",
+      "scope": "database",
+      "sha": "5b68a69"
+    },
+    {
+      "date": "2026-09-12",
+      "time": "05:58",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "文檔",
+      "title": "docs: add Capy Pedigree badge and scraper documentation",
+      "scope": "database",
+      "sha": "c11b581"
+    },
+    {
+      "date": "2026-09-12",
+      "time": "04:09",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-11T20:09Z · [data][skip ci] pool-b 2026-09-11T20:09Z via GHA",
+      "scope": "database",
+      "sha": "12bc331"
+    },
+    {
+      "date": "2026-09-12",
+      "time": "02:55",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "c9e40ee"
+    },
     {
       "date": "2026-09-11",
       "time": "21:51",
@@ -337,60 +467,10 @@
       "time": "23:50",
       "areaKey": "data",
       "area": "數據·爬蟲",
-      "typeLabel": "維護",
-      "title": "chore(weather): sync 2026-09-09 track weather snapshots (200 rows)",
-      "scope": "database",
-      "sha": "8cca6bd"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "23:50",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
       "typeLabel": "提交",
       "title": "[manifest][skip ci] regenerate data/index.json",
       "scope": "database",
       "sha": "8999460"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "17:48",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "c0fda24"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "17:47",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "維護",
-      "title": "chore(weather): sync 2026-09-09 track weather snapshots (56 rows)",
-      "scope": "database",
-      "sha": "248fced"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "16:57",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "e5fc2b9"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "15:43",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] warn critical=0 warn=21 · 2026-09-09T07:43Z",
-      "scope": "database",
-      "sha": "5cc055c"
     },
     {
       "date": "2026-09-09",
@@ -404,26 +484,6 @@
     },
     {
       "date": "2026-09-09",
-      "time": "15:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-09T07:17Z",
-      "scope": "database",
-      "sha": "821ec80"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "13:43",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: update speed-guide data (2026-09-09T05:43Z)",
-      "scope": "database",
-      "sha": "51d6713"
-    },
-    {
-      "date": "2026-09-09",
       "time": "12:26",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -431,26 +491,6 @@
       "title": "fix(lgb): 休季後驗證集擴窗；無驗證集時不再自動把 ensemble_alpha 寫成 0",
       "scope": "backend",
       "sha": "d917ed0"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "09:33",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-09T01:33Z · pool-a 2026-09-09T01:33Z via GHA matrix",
-      "scope": "database",
-      "sha": "273063d"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "04:24",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-08T20:24Z · [data][skip ci] pool-b 2026-09-08T20:24Z via GHA",
-      "scope": "database",
-      "sha": "adaa813"
     },
     {
       "date": "2026-09-09",
@@ -471,16 +511,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "7267be6"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "02:52",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-08T18:52Z · [data][skip ci] race-day 2026-09-08T18:52Z via GHA",
-      "scope": "database",
-      "sha": "d8aeea1"
     },
     {
       "date": "2026-09-09",
@@ -907,30 +937,10 @@
       "time": "12:30",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: dashboard TRACK_NAME quote (restore JS parse)",
-      "scope": "site",
-      "sha": "7346228"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:30",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "8701b1b"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:27",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "f6f8b47"
     },
     {
       "date": "2026-08-30",
@@ -991,16 +1001,6 @@
       "title": "data: update Mark Six results (2026-08-20T15:02Z)",
       "scope": "marksix",
       "sha": "62ab8f6"
-    },
-    {
-      "date": "2026-08-18",
-      "time": "23:00",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-08-18T15:00Z)",
-      "scope": "marksix",
-      "sha": "b5b5d00"
     }
   ]
 }
