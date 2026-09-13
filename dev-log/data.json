@@ -1,7 +1,267 @@
 {
-  "generatedHKT": "2026-09-13 02:01 HKT",
+  "generatedHKT": "2026-09-14 02:28 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-14",
+      "time": "02:18",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-13T18:18Z · [data][skip ci] race-day 2026-09-13T18:18Z via GHA",
+      "scope": "database",
+      "sha": "e665fea"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "23:50",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "維護",
+      "title": "chore(weather): sync 2026-09-13 track weather snapshots (212 rows)",
+      "scope": "database",
+      "sha": "fa544af"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "23:50",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "c14d07f"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "17:32",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "cb82267"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "15:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] critical critical=1 warn=19 · 2026-09-13T07:51Z",
+      "scope": "database",
+      "sha": "2f465c4"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "15:29",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-13T15:29",
+      "scope": "site",
+      "sha": "b7df623"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "15:23",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-13T07:23Z",
+      "scope": "database",
+      "sha": "07740b6"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "15:23",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] engine health 2026-09-13T15:23",
+      "scope": "backend",
+      "sha": "430d214"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "13:58",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(analyze): expose race startTime on today-picks + race-day report so the status light can compute the T-30 lock",
+      "scope": "backend",
+      "sha": "b37234e"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "13:58",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(ci): freeze the production model bundle into cache for carry-over fallback",
+      "scope": "backend",
+      "sha": "2948d72"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "13:58",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(ci): add lgb_fast_predict — carry-over self-heal when today has zero LGB coverage",
+      "scope": "backend",
+      "sha": "b4e026c"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "13:58",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(predict): --save-bundle/--load-bundle for carry-over scoring with frozen FEAT_COLS",
+      "scope": "backend",
+      "sha": "357e8d6"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "13:24",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "perf(ci): incremental features.csv via restore-keys — avoid the ~2h full-history dump every run",
+      "scope": "backend",
+      "sha": "f8277bd"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "13:06",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "功能",
+      "title": "feat(ci): ingestion freshness watchdog with GitHub issue alarm",
+      "scope": "database",
+      "sha": "b659f89"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "13:06",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(ci): watchdog — drop legacy capy_* (moved to tianxi-database), alarm on no-success-in-window",
+      "scope": "backend",
+      "sha": "c2cfdca"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "12:59",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(ci): sanity — send UA on season fetch (403) and rebase before push",
+      "scope": "backend",
+      "sha": "a911156"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "12:59",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] engine health 2026-09-13T12:59",
+      "scope": "backend",
+      "sha": "6c34843"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "12:48",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(ci): watchdog uses ADMIN_TOKEN secret name",
+      "scope": "backend",
+      "sha": "ec4e287"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "12:47",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(ci): unblock deploy (classify new analyze reads), fix sanity unbound var, add automation watchdog with coverage alarm",
+      "scope": "backend",
+      "sha": "6f14aab"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "12:47",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(ci): unblock deploy (classify new analyze reads), fix sanity unbound var, add automation watchdog with coverage alarm",
+      "scope": "backend",
+      "sha": "e27f450"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "12:47",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(ci): unblock deploy (classify new analyze reads), fix sanity unbound var, add automation watchdog with coverage alarm",
+      "scope": "backend",
+      "sha": "55e1338"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "12:26",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(ci): point admin API calls to worker origin after tianxi.racing cutover to new site",
+      "scope": "backend",
+      "sha": "48dca4d"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "12:26",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(ci): point admin API calls to worker origin after tianxi.racing cutover to new site",
+      "scope": "backend",
+      "sha": "46d4636"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "12:26",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(ci): point admin API calls to worker origin after tianxi.racing cutover to new site",
+      "scope": "backend",
+      "sha": "07f5740"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "08:22",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-13T00:22Z · pool-a 2026-09-13T00:22Z via GHA matrix",
+      "scope": "database",
+      "sha": "5f3df57"
+    },
+    {
+      "date": "2026-09-13",
+      "time": "02:01",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "c47d7b3"
+    },
     {
       "date": "2026-09-13",
       "time": "01:47",
@@ -374,26 +634,6 @@
     },
     {
       "date": "2026-09-10",
-      "time": "16:56",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "4b6216e"
-    },
-    {
-      "date": "2026-09-10",
-      "time": "15:42",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] critical critical=1 warn=7 · 2026-09-10T07:42Z",
-      "scope": "database",
-      "sha": "40fdc3b"
-    },
-    {
-      "date": "2026-09-10",
       "time": "15:20",
       "areaKey": "web",
       "area": "前端",
@@ -404,56 +644,6 @@
     },
     {
       "date": "2026-09-10",
-      "time": "15:13",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-10T07:13Z",
-      "scope": "database",
-      "sha": "bcc9e52"
-    },
-    {
-      "date": "2026-09-10",
-      "time": "13:37",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: update speed-guide data (2026-09-10T05:37Z)",
-      "scope": "database",
-      "sha": "fb09bd4"
-    },
-    {
-      "date": "2026-09-10",
-      "time": "13:08",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[ci] race-day scraper: retry up to 3x on browser timeout",
-      "scope": "database",
-      "sha": "8011763"
-    },
-    {
-      "date": "2026-09-10",
-      "time": "13:03",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-10T05:03Z · [data][skip ci] race-day 2026-09-10T05:03Z via GHA",
-      "scope": "database",
-      "sha": "550327a"
-    },
-    {
-      "date": "2026-09-10",
-      "time": "10:05",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-10T02:05Z · pool-a 2026-09-10T02:05Z via GHA matrix",
-      "scope": "database",
-      "sha": "2d0c56b"
-    },
-    {
-      "date": "2026-09-10",
       "time": "03:00",
       "areaKey": "web",
       "area": "前端",
@@ -461,16 +651,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "2d3a77a"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "23:50",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "8999460"
     },
     {
       "date": "2026-09-09",
@@ -554,76 +734,6 @@
     },
     {
       "date": "2026-09-08",
-      "time": "21:34",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "elo-tune: from/to date range + raw sums for chunked 365d scan",
-      "scope": "backend",
-      "sha": "651987c"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "20:13",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "維護",
-      "title": "chore: register elo-tune route policy",
-      "scope": "backend",
-      "sha": "85270f3"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "20:13",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(admin): ELO weight scan link",
-      "scope": "backend",
-      "sha": "2e2c55b"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "20:11",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(engine): db-tunable ELO axis weights + /api/analyze/elo-tune grid search",
-      "scope": "backend",
-      "sha": "0cae9f1"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "19:51",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(hit-rate): invalidate legacy caches missing per-race scoreSource",
-      "scope": "backend",
-      "sha": "be3428b"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "19:50",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(public): expose frozen scoreSource/alpha in hit-rate projection",
-      "scope": "backend",
-      "sha": "6fabb5c"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "19:47",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(hit-rate): surface frozen ensemble alpha per race",
-      "scope": "backend",
-      "sha": "aad6d0b"
-    },
-    {
-      "date": "2026-09-08",
       "time": "15:16",
       "areaKey": "web",
       "area": "前端",
@@ -631,26 +741,6 @@
       "title": "chore(engine): stamp health.json 2026-09-08T15:16",
       "scope": "site",
       "sha": "50961bb"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "13:49",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(lgb): Stage 14 layoff/comeback features (candidate, A/B pending)",
-      "scope": "backend",
-      "sha": "81c4f0d"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "13:49",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(lgb): Stage 14 layoff/comeback features (candidate, A/B pending)",
-      "scope": "backend",
-      "sha": "0a7e7cf"
     },
     {
       "date": "2026-09-08",
@@ -711,76 +801,6 @@
       "title": "data: update Mark Six results (2026-09-05T16:53Z)",
       "scope": "marksix",
       "sha": "18cdee4"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "21:13",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(trackwork): read real scraper columns + parse 操練詳情",
-      "scope": "backend",
-      "sha": "0441b1e"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "21:13",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(trackwork): include work_type+details in id hash",
-      "scope": "backend",
-      "sha": "14383a5"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "21:13",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(horse): expose trackwork venue/track/type/splits/rider/gear",
-      "scope": "backend",
-      "sha": "eefaf3d"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "21:13",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "文檔",
-      "title": "docs(schema): document new horse_trackwork columns",
-      "scope": "backend",
-      "sha": "3bfffb2"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "17:53",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(hit-rate): add 四重彩 quartet (exact top-4 order) metric",
-      "scope": "backend",
-      "sha": "6907d6c"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "17:53",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(hit-rate): add 四重彩 quartet (exact top-4 order) metric",
-      "scope": "backend",
-      "sha": "b1df7ee"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "17:47",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(index): restore full entry file (truncated on 09-03) and re-apply frozen-prediction overlay",
-      "scope": "backend",
-      "sha": "2fb6769"
     },
     {
       "date": "2026-09-05",
@@ -917,30 +937,10 @@
       "time": "12:35",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: restore full results page with 最終版 freeze badges",
-      "scope": "site",
-      "sha": "5a9019b"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:35",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "49b28d1"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:30",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "8701b1b"
     },
     {
       "date": "2026-08-30",
