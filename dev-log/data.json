@@ -1,7 +1,37 @@
 {
-  "generatedHKT": "2026-09-14 18:42 HKT",
+  "generatedHKT": "2026-09-14 18:45 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-14",
+      "time": "18:45",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(score-matrix): 波膽展示層 — roadmap.md",
+      "scope": "site",
+      "sha": "87f06b8"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "18:45",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(score-matrix): 波膽展示層 — src/routes/dev-log.tsx",
+      "scope": "site",
+      "sha": "e7adc2d"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "18:45",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(score-matrix): 波膽展示層 — src/routes/football.fixtures.tsx",
+      "scope": "site",
+      "sha": "0c155cf"
+    },
     {
       "date": "2026-09-14",
       "time": "18:42",
@@ -31,6 +61,16 @@
       "title": "docs(clubelo): 對帳層同步 — src/lib/football-snapshot.ts",
       "scope": "site",
       "sha": "388bd79"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "18:42",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "6c24bbb"
     },
     {
       "date": "2026-09-14",
@@ -901,46 +941,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "75875c2"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:47",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "67fc8fe"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:46",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(results): restore full results page (revert stub)",
-      "scope": "site",
-      "sha": "0bcf860"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:44",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "d9d68f8"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:43",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(results): restore full page after placeholder accident",
-      "scope": "site",
-      "sha": "c47154b"
     },
     {
       "date": "2026-08-30",
