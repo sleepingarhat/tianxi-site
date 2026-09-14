@@ -1,7 +1,57 @@
 {
-  "generatedHKT": "2026-09-14 19:06 HKT",
+  "generatedHKT": "2026-09-14 19:23 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-14",
+      "time": "19:23",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(s16): S5 集成入凍結軌，前端燈號同文案同步 (src/routes/football.fixtures.tsx)",
+      "scope": "site",
+      "sha": "70dd008"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "19:23",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(s16): S5 集成入凍結軌，前端燈號同文案同步 (src/routes/football.results.tsx)",
+      "scope": "site",
+      "sha": "a58ab3f"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "19:23",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(s16): S5 集成入凍結軌，前端燈號同文案同步 (src/components/tx/FootballLedger.tsx)",
+      "scope": "site",
+      "sha": "c638eef"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "19:23",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(s16): S5 集成入凍結軌，前端燈號同文案同步 (src/routes/dev-log.tsx)",
+      "scope": "site",
+      "sha": "f37877a"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "19:23",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(s16): S5 集成入凍結軌，前端燈號同文案同步 (roadmap.md)",
+      "scope": "site",
+      "sha": "3157604"
+    },
     {
       "date": "2026-09-14",
       "time": "19:06",
@@ -51,6 +101,16 @@
       "title": "feat(s13): 逐場凍結帳公開對帳 (roadmap.md)",
       "scope": "site",
       "sha": "3329c49"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "19:06",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "28d629e"
     },
     {
       "date": "2026-09-14",
@@ -844,16 +904,6 @@
     },
     {
       "date": "2026-09-09",
-      "time": "03:12",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "7267be6"
-    },
-    {
-      "date": "2026-09-09",
       "time": "02:48",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -881,56 +931,6 @@
       "title": "data: update Mark Six results (2026-09-08T17:59Z)",
       "scope": "marksix",
       "sha": "d6318c8"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "15:16",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-08T15:16",
-      "scope": "site",
-      "sha": "50961bb"
-    },
-    {
-      "date": "2026-09-08",
-      "time": "03:32",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "19557fc"
-    },
-    {
-      "date": "2026-09-07",
-      "time": "15:21",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-07T15:21",
-      "scope": "site",
-      "sha": "f6197d0"
-    },
-    {
-      "date": "2026-09-07",
-      "time": "01:57",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "d3fd3e1"
-    },
-    {
-      "date": "2026-09-06",
-      "time": "15:09",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-06T15:09",
-      "scope": "site",
-      "sha": "cb7af7b"
     },
     {
       "date": "2026-09-06",
