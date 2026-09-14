@@ -1,7 +1,37 @@
 {
-  "generatedHKT": "2026-09-15 04:07 HKT",
+  "generatedHKT": "2026-09-15 04:52 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-15",
+      "time": "04:51",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S25 試驗 5 動態攻防結果 + 波膽大字還原",
+      "scope": "site",
+      "sha": "f07e512"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "04:51",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S25 試驗 5 完成（停），波膽大字還原",
+      "scope": "site",
+      "sha": "f2bc573"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "04:07",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "4654ce5"
+    },
     {
       "date": "2026-09-15",
       "time": "01:44",
@@ -804,16 +834,6 @@
     },
     {
       "date": "2026-09-11",
-      "time": "02:52",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "8828083"
-    },
-    {
-      "date": "2026-09-11",
       "time": "01:46",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -861,26 +881,6 @@
       "title": "feat(draw): 檔位效應 v3 分層（地質／匹數／班次）+ resolveDrawFactor；draw-tune 支援 v3（生產仍用 v1）",
       "scope": "backend",
       "sha": "c0c3949"
-    },
-    {
-      "date": "2026-09-10",
-      "time": "15:20",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-10T15:20",
-      "scope": "site",
-      "sha": "03312a7"
-    },
-    {
-      "date": "2026-09-10",
-      "time": "03:00",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "2d3a77a"
     },
     {
       "date": "2026-09-09",
