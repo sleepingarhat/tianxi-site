@@ -1,7 +1,17 @@
 {
-  "generatedHKT": "2026-09-14 19:23 HKT",
+  "generatedHKT": "2026-09-15 04:07 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-15",
+      "time": "01:44",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-14T17:44Z · [data][skip ci] entries 2026-09-14T17:44Z via GHA",
+      "scope": "database",
+      "sha": "a0a7aea"
+    },
     {
       "date": "2026-09-14",
       "time": "19:23",
@@ -51,6 +61,16 @@
       "title": "feat(s16): S5 集成入凍結軌，前端燈號同文案同步 (roadmap.md)",
       "scope": "site",
       "sha": "3157604"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "19:23",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "13449ec"
     },
     {
       "date": "2026-09-14",
@@ -678,16 +698,6 @@
       "areaKey": "data",
       "area": "數據·爬蟲",
       "typeLabel": "功能",
-      "title": "feat(pedigree): add HorsePedigree_Scraper + D1 sync (HorsePedigree_Scraper.py)",
-      "scope": "database",
-      "sha": "cc2ea79"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "21:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "功能",
       "title": "feat(pedigree): add HorsePedigree_Scraper + D1 sync (scripts/pedigree_to_d1_sql.py)",
       "scope": "database",
       "sha": "303d556"
@@ -871,16 +881,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "2d3a77a"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "15:25",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-09T15:25",
-      "scope": "site",
-      "sha": "274c6da"
     },
     {
       "date": "2026-09-09",
