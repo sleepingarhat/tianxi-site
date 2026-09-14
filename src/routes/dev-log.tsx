@@ -23,6 +23,12 @@ type Tag = "數據" | "技術" | "前端" | "系統";
 const ENTRIES: { date: string; title: string; tags: Tag[]; body: string }[] = [
   {
     date: "2026-09-14 · HKT",
+    title: "波膽塌落 1-1 診斷：展示層改出整張矩陣頭八格、期望比分同尾部桶，凍結 1X2 一分不改",
+    tags: ["技術", "前端"],
+    body: "一、診斷：公開嘅「波膽」本質係 Dixon-Coles 矩陣嘅眾數，而 λ 被壓扁——今日 190 場凍結檔 λ 主場最細 1.11／中位 1.57／最大 2.69，客場最細 0.92／中位 1.24／最大 1.86，客場預期入球從來未低過約 0.9，加上 ρ=−0.05 把質量推向低分格，結果 178 場出 1-1、12 場出 2-1，零 2-0／3-0／4-0。根因喺 S3 結構，唔係偶發：聯賽基準鎖死 log 1.35、攻防係數 clamp ±1.2、跨季再 ×0.80、Elo 分差完全冇注入 λ，所以 +200 Elo 唔會變成 2.8 對 0.7。極端例子：PSV 對 Sparta（λ 2.69/1.31、Elo 差 +199）眾數只到 2-1；皇馬對華斯（λ 2.02/1.18、Elo 差 +235）仍然 1-1。二、今日已上線（純展示層，凍結 1X2 同版本指紋完全唔郁）：同一張重新加權矩陣多出四樣——整張矩陣頭八格連機率、期望比分 E[主]-E[客]（可以係 1.74:1.04 而眾數仍係 1-0）、主／和／客三個分區各自最可能比分連「該賽果成立下」條件機率、尾部桶（主隊贏三球或以上、主隊入四球或以上、客隊零封）。公開嘅單一波膽照舊只出一格、照舊同賽果預測同區，唔會變成兩套答案。三、研究軌（未動凍結）：λ 注入實力 λh = exp(μ+γ+αh−βa+κ·elo_diff/400)，κ 掃 0.4–0.7 做逐季前推，目標係懸殊場 1-1 跌出頭三、2-0／3-0／3-1 行先、4-0 入頭八，同時 RPS／log-loss 唔可以爛；肥尾用負二項／過散泊松或另開 P(淨勝≥3) 頭以 Elo 分桶歷史頻率校準，明確唔用零膨脹（會出更多 1-1）。三項閘（RPS／log-loss／ECE）全過，κ 先准寫入凍結指紋。四、現實錨：英超極懸殊場完場眾數都仍然係 2-0／3-0／2-1 多過 5-1／6-0，所以目標唔係把 6-0 寫成預測，而係懸殊場唔再被 1-1 壓住。",
+  },
+  {
+    date: "2026-09-14 · HKT",
     title: "ClubElo 對帳層落地：外部免 key 實力尺接入每日管線，只作對帳，凍結預測一分不改",
     tags: ["數據", "系統"],
     body: "一、定位：ClubElo（api.clubelo.com 官方免 key CSV，1939 年起歐洲球會每日 Elo）只做外部對帳尺——自建 elo_s2（主客分拆、主場優勢 60、K0 22、跨季回歸 0.70）仍然係唯一入模型同入 S6 凍結預測嘅實力分。ClubElo 唔覆蓋任何參數、唔改凍結公式、機率唔會當公開預測。二、bronze 採集：scripts/ingest_clubelo.py 每日拉全日排名表（欄位 Rank,Club,Country,Level,Elo,From,To）落 data/clubelo/daily/YYYY-MM-DD.csv，限速 1 req/s、四次重試、只打官方 CSV API（唔 scrape 網頁）。上游掛就保留舊快照、寫失敗記錄、非零退出俾看門狗開 issue，絕不寫假數、絕不填 0、絕不用均值頂——今日由機房實測 api.clubelo.com 確實回 502，正好係呢套容錯設計嘅理由。三、對名：mapping/clubelo_names.csv（fd_div｜fd_name｜clubelo_name｜country｜level）已鋪五大聯賽 110 行，涵蓋本季同上季升降隊；對唔上入 unmapped／unmatched 出報告，唔 silently 亂配。四、silver 對帳：scripts/reconcile_elo.py 逐場前推重建自建 Elo，用開賽日 as-of 嘅 ClubElo 比對，兩邊尺度唔同所以按聯賽內 z-score 比，唔直接減 1500；輸出 snapshots/clubelo_reconcile_YYYY-MM-DD.json，只增不改。四條告警線：五大一級隊對名成功率 < 95%、同隊 z-score 中位數差 > 0.50、近 50 場 Elo 差符號一致率 < 80%、單日 ClubElo 跳幅 > 60 分（只標記，唔跟住改 K）。五、管線位置：football_daily.yml 喺賽果增量之後、predict_fixtures（S6）之前加兩步，兩步都 continue-on-error——對帳源掛唔可以令公開預測斷檔；異常另開 [watchdog] ClubElo 對帳層異常 issue。自檢報告新增 clubelo 層，屬報告性質，唔當健康門檻。六、代理 xG 排第二，維持研究軌：未交 walk-forward 快照（RPS／log-loss／ECE 三項有升）之前，唔入 predict_fixtures、唔入公開頁；ingest_xg.py 封存 Understat、README 禁用衍生 ExpectedGoals 兩條紀律不變。",
