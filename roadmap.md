@@ -302,3 +302,25 @@
 - [ ] 原則重申：外部只作啟發與交叉核對，模型、特徵、凍結機制與呈現一律自建
 
 - [ ] 逐場 xG 來源評估補充：Sportmonks xG add-on（付費）、sportsdatacampus 免費清單、hungson175 gist 清單、xgstat.com（Vercel 機器人驗證擋爬、無公開 API）——結論記入 dev-log 同 football-source-check 來源表
+
+### S13 逐場凍結帳＋公開對帳（2026-09-14，用戶批：鎖 60 分鐘／先接 S5 才開帳／只收五大）
+斷層診斷：足球只有會被覆寫嘅 `data/predictions/upcoming.json`，冇賽馬嗰套「一場一條凍結帳」；冇結算 job、冇公開讀口；燈號三份文件唔一致（檔案 30 分鐘 vs backend README T−24h／T−1h）；回測身分（S5／S8）同生產凍結軌（S3＋S2）分叉。
+- [x] 逐場鎖定統一＝開賽前 60 分鐘（`predict_fixtures.py` LOCK_MINUTES = 60），黃燈可刷新／綠燈已鎖／紅燈退回基準
+- [x] 凍結器同時凍結整張波膽結構（`cs`：Top 8 格、三區條件格、期望比分、尾部桶），公開頁只讀凍結值，唔喺前端重算
+- [x] `scripts/log_predictions.py`：按 match_key upsert 落 `data/predictions/log/YYYY-MM.json`，鎖後預測欄（p／lambda／cs／fingerprint／track／status）永不覆寫，被拒改動記入 `log/audit.jsonl`
+- [x] `scripts/settle_predictions.py`：賽果 CSV 按 `div|DD/MM/YYYY|home|away` join，只寫 result（ft_h／ft_a／ftr／rps／argmax_hit／p_actual／波膽格排名／尾部實現），預測欄一分不改；開賽 3 日後仍 join 唔到才入 unmatched，唔智能亂配
+- [x] `data/predictions/hit_rate.json` 公開讀口：入帳範圍＝五大聯賽（E0／D1／SP1／I1／F1）＋綠燈＋已鎖；紅燈軌只作診斷；附基準 0.2261 同市場去水 0.2047
+- [x] 每日流程：S6 凍結後插入 upsert 同結算兩步；站內讀口 `/api/public/football-predictions?file=hit_rate`、`?file=log&month=YYYY-MM`
+- [x] `/football/results` 頁頂加逐場凍結帳三數（平均 RPS／校準偏差／樣本＋指紋）＋「預測 vs 賽果」只讀凍結列表；波膽以「實際比分排第幾格」對帳，唔用眾數打 ✓／✗
+- [ ] 接 S5 集成推論入每日凍結軌（同一指紋）→ 綠燈成立，戰績正式開帳；未接入前三數顯示「未開帳」，唔借回測數字充當實戰
+- [ ] 完場後禁止重算之自動檢查：selfcheck 加「已鎖場次 p 有無被改」比對 audit
+- [ ] 收費會員頁引用 football-data.co.uk 歷史（非商業條款）前，需法律位確認
+
+### S14 波膽一致性優化次序（2026-09-14，用戶清單）
+- [ ] ①公開只出 S8 重加權後嘅格（1X2 與波膽同一來源），未縮放 raw DC 唔出街
+- [ ] ②波膽 KPI 改 Top 1／Top 3／Top 8 覆蓋率＋格 log-loss（目標 Top 8 約 55–70%），12.6% 命中率降級為輔助
+- [ ] ③ρ 隨 λh·λa 衰減（或總 λ 過線關修正），專治懸殊場假 1-1
+- [ ] ④κ 把 Elo 注入 λ，walk-forward 過 RPS／log-loss／ECE 三閘先談寫入凍結指紋
+- [ ] ⑤主客攻防分開（as-of、shift(1)）；五大聯賽 μ 分開，唔用全局 log 1.35
+- [ ] 更後：過散（負二項／雙變量負二項）＋兩狀態混合（賽前滾動 BTTS／總入球做權重）；同 ③ 一齊校，否則中間場更 1-1
+- [ ] 明確唔做：人手規則「Elo>200 顯示 4-0」、用收盤波膽賠率教矩陣、賽中／紅牌／賽後 xG 入波膽、綠燈後為陣容重開成張格；1X2 永不為出大比數而改
