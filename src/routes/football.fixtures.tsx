@@ -45,6 +45,15 @@ type Match = {
   btts: number;
   top_score: { score: string; p: number };
   scores?: { score: string; p: number; res: "home" | "draw" | "away" }[];
+  p_s5?: [number, number, number] | null;
+  p_lgb?: [number, number, number] | null;
+  s5_warm?: boolean;
+  cs?: {
+    top8: { score: string; p: number; res: "home" | "draw" | "away" }[];
+    cond: Partial<Record<"home" | "draw" | "away", { score: string; p: number; p_cond: number }>>;
+    exp: [number, number];
+    tails: { win_by_3plus: number; home_4plus: number; away_clean_sheet: number };
+  } | null;
   elo_diff: number;
   market: [number, number, number] | null;
   edge: [number, number, number] | null;
@@ -63,6 +72,16 @@ type Payload = {
     weights: { dc: number; elo: number };
     lock_minutes: number;
     status_note: string;
+    s5?: {
+      ready: boolean;
+      reason: string | null;
+      fingerprint: string | null;
+      trained_at: string | null;
+      alpha: { lgb: number; dc: number; elo: number } | null;
+      gate: { passed: boolean; checks: Record<string, boolean>; best_single_track_rps: number } | null;
+      backtest: { n: number; rps: number; logloss: number; acc: number; ece: number } | null;
+      green_matches: number;
+    } | null;
   };
   matches: Match[];
 };
@@ -182,8 +201,30 @@ function MatchCard({
 }) {
   const [open, setOpen] = useState(false);
   const top = m.p.indexOf(Math.max(...m.p)) as 0 | 1 | 2;
-  const csAll = useMemo(() => scoreTop(m.lambda, m.p), [m.lambda, m.p]);
-  // 波膽必須同賽果預測一致：取預測賽果分區入面最可能嗰格
+  const derived = useMemo(() => scoreTop(m.lambda, m.p), [m.lambda, m.p]);
+  // 只讀凍結值：有凍結波膽（S5 分區重加權後嘅矩陣）就用凍結嗰張，冇才由 λ 同機率派生
+  const csAll = useMemo(() => {
+    const f = m.cs;
+    if (!f) return derived;
+    const RES: ("home" | "draw" | "away")[] = ["home", "draw", "away"];
+    const zones = RES.map((res) => {
+      const z = f.cond[res];
+      return { score: z?.score ?? "—", p: z?.p ?? 0, res, cond: z?.p_cond ?? 0 };
+    });
+    const sorted = [...zones].sort((a, b) => b.p - a.p);
+    return {
+      ...sorted[0]!,
+      bigP: f.top8.reduce((acc, c) => {
+        const [a, b] = c.score.split("-").map(Number);
+        return acc + ((a ?? 0) + (b ?? 0) >= 4 ? c.p : 0);
+      }, 0),
+      zones,
+      alts: sorted.slice(1),
+      top8: f.top8,
+      exp: f.exp,
+      tails: { winBy3: f.tails.win_by_3plus, h4plus: f.tails.home_4plus, awayZero: f.tails.away_clean_sheet },
+    };
+  }, [m.cs, derived]);
   const cs = { ...csAll.zones[top]!, bigP: csAll.bigP };
   const edgeMax = m.edge ? Math.max(...m.edge) : null;
   const edgeIdx = m.edge ? m.edge.indexOf(Math.max(...m.edge)) : -1;
@@ -198,7 +239,11 @@ function MatchCard({
           <span className="tabnum font-mono-tx text-[11px] font-bold text-ink">{hk(m.kickoff_utc)}</span>
           <Pill tone="ink">{m.league_zh}</Pill>
         </div>
-        <Pill tone="lose">{m.locked ? "紅燈 · 已鎖定" : "紅燈 · 基準"}</Pill>
+        {m.status === "final" ? (
+          <Pill tone="win">{m.locked ? "綠燈 · 已鎖定" : "綠燈 · 未鎖"}</Pill>
+        ) : (
+          <Pill tone="lose">{m.locked ? "紅燈 · 基準軌已鎖" : "紅燈 · 基準軌"}</Pill>
+        )}
       </header>
 
       {/* 一個賽果預測：主 / 和 / 客 */}
@@ -468,7 +513,11 @@ function FootballFixturesPage() {
               <Stat label="版本指紋" value={meta.fingerprint.slice(0, 8)} sub="腳本＋資料＋場次數" />
             </StatGrid>
             <div className="mt-2 flex flex-wrap items-center gap-1.5">
-              <Pill tone="lose">紅燈 · 退回基準</Pill>
+              {meta.s5?.ready ? (
+                <Pill tone="win">綠燈 · S5 集成已接入（{meta.s5.green_matches} 場）</Pill>
+              ) : (
+                <Pill tone="lose">紅燈 · 退回基準軌</Pill>
+              )}
               <Pill tone="ink">生成 {hk(meta.generated_at)}（香港時間）</Pill>
               <Pill tone={meta.fixtures_stale ? "lose" : "win"}>{meta.fixtures_stale ? "賽程係舊貨" : "賽程新鮮"}</Pill>
               <Pill tone="ink">
@@ -476,12 +525,26 @@ function FootballFixturesPage() {
               </Pill>
               <Pill tone="ink">開賽前 {meta.lock_minutes} 分鐘鎖定</Pill>
             </div>
-            <p className="mt-2 rounded-[8px] border border-lose/30 bg-lose/5 px-2.5 py-2 text-[10px] leading-relaxed text-ink-2">
-              <b className="text-lose">照實講：</b>
-              {meta.status_note}換句話講，呢批機率係 S2 天喜足球ELO 加 S3 入球模型嘅在線混合，
-              並未經過 S5 校準——即係「講幾成」未必真係幾成，唔可以當最終預測用。接通 LGB 同集成推論之後，
-              狀態燈才會出黃燈（暫定）同綠燈（最終）。
-            </p>
+            {meta.s5?.ready ? (
+              <p className="mt-2 rounded-[8px] border border-gold-strong/40 bg-gold-bg px-2.5 py-2 text-[10px] leading-relaxed text-ink-2">
+                <b className="text-gold">照實講：</b>
+                {meta.status_note}
+                {meta.s5.backtest ? (
+                  <>
+                    {" "}呢個模型上線之前要過三項閘門：最近三個完整賽季共 {meta.s5.backtest.n.toLocaleString()} 場季外測試，
+                    排序分數 RPS {meta.s5.backtest.rps.toFixed(4)}、校準偏差 {(meta.s5.backtest.ece * 100).toFixed(2)}%，
+                    都要贏最佳單軌（RPS {meta.s5.gate?.best_single_track_rps.toFixed(4)}）先准入凍結軌。
+                  </>
+                ) : null}
+                {" "}紅燈場次係熱身場數不足（雙方各要 40 場歷史）而退回基準軌，只作診斷，唔入公開帳。
+              </p>
+            ) : (
+              <p className="mt-2 rounded-[8px] border border-lose/30 bg-lose/5 px-2.5 py-2 text-[10px] leading-relaxed text-ink-2">
+                <b className="text-lose">照實講：</b>
+                {meta.status_note}換句話講，呢批機率係 S2 天喜足球ELO 加 S3 入球模型嘅在線混合，未經 S5 校準，
+                唔可以當最終預測用。{meta.s5?.reason ? `未就緒原因：${meta.s5.reason}。` : ""}
+              </p>
+            )}
           </Card>
 
           <Card title="逐場預測" en="Match List">
@@ -568,7 +631,9 @@ function FootballFixturesPage() {
 
           <Card title="呢頁未有嘅嘢" en="Not Yet">
             <ul className="ml-4 list-disc space-y-1 text-[10px] leading-relaxed text-ink-2">
-              <li>S4 天喜LGB 同 S5 集成校準嘅逐場推論未接入，所以未有黃燈同綠燈，機率亦未校準。</li>
+              <li>
+                黃燈（開賽前刷新中）暫時未細分：現時只有綠燈（S5 集成、已過三項閘門）同紅燈（熱身不足退回基準軌）。
+              </li>
               <li>機率區間（信賴帶）同逐場前幾大特徵貢獻（SHAP）未上線，已入路線圖。</li>
               <li>賽後逐場對帳紀錄要等呢批凍結預測有咗賽果之後才會出現。</li>
               <li>xG、官方首發陣容、傷停係 v1 特徵，未上線；官方球隊徽章需授權，暫用派生識別標。</li>
@@ -585,7 +650,13 @@ function FootballFixturesPage() {
         </>
       )}
 
-      <Disclaimer extra="本頁機率為未校準嘅基準軌輸出，僅作研究對照，不構成任何投注建議。" />
+      <Disclaimer
+        extra={
+          meta?.s5?.ready
+            ? "綠燈場次為 S5 集成校準後嘅賽前凍結機率，紅燈場次為未校準基準軌，全部僅作研究對照，不構成任何投注建議。"
+            : "本頁機率為未校準嘅基準軌輸出，僅作研究對照，不構成任何投注建議。"
+        }
+      />
     </AppShell>
   );
 }
