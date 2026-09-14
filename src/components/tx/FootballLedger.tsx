@@ -136,9 +136,9 @@ export function FootballLedger() {
             <p className="mt-2 text-[10px] leading-relaxed text-ink-2">
               入帳範圍：五大聯賽（{(hit.data?.scope.big5 ?? []).join("、")}）、綠燈且已鎖場次。逐場鎖定＝
               <b className="text-deep">開賽前 60 分鐘</b>；黃燈可刷新、綠燈已鎖、紅燈退回基準軌。
-              現時每日凍結軌仍係 S3＋S2 在線混合（
-              <Pill tone="ink">紅燈 · 未入帳</Pill>），要等 S5 集成推論接入同一指紋才開綠燈入帳——所以
-              上面三格暫時係「未開帳」，唔會借回測數字充當實戰成績。
+              每日凍結軌已接入 S5 三軌集成（S4 天喜足球LGB ＋ S3 入球模型 ＋ S2 天喜足球ELO），過三項閘門先算綠燈；
+              熱身場數不足嘅場次維持紅燈基準軌，只作診斷。上面三格要等綠燈場次有咗完場賽果才會出實數，
+              喺此之前一律寫「未開帳」，唔會借回測數字充當實戰成績。
             </p>
             <div className="mt-2 grid gap-2 sm:grid-cols-3">
               <Stat label="帳內場次" value={(log.data?.length ?? 0).toLocaleString()} sub={`已鎖 ${lockedCount}`} />
