@@ -1,7 +1,57 @@
 {
-  "generatedHKT": "2026-09-14 18:45 HKT",
+  "generatedHKT": "2026-09-14 19:06 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-14",
+      "time": "19:06",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(s13): 逐場凍結帳公開對帳 (src/components/tx/FootballLedger.tsx)",
+      "scope": "site",
+      "sha": "a8986fb"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "19:06",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(s13): 逐場凍結帳公開對帳 (src/routes/football.results.tsx)",
+      "scope": "site",
+      "sha": "f99a020"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "19:06",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(s13): 逐場凍結帳公開對帳 (src/routes/api/public/football-predictions.ts)",
+      "scope": "site",
+      "sha": "503d156"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "19:06",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(s13): 逐場凍結帳公開對帳 (src/routes/dev-log.tsx)",
+      "scope": "site",
+      "sha": "e0ff4bf"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "19:06",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(s13): 逐場凍結帳公開對帳 (roadmap.md)",
+      "scope": "site",
+      "sha": "3329c49"
+    },
     {
       "date": "2026-09-14",
       "time": "18:45",
@@ -31,6 +81,16 @@
       "title": "feat(score-matrix): 波膽展示層 — src/routes/football.fixtures.tsx",
       "scope": "site",
       "sha": "0c155cf"
+    },
+    {
+      "date": "2026-09-14",
+      "time": "18:45",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "5bf1ae8"
     },
     {
       "date": "2026-09-14",
@@ -874,16 +934,6 @@
     },
     {
       "date": "2026-09-06",
-      "time": "01:51",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "1e98345"
-    },
-    {
-      "date": "2026-09-06",
       "time": "00:53",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -891,56 +941,6 @@
       "title": "data: update Mark Six results (2026-09-05T16:53Z)",
       "scope": "marksix",
       "sha": "18cdee4"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "14:57",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-05T14:57",
-      "scope": "site",
-      "sha": "cf5c429"
-    },
-    {
-      "date": "2026-09-05",
-      "time": "02:45",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "cb6084e"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "15:15",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-04T15:15",
-      "scope": "site",
-      "sha": "e9ce9be"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:56",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(engine): stack 初版 / 最終版 legend so mobile does not wrap mid-sentence",
-      "scope": "site",
-      "sha": "93d0c6d"
-    },
-    {
-      "date": "2026-09-04",
-      "time": "12:56",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "75875c2"
     },
     {
       "date": "2026-08-30",
