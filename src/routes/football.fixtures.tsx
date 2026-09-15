@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCrests } from "@/lib/footballCrests";
+import { leanSide } from "@/lib/footballTeams";
+import { teamZh } from "@/lib/teamZh";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
@@ -200,7 +202,7 @@ function MatchCard({
   crestOf: (div: string, name: string) => string | null;
 }) {
   const [open, setOpen] = useState(false);
-  const top = m.p.indexOf(Math.max(...m.p)) as 0 | 1 | 2;
+  const top = leanSide(m.p);
   const derived = useMemo(() => scoreTop(m.lambda, m.p), [m.lambda, m.p]);
   // 只讀凍結值：有凍結波膽（S5 分區重加權後嘅矩陣）就用凍結嗰張，冇才由 λ 同機率派生
   const csAll = useMemo(() => {
@@ -225,7 +227,10 @@ function MatchCard({
       tails: { winBy3: f.tails.win_by_3plus, h4plus: f.tails.home_4plus, awayZero: f.tails.away_clean_sheet },
     };
   }, [m.cs, derived]);
-  const cs = { ...csAll.zones[top]!, bigP: csAll.bigP };
+  // 波膽大字出全矩陣最可能一格，唔跟 1X2 傾向分區
+  const cs = csAll.top8[0]
+    ? { ...csAll.top8[0], bigP: csAll.bigP }
+    : { score: "—", p: 0, res: "draw" as const, bigP: csAll.bigP };
   const edgeMax = m.edge ? Math.max(...m.edge) : null;
   const edgeIdx = m.edge ? m.edge.indexOf(Math.max(...m.edge)) : -1;
   const side = ["主勝", "和局", "客勝"];
@@ -246,34 +251,53 @@ function MatchCard({
         )}
       </header>
 
-      {/* 一個賽果預測：主 / 和 / 客 */}
-      <div className="mt-2 flex items-center gap-1.5 rounded-[8px] border border-gold-strong/40 bg-gold-bg px-2 py-1.5">
-        <span className="shrink-0 rounded-[4px] bg-gold px-1.5 py-0.5 font-serif-tc text-[11px] font-bold text-paper">
-          預測
-        </span>
-        <p className="truncate font-serif-tc text-[14px] font-bold text-ink">
-          {top === 1 ? "和局" : top === 0 ? m.home : m.away}
-          {top === 1 ? "" : side[top]}
+      {/* 賽果預測：三條機率（主／和／客）齊列，最高者標金 */}
+      <div className="mt-2 rounded-[8px] border border-gold-strong/40 bg-gold-bg px-2 py-1.5">
+        <div className="space-y-1">
+          {[0, 1, 2].map((i) => {
+            const v = m.p[i] ?? 0;
+            const lead = i === top;
+            return (
+              <div key={i} className="flex items-center gap-1.5">
+                <span className={`w-8 shrink-0 text-[10px] font-bold ${lead ? "text-ink" : "text-ink-2"}`}>
+                  {side[i]}
+                </span>
+                <span className="h-2 flex-1 overflow-hidden rounded-[2px] bg-hairline">
+                  <span
+                    className={`block h-full ${lead ? "bg-gold" : "bg-ink-3/45"}`}
+                    style={{ width: `${Math.round(v * 100)}%` }}
+                  />
+                </span>
+                <span
+                  className={`tabnum w-10 shrink-0 text-right font-mono-tx text-[10px] ${lead ? "font-bold text-ink" : "text-ink-2"}`}
+                >
+                  {p1(v)}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+        <p className="mt-1 text-[9px] leading-tight text-ink-3">
+          和局歷史上只佔約四分一，三條機率齊列；波膽大字係全矩陣最可能一格，唔跟傾向分區。
         </p>
-        <span className="tabnum ml-auto shrink-0 font-mono-tx text-[9px] text-ink-3">信心 {p1(m.p[top])}</span>
       </div>
 
       {/* 一個波膽預測 */}
       <div className="mt-1.5 grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 rounded-[8px] border border-hairline bg-paper-2 px-2.5 py-2">
         <div className="flex min-w-0 items-center gap-1.5">
-          <FootballCrest name={m.home} src={crestOf(m.div, m.home)} />
-          <p className="truncate font-serif-tc text-[12px] font-bold text-ink">{m.home}</p>
+          <FootballCrest name={teamZh(m.div, m.home)} src={crestOf(m.div, m.home)} />
+          <p className="truncate font-serif-tc text-[12px] font-bold text-ink">{teamZh(m.div, m.home)}</p>
         </div>
         <p className="tabnum shrink-0 text-center font-mono-tx text-[22px] font-bold leading-none text-gold">
           {Number.isNaN(sh) ? cs.score : `${sh} : ${sa}`}
         </p>
         <div className="flex min-w-0 items-center justify-end gap-1.5">
-          <p className="truncate text-right font-serif-tc text-[12px] font-bold text-ink">{m.away}</p>
-          <FootballCrest name={m.away} src={crestOf(m.div, m.away)} />
+          <p className="truncate text-right font-serif-tc text-[12px] font-bold text-ink">{teamZh(m.div, m.away)}</p>
+          <FootballCrest name={teamZh(m.div, m.away)} src={crestOf(m.div, m.away)} />
         </div>
       </div>
       <p className="mt-1 tabnum font-mono-tx text-[9px] leading-tight text-ink-3">
-        波膽命中機率 {p1(cs.p)} · 屬{SIDE_ZH[cs.res]}格 · 四球或以上合計 {p1(cs.bigP)}
+        波膽命中機率 {p1(cs.p)} · 全矩陣最可能一格 · 四球或以上合計 {p1(cs.bigP)}
       </p>
 
 
@@ -361,7 +385,7 @@ function MatchCard({
               </li>
             </ul>
             <p className="mt-1 text-[9px] leading-relaxed text-ink-3">
-              公開波膽只出一格（賽果分區內最可能者），呢張表係同一張矩陣嘅完整分佈，唔係另一套預測。
+              公開波膽只出一格（全矩陣機率最高者），呢張表係同一張矩陣嘅完整分佈，唔係另一套預測。
               泊松方差等於均值，大比分先天偏瘦；肥尾同把 Elo 分差注入 λ 仍屬研究軌，未過三項閘唔會入凍結。
             </p>
           </div>
@@ -624,7 +648,7 @@ function FootballFixturesPage() {
               賠率係唯一唔會用嚟校正模型嘅資料：市場只作對照線同價值判斷，權重永遠零。
               大細同兩隊入球同出一個矩陣，各盤口機率永遠互相一致。「市場去水」係賽前平均賠率去掉水錢後嘅隱含機率，
               權重零，只作對照；「價值差」＝模型機率減市場機率。隊徽係按隊名派生嘅識別標，唔係官方徽章；
-              球隊名暫時顯示原文——港式馬會譯名對照表仍在建，未撞到官方譯名之前唔會亂譯。
+              隊名用港式馬會譯名對照表；表外球隊原樣顯示英文短名，唔會亂譯。
             </p>
 
           </Card>
