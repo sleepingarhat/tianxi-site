@@ -47,6 +47,14 @@ export const Route = createFileRoute("/api/public/football-predictions")({
               "User-Agent": "tianxi-web",
             },
           });
+          // 未有該月凍結帳（例：上一月未開跑）＝正常空狀態，唔算故障
+          if (res.status === 404) {
+            return json(
+              { ok: true, month: month || null, matches: {}, empty: true },
+              200,
+              "public, max-age=300, s-maxage=900, stale-while-revalidate=86400",
+            );
+          }
           if (!res.ok) throw new Error(`upstream ${res.status}`);
           const text = await res.text();
           return new Response(text, {
