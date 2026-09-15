@@ -1,7 +1,137 @@
 {
-  "generatedHKT": "2026-09-15 14:03 HKT",
+  "generatedHKT": "2026-09-15 16:59 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-15",
+      "time": "16:58",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: roadmap.md",
+      "scope": "site",
+      "sha": "cf96301"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "16:58",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: src/routes/dev-log.tsx",
+      "scope": "site",
+      "sha": "8df0a86"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "16:14",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] critical critical=1 warn=6 · 2026-09-15T08:14Z",
+      "scope": "database",
+      "sha": "4ba822a"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "15:48",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-15T15:48",
+      "scope": "site",
+      "sha": "7970163"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "15:34",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-15T07:34Z",
+      "scope": "database",
+      "sha": "4c60921"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "15:33",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] engine health 2026-09-15T15:33",
+      "scope": "backend",
+      "sha": "cc968b0"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "15:28",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S28 中文隊名對照（96 隊港式馬會譯名）＋日誌路線圖同步",
+      "scope": "site",
+      "sha": "3ce16d3"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "15:28",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S28 中文隊名對照（96 隊港式馬會譯名）＋日誌路線圖同步",
+      "scope": "site",
+      "sha": "1a4dbbf"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "15:28",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S28 中文隊名對照（96 隊港式馬會譯名）＋日誌路線圖同步",
+      "scope": "site",
+      "sha": "a9c4ed1"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "15:28",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S28 中文隊名對照（96 隊港式馬會譯名）＋日誌路線圖同步",
+      "scope": "site",
+      "sha": "2e75472"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "15:28",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S28 中文隊名對照（96 隊港式馬會譯名）＋日誌路線圖同步",
+      "scope": "site",
+      "sha": "573259b"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "15:28",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S28 中文隊名對照（96 隊港式馬會譯名）＋日誌路線圖同步",
+      "scope": "site",
+      "sha": "ebf07a3"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "15:28",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S28 中文隊名對照（96 隊港式馬會譯名）＋日誌路線圖同步",
+      "scope": "site",
+      "sha": "82bedd4"
+    },
     {
       "date": "2026-09-15",
       "time": "14:03",
@@ -31,6 +161,16 @@
       "title": "凍結帳代理：未有該月回 200 空響應，唔再 502",
       "scope": "site",
       "sha": "cec3aae"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "14:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "15ea25f"
     },
     {
       "date": "2026-09-15",
@@ -198,36 +338,6 @@
       "areaKey": "web",
       "area": "前端",
       "typeLabel": "功能",
-      "title": "feat(s13): 逐場凍結帳公開對帳 (src/components/tx/FootballLedger.tsx)",
-      "scope": "site",
-      "sha": "a8986fb"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "19:06",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(s13): 逐場凍結帳公開對帳 (src/routes/football.results.tsx)",
-      "scope": "site",
-      "sha": "f99a020"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "19:06",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(s13): 逐場凍結帳公開對帳 (src/routes/api/public/football-predictions.ts)",
-      "scope": "site",
-      "sha": "503d156"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "19:06",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
       "title": "feat(s13): 逐場凍結帳公開對帳 (src/routes/dev-log.tsx)",
       "scope": "site",
       "sha": "e0ff4bf"
@@ -251,86 +361,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "28d629e"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "18:45",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(score-matrix): 波膽展示層 — roadmap.md",
-      "scope": "site",
-      "sha": "87f06b8"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "18:45",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(score-matrix): 波膽展示層 — src/routes/dev-log.tsx",
-      "scope": "site",
-      "sha": "e7adc2d"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "18:45",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(score-matrix): 波膽展示層 — src/routes/football.fixtures.tsx",
-      "scope": "site",
-      "sha": "0c155cf"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "18:45",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "5bf1ae8"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "18:42",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "文檔",
-      "title": "docs(clubelo): 對帳層同步 — roadmap.md",
-      "scope": "site",
-      "sha": "4f828a1"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "18:42",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "文檔",
-      "title": "docs(clubelo): 對帳層同步 — src/routes/dev-log.tsx",
-      "scope": "site",
-      "sha": "f363f9b"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "18:42",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "文檔",
-      "title": "docs(clubelo): 對帳層同步 — src/lib/football-snapshot.ts",
-      "scope": "site",
-      "sha": "388bd79"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "18:42",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "6c24bbb"
     },
     {
       "date": "2026-09-14",
@@ -757,26 +787,6 @@
       "time": "21:51",
       "areaKey": "data",
       "area": "數據·爬蟲",
-      "typeLabel": "功能",
-      "title": "feat(pedigree): add HorsePedigree_Scraper + D1 sync (RunAll_Scrapers.py)",
-      "scope": "database",
-      "sha": "a124f78"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "21:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "功能",
-      "title": "feat(pedigree): add HorsePedigree_Scraper + D1 sync (data/pedigree/horse_pedigree.csv)",
-      "scope": "database",
-      "sha": "c8d65db"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "21:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
       "typeLabel": "提交",
       "title": "[manifest][skip ci] regenerate data/index.json",
       "scope": "database",
@@ -911,16 +921,6 @@
       "title": "auth manifest: draw-tune (admin only)",
       "scope": "backend",
       "sha": "f3f353b"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "02:47",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "檔位效應 v2：場地×賽道×路程分層 + 場數期望 + 收縮；新增 /api/analyze/draw-tune A/B",
-      "scope": "backend",
-      "sha": "a97e6a4"
     },
     {
       "date": "2026-09-09",
