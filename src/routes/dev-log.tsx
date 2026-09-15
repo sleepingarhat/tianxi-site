@@ -23,6 +23,12 @@ type Tag = "數據" | "技術" | "前端" | "系統";
 const ENTRIES: { date: string; title: string; tags: Tag[]; body: string }[] = [
   {
     date: "2026-09-15 · HKT",
+    title: "中文隊名對照表上線：五大聯賽 96 隊港式馬會譯名，純展示層唔碰凍結",
+    tags: ["前端", "數據"],
+    body: "一、範圍：新增 src/lib/teamZh.ts，按 football-data.co.uk 短名逐隊對上港式馬會官方譯名——英超 20 隊（阿仙奴、曼城、列斯聯、侯城、白禮頓、車路士、賓福特、利物浦、愛華頓、葉士域治、諾定咸森林、紐卡素、曼聯、新特蘭、般尼茅夫、水晶宮、熱刺、富咸、阿士東維拉、高雲地利）、德甲 18 隊（拜仁慕尼黑、多蒙特、利華古遜、RB萊比錫、慕遜加柏、史浩克零四等）、西甲 20 隊（皇家馬德里、巴塞隆拿、馬德里體育會、畢爾包、愛斯賓奴、華歷簡奴等）、意甲 20 隊（國際米蘭、AC米蘭、祖雲達斯、拿玻里、拖連奴、費辛隆尼等）、法甲 18 隊（巴黎聖日耳門、摩納哥、里昂、馬賽、勒哈弗爾等），共 96 隊。二、規則：先按聯賽查表，再試跨聯賽全站唯一名；撞名或表外球隊原樣顯示英文短名，唔會亂譯。三、接入頁面：賽前預測卡（fixtures）、五大積分榜（standings）、球隊資料頁（標題、近況對手、逐場凍結對帳）、公開「預測 vs 賽果」逐場卡（FootballLedger）；隊徽派生盾形標嘅 initials 同步改用中文頭兩字。四、性質：純展示層對照表，唔碰凍結預測、唔入模、唔改對帳；內部對照仍以英文短名做鍵，teamSlug、凍結列 join 全部維持原文。五、備註：譯名係手工對照表，會隨聯賽升降班逐季補；表外新隊出現時會暫時顯示英文短名，入表先轉中文。已 Playwright 實測積分榜、球隊頁同對帳頁中文顯示正常；賽前預測頁暫時 0 場未開賽（本批 190 場全部已開賽），下批賽程入庫後自動生效。",
+  },
+  {
+    date: "2026-09-15 · HKT",
     title: "S24 倉庫分家完成 ＋ S27 場次條件層 Δλ 三表結構落地；球隊頁上一月凍結帳唔再報錯",
     tags: ["系統", "數據", "前端"],
     body: "一、分家（S24）：新開私有研究倉 sleepingarhat/tianxi-football-research，把 scripts/research/ 七個腳本（cuts、lambda_chain、dibp、bp、cmp、dibp_on_bp、dynamic_ad）同 data/research/ 九個結果 JSON（S23＋S25 試驗 1–5）整批遷入，再從生產倉 tianxi-football-database 刪清；網站倉本地 research/ 副本亦一併刪走，避免三處各存一份。生產倉之後只留凍結預測 data/predictions/、prediction_log、audit.jsonl、版本指紋、models/、snapshots/ 同每日凍結 workflow。二、權限邊界（兩倉 README 寫死）：產品站只讀生產倉凍結檔、永不讀研究倉；研究倉唔准寫生產倉任何指紋、模型或凍結檔，研究要升級唯一路徑係三主閘（RPS、實際比分格 log-loss、ECE）加三副閘（大細 2.5、對角總質量、頭八格覆蓋）逐季 walk-forward 全過，再由人手在生產倉開新指紋版本——研究倉自己升唔到指紋。研究倉另加 NOTES-rejected.md，把禁止列（對手調整殘差、ρ(λ) 衰減、逐聯賽 μ、時間衰減 ξ、κ→λ、Rue–Salvesen γ、五刀疊加、逐場近況入凍結、賠率入模、單格命中回寫調參、完場 xG 倒算賽前盤…）同紅燈規則寫成硬文件。三、Δλ 三表（S27，只落結構、唔估 λ）：生產倉加 docs/delta-schema.md 同 data/delta/ 三張只附加 JSONL——delta_squad（名單／陣容，准用前置係公布名單時間戳要早過鎖定時刻）、delta_density（休息日、14 日場數、旅程）、delta_market（去水機率殘差，只作診斷、永不回餵模型，賠率權重永遠 0）。語意寫死：改正只准寫新一行並填 supersedes，永不 UPDATE、永不刪行；缺資料 status=missing → Δλ=0 退回基準 λ、場次標紅燈（可查可睇、唔入戰績、唔入對帳分母）；delta_market captured_before_lock=false 嘅紀錄唔准入任何對照表。四、寫入器守門：scripts/delta_write.py 硬拒絕寫入 data/predictions/、models/、snapshots/，硬拒絕紀錄帶凍結欄（p、lambda、cs、fingerprint、locked_at、result），亦拒絕未知欄；結構階段 delta_h／delta_a 一律 0、applied 一律 false，已本地實測（防護觸發、拒絕退出）。五、產品可用性：球隊頁會拉上一月凍結帳，該月未開跑時上游 404 令代理回 502，前端雖然已忽略但會留錯誤紀錄；已改為 404 時回 200 空響應（matches 空、empty 標記）並照樣邊緣快取。六、模型線維持停：凍結預測、每日凍結流程、版本指紋一分不動；試驗 5 重開前置（分家＋Δλ 結構＋紅燈規則入研究倉）今日已齊，但要等人手開跑。",
