@@ -1,6 +1,7 @@
 # tianxi-web roadmap
 
 ## 進行中
+- [x] S30 賽馬引擎健康稽核修正：掛上 /api/analyze/engine-health（JSON／HTML）＋ /engine/health.json ＋ /admin/engine-health ＋ 主站代理 /api/public/engine-health；健康 payload 改 buildEngineHealth(db) 即時讀季節同最近凍結賽日（live 曲線／diagnostics 兩項 WATCH 自動翻）；鎖點規格（T−1.5h）同落地（第一場賽果入庫）未對齊已寫明，public_freeze 降 WATCH；today-picks 加 frozen／edition，選馬頁加「初版／最終版」章；SANITY 馬匹池路徑改 horses/profiles/horse_profiles.csv；工程債待辦：analyze.ts／admin.ts 拆檔、盤 prune 保留歷史 live snapshot
 - [x] 全站頁面大標題加入聚光掃光；品牌「天喜 TIANXI」同步聚光，「ENTERTAINMENT」使用紙墨金金箔流光，並支援減少動態效果
 - [x] 排位表手機版重整：統一所有馬匹號碼尺寸，取消厚重黑底；固定馬名／檔位欄邊界避免重疊，並參考香港賽馬會官方排位表重整資料層級與密度
 - [ ] 會員／收費權限：建立付費會員方案；只有已驗證付費權限可見會員預測與獨家分數。「更高權重」候選必須先完成 walk-forward 回測並通過四揀主指標閘門，未通過前不可宣稱較準或套入生產
