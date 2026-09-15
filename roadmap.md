@@ -1,6 +1,10 @@
 # tianxi-web roadmap
 
 ## 進行中
+- [x] S31 鎖點改追已批規格（T−1.5h）：新增 src/lib/lock-window.ts，鎖點時間＝fixture 首場 post_time − 90 分鐘（唔再等賽果入庫）；writePredictionLog／writeRaceDayReportCache 改用 predictionWritesAreFrozen（未到鎖點可刷新＝初版；到鎖點有快照即拒寫；到鎖點未有快照准寫一次）；讀取側 dateIsLocked 由鎖點一刻起讀凍結快照（today-picks／top-picks／picks-by-date／explain）；wrangler 加 */5 輕量 lock tick（heavy job 留原時段）＋ GET /api/analyze/lock-state、POST /admin/api/lock-tick；健康頁 LOCK_POLICY aligned=true、public_freeze 翻 PASS；主站加 /api/public/lock-state 代理，選馬頁初版章寫出實際鎖定時間。鎖後只准 join 名次，唔再寫預測欄；算法線同指紋一分不動
+- [ ] S32 打穿之前先量邊：研究倉建凍結 p vs 扣水後隱含 q 對照表（WIN／PLA logloss ＋ 模擬 EV，逐場逐匹），主尺仍為四選（四揀入圍數／頭四覆蓋／位置命中），獨贏只旁註；未有呢張表之前唔宣稱任何「打穿」
+- [ ] S33 card_delta（鎖後變更 overlay）：換騎／蹄鐵／後備上陣只微調已鎖分數，永不入 LGB、永不改凍結欄；缺資料＝0、紅燈可睇唔入戰績
+- [ ] S34 少仗紅燈規則寫入健康頁：新馬／試閘場次標紅燈（α=0.88、96 匹有分只證明「有分」，唔證明新馬唔係亂估）；少仗退 Elo＋試閘／血統先驗
 - [x] S30 賽馬引擎健康稽核修正：掛上 /api/analyze/engine-health（JSON／HTML）＋ /engine/health.json ＋ /admin/engine-health ＋ 主站代理 /api/public/engine-health；健康 payload 改 buildEngineHealth(db) 即時讀季節同最近凍結賽日（live 曲線／diagnostics 兩項 WATCH 自動翻）；鎖點規格（T−1.5h）同落地（第一場賽果入庫）未對齊已寫明，public_freeze 降 WATCH；today-picks 加 frozen／edition，選馬頁加「初版／最終版」章；SANITY 馬匹池路徑改 horses/profiles/horse_profiles.csv；工程債待辦：analyze.ts／admin.ts 拆檔、盤 prune 保留歷史 live snapshot
 - [x] 全站頁面大標題加入聚光掃光；品牌「天喜 TIANXI」同步聚光，「ENTERTAINMENT」使用紙墨金金箔流光，並支援減少動態效果
 - [x] 排位表手機版重整：統一所有馬匹號碼尺寸，取消厚重黑底；固定馬名／檔位欄邊界避免重疊，並參考香港賽馬會官方排位表重整資料層級與密度
