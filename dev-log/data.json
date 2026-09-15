@@ -1,7 +1,257 @@
 {
-  "generatedHKT": "2026-09-15 16:59 HKT",
+  "generatedHKT": "2026-09-15 19:05 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-15",
+      "time": "19:05",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "lock: T-1.5h freeze spec (site side: lock-state proxy, predictor lock time, dev-log, roadmap)",
+      "scope": "site",
+      "sha": "9664d05"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:05",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "lock: T-1.5h freeze spec (site side: lock-state proxy, predictor lock time, dev-log, roadmap)",
+      "scope": "site",
+      "sha": "b2cb599"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "lock: T-1.5h freeze spec (site side: lock-state proxy, predictor lock time, dev-log, roadmap)",
+      "scope": "site",
+      "sha": "9a9a345"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "lock: T-1.5h freeze spec (site side: lock-state proxy, predictor lock time, dev-log, roadmap)",
+      "scope": "site",
+      "sha": "29b969b"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:03",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
+      "scope": "backend",
+      "sha": "de00f9f"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:03",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
+      "scope": "backend",
+      "sha": "bf25f91"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:03",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
+      "scope": "backend",
+      "sha": "669c39d"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:03",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
+      "scope": "backend",
+      "sha": "2f31a9d"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:03",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
+      "scope": "backend",
+      "sha": "b25fb03"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:03",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
+      "scope": "backend",
+      "sha": "d5ecd0e"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:03",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
+      "scope": "backend",
+      "sha": "c5bc932"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:24",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "6c396ee"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:18",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: src/routes/api/public/engine-health.ts",
+      "scope": "site",
+      "sha": "70e31d3"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:18",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: src/lib/use-today-picks.ts",
+      "scope": "site",
+      "sha": "5cb49cb"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:18",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: src/routes/predictor.tsx",
+      "scope": "site",
+      "sha": "8b46840"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:18",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: src/routes/dev-log.tsx",
+      "scope": "site",
+      "sha": "84fc4c6"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:18",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: roadmap.md",
+      "scope": "site",
+      "sha": "3983ca3"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:17",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: src/routes/analyze.ts",
+      "scope": "backend",
+      "sha": "07cd0e7"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:14",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: scripts/test-admin-auth.ts",
+      "scope": "backend",
+      "sha": "0dbc52d"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:05",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: .github/workflows/capy_sanity_daily.yml",
+      "scope": "database",
+      "sha": "d953d9a"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:05",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: src/lib/engine-health.ts",
+      "scope": "backend",
+      "sha": "48a1e9a"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:05",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: src/index.ts",
+      "scope": "backend",
+      "sha": "b39d46a"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:05",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: ENGINE_STATUS.md",
+      "scope": "backend",
+      "sha": "43d829f"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "17:05",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "S29 context data layer: .github/workflows/engine_sanity_daily.yml",
+      "scope": "backend",
+      "sha": "612a152"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "16:59",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "c1d0604"
+    },
     {
       "date": "2026-09-15",
       "time": "16:58",
@@ -254,16 +504,6 @@
     },
     {
       "date": "2026-09-15",
-      "time": "04:07",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "4654ce5"
-    },
-    {
-      "date": "2026-09-15",
       "time": "01:44",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -271,96 +511,6 @@
       "title": "[data][skip ci] 2026-09-14T17:44Z · [data][skip ci] entries 2026-09-14T17:44Z via GHA",
       "scope": "database",
       "sha": "a0a7aea"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "19:23",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(s16): S5 集成入凍結軌，前端燈號同文案同步 (src/routes/football.fixtures.tsx)",
-      "scope": "site",
-      "sha": "70dd008"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "19:23",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(s16): S5 集成入凍結軌，前端燈號同文案同步 (src/routes/football.results.tsx)",
-      "scope": "site",
-      "sha": "a58ab3f"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "19:23",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(s16): S5 集成入凍結軌，前端燈號同文案同步 (src/components/tx/FootballLedger.tsx)",
-      "scope": "site",
-      "sha": "c638eef"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "19:23",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(s16): S5 集成入凍結軌，前端燈號同文案同步 (src/routes/dev-log.tsx)",
-      "scope": "site",
-      "sha": "f37877a"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "19:23",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(s16): S5 集成入凍結軌，前端燈號同文案同步 (roadmap.md)",
-      "scope": "site",
-      "sha": "3157604"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "19:23",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "13449ec"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "19:06",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(s13): 逐場凍結帳公開對帳 (src/routes/dev-log.tsx)",
-      "scope": "site",
-      "sha": "e0ff4bf"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "19:06",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(s13): 逐場凍結帳公開對帳 (roadmap.md)",
-      "scope": "site",
-      "sha": "3329c49"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "19:06",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "28d629e"
     },
     {
       "date": "2026-09-14",
@@ -640,16 +790,6 @@
       "typeLabel": "修正",
       "title": "fix(ci): point admin API calls to worker origin after tianxi.racing cutover to new site",
       "scope": "backend",
-      "sha": "48dca4d"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "12:26",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(ci): point admin API calls to worker origin after tianxi.racing cutover to new site",
-      "scope": "backend",
       "sha": "46d4636"
     },
     {
@@ -773,76 +913,6 @@
       "sha": "c11b581"
     },
     {
-      "date": "2026-09-12",
-      "time": "04:09",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-11T20:09Z · [data][skip ci] pool-b 2026-09-11T20:09Z via GHA",
-      "scope": "database",
-      "sha": "12bc331"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "21:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "623a759"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "20:05",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Stage 15: non-odds class-fit / J-T rolling quality / draw x distance features (dormant, A/B did not beat baseline)",
-      "scope": "backend",
-      "sha": "44ae304"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "20:05",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "Stage 15: non-odds class-fit / J-T rolling quality / draw x distance features (dormant, A/B did not beat baseline)",
-      "scope": "backend",
-      "sha": "afd040d"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "18:03",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(calibration): segmented per-odds-band Platt curves (probabilities only, ranking untouched)",
-      "scope": "backend",
-      "sha": "5f7e5eb"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "18:03",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(calibration): segmented per-odds-band Platt curves (probabilities only, ranking untouched)",
-      "scope": "backend",
-      "sha": "4d1c91f"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "12:37",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(analyze): 殘差診斷 /api/analyze/residuals（班次／路程／地質／賠率／馬場分組偏差）",
-      "scope": "backend",
-      "sha": "01ab69e"
-    },
-    {
       "date": "2026-09-11",
       "time": "01:46",
       "areaKey": "data",
@@ -851,76 +921,6 @@
       "title": "data: update Mark Six results (2026-09-10T17:46Z)",
       "scope": "marksix",
       "sha": "a53cff3"
-    },
-    {
-      "date": "2026-09-10",
-      "time": "20:00",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(calibration): Platt scaling for top-3 probabilities + /api/analyze/calibration",
-      "scope": "backend",
-      "sha": "835a344"
-    },
-    {
-      "date": "2026-09-10",
-      "time": "20:00",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(calibration): Platt scaling for top-3 probabilities + /api/analyze/calibration",
-      "scope": "backend",
-      "sha": "36e2908"
-    },
-    {
-      "date": "2026-09-10",
-      "time": "19:19",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "analyze: 新增 /prediction-accuracy（Brier／log-loss／可靠度校準／Brier skill）",
-      "scope": "backend",
-      "sha": "8a13b4a"
-    },
-    {
-      "date": "2026-09-10",
-      "time": "17:08",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(draw): 檔位效應 v3 分層（地質／匹數／班次）+ resolveDrawFactor；draw-tune 支援 v3（生產仍用 v1）",
-      "scope": "backend",
-      "sha": "c0c3949"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "12:26",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(lgb): 休季後驗證集擴窗；無驗證集時不再自動把 ensemble_alpha 寫成 0",
-      "scope": "backend",
-      "sha": "d917ed0"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "04:23",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "draw-tune: 檔位因子權重倍數 scales 回測參數（不改生產）",
-      "scope": "backend",
-      "sha": "ee4bbc2"
-    },
-    {
-      "date": "2026-09-09",
-      "time": "02:48",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "auth manifest: draw-tune (admin only)",
-      "scope": "backend",
-      "sha": "f3f353b"
     },
     {
       "date": "2026-09-09",
