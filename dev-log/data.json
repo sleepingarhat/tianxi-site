@@ -1,7 +1,47 @@
 {
-  "generatedHKT": "2026-09-15 12:44 HKT",
+  "generatedHKT": "2026-09-15 14:03 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-15",
+      "time": "14:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S24 分家 + S27 Δλ 結構 + 球隊頁 502 修正：日誌條目",
+      "scope": "site",
+      "sha": "8b11985"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "14:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S24／S27 路線圖更新",
+      "scope": "site",
+      "sha": "7b84cff"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "14:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "凍結帳代理：未有該月回 200 空響應，唔再 502",
+      "scope": "site",
+      "sha": "cec3aae"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "13:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: update speed-guide data (2026-09-15T05:51Z)",
+      "scope": "database",
+      "sha": "f5a6c97"
+    },
     {
       "date": "2026-09-15",
       "time": "12:44",
@@ -21,6 +61,16 @@
       "title": "roadmap: S26 產品線對帳——三格實數、抽五場核對、凍結修正",
       "scope": "site",
       "sha": "79df781"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "12:44",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "992dd9d"
     },
     {
       "date": "2026-09-15",
@@ -304,16 +354,6 @@
     },
     {
       "date": "2026-09-14",
-      "time": "15:56",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-14T15:56",
-      "scope": "site",
-      "sha": "bca0fa6"
-    },
-    {
-      "date": "2026-09-14",
       "time": "15:48",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -364,16 +404,6 @@
     },
     {
       "date": "2026-09-14",
-      "time": "02:28",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "500fd40"
-    },
-    {
-      "date": "2026-09-14",
       "time": "02:18",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -421,16 +451,6 @@
       "title": "[audit][skip ci] critical critical=1 warn=19 · 2026-09-13T07:51Z",
       "scope": "database",
       "sha": "2f465c4"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "15:29",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-13T15:29",
-      "scope": "site",
-      "sha": "b7df623"
     },
     {
       "date": "2026-09-13",
@@ -624,16 +644,6 @@
     },
     {
       "date": "2026-09-13",
-      "time": "02:01",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "c47d7b3"
-    },
-    {
-      "date": "2026-09-13",
       "time": "01:47",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -741,16 +751,6 @@
       "title": "[data][skip ci] 2026-09-11T20:09Z · [data][skip ci] pool-b 2026-09-11T20:09Z via GHA",
       "scope": "database",
       "sha": "12bc331"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "21:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "功能",
-      "title": "feat(pedigree): add HorsePedigree_Scraper + D1 sync (.github/workflows/capy_pedigree.yml)",
-      "scope": "database",
-      "sha": "bd7f842"
     },
     {
       "date": "2026-09-11",
