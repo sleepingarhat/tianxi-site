@@ -1,7 +1,87 @@
 {
-  "generatedHKT": "2026-09-15 19:05 HKT",
+  "generatedHKT": "2026-09-15 19:34 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-15",
+      "time": "19:34",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S32 freeze ledger page + public proxy (measure only)",
+      "scope": "site",
+      "sha": "5b0c0f4"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:34",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S32 freeze ledger page + public proxy (measure only)",
+      "scope": "site",
+      "sha": "05512b1"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:34",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S32 freeze ledger page + public proxy (measure only)",
+      "scope": "site",
+      "sha": "be6c596"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:34",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S32 freeze ledger page + public proxy (measure only)",
+      "scope": "site",
+      "sha": "625d33c"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:34",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S32 freeze ledger page + public proxy (measure only)",
+      "scope": "site",
+      "sha": "46896ff"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:32",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "S32: classify /api/analyze/freeze-ledger as public read",
+      "scope": "backend",
+      "sha": "588d885"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:22",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "S32 freeze ledger: measure-only reconciliation over locked prediction_log",
+      "scope": "backend",
+      "sha": "0412ed8"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:22",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "S32 freeze ledger: measure-only reconciliation over locked prediction_log",
+      "scope": "backend",
+      "sha": "ddb921e"
+    },
     {
       "date": "2026-09-15",
       "time": "19:05",
@@ -21,6 +101,16 @@
       "title": "lock: T-1.5h freeze spec (site side: lock-state proxy, predictor lock time, dev-log, roadmap)",
       "scope": "site",
       "sha": "b2cb599"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "19:05",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "72ed4e6"
     },
     {
       "date": "2026-09-15",
@@ -434,36 +524,6 @@
     },
     {
       "date": "2026-09-15",
-      "time": "12:44",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "dev-log: 首批綠燈對帳實數＋抽五場核對＋凍結完整性修正",
-      "scope": "site",
-      "sha": "e2265c7"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "12:44",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "roadmap: S26 產品線對帳——三格實數、抽五場核對、凍結修正",
-      "scope": "site",
-      "sha": "79df781"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "12:44",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "992dd9d"
-    },
-    {
-      "date": "2026-09-15",
       "time": "09:55",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -471,36 +531,6 @@
       "title": "[data][skip ci] 2026-09-15T01:55Z · pool-a 2026-09-15T01:55Z via GHA matrix",
       "scope": "database",
       "sha": "a1a9802"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "04:52",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "3575152"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "04:51",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S25 試驗 5 動態攻防結果 + 波膽大字還原",
-      "scope": "site",
-      "sha": "f07e512"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "04:51",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S25 試驗 5 完成（停），波膽大字還原",
-      "scope": "site",
-      "sha": "f2bc573"
     },
     {
       "date": "2026-09-15",
@@ -760,16 +790,6 @@
       "typeLabel": "修正",
       "title": "fix(ci): unblock deploy (classify new analyze reads), fix sanity unbound var, add automation watchdog with coverage alarm",
       "scope": "backend",
-      "sha": "6f14aab"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "12:47",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(ci): unblock deploy (classify new analyze reads), fix sanity unbound var, add automation watchdog with coverage alarm",
-      "scope": "backend",
       "sha": "e27f450"
     },
     {
@@ -781,26 +801,6 @@
       "title": "fix(ci): unblock deploy (classify new analyze reads), fix sanity unbound var, add automation watchdog with coverage alarm",
       "scope": "backend",
       "sha": "55e1338"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "12:26",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(ci): point admin API calls to worker origin after tianxi.racing cutover to new site",
-      "scope": "backend",
-      "sha": "46d4636"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "12:26",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(ci): point admin API calls to worker origin after tianxi.racing cutover to new site",
-      "scope": "backend",
-      "sha": "07f5740"
     },
     {
       "date": "2026-09-13",
