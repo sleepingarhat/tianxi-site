@@ -393,6 +393,17 @@
 - [ ] 准用前置未齊：公布名單時間戳、穩定分鐘、賽前 projected xG、門將撲救；未齊唔碰凍結、Δλ 維持 0
 - [ ] 試驗 5 重開條件：S24＋S27 已完成，紅燈規則已寫入研究倉；仍需人手開跑，指紋一分不動
 
+### S29 條件層資料層前置（2026-09-15，只落庫、唔生成 δ）
+- [x] `docs/lineup-source-survey.md`：五大聯賽公布名單時刻調查（英超官方 75 分鐘；德甲／西甲／意甲 60–75、法甲 60–90 浮動、官方冇承諾）、聚合來源次序（官方 > API-Football 免費層 20–40 分鐘多數遲過鎖定線 > TheSportsDB 唔准做開關）
+- [x] 時間戳定義寫死：`effective_ts = lineup_published_ts ?? lineup_observed_ts`；`lead_minutes = (kickoff − effective_ts)/60`
+- [x] 遲到規則表：`ok`（≥60 分鐘且兩隊齊 11 人，eligible=true）／`late`／`post_kickoff`／`incomplete`／`missing`／`unmatched` 一律 eligible=false → Δλ=0、場次紅燈
+- [x] `docs/context-data-schema.md` ＋ `data/context/{lineups,player_minutes,projected_xg,gk_saves}.jsonl` 空表 ＋ `_schema_version=1`：四項一次定齊欄位同遲到規則
+- [x] `scripts/context_write.py` 只附加寫入器：拒絕凍結路徑同凍結／δ 欄（p/lambda/cs/fingerprint/locked_at/result/delta_h/delta_a/applied）、拒絕未知欄；eligible 由時間戳＋完整度自動計，已本地實測（官方 75 分鐘→ok、觀察 30 分鐘→late、完場 xG→missing、防護觸發）
+- [x] `scripts/ingest_lineups.py` 採集骨架：只記 published/observed 時間戳同 11 人完整度；冇授權 key 或抓取失敗寫 missing 佔位，唔用平均／上仗 11 人頂替
+- [ ] 未開（按指示排後）：用名單計 δ、LGB 改估兩個 Poisson λ、動態攻防重開；凍結預測、prediction_log、指紋一分不動
+
+
+
 ### S19 λ 生成鏈升級（研究軌，未過三閘唔升指紋）
 - [x] 研究腳本 scripts/research/lambda_chain.py：Elo 差注入 λ（κ 掃描）＋ ρ 隨強度衰減（ψ）＋聯賽自己嘅 μ，五大聯賽 46,855 場、評分季 ≥ 2021（8,603 場）
 - [x] 首輪結果：κ > 0 令 RPS／實際格 log-loss／ECE 三項全部變差（κ 0.15→RPS 0.2150、κ 0.60→0.2209，基準 0.2137）；1-1 眾數佔比由 58.7% 跌到 41.3%，即「格靚咗但機率差咗」——κ 唔准升指紋
