@@ -372,6 +372,21 @@
 - [x] 核對揭兩漏洞已修（數據倉庫三腳本）：predict_fixtures 鎖定窗口改 0≤Δ≤60min（已開賽永不鎖）；log_predictions 賽後入帳標 late_ingest 永不鎖；settle_predictions 綠燈加 genuine_lock（first_seen ≤ 開賽−60min）。現有 5 場綠燈 first_seen 早過開賽 5.5–8h，新檢查下仍合資格
 - [ ] 對外對照表（天喜 vs 公開站，同一批已鎖預測逐場記 1X2／波膽格／RPS）：等綠燈樣本再累积先開，唔用回測充場
 
+### S24 倉庫分家（2026-09-15，完成）
+- [x] 新開私有研究倉 `sleepingarhat/tianxi-football-research`：`scripts/research/`（7 個腳本）＋ `data/research/`（9 個結果 JSON，含 S23、S25 試驗 1–5）遷入
+- [x] 生產倉 `tianxi-football-database` 刪走全部 research 路徑；只留凍結預測、prediction_log、audit、指紋、models/、snapshots/、每日凍結 workflow
+- [x] 網站倉 `tianxi-site` 刪走本地 `research/` 副本，避免三處同一份研究檔
+- [x] 權限邊界寫入兩倉 README：產品站只讀生產倉凍結檔；研究倉唔准寫指紋／模型／凍結檔，升級只准人手在生產倉開新版本
+- [x] 研究倉加 `NOTES-rejected.md`：禁止列（殘差、ρ(λ)、逐聯賽 μ、時間衰減、κ→λ、Rue–Salvesen γ、疊加、賠率入模、單格命中回寫調參…）＋紅燈規則（缺資料 Δλ=0、紅燈可睇唔入戰績）
+
+### S27 場次條件層 Δλ 表（2026-09-15，結構落地）
+- [x] `docs/delta-schema.md`：三表欄位定義、只附加語意（改正靠新行 + supersedes）、硬規則（唔准寫 data/predictions、models、snapshots、唔准帶凍結欄）
+- [x] `data/delta/{delta_squad,delta_density,delta_market}.jsonl` 空表 ＋ `_schema_version=1`（結構版本，唔係模型指紋）
+- [x] `scripts/delta_write.py` 只附加寫入器：拒絕凍結路徑、拒絕凍結欄（p/lambda/cs/fingerprint/locked_at/result）、拒絕未知欄；結構階段 delta_h/delta_a 一律 0、applied 一律 false
+- [x] 缺資料語意：status=missing → Δλ=0 退回基準 λ、場次標紅燈（可查可睇、唔入戰績、唔入對帳分母）；delta_market `captured_before_lock=false` 唔准入任何對照表
+- [ ] 准用前置未齊：公布名單時間戳、穩定分鐘、賽前 projected xG、門將撲救；未齊唔碰凍結、Δλ 維持 0
+- [ ] 試驗 5 重開條件：S24＋S27 已完成，紅燈規則已寫入研究倉；仍需人手開跑，指紋一分不動
+
 ### S19 λ 生成鏈升級（研究軌，未過三閘唔升指紋）
 - [x] 研究腳本 scripts/research/lambda_chain.py：Elo 差注入 λ（κ 掃描）＋ ρ 隨強度衰減（ψ）＋聯賽自己嘅 μ，五大聯賽 46,855 場、評分季 ≥ 2021（8,603 場）
 - [x] 首輪結果：κ > 0 令 RPS／實際格 log-loss／ECE 三項全部變差（κ 0.15→RPS 0.2150、κ 0.60→0.2209，基準 0.2137）；1-1 眾數佔比由 58.7% 跌到 41.3%，即「格靚咗但機率差咗」——κ 唔准升指紋
