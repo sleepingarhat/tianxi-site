@@ -23,6 +23,12 @@ type Tag = "數據" | "技術" | "前端" | "系統";
 const ENTRIES: { date: string; title: string; tags: Tag[]; body: string }[] = [
   {
     date: "2026-09-15 · HKT",
+    title: "凍結對帳表上線（只量唔改）：主尺四揀相交／頭四覆蓋，副尺位置命中，市場隱含只旁註",
+    tags: ["系統", "數據"],
+    body: "一、範圍：只讀已鎖 prediction_log（variant=baseline），禁回測、禁 live 重算、禁 α／τ refit、禁加特徵、禁換模型。未鎖賽日一律標「未鎖」唔入表；完場只 join 名次，凍結欄唔改。二、尺（src/lib/freeze-ledger.ts）：主尺＝四揀，逐場出四揀入圍數（predictedTop4 ∩ 實際頭四）、頭四覆蓋（相交／4）、四揀全中場數，賽日同開季累積；Top3 平均相交同任中只作旁註。副尺＝位置命中（四揀之中幾多匹入位置，位置格數按出賽匹數 ≥7 為 3、否則 2）。旁註＝獨贏頭馬命中、市場大熱命中、模型獨贏 logloss（凍結 p_win 按實際出賽匹重新歸一）、扣水隱含 logloss（最終獨贏賠率 1/odds 歸一，另記 overround）、平注模擬 EV（首選獨贏 $10 平注 ROI）。市場欄只係量市場有幾硬，永不回寫樹、永不寫入健康頁當 PASS。三、介面：GET /api/analyze/freeze-ledger?dates=…／?since=…，主站加 /api/public/freeze-ledger 代理同 /freeze-ledger 對帳頁（開季累積 → 逐賽日 → 逐場明細三層）。健康頁維持結構閘，唔收 EV。四、樣本：先 9-6、9-9、9-13 三個開季日；9-16 17:40 鎖完、完場後自動多一行。場數少一律出表、唔下「有邊／冇邊」結論。五、待辦未動：鎖後變更 overlay（card_delta）同少仗紅燈規則，等呢張表有數先決定開唔開。六、模型同版本指紋一分不動。",
+  },
+  {
+    date: "2026-09-15 · HKT",
     title: "鎖點改追已批規格：首場開跑前 90 分鐘鎖死全日四揀，唔再等賽果入庫",
     tags: ["系統", "技術"],
     body: "一、裁決：改程式去追已批規格，唔改規格遷就現行做法。原本落地係「該賽日第一場賽果入庫後才凍」，等於第 1 場開緊、第 2–10 場仲可以改口，比 T−1.5h 更差，亦同足球凍結口徑、同健康頁「初版唔入戰績」唔一致。二、實作（src/lib/lock-window.ts）：鎖點時間 = fixture（entries_upcoming.post_time）首場開跑時間 − 90 分鐘，純由賽程表驅動，唔睇賽果。getMeetingLockState 回傳 firstPostAt／lockAt／locked／minutesToLock；賽果入庫保留做更嚴後備（settled 一律鎖）。三、寫入守衛（analyze.ts predictionWritesAreFrozen）：未到鎖點＝可刷新（初版）；到鎖點且已有凍結快照＝拒絕一切預測寫入；到鎖點但仲未有快照＝准寫一次，確保該日一定有凍結底。writePredictionLog 同 writeRaceDayReportCache 一齊改用呢個守衛。鎖後只准 join 名次，唔再寫預測欄。四、讀取側（prediction-lock-db.ts dateIsLocked）：/today-picks、/top-picks、/picks-by-date、/explain 由鎖點一刻起讀 prediction_log 凍結快照，唔再係「有賽果才 overlay」，公開四擇再唔會跟 live LGB 漂移。五、觸發（wrangler.toml + index.ts）：加 */5 * * * * 輕量 tick，只跑鎖點檢查（heavy job 仍留原有時段）；到鎖點若未有快照就即時寫一次。新增 GET /api/analyze/lock-state 公開查鎖點狀態、POST /admin/api/lock-tick 手動觸發（已入權限清單，回歸測試通過）。六、健康頁：LOCK_POLICY.implemented 改為 T−1.5h、aligned 轉 true，public_freeze 由 WATCH 翻 PASS，並寫明「鎖後只准 join 名次」。七、主站：新增 /api/public/lock-state 代理，選馬頁初版章加寫實際鎖定時間（HH:MM · 首場開跑前 90 分鐘），未鎖仍然硬標「初版 · 未鎖」。八、算法線一分不動：唔改樹、唔換模型、臨場盤唔入 LGB、指紋唔郁。九、未做（工單其餘項）：凍結 p vs 扣水隱含 q 嘅 WIN／PLA logloss 同模擬 EV（研究倉）、card_delta 鎖後變更表結構、少仗紅燈規則寫入健康頁——排落一步，四選對帳指標（四揀入圍數／頭四覆蓋／位置命中）仍為主尺，獨贏只旁註。",
