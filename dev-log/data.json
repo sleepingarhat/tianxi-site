@@ -1,7 +1,47 @@
 {
-  "generatedHKT": "2026-09-15 04:52 HKT",
+  "generatedHKT": "2026-09-15 12:44 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-15",
+      "time": "12:44",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "dev-log: 首批綠燈對帳實數＋抽五場核對＋凍結完整性修正",
+      "scope": "site",
+      "sha": "e2265c7"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "12:44",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "roadmap: S26 產品線對帳——三格實數、抽五場核對、凍結修正",
+      "scope": "site",
+      "sha": "79df781"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "09:55",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-15T01:55Z · pool-a 2026-09-15T01:55Z via GHA matrix",
+      "scope": "database",
+      "sha": "a1a9802"
+    },
+    {
+      "date": "2026-09-15",
+      "time": "04:52",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "3575152"
+    },
     {
       "date": "2026-09-15",
       "time": "04:51",
@@ -654,16 +694,6 @@
     },
     {
       "date": "2026-09-12",
-      "time": "15:11",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-12T15:11",
-      "scope": "site",
-      "sha": "0f7654f"
-    },
-    {
-      "date": "2026-09-12",
       "time": "15:04",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -711,26 +741,6 @@
       "title": "[data][skip ci] 2026-09-11T20:09Z · [data][skip ci] pool-b 2026-09-11T20:09Z via GHA",
       "scope": "database",
       "sha": "12bc331"
-    },
-    {
-      "date": "2026-09-12",
-      "time": "02:55",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "c9e40ee"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "21:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "功能",
-      "title": "feat(pedigree): add HorsePedigree_Scraper + D1 sync (scripts/pedigree_to_d1_sql.py)",
-      "scope": "database",
-      "sha": "303d556"
     },
     {
       "date": "2026-09-11",
@@ -811,16 +821,6 @@
       "title": "feat(calibration): segmented per-odds-band Platt curves (probabilities only, ranking untouched)",
       "scope": "backend",
       "sha": "4d1c91f"
-    },
-    {
-      "date": "2026-09-11",
-      "time": "15:19",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-11T15:19",
-      "scope": "site",
-      "sha": "fa47a7f"
     },
     {
       "date": "2026-09-11",
