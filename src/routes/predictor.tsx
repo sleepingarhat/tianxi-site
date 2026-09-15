@@ -40,6 +40,26 @@ function PredictorPage() {
   }, []);
 
   const tp = useTodayPicks();
+
+  // 鎖點狀態：首場開跑前 90 分鐘鎖死全日四揀（只作展示，唔改任何預測數值）
+  const lockQ = useQuery({
+    queryKey: ["lockState"],
+    queryFn: async () => {
+      const res = await fetch("/api/public/lock-state");
+      if (!res.ok) return null;
+      return (await res.json()) as { lockAt?: string | null; locked?: boolean } | null;
+    },
+    refetchInterval: 120_000,
+  });
+  const lockClock = (() => {
+    const iso = lockQ.data?.lockAt;
+    if (!iso) return null;
+    const t = new Date(iso);
+    if (Number.isNaN(t.getTime())) return null;
+    const hk = new Date(t.getTime() + 8 * 3600_000).toISOString();
+    return `${hk.substring(11, 16)}`;
+  })();
+
   const races = tp.races;
   const race = races.find((r: any) => Number(r.raceNumber) === raceNo) || races[0];
   const start = cleanTime(race?.startTime);
@@ -132,7 +152,9 @@ function PredictorPage() {
           <span className="text-[10px] leading-snug text-ink-3">
             {tp.frozen
               ? "已鎖定四揀，同對賬、賽果頁用同一套，唔會再改。"
-              : "未鎖定：刷新有機會改四揀；只有鎖定後嘅最終版會入戰績。"}
+              : `未鎖定：刷新有機會改四揀；${
+                  lockClock ? `${lockClock}（首場開跑前 90 分鐘）自動鎖死全日` : "首場開跑前 90 分鐘自動鎖死全日"
+                }，只有鎖定後嘅最終版會入戰績。`}
           </span>
         </div>
 
