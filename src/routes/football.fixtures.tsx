@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCrests } from "@/lib/footballCrests";
 import { argmaxSide, haGap } from "@/lib/footballTeams";
+import { SECOND_LAYER, recommend } from "@/lib/footballSecondLayer";
 import { teamZh } from "@/lib/teamZh";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
@@ -203,6 +204,8 @@ function MatchCard({
 }) {
   const [open, setOpen] = useState(false);
   const top = argmaxSide(m.p);
+  // 第二層：由同一張凍結矩陣派生嘅推薦結算（唔改三格、唔改指紋）
+  const rec = useMemo(() => recommend(m.lambda, m.p), [m.lambda, m.p]);
   const derived = useMemo(() => scoreTop(m.lambda, m.p), [m.lambda, m.p]);
   // 只讀凍結值：有凍結波膽（S5 分區重加權後嘅矩陣）就用凍結嗰張，冇才由 λ 同機率派生
   const csAll = useMemo(() => {
@@ -300,6 +303,33 @@ function MatchCard({
       <p className="mt-1 tabnum font-mono-tx text-[9px] leading-tight text-ink-3">
         主客機率距離 {p1(haGap(m.p))} · 距離愈細和局機率愈高（獨立泊松本身已有），但預測字仍然取最高格
       </p>
+
+      {/* 第二層：推薦結算（唔改三格、唔改矩陣、唔升指紋） */}
+      <div className="mt-1.5 rounded-[8px] border border-deep/30 bg-paper-2 px-2.5 py-2">
+        <p className="flex items-center justify-between text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">
+          <span>第二層 · 推薦結算</span>
+          <span className="tabnum font-mono-tx normal-case tracking-normal">
+            τ={SECOND_LAYER.tau.toFixed(2)} δ={SECOND_LAYER.delta.toFixed(2)} · {rec.bucketZh}
+          </span>
+        </p>
+        <p className="mt-0.5 font-serif-tc text-[17px] font-bold leading-none text-deep">
+          {rec.label(teamZh(m.div, m.home), teamZh(m.div, m.away))}
+        </p>
+        <p className="tabnum mt-1 font-mono-tx text-[10px] text-ink-2">
+          該結算由同一張矩陣加總：贏 {p1(rec.leg.win)}
+          {rec.line !== 0 ? ` · 走水 ${p1(rec.leg.push)}` : ""} · 輸 {p1(rec.leg.lose)}
+        </p>
+        {rec.minus1 ? (
+          <p className="tabnum mt-1 font-mono-tx text-[9px] leading-relaxed text-ink-3">
+            旁註（未過閘、唔作推薦）：強隊 −1 隱含贏 {p1(rec.minus1.win)} · 走水 {p1(rec.minus1.push)}；
+            凍結 walk-forward 顯示 −1 逐季一致高估 4.3–9.8 個百分點，超出 2 點校準閘。
+          </p>
+        ) : null}
+        <p className="mt-1 text-[9px] leading-relaxed text-ink-3">
+          第二層只出一句結算，唔改上面三格、唔改矩陣、唔升指紋，盤口權重永遠 0。
+          「其餘」情況＝三格最高嗰邊（主或客）直勝，第二層唔會出和；戰績分兩欄，−1／+1 贏唔當 1X2 中。
+        </p>
+      </div>
 
 
 
