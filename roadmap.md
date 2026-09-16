@@ -476,3 +476,14 @@
 - [x] 上游 fixtures.csv 只滾動未來約一週（現時 30 場：9-15/16/17），未開賽 10 場係真數，週末五大場次等上游放出
 - [ ] 待辦：加 watchdog——若 upcoming.json last_success 超過 12 小時就開 issue（今日未做）
 - [x] 凍結預測、鎖定政策、版本指紋一分未動
+
+### S36 球員資料層（2026-09-16，只開資料層）
+- [x] 源探測：API-SPORTS 免費層 /players/squads 當季名單＋官方相片連結可讀（實測 63 名球員全有 photo）；/injuries 只包 2022–2024；當季 fixtures／lineups 唔包。apifootball.com 當季 get_events 帶 lineup 物件，但冇公布時間戳
+- [x] data/context/ schema_version 2：新增 players.jsonl、injuries.jsonl（只附加、永不 UPDATE、缺資料＝missing）
+- [x] 相片只存連結，唔重新託管；photo_license 未確認＝唔准上前台；無授權站（Forza 一類）唔抓唔直連
+- [x] 當季名單時間戳：ingest_lineups.py --source current 走 apifootball，只記 lineup_observed_ts（首次見到齊 11 人，保守上界），未公布寫 missing 繼續輪詢
+- [x] 合格閘：as_of／observed_ts 要早過開賽前 60 分鐘，否則 late／missing → Δλ=0 退回基準、紅燈可查唔入戰績
+- [x] 當季傷停免費層拿唔到 → missing 佔位，唔准用上季／平均／上仗頂替
+- [x] 配額紀律：每日滾動 ≤20 隊（100 請求／日上限），五大 96 隊約五日一輪
+- [ ] 未做：δ_名單／δ_密度估計、LGB 兩個 Poisson λ、球員前台頁、穩定分鐘與門將撲救採集器
+- [x] 凍結預測、每日凍結流程、版本指紋一分未動
