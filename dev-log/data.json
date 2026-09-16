@@ -1,7 +1,57 @@
 {
-  "generatedHKT": "2026-09-16 03:26 HKT",
+  "generatedHKT": "2026-09-16 13:12 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-16",
+      "time": "13:11",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "文檔",
+      "title": "docs: S35 每日採集停更修正記錄 (src/routes/dev-log.tsx)",
+      "scope": "site",
+      "sha": "08051ea"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "13:11",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "文檔",
+      "title": "docs: S35 每日採集停更修正記錄 (roadmap.md)",
+      "scope": "site",
+      "sha": "e882eb3"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "09:43",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-16T01:43Z · pool-a 2026-09-16T01:43Z via GHA matrix",
+      "scope": "database",
+      "sha": "8113577"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "04:32",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-15T20:32Z · [data][skip ci] pool-b 2026-09-15T20:32Z via GHA",
+      "scope": "database",
+      "sha": "3ce8395"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "03:26",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "e37ac2c"
+    },
     {
       "date": "2026-09-16",
       "time": "03:09",
@@ -514,36 +564,6 @@
     },
     {
       "date": "2026-09-15",
-      "time": "14:03",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S24／S27 路線圖更新",
-      "scope": "site",
-      "sha": "7b84cff"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "14:03",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "凍結帳代理：未有該月回 200 空響應，唔再 502",
-      "scope": "site",
-      "sha": "cec3aae"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "14:03",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "15ea25f"
-    },
-    {
-      "date": "2026-09-15",
       "time": "13:51",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -901,26 +921,6 @@
       "title": "[audit][skip ci] critical critical=1 warn=7 · 2026-09-12T07:30Z",
       "scope": "database",
       "sha": "74609ca"
-    },
-    {
-      "date": "2026-09-12",
-      "time": "15:04",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-12T07:04Z",
-      "scope": "database",
-      "sha": "167e5bf"
-    },
-    {
-      "date": "2026-09-12",
-      "time": "13:25",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: update speed-guide data (2026-09-12T05:25Z)",
-      "scope": "database",
-      "sha": "6f4534d"
     },
     {
       "date": "2026-09-11",
