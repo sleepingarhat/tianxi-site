@@ -23,6 +23,12 @@ type Tag = "數據" | "技術" | "前端" | "系統";
 const ENTRIES: { date: string; title: string; tags: Tag[]; body: string }[] = [
   {
     date: "2026-09-16 · HKT",
+    title: "S36 球員資料層落地（照片＋當季名單＋傷停）：只記事實，唔生成 δ、唔碰凍結",
+    tags: ["數據", "技術"],
+    body: "一、範圍：只開資料層，唔開估 δ、唔開 LGB λ、唔改凍結預測同指紋。二、源探測結論（服務端內部端點，永不回傳密鑰）：API-SPORTS 免費層 /players/squads 當季名單可讀（實測曼聯＋阿仙奴 63 名球員全部有官方相片連結）、/injuries 只包 2022–2024 季（當季一律回 plan 錯誤）、當季 fixtures／lineups 亦唔包；apifootball.com 當季可用，get_events 帶 lineup 物件（未公布時 starting_lineups 為空陣），但一律冇「公布時間戳」。三、表（data/context/，schema_version 升到 2，仍然只附加、永不 UPDATE）：新增 players.jsonl（player_id／名／中文名位／球隊／號碼／位置／國籍／出生日／身高體重／photo_url／photo_license／as_of）同 injuries.jsonl（player_id／名／球隊／原因／類型／預計復出／as_of／season）。四、相片授權：photo_url 只存連結，唔下載、唔重新託管；photo_license 預設 api-sports:media-link-unverified＝授權未確認，硬規則係未確認唔准上前台。要公開展示先逐源確認（API-SPORTS 條款／Wikimedia Commons／官方媒體授權）。Forza Football 一類冇開放授權嘅站，唔抓、唔直連圖片。五、合格閘：as_of 要早過開賽前 60 分鐘（鎖定線）先 eligible，否則 status=late；缺資料 status=missing、eligible=false，Δλ=0 退回基準、場次標紅燈。當季傷停一律 missing 佔位，唔准用上季／平均／上仗值頂替。六、當季名單時間戳：ingest_lineups.py 加 --source current 走 apifootball，只記 lineup_observed_ts＝我哋首次見到先發齊 11 人（保守上界），未公布寫 missing 並繼續輪詢；無時間戳＝Δλ=0，避免「賽後先有名單」洩漏。七、配額紀律：免費層 100 請求／日、每隊一請求，每日只跑滾動一批（≤20 隊），五大 96 隊約五日一輪；抓唔到寫 missing，唔用舊值假裝新鮮。八、防護實測：寫入器仍然攔凍結路徑（data/predictions／models／snapshots）同凍結／δ 欄（p、lambda、cs、fingerprint、delta_h…）。九、已推資料倉庫：context_write.py、ingest_lineups.py、ingest_players.py、ingest_injuries.py、docs/context-data-schema.md。十、未做：δ_名單／δ_密度估計、LGB 兩個 λ、球員前台頁——齊料同過閘之前一律唔碰凍結。",
+  },
+  {
+    date: "2026-09-16 · HKT",
     title: "足球賽程停更修好：每日採集自 9-15 起連續失敗，凍結帳寫入撞名 datetime",
     tags: ["數據", "技術"],
     body: "一、症狀：站上賽程停留喺 9-14 23:53 嗰批（190 場，最遲開賽 9-14 19:45 UTC），9-15 之後嘅場次全部唔見。二、真因：scripts/log_predictions.py 喺 late_ingest 判斷嗰個 try 內部再 from datetime import datetime, timezone，令函式內 datetime 變成局部變數，第 59 行 datetime.now() 一開始就 UnboundLocalError。該步一 fail，之後嘅「入倉」step 就冇跑——即係賽程、賽果、S6 凍結預測其實每次都成功抓到，只係從未 commit。9-15 08:41／14:20／19:00／23:31 連續四次都係同一個死法。三、修正：刪掉個局部 import（頂層已 import），推上資料倉庫並手動重跑 football daily ingest，今次 success，data/predictions/upcoming.json 已更新。四、ClubElo 502 唔係主因：該步本身就係 continue-on-error，符合「對帳層掛咗唔准擋凍結」規則，只會開 watchdog issue。五、現況：上游 football-data.co.uk fixtures.csv 本身只滾動出未來約一週（現時 30 場：9-15 二十場、9-16 七場、9-17 三場，其中西甲 9 場、聯賽盃 12 場），所以未開賽 10 場係真實數字，唔係壞掉；週末五大聯賽場次要等上游放出先入庫。六、凍結預測、鎖定政策同版本指紋一分未動，今次只係修採集寫入。",
