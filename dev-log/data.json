@@ -1,7 +1,37 @@
 {
-  "generatedHKT": "2026-09-16 19:03 HKT",
+  "generatedHKT": "2026-09-17 03:18 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-17",
+      "time": "03:01",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-16T19:01Z · [data][skip ci] race-day 2026-09-16T19:01Z via GHA",
+      "scope": "database",
+      "sha": "9465db7"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "23:50",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "維護",
+      "title": "chore(weather): sync 2026-09-16 track weather snapshots (184 rows)",
+      "scope": "database",
+      "sha": "a206e9e"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "23:50",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "a44b86b"
+    },
     {
       "date": "2026-09-16",
       "time": "19:03",
@@ -51,6 +81,16 @@
       "title": "S38 第二層推薦結算",
       "scope": "site",
       "sha": "2250fda"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "19:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "0ec6c02"
     },
     {
       "date": "2026-09-16",
@@ -331,16 +371,6 @@
       "title": "[data][skip ci] 2026-09-15T16:18Z · [data][skip ci] entries 2026-09-15T16:18Z via GHA",
       "scope": "database",
       "sha": "199c673"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:34",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S32 freeze ledger page + public proxy (measure only)",
-      "scope": "site",
-      "sha": "5b0c0f4"
     },
     {
       "date": "2026-09-15",
@@ -884,26 +914,6 @@
     },
     {
       "date": "2026-09-13",
-      "time": "08:22",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-13T00:22Z · pool-a 2026-09-13T00:22Z via GHA matrix",
-      "scope": "database",
-      "sha": "5f3df57"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "01:47",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-12T17:47Z · [data][skip ci] race-day 2026-09-12T17:47Z via GHA",
-      "scope": "database",
-      "sha": "12c2b67"
-    },
-    {
-      "date": "2026-09-13",
       "time": "01:19",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -911,16 +921,6 @@
       "title": "data: update Mark Six results (2026-09-12T17:19Z)",
       "scope": "marksix",
       "sha": "2fa7977"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "00:24",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-12T16:24Z · [data][skip ci] pedigree 2026-09-12T16:24Z via GHA",
-      "scope": "database",
-      "sha": "62d2450"
     },
     {
       "date": "2026-09-11",
