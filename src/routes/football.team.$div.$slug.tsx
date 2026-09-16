@@ -18,7 +18,9 @@ import {
   Td,
 } from "@/components/tx/ui";
 import { useCrests } from "@/lib/footballCrests";
-import { LEAGUE_ZH, teamSlug } from "@/lib/footballTeams";
+import { argmaxSide, LEAGUE_ZH, teamSlug } from "@/lib/footballTeams";
+
+const RES_IDX: Record<string, number> = { home: 0, H: 0, draw: 1, D: 1, away: 2, A: 2 };
 import { teamZh } from "@/lib/teamZh";
 import type { LeaguePayload, LeagueTeam } from "@/lib/footballTeams";
 
@@ -299,11 +301,20 @@ function TeamPage() {
                         凍結機率 主 {p1(p[0])} · 和 {p1(p[1])} · 客 {p1(p[2])}
                         {m.lambda ? ` · 預期入球 ${m.lambda[0].toFixed(2)}–${m.lambda[1].toFixed(2)}` : ""}
                       </p>
+                      <p className="tabnum mt-0.5 font-mono-tx text-[10px] text-ink-3">
+                        預測 {["主勝", "和局", "客勝"][argmaxSide(p)]}（{p1(p[argmaxSide(p)] ?? 0)}）
+                        {settled ? (argmaxSide(p) === RES_IDX[m.result?.ftr ?? ""] ? " · 中" : " · 唔中") : ""}
+                      </p>
                       {top ? (
-                        <p className="tabnum mt-0.5 font-mono-tx text-[10px] text-ink-3">
-                          最可能波膽 {top.score}（{p1(top.p)}）
-                          {hit === null ? "" : hit ? " · 眾數中" : " · 眾數唔中"}
-                        </p>
+                        <details className="mt-0.5">
+                          <summary className="cursor-pointer font-mono-tx text-[9px] text-ink-3">
+                            波膽格（診斷）
+                          </summary>
+                          <p className="tabnum font-mono-tx text-[10px] text-ink-3">
+                            最高格 {top.score}（{p1(top.p)}）
+                            {hit === null ? "" : hit ? " · 眾數中" : " · 眾數唔中"}
+                          </p>
+                        </details>
                       ) : null}
                       {m.fingerprint ? (
                         <p className="mt-0.5 font-mono-tx text-[9px] text-ink-3">指紋 {m.fingerprint}</p>
