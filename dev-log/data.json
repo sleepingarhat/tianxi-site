@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-16 17:03 HKT",
+  "generatedHKT": "2026-09-16 17:13 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-16",
+      "time": "17:13",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S26b 和局預測回測日誌同待辦",
+      "scope": "site",
+      "sha": "d4d7152"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "17:13",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S26b 和局預測回測日誌同待辦",
+      "scope": "site",
+      "sha": "b32c021"
+    },
     {
       "date": "2026-09-16",
       "time": "17:03",
@@ -61,6 +81,16 @@
       "title": "S37 球隊頁凍結列改報三格 argmax",
       "scope": "site",
       "sha": "eeadfe3"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "17:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "2de55d7"
     },
     {
       "date": "2026-09-16",
@@ -451,36 +481,6 @@
       "title": "[manifest][skip ci] regenerate data/index.json",
       "scope": "database",
       "sha": "6c396ee"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "17:18",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S29 context data layer: src/lib/use-today-picks.ts",
-      "scope": "site",
-      "sha": "5cb49cb"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "17:18",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S29 context data layer: src/routes/predictor.tsx",
-      "scope": "site",
-      "sha": "8b46840"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "17:18",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S29 context data layer: src/routes/dev-log.tsx",
-      "scope": "site",
-      "sha": "84fc4c6"
     },
     {
       "date": "2026-09-15",
