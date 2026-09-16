@@ -23,6 +23,12 @@ type Tag = "數據" | "技術" | "前端" | "系統";
 const ENTRIES: { date: string; title: string; tags: Tag[]; body: string }[] = [
   {
     date: "2026-09-16 · HKT",
+    title: "S37 對外只報主／和／客：預測字改 argmax 三格，波膽收埋做診斷；近盤判和量完唔過閘",
+    tags: ["前端", "數據"],
+    body: "一、產品口徑：賽前預測卡、逐場凍結對帳卡、球隊頁凍結列一律只報三格——P_H＝Σ M(h>a)、P_D＝Σ M(h=a)、P_A＝Σ M(h<a)，全部由同一張凍結矩陣加總，唔另訓 1X2 分類器（避免同舊頁、舊凍結分叉，亦唔想用校準同 RPS 去換偶發和局第一）。二、預測字改為 argmax(P_H,P_D,P_A)，唔再用比分眾數；卡面舊嘅 5% 近盤判和展示閘（leanSide）唔再用喺卡面。三、波膽移入摺疊區只作診斷（最高格、頭八格），對帳同訓練仍然一律用全格；單格命中率永不入損失函數、永不回寫調參。四、S26 研究量表（研究倉，只讀已鎖凍結帳 190 場，禁回測、禁 live 重算）：量 |P_H−P_A| < 0.03／0.05／0.08／0.12 分桶嘅實際和局率，三閘＝(a) 實際和 > 實際主勝、(b) 實際和 > 該批平均 P_D、(c) 硬出和命中率 > argmax 命中率。五、結果：全部唔過。gap<0.03（14 場）和 21.4% 對主勝 42.9%、平均 P_D 27.0%；gap<0.05（20 場）和 25.0% 對主勝 40.0%、平均 P_D 26.9%、argmax 命中 35.0% 對硬出和 25.0%；gap<0.08（38 場）和 26.3% 對客勝 39.5%；gap<0.12（73 場）和 27.4% 對客勝 37.0%。近盤場和局機率確實高過一面倒（P_D 平均由 25.9% 升到 27.2%），但實際賽果仍然係一面倒嘅贏方多過和，硬出和只會用命中率換 RPS。六、裁決：「|P_H−P_A| < τ 就出和」唔入產品、唔改指紋、唔改矩陣；樣本累積到 ≥200 場近盤場再重量。結果 data/research/s26/tau_draw_result.json、腳本 scripts/research/tau_draw_s26.py。七、凍結矩陣、每日凍結流程、版本指紋一分未動；射門／撲救／球員層繼續唔入凍結。",
+  },
+  {
+    date: "2026-09-16 · HKT",
     title: "S36 球員資料層落地（照片＋當季名單＋傷停）：只記事實，唔生成 δ、唔碰凍結",
     tags: ["數據", "技術"],
     body: "一、範圍：只開資料層，唔開估 δ、唔開 LGB λ、唔改凍結預測同指紋。二、源探測結論（服務端內部端點，永不回傳密鑰）：API-SPORTS 免費層 /players/squads 當季名單可讀（實測曼聯＋阿仙奴 63 名球員全部有官方相片連結）、/injuries 只包 2022–2024 季（當季一律回 plan 錯誤）、當季 fixtures／lineups 亦唔包；apifootball.com 當季可用，get_events 帶 lineup 物件（未公布時 starting_lineups 為空陣），但一律冇「公布時間戳」。三、表（data/context/，schema_version 升到 2，仍然只附加、永不 UPDATE）：新增 players.jsonl（player_id／名／中文名位／球隊／號碼／位置／國籍／出生日／身高體重／photo_url／photo_license／as_of）同 injuries.jsonl（player_id／名／球隊／原因／類型／預計復出／as_of／season）。四、相片授權：photo_url 只存連結，唔下載、唔重新託管；photo_license 預設 api-sports:media-link-unverified＝授權未確認，硬規則係未確認唔准上前台。要公開展示先逐源確認（API-SPORTS 條款／Wikimedia Commons／官方媒體授權）。Forza Football 一類冇開放授權嘅站，唔抓、唔直連圖片。五、合格閘：as_of 要早過開賽前 60 分鐘（鎖定線）先 eligible，否則 status=late；缺資料 status=missing、eligible=false，Δλ=0 退回基準、場次標紅燈。當季傷停一律 missing 佔位，唔准用上季／平均／上仗值頂替。六、當季名單時間戳：ingest_lineups.py 加 --source current 走 apifootball，只記 lineup_observed_ts＝我哋首次見到先發齊 11 人（保守上界），未公布寫 missing 並繼續輪詢；無時間戳＝Δλ=0，避免「賽後先有名單」洩漏。七、配額紀律：免費層 100 請求／日、每隊一請求，每日只跑滾動一批（≤20 隊），五大 96 隊約五日一輪；抓唔到寫 missing，唔用舊值假裝新鮮。八、防護實測：寫入器仍然攔凍結路徑（data/predictions／models／snapshots）同凍結／δ 欄（p、lambda、cs、fingerprint、delta_h…）。九、已推資料倉庫：context_write.py、ingest_lineups.py、ingest_players.py、ingest_injuries.py、docs/context-data-schema.md。十、未做：δ_名單／δ_密度估計、LGB 兩個 λ、球員前台頁——齊料同過閘之前一律唔碰凍結。",
