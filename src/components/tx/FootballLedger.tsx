@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 
 import { Card, Empty, ErrorNote, Loading, Pill, Seg, Stat, StatGrid } from "@/components/tx/ui";
-import { leanSide } from "@/lib/footballTeams";
+import { argmaxSide } from "@/lib/footballTeams";
 import { teamZh } from "@/lib/teamZh";
 
 /** 比分字串 → 賽果分區 */
@@ -112,7 +112,7 @@ function MatchCard({ r }: { r: LogRec }) {
   const green = isGreen(r);
   const inLedger = green && BIG5.includes(r.div);
   const actualIdx = res ? ({ home: 0, draw: 1, away: 2 }[res.ftr] ?? -1) : -1;
-  const leanIdx = p.length === 3 ? leanSide(p) : -1;
+  const predIdx = p.length === 3 ? argmaxSide(p) : -1;
   const actualScore = res ? `${res.ft_h}-${res.ft_a}` : "";
   const top8 = r.cs?.top8 ?? [];
   const hitCell = top8.find((c) => c.score === actualScore);
@@ -167,25 +167,36 @@ function MatchCard({ r }: { r: LogRec }) {
               );
             })}
           </div>
-          {topCell ? (
+          {predIdx >= 0 ? (
             <div className="mt-2 rounded-[7px] border border-hairline bg-paper px-2 py-1.5">
               <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">
-                最可能比分（全矩陣最高格）
+                對外預測（三格最高者）
               </p>
-              <p className="tabnum mt-0.5 font-mono-tx text-[22px] font-bold leading-none text-deep">
-                {topCell.score.replace("-", ":")}
-                <span className="ml-1.5 text-[10px] font-normal text-ink-2">{pc(topCell.p, 1)}</span>
+              <p className="mt-0.5 font-serif-tc text-[20px] font-bold leading-none text-deep">
+                {RES_ZH[["home", "draw", "away"][predIdx]!]}
+                <span className="tabnum ml-1.5 font-mono-tx text-[10px] font-normal text-ink-2">
+                  {pc(p[predIdx] ?? 0, 1)}
+                </span>
                 {res ? (
-                  <span className={`ml-1.5 text-[11px] ${modeHit ? "text-win" : "text-ink-3"}`}>
-                    {modeHit ? "● 眾數中" : "○ 眾數唔中"}
+                  <span className={`ml-1.5 text-[11px] ${predIdx === actualIdx ? "text-win" : "text-ink-3"}`}>
+                    {predIdx === actualIdx ? "● 中" : "○ 唔中"}
                   </span>
                 ) : null}
               </p>
-              {top8.length > 1 ? (
+              <p className="tabnum mt-1 font-mono-tx text-[9px] text-ink-3">
+                主客機率距離 {pc(Math.abs((p[0] ?? 0) - (p[2] ?? 0)), 1)}
+                {exp.length === 2 ? `｜預期入球 ${exp[0]!.toFixed(2)}–${exp[1]!.toFixed(2)}` : ""}
+              </p>
+              {top8.length > 0 ? (
                 <details className="mt-1.5">
                   <summary className="cursor-pointer text-[9px] font-bold text-ink-3">
-                    展開頭八格（對帳與訓練一律用全格）
+                    展開波膽格（只作診斷，對帳與訓練一律用全格）
                   </summary>
+                  <p className="tabnum mt-1 font-mono-tx text-[10px] text-ink-2">
+                    最高格 {topCell ? topCell.score.replace("-", ":") : "—"}
+                    {topCell ? `（${pc(topCell.p, 1)}）` : ""}
+                    {res ? (modeHit ? " · 眾數中" : " · 眾數唔中") : ""}
+                  </p>
                   <ul className="mt-1 grid grid-cols-4 gap-1">
                     {top8.map((c) => (
                       <li
@@ -206,14 +217,10 @@ function MatchCard({ r }: { r: LogRec }) {
                 </details>
               ) : null}
               <p className="mt-1.5 text-[9px] leading-relaxed text-ink-3">
-                大字係全矩陣機率最高一格。單格通常只 10–20%，係「最不意外」嘅比分，唔係「估中」；對帳同訓練一律用全格。
+                主／和／客係同一張凍結矩陣加總（P_H、P_D、P_A），預測字取最高者；波膽只係同一張矩陣嘅單格，收起唔對外報。
               </p>
             </div>
           ) : null}
-          <p className="tabnum mt-1.5 font-mono-tx text-[9px] text-ink-3">
-            傾向 {leanIdx >= 0 ? RES_ZH[["home", "draw", "away"][leanIdx]!] : "—"}
-            {exp.length === 2 ? `｜預期比分 ${exp[0]!.toFixed(2)}–${exp[1]!.toFixed(2)}` : ""}
-          </p>
           <p className="mt-1 break-all font-mono-tx text-[9px] text-ink-3">
             指紋 {r.fingerprint ?? "—"}｜軌 {r.track ?? "—"}
           </p>
