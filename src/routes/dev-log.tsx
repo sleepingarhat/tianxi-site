@@ -22,6 +22,12 @@ type Tag = "數據" | "技術" | "前端" | "系統";
 
 const ENTRIES: { date: string; title: string; tags: Tag[]; body: string }[] = [
   {
+    date: "2026-09-16 · HKT",
+    title: "足球賽程停更修好：每日採集自 9-15 起連續失敗，凍結帳寫入撞名 datetime",
+    tags: ["數據", "技術"],
+    body: "一、症狀：站上賽程停留喺 9-14 23:53 嗰批（190 場，最遲開賽 9-14 19:45 UTC），9-15 之後嘅場次全部唔見。二、真因：scripts/log_predictions.py 喺 late_ingest 判斷嗰個 try 內部再 from datetime import datetime, timezone，令函式內 datetime 變成局部變數，第 59 行 datetime.now() 一開始就 UnboundLocalError。該步一 fail，之後嘅「入倉」step 就冇跑——即係賽程、賽果、S6 凍結預測其實每次都成功抓到，只係從未 commit。9-15 08:41／14:20／19:00／23:31 連續四次都係同一個死法。三、修正：刪掉個局部 import（頂層已 import），推上資料倉庫並手動重跑 football daily ingest，今次 success，data/predictions/upcoming.json 已更新。四、ClubElo 502 唔係主因：該步本身就係 continue-on-error，符合「對帳層掛咗唔准擋凍結」規則，只會開 watchdog issue。五、現況：上游 football-data.co.uk fixtures.csv 本身只滾動出未來約一週（現時 30 場：9-15 二十場、9-16 七場、9-17 三場，其中西甲 9 場、聯賽盃 12 場），所以未開賽 10 場係真實數字，唔係壞掉；週末五大聯賽場次要等上游放出先入庫。六、凍結預測、鎖定政策同版本指紋一分未動，今次只係修採集寫入。",
+  },
+  {
     date: "2026-09-15 · HKT",
     title: "凍結對帳表上線（只量唔改）：主尺四揀相交／頭四覆蓋，副尺位置命中，市場隱含只旁註",
     tags: ["系統", "數據"],
