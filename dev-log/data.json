@@ -1,7 +1,107 @@
 {
-  "generatedHKT": "2026-09-16 13:49 HKT",
+  "generatedHKT": "2026-09-16 17:03 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-16",
+      "time": "17:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S37 對外只報主／和／客（argmax 三格，波膽收埋）",
+      "scope": "site",
+      "sha": "aa5d8ee"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "17:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S37 對外只報主／和／客（argmax 三格，波膽收埋）",
+      "scope": "site",
+      "sha": "4fd4513"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "17:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S37 對外只報主／和／客（argmax 三格，波膽收埋）",
+      "scope": "site",
+      "sha": "5162091"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "17:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S37 對外只報主／和／客（argmax 三格，波膽收埋）",
+      "scope": "site",
+      "sha": "cf7cda1"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "17:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S37 對外只報主／和／客（argmax 三格，波膽收埋）",
+      "scope": "site",
+      "sha": "ef1def4"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "17:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S37 球隊頁凍結列改報三格 argmax",
+      "scope": "site",
+      "sha": "eeadfe3"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "16:08",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] critical critical=1 warn=21 · 2026-09-16T08:08Z",
+      "scope": "database",
+      "sha": "b110a42"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "15:43",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-16T15:43",
+      "scope": "site",
+      "sha": "f4aa77d"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "15:33",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-16T07:33Z",
+      "scope": "database",
+      "sha": "cc30dd8"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "15:32",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] engine health 2026-09-16T15:32",
+      "scope": "backend",
+      "sha": "f3d3704"
+    },
     {
       "date": "2026-09-16",
       "time": "13:49",
@@ -31,6 +131,16 @@
       "title": "S36 球員資料層日誌／路線圖／源探測端點",
       "scope": "site",
       "sha": "63b72e2"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "13:49",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "8da1e7b"
     },
     {
       "date": "2026-09-16",
@@ -348,16 +458,6 @@
       "areaKey": "web",
       "area": "前端",
       "typeLabel": "提交",
-      "title": "S29 context data layer: src/routes/api/public/engine-health.ts",
-      "scope": "site",
-      "sha": "70e31d3"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "17:18",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
       "title": "S29 context data layer: src/lib/use-today-picks.ts",
       "scope": "site",
       "sha": "5cb49cb"
@@ -464,36 +564,6 @@
     },
     {
       "date": "2026-09-15",
-      "time": "16:59",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "c1d0604"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "16:58",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S29 context data layer: roadmap.md",
-      "scope": "site",
-      "sha": "cf96301"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "16:58",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S29 context data layer: src/routes/dev-log.tsx",
-      "scope": "site",
-      "sha": "8df0a86"
-    },
-    {
-      "date": "2026-09-15",
       "time": "16:14",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -501,16 +571,6 @@
       "title": "[audit][skip ci] critical critical=1 warn=6 · 2026-09-15T08:14Z",
       "scope": "database",
       "sha": "4ba822a"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "15:48",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-15T15:48",
-      "scope": "site",
-      "sha": "7970163"
     },
     {
       "date": "2026-09-15",
@@ -531,36 +591,6 @@
       "title": "[sanity][skip ci] engine health 2026-09-15T15:33",
       "scope": "backend",
       "sha": "cc968b0"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "15:28",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S28 中文隊名對照（96 隊港式馬會譯名）＋日誌路線圖同步",
-      "scope": "site",
-      "sha": "573259b"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "15:28",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S28 中文隊名對照（96 隊港式馬會譯名）＋日誌路線圖同步",
-      "scope": "site",
-      "sha": "ebf07a3"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "15:28",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S28 中文隊名對照（96 隊港式馬會譯名）＋日誌路線圖同步",
-      "scope": "site",
-      "sha": "82bedd4"
     },
     {
       "date": "2026-09-15",
@@ -840,16 +870,6 @@
       "typeLabel": "修正",
       "title": "fix(ci): unblock deploy (classify new analyze reads), fix sanity unbound var, add automation watchdog with coverage alarm",
       "scope": "backend",
-      "sha": "e27f450"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "12:47",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(ci): unblock deploy (classify new analyze reads), fix sanity unbound var, add automation watchdog with coverage alarm",
-      "scope": "backend",
       "sha": "55e1338"
     },
     {
@@ -901,26 +921,6 @@
       "title": "[data][skip ci] 2026-09-12T15:01Z · [data][skip ci] entries 2026-09-12T15:01Z via GHA",
       "scope": "database",
       "sha": "3f4c636"
-    },
-    {
-      "date": "2026-09-12",
-      "time": "16:38",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "b25b993"
-    },
-    {
-      "date": "2026-09-12",
-      "time": "15:30",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] critical critical=1 warn=7 · 2026-09-12T07:30Z",
-      "scope": "database",
-      "sha": "74609ca"
     },
     {
       "date": "2026-09-11",
