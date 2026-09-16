@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 
 import { Card, Empty, ErrorNote, Loading, Pill, Seg, Stat, StatGrid } from "@/components/tx/ui";
+import { SECOND_LAYER, legOutcome, recommend } from "@/lib/footballSecondLayer";
 import { argmaxSide } from "@/lib/footballTeams";
 import { teamZh } from "@/lib/teamZh";
 
@@ -113,6 +114,13 @@ function MatchCard({ r }: { r: LogRec }) {
   const inLedger = green && BIG5.includes(r.div);
   const actualIdx = res ? ({ home: 0, draw: 1, away: 2 }[res.ftr] ?? -1) : -1;
   const predIdx = p.length === 3 ? argmaxSide(p) : -1;
+  // 第二層推薦結算：同一張凍結矩陣（λ + 三格）派生，獨立一欄對帳
+  const lam = r.lambda ?? [];
+  const rec =
+    p.length === 3 && lam.length === 2
+      ? recommend([lam[0]!, lam[1]!], [p[0]!, p[1]!, p[2]!])
+      : null;
+  const legRes = rec && res ? legOutcome(res.ft_h, res.ft_a, rec.sideHome, rec.line) : null;
   const actualScore = res ? `${res.ft_h}-${res.ft_a}` : "";
   const top8 = r.cs?.top8 ?? [];
   const hitCell = top8.find((c) => c.score === actualScore);
@@ -219,6 +227,33 @@ function MatchCard({ r }: { r: LogRec }) {
               <p className="mt-1.5 text-[9px] leading-relaxed text-ink-3">
                 主／和／客係同一張凍結矩陣加總（P_H、P_D、P_A），預測字取最高者；波膽只係同一張矩陣嘅單格，收起唔對外報。
               </p>
+              {rec ? (
+                <div className="mt-1.5 rounded-[6px] border border-deep/25 bg-paper-2 px-2 py-1.5">
+                  <p className="flex items-center justify-between text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">
+                    <span>第二層 · 推薦結算</span>
+                    <span className="tabnum font-mono-tx normal-case tracking-normal">{rec.bucketZh}</span>
+                  </p>
+                  <p className="mt-0.5 font-serif-tc text-[13px] font-bold leading-none text-deep">
+                    {rec.label(teamZh(r.div, r.home), teamZh(r.div, r.away))}
+                    {legRes ? (
+                      <span
+                        className={`ml-1.5 font-mono-tx text-[10px] font-normal ${
+                          legRes === "win" ? "text-win" : legRes === "push" ? "text-ink-2" : "text-ink-3"
+                        }`}
+                      >
+                        {legRes === "win" ? "● 贏" : legRes === "push" ? "◐ 走水" : "○ 輸"}
+                      </span>
+                    ) : null}
+                  </p>
+                  <p className="tabnum mt-1 font-mono-tx text-[9px] text-ink-3">
+                    矩陣加總：贏 {pc(rec.leg.win, 1)}
+                    {rec.line !== 0 ? ` · 走水 ${pc(rec.leg.push, 1)}` : ""} · 輸 {pc(rec.leg.lose, 1)}
+                  </p>
+                  <p className="mt-1 text-[9px] leading-relaxed text-ink-3">
+                    第二層獨立一欄計數：−1／+1 贏唔當 1X2 中，1X2 中亦唔當第二層贏。第二層唔會出和。
+                  </p>
+                </div>
+              ) : null}
             </div>
           ) : null}
           <p className="mt-1 break-all font-mono-tx text-[9px] text-ink-3">
@@ -333,6 +368,31 @@ export function FootballLedger() {
       (ph === "all" || phaseOf(r) === ph),
   );
 
+  // 第二層戰績：只讀綠燈已鎖、五大、已完場嘅凍結列，獨立一欄計，唔混入 1X2 命中
+  const secondLayer = useMemo(() => {
+    let n = 0;
+    let win = 0;
+    let push = 0;
+    let lose = 0;
+    let predWin = 0;
+    const cov = [0, 0, 0];
+    for (const r of all) {
+      const pr = r.p ?? [];
+      const lam = r.lambda ?? [];
+      if (!r.result || pr.length !== 3 || lam.length !== 2) continue;
+      if (!isGreen(r) || !BIG5.includes(r.div)) continue;
+      const rc = recommend([lam[0]!, lam[1]!], [pr[0]!, pr[1]!, pr[2]!]);
+      const o = legOutcome(r.result.ft_h, r.result.ft_a, rc.sideHome, rc.line);
+      n += 1;
+      cov[rc.bucket - 1] = (cov[rc.bucket - 1] ?? 0) + 1;
+      predWin += rc.leg.win;
+      if (o === "win") win += 1;
+      else if (o === "push") push += 1;
+      else lose += 1;
+    }
+    return { n, win, push, lose, cov, predWin: n ? predWin / n : 0, actWin: n ? win / n : 0 };
+  }, [all]);
+
   const green = hit.data?.green ?? null;
   const diag = hit.data?.diagnostic_big5_all_lights ?? null;
 
@@ -364,6 +424,42 @@ export function FootballLedger() {
                 sub={green?.fingerprints?.length ? `指紋 ${green.fingerprints.join("、")}` : "指紋：待綠燈"}
               />
             </StatGrid>
+            <div className="mt-2 rounded-[8px] border border-deep/25 bg-paper px-2.5 py-2">
+              <p className="flex items-center justify-between text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">
+                <span>第二層 · 推薦結算戰績（獨立一欄）</span>
+                <span className="tabnum font-mono-tx normal-case tracking-normal">
+                  τ={SECOND_LAYER.tau.toFixed(2)} δ={SECOND_LAYER.delta.toFixed(2)}
+                </span>
+              </p>
+              <div className="mt-1.5 grid gap-1 font-mono-tx text-[10px] sm:grid-cols-2">
+                <span className="text-ink-3">
+                  贏 <b className="tabnum text-ink">{secondLayer.n ? secondLayer.win : "—"}</b>／走水{" "}
+                  <b className="tabnum text-ink">{secondLayer.n ? secondLayer.push : "—"}</b>／輸{" "}
+                  <b className="tabnum text-ink">{secondLayer.n ? secondLayer.lose : "—"}</b>
+                </span>
+                <span className="text-ink-3">
+                  結算樣本 <b className="tabnum text-ink">{secondLayer.n}</b> 場（綠燈已鎖 · 五大）
+                </span>
+                <span className="text-ink-3">
+                  矩陣隱含贏率{" "}
+                  <b className="tabnum text-ink">{secondLayer.n ? pc(secondLayer.predWin, 1) : "—"}</b>
+                </span>
+                <span className="text-ink-3">
+                  實際贏率 <b className="tabnum text-ink">{secondLayer.n ? pc(secondLayer.actWin, 1) : "—"}</b>
+                </span>
+                <span className="text-ink-3">
+                  覆蓋 一面倒 <b className="tabnum text-ink">{secondLayer.cov[0]}</b>／近盤{" "}
+                  <b className="tabnum text-ink">{secondLayer.cov[1]}</b>／其餘{" "}
+                  <b className="tabnum text-ink">{secondLayer.cov[2]}</b>
+                </span>
+              </div>
+              <p className="mt-1 text-[9px] leading-relaxed text-ink-3">
+                第二層只出一句結算，唔改上面三格、唔改矩陣、唔升指紋，盤口權重永遠 0。主指標係結算校準（隱含贏率
+                對實際贏率），副指標係三類覆蓋率。−1／+1 贏唔當 1X2 中。τ、δ 由凍結 walk-forward 揀（
+                {SECOND_LAYER.gate.sample.toLocaleString()} 場，{SECOND_LAYER.gate.evalFrom} 季起），一季只准改一次；
+                「強隊 −1」逐季一致高估 4.3–9.8 個百分點、超出 2 點校準閘，所以一面倒場暫時退回直勝，−1 只作旁註。
+              </p>
+            </div>
             <details className="mt-2 rounded-[8px] border border-hairline bg-paper px-2.5 py-2">
               <summary className="cursor-pointer text-[10px] font-bold text-ink-2">
                 波膽對帳（眾數命中率＋頭八格覆蓋＋實際格 log-loss，摺疊）
