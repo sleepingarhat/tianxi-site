@@ -467,3 +467,12 @@
 - [ ] 場次 Δλ 倉：δ_名單（官方名單公布先寫）、δ_密度、Δλ_市場（只做殘差診斷）；缺資料一律 Δλ = 0 退回基準
 - [ ] 球員層資料前置：分鐘、賽前 projected xG、撲救、公布名單時間戳；未齊唔碰凍結
 - [ ] 禁止列不變：殘差、ρ(λ)、逐聯賽 μ、ξ、κ、Rue–Salvesen γ、疊加、單格命中訓練、賠率入模
+
+### S35 每日採集停更修正（2026-09-16）
+- [x] 症狀：站上賽程停留 9-14 23:53 批（190 場），9-15 之後場次全失
+- [x] 真因：scripts/log_predictions.py late_ingest 判斷內重複 `from datetime import datetime` → 函式內 datetime 變局部變數 → 第 59 行 UnboundLocalError；該步 fail 令「入倉」step 唔跑，抓到嘅賽程／賽果／凍結預測從未 commit（9-15 四次 run 全同一死法）
+- [x] 修正：刪局部 import，推資料倉庫並手動重跑 football daily ingest → success，upcoming.json 已更新
+- [x] ClubElo 502 非主因（continue-on-error，符合對帳層唔擋凍結規則）
+- [x] 上游 fixtures.csv 只滾動未來約一週（現時 30 場：9-15/16/17），未開賽 10 場係真數，週末五大場次等上游放出
+- [ ] 待辦：加 watchdog——若 upcoming.json last_success 超過 12 小時就開 issue（今日未做）
+- [x] 凍結預測、鎖定政策、版本指紋一分未動
