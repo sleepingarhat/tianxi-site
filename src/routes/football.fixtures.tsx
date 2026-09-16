@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCrests } from "@/lib/footballCrests";
-import { leanSide } from "@/lib/footballTeams";
+import { argmaxSide, haGap } from "@/lib/footballTeams";
 import { teamZh } from "@/lib/teamZh";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
@@ -202,7 +202,7 @@ function MatchCard({
   crestOf: (div: string, name: string) => string | null;
 }) {
   const [open, setOpen] = useState(false);
-  const top = leanSide(m.p);
+  const top = argmaxSide(m.p);
   const derived = useMemo(() => scoreTop(m.lambda, m.p), [m.lambda, m.p]);
   // 只讀凍結值：有凍結波膽（S5 分區重加權後嘅矩陣）就用凍結嗰張，冇才由 λ 同機率派生
   const csAll = useMemo(() => {
@@ -235,7 +235,7 @@ function MatchCard({
   const edgeIdx = m.edge ? m.edge.indexOf(Math.max(...m.edge)) : -1;
   const side = ["主勝", "和局", "客勝"];
   const eloRatio = Math.min(1, Math.abs(m.elo_diff) / 400);
-  const [sh, sa] = cs.score.split("-").map((v) => Number(v));
+  
 
   return (
     <article className="rounded-[10px] border border-hairline bg-paper px-2.5 py-2.5">
@@ -278,18 +278,19 @@ function MatchCard({
           })}
         </div>
         <p className="mt-1 text-[9px] leading-tight text-ink-3">
-          和局歷史上只佔約四分一，三條機率齊列；波膽大字係全矩陣最可能一格，唔跟傾向分區。
+          和局歷史上只佔約四分一，三條機率齊列；預測字取三格最高者（同一張凍結矩陣加總），唔另訓分類器。
         </p>
       </div>
 
-      {/* 一個波膽預測 */}
+      {/* 對外只報一個賽果：主／和／客 argmax */}
       <div className="mt-1.5 grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 rounded-[8px] border border-hairline bg-paper-2 px-2.5 py-2">
         <div className="flex min-w-0 items-center gap-1.5">
           <FootballCrest name={teamZh(m.div, m.home)} src={crestOf(m.div, m.home)} />
           <p className="truncate font-serif-tc text-[12px] font-bold text-ink">{teamZh(m.div, m.home)}</p>
         </div>
-        <p className="tabnum shrink-0 text-center font-mono-tx text-[22px] font-bold leading-none text-gold">
-          {Number.isNaN(sh) ? cs.score : `${sh} : ${sa}`}
+        <p className="shrink-0 text-center font-serif-tc text-[18px] font-bold leading-none text-gold">
+          {side[top]}
+          <span className="tabnum ml-1 font-mono-tx text-[11px] font-normal text-ink-2">{p1(m.p[top] ?? 0)}</span>
         </p>
         <div className="flex min-w-0 items-center justify-end gap-1.5">
           <p className="truncate text-right font-serif-tc text-[12px] font-bold text-ink">{teamZh(m.div, m.away)}</p>
@@ -297,8 +298,9 @@ function MatchCard({
         </div>
       </div>
       <p className="mt-1 tabnum font-mono-tx text-[9px] leading-tight text-ink-3">
-        波膽命中機率 {p1(cs.p)} · 全矩陣最可能一格 · 四球或以上合計 {p1(cs.bigP)}
+        主客機率距離 {p1(haGap(m.p))} · 距離愈細和局機率愈高（獨立泊松本身已有），但預測字仍然取最高格
       </p>
+
 
 
 
