@@ -1,7 +1,67 @@
 {
-  "generatedHKT": "2026-09-16 17:13 HKT",
+  "generatedHKT": "2026-09-16 19:03 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-16",
+      "time": "19:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S38 第二層推薦結算",
+      "scope": "site",
+      "sha": "ae6ef71"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "19:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S38 第二層推薦結算",
+      "scope": "site",
+      "sha": "8208f24"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "19:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S38 第二層推薦結算",
+      "scope": "site",
+      "sha": "adeda68"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "19:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S38 第二層推薦結算",
+      "scope": "site",
+      "sha": "510f776"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "19:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "S38 第二層推薦結算",
+      "scope": "site",
+      "sha": "2250fda"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "17:17",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "e138d0d"
+    },
     {
       "date": "2026-09-16",
       "time": "17:13",
@@ -21,6 +81,16 @@
       "title": "S26b 和局預測回測日誌同待辦",
       "scope": "site",
       "sha": "b32c021"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "17:13",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "006d7cf"
     },
     {
       "date": "2026-09-16",
@@ -354,56 +424,6 @@
     },
     {
       "date": "2026-09-15",
-      "time": "19:05",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "lock: T-1.5h freeze spec (site side: lock-state proxy, predictor lock time, dev-log, roadmap)",
-      "scope": "site",
-      "sha": "9664d05"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:05",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "lock: T-1.5h freeze spec (site side: lock-state proxy, predictor lock time, dev-log, roadmap)",
-      "scope": "site",
-      "sha": "b2cb599"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:05",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "72ed4e6"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "lock: T-1.5h freeze spec (site side: lock-state proxy, predictor lock time, dev-log, roadmap)",
-      "scope": "site",
-      "sha": "9a9a345"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "lock: T-1.5h freeze spec (site side: lock-state proxy, predictor lock time, dev-log, roadmap)",
-      "scope": "site",
-      "sha": "29b969b"
-    },
-    {
-      "date": "2026-09-15",
       "time": "19:03",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -481,16 +501,6 @@
       "title": "[manifest][skip ci] regenerate data/index.json",
       "scope": "database",
       "sha": "6c396ee"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "17:18",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S29 context data layer: roadmap.md",
-      "scope": "site",
-      "sha": "3983ca3"
     },
     {
       "date": "2026-09-15",
@@ -911,16 +921,6 @@
       "title": "[data][skip ci] 2026-09-12T16:24Z · [data][skip ci] pedigree 2026-09-12T16:24Z via GHA",
       "scope": "database",
       "sha": "62d2450"
-    },
-    {
-      "date": "2026-09-12",
-      "time": "23:01",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-12T15:01Z · [data][skip ci] entries 2026-09-12T15:01Z via GHA",
-      "scope": "database",
-      "sha": "3f4c636"
     },
     {
       "date": "2026-09-11",
