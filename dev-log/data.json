@@ -1,7 +1,87 @@
 {
-  "generatedHKT": "2026-09-17 03:18 HKT",
+  "generatedHKT": "2026-09-18 03:29 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-18",
+      "time": "02:24",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-09-17T18:24Z)",
+      "scope": "marksix",
+      "sha": "369b21e"
+    },
+    {
+      "date": "2026-09-17",
+      "time": "17:26",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "5c9960c"
+    },
+    {
+      "date": "2026-09-17",
+      "time": "16:15",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] critical critical=1 warn=7 · 2026-09-17T08:15Z",
+      "scope": "database",
+      "sha": "0b38ee0"
+    },
+    {
+      "date": "2026-09-17",
+      "time": "15:43",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-17T15:43",
+      "scope": "site",
+      "sha": "f9bc482"
+    },
+    {
+      "date": "2026-09-17",
+      "time": "15:29",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-17T07:29Z",
+      "scope": "database",
+      "sha": "0dd5585"
+    },
+    {
+      "date": "2026-09-17",
+      "time": "15:28",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] engine health 2026-09-17T15:28",
+      "scope": "backend",
+      "sha": "9111536"
+    },
+    {
+      "date": "2026-09-17",
+      "time": "09:34",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-17T01:34Z · pool-a 2026-09-17T01:34Z via GHA matrix",
+      "scope": "database",
+      "sha": "5edf118"
+    },
+    {
+      "date": "2026-09-17",
+      "time": "03:18",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "1bfb87d"
+    },
     {
       "date": "2026-09-17",
       "time": "03:01",
@@ -380,26 +460,6 @@
       "typeLabel": "提交",
       "title": "S32 freeze ledger page + public proxy (measure only)",
       "scope": "site",
-      "sha": "05512b1"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:34",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S32 freeze ledger page + public proxy (measure only)",
-      "scope": "site",
-      "sha": "be6c596"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:34",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S32 freeze ledger page + public proxy (measure only)",
-      "scope": "site",
       "sha": "625d33c"
     },
     {
@@ -764,36 +824,6 @@
     },
     {
       "date": "2026-09-13",
-      "time": "17:32",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "cb82267"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "15:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] critical critical=1 warn=19 · 2026-09-13T07:51Z",
-      "scope": "database",
-      "sha": "2f465c4"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "15:23",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-13T07:23Z",
-      "scope": "database",
-      "sha": "07740b6"
-    },
-    {
-      "date": "2026-09-13",
       "time": "15:23",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -855,16 +885,6 @@
     {
       "date": "2026-09-13",
       "time": "13:06",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "功能",
-      "title": "feat(ci): ingestion freshness watchdog with GitHub issue alarm",
-      "scope": "database",
-      "sha": "b659f89"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "13:06",
       "areaKey": "backend",
       "area": "後端·模型",
       "typeLabel": "修正",
@@ -901,16 +921,6 @@
       "title": "fix(ci): watchdog uses ADMIN_TOKEN secret name",
       "scope": "backend",
       "sha": "ec4e287"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "12:47",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(ci): unblock deploy (classify new analyze reads), fix sanity unbound var, add automation watchdog with coverage alarm",
-      "scope": "backend",
-      "sha": "55e1338"
     },
     {
       "date": "2026-09-13",
@@ -991,16 +1001,6 @@
       "title": "data: update Mark Six results (2026-08-25T15:12Z)",
       "scope": "marksix",
       "sha": "8011435"
-    },
-    {
-      "date": "2026-08-22",
-      "time": "22:45",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-08-22T14:45Z)",
-      "scope": "marksix",
-      "sha": "50b14d8"
     }
   ]
 }
