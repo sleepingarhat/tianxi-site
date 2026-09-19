@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 
 import { getTodayPicksAll } from "./picks.functions";
+import { todayMeetingCancellation } from "./meeting-status";
 import { txApi } from "./tx-api";
 
 export type MergedPick = {
@@ -26,13 +27,19 @@ export type MergedPick = {
 };
 
 export function useTodayPicks() {
+  const cancellation = todayMeetingCancellation();
   const fetchAll = useServerFn(getTodayPicksAll);
-  const picks = useQuery({ queryKey: ["todayPicksAll"], queryFn: () => fetchAll(), staleTime: 60_000 });
+  const picks = useQuery({
+    queryKey: ["todayPicksAll"],
+    queryFn: () => fetchAll(),
+    staleTime: 60_000,
+    enabled: !cancellation,
+  });
   const date: string | undefined = picks.data?.date;
   const meeting = useQuery({
     queryKey: ["meeting", date],
     queryFn: () => txApi.meeting(date!),
-    enabled: !!date,
+    enabled: !!date && !cancellation,
     refetchInterval: 60_000,
   });
 
@@ -70,7 +77,7 @@ export function useTodayPicks() {
   });
 
   return {
-    date,
+    date: cancellation?.date ?? date,
     venue: picks.data?.venue as string | undefined,
     trackCondition: picks.data?.trackCondition as string | undefined,
     generatedAt: picks.data?.generatedAt as string | undefined,
@@ -79,9 +86,10 @@ export function useTodayPicks() {
     edition: (picks.data?.frozen === true ? "final" : "draft") as "final" | "draft",
 
     engine: (picks.data?.engine ?? picks.data?.meta ?? picks.data) as any,
-    races,
+    races: cancellation ? [] : races,
     meeting: meeting.data,
-    isLoading: picks.isLoading,
+    cancellation,
+    isLoading: cancellation ? false : picks.isLoading,
     error: picks.error,
   };
 }
