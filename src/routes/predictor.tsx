@@ -4,12 +4,14 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 
 import { AppShell } from "@/components/tx/AppShell";
+import { MeetingCancellationNotice } from "@/components/tx/MeetingCancellationNotice";
 import { PredictionStatusLight } from "@/components/tx/PredictionStatusLight";
 import { WeatherPanel } from "@/components/tx/WeatherPanel";
 import { WhyPicked } from "@/components/tx/WhyPicked";
 import { Card, Disclaimer, Empty, ErrorNote, Loading, PageHead, Pill, Scroller, Silks, Table, Td } from "@/components/tx/ui";
 import { getFeatureRace, listFeatureRaces } from "@/lib/features.functions";
-import { raceStatus } from "@/lib/prediction-status";
+import { meetingLockMinutes, raceStatus } from "@/lib/prediction-status";
+import { useScarceStarts } from "@/lib/use-scarce-starts";
 import { FEATURE_MAP, type FeatureId, type Horse } from "@/lib/race-data";
 import { cleanTime, countdown, fmtMeetingDate, pct, txApi } from "@/lib/tx-api";
 import { useTodayPicks } from "@/lib/use-today-picks";
@@ -77,8 +79,17 @@ function PredictorPage() {
     return typeof v === "number" ? v : null;
   };
 
-  const raceLight = race ? raceStatus(race, tp.date ? { date: tp.date, now } : { now }) : null;
-  const locked = raceLight?.color === "green";
+  const dayLockMinutes = meetingLockMinutes(races);
+  const scarce = useScarceStarts(races, tp.date);
+  const raceLight = race
+    ? raceStatus(race, {
+        ...(tp.date ? { date: tp.date } : {}),
+        now,
+        lockMinutes: dayLockMinutes,
+        scarceStarts: scarce.scarceByRace[Number(race.raceNumber)] ?? 0,
+      })
+    : null;
+  const locked = raceLight?.color === "green" || tp.frozen;
 
   const picks: any[] = race?.picks || [];
   const withOdds = picks.map((p) => {
@@ -119,6 +130,20 @@ function PredictorPage() {
     const leader = ranked[0];
     return { id, label: FEATURE_MAP[id].shortLabel, leader, stat: leader?.stats[id] };
   });
+
+  if (tp.cancellation) {
+    return (
+      <AppShell page="predictor" ticker={`${fmtMeetingDate(tp.cancellation.date)} · 今日賽事停賽`}>
+        <PageHead
+          en="Predictor"
+          title="選馬神器"
+          desc="今日不提供預測；恢復賽事後，四揀會按既定鎖點重新提供。"
+        />
+        <MeetingCancellationNotice cancellation={tp.cancellation} />
+        <Disclaimer />
+      </AppShell>
+    );
+  }
 
 
   return (
@@ -223,9 +248,9 @@ function PredictorPage() {
         </div>
       </div>
 
-      {race ? (
+      {race && raceLight ? (
         <div className="mx-4 mb-3">
-          <PredictionStatusLight status={raceLight ?? raceStatus(race, tp.date ? { date: tp.date, now } : { now })} />
+          <PredictionStatusLight status={raceLight} />
           <div className="mt-2 flex flex-wrap gap-1.5">
             <Pill tone="gold">R{race.raceNumber} · {race.distance || "—"}m</Pill>
             <Pill>{race.going || "地質待公布"}</Pill>
