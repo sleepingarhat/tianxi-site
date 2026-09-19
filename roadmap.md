@@ -1,10 +1,12 @@
 # tianxi-web roadmap
 
 ## 進行中
+- [x] 2026-09-19 停賽守門：因董建華離世，今日賽事停賽；首頁／選馬／逐場卡／日程顯示停賽通告，前端停止今日預測查詢，避免 9 月 16 日舊資料冒充今日賽事；今日不生成、不鎖定、不入凍結對帳及開季戰績，模型線不變
 - [x] S31 鎖點改追已批規格（T−1.5h）：新增 src/lib/lock-window.ts，鎖點時間＝fixture 首場 post_time − 90 分鐘（唔再等賽果入庫）；writePredictionLog／writeRaceDayReportCache 改用 predictionWritesAreFrozen（未到鎖點可刷新＝初版；到鎖點有快照即拒寫；到鎖點未有快照准寫一次）；讀取側 dateIsLocked 由鎖點一刻起讀凍結快照（today-picks／top-picks／picks-by-date／explain）；wrangler 加 */5 輕量 lock tick（heavy job 留原時段）＋ GET /api/analyze/lock-state、POST /admin/api/lock-tick；健康頁 LOCK_POLICY aligned=true、public_freeze 翻 PASS；主站加 /api/public/lock-state 代理，選馬頁初版章寫出實際鎖定時間。鎖後只准 join 名次，唔再寫預測欄；算法線同指紋一分不動
 - [x] S32 凍結對帳表（先量、唔改模型）：後端 src/lib/freeze-ledger.ts ＋ GET /api/analyze/freeze-ledger，只讀已鎖 prediction_log（禁回測、禁 live 重算）；主尺＝四揀入圍數／頭四覆蓋／平均相交（賽日＋開季累積，Top3 旁註），副尺＝位置命中（位置格數按出賽匹數 ≥7 為 3、否則 2），旁註＝獨贏頭馬、市場大熱、模型 vs 扣水隱含獨贏 logloss、平注模擬 EV（只量市場硬度，永不回寫模型／指紋／健康頁）；主站加 /api/public/freeze-ledger 代理同 /freeze-ledger 頁（開季累積 → 逐賽日 → 逐場明細）；樣本先 9-6／9-9／9-13，9-16 鎖完完場後自動加行；場數少出表唔下結論
 - [ ] S33 card_delta（鎖後變更 overlay）：換騎／蹄鐵／後備上陣只微調已鎖分數，永不入 LGB、永不改凍結欄；缺資料＝0、紅燈可睇唔入戰績
-- [ ] S34 少仗紅燈規則寫入健康頁：新馬／試閘場次標紅燈（α=0.88、96 匹有分只證明「有分」，唔證明新馬唔係亂估）；少仗退 Elo＋試閘／血統先驗
+- [x] S35 開季收口三項（純展示層）：(1) 鎖同字統一——prediction-status.ts 加 DAY_LOCK_MINUTES_BEFORE_FIRST_POST=90／meetingLockMinutes()，全站只講「首場開跑前 90 分鐘一次鎖全日」，版本字只得「初版 · 未鎖」／「最終版 · 已鎖」一套，卡面唔再出現 18:40／開跑前 30 分鐘；(2) 少仗紅燈——SCARCE_START_THRESHOLD=2，四揀有第一／二次出賽即紅燈＋「少仗 N 匹」章，reason 寫明改用 ELO＋試閘／血統、唔用 min_data_in_leaf=80 葉、唔入戰績，出賽次數由 getHorseStarts server fn 批量讀 totalStarts（缺＝0，唔靠估），引擎監控加鎖點口徑／少仗紅燈兩行；(3) 首屏加獨立「本季開季窗」行（2026/27 起，按場數加權四揀平均），同近 90 日歷史窗分開標。模型線一分未動
+- [ ] S34 少仗紅燈規則寫入健康頁（後端）：新馬／試閘場次標紅燈（α=0.88、96 匹有分只證明「有分」，唔證明新馬唔係亂估）；少仗退 Elo＋試閘／血統先驗
 - [x] S30 賽馬引擎健康稽核修正：掛上 /api/analyze/engine-health（JSON／HTML）＋ /engine/health.json ＋ /admin/engine-health ＋ 主站代理 /api/public/engine-health；健康 payload 改 buildEngineHealth(db) 即時讀季節同最近凍結賽日（live 曲線／diagnostics 兩項 WATCH 自動翻）；鎖點規格（T−1.5h）同落地（第一場賽果入庫）未對齊已寫明，public_freeze 降 WATCH；today-picks 加 frozen／edition，選馬頁加「初版／最終版」章；SANITY 馬匹池路徑改 horses/profiles/horse_profiles.csv；工程債待辦：analyze.ts／admin.ts 拆檔、盤 prune 保留歷史 live snapshot
 - [x] 全站頁面大標題加入聚光掃光；品牌「天喜 TIANXI」同步聚光，「ENTERTAINMENT」使用紙墨金金箔流光，並支援減少動態效果
 - [x] 排位表手機版重整：統一所有馬匹號碼尺寸，取消厚重黑底；固定馬名／檔位欄邊界避免重疊，並參考香港賽馬會官方排位表重整資料層級與密度
