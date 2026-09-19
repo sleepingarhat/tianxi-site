@@ -1,7 +1,177 @@
 {
-  "generatedHKT": "2026-09-19 02:48 HKT",
+  "generatedHKT": "2026-09-19 14:04 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-19",
+      "time": "14:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
+      "scope": "site",
+      "sha": "d9fc9cf"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
+      "scope": "site",
+      "sha": "8d39805"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
+      "scope": "site",
+      "sha": "07f6298"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
+      "scope": "site",
+      "sha": "67d3c91"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
+      "scope": "site",
+      "sha": "079daf9"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
+      "scope": "site",
+      "sha": "1a51b99"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
+      "scope": "site",
+      "sha": "fd4d063"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
+      "scope": "site",
+      "sha": "a9df793"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
+      "scope": "site",
+      "sha": "8e47359"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
+      "scope": "site",
+      "sha": "9acb57a"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:02",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: record cancelled 2026-09-19 meeting",
+      "scope": "database",
+      "sha": "bf23423"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:02",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "cc27f59"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:02",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix: skip cancelled 2026-09-19 meeting lock",
+      "scope": "backend",
+      "sha": "ac7c8b0"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "14:02",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix: suppress predictions for cancelled 2026-09-19 meeting",
+      "scope": "backend",
+      "sha": "5b65e59"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "09:11",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-19T01:11Z · pool-a 2026-09-19T01:11Z via GHA matrix",
+      "scope": "database",
+      "sha": "e61fa66"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "04:05",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-18T20:05Z · [data][skip ci] pool-b 2026-09-18T20:05Z via GHA",
+      "scope": "database",
+      "sha": "dbc2d29"
+    },
+    {
+      "date": "2026-09-19",
+      "time": "02:48",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "96d186e"
+    },
     {
       "date": "2026-09-18",
       "time": "17:00",
@@ -300,16 +470,6 @@
       "typeLabel": "提交",
       "title": "S37 對外只報主／和／客（argmax 三格，波膽收埋）",
       "scope": "site",
-      "sha": "aa5d8ee"
-    },
-    {
-      "date": "2026-09-16",
-      "time": "17:03",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S37 對外只報主／和／客（argmax 三格，波膽收埋）",
-      "scope": "site",
       "sha": "4fd4513"
     },
     {
@@ -374,16 +534,6 @@
     },
     {
       "date": "2026-09-16",
-      "time": "15:43",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-16T15:43",
-      "scope": "site",
-      "sha": "f4aa77d"
-    },
-    {
-      "date": "2026-09-16",
       "time": "15:33",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -404,76 +554,6 @@
     },
     {
       "date": "2026-09-16",
-      "time": "13:49",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S36 球員資料層日誌／路線圖／源探測端點",
-      "scope": "site",
-      "sha": "3b6a1b8"
-    },
-    {
-      "date": "2026-09-16",
-      "time": "13:49",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S36 球員資料層日誌／路線圖／源探測端點",
-      "scope": "site",
-      "sha": "1353705"
-    },
-    {
-      "date": "2026-09-16",
-      "time": "13:49",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S36 球員資料層日誌／路線圖／源探測端點",
-      "scope": "site",
-      "sha": "63b72e2"
-    },
-    {
-      "date": "2026-09-16",
-      "time": "13:49",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "8da1e7b"
-    },
-    {
-      "date": "2026-09-16",
-      "time": "13:12",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "bfec598"
-    },
-    {
-      "date": "2026-09-16",
-      "time": "13:11",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "文檔",
-      "title": "docs: S35 每日採集停更修正記錄 (src/routes/dev-log.tsx)",
-      "scope": "site",
-      "sha": "08051ea"
-    },
-    {
-      "date": "2026-09-16",
-      "time": "13:11",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "文檔",
-      "title": "docs: S35 每日採集停更修正記錄 (roadmap.md)",
-      "scope": "site",
-      "sha": "e882eb3"
-    },
-    {
-      "date": "2026-09-16",
       "time": "09:43",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -491,16 +571,6 @@
       "title": "[data][skip ci] 2026-09-15T20:32Z · [data][skip ci] pool-b 2026-09-15T20:32Z via GHA",
       "scope": "database",
       "sha": "3ce8395"
-    },
-    {
-      "date": "2026-09-16",
-      "time": "03:26",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "e37ac2c"
     },
     {
       "date": "2026-09-16",
@@ -531,16 +601,6 @@
       "title": "[data][skip ci] 2026-09-15T16:18Z · [data][skip ci] entries 2026-09-15T16:18Z via GHA",
       "scope": "database",
       "sha": "199c673"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:34",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "1b1e495"
     },
     {
       "date": "2026-09-15",
@@ -784,36 +844,6 @@
     },
     {
       "date": "2026-09-14",
-      "time": "17:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "91cef0b"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "16:23",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] critical critical=1 warn=7 · 2026-09-14T08:23Z",
-      "scope": "database",
-      "sha": "910c865"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "15:48",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-14T07:48Z",
-      "scope": "database",
-      "sha": "5d59a2a"
-    },
-    {
-      "date": "2026-09-14",
       "time": "15:48",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -821,16 +851,6 @@
       "title": "[sanity][skip ci] engine health 2026-09-14T15:48",
       "scope": "backend",
       "sha": "825b6be"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "13:49",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: update speed-guide data (2026-09-14T05:49Z)",
-      "scope": "database",
-      "sha": "ced3b6c"
     },
     {
       "date": "2026-09-13",
@@ -901,26 +921,6 @@
       "title": "fix(ci): watchdog — drop legacy capy_* (moved to tianxi-database), alarm on no-success-in-window",
       "scope": "backend",
       "sha": "c2cfdca"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "12:59",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "修正",
-      "title": "fix(ci): sanity — send UA on season fetch (403) and rebase before push",
-      "scope": "backend",
-      "sha": "a911156"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "12:59",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] engine health 2026-09-13T12:59",
-      "scope": "backend",
-      "sha": "6c34843"
     },
     {
       "date": "2026-09-13",
