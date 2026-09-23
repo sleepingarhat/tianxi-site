@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<script src="/assets/theme.js"></script>
+<script src="/assets/shell.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>四擁覆蓋解釋 · 天喜 TIANXI</title>
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/shell.css">
+<script src="/assets/api.js"></script>
+</head>
+<body>
+<main class="tx-page">
+  <h1>四擁覆蓋解釋</h1>
+  <p>唯讀。凍結四擁同實際頭 4 重疊，唔係勝出因果，亦唔改排名。</p>
+  <div id="global"></div>
+  <h2>最近已完場賽日</h2>
+  <div id="days">載入中…</div>
+  <p>樣本少於 10 場嘅分層唔好當結論。未有凍結拆解唔係故障。</p>
+</main>
+<script>
+(function(){
+  function onlyCounts(races){
+    var c=[0,0,0,0,0];
+    (races||[]).forEach(function(r){
+      var n=Number(r.top4IntersectCount);
+      if(n>=0&&n<=4) c[n]++;
+    });
+    return c;
+  }
+  TX_API.meetings('?limit=12').then(function(resp){
+    var list=(resp && (resp.meetings||resp)) || [];
+    var dates=list.map(function(m){ return m.date || m; }).filter(Boolean).slice(0,8);
+    return Promise.all(dates.map(function(date){
+      return TX_API.hitRate(date).then(function(hr){
+        return { date:date, hr:hr, n:(hr.summary&&hr.summary.racesEvaluated)||(hr.races||[]).length||0, races:hr.races||[] };
+      }).catch(function(){ return { date:date, hr:null, n:0, races:[] }; });
+    }));
+  }).then(function(rows){
+    var ready=rows.filter(function(r){ return r.n>0; });
+    var races=[], sum=0;
+    ready.forEach(function(d){ (d.races||[]).forEach(function(r){ races.push(r); sum+=Number(r.top4IntersectCount||0); }); });
+    var n=races.length, c=onlyCounts(races);
+    var avg=n? (sum/n).toFixed(2):'—';
+    document.getElementById('global').innerHTML = '<p>平均只中 '+avg+' ／4 · '+n+' 場</p><p>只中4/3/2/1/0 = '+[c[4],c[3],c[2],c[1],c[0]].join(' / ')+'</p>';
+    document.getElementById('days').innerHTML = ready.map(function(r){
+      var avg2=r.hr.summary && r.hr.summary.top4AvgIntersect;
+      return '<p><a href="/explain/?date='+encodeURIComponent(r.date)+'">'+r.date+'</a> · '+r.n+' 場 · 平均 '+(avg2!=null?avg2:'—')+'</p>';
+    }).join('') || '未有已評賽日';
+    var q=new URLSearchParams(location.search).get('date');
+    if(!q) return;
+    var row=ready.filter(function(r){ return r.date===q; })[0];
+    var box=document.createElement('section');
+    if(!row){ box.innerHTML='<h2>'+q+'</h2><p>未有凍結拆解，唔係故障。</p>'; }
+    else {
+      box.innerHTML='<h2>'+q+' · '+row.n+' 場</h2>'+(row.races||[]).map(function(r){
+        return '<p>第 '+(r.raceNumber||'')+' 場 · 只中 '+(r.top4IntersectCount==null?'—':r.top4IntersectCount)+'</p>';
+      }).join('');
+    }
+    document.getElementById('days').before(box);
+  }).catch(function(e){
+    document.getElementById('days').textContent='載入失敗 '+e.message;
+  });
+})();
+</script>
+</body>
+</html>
