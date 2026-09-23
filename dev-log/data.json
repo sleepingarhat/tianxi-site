@@ -1,7 +1,67 @@
 {
-  "generatedHKT": "2026-09-24 03:24 HKT",
+  "generatedHKT": "2026-09-24 04:49 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-24",
+      "time": "04:49",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat(explain): live coverage page so 2026-09-23 appears",
+      "scope": "site",
+      "sha": "52abcf3"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "04:39",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(hit-rate): coverage-stale helper for partial cache self-heal",
+      "scope": "backend",
+      "sha": "7c7aa36"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "04:32",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "results skip: set(CSV placed race_no)==set(HKJC races); drop row/link thresholds",
+      "scope": "database",
+      "sha": "4830d77"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "04:15",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-23T20:15Z · [data][skip ci] race-day 2026-09-23T20:15Z via GHA",
+      "scope": "database",
+      "sha": "25668b3"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "04:12",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "修正",
+      "title": "fix(results): only skip a race day when CSV holds every HKJC race (R5-R9 of 2026-09-23 were skipped)",
+      "scope": "database",
+      "sha": "c827ef3"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "03:24",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "116943c"
+    },
     {
       "date": "2026-09-23",
       "time": "23:51",
@@ -374,16 +434,6 @@
     },
     {
       "date": "2026-09-20",
-      "time": "16:08",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] critical critical=1 warn=13 · 2026-09-20T08:08Z",
-      "scope": "database",
-      "sha": "923aca1"
-    },
-    {
-      "date": "2026-09-20",
       "time": "15:46",
       "areaKey": "web",
       "area": "前端",
@@ -394,16 +444,6 @@
     },
     {
       "date": "2026-09-20",
-      "time": "15:40",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-20T07:40Z",
-      "scope": "database",
-      "sha": "523af42"
-    },
-    {
-      "date": "2026-09-20",
       "time": "15:39",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -411,16 +451,6 @@
       "title": "[sanity][skip ci] engine health 2026-09-20T15:39",
       "scope": "backend",
       "sha": "da73b31"
-    },
-    {
-      "date": "2026-09-20",
-      "time": "09:01",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-20T01:01Z · pool-a 2026-09-20T01:01Z via GHA matrix",
-      "scope": "database",
-      "sha": "ae277b6"
     },
     {
       "date": "2026-09-20",
@@ -680,26 +710,6 @@
       "typeLabel": "提交",
       "title": "S38 第二層推薦結算",
       "scope": "site",
-      "sha": "8208f24"
-    },
-    {
-      "date": "2026-09-16",
-      "time": "19:03",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S38 第二層推薦結算",
-      "scope": "site",
-      "sha": "adeda68"
-    },
-    {
-      "date": "2026-09-16",
-      "time": "19:03",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "S38 第二層推薦結算",
-      "scope": "site",
       "sha": "510f776"
     },
     {
@@ -931,16 +941,6 @@
       "title": "[sanity][skip ci] engine health 2026-09-13T15:23",
       "scope": "backend",
       "sha": "430d214"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "13:58",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "功能",
-      "title": "feat(predict): --save-bundle/--load-bundle for carry-over scoring with frozen FEAT_COLS",
-      "scope": "backend",
-      "sha": "357e8d6"
     },
     {
       "date": "2026-09-13",
