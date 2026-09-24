@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-24 19:41 HKT",
+  "generatedHKT": "2026-09-24 21:05 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-24",
+      "time": "21:05",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "文檔",
+      "title": "docs: roadmap 記錄 S5.1 TreeSHAP 研究閘結果（overlay 未過）",
+      "scope": "site",
+      "sha": "0f0766e"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "21:05",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "dev-log: 足球 S5.1 TreeSHAP 真數條目（研究閘過、產品 overlay 未過）",
+      "scope": "site",
+      "sha": "4c51c11"
+    },
     {
       "date": "2026-09-24",
       "time": "19:41",
@@ -21,6 +41,16 @@
       "title": "記錄 2026-09-24 賽季橫額改讀 /api/season（dev-log + roadmap）",
       "scope": "site",
       "sha": "8f4bb18"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "19:41",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "a195475"
     },
     {
       "date": "2026-09-24",
@@ -641,36 +671,6 @@
       "title": "[sanity][skip ci] engine health 2026-09-19T15:14",
       "scope": "backend",
       "sha": "21b3500"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "14:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
-      "scope": "site",
-      "sha": "1a51b99"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "14:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
-      "scope": "site",
-      "sha": "fd4d063"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "14:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
-      "scope": "site",
-      "sha": "a9df793"
     },
     {
       "date": "2026-09-19",
