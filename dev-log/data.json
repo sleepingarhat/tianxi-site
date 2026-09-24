@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-24 18:08 HKT",
+  "generatedHKT": "2026-09-24 19:26 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-24",
+      "time": "19:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "文檔",
+      "title": "docs: dev-log 2026-09-24 覆蓋解釋層收口條目",
+      "scope": "site",
+      "sha": "f362fde"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "19:25",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "文檔",
+      "title": "docs: roadmap 09-24 解釋層收口（358/2.03 即場、09-23 拆解、足球 explain、收料與命中率重算）",
+      "scope": "site",
+      "sha": "ecddf4b"
+    },
     {
       "date": "2026-09-24",
       "time": "18:08",
@@ -11,6 +31,16 @@
       "title": "S39 football: coverage explain page + league API",
       "scope": "site",
       "sha": "7e77545"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "18:08",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "fb84588"
     },
     {
       "date": "2026-09-24",
@@ -694,16 +724,6 @@
     },
     {
       "date": "2026-09-18",
-      "time": "03:29",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "2dce697"
-    },
-    {
-      "date": "2026-09-18",
       "time": "02:24",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -714,16 +734,6 @@
     },
     {
       "date": "2026-09-17",
-      "time": "15:43",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-17T15:43",
-      "scope": "site",
-      "sha": "f9bc482"
-    },
-    {
-      "date": "2026-09-17",
       "time": "15:28",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -731,16 +741,6 @@
       "title": "[sanity][skip ci] engine health 2026-09-17T15:28",
       "scope": "backend",
       "sha": "9111536"
-    },
-    {
-      "date": "2026-09-17",
-      "time": "03:18",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "1bfb87d"
     },
     {
       "date": "2026-09-16",
