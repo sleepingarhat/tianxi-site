@@ -541,3 +541,14 @@
 - [x] 引擎倉季節旗 lastMeeting 滯後：靜態檔已改 2026-09-23／in_season，橫額以 /api/season 為準（用戶倉側完成）
 - [x] 2026-09-24 足球 S5.1 TreeSHAP 真數（研究倉 tianxi-football-research data/research/s39/lgb_shap.json，commit f91e60d）：沙盒用資料倉 FeatureEngine 重放 198,288 場（177,207 場暖身後），取最新 4,000 場計 TreeSHAP；status=ok、指紋 378c283b73a7-bb35e29b0c7b-175995 對上、54 特徵、applied_to_freeze=false；gain 頭五 dc_pa／elo_exp／elo_diff／lam_diff／seen_a；per_class（主=Elo 系、客=dc_pa、和=dc_pd 幅細，同 S26b「LGB 分唔出和」一致）＋ per_league（五大頭三幾乎同一套，德甲窗追溯到 2021-10 較早、唔當可直接比）已加。研究擴充閘過；產品 overlay 閘未過——無逐場 local 因子包、只解釋 LGB 65% 軌、Elo／DC 共線未拆，前端紅綠因子唔上。沙盒計算路徑代替 GHA（GITHUB_API_KEY 係 connector key，Actions 用唔到）；lgb_shap_compute.py 三分類 SHAP 維度 bug 已修（commit 1645560）。
 - [ ] 賽馬 SHAP：等鎖點 booster。2026-09-24 已定位障礙——生產 workflow（lgb_predict_upcoming.yml）原本只 POST 分數入 D1，樹檔（model-bundle/model.txt + meta.json）只入 Actions cache 唔入 artifact；已改 workflow 把 model-bundle 加入 upload-artifact，下個預測 run 起有鎖點 booster 可跑 shap_knife2.py 出 reports/shap/latest.json 過閘。第一份 artifact 出現之前維持 blocked，前端紅綠因子唔上
+
+## 2026-09-24 賽馬鎖點 bundle
+- [x] lgb_predict_upcoming.yml 加「Verify lock-point bundle」：缺 model.txt／meta.json／特徵檔、booster 特徵名 ≠ meta.featCols、特徵檔缺欄即 fail；寫 lock-manifest.json（run_id、sha256、bundleFingerprint）入 artifact（tianxi-backend c3c80ea）
+- [ ] 下次預測 run 後拉 artifact 跑 shap_knife2.py → reports/shap/latest.json（09-23 run 35929308766 早於改動，冇 model-bundle）
+- [ ] 研究員 AI 問答摘要：待用戶決定做唔做
+
+- [x] 2026-09-25 命中率自動重算兩條觸發（已評場數<有頭4名次場數；賽果行數多過上次快取）已部署網上引擎（hit-rate 讀取＋每日 03:00 排程），09-23=9、09-16=8 核對不變；race_results 冇入庫時間欄，改用行數做第二條。
+- [ ] 儀表板首次載入慢：引擎今日預測回應約 15 秒（非容量／付費問題），要睇加快取。
+
+- [x] 2026-09-25 tianxi-backend 網上版 vs GitHub 逐檔對齊：34 個檔格式化後比較，除 index.ts 外全部一致（其餘差異只係打包雜訊）。index.ts 差異源於 f649364／72ede95 兩個自動部署撞車，舊版後上線，令每日 03:00 追補最近 8 個賽日未生效；已重跑 72ede95 部署，網上已含追補。GitHub 由此起即係網上版本（push main 自動部署）。
+- [x] 2026-09-25 lgb_fast_predict.yml（後備補分流程）修正並生效：根因係三段內嵌 Python heredoc 由第一格開始寫，成個 YAML 無效，自 09-13 建立以來從未運行、每次 push 即標失敗；三段代碼按層縮進，指令一字未改，YAML＋bash 雙重驗證通過。推 main（commit 9dd8bca）後 GitHub 認到流程名，手動試跑 success——非賽日正確判斷唔使補分、carry 步驟跳過。已鎖四揀由 prediction_log 凍結層保護，α／訓練／四揀無改。賽日日間每 30 分鐘（HKT 06:00–18:30）自動檢查覆蓋。
