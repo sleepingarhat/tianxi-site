@@ -20,10 +20,19 @@
     load: function(id){
       var el = document.getElementById(id); if(!el) return;
       var base = (window.TX_API && TX_API.base) || 'https://tianxi-backend.tianxi-entertainment.workers.dev';
-      fetch(base+'/api/analyze/engine-health').then(function(r){if(!r.ok)throw 0;return r.json();})
-        .catch(function(){return fetch('/engine/health.json?t='+Date.now()).then(function(r){if(!r.ok)throw 0;return r.json();});})
-        .then(function(d){render(el,d);})
-        .catch(function(){el.textContent='引擎健康清單暫時無法載入';});
+      // 賽季旗以 /api/season 為準（即時）：in_season 唔出「休季中」，off_season 先出休季句。
+      // API 失敗先至 overlay 靜態 /engine/health.json，唔會因靜態檔滯後當成休季。
+      // 純讀取：唔寫、唔快取做凍結帳。
+      var seasonP = fetch(base+'/api/season').then(function(r){if(!r.ok)throw 0;return r.json();}).catch(function(){return null;});
+      var healthP = fetch(base+'/api/analyze/engine-health').then(function(r){if(!r.ok)throw 0;return r.json();})
+        .catch(function(){return fetch('/engine/health.json?t='+Date.now()).then(function(r){if(!r.ok)throw 0;return r.json();});});
+      Promise.all([seasonP, healthP]).then(function(rs){
+        var s = rs[0], d = rs[1];
+        if (s && s.status) {
+          d.season = { status: s.status, lastMeeting: s.lastMeeting, nextMeeting: s.nextMeeting, label: s.label };
+        }
+        render(el, d);
+      }).catch(function(){el.textContent='引擎健康清單暫時無法載入';});
     }
   };
 })();
