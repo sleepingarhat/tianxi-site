@@ -538,4 +538,6 @@
 - [x] 2026-09-24 賽季橫額改讀 /api/season（tianxi-site assets/engine-health.js，commit c78cd22）：賽季標籤優先取 API 嘅 status／lastMeeting／nextMeeting／label，in_season 唔出「休季中」、off_season 先出休季句；API 失敗先 overlay 靜態 engine/health.json，唔會因靜態檔滯後成頁當休季；純讀取唔寫唔快取做凍結帳；同段修正渲染函數名筆誤 ess→esc。預測卡／凍結四揀／鎖定／指紋／解釋入口無改。
 - [x] 收料層（tianxi-database）：賽果抓取跳過條件改場號集合（CSV 已排位場號 == 馬會實際場號兼連續 1..N，每場至少有完賽名次），停用行數／連結數門檻；09-23 補齊 9 場 109 名次
 - [x] 命中率自動重算（tianxi-backend）：已評場數 < 有完整頭 4 場數、或賽果新過 hit-rate generatedAt 即重算；GET 讀取同 cron 都做檢查；只重算對帳，凍結四揀不動；賽果未齊唔評（fail-closed），手動重跑降級後備
-- [ ] 引擎倉季節旗 lastMeeting 滯後（09-16）同 hit-rate 自動化對齊
+- [x] 引擎倉季節旗 lastMeeting 滯後：靜態檔已改 2026-09-23／in_season，橫額以 /api/season 為準（用戶倉側完成）
+- [x] 2026-09-24 足球 S5.1 TreeSHAP 真數（研究倉 tianxi-football-research data/research/s39/lgb_shap.json，commit f91e60d）：沙盒用資料倉 FeatureEngine 重放 198,288 場（177,207 場暖身後），取最新 4,000 場計 TreeSHAP；status=ok、指紋 378c283b73a7-bb35e29b0c7b-175995 對上、54 特徵、applied_to_freeze=false；gain 頭五 dc_pa／elo_exp／elo_diff／lam_diff／seen_a；per_class（主=Elo 系、客=dc_pa、和=dc_pd 幅細，同 S26b「LGB 分唔出和」一致）＋ per_league（五大頭三幾乎同一套，德甲窗追溯到 2021-10 較早、唔當可直接比）已加。研究擴充閘過；產品 overlay 閘未過——無逐場 local 因子包、只解釋 LGB 65% 軌、Elo／DC 共線未拆，前端紅綠因子唔上。沙盒計算路徑代替 GHA（GITHUB_API_KEY 係 connector key，Actions 用唔到）；lgb_shap_compute.py 三分類 SHAP 維度 bug 已修（commit 1645560）。
+- [ ] 賽馬 SHAP：等鎖點 booster（未到手前全面停）
