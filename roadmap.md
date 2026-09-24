@@ -535,6 +535,7 @@
 - [ ] 解釋層改接 GET /api/explain/global、GET /api/explain/meeting?date=（現讀倉內 JSON）
 
 - [x] 2026-09-24 對齊收口：/explain 即場讀 hit-rate（頭條 358 場、平均 2.03／4、窗至 09-23；分層表／殘差寫死「只計至 09-16，349 場」，兩套數分開標）；/explain/2026-09-23 九場全出（只中 2,1,1,2,1,3,2,2,1、平均 1.67）；新增 /football/explain（綠燈 28 場、首選 71.4%、頭八格 50%、RPS 0.2081、ECE 0.1547）；正式站 tianxi.racing 瀏覽器等 hydration 核對，三條路由同預覽一致。預測指紋不變。
+- [x] 2026-09-24 賽季橫額改讀 /api/season（tianxi-site assets/engine-health.js，commit c78cd22）：賽季標籤優先取 API 嘅 status／lastMeeting／nextMeeting／label，in_season 唔出「休季中」、off_season 先出休季句；API 失敗先 overlay 靜態 engine/health.json，唔會因靜態檔滯後成頁當休季；純讀取唔寫唔快取做凍結帳；同段修正渲染函數名筆誤 ess→esc。預測卡／凍結四揀／鎖定／指紋／解釋入口無改。
 - [x] 收料層（tianxi-database）：賽果抓取跳過條件改場號集合（CSV 已排位場號 == 馬會實際場號兼連續 1..N，每場至少有完賽名次），停用行數／連結數門檻；09-23 補齊 9 場 109 名次
 - [x] 命中率自動重算（tianxi-backend）：已評場數 < 有完整頭 4 場數、或賽果新過 hit-rate generatedAt 即重算；GET 讀取同 cron 都做檢查；只重算對帳，凍結四揀不動；賽果未齊唔評（fail-closed），手動重跑降級後備
 - [ ] 引擎倉季節旗 lastMeeting 滯後（09-16）同 hit-rate 自動化對齊
