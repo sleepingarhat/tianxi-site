@@ -1,7 +1,37 @@
 {
-  "generatedHKT": "2026-09-24 19:26 HKT",
+  "generatedHKT": "2026-09-24 19:31 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-24",
+      "time": "19:30",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "Knife-2: racing TreeSHAP contract + runner",
+      "scope": "backend",
+      "sha": "3a48bb9"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "19:30",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "修正",
+      "title": "fix(engine): lastMeeting lag 07-15 → 09-23, season in_season from live API",
+      "scope": "site",
+      "sha": "424c007"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "19:26",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "7d2a3a9"
+    },
     {
       "date": "2026-09-24",
       "time": "19:25",
@@ -693,26 +723,6 @@
       "sha": "5b65e59"
     },
     {
-      "date": "2026-09-19",
-      "time": "02:48",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "96d186e"
-    },
-    {
-      "date": "2026-09-18",
-      "time": "15:26",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-18T15:26",
-      "scope": "site",
-      "sha": "c63f177"
-    },
-    {
       "date": "2026-09-18",
       "time": "15:17",
       "areaKey": "backend",
@@ -931,16 +941,6 @@
       "title": "[sanity][skip ci] engine health 2026-09-15T15:33",
       "scope": "backend",
       "sha": "cc968b0"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "15:48",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] engine health 2026-09-14T15:48",
-      "scope": "backend",
-      "sha": "825b6be"
     },
     {
       "date": "2026-09-13",
