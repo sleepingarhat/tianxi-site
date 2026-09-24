@@ -1,7 +1,57 @@
 {
-  "generatedHKT": "2026-09-24 23:04 HKT",
+  "generatedHKT": "2026-09-25 03:43 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-25",
+      "time": "00:43",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "sync(hit-rate): 逐段對齊網上版補件自動重算（場數／筆數觸發），唔改凍結四揀",
+      "scope": "backend",
+      "sha": "f649364"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "00:43",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "sync(hit-rate): 逐段對齊網上版補件自動重算（場數／筆數觸發），唔改凍結四揀",
+      "scope": "backend",
+      "sha": "72ede95"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "23:32",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "修正",
+      "title": "fix(tg): read backend workers.dev API (tianxi.racing/api 404) + retry 5xx",
+      "scope": "database",
+      "sha": "6f2c2c2"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "23:32",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "修正",
+      "title": "fix(tg): read backend workers.dev API (tianxi.racing/api 404) + retry 5xx",
+      "scope": "database",
+      "sha": "4a8bb1e"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "23:12",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "ci: verify lock-point bundle (model/meta/features/run_id), fail-closed",
+      "scope": "backend",
+      "sha": "c3c80ea"
+    },
     {
       "date": "2026-09-24",
       "time": "23:04",
@@ -11,6 +61,16 @@
       "title": "docs: dev-log 加 09-24 賽馬 SHAP booster 持久化條目",
       "scope": "site",
       "sha": "1dfaee2"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "23:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "87de088"
     },
     {
       "date": "2026-09-24",
@@ -604,26 +664,6 @@
     },
     {
       "date": "2026-09-21",
-      "time": "17:56",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "9cc76c2"
-    },
-    {
-      "date": "2026-09-21",
-      "time": "16:25",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] critical critical=1 warn=12 · 2026-09-21T08:25Z",
-      "scope": "database",
-      "sha": "7826e61"
-    },
-    {
-      "date": "2026-09-21",
       "time": "15:59",
       "areaKey": "web",
       "area": "前端",
@@ -691,16 +731,6 @@
       "title": "data: update Mark Six results (2026-09-19T17:20Z)",
       "scope": "marksix",
       "sha": "eeabff5"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "15:22",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-19T15:22",
-      "scope": "site",
-      "sha": "f45cdb7"
     },
     {
       "date": "2026-09-19",
@@ -901,36 +931,6 @@
       "title": "S29 context data layer: scripts/test-admin-auth.ts",
       "scope": "backend",
       "sha": "0dbc52d"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "17:05",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "S29 context data layer: src/lib/engine-health.ts",
-      "scope": "backend",
-      "sha": "48a1e9a"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "17:05",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "S29 context data layer: src/index.ts",
-      "scope": "backend",
-      "sha": "b39d46a"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "17:05",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "S29 context data layer: ENGINE_STATUS.md",
-      "scope": "backend",
-      "sha": "43d829f"
     },
     {
       "date": "2026-09-15",
