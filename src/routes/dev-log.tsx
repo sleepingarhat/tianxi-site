@@ -23,6 +23,12 @@ type Tag = "數據" | "技術" | "前端" | "系統";
 const ENTRIES: { date: string; title: string; tags: Tag[]; body: string }[] = [
   {
     date: "2026-09-24 · HKT",
+    title: "足球 S5.1 TreeSHAP 真數完成（研究閘過、產品 overlay 閘未過，前端唔上紅綠）",
+    tags: ["數據"],
+    body: "喺沙盒用資料倉自家 FeatureEngine 重放 2000-07 至 2026-09-20 全部 198,288 場（177,207 場有足夠往績），用鎖點 booster（指紋 378c283b73a7-bb35e29b0c7b-175995，原檔不動、冇重訓）對最新 4,000 場計 TreeSHAP 真數，寫入研究倉 data/research/s39/lgb_shap.json（commit f91e60d），applied_to_freeze: false。gain 頭五：dc_pa、elo_exp、elo_diff、lam_diff、seen_a。研究擴充：per_class 主／和／客分開計（主=Elo 系最強、客=dc_pa、和=dc_pd 幅細——同 S26b「LGB 分唔出和」結論一致）；per_league 五大聯賽分層（頭三幾乎同一套，冇新結構；德甲樣本窗追溯到 2021-10 較早，唔當五聯賽可直接比）。用戶核過研究擴充閘：過。產品 overlay 閘唔過：無逐場 local 因子包、只解釋 LGB 65% 嗰條軌、Elo／DC 共線未拆——所以紅綠因子唔上前台，凍結、預測、指紋全部唔動。技術備註：GITHUB_API_KEY 係 connector key，GitHub Actions 認唔到，改為沙盒直讀直算；lgb_shap_compute.py 原本唔處理三分類 SHAP 輸出維度會拋錯，已修（commit 1645560）。賽馬 SHAP 繼續 blocked，等鎖點 booster。",
+  },
+  {
+    date: "2026-09-24 · HKT",
     title: "賽季橫額改讀即時賽季接口，靜態檔只做失敗後備",
     tags: ["前端", "系統"],
     body: "賽季橫額（assets/engine-health.js 嘅賽季標籤）改為優先讀 /api/season 嘅 status／lastMeeting／nextMeeting／label：in_season 唔出「休季中」，off_season 先出休季句；接口失敗先至 overlay 靜態 engine/health.json，唔會因為靜態檔滯後（仲寫 07-15／休季）成頁當休季。純讀取——唔寫、唔快取做凍結帳。同段順手修正渲染函數名筆誤（ess→esc），否則面板會拋錯顯示「暫時無法載入」。預測卡、凍結四揀、鎖定、指紋、解釋入口一概無改。",
