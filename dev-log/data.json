@@ -1,7 +1,37 @@
 {
-  "generatedHKT": "2026-09-24 21:05 HKT",
+  "generatedHKT": "2026-09-24 23:04 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-24",
+      "time": "23:04",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "文檔",
+      "title": "docs: dev-log 加 09-24 賽馬 SHAP booster 持久化條目",
+      "scope": "site",
+      "sha": "1dfaee2"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "23:03",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "維護",
+      "title": "chore: persist lock-point LGB booster (model-bundle) in artifacts for SHAP knife2",
+      "scope": "backend",
+      "sha": "bc7ba65"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "23:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "文檔",
+      "title": "docs: roadmap 記錄賽馬 SHAP booster 持久化修復",
+      "scope": "site",
+      "sha": "23962f0"
+    },
     {
       "date": "2026-09-24",
       "time": "21:05",
@@ -21,6 +51,16 @@
       "title": "dev-log: 足球 S5.1 TreeSHAP 真數條目（研究閘過、產品 overlay 未過）",
       "scope": "site",
       "sha": "4c51c11"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "21:05",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "ab803a9"
     },
     {
       "date": "2026-09-24",
@@ -674,36 +714,6 @@
     },
     {
       "date": "2026-09-19",
-      "time": "14:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
-      "scope": "site",
-      "sha": "8e47359"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "14:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
-      "scope": "site",
-      "sha": "9acb57a"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "14:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "852b2a7"
-    },
-    {
-      "date": "2026-09-19",
       "time": "14:02",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -931,16 +941,6 @@
       "title": "S29 context data layer: .github/workflows/engine_sanity_daily.yml",
       "scope": "backend",
       "sha": "612a152"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "15:33",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] engine health 2026-09-15T15:33",
-      "scope": "backend",
-      "sha": "cc968b0"
     },
     {
       "date": "2026-09-13",
