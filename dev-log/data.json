@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-24 19:31 HKT",
+  "generatedHKT": "2026-09-24 19:40 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-24",
+      "time": "19:40",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "賽季橫額改讀 /api/season（status/lastMeeting/nextMeeting/label），API 失敗先 overlay 靜態 health.json；修正渲染函數名筆誤 ess→esc",
+      "scope": "site",
+      "sha": "c78cd22"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "19:31",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "28c37ae"
+    },
     {
       "date": "2026-09-24",
       "time": "19:30",
@@ -591,26 +611,6 @@
       "title": "[sanity][skip ci] engine health 2026-09-19T15:14",
       "scope": "backend",
       "sha": "21b3500"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "14:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
-      "scope": "site",
-      "sha": "d9fc9cf"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "14:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
-      "scope": "site",
-      "sha": "8d39805"
     },
     {
       "date": "2026-09-19",
