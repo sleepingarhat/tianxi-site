@@ -23,6 +23,12 @@ type Tag = "數據" | "技術" | "前端" | "系統";
 const ENTRIES: { date: string; title: string; tags: Tag[]; body: string }[] = [
   {
     date: "2026-09-24 · HKT",
+    title: "賽馬第二刀障礙定位：生產流程冇持久化鎖點 booster，已改 workflow 補上",
+    tags: ["數據", "系統"],
+    body: "核對 tianxi-backend 代碼同最近成功 run（35929308766）確認：predict_upcoming.py 訓練完只 POST 分數入 D1（lgb_score／p_win），鎖點樹檔只寫 runner 臨時目錄 model-bundle/（model.txt + meta.json），再用 Actions cache 跟 run_id 存畀 lgb_fast_predict 頂住；upload-artifact 清單原本只得 features.csv／upcoming-features.csv／upcoming-entries.json，D1／git／Workers 都冇樹。已改 .github/workflows/lgb_predict_upcoming.yml：Upload artifacts 加 tianxi-backend/model-bundle/model.txt 同 meta.json，之後每次預測 run 都會把當日鎖點 booster 持久化，夠料跑 scripts/backtest/shap_knife2.py 出 reports/shap/latest.json 過閘。唔改訓練、唔改 POST、唔改 α、唔改四揀、唔改指紋。artifact 只有 14 日保留期，每個賽日會重新產生，唔影響對帳。前端紅綠因子、預測卡、凍結、解釋入口繼續唔郁；賽馬 SHAP 喺第一份 model-bundle artifact 出現之前維持 blocked。",
+  },
+  {
+    date: "2026-09-24 · HKT",
     title: "足球 S5.1 TreeSHAP 真數完成（研究閘過、產品 overlay 閘未過，前端唔上紅綠）",
     tags: ["數據"],
     body: "喺沙盒用資料倉自家 FeatureEngine 重放 2000-07 至 2026-09-20 全部 198,288 場（177,207 場有足夠往績），用鎖點 booster（指紋 378c283b73a7-bb35e29b0c7b-175995，原檔不動、冇重訓）對最新 4,000 場計 TreeSHAP 真數，寫入研究倉 data/research/s39/lgb_shap.json（commit f91e60d），applied_to_freeze: false。gain 頭五：dc_pa、elo_exp、elo_diff、lam_diff、seen_a。研究擴充：per_class 主／和／客分開計（主=Elo 系最強、客=dc_pa、和=dc_pd 幅細——同 S26b「LGB 分唔出和」結論一致）；per_league 五大聯賽分層（頭三幾乎同一套，冇新結構；德甲樣本窗追溯到 2021-10 較早，唔當五聯賽可直接比）。用戶核過研究擴充閘：過。產品 overlay 閘唔過：無逐場 local 因子包、只解釋 LGB 65% 嗰條軌、Elo／DC 共線未拆——所以紅綠因子唔上前台，凍結、預測、指紋全部唔動。技術備註：GITHUB_API_KEY 係 connector key，GitHub Actions 認唔到，改為沙盒直讀直算；lgb_shap_compute.py 原本唔處理三分類 SHAP 輸出維度會拋錯，已修（commit 1645560）。賽馬 SHAP 繼續 blocked，等鎖點 booster。",
