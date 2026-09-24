@@ -1,7 +1,47 @@
 {
-  "generatedHKT": "2026-09-25 03:43 HKT",
+  "generatedHKT": "2026-09-25 04:03 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-25",
+      "time": "04:02",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "文檔",
+      "title": "docs(roadmap): lgb_fast_predict 修正生效（heredoc 縮進修正，指令未改）",
+      "scope": "site",
+      "sha": "6bd8e29"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "04:02",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "文檔",
+      "title": "docs(dev-log): 2026-09-25 後備補分流程修正條目",
+      "scope": "site",
+      "sha": "53a7071"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "04:00",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(lgb-fast-predict): indent heredoc bodies so workflow YAML parses — 後備補分流程從未運行，指令內容一字未改",
+      "scope": "backend",
+      "sha": "9dd8bca"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "03:43",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "d25d184"
+    },
     {
       "date": "2026-09-25",
       "time": "00:43",
@@ -683,26 +723,6 @@
       "sha": "98a85b8"
     },
     {
-      "date": "2026-09-21",
-      "time": "02:25",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "c92ea63"
-    },
-    {
-      "date": "2026-09-20",
-      "time": "15:46",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-20T15:46",
-      "scope": "site",
-      "sha": "0b69279"
-    },
-    {
       "date": "2026-09-20",
       "time": "15:39",
       "areaKey": "backend",
@@ -711,16 +731,6 @@
       "title": "[sanity][skip ci] engine health 2026-09-20T15:39",
       "scope": "backend",
       "sha": "da73b31"
-    },
-    {
-      "date": "2026-09-20",
-      "time": "02:20",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "9cbbc39"
     },
     {
       "date": "2026-09-20",
@@ -931,16 +941,6 @@
       "title": "S29 context data layer: scripts/test-admin-auth.ts",
       "scope": "backend",
       "sha": "0dbc52d"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "17:05",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "S29 context data layer: .github/workflows/engine_sanity_daily.yml",
-      "scope": "backend",
-      "sha": "612a152"
     },
     {
       "date": "2026-09-13",
