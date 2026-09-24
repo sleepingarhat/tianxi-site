@@ -517,3 +517,24 @@
 - [x] 產品：src/lib/footballSecondLayer.ts、賽前預測卡第二層卡、凍結帳卡結算行、對帳頁第二層獨立戰績欄（贏／走水／輸、隱含 vs 實際、三類覆蓋）
 - [x] 戰績分兩欄：1X2 對三格、第二層對結算；−1／+1 贏唔當 1X2 中
 - [ ] 累積綠燈已鎖完場樣本後重量一次 −1 校準；過 2 點閘才考慮開 MINUS1_GATE_PASSED（一季一次）
+
+## S39 停賽自動偵測 ＋ 賽果入帳狀態（2026-09-21）
+- [x] /api/public/meeting-cancellation：人手覆核檔 → 馬會公告關鍵字 → 賽日結構（排位表 0 場／0 匹，只查當日或過往）→ 正常賽日；上游失敗回正常賽日並標 source=unknown（守舊唔誤報）
+- [x] 人手覆核檔位置 tianxi-database data/meeting-status/YYYY-MM-DD.json（2026-09-19 已存檔並實測命中）
+- [x] useMeetingCancellation 成為全站唯一停賽真相（60 秒 stale／5 分鐘重抓）；硬編碼名單降為離線 fallback
+- [x] 通告分兩級：已確認停賽（紅）／疑似停賽（黃，待官方確認）；兩者一律不生成、不鎖定、不入戰績
+- [x] 足球對帳加第四狀態「待賽果入帳」（開賽逾 3 小時未 join 賽果）：寫明上游賽果檔未更新、賽果一到自動結算、凍結預測唔補算
+- [ ] 後端 tianxi-backend：CANCELLED_MEETING_DATES 改讀 meeting_status（append-only），每 5 分鐘鎖點檢查同一條 cron 命中即跳過 writePredictionLog
+- [ ] 上游 90 分鐘賽果檔（football-data.co.uk）更新後核對 09-18～09-20 共 198 場自動入帳
+
+## 2026-09-22 解釋層第一刀 + 抓取修復
+- [x] tianxi-database 四個工作流修好瀏覽器／驅動版本不配對（setup-chrome install-chromedriver），每日賽果流程重跑 success
+- [x] /explain 全局分層覆蓋頁（349 場、平均 2.04／4、分層 + 兩頭殘差；<10 場標樣本太少）
+- [x] /explain/:date 逐場拆解（凍結四揀 vs 實際頭 4 重疊，唯讀，唔改排名）
+- [ ] 引擎倉 lgb_walkforward.py 加 TreeSHAP + explain_log（append-only、fail-closed），前端先顯示紅綠五因子
+- [ ] 解釋層改接 GET /api/explain/global、GET /api/explain/meeting?date=（現讀倉內 JSON）
+
+- [x] 2026-09-24 對齊收口：/explain 即場讀 hit-rate（頭條 358 場、平均 2.03／4、窗至 09-23；分層表／殘差寫死「只計至 09-16，349 場」，兩套數分開標）；/explain/2026-09-23 九場全出（只中 2,1,1,2,1,3,2,2,1、平均 1.67）；新增 /football/explain（綠燈 28 場、首選 71.4%、頭八格 50%、RPS 0.2081、ECE 0.1547）；正式站 tianxi.racing 瀏覽器等 hydration 核對，三條路由同預覽一致。預測指紋不變。
+- [x] 收料層（tianxi-database）：賽果抓取跳過條件改場號集合（CSV 已排位場號 == 馬會實際場號兼連續 1..N，每場至少有完賽名次），停用行數／連結數門檻；09-23 補齊 9 場 109 名次
+- [x] 命中率自動重算（tianxi-backend）：已評場數 < 有完整頭 4 場數、或賽果新過 hit-rate generatedAt 即重算；GET 讀取同 cron 都做檢查；只重算對帳，凍結四揀不動；賽果未齊唔評（fail-closed），手動重跑降級後備
+- [ ] 引擎倉季節旗 lastMeeting 滯後（09-16）同 hit-rate 自動化對齊
