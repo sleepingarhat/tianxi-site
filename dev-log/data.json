@@ -1,7 +1,27 @@
 {
-  "generatedHKT": "2026-09-24 19:40 HKT",
+  "generatedHKT": "2026-09-24 19:41 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-24",
+      "time": "19:41",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "記錄 2026-09-24 賽季橫額改讀 /api/season（dev-log + roadmap）",
+      "scope": "site",
+      "sha": "c501bbe"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "19:41",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "提交",
+      "title": "記錄 2026-09-24 賽季橫額改讀 /api/season（dev-log + roadmap）",
+      "scope": "site",
+      "sha": "8f4bb18"
+    },
     {
       "date": "2026-09-24",
       "time": "19:40",
@@ -11,6 +31,16 @@
       "title": "賽季橫額改讀 /api/season（status/lastMeeting/nextMeeting/label），API 失敗先 overlay 靜態 health.json；修正渲染函數名筆誤 ess→esc",
       "scope": "site",
       "sha": "c78cd22"
+    },
+    {
+      "date": "2026-09-24",
+      "time": "19:40",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "d9c54f3"
     },
     {
       "date": "2026-09-24",
@@ -611,36 +641,6 @@
       "title": "[sanity][skip ci] engine health 2026-09-19T15:14",
       "scope": "backend",
       "sha": "21b3500"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "14:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
-      "scope": "site",
-      "sha": "07f6298"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "14:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
-      "scope": "site",
-      "sha": "67d3c91"
-    },
-    {
-      "date": "2026-09-19",
-      "time": "14:04",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix: show and exclude cancelled 2026-09-19 meeting",
-      "scope": "site",
-      "sha": "079daf9"
     },
     {
       "date": "2026-09-19",
