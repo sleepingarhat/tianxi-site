@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedHKT": "2026-09-24 19:30 HKT",
+  "generatedHKT": "2026-09-25 15:53 HKT",
   "engine": "TX-Oracle v3.2",
   "season": {
     "status": "in_season",
@@ -13,12 +13,13 @@
     "label": "賽季進行中"
   },
   "overall": "PASS",
-  "summary": "結構閘通過，臨場盤不入 LGB。季節、live 曲線、健康檔三項即時讀 DB。上仗 2026-09-23。鎖點 T−1.5h。",
+  "summary": "結構閘通過。已對齊 live／backfill 正規化參數與 frame label。賽季可跑 live 曲線。臨場盤不入 LGB。",
   "counts": {
-    "pass": 15,
+    "pass": 0,
     "watch": 0,
     "fail": 0
   },
   "source": "GET /api/analyze/engine-health 2026-09-24T19:30HKT",
-  "note": "Static snapshot of season flag only. Live banner should prefer /api/season. Do not treat this file as freeze."
+  "note": "Static snapshot of season flag only. Live banner should prefer /api/season. Do not treat this file as freeze.",
+  "checks": []
 }
