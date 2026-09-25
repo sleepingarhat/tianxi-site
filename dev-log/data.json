@@ -1,7 +1,107 @@
 {
-  "generatedHKT": "2026-09-25 04:03 HKT",
+  "generatedHKT": "2026-09-26 03:46 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-25",
+      "time": "17:36",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "97bda9c"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "16:38",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: update speed-guide data (2026-09-25T08:38Z)",
+      "scope": "database",
+      "sha": "6463b33"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "16:24",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] critical critical=1 warn=12 · 2026-09-25T08:24Z",
+      "scope": "database",
+      "sha": "2e88542"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "15:53",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-25T15:53",
+      "scope": "site",
+      "sha": "45f79cd"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "15:33",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-25T07:33Z",
+      "scope": "database",
+      "sha": "2e21587"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "15:32",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] engine health 2026-09-25T15:32",
+      "scope": "backend",
+      "sha": "fc4790e"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "13:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: update speed-guide data (2026-09-25T05:51Z)",
+      "scope": "database",
+      "sha": "3058c56"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "09:57",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-25T01:57Z · pool-a 2026-09-25T01:57Z via GHA matrix",
+      "scope": "database",
+      "sha": "f40b6be"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "04:52",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-24T20:52Z · [data][skip ci] pool-b 2026-09-24T20:52Z via GHA",
+      "scope": "database",
+      "sha": "63e9307"
+    },
+    {
+      "date": "2026-09-25",
+      "time": "04:03",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "e419e3f"
+    },
     {
       "date": "2026-09-25",
       "time": "04:02",
@@ -604,26 +704,6 @@
     },
     {
       "date": "2026-09-22",
-      "time": "17:18",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "ae76d8e"
-    },
-    {
-      "date": "2026-09-22",
-      "time": "16:06",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] critical critical=1 warn=11 · 2026-09-22T08:06Z",
-      "scope": "database",
-      "sha": "6da62ff"
-    },
-    {
-      "date": "2026-09-22",
       "time": "15:45",
       "areaKey": "web",
       "area": "前端",
@@ -635,82 +715,12 @@
     {
       "date": "2026-09-22",
       "time": "15:36",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-22T07:36Z",
-      "scope": "database",
-      "sha": "5516e4b"
-    },
-    {
-      "date": "2026-09-22",
-      "time": "15:36",
       "areaKey": "backend",
       "area": "後端·模型",
       "typeLabel": "提交",
       "title": "[sanity][skip ci] engine health 2026-09-22T15:36",
       "scope": "backend",
       "sha": "7598ed2"
-    },
-    {
-      "date": "2026-09-22",
-      "time": "13:52",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: update speed-guide data (2026-09-22T05:52Z)",
-      "scope": "database",
-      "sha": "ff4824d"
-    },
-    {
-      "date": "2026-09-22",
-      "time": "09:36",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-22T01:36Z · pool-a 2026-09-22T01:36Z via GHA matrix",
-      "scope": "database",
-      "sha": "bb9be02"
-    },
-    {
-      "date": "2026-09-22",
-      "time": "05:18",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-21T21:18Z · [data][skip ci] pool-b 2026-09-21T21:18Z via GHA",
-      "scope": "database",
-      "sha": "c2e3dbc"
-    },
-    {
-      "date": "2026-09-22",
-      "time": "04:14",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "d90d839"
-    },
-    {
-      "date": "2026-09-22",
-      "time": "01:54",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-21T17:54Z · [data][skip ci] entries 2026-09-21T17:54Z via GHA",
-      "scope": "database",
-      "sha": "8ba7802"
-    },
-    {
-      "date": "2026-09-21",
-      "time": "15:59",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-21T15:59",
-      "scope": "site",
-      "sha": "ea9e496"
     },
     {
       "date": "2026-09-21",
@@ -931,16 +941,6 @@
       "title": "S29 context data layer: src/routes/analyze.ts",
       "scope": "backend",
       "sha": "07cd0e7"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "17:14",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "S29 context data layer: scripts/test-admin-auth.ts",
-      "scope": "backend",
-      "sha": "0dbc52d"
     },
     {
       "date": "2026-09-13",
