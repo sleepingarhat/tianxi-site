@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { AppShell } from "@/components/tx/AppShell";
 import { Card, Disclaimer, ErrorNote, Loading, PageHead, Stat, StatGrid } from "@/components/tx/ui";
+import { EXPLAIN } from "@/lib/footballExplain";
 
 export const Route = createFileRoute("/football/explain")({
   head: () => ({
@@ -72,6 +73,13 @@ function FootballExplain() {
           </p>
         </Card>
       )}
+      <Card title="E1 解釋層" en="Templates">
+        <p className="text-[11px] leading-relaxed text-ink-2">
+          逐場原因句由凍結三格、λ／預期入球、綠紅燈同軌名加總。近盤標籤閘
+          |P_H−P_A|＜{EXPLAIN.closeGap}（S26b），只掛章、唔出和、唔平移機率。
+        </p>
+        <p className="mt-1.5 text-[10px] leading-relaxed text-ink-3">{EXPLAIN.disclaimer}</p>
+      </Card>
       <Disclaimer extra="釋義層用覆蓋／只中／凍結四擁口徑。「因果」只出現在否定句。LGB TreeSHAP 要同一版 booster 在研究倉跑完先顯示。" />
     </AppShell>
   );

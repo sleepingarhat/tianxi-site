@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 
 import { Card, Empty, ErrorNote, Loading, Pill, Seg, Stat, StatGrid } from "@/components/tx/ui";
 import { SECOND_LAYER, legOutcome, recommend } from "@/lib/footballSecondLayer";
+import { explainMatch, EXPLAIN } from "@/lib/footballExplain";
 import { argmaxSide } from "@/lib/footballTeams";
 import { teamZh } from "@/lib/teamZh";
 
@@ -67,12 +68,11 @@ type LogRec = {
 
 type LogFile = { matches: Record<string, LogRec> };
 
-const pc = (v: number | undefined, d = 1) => (v == null ? "—" : `${(v * 100).toFixed(d)}%`);
-const RES_ZH: Record<string, string> = { home: "主勝", draw: "和局", away: "客勝" };
+const pc = (v: number | undefined, d = 1) => (v == null ? "\u2014" : `${(v * 100).toFixed(d)}%`);
+const RES_ZH: Record<string, string> = { home: "\u4e3b\u52dd", draw: "\u548c\u5c40", away: "\u5ba2\u52dd" };
 const BIG5 = ["E0", "D1", "SP1", "I1", "F1"];
 const isGreen = (r: LogRec) => r.status !== "fallback" && !!r.locked_at;
 
-/** 同一張卡三個狀態：未開賽 → 進行中（只顯示狀態，唔顯示即時比分）→ 已結算。 */
 type Phase = "upcoming" | "live" | "done";
 function phaseOf(r: LogRec): Phase {
   if (r.result) return "done";
@@ -90,7 +90,7 @@ const hkTime = (iso?: string) =>
         minute: "2-digit",
         hour12: false,
       })
-    : "—";
+    : "\u2014";
 
 function monthKey(offset = 0) {
   const d = new Date();
@@ -101,11 +101,10 @@ function monthKey(offset = 0) {
 
 async function readJson<T>(query: string): Promise<T> {
   const res = await fetch(`/api/public/football-predictions?${query}`);
-  if (!res.ok) throw new Error(`載入失敗 ${res.status}`);
+  if (!res.ok) throw new Error(`\u8f09\u5165\u5931\u6557 ${res.status}`);
   return (await res.json()) as T;
 }
 
-/** 一場一卡：左邊凍結預測（已鎖），右邊 90 分鐘賽果，同一張矩陣出 1X2 同波膽。 */
 function MatchCard({ r }: { r: LogRec }) {
   const res = r.result ?? null;
   const phase = phaseOf(r);
@@ -114,7 +113,6 @@ function MatchCard({ r }: { r: LogRec }) {
   const inLedger = green && BIG5.includes(r.div);
   const actualIdx = res ? ({ home: 0, draw: 1, away: 2 }[res.ftr] ?? -1) : -1;
   const predIdx = p.length === 3 ? argmaxSide(p) : -1;
-  // 第二層推薦結算：同一張凍結矩陣（λ + 三格）派生，獨立一欄對帳
   const lam = r.lambda ?? [];
   const rec =
     p.length === 3 && lam.length === 2
@@ -122,150 +120,122 @@ function MatchCard({ r }: { r: LogRec }) {
       : null;
   const legRes = rec && res ? legOutcome(res.ft_h, res.ft_a, rec.sideHome, rec.line) : null;
   const actualScore = res ? `${res.ft_h}-${res.ft_a}` : "";
+  const expl = explainMatch({
+    p,
+    lambda: lam,
+    exp: r.cs?.exp ?? r.lambda,
+    status: r.status,
+    lockedAt: r.locked_at,
+    track: r.track,
+    inLedger,
+    result: res,
+  });
   const top8 = r.cs?.top8 ?? [];
   const hitCell = top8.find((c) => c.score === actualScore);
   const topCell = top8[0] ?? null;
   const modeHit = !!res && !!topCell && topCell.score === actualScore;
-  const exp = r.cs?.exp ?? r.lambda ?? [];
   const phasePill =
     phase === "done"
-      ? { tone: "gold" as const, label: "已結算" }
+      ? { tone: "gold" as const, label: "\u5df2\u7d50\u7b97" }
       : phase === "live"
-        ? { tone: "gold" as const, label: "進行中 · 預測已鎖定" }
-        : { tone: "ink" as const, label: `未開賽 · ${hkTime(r.kickoff_utc)}` };
+        ? { tone: "gold" as const, label: "\u9032\u884c\u4e2d \u00b7 \u9810\u6e2c\u5df2\u9396\u5b9a" }
+        : { tone: "ink" as const, label: `\u672a\u958b\u8cfd \u00b7 ${hkTime(r.kickoff_utc)}` };
 
   return (
     <article className="rounded-[10px] border border-hairline bg-paper px-2.5 py-2.5">
       <header className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
         <span className="font-serif-tc text-[13px] font-bold text-ink">
-          {teamZh(r.div, r.home)} <span className="text-ink-3">對</span> {teamZh(r.div, r.away)}
+          {teamZh(r.div, r.home)} <span className="text-ink-3">\u5c0d</span> {teamZh(r.div, r.away)}
         </span>
         <Pill tone="ink">{r.league_zh ?? r.div}</Pill>
-        <Pill tone={green ? "win" : "lose"}>{green ? "綠燈 · 已鎖" : "紅燈 · 熱身不足"}</Pill>
+        <Pill tone={green ? "win" : "lose"}>{green ? "\u7da0\u71c8 \u00b7 \u5df2\u9396" : "\u7d05\u71c8 \u00b7 \u71b1\u8eab\u4e0d\u8db3"}</Pill>
         <Pill tone={phasePill.tone}>{phasePill.label}</Pill>
-        {inLedger ? null : <Pill tone="ink">唔入戰績</Pill>}
+        {inLedger ? null : <Pill tone="ink">\u5514\u5165\u6230\u7e3e</Pill>}
       </header>
-
       <div className="mt-2 grid gap-2 sm:grid-cols-2">
-        {/* 左：凍結預測 */}
         <div className="rounded-[8px] border border-hairline bg-paper-2 px-2 py-2">
-          <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">
-            凍結預測（開波前已鎖）
-          </p>
+          <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">\u51cd\u7d50\u9810\u6e2c\uff08\u958b\u6ce2\u524d\u5df2\u9396\uff09</p>
           <div className="mt-1.5 space-y-1">
             {["home", "draw", "away"].map((k, i) => {
               const v = p[i] ?? 0;
               const hit = i === actualIdx;
               return (
                 <div key={k} className="flex items-center gap-1.5">
-                  <span className={`w-8 text-[10px] font-bold ${hit ? "text-win" : "text-ink-2"}`}>
-                    {RES_ZH[k]}
-                  </span>
+                  <span className={`w-8 text-[10px] font-bold ${hit ? "text-win" : "text-ink-2"}`}>{RES_ZH[k]}</span>
                   <span className="h-2 flex-1 overflow-hidden rounded-[2px] bg-hairline">
-                    <span
-                      className={`block h-full ${hit ? "bg-win" : "bg-ink-3/50"}`}
-                      style={{ width: `${Math.round(v * 100)}%` }}
-                    />
+                    <span className={`block h-full ${hit ? "bg-win" : "bg-ink-3/50"}`} style={{ width: `${Math.round(v * 100)}%` }} />
                   </span>
-                  <span className="tabnum w-10 text-right font-mono-tx text-[10px] text-ink">
-                    {pc(v, 0)}
-                  </span>
-                  <span className="w-3 text-[10px] text-win">{hit ? "●" : ""}</span>
+                  <span className="tabnum w-10 text-right font-mono-tx text-[10px] text-ink">{pc(v, 0)}</span>
+                  <span className="w-3 text-[10px] text-win">{hit ? "\u25cf" : ""}</span>
                 </div>
               );
             })}
           </div>
           {predIdx >= 0 ? (
             <div className="mt-2 rounded-[7px] border border-hairline bg-paper px-2 py-1.5">
-              <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">
-                對外預測（三格最高者）
-              </p>
+              <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">\u5c0d\u5916\u9810\u6e2c\uff08\u4e09\u683c\u6700\u9ad8\u8005\uff09</p>
               <p className="mt-0.5 font-serif-tc text-[20px] font-bold leading-none text-deep">
                 {RES_ZH[["home", "draw", "away"][predIdx]!]}
-                <span className="tabnum ml-1.5 font-mono-tx text-[10px] font-normal text-ink-2">
-                  {pc(p[predIdx] ?? 0, 1)}
-                </span>
+                <span className="tabnum ml-1.5 font-mono-tx text-[10px] font-normal text-ink-2">{pc(p[predIdx] ?? 0, 1)}</span>
                 {res ? (
                   <span className={`ml-1.5 text-[11px] ${predIdx === actualIdx ? "text-win" : "text-ink-3"}`}>
-                    {predIdx === actualIdx ? "● 中" : "○ 唔中"}
+                    {predIdx === actualIdx ? "\u25cf \u4e2d" : "\u25cb \u5514\u4e2d"}
                   </span>
                 ) : null}
               </p>
-              <p className="tabnum mt-1 font-mono-tx text-[9px] text-ink-3">
-                主客機率距離 {pc(Math.abs((p[0] ?? 0) - (p[2] ?? 0)), 1)}
-                {exp.length === 2 ? `｜預期入球 ${exp[0]!.toFixed(2)}–${exp[1]!.toFixed(2)}` : ""}
-              </p>
+              <p className="tabnum mt-1 font-mono-tx text-[9px] text-ink-3">{expl.why}</p>
+              {expl.closeTag ? (
+                <p className="mt-1 rounded-[5px] border border-deep/20 bg-paper-2 px-1.5 py-1 text-[9px] leading-relaxed text-ink-2">
+                  {expl.closeTag}
+                  <span className="mt-0.5 block text-ink-3">\u6a19\u7c64\u5514\u6539\u9810\u6e2c\u5b57\u3001\u5514\u5165\u5c0d\u5e33\u3002</span>
+                </p>
+              ) : null}
               {top8.length > 0 ? (
                 <details className="mt-1.5">
-                  <summary className="cursor-pointer text-[9px] font-bold text-ink-3">
-                    展開波膽格（只作診斷，對帳與訓練一律用全格）
-                  </summary>
+                  <summary className="cursor-pointer text-[9px] font-bold text-ink-3">\u5c55\u958b\u6ce2\u81bd\u683c\uff08\u53ea\u4f5c\u8a3a\u65b7\uff0c\u5c0d\u5e33\u8207\u8a13\u7df4\u4e00\u5f8b\u7528\u5168\u683c\uff09</summary>
                   <p className="tabnum mt-1 font-mono-tx text-[10px] text-ink-2">
-                    最高格 {topCell ? topCell.score.replace("-", ":") : "—"}
+                    \u6700\u9ad8\u683c {topCell ? topCell.score.replace("-", ":") : "\u2014"}
                     {topCell ? `（${pc(topCell.p, 1)}）` : ""}
-                    {res ? (modeHit ? " · 眾數中" : " · 眾數唔中") : ""}
+                    {res ? (modeHit ? " \u00b7 \u773e\u6578\u4e2d" : " \u00b7 \u773e\u6578\u5514\u4e2d") : ""}
                   </p>
                   <ul className="mt-1 grid grid-cols-4 gap-1">
                     {top8.map((c) => (
-                      <li
-                        key={c.score}
-                        className={`rounded-[5px] border px-1 py-1 text-center ${
-                          c.score === actualScore
-                            ? "border-win/60 bg-win/10"
-                            : "border-hairline bg-paper-2"
-                        }`}
-                      >
-                        <p className="tabnum font-mono-tx text-[10px] font-bold text-ink">
-                          {c.score.replace("-", ":")}
-                        </p>
+                      <li key={c.score} className={`rounded-[5px] border px-1 py-1 text-center ${c.score === actualScore ? "border-win/60 bg-win/10" : "border-hairline bg-paper-2"}`}>
+                        <p className="tabnum font-mono-tx text-[10px] font-bold text-ink">{c.score.replace("-", ":")}</p>
                         <p className="tabnum font-mono-tx text-[9px] text-ink-3">{pc(c.p, 1)}</p>
                       </li>
                     ))}
                   </ul>
                 </details>
               ) : null}
-              <p className="mt-1.5 text-[9px] leading-relaxed text-ink-3">
-                主／和／客係同一張凍結矩陣加總（P_H、P_D、P_A），預測字取最高者；波膽只係同一張矩陣嘅單格，收起唔對外報。
-              </p>
+              <p className="mt-1.5 text-[9px] leading-relaxed text-ink-3">\u4e3b／\u548c／\u5ba2\u4fc2\u540c\u4e00\u5f35\u51cd\u7d50\u77e9\u9663\u52a0\u7e3d\uff08P_H\u3001P_D\u3001P_A\uff09，\u9810\u6e2c\u5b57\u53d6\u6700\u9ad8\u8005\uff1b\u6ce2\u81bd\u53ea\u4fc2\u540c\u4e00\u5f35\u77e9\u9663\u5605\u55ae\u683c，\u6536\u8d77\u5514\u5c0d\u5916\u5831\u3002</p>
               {rec ? (
                 <div className="mt-1.5 rounded-[6px] border border-deep/25 bg-paper-2 px-2 py-1.5">
                   <p className="flex items-center justify-between text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">
-                    <span>第二層 · 推薦結算</span>
+                    <span>\u7b2c\u4e8c\u5c64 \u00b7 \u63a8\u85a6\u7d50\u7b97</span>
                     <span className="tabnum font-mono-tx normal-case tracking-normal">{rec.bucketZh}</span>
                   </p>
                   <p className="mt-0.5 font-serif-tc text-[13px] font-bold leading-none text-deep">
                     {rec.label(teamZh(r.div, r.home), teamZh(r.div, r.away))}
                     {legRes ? (
-                      <span
-                        className={`ml-1.5 font-mono-tx text-[10px] font-normal ${
-                          legRes === "win" ? "text-win" : legRes === "push" ? "text-ink-2" : "text-ink-3"
-                        }`}
-                      >
-                        {legRes === "win" ? "● 贏" : legRes === "push" ? "◐ 走水" : "○ 輸"}
+                      <span className={`ml-1.5 font-mono-tx text-[10px] font-normal ${legRes === "win" ? "text-win" : legRes === "push" ? "text-ink-2" : "text-ink-3"}`}>
+                        {legRes === "win" ? "\u25cf \u8d0f" : legRes === "push" ? "\u25d0 \u8d70\u6c34" : "\u25cb \u8f38"}
                       </span>
                     ) : null}
                   </p>
                   <p className="tabnum mt-1 font-mono-tx text-[9px] text-ink-3">
-                    矩陣加總：贏 {pc(rec.leg.win, 1)}
-                    {rec.line !== 0 ? ` · 走水 ${pc(rec.leg.push, 1)}` : ""} · 輸 {pc(rec.leg.lose, 1)}
+                    \u77e9\u9663\u52a0\u7e3d\uff1a\u8d0f {pc(rec.leg.win, 1)}
+                    {rec.line !== 0 ? ` \u00b7 \u8d70\u6c34 ${pc(rec.leg.push, 1)}` : ""} \u00b7 \u8f38 {pc(rec.leg.lose, 1)}
                   </p>
-                  <p className="mt-1 text-[9px] leading-relaxed text-ink-3">
-                    第二層獨立一欄計數：−1／+1 贏唔當 1X2 中，1X2 中亦唔當第二層贏。第二層唔會出和。
-                  </p>
+                  <p className="mt-1 text-[9px] leading-relaxed text-ink-3">\u7b2c\u4e8c\u5c64\u7368\u7acb\u4e00\u6b04\u8a08\u6578\uff1a\u22121／+1 \u8d0f\u5514\u7576 1X2 中，1X2 中亦\u5514\u7576\u7b2c\u4e8c\u5c64\u8d0f\u3002\u7b2c\u4e8c\u5c64\u5514\u6703\u51fa\u548c\u3002</p>
                 </div>
               ) : null}
             </div>
           ) : null}
-          <p className="mt-1 break-all font-mono-tx text-[9px] text-ink-3">
-            指紋 {r.fingerprint ?? "—"}｜軌 {r.track ?? "—"}
-          </p>
+          <p className="mt-1 break-all font-mono-tx text-[9px] text-ink-3">\u6307\u7d0b {r.fingerprint ?? "\u2014"}\uff5c\u8ecc {r.track ?? "\u2014"}</p>
         </div>
-
-        {/* 右：90 分鐘賽果（未完場只顯示狀態，唔顯示即時比分） */}
         <div className="rounded-[8px] border border-hairline bg-paper-2 px-2 py-2">
-          <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">
-            90 分鐘賽果（加時／點球另計）
-          </p>
+          <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">90 \u5206\u9418\u8cfd\u679c\uff08\u52a0\u6642／\u9ede\u7403\u53e6\u8a08\uff09</p>
           {res ? (
             <>
               <p className="tabnum mt-1.5 font-mono-tx text-[20px] font-bold leading-none text-deep">
@@ -273,34 +243,29 @@ function MatchCard({ r }: { r: LogRec }) {
                 <span className="ml-1.5 text-[10px] font-normal text-ink-2">{RES_ZH[res.ftr]}</span>
               </p>
               <div className="mt-1.5 grid grid-cols-2 gap-x-2 gap-y-0.5 font-mono-tx text-[10px]">
-                <span className="text-ink-3">本場 RPS ↓</span>
-                <span className="tabnum text-right text-ink">{res.rps?.toFixed(4) ?? "—"}</span>
-                <span className="text-ink-3">賽果落咗幾多機率</span>
+                <span className="text-ink-3">\u672c\u5834 RPS \u2193</span>
+                <span className="tabnum text-right text-ink">{res.rps?.toFixed(4) ?? "\u2014"}</span>
+                <span className="text-ink-3">\u8cfd\u679c\u843d\u5497\u5e7e\u591a\u6a5f\u7387</span>
                 <span className="tabnum text-right text-ink">{pc(res.p_actual, 1)}</span>
-                <span className="text-ink-3">波膽第幾格</span>
-                <span className="tabnum text-right text-ink">
-                  {res.cs_rank ? `第 ${res.cs_rank} 格` : "跌出頭八格"}
-                </span>
-                <span className="text-ink-3">該格凍結機率</span>
-                <span className="tabnum text-right text-ink">{hitCell ? pc(hitCell.p, 1) : "—"}</span>
+                <span className="text-ink-3">\u6ce2\u81bd\u7b2c\u5e7e\u683c</span>
+                <span className="tabnum text-right text-ink">{res.cs_rank ? `\u7b2c ${res.cs_rank} \u683c` : "\u8dcc\u51fa\u982d\u516b\u683c"}</span>
+                <span className="text-ink-3">\u8a72\u683c\u51cd\u7d50\u6a5f\u7387</span>
+                <span className="tabnum text-right text-ink">{hitCell ? pc(hitCell.p, 1) : "\u2014"}</span>
               </div>
               <p className="mt-1.5">
-                <Pill tone={res.cs_rank ? "win" : "ink"}>
-                  {res.cs_rank ? `頭八格內中（第 ${res.cs_rank}）` : "頭八格外"}
-                </Pill>
+                <Pill tone={res.cs_rank ? "win" : "ink"}>{res.cs_rank ? `\u982d\u516b\u683c\u5167\u4e2d\uff08\u7b2c ${res.cs_rank}\uff09` : "\u982d\u516b\u683c\u5916"}</Pill>
               </p>
+              {expl.settled ? (
+                <p className="tabnum mt-1.5 font-mono-tx text-[9px] leading-relaxed text-ink-3">{expl.settled}</p>
+              ) : null}
             </>
           ) : (
             <>
-              <p className="mt-1.5 font-serif-tc text-[15px] font-bold leading-tight text-ink-2">
-                {phase === "live" ? "進行中 · 預測已鎖定" : "未開賽"}
-              </p>
+              <p className="mt-1.5 font-serif-tc text-[15px] font-bold leading-tight text-ink-2">{phase === "live" ? "\u9032\u884c\u4e2d \u00b7 \u9810\u6e2c\u5df2\u9396\u5b9a" : "\u672a\u958b\u8cfd"}</p>
               <p className="mt-1 text-[10px] leading-relaxed text-ink-3">
                 {phase === "live"
-                  ? "比賽進行期間唔顯示即時比分：對帳單位係 90 分鐘完場賽果，凍結機率永遠唔會賽中更新。完場並結算後，呢張卡會自動轉「已結算」。"
-                  : `開賽時間 ${hkTime(r.kickoff_utc)}（香港）。${
-                      r.locked_at ? "已鎖定，開賽前 60 分鐘定案。" : "開賽前 60 分鐘鎖定，鎖定前仍可刷新。"
-                    }`}
+                  ? "\u6bd4\u8cfd\u9032\u884c\u671f\u9593\u5514\u986f\u793a\u5373\u6642\u6bd4\u5206\uff1a\u5c0d\u5e33\u55ae\u4f4d\u4fc2 90 \u5206\u9418\u5b8c\u5834\u8cfd\u679c，\u51cd\u7d50\u6a5f\u7387\u6c38\u9060\u5514\u6703\u8cfd\u4e2d\u66f4\u65b0\u3002\u5b8c\u5834\u4e26\u7d50\u7b97\u5f8c，\u5462\u5f35\u5361\u6703\u81ea\u52d5\u8f49\u300c\u5df2\u7d50\u7b97\u300d\u3002"
+                  : `\u958b\u8cfd\u6642\u9593 ${hkTime(r.kickoff_utc)}\uff08\u9999\u6e2f\uff09\u3002${r.locked_at ? "\u5df2\u9396\u5b9a，\u958b\u8cfd\u524d 60 \u5206\u9418\u5b9a\u6848\u3002" : "\u958b\u8cfd\u524d 60 \u5206\u9418\u9396\u5b9a，\u9396\u5b9a\u524d\u4ecd\u53ef\u5237\u65b0\u3002"}`}
               </p>
             </>
           )}
@@ -314,67 +279,35 @@ export function FootballLedger() {
   const [day, setDay] = useState("all");
   const [lg, setLg] = useState("big5");
   const [ph, setPh] = useState<Phase | "all">("all");
-
-  const hit = useQuery<HitRate>({
-    queryKey: ["footballHitRate"],
-    queryFn: () => readJson<HitRate>("file=hit_rate"),
-    staleTime: 300_000,
-  });
-
+  const hit = useQuery<HitRate>({ queryKey: ["footballHitRate"], queryFn: () => readJson<HitRate>("file=hit_rate"), staleTime: 300_000 });
   const months = [monthKey(0), monthKey(-1)];
   const log = useQuery<LogRec[]>({
     queryKey: ["footballLedger", months.join(",")],
     queryFn: async () => {
       const files = await Promise.all(
         months.map(async (m) => {
-          try {
-            return await readJson<LogFile>(`file=log&month=${m}`);
-          } catch {
-            return { matches: {} } as LogFile;
-          }
+          try { return await readJson<LogFile>(`file=log&month=${m}`); }
+          catch { return { matches: {} } as LogFile; }
         }),
       );
       return files.flatMap((f) => Object.values(f.matches ?? {}));
     },
     staleTime: 300_000,
   });
-
-  const all = useMemo(
-    () =>
-      (log.data ?? [])
-        .slice()
-        .sort((a, b) => (b.kickoff_utc ?? "").localeCompare(a.kickoff_utc ?? "")),
-    [log.data],
-  );
+  const all = useMemo(() => (log.data ?? []).slice().sort((a, b) => (b.kickoff_utc ?? "").localeCompare(a.kickoff_utc ?? "")), [log.data]);
   const done = useMemo(() => all.filter((r) => r.result), [all]);
   const live = useMemo(() => all.filter((r) => phaseOf(r) === "live"), [all]);
   const pending = all.filter((r) => !r.result);
   const lockedCount = all.filter((r) => r.locked_at).length;
-
-  const days = useMemo(
-    () => Array.from(new Set(all.map((r) => (r.kickoff_utc ?? "").slice(0, 10)).filter(Boolean))),
-    [all],
-  );
+  const days = useMemo(() => Array.from(new Set(all.map((r) => (r.kickoff_utc ?? "").slice(0, 10)).filter(Boolean))), [all]);
   const leagues = useMemo(() => {
     const m = new Map<string, string>();
     all.forEach((r) => m.set(r.div, r.league_zh ?? r.div));
     return Array.from(m, ([value, label]) => ({ value, label }));
   }, [all]);
-
-  const shown = all.filter(
-    (r) =>
-      (day === "all" || (r.kickoff_utc ?? "").slice(0, 10) === day) &&
-      (lg === "all" ? true : lg === "big5" ? BIG5.includes(r.div) : r.div === lg) &&
-      (ph === "all" || phaseOf(r) === ph),
-  );
-
-  // 第二層戰績：只讀綠燈已鎖、五大、已完場嘅凍結列，獨立一欄計，唔混入 1X2 命中
+  const shown = all.filter((r) => (day === "all" || (r.kickoff_utc ?? "").slice(0, 10) === day) && (lg === "all" ? true : lg === "big5" ? BIG5.includes(r.div) : r.div === lg) && (ph === "all" || phaseOf(r) === ph));
   const secondLayer = useMemo(() => {
-    let n = 0;
-    let win = 0;
-    let push = 0;
-    let lose = 0;
-    let predWin = 0;
+    let n = 0, win = 0, push = 0, lose = 0, predWin = 0;
     const cov = [0, 0, 0];
     for (const r of all) {
       const pr = r.p ?? [];
@@ -386,185 +319,59 @@ export function FootballLedger() {
       n += 1;
       cov[rc.bucket - 1] = (cov[rc.bucket - 1] ?? 0) + 1;
       predWin += rc.leg.win;
-      if (o === "win") win += 1;
-      else if (o === "push") push += 1;
-      else lose += 1;
+      if (o === "win") win += 1; else if (o === "push") push += 1; else lose += 1;
     }
     return { n, win, push, lose, cov, predWin: n ? predWin / n : 0, actWin: n ? win / n : 0 };
   }, [all]);
-
   const green = hit.data?.green ?? null;
   const diag = hit.data?.diagnostic_big5_all_lights ?? null;
-
   return (
     <>
-      <Card title="逐場凍結帳（S13）" en="Frozen Ledger">
-        {hit.isLoading ? (
-          <Loading label="讀取凍結帳" />
-        ) : hit.error ? (
-          <ErrorNote error={hit.error} />
-        ) : (
+      <Card title="\u9010\u5834\u51cd\u7d50\u5e33\uff08S13\uff09" en="Frozen Ledger">
+        {hit.isLoading ? <Loading label="\u8b80\u53d6\u51cd\u7d50\u5e33" /> : hit.error ? <ErrorNote error={hit.error} /> : (
           <>
             <StatGrid cols={3}>
-              <Stat
-                label="平均 RPS ↓（入帳場次）"
-                value={green ? green.rps_avg.toFixed(4) : "未開帳"}
-                sub={`基準 ${hit.data?.baselines.prior_asof ?? 0.2261}／市場去水 ${
-                  hit.data?.baselines.market_devig ?? 0.2047
-                }`}
-              />
-              <Stat
-                label="1X2 校準"
-                value={green ? pc(green.ece, 2) : "未開帳"}
-                sub="模型講幾成，實際幾成"
-              />
-              <Stat
-                label="入帳樣本"
-                value={green ? green.n.toLocaleString() : "0"}
-                sub={green?.fingerprints?.length ? `指紋 ${green.fingerprints.join("、")}` : "指紋：待綠燈"}
-              />
+              <Stat label="\u5e73\u5747 RPS \u2193\uff08\u5165\u5e33\u5834\u6b21\uff09" value={green ? green.rps_avg.toFixed(4) : "\u672a\u958b\u5e33"} sub={`\u57fa\u6e96 ${hit.data?.baselines.prior_asof ?? 0.2261}\uff0f\u5e02\u5834\u53bb\u6c34 ${hit.data?.baselines.market_devig ?? 0.2047}`} />
+              <Stat label="1X2 \u6821\u6e96" value={green ? pc(green.ece, 2) : "\u672a\u958b\u5e33"} sub="\u6a21\u578b\u8b1b\u5e7e\u6210，\u5be6\u969b\u5e7e\u6210" />
+              <Stat label="\u5165\u5e33\u6a23\u672c" value={green ? green.n.toLocaleString() : "0"} sub={green?.fingerprints?.length ? `\u6307\u7d0b ${green.fingerprints.join("\u3001")}` : "\u6307\u7d0b\uff1a\u5f85\u7da0\u71c8"} />
             </StatGrid>
             <div className="mt-2 rounded-[8px] border border-deep/25 bg-paper px-2.5 py-2">
               <p className="flex items-center justify-between text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">
-                <span>第二層 · 推薦結算戰績（獨立一欄）</span>
-                <span className="tabnum font-mono-tx normal-case tracking-normal">
-                  τ={SECOND_LAYER.tau.toFixed(2)} δ={SECOND_LAYER.delta.toFixed(2)}
-                </span>
+                <span>\u7b2c\u4e8c\u5c64 \u00b7 \u63a8\u85a6\u7d50\u7b97\u6230\u7e3e\uff08\u7368\u7acb\u4e00\u6b04\uff09</span>
+                <span className="tabnum font-mono-tx normal-case tracking-normal">τ={SECOND_LAYER.tau.toFixed(2)} δ={SECOND_LAYER.delta.toFixed(2)}</span>
               </p>
               <div className="mt-1.5 grid gap-1 font-mono-tx text-[10px] sm:grid-cols-2">
-                <span className="text-ink-3">
-                  贏 <b className="tabnum text-ink">{secondLayer.n ? secondLayer.win : "—"}</b>／走水{" "}
-                  <b className="tabnum text-ink">{secondLayer.n ? secondLayer.push : "—"}</b>／輸{" "}
-                  <b className="tabnum text-ink">{secondLayer.n ? secondLayer.lose : "—"}</b>
-                </span>
-                <span className="text-ink-3">
-                  結算樣本 <b className="tabnum text-ink">{secondLayer.n}</b> 場（綠燈已鎖 · 五大）
-                </span>
-                <span className="text-ink-3">
-                  矩陣隱含贏率{" "}
-                  <b className="tabnum text-ink">{secondLayer.n ? pc(secondLayer.predWin, 1) : "—"}</b>
-                </span>
-                <span className="text-ink-3">
-                  實際贏率 <b className="tabnum text-ink">{secondLayer.n ? pc(secondLayer.actWin, 1) : "—"}</b>
-                </span>
-                <span className="text-ink-3">
-                  覆蓋 一面倒 <b className="tabnum text-ink">{secondLayer.cov[0]}</b>／近盤{" "}
-                  <b className="tabnum text-ink">{secondLayer.cov[1]}</b>／其餘{" "}
-                  <b className="tabnum text-ink">{secondLayer.cov[2]}</b>
-                </span>
+                <span className="text-ink-3">\u8d0f <b className="tabnum text-ink">{secondLayer.n ? secondLayer.win : "\u2014"}</b>\uff0f\u8d70\u6c34 <b className="tabnum text-ink">{secondLayer.n ? secondLayer.push : "\u2014"}</b>\uff0f\u8f38 <b className="tabnum text-ink">{secondLayer.n ? secondLayer.lose : "\u2014"}</b></span>
+                <span className="text-ink-3">\u7d50\u7b97\u6a23\u672c <b className="tabnum text-ink">{secondLayer.n}</b> \u5834\uff08\u7da0\u71c8\u5df2\u9396 \u00b7 \u4e94\u5927\uff09</span>
+                <span className="text-ink-3">\u77e9\u9663\u96b1\u542b\u8d0f\u7387 <b className="tabnum text-ink">{secondLayer.n ? pc(secondLayer.predWin, 1) : "\u2014"}</b></span>
+                <span className="text-ink-3">\u5be6\u969b\u8d0f\u7387 <b className="tabnum text-ink">{secondLayer.n ? pc(secondLayer.actWin, 1) : "\u2014"}</b></span>
+                <span className="text-ink-3">\u8986\u84cb \u4e00\u9762\u5012 <b className="tabnum text-ink">{secondLayer.cov[0]}</b>\uff0f\u8fd1\u76e4 <b className="tabnum text-ink">{secondLayer.cov[1]}</b>\uff0f\u5176\u9918 <b className="tabnum text-ink">{secondLayer.cov[2]}</b></span>
               </div>
-              <p className="mt-1 text-[9px] leading-relaxed text-ink-3">
-                第二層只出一句結算，唔改上面三格、唔改矩陣、唔升指紋，盤口權重永遠 0。主指標係結算校準（隱含贏率
-                對實際贏率），副指標係三類覆蓋率。−1／+1 贏唔當 1X2 中。τ、δ 由凍結 walk-forward 揀（
-                {SECOND_LAYER.gate.sample.toLocaleString()} 場，{SECOND_LAYER.gate.evalFrom} 季起），一季只准改一次；
-                「強隊 −1」逐季一致高估 4.3–9.8 個百分點、超出 2 點校準閘，所以一面倒場暫時退回直勝，−1 只作旁註。
-              </p>
+              <p className="mt-1 text-[9px] leading-relaxed text-ink-3">\u7b2c\u4e8c\u5c64\u53ea\u51fa\u4e00\u53e5\u7d50\u7b97，\u5514\u6539\u4e0a\u9762\u4e09\u683c\u3001\u5514\u6539\u77e9\u9663\u3001\u5514\u5347\u6307\u7d0b，\u76e4\u53e3\u6b0a\u91cd\u6c38\u9060 0\u3002\u89e3\u91cb\u53e5\u7531\u51cd\u7d50\u5217\u52a0\u7e3d，\u5514\u53e6\u958b\u6a21\u578b\uff1b\u8fd1\u76e4\u6a19\u7c64\u9598 |P_H\u2212P_A|\uff1c{EXPLAIN.closeGap}\u3002</p>
             </div>
-            <details className="mt-2 rounded-[8px] border border-hairline bg-paper px-2.5 py-2">
-              <summary className="cursor-pointer text-[10px] font-bold text-ink-2">
-                波膽對帳（眾數命中率＋頭八格覆蓋＋實際格 log-loss，摺疊）
-              </summary>
-              <div className="mt-1.5 grid gap-1 font-mono-tx text-[10px] sm:grid-cols-2">
-                <span className="text-ink-3">
-                  眾數命中率（展示用）{" "}
-                  <b className="tabnum text-ink">{green ? pc(green.cs_top1, 1) : "未開帳"}</b>
-                </span>
-                <span className="text-ink-3">
-                  頭三格中 <b className="tabnum text-ink">{green ? pc(green.cs_top3, 1) : "未開帳"}</b>
-                </span>
-                <span className="text-ink-3">
-                  頭八格中 <b className="tabnum text-ink">{green ? pc(green.cs_top8, 1) : "未開帳"}</b>
-                </span>
-                <span className="text-ink-3">
-                  實際格 log-loss ↓{" "}
-                  <b className="tabnum text-ink">
-                    {green?.cs_logloss != null ? green.cs_logloss.toFixed(3) : "未開帳"}
-                  </b>
-                </span>
-              </div>
-              <p className="mt-1 text-[9px] leading-relaxed text-ink-3">
-                眾數命中率（我哋出嗰個最可能比分中唔中）只作展示戰績，永遠唔會回寫落模型參數；調參一律睇全格
-                機率——「實際格 log-loss」同「頭八格覆蓋」。實際比分跌出頭八格時，以頭八格最細機率一半作罰分底。
-              </p>
-            </details>
-            <p className="mt-2 text-[10px] leading-relaxed text-ink-2">
-              入帳範圍：五大聯賽（{(hit.data?.scope.big5 ?? []).join("、")}）、綠燈且已鎖場次。逐場鎖定＝
-              <b className="text-deep">開賽前 60 分鐘</b>；黃燈可刷新、綠燈已鎖、紅燈退回基準軌。已鎖場次
-              <b className="text-deep">永遠跟當時指紋</b>，重訓只影響之後未鎖場次，新模型想改已鎖場只會寫入審計並被拒。
-              每日凍結軌已接入 S5 三軌集成（S4 天喜足球LGB ＋ S3 入球模型 ＋ S2 天喜足球ELO），過三項閘門先算綠燈。
-              權重唔係固定常數：當季約 LGB 0.65、入球模型 0.10、天喜ELO 0.25，每季用過去兩季季外預測重擬合；
-              熱身場數不足嘅場次維持紅燈基準軌，只作診斷。上面三格要等綠燈場次有咗完場賽果才會出實數，
-              喺此之前一律寫「未開帳」，唔會借回測數字充當實戰成績。
-            </p>
+            <p className="mt-2 text-[10px] leading-relaxed text-ink-2">\u5165\u5e33\u7bc4\u570d\uff1a\u4e94\u5927\u806f\u8cfd\u3001\u7da0\u71c8\u4e14\u5df2\u9396\u5834\u6b21\u3002\u9010\u5834\u9396\u5b9a\uff1d\u958b\u8cfd\u524d 60 \u5206\u9418\u3002\u5df2\u9396\u5834\u6b21\u6c38\u9060\u8ddf\u7576\u6642\u6307\u7d0b\u3002\u5e02\u5834\u53bb\u6c34\u8ce0\u7387\u53ea\u4f5c\u8a3a\u65b7\u5c0d\u7167，\u6c38\u4e0d\u5165\u6a21\uff08market_beta = 0\uff09\u3002</p>
             <div className="mt-2 grid gap-2 sm:grid-cols-3">
-              <Stat label="帳內場次" value={(log.data?.length ?? 0).toLocaleString()} sub={`已鎖 ${lockedCount}`} />
-              <Stat
-                label="已完場對帳"
-                value={done.length.toLocaleString()}
-                sub={`進行中 ${live.length}｜未開賽 ${pending.length - live.length}`}
-              />
-              <Stat
-                label="診斷軌 RPS（紅燈五大）"
-                value={diag ? diag.rps_avg.toFixed(4) : "—"}
-                sub={diag ? `${diag.n} 場 · 首選中 ${pc(diag.argmax_hit_rate)}` : "尚無完場樣本"}
-              />
+              <Stat label="\u5e33\u5167\u5834\u6b21" value={(log.data?.length ?? 0).toLocaleString()} sub={`\u5df2\u9396 ${lockedCount}`} />
+              <Stat label="\u5df2\u5b8c\u5834\u5c0d\u5e33" value={done.length.toLocaleString()} sub={`\u9032\u884c\u4e2d ${live.length}\uff5c\u672a\u958b\u8cfd ${pending.length - live.length}`} />
+              <Stat label="\u8a3a\u65b7\u8ecc RPS\uff08\u7d05\u71c8\u4e94\u5927\uff09" value={diag ? diag.rps_avg.toFixed(4) : "\u2014"} sub={diag ? `${diag.n} \u5834 \u00b7 \u9996\u9078\u4e2d ${pc(diag.argmax_hit_rate)}` : "\u5c1a\u7121\u5b8c\u5834\u6a23\u672c"} />
             </div>
           </>
         )}
       </Card>
-
-      <Card title="預測 vs 賽果（只讀凍結列）" en="Prediction vs Result">
-        {log.isLoading ? (
-          <Loading label="讀取逐場對帳" />
-        ) : log.error ? (
-          <ErrorNote error={log.error} />
-        ) : all.length === 0 ? (
-          <Empty label="帳內尚無場次（凍結器每日跑，賽程入庫後補）" />
-        ) : (
+      <Card title="\u9810\u6e2c vs \u8cfd\u679c\uff08\u53ea\u8b80\u51cd\u7d50\u5217\uff09" en="Prediction vs Result">
+        {log.isLoading ? <Loading label="\u8b80\u53d6\u9010\u5834\u5c0d\u5e33" /> : log.error ? <ErrorNote error={log.error} /> : all.length === 0 ? <Empty label="\u5e33\u5167\u5c1a\u7121\u5834\u6b21\uff08\u51cd\u7d50\u5668\u6bcf\u65e5\u8dd1，\u8cfd\u7a0b\u5165\u5eab\u5f8c\u88dc\uff09" /> : (
           <>
             <div className="space-y-1.5">
-              <Seg
-                value={lg}
-                onChange={setLg}
-                options={[{ value: "big5", label: "五大聯賽" }, { value: "all", label: "全部聯賽" }, ...leagues]}
-              />
-              <Seg
-                value={day}
-                onChange={setDay}
-                options={[{ value: "all", label: "全部日期" }, ...days.map((d) => ({ value: d, label: d.slice(5) }))]}
-              />
-              <Seg
-                value={ph}
-                onChange={setPh}
-                options={[
-                  { value: "all" as const, label: "全部狀態" },
-                  { value: "done" as const, label: `已結算 ${done.length}` },
-                  { value: "live" as const, label: `進行中 ${live.length}` },
-                  { value: "upcoming" as const, label: `未開賽 ${pending.length - live.length}` },
-                ]}
-              />
+              <Seg value={lg} onChange={setLg} options={[{ value: "big5", label: "\u4e94\u5927\u806f\u8cfd" }, { value: "all", label: "\u5168\u90e8\u806f\u8cfd" }, ...leagues]} />
+              <Seg value={day} onChange={setDay} options={[{ value: "all", label: "\u5168\u90e8\u65e5\u671f" }, ...days.map((d) => ({ value: d, label: d.slice(5) }))]} />
+              <Seg value={ph} onChange={setPh} options={[{ value: "all" as const, label: "\u5168\u90e8\u72c0\u614b" }, { value: "done" as const, label: `\u5df2\u7d50\u7b97 ${done.length}` }, { value: "live" as const, label: `\u9032\u884c\u4e2d ${live.length}` }, { value: "upcoming" as const, label: `\u672a\u958b\u8cfd ${pending.length - live.length}` }]} />
             </div>
-            {shown.length === 0 ? (
-              <div className="mt-2">
-                <Empty label="呢個篩選冇場次" />
-              </div>
-            ) : (
-              <div className="mt-2 space-y-2">
-                {shown.slice(0, 40).map((r) => (
-                  <MatchCard key={r.match_key} r={r} />
-                ))}
-              </div>
+            {shown.length === 0 ? <div className="mt-2"><Empty label="\u5462\u500b\u7be9\u9078\u5187\u5834\u6b21" /></div> : (
+              <div className="mt-2 space-y-2">{shown.slice(0, 40).map((r) => <MatchCard key={r.match_key} r={r} />)}</div>
             )}
           </>
         )}
-        <p className="mt-2 text-[10px] leading-relaxed text-ink-3">
-          呢張帳只 join 凍結列，唔會用最新模型重打已完場；差預測同虧損期一律不刪不改。主數字係賽果落咗幾多機率
-          同該場 RPS，首選中唔中只係次指標；波膽大字出一個最可能比分並標眾數中唔中，但對帳同調參一律用全格
-          （實際格排第幾、實際格 log-loss），眾數命中率只讀、唔回寫參數。加時同點球另計，唔入
-          90 分鐘對帳。紅燈（熱身不足）場次照顯示賽果但標「唔入戰績」，唔會同綠燈場合併計數。市場去水賠率只作診斷對照，
-          永不入模（market_beta = 0）。同一張卡由「未開賽」→「進行中 · 預測已鎖定」→「已結算」，賽事進行期間唔顯示即時
-          比分，亦唔會預先畫 ✓。
-        </p>
+        <p className="mt-2 text-[10px] leading-relaxed text-ink-3">\u5462\u5f35\u5e33\u53ea join \u51cd\u7d50\u5217，\u5514\u6703\u7528\u6700\u65b0\u6a21\u578b\u91cd\u6253\u5df2\u5b8c\u5834\u3002\u7d05\u71c8\u5834\u6b21\u7167\u986f\u793a\u8cfd\u679c\u4f46\u6a19\u300c\u5514\u5165\u6230\u7e3e\u300d\u3002market_beta = 0\u3002</p>
       </Card>
     </>
   );
