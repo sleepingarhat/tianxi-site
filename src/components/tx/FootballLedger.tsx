@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 
 import { Card, Empty, ErrorNote, Loading, Pill, Seg, Stat, StatGrid } from "@/components/tx/ui";
 import { SECOND_LAYER, legOutcome, recommend } from "@/lib/footballSecondLayer";
+import { explainMatch, EXPLAIN } from "@/lib/footballExplain";
 import { argmaxSide } from "@/lib/footballTeams";
 import { teamZh } from "@/lib/teamZh";
 
@@ -72,7 +73,6 @@ const RES_ZH: Record<string, string> = { home: "主勝", draw: "和局", away: "
 const BIG5 = ["E0", "D1", "SP1", "I1", "F1"];
 const isGreen = (r: LogRec) => r.status !== "fallback" && !!r.locked_at;
 
-/** 同一張卡三個狀態：未開賽 → 進行中（只顯示狀態，唔顯示即時比分）→ 已結算。 */
 type Phase = "upcoming" | "live" | "done";
 function phaseOf(r: LogRec): Phase {
   if (r.result) return "done";
@@ -105,7 +105,6 @@ async function readJson<T>(query: string): Promise<T> {
   return (await res.json()) as T;
 }
 
-/** 一場一卡：左邊凍結預測（已鎖），右邊 90 分鐘賽果，同一張矩陣出 1X2 同波膽。 */
 function MatchCard({ r }: { r: LogRec }) {
   const res = r.result ?? null;
   const phase = phaseOf(r);
@@ -114,7 +113,6 @@ function MatchCard({ r }: { r: LogRec }) {
   const inLedger = green && BIG5.includes(r.div);
   const actualIdx = res ? ({ home: 0, draw: 1, away: 2 }[res.ftr] ?? -1) : -1;
   const predIdx = p.length === 3 ? argmaxSide(p) : -1;
-  // 第二層推薦結算：同一張凍結矩陣（λ + 三格）派生，獨立一欄對帳
   const lam = r.lambda ?? [];
   const rec =
     p.length === 3 && lam.length === 2
@@ -122,11 +120,20 @@ function MatchCard({ r }: { r: LogRec }) {
       : null;
   const legRes = rec && res ? legOutcome(res.ft_h, res.ft_a, rec.sideHome, rec.line) : null;
   const actualScore = res ? `${res.ft_h}-${res.ft_a}` : "";
+  const expl = explainMatch({
+    p,
+    lambda: lam,
+    exp: r.cs?.exp ?? r.lambda,
+    status: r.status,
+    lockedAt: r.locked_at,
+    track: r.track,
+    inLedger,
+    result: res,
+  });
   const top8 = r.cs?.top8 ?? [];
   const hitCell = top8.find((c) => c.score === actualScore);
   const topCell = top8[0] ?? null;
   const modeHit = !!res && !!topCell && topCell.score === actualScore;
-  const exp = r.cs?.exp ?? r.lambda ?? [];
   const phasePill =
     phase === "done"
       ? { tone: "gold" as const, label: "已結算" }
@@ -147,7 +154,6 @@ function MatchCard({ r }: { r: LogRec }) {
       </header>
 
       <div className="mt-2 grid gap-2 sm:grid-cols-2">
-        {/* 左：凍結預測 */}
         <div className="rounded-[8px] border border-hairline bg-paper-2 px-2 py-2">
           <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">
             凍結預測（開波前已鎖）
@@ -192,9 +198,14 @@ function MatchCard({ r }: { r: LogRec }) {
                 ) : null}
               </p>
               <p className="tabnum mt-1 font-mono-tx text-[9px] text-ink-3">
-                主客機率距離 {pc(Math.abs((p[0] ?? 0) - (p[2] ?? 0)), 1)}
-                {exp.length === 2 ? `｜預期入球 ${exp[0]!.toFixed(2)}–${exp[1]!.toFixed(2)}` : ""}
+                {expl.why}
               </p>
+              {expl.closeTag ? (
+                <p className="mt-1 rounded-[5px] border border-deep/20 bg-paper-2 px-1.5 py-1 text-[9px] leading-relaxed text-ink-2">
+                  {expl.closeTag}
+                  <span className="mt-0.5 block text-ink-3">標籤唔改預測字、唔入對帳。</span>
+                </p>
+              ) : null}
               {top8.length > 0 ? (
                 <details className="mt-1.5">
                   <summary className="cursor-pointer text-[9px] font-bold text-ink-3">
@@ -261,7 +272,6 @@ function MatchCard({ r }: { r: LogRec }) {
           </p>
         </div>
 
-        {/* 右：90 分鐘賽果（未完場只顯示狀態，唔顯示即時比分） */}
         <div className="rounded-[8px] border border-hairline bg-paper-2 px-2 py-2">
           <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-ink-3">
             90 分鐘賽果（加時／點球另計）
@@ -289,6 +299,11 @@ function MatchCard({ r }: { r: LogRec }) {
                   {res.cs_rank ? `頭八格內中（第 ${res.cs_rank}）` : "頭八格外"}
                 </Pill>
               </p>
+              {expl.settled ? (
+                <p className="tabnum mt-1.5 font-mono-tx text-[9px] leading-relaxed text-ink-3">
+                  {expl.settled}
+                </p>
+              ) : null}
             </>
           ) : (
             <>
@@ -368,7 +383,6 @@ export function FootballLedger() {
       (ph === "all" || phaseOf(r) === ph),
   );
 
-  // 第二層戰績：只讀綠燈已鎖、五大、已完場嘅凍結列，獨立一欄計，唔混入 1X2 命中
   const secondLayer = useMemo(() => {
     let n = 0;
     let win = 0;
@@ -455,116 +469,14 @@ export function FootballLedger() {
               </div>
               <p className="mt-1 text-[9px] leading-relaxed text-ink-3">
                 第二層只出一句結算，唔改上面三格、唔改矩陣、唔升指紋，盤口權重永遠 0。主指標係結算校準（隱含贏率
-                對實際贏率），副指標係三類覆蓋率。−1／+1 贏唔當 1X2 中。τ、δ 由凍結 walk-forward 揀（
+                對實際贏率），副指標係三類覆蓋率。−1／+1 贏唔當 1X2 中。τ、δ 由凍結 walk-forward 擇（
                 {SECOND_LAYER.gate.sample.toLocaleString()} 場，{SECOND_LAYER.gate.evalFrom} 季起），一季只准改一次；
                 「強隊 −1」逐季一致高估 4.3–9.8 個百分點、超出 2 點校準閘，所以一面倒場暫時退回直勝，−1 只作旁註。
+                解釋句由凍結列加總，唔另開模型；近盤標籤閘 |P_H−P_A|＜{EXPLAIN.closeGap}。
               </p>
-            </div>
-            <details className="mt-2 rounded-[8px] border border-hairline bg-paper px-2.5 py-2">
-              <summary className="cursor-pointer text-[10px] font-bold text-ink-2">
-                波膽對帳（眾數命中率＋頭八格覆蓋＋實際格 log-loss，摺疊）
-              </summary>
-              <div className="mt-1.5 grid gap-1 font-mono-tx text-[10px] sm:grid-cols-2">
-                <span className="text-ink-3">
-                  眾數命中率（展示用）{" "}
-                  <b className="tabnum text-ink">{green ? pc(green.cs_top1, 1) : "未開帳"}</b>
-                </span>
-                <span className="text-ink-3">
-                  頭三格中 <b className="tabnum text-ink">{green ? pc(green.cs_top3, 1) : "未開帳"}</b>
-                </span>
-                <span className="text-ink-3">
-                  頭八格中 <b className="tabnum text-ink">{green ? pc(green.cs_top8, 1) : "未開帳"}</b>
-                </span>
-                <span className="text-ink-3">
-                  實際格 log-loss ↓{" "}
-                  <b className="tabnum text-ink">
-                    {green?.cs_logloss != null ? green.cs_logloss.toFixed(3) : "未開帳"}
-                  </b>
-                </span>
-              </div>
-              <p className="mt-1 text-[9px] leading-relaxed text-ink-3">
-                眾數命中率（我哋出嗰個最可能比分中唔中）只作展示戰績，永遠唔會回寫落模型參數；調參一律睇全格
-                機率——「實際格 log-loss」同「頭八格覆蓋」。實際比分跌出頭八格時，以頭八格最細機率一半作罰分底。
-              </p>
-            </details>
-            <p className="mt-2 text-[10px] leading-relaxed text-ink-2">
-              入帳範圍：五大聯賽（{(hit.data?.scope.big5 ?? []).join("、")}）、綠燈且已鎖場次。逐場鎖定＝
-              <b className="text-deep">開賽前 60 分鐘</b>；黃燈可刷新、綠燈已鎖、紅燈退回基準軌。已鎖場次
-              <b className="text-deep">永遠跟當時指紋</b>，重訓只影響之後未鎖場次，新模型想改已鎖場只會寫入審計並被拒。
-              每日凍結軌已接入 S5 三軌集成（S4 天喜足球LGB ＋ S3 入球模型 ＋ S2 天喜足球ELO），過三項閘門先算綠燈。
-              權重唔係固定常數：當季約 LGB 0.65、入球模型 0.10、天喜ELO 0.25，每季用過去兩季季外預測重擬合；
-              熱身場數不足嘅場次維持紅燈基準軌，只作診斷。上面三格要等綠燈場次有咗完場賽果才會出實數，
-              喺此之前一律寫「未開帳」，唔會借回測數字充當實戰成績。
-            </p>
-            <div className="mt-2 grid gap-2 sm:grid-cols-3">
-              <Stat label="帳內場次" value={(log.data?.length ?? 0).toLocaleString()} sub={`已鎖 ${lockedCount}`} />
-              <Stat
-                label="已完場對帳"
-                value={done.length.toLocaleString()}
-                sub={`進行中 ${live.length}｜未開賽 ${pending.length - live.length}`}
-              />
-              <Stat
-                label="診斷軌 RPS（紅燈五大）"
-                value={diag ? diag.rps_avg.toFixed(4) : "—"}
-                sub={diag ? `${diag.n} 場 · 首選中 ${pc(diag.argmax_hit_rate)}` : "尚無完場樣本"}
-              />
             </div>
           </>
         )}
-      </Card>
-
-      <Card title="預測 vs 賽果（只讀凍結列）" en="Prediction vs Result">
-        {log.isLoading ? (
-          <Loading label="讀取逐場對帳" />
-        ) : log.error ? (
-          <ErrorNote error={log.error} />
-        ) : all.length === 0 ? (
-          <Empty label="帳內尚無場次（凍結器每日跑，賽程入庫後補）" />
-        ) : (
-          <>
-            <div className="space-y-1.5">
-              <Seg
-                value={lg}
-                onChange={setLg}
-                options={[{ value: "big5", label: "五大聯賽" }, { value: "all", label: "全部聯賽" }, ...leagues]}
-              />
-              <Seg
-                value={day}
-                onChange={setDay}
-                options={[{ value: "all", label: "全部日期" }, ...days.map((d) => ({ value: d, label: d.slice(5) }))]}
-              />
-              <Seg
-                value={ph}
-                onChange={setPh}
-                options={[
-                  { value: "all" as const, label: "全部狀態" },
-                  { value: "done" as const, label: `已結算 ${done.length}` },
-                  { value: "live" as const, label: `進行中 ${live.length}` },
-                  { value: "upcoming" as const, label: `未開賽 ${pending.length - live.length}` },
-                ]}
-              />
-            </div>
-            {shown.length === 0 ? (
-              <div className="mt-2">
-                <Empty label="呢個篩選冇場次" />
-              </div>
-            ) : (
-              <div className="mt-2 space-y-2">
-                {shown.slice(0, 40).map((r) => (
-                  <MatchCard key={r.match_key} r={r} />
-                ))}
-              </div>
-            )}
-          </>
-        )}
-        <p className="mt-2 text-[10px] leading-relaxed text-ink-3">
-          呢張帳只 join 凍結列，唔會用最新模型重打已完場；差預測同虧損期一律不刪不改。主數字係賽果落咗幾多機率
-          同該場 RPS，首選中唔中只係次指標；波膽大字出一個最可能比分並標眾數中唔中，但對帳同調參一律用全格
-          （實際格排第幾、實際格 log-loss），眾數命中率只讀、唔回寫參數。加時同點球另計，唔入
-          90 分鐘對帳。紅燈（熱身不足）場次照顯示賽果但標「唔入戰績」，唔會同綠燈場合併計數。市場去水賠率只作診斷對照，
-          永不入模（market_beta = 0）。同一張卡由「未開賽」→「進行中 · 預測已鎖定」→「已結算」，賽事進行期間唔顯示即時
-          比分，亦唔會預先畫 ✓。
-        </p>
       </Card>
     </>
   );
