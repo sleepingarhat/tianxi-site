@@ -1,7 +1,37 @@
 {
-  "generatedHKT": "2026-09-27 21:31 HKT",
+  "generatedHKT": "2026-09-28 03:27 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-28",
+      "time": "03:10",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-27T19:10Z · [data][skip ci] race-day 2026-09-27T19:10Z via GHA",
+      "scope": "database",
+      "sha": "fdc30af"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "23:50",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "維護",
+      "title": "chore(weather): sync 2026-09-27 track weather snapshots (232 rows)",
+      "scope": "database",
+      "sha": "072c029"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "23:50",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "0aa2c29"
+    },
     {
       "date": "2026-09-27",
       "time": "21:31",
@@ -11,6 +41,16 @@
       "title": "feat: E1 explain layer (football + horse H-E1 chip)",
       "scope": "site",
       "sha": "f2ee628"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "21:31",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "abc8587"
     },
     {
       "date": "2026-09-27",
@@ -694,36 +734,6 @@
     },
     {
       "date": "2026-09-24",
-      "time": "13:52",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: update speed-guide data (2026-09-24T05:52Z)",
-      "scope": "database",
-      "sha": "6dc5fed"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "09:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-24T01:17Z · pool-a 2026-09-24T01:17Z via GHA matrix",
-      "scope": "database",
-      "sha": "177ee95"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "04:49",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "873dc52"
-    },
-    {
-      "date": "2026-09-24",
       "time": "04:39",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -731,16 +741,6 @@
       "title": "feat(hit-rate): coverage-stale helper for partial cache self-heal",
       "scope": "backend",
       "sha": "7c7aa36"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "04:32",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "results skip: set(CSV placed race_no)==set(HKJC races); drop row/link thresholds",
-      "scope": "database",
-      "sha": "4830d77"
     },
     {
       "date": "2026-09-23",
