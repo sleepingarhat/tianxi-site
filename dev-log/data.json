@@ -1,7 +1,117 @@
 {
-  "generatedHKT": "2026-09-27 02:55 HKT",
+  "generatedHKT": "2026-09-27 21:31 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-27",
+      "time": "21:31",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "功能",
+      "title": "feat: E1 explain layer (football + horse H-E1 chip)",
+      "scope": "site",
+      "sha": "f2ee628"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "20:40",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "shap knife2: map generic Column_N booster names via meta.featCols; add reports/shap/latest.json (frozen lgb-ensemble-20260926, fp 8da20f27a7",
+      "scope": "backend",
+      "sha": "717e2fe"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "20:36",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(predict): lock-point bundle verify — numpy-trained booster writes generic Column_N names; check count only",
+      "scope": "backend",
+      "sha": "246586c"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "18:00",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "1e5bd12"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "16:47",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] critical critical=1 warn=24 · 2026-09-27T08:47Z",
+      "scope": "database",
+      "sha": "f13dcb1"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "16:15",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-27T16:15",
+      "scope": "site",
+      "sha": "cbc9961"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "15:57",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-27T07:57Z",
+      "scope": "database",
+      "sha": "920f26e"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "15:56",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] engine health 2026-09-27T15:56",
+      "scope": "backend",
+      "sha": "a374c64"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "14:15",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: update speed-guide data (2026-09-27T06:15Z)",
+      "scope": "database",
+      "sha": "edcda94"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "09:04",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-27T01:04Z · pool-a 2026-09-27T01:04Z via GHA matrix",
+      "scope": "database",
+      "sha": "aebd1f3"
+    },
+    {
+      "date": "2026-09-27",
+      "time": "02:55",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "7243005"
+    },
     {
       "date": "2026-09-27",
       "time": "02:41",
@@ -607,16 +717,6 @@
       "time": "04:49",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "功能",
-      "title": "feat(explain): live coverage page so 2026-09-23 appears",
-      "scope": "site",
-      "sha": "52abcf3"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "04:49",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
@@ -641,76 +741,6 @@
       "title": "results skip: set(CSV placed race_no)==set(HKJC races); drop row/link thresholds",
       "scope": "database",
       "sha": "4830d77"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "04:15",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-23T20:15Z · [data][skip ci] race-day 2026-09-23T20:15Z via GHA",
-      "scope": "database",
-      "sha": "25668b3"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "04:12",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "修正",
-      "title": "fix(results): only skip a race day when CSV holds every HKJC race (R5-R9 of 2026-09-23 were skipped)",
-      "scope": "database",
-      "sha": "c827ef3"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "03:24",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "116943c"
-    },
-    {
-      "date": "2026-09-23",
-      "time": "23:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "5ebed81"
-    },
-    {
-      "date": "2026-09-23",
-      "time": "23:50",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "維護",
-      "title": "chore(weather): sync 2026-09-23 track weather snapshots (130 rows)",
-      "scope": "database",
-      "sha": "eb5c963"
-    },
-    {
-      "date": "2026-09-23",
-      "time": "20:46",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-23T12:46Z · [data][skip ci] race-day 2026-09-23T12:46Z via GHA",
-      "scope": "database",
-      "sha": "31d4122"
-    },
-    {
-      "date": "2026-09-23",
-      "time": "15:47",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-23T15:47",
-      "scope": "site",
-      "sha": "5e93624"
     },
     {
       "date": "2026-09-23",
@@ -881,36 +911,6 @@
       "title": "S32 freeze ledger: measure-only reconciliation over locked prediction_log",
       "scope": "backend",
       "sha": "ddb921e"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:03",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
-      "scope": "backend",
-      "sha": "de00f9f"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:03",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
-      "scope": "backend",
-      "sha": "bf25f91"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:03",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
-      "scope": "backend",
-      "sha": "669c39d"
     },
     {
       "date": "2026-09-15",
