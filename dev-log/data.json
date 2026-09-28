@@ -1,7 +1,157 @@
 {
-  "generatedHKT": "2026-09-28 03:27 HKT",
+  "generatedHKT": "2026-09-29 05:31 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-09-29",
+      "time": "04:10",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-28T20:10Z · [data][skip ci] pedigree 2026-09-28T20:10Z via GHA",
+      "scope": "database",
+      "sha": "232b213"
+    },
+    {
+      "date": "2026-09-29",
+      "time": "03:16",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-28T19:16Z · [data][skip ci] entries 2026-09-28T19:16Z via GHA",
+      "scope": "database",
+      "sha": "b1ed77e"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "18:54",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "bbb9ccc"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "17:31",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: update speed-guide data (2026-09-28T09:31Z)",
+      "scope": "database",
+      "sha": "391a4aa"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "17:11",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] critical critical=1 warn=12 · 2026-09-28T09:11Z",
+      "scope": "database",
+      "sha": "57ccf12"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "16:44",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-09-28T16:44",
+      "scope": "site",
+      "sha": "8509210"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "16:33",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-09-28T08:33Z",
+      "scope": "database",
+      "sha": "59a22af"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "16:32",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] engine health 2026-09-28T16:32",
+      "scope": "backend",
+      "sha": "0fa57f8"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "15:04",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "research(H-R2): 凍結 p vs 扣水 q 診斷；closeGap 樣本 18<200 維持 null",
+      "scope": "backend",
+      "sha": "7587089"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "15:03",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(ledger): 9-27 第 2–11 場人工列為鎖後、唔計分（倉主裁決，唔回填）",
+      "scope": "backend",
+      "sha": "7c723ab"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "15:02",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "功能",
+      "title": "feat(lock): T−90 全日快照補寫一次（首場前、只補缺場、永不覆寫）；凍結對帳剔除鎖後場次（鎖後、唔計分）",
+      "scope": "backend",
+      "sha": "9e085d3"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "14:20",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: update speed-guide data (2026-09-28T06:20Z)",
+      "scope": "database",
+      "sha": "41e3f88"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "09:27",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-28T01:27Z · pool-a 2026-09-28T01:27Z via GHA matrix",
+      "scope": "database",
+      "sha": "e704e5e"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "07:28",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-09-27T23:28Z · [data][skip ci] fixture-calendar 2026-09-27T23:28Z via GHA",
+      "scope": "database",
+      "sha": "5b8954e"
+    },
+    {
+      "date": "2026-09-28",
+      "time": "03:27",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "fd2e240"
+    },
     {
       "date": "2026-09-28",
       "time": "03:10",
@@ -334,16 +484,6 @@
     },
     {
       "date": "2026-09-25",
-      "time": "15:33",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-25T07:33Z",
-      "scope": "database",
-      "sha": "2e21587"
-    },
-    {
-      "date": "2026-09-25",
       "time": "15:32",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -351,36 +491,6 @@
       "title": "[sanity][skip ci] engine health 2026-09-25T15:32",
       "scope": "backend",
       "sha": "fc4790e"
-    },
-    {
-      "date": "2026-09-25",
-      "time": "13:51",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: update speed-guide data (2026-09-25T05:51Z)",
-      "scope": "database",
-      "sha": "3058c56"
-    },
-    {
-      "date": "2026-09-25",
-      "time": "09:57",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-25T01:57Z · pool-a 2026-09-25T01:57Z via GHA matrix",
-      "scope": "database",
-      "sha": "f40b6be"
-    },
-    {
-      "date": "2026-09-25",
-      "time": "04:52",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-24T20:52Z · [data][skip ci] pool-b 2026-09-24T20:52Z via GHA",
-      "scope": "database",
-      "sha": "63e9307"
     },
     {
       "date": "2026-09-25",
@@ -451,26 +561,6 @@
       "title": "sync(hit-rate): 逐段對齊網上版補件自動重算（場數／筆數觸發），唔改凍結四揀",
       "scope": "backend",
       "sha": "72ede95"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "23:32",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "修正",
-      "title": "fix(tg): read backend workers.dev API (tianxi.racing/api 404) + retry 5xx",
-      "scope": "database",
-      "sha": "6f2c2c2"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "23:32",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "修正",
-      "title": "fix(tg): read backend workers.dev API (tianxi.racing/api 404) + retry 5xx",
-      "scope": "database",
-      "sha": "4a8bb1e"
     },
     {
       "date": "2026-09-24",
@@ -667,60 +757,10 @@
       "time": "18:08",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "提交",
-      "title": "S39 football: coverage explain page + league API",
-      "scope": "site",
-      "sha": "7e77545"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "18:08",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "fb84588"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "17:18",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "8834c06"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "16:00",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] critical critical=1 warn=12 · 2026-09-24T08:00Z",
-      "scope": "database",
-      "sha": "7e2b90e"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "15:38",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(engine): stamp health.json 2026-09-24T15:38",
-      "scope": "site",
-      "sha": "d01438d"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "15:30",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-24T07:30Z",
-      "scope": "database",
-      "sha": "c977fab"
     },
     {
       "date": "2026-09-24",
@@ -911,46 +951,6 @@
       "title": "S32 freeze ledger: measure-only reconciliation over locked prediction_log",
       "scope": "backend",
       "sha": "ddb921e"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:03",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
-      "scope": "backend",
-      "sha": "2f31a9d"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:03",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
-      "scope": "backend",
-      "sha": "b25fb03"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:03",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
-      "scope": "backend",
-      "sha": "d5ecd0e"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:03",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "lock: freeze full race day at T-1.5h (first post time - 90min), results only join finish",
-      "scope": "backend",
-      "sha": "c5bc932"
     },
     {
       "date": "2026-09-13",
