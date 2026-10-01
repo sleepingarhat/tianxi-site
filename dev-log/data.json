@@ -1,7 +1,117 @@
 {
-  "generatedHKT": "2026-10-01 04:27 HKT",
+  "generatedHKT": "2026-10-02 04:44 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-10-02",
+      "time": "04:27",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-10-01T20:27Z · [data][skip ci] race-day 2026-10-01T20:27Z via GHA",
+      "scope": "database",
+      "sha": "55281ea"
+    },
+    {
+      "date": "2026-10-02",
+      "time": "04:23",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "修正",
+      "title": "fix(hit-rate-rollup): 唔快取失敗或空嘅近 N 日總結",
+      "scope": "backend",
+      "sha": "1d3abc1"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "23:50",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "維護",
+      "title": "chore(weather): sync 2026-10-01 track weather snapshots (226 rows)",
+      "scope": "database",
+      "sha": "19bdd6c"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "23:50",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "f8cc6b2"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "18:57",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "52069eb"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "17:38",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] critical critical=1 warn=24 · 2026-10-01T09:38Z",
+      "scope": "database",
+      "sha": "324367a"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "17:00",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-10-01T17:00",
+      "scope": "site",
+      "sha": "cac640f"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "16:40",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-10-01T08:40Z",
+      "scope": "database",
+      "sha": "88afadc"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "16:40",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] engine health 2026-10-01T16:40",
+      "scope": "backend",
+      "sha": "faf4830"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "10:09",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-10-01T02:09Z · pool-a 2026-10-01T02:09Z via GHA matrix",
+      "scope": "database",
+      "sha": "d47d036"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "04:27",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "c91511d"
+    },
     {
       "date": "2026-10-01",
       "time": "04:12",
@@ -344,16 +454,6 @@
     },
     {
       "date": "2026-09-28",
-      "time": "07:28",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-27T23:28Z · [data][skip ci] fixture-calendar 2026-09-27T23:28Z via GHA",
-      "scope": "database",
-      "sha": "5b8954e"
-    },
-    {
-      "date": "2026-09-28",
       "time": "03:27",
       "areaKey": "web",
       "area": "前端",
@@ -361,36 +461,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "fd2e240"
-    },
-    {
-      "date": "2026-09-28",
-      "time": "03:10",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-27T19:10Z · [data][skip ci] race-day 2026-09-27T19:10Z via GHA",
-      "scope": "database",
-      "sha": "fdc30af"
-    },
-    {
-      "date": "2026-09-27",
-      "time": "23:50",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "維護",
-      "title": "chore(weather): sync 2026-09-27 track weather snapshots (232 rows)",
-      "scope": "database",
-      "sha": "072c029"
-    },
-    {
-      "date": "2026-09-27",
-      "time": "23:50",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "0aa2c29"
     },
     {
       "date": "2026-09-27",
@@ -434,26 +504,6 @@
     },
     {
       "date": "2026-09-27",
-      "time": "18:00",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "1e5bd12"
-    },
-    {
-      "date": "2026-09-27",
-      "time": "16:47",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] critical critical=1 warn=24 · 2026-09-27T08:47Z",
-      "scope": "database",
-      "sha": "f13dcb1"
-    },
-    {
-      "date": "2026-09-27",
       "time": "16:15",
       "areaKey": "web",
       "area": "前端",
@@ -461,16 +511,6 @@
       "title": "chore(engine): stamp health.json 2026-09-27T16:15",
       "scope": "site",
       "sha": "cbc9961"
-    },
-    {
-      "date": "2026-09-27",
-      "time": "15:57",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-27T07:57Z",
-      "scope": "database",
-      "sha": "920f26e"
     },
     {
       "date": "2026-09-27",
@@ -754,16 +794,6 @@
     },
     {
       "date": "2026-09-24",
-      "time": "19:31",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "維護",
-      "title": "chore(dev-log): refresh auto commit feed",
-      "scope": "site",
-      "sha": "28c37ae"
-    },
-    {
-      "date": "2026-09-24",
       "time": "19:30",
       "areaKey": "backend",
       "area": "後端·模型",
@@ -771,16 +801,6 @@
       "title": "Knife-2: racing TreeSHAP contract + runner",
       "scope": "backend",
       "sha": "3a48bb9"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "19:30",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "修正",
-      "title": "fix(engine): lastMeeting lag 07-15 → 09-23, season in_season from live API",
-      "scope": "site",
-      "sha": "424c007"
     },
     {
       "date": "2026-09-24",
@@ -924,16 +944,6 @@
     },
     {
       "date": "2026-09-16",
-      "time": "15:32",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] engine health 2026-09-16T15:32",
-      "scope": "backend",
-      "sha": "f3d3704"
-    },
-    {
-      "date": "2026-09-16",
       "time": "02:20",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -941,16 +951,6 @@
       "title": "data: update Mark Six results (2026-09-15T18:20Z)",
       "scope": "marksix",
       "sha": "b46223a"
-    },
-    {
-      "date": "2026-09-15",
-      "time": "19:32",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "S32: classify /api/analyze/freeze-ledger as public read",
-      "scope": "backend",
-      "sha": "588d885"
     },
     {
       "date": "2026-09-13",
