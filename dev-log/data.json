@@ -1,7 +1,137 @@
 {
-  "generatedHKT": "2026-10-03 04:17 HKT",
+  "generatedHKT": "2026-10-04 02:56 HKT",
   "count": 100,
   "entries": [
+    {
+      "date": "2026-10-04",
+      "time": "02:05",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "數據",
+      "title": "data: update Mark Six results (2026-10-03T18:05Z)",
+      "scope": "marksix",
+      "sha": "8a14816"
+    },
+    {
+      "date": "2026-10-04",
+      "time": "01:32",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-10-03T17:32Z · [data][skip ci] race-day 2026-10-03T17:32Z via GHA",
+      "scope": "database",
+      "sha": "2f41856"
+    },
+    {
+      "date": "2026-10-04",
+      "time": "01:28",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-10-03T17:28Z · [data][skip ci] pedigree 2026-10-03T17:28Z via GHA",
+      "scope": "database",
+      "sha": "cf3829b"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "23:45",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-10-03T15:45Z · [data][skip ci] entries 2026-10-03T15:45Z via GHA",
+      "scope": "database",
+      "sha": "56a2694"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "17:51",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[manifest][skip ci] regenerate data/index.json",
+      "scope": "database",
+      "sha": "c18d6a0"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "16:45",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[audit][skip ci] critical critical=1 warn=12 · 2026-10-03T08:45Z",
+      "scope": "database",
+      "sha": "4505526"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "16:11",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(engine): stamp health.json 2026-10-03T16:11",
+      "scope": "site",
+      "sha": "7cc1190"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "15:55",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] daily status 2026-10-03T07:55Z",
+      "scope": "database",
+      "sha": "e2250f7"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "15:54",
+      "areaKey": "backend",
+      "area": "後端·模型",
+      "typeLabel": "提交",
+      "title": "[sanity][skip ci] engine health 2026-10-03T15:54",
+      "scope": "backend",
+      "sha": "9d9e552"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "14:03",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "speedpro: update speed-guide data (2026-10-03T06:03Z)",
+      "scope": "database",
+      "sha": "db66d2e"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "10:35",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-10-03T02:35Z · pool-a 2026-10-03T02:35Z via GHA matrix",
+      "scope": "database",
+      "sha": "14c2843"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "05:30",
+      "areaKey": "data",
+      "area": "數據·爬蟲",
+      "typeLabel": "提交",
+      "title": "[data][skip ci] 2026-10-02T21:30Z · [data][skip ci] pool-b 2026-10-02T21:30Z via GHA",
+      "scope": "database",
+      "sha": "72d2c74"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "04:17",
+      "areaKey": "web",
+      "area": "前端",
+      "typeLabel": "維護",
+      "title": "chore(dev-log): refresh auto commit feed",
+      "scope": "site",
+      "sha": "a3f2263"
+    },
     {
       "date": "2026-10-02",
       "time": "18:30",
@@ -313,46 +443,6 @@
       "sha": "b215736"
     },
     {
-      "date": "2026-09-30",
-      "time": "01:40",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-29T17:40Z · [data][skip ci] entries 2026-09-29T17:40Z via GHA",
-      "scope": "database",
-      "sha": "15d0487"
-    },
-    {
-      "date": "2026-09-29",
-      "time": "18:40",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[manifest][skip ci] regenerate data/index.json",
-      "scope": "database",
-      "sha": "8a4bccd"
-    },
-    {
-      "date": "2026-09-29",
-      "time": "17:35",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: update speed-guide data (2026-09-29T09:35Z)",
-      "scope": "database",
-      "sha": "3e458da"
-    },
-    {
-      "date": "2026-09-29",
-      "time": "17:20",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[audit][skip ci] critical critical=1 warn=11 · 2026-09-29T09:20Z",
-      "scope": "database",
-      "sha": "535c003"
-    },
-    {
       "date": "2026-09-29",
       "time": "16:36",
       "areaKey": "web",
@@ -361,16 +451,6 @@
       "title": "chore(engine): stamp health.json 2026-09-29T16:36",
       "scope": "site",
       "sha": "be76d71"
-    },
-    {
-      "date": "2026-09-29",
-      "time": "16:17",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] daily status 2026-09-29T08:17Z",
-      "scope": "database",
-      "sha": "1caea14"
     },
     {
       "date": "2026-09-29",
@@ -384,36 +464,6 @@
     },
     {
       "date": "2026-09-29",
-      "time": "14:35",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "speedpro: update speed-guide data (2026-09-29T06:35Z)",
-      "scope": "database",
-      "sha": "cef93a6"
-    },
-    {
-      "date": "2026-09-29",
-      "time": "10:53",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-29T02:53Z · pool-a 2026-09-29T02:53Z via GHA matrix",
-      "scope": "database",
-      "sha": "786a92d"
-    },
-    {
-      "date": "2026-09-29",
-      "time": "06:41",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-28T22:41Z · [data][skip ci] pool-b 2026-09-28T22:41Z via GHA",
-      "scope": "database",
-      "sha": "3a77b6f"
-    },
-    {
-      "date": "2026-09-29",
       "time": "05:31",
       "areaKey": "web",
       "area": "前端",
@@ -421,16 +471,6 @@
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
       "sha": "de7388b"
-    },
-    {
-      "date": "2026-09-29",
-      "time": "04:10",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "提交",
-      "title": "[data][skip ci] 2026-09-28T20:10Z · [data][skip ci] pedigree 2026-09-28T20:10Z via GHA",
-      "scope": "database",
-      "sha": "232b213"
     },
     {
       "date": "2026-09-28",
@@ -777,26 +817,6 @@
       "time": "19:41",
       "areaKey": "web",
       "area": "前端",
-      "typeLabel": "提交",
-      "title": "記錄 2026-09-24 賽季橫額改讀 /api/season（dev-log + roadmap）",
-      "scope": "site",
-      "sha": "c501bbe"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "19:41",
-      "areaKey": "web",
-      "area": "前端",
-      "typeLabel": "提交",
-      "title": "記錄 2026-09-24 賽季橫額改讀 /api/season（dev-log + roadmap）",
-      "scope": "site",
-      "sha": "8f4bb18"
-    },
-    {
-      "date": "2026-09-24",
-      "time": "19:41",
-      "areaKey": "web",
-      "area": "前端",
       "typeLabel": "維護",
       "title": "chore(dev-log): refresh auto commit feed",
       "scope": "site",
@@ -924,16 +944,6 @@
     },
     {
       "date": "2026-09-18",
-      "time": "15:17",
-      "areaKey": "backend",
-      "area": "後端·模型",
-      "typeLabel": "提交",
-      "title": "[sanity][skip ci] engine health 2026-09-18T15:17",
-      "scope": "backend",
-      "sha": "3d07876"
-    },
-    {
-      "date": "2026-09-18",
       "time": "02:24",
       "areaKey": "data",
       "area": "數據·爬蟲",
@@ -991,16 +1001,6 @@
       "title": "data: update Mark Six results (2026-09-05T16:53Z)",
       "scope": "marksix",
       "sha": "18cdee4"
-    },
-    {
-      "date": "2026-08-30",
-      "time": "01:46",
-      "areaKey": "data",
-      "area": "數據·爬蟲",
-      "typeLabel": "數據",
-      "title": "data: update Mark Six results (2026-08-29T17:46Z)",
-      "scope": "marksix",
-      "sha": "3b87b95"
     }
   ]
 }
